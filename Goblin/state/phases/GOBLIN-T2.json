@@ -1,0 +1,16 @@
+{
+  "phase_id": "GOBLIN-T2",
+  "title": "Compatibility Bridge",
+  "status": "completed",
+  "depends_on": ["GOBLIN-T1"],
+  "started_at": "2026-04-13T14:10:00Z",
+  "completed_at": "2026-04-13T14:20:00Z",
+  "primary_deliverable": "src/goblin/ compatibility namespace wrappers",
+  "artifacts": [
+    "src/goblin/__init__.py",
+    "src/goblin/cli/app.py",
+    "src/goblin/__main__.py",
+    "Goblin/contracts/namespace-compatibility.md"
+  ],
+  "last_checkpoint": "Goblin/checkpoints/GOBLIN-T2/goblin-t2-compat-bridge-complete.json"
+}

@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-03-29T21:00:28.834280Z",
+  "family": "day_trading",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "comparison_report_path": "experiments\\comparison_20260329T210028Z.json",
+  "recommended_candidate_id": null,
+  "report_path": "experiments\\day_trading_exploration_20260329T210028Z.json",
+  "candidates": [
+    {
+      "candidate_id": "AF-CAND-0295",
+      "title": "Europe Compression Break Day Trade",
+      "entry_style": "compression_breakout",
+      "thesis": "Trade directional expansion only when a compressed Europe-session range starts releasing with aligned momentum and range-position confirmation. Corpus anchor: SRC-001: 3. The \ufb01 rst and second pro\ufb01 t targets are 50% and 90% of the range respec- tively, which are 103 pips and 185 pips below the resistance (1.6117). 4. Use risk to reward ratio of 1:1 to set the stop loss. (See Figure 8.41 .) From the long example in Figure 8.42 : Entry price = 1.6",
+      "candidate_path": "reports\\AF-CAND-0295\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0295\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0295\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0295\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0295\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0296",
+      "title": "Europe Failed Break Fade Day Trade",
+      "entry_style": "failed_break_fade",
+      "thesis": "Fade a failed Europe-open break only after the extension stalls, reversal pressure appears, and price starts snapping back from the stretched edge rather than chasing continuation. Corpus anchor: SRC-002: Pyramiding approaches, scale trading, stop reversals, breakouts, momentum trad-",
+      "candidate_path": "reports\\AF-CAND-0296\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0296\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0296\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0296\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0296\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0297",
+      "title": "London Range Reclaim Day Trade",
+      "entry_style": "range_reclaim",
+      "thesis": "Fade failed London-session extension only after price starts reclaiming back into the recent range with a controlled reversal profile. Corpus anchor: SRC-003: Always remember Wyckoff's second law, the law of cause and effect. If the cause is large, then this will be reflected in the effect, which applies to support and resistance. The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once",
+      "candidate_path": "reports\\AF-CAND-0297\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0297\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0297\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0297\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0297\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0298",
+      "title": "Overlap Trend Retest Day Trade",
+      "entry_style": "trend_retest",
+      "thesis": "Trade overlap-session continuation only after an established move retests without breaking trend structure, aiming for a longer directional follow-through than the retired scalping family. Corpus anchor: SRC-004: The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once the market moves away from this region. Naturally this is all relative, not least because a market that has been consolidating on a daily chart for several weeks is likely t",
+      "candidate_path": "reports\\AF-CAND-0298\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0298\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0298\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0298\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0298\\review_packet.json"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "phase_id": "GOBLIN-P10",
+  "title": "Portfolio And Candidate Strategy Program",
+  "objective": "Resume and improve strategy search under repaired governance, with promotion decisions anchored to the statistical decision policy and deployment ladder.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P09"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Resume governed strategy search only after truth-stack, incident controls, and experiment governance are in place.",
+    "Separate alpha quality from deployment fit through candidate scorecards, deployment profiles, and risk overlays.",
+    "Enforce that promotion packets reference statistical decision policy keys, not free-text judgment.",
+    "Enforce that promotion packets reference the candidate's current deployment ladder state.",
+    "Block promotion for candidates below observed_demo ladder state.",
+    "Enforce benchmark/challenger rules and promotion packets across overlap and gap lanes.",
+    "Ensure deployment-fit changes that cross declared thresholds require a new bundle, not a promotion continuation."
+  ],
+  "outputs": [
+    "candidate scorecard",
+    "deployment profile",
+    "promotion decision packet"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/candidate-scorecard.md",
+    "Goblin/contracts/promotion-decision-packet.md"
+  ],
+  "checkpoint_targets": [
+    "Candidate scorecard contract exists.",
+    "Promotion decision packet exists and distinguishes alpha from deployment fit.",
+    "Promotion decision packet cites statistical policy keys for every criterion.",
+    "Promotion decision packet cites the candidate's deployment ladder state.",
+    "Promotion is blocked for candidates below observed_demo."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/candidate-scorecard.md",
+    "Goblin/contracts/promotion-decision-packet.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P10.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P10\\goblin-p10-portfolio-and-promotion-controls-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P10",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P10 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-12T23:39:32.0902980Z",
+  "updated_at": "2026-04-14T19:50:53.046195Z",
+  "completed_at": "2026-04-12T23:39:32.0902980Z",
+  "exit_criteria": [
+    "No improvement claim can hide deployment changes inside alpha claims.",
+    "Promotion criteria reference statistical policy thresholds, not free-text judgment.",
+    "Deployment ladder state is required in every promotion decision packet."
+  ],
+  "acceptance_result": {
+    "targeted_tests": [
+      "pytest tests/test_goblin_controls.py tests/test_portfolio_layer.py -q"
+    ],
+    "code_enforcement": [
+      "promotion_packet_requires_statistical_policy_keys",
+      "promotion_packet_requires_ladder_state",
+      "promotion_blocked_below_observed_demo",
+      "deployment_fit_material_delta_requires_bundle",
+      "gap_lane_challenger_requires_promotion_packet"
+    ]
+  },
+  "notes": [
+    "P10 controls completed in goblin controls and portfolio lane orchestration with targeted regression coverage."
+  ],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P10.json"
+}

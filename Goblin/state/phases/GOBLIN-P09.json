@@ -1,0 +1,77 @@
+{
+  "phase_id": "GOBLIN-P09",
+  "title": "Strategy Methodology, Search-Bias, And Experiment Governance",
+  "objective": "Improve strategy quality without repeating the same research-control mistakes, with experiment budgeting that enforces search discipline rather than documenting it.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P08"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Translate the strategy book into a methodology rubric rather than a trading oracle.",
+    "Add strategy rationale cards and search-bias controls at the family level.",
+    "Add experiment budgeting: per-family budget caps, mutation depth limits, and suspension thresholds after failed refinements.",
+    "Define invalid comparison rules: prohibit in-sample vs out-of-sample comparisons and cross-window comparisons without regime accounting.",
+    "Use statistical decision policy thresholds as the research floor.",
+    "Prevent candidate churn from hiding multiple-testing or experiment-lineage risk."
+  ],
+  "outputs": [
+    "methodology rubric",
+    "strategy rationale cards",
+    "experiment accounting ledger with budget enforcement"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/strategy-rationale-card.md",
+    "Goblin/contracts/experiment-accounting.md"
+  ],
+  "checkpoint_targets": [
+    "Strategy rationale card contract exists.",
+    "Experiment-accounting contract captures per-family budget, mutation depth, invalid comparison rules, and suspension thresholds.",
+    "Both contracts reference the statistical decision policy as the shared research floor."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/strategy-rationale-card.md",
+    "Goblin/contracts/experiment-accounting.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P09.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P09\\goblin-p09-strategy-governance-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P09",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P09 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-12T23:01:55.658517Z",
+  "updated_at": "2026-04-14T19:50:53.045664Z",
+  "completed_at": "2026-04-13T01:15:00Z",
+  "exit_criteria": [
+    "No live/demo candidate exists without a rationale card and experiment lineage.",
+    "Experiment accounting captures the budget consumed and whether suspension thresholds were hit."
+  ],
+  "acceptance_result": {
+    "phase_completion": "implemented",
+    "legacy_path_enforcement": [
+      "run_next_step",
+      "run_governed_loop",
+      "run_program_loop",
+      "run_autonomous_manager",
+      "run_bounded_campaign"
+    ],
+    "live_demo_candidate_gates": [
+      "publish_candidate",
+      "generate_mt5_packet",
+      "write_live_attach_manifest"
+    ],
+    "promotion_packet_wiring": "search_bias_summary_attached",
+    "validation": {
+      "pytest_suite": "tests/test_goblin_controls.py tests/test_codex_operator.py tests/test_governance_controls.py tests/test_validation_pipeline.py tests/test_production_incident.py tests/test_autonomous_manager.py tests/test_next_step_controller.py",
+      "tests_passed": 153
+    }
+  },
+  "notes": [
+    "P09 completed without advancing to P10; waiting for explicit user approval before next phase."
+  ],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P09.json"
+}

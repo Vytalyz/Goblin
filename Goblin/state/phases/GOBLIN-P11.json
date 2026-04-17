@@ -1,0 +1,62 @@
+{
+  "phase_id": "GOBLIN-P11",
+  "title": "Governed ML And Self-Learning",
+  "objective": "Add learning only after labels and provenance are trustworthy.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P10"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Add a governed model registry and trusted label policy for offline learning only.",
+    "Start with low-risk ML layers such as anomaly detection and regime classification.",
+    "Require offline validation, holdouts, and MT5-compatible replay if model output touches live decision logic."
+  ],
+  "outputs": [
+    "model registry",
+    "label policy",
+    "governed offline training cycle"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/model-registry.md"
+  ],
+  "checkpoint_targets": [
+    "Model registry contract exists.",
+    "Offline-only self-learning rule is documented and linked to governance."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/model-registry.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P11.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P11\\goblin-p11-governed-ml-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P11",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P11 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-13T00:07:33.4660070Z",
+  "updated_at": "2026-04-14T19:50:53.046658Z",
+  "completed_at": "2026-04-13T00:07:33.4660070Z",
+  "exit_criteria": [
+    "No online self-tuning exists in live/demo execution."
+  ],
+  "acceptance_result": {
+    "targeted_tests": [
+      "pytest tests/test_goblin_ml.py -q"
+    ],
+    "code_enforcement": [
+      "trusted_label_policy_requires_ambiguity_rejection_criteria",
+      "offline_training_requires_holdout_windows",
+      "live_execution_model_requires_mt5_certification",
+      "ml_governance_blocked_online_self_tuning",
+      "ml_governance_blocked_unapproved_model"
+    ]
+  },
+  "notes": [
+    "P11 governed ML controls completed with offline-only enforcement and targeted regression coverage."
+  ],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P11.json"
+}

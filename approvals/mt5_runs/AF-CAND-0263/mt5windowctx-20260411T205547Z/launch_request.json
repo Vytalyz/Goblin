@@ -1,0 +1,24 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5windowctx-20260411T205547Z",
+  "purpose": "context_prefill_mt5_real_ticks_backtest_for_live_window",
+  "from_date": "2026.03.01",
+  "to_date": "2026.04.11",
+  "tester_mode": "Every tick based on real ticks",
+  "manual_overrides": {
+    "deposit": 100.0,
+    "leverage": 33.0,
+    "fixed_lots": 0.01,
+    "auto_scale_lots": false,
+    "canonical_deposit": 100000.0,
+    "canonical_leverage": 30.0,
+    "canonical_fixed_lots": 5.0,
+    "min_lot": 0.01,
+    "lot_step": 0.01,
+    "sizing_mode": "explicit_fixed_lots",
+    "effective_fixed_lots": 0.01
+  },
+  "config_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5windowctx-20260411T205547Z\\tester_config.ini",
+  "audit_relative_path": "AgenticForex\\Audit\\AF-CAND-0263__mt5windowctx-20260411T205547Z__audit.csv",
+  "audit_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0263__mt5windowctx-20260411T205547Z__audit.csv"
+}

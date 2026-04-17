@@ -1,0 +1,20 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5run-20260325T040342Z",
+  "command": [
+    "data\\state\\mt5_automation_runtime\\terminal64.exe",
+    "/config:<USER_HOME>/OneDrive\\DOCUME~1\\PLAYGR~1\\AGENTI~1\\APPROV~1\\mt5_runs\\AF20C8~1\\MT1E45~1\\TESTER~1.INI",
+    "/portable"
+  ],
+  "launch_status": "completed",
+  "timed_out": false,
+  "terminal_return_code": 0,
+  "tester_report_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5run-20260325T040342Z\\AF-CAND-0263-mt5run-20260325T040342Z-report.htm",
+  "audit_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5run-20260325T040342Z\\AF-CAND-0263__mt5run-20260325T040323Z__audit.csv",
+  "broker_history_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5run-20260325T040342Z\\AF-CAND-0263__broker_history.csv",
+  "diagnostic_ticks_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5run-20260325T040342Z\\AF-CAND-0263__diagnostic_ticks.csv",
+  "started_utc": "2026-03-25T04:03:44.088853Z",
+  "finished_utc": "2026-03-25T04:03:58.530021Z",
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-03-30T21:59:07.638643Z",
+  "family": "day_trading",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "scan_report_path": "experiments\\day_trading_behavior_scan_20260330T215907Z.json",
+  "comparison_report_path": "experiments\\comparison_20260330T215907Z.json",
+  "recommended_candidate_id": "AF-CAND-0414",
+  "report_path": "experiments\\day_trading_exploration_20260330T215907Z.json",
+  "candidates": [
+    {
+      "candidate_id": "AF-CAND-0414",
+      "title": "Europe High-Vol Pullback Persistence Day Trade",
+      "entry_style": "pullback_continuation",
+      "thesis": "Trade high-volatility Europe pre-overlap pullback persistence only when the initial release is already directional, the pullback remains shallow, and the branch keeps the stress-surviving continuation profile seen in the strongest late-window clue while explicitly searching for more density. Corpus anchor: SRC-001: 3. The \ufb01 rst and second pro\ufb01 t targets are 50% and 90% of the range respec- tively, which are 103 pips and 185 pips below the resistance (1.6117). 4. Use risk to reward ratio of 1:1 to set the stop loss. (See Figure 8.41 .) From the long example in Figure 8.42 : Entry price = 1.6",
+      "candidate_path": "reports\\AF-CAND-0414\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0414\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0414\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0414\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0414\\review_packet.json"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "checkpoint_id": "goblin-p11-governed-ml-complete",
+  "phase_id": "GOBLIN-P11",
+  "title": "Governed ML Controls Complete",
+  "recorded_utc": "2026-04-13T00:07:33Z",
+  "exit_criteria_met": [
+    "Trusted label policy artifacts are enforced with required ambiguity rejection criteria.",
+    "Offline training cycles require holdout windows and MT5 certification evidence when touching live execution.",
+    "Model governance enforcement blocks online self-tuning and unapproved live-touching models.",
+    "No online self-tuning exists in live/demo execution through enforced registry checks."
+  ],
+  "code_changes": [
+    "src/agentic_forex/goblin/models.py: added TrustedLabelPolicy, OfflineTrainingCycle, OfflineTrainingStatus; ModelRegistryEntry extended with label_policy_path, training_cycle_path, online_self_tuning_enabled",
+    "src/agentic_forex/goblin/controls.py: added write_trusted_label_policy, write_offline_training_cycle, enforce_ml_governance; write_model_registry_entry now links label/training artifacts",
+    "src/agentic_forex/utils/paths.py: added goblin_label_policies_dir and goblin_training_cycles_dir",
+    "src/agentic_forex/goblin/__init__.py: exported new ML models and control functions",
+    "Goblin/contracts/model-registry.md: added governed ML enforcement rules",
+    "tests/test_goblin_ml.py: added targeted P11 governance coverage"
+  ],
+  "tests_run": [
+    "pytest tests/test_goblin_ml.py -q"
+  ],
+  "artifacts_written": [
+    "Goblin/checkpoints/GOBLIN-P11/goblin-p11-governed-ml-complete.json",
+    "Goblin/state/phases/GOBLIN-P11.json",
+    "Goblin/contracts/model-registry.md",
+    "tests/test_goblin_ml.py"
+  ],
+  "assumptions": [
+    "Model registry approval is evaluated when model output touches live execution via the explicit governance gate.",
+    "Latest training cycle linkage uses deterministic lexical ordering of cycle artifact paths under the model directory."
+  ]
+}

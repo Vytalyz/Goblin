@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "manager-20260322Tautonomy-smoke",
+  "program_id": "manager-20260322Tautonomy-smoke-program",
+  "family": "scalping",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": "campaign-20260322T143452Z-next-step",
+  "executed_cycles": 1,
+  "max_cycles": 2,
+  "status": "stopped",
+  "stop_reason": "data_label_audit_completed_upstream_contract_change_required",
+  "stop_class": "blocked_upstream_contract",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "ce4ef591c0a0cadb665ece64d74d3692cff126f9c3dbd00b8e78f7d452d58cc1",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260322Tautonomy-smoke-program-cycle-01.json",
+      "stop_reason": "data_label_audit_completed_upstream_contract_change_required",
+      "stop_class": "policy_decision",
+      "material_transition": true,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260322Tautonomy-smoke.json"
+}

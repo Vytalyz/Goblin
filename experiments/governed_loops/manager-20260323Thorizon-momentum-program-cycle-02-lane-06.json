@@ -1,0 +1,35 @@
+{
+  "loop_id": "manager-20260323Thorizon-momentum-program-cycle-02-lane-06",
+  "family": "horizon_momentum_research",
+  "initial_parent_campaign_id": "campaign-20260323T220418833348Z-next-step",
+  "final_parent_campaign_id": "campaign-20260323T220418878683Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "data_regime_audit_completed_retire_lane",
+  "stop_class": "policy_decision",
+  "transition_intent": "advance_next_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260323T220418878683Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260323T220418878683Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260323T220418878683Z-next-step",
+      "selected_step_type": "data_regime_audit",
+      "status": "completed",
+      "stop_reason": "data_regime_audit_completed_retire_lane",
+      "continuation_status": "stop",
+      "stop_class": "policy_decision",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": null,
+      "transition_status": "move_to_next_lane",
+      "transition_intent": "advance_next_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260323T220418878683Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "23cf3cd8fd7de59fb2aefce1196c7219d4cf813ac96647afaaff5173f3dfc72e",
+  "report_path": "experiments\\governed_loops\\manager-20260323Thorizon-momentum-program-cycle-02-lane-06.json"
+}

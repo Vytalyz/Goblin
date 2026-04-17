@@ -1,0 +1,18 @@
+{
+  "source_id": "SRC-003",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "high",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "A Complete Guide To Volume Price Analysis \u00a9 2013 Anna Coulling - All rights reserved All rights reserved. No part of this book may be reproduced or transmitted in any form, or by any means, electronic or mechanical, including photocopying, recording, or any information storage an"
+  ],
+  "front_matter_signals": [
+    "Table of Contents",
+    "An introduction to Volume Price Analysis and how it all began for me. I was one of the lucky traders who began my own journey in trading based on volume. It has been the cornerstone of my success and I want it to be yours as well. This is why I wrote the book. To help you, achiev",
+    "Acknowledgments &amp; Trader Resources"
+  ],
+  "best_excerpt": "Price action - weakness The clue is in the name! Just as stopping volume was stopping the market from falling further, so topping out volume is the market topping out after a bullish run higher. Once again, the market does not simply stop and reverse, it has momentum, both in up "
+}

@@ -1,0 +1,4 @@
+Use the quality-gated corpus digest below to produce a rich typed scalping candidate.
+Preserve deterministic rule language and include clear setup, entry, exit, risk, and market-context summaries.
+
+{{payload}}

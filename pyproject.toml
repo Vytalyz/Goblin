@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "goblin"
+version = "0.1.0"
+description = "Goblin-first forex research and validation platform with governed compatibility bridges."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.13"
+dependencies = [
+  "duckdb>=1.2,<2",
+  "ebooklib>=0.18,<1",
+  "numpy>=2.2,<3",
+  "openai>=1.60,<2",
+  "pandas>=2.2,<3",
+  "pydantic>=2.10,<3",
+  "pypdf>=5,<6",
+  "pyarrow>=18,<20",
+  "requests>=2.32,<3",
+  "scikit-learn>=1.6,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3,<9",
+]
+
+[project.scripts]
+goblin = "goblin.cli.app:main"
+agentic-forex = "goblin.cli.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

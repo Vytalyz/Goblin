@@ -1,0 +1,76 @@
+{
+  "campaign_id": "campaign-20260323T235823385213Z-next-step",
+  "parent_campaign_id": "campaign-20260323T235823275009Z-overlap_event_retest_density_af_cand_0230-seed",
+  "selected_step_type": "formalize_rule_candidate",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0230 is an approved throughput root for overlap_event_retest_breakout. Start by freezing a deterministic rule specification before EA-spec generation, compile, and MT5 smoke.",
+  "status": "completed",
+  "stop_reason": "rule_formalization_completed_with_supported_recommendation",
+  "candidate_scope": [
+    "AF-CAND-0230"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [
+    {
+      "candidate_id": "AF-CAND-0230",
+      "readiness_status": "rule_spec_complete",
+      "economic_plausibility_passed": false,
+      "completeness_checks": [
+        "instrument",
+        "timeframe",
+        "session_hours_utc",
+        "entry_trigger_formula",
+        "order_type",
+        "stop_logic",
+        "target_logic",
+        "timeout_logic",
+        "spread_filter",
+        "news_event_policy",
+        "sizing_rule",
+        "invalidation_rules"
+      ],
+      "artifact_paths": {
+        "candidate_path": "reports\\AF-CAND-0230\\candidate.json",
+        "strategy_spec_path": "reports\\AF-CAND-0230\\strategy_spec.json",
+        "rule_spec_path": "reports\\AF-CAND-0230\\rule_spec.json"
+      }
+    }
+  ],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "generate_ea_spec",
+      "candidate_id": "AF-CAND-0230",
+      "rationale": "AF-CAND-0230 now has a deterministic rule spec. The next bounded throughput step is EA-spec generation under the same control-plane state.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0230"
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "generate_ea_spec",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "cf9b21e9ccf61d4f4db94cb4026ea377f67cadaaa4b5714aad054a0ad68263c3",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260323T235823385213Z-next-step\\next_step_report.json"
+}

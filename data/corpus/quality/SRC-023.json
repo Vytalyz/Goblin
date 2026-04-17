@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-023",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "high",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright \u00a9 2018 by Chris Burniske and Jack Tatar. All rights reserved. Except as permitted under",
+    "the United States Copyright Act of 1976, no part of this publication may be reproduced or distributed",
+    "ISBN: 978-1-26-002668-9"
+  ],
+  "front_matter_signals": [
+    "first phase of the Internet. Cryptoassets is an excellent introduction to this",
+    "Cryptoassets is a fascinating introduction to this new space of the digital econ-",
+    "Cryptoassets provides a great introduction to and overview of the young yet"
+  ],
+  "best_excerpt": "other to spot trend reversals and shifts in momentum. For exam-"
+}

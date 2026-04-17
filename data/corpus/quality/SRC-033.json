@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-033",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright \u00a9 2015 by Gary Antonacci. All rights reserved. Except as permitted under the United States Copyright Act of 1976, no part of this publication may be reproduced or distributed in any form or by any means, or stored in a database or retrieval system, without the prior wri",
+    "Rather than put a trademark symbol after every occurrence of a trademarked name, we use names in an editorial fashion only, and to the benefit of the trademark owner, with no intention of infringement of the trademark. Where such designations appear in this book, they have been p",
+    "If legal advice or other expert assistance is required, the services of a competent professional person should be sought. &#13; \u2014 From a Declaration of Principles Jointly Adopted by a Committee of the American Bar Association and a Committee of Publishers and Associations &#13; T"
+  ],
+  "front_matter_signals": [
+    "FOREWORD &#13; E UGENE F AMA, THE 2014 CORECIPIENT of the Nobel Prize in Economics and father of the efficient market hypothesis, has three words to describe momentum: \u201cmomentum is pervasive.\u201d This is no small admission from Dr.",
+    "ACKNOWLEDGMENTS &#13; If I have seen further, it is by standing on the shoulders of giants. &#13; \u2014 Isaac Newton &#13; I NEVER COULD HAVE WRITTEN THIS book had it not been for the substantial body of work by so many dedicated momentum researchers over the past 80 years.",
+    "PREFACE &#13; Profit in the share market is goblin treasure; at one moment, it is carbuncles, the next it is coal; one moment diamonds, and the next pebbles. Sometimes they are the tears that Aurora leaves on the sweet morning\u2019s grass; at other times, they are just tears. &#13; \u2014"
+  ],
+  "best_excerpt": "Parity with 12-month absolute momentum, as presented here, is more adaptive than normal risk parity and has the ability to exit fixed-income investments during periods of rising interest rates due to its trend-following nature."
+}

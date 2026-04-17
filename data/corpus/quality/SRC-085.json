@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-085",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "John Wiley & Sons, Inc.",
+    "John Wiley & Sons, Inc.",
+    "Copyright C\u20dd 2008 by Jamie Saettele. All rights reserved."
+  ],
+  "front_matter_signals": [
+    "Includes bibliographical references and index.",
+    "Contents",
+    "Preface ix"
+  ],
+  "best_excerpt": "the momentum extreme. Most retail traders fade these extremes and lose"
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "step_type": "mutate_one_candidate",
+    "candidate_id": "AF-CAND-0014-VOL",
+    "rationale": "AF-CAND-0014-VOL should be refreshed to the current governed scalping execution-cost defaults before sibling-family comparison.",
+    "binding": true,
+    "evidence_status": "supported",
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0014-VOL",
+      "mutation_type": "refresh_execution_cost_defaults",
+      "refresh_reason": "align AF-CAND-0014-VOL to the current scalping execution-cost contract before sibling-family comparison"
+    }
+  }
+]

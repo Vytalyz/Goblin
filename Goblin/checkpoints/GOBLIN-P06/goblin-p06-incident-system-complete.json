@@ -1,0 +1,27 @@
+{
+  "checkpoint_id": "goblin-p06-incident-system-complete",
+  "phase_id": "GOBLIN-P06",
+  "title": "P06 Incident And Safety Envelope System — Complete",
+  "recorded_utc": "2026-04-12T21:00:00.000000Z",
+  "exit_criteria_met": [
+    "Any unexplained material delta opens an incident with typed incident_type from the severity matrix.",
+    "Incident severity drives suspension and closure evidence requirements: validate_incident_closure enforces required fields per severity before close_incident_record persists.",
+    "IncidentRecord carries severity (S1-S4), sla_class, incident_type, ladder_state_at_incident, and deployed_bundle_id.",
+    "list_open_blocking_incidents returns open/monitoring S1 and S2 incidents; S3, S4, and closed incidents are excluded.",
+    "INCIDENT_RESPONSE.md runbook references severity matrix, SLA contract, and statistical decision policy."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/incident-severity-matrix.md",
+    "Goblin/contracts/incident-sla.md",
+    "Goblin/runbooks/INCIDENT_RESPONSE.md"
+  ],
+  "code_changes": [
+    "src/agentic_forex/goblin/models.py: added IncidentSeverity, IncidentSlaClass, DeploymentLadderState literals; updated IncidentRecord with severity/sla_class/incident_type/ladder_state_at_incident/deployed_bundle_id; updated IncidentClosurePacket with all severity-driven required fields",
+    "src/agentic_forex/goblin/controls.py: updated open_incident_record signature; added validate_incident_closure; updated close_incident_record with severity validation; added list_open_blocking_incidents",
+    "src/agentic_forex/goblin/__init__.py: exported IncidentSeverity, IncidentSlaClass, validate_incident_closure, list_open_blocking_incidents"
+  ],
+  "tests": [
+    "tests/test_goblin_incident.py: 17 targeted tests, all passing"
+  ],
+  "notes": []
+}

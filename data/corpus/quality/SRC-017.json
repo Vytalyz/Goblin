@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-017",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "CANDLESTICK CHARTING EXPLAINED This page intentionally left blank CANDLESTICK CHARTING EXPLAINED Timeless Techniques for Trading Stocks and Futures Third Edition Gregory L. Morris with Ryan Litchfield McGraw-Hill New York Chicago San Francisco Lisbon London Madrid Mexico City Mil",
+    "Morris. All rights reserved. Except as permitted under the United States Copyright Act of 1976, no part of this publication may be reproduced or distributed in any form or by any means, or stored in a database or retrieval system, without the prior written permission of the publi",
+    "ISBN: 978-0-07-163217-1 MHID: 0-07-163217-4 The material in this eBook also appears in the print version of this title: ISBN: 978-0-07-146154-2, MHID: 0-07-146154-X. All trademarks are trademarks of their respective owners."
+  ],
+  "front_matter_signals": [
+    "To Dusti, Grant, Derek, and Kane This page intentionally left blank Contents Foreword from the Second Edition ix Foreword for the Third Edition by Tim Chapman xiii Preface from the Second Edition xvii Preface for the Third Edition xxi Acknowledgments xxiii 1.",
+    "Introduction 1 2. Candlestick Lines 11 3. Reversal Candle Patterns 21 4. Continuation Patterns 211 5. Sakata\u2019s Method and Candle Formations 281 6. The Philosophy behind Candle Pattern Identification 301 7. Reliability of Pattern Recognition 317 8.",
+    "Candle Pattern Performance 351 9. Candle Pattern Filtering 361 10. Candlesticks for Traders 391 11. Conclusions 479 Appendix A: Interview with Takehiro Hikita 481 Appendix B: Derivative Charting Methods 489 Bibliography 497 Index 503 Special Offer 521 /H17039vii /H17039 This page"
+  ],
+  "best_excerpt": "SAN-KU (THREE GAPS) This method uses gaps in price action as a means to time entry and exit points in the market. The saying goes that after a market bottom, /H17039286 Chapter Five Figure 5-2B"
+}

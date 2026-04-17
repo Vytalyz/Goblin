@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-03-29T22:43:03.427299Z",
+  "family_filter": null,
+  "candidate_filters": [
+    "AF-CAND-0329"
+  ],
+  "total_records": 1,
+  "registry_path": "experiments\\registry.csv",
+  "report_path": "experiments\\comparison_20260329T224303Z.json",
+  "latest_report_path": "experiments\\comparison_latest.json",
+  "recommended_candidate_id": null,
+  "records": [
+    {
+      "candidate_id": "AF-CAND-0329",
+      "family": "europe_open_compression_reversion_research",
+      "instrument": "EUR_USD",
+      "entry_style": "compression_reversion",
+      "benchmark_group_id": "AF-CAND-0329",
+      "variant_name": "base",
+      "dataset_start_utc": "2025-10-02T07:58:00Z",
+      "dataset_end_utc": "2026-03-20T11:23:00Z",
+      "trading_days_observed": 115,
+      "trade_count": 365,
+      "profit_factor": 0.5563926434743662,
+      "out_of_sample_profit_factor": 0.3394495412844157,
+      "expectancy_pips": -1.0969863013700019,
+      "max_drawdown_pct": 16.034845760842824,
+      "stressed_profit_factor": 0.429913288711324,
+      "stress_passed": false,
+      "ftmo_fit_score": 67.43,
+      "ftmo_fit_band": "moderate_fit",
+      "readiness": "robustness_provisional",
+      "approval_recommendation": "needs_human_review",
+      "ready_for_publish": false,
+      "walk_forward_ok": false,
+      "benchmark_ranking_score": null,
+      "comparison_score": -131.546309,
+      "spec_path": "reports\\AF-CAND-0329\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0329\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0329\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0329\\review_packet.json",
+      "benchmark_report_path": null
+    }
+  ]
+}

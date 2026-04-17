@@ -1,0 +1,40 @@
+{
+  "manager_run_id": "manager-20260323T230158Z",
+  "program_id": "manager-20260323T230158Z-program",
+  "family": "volatility_retest_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": "campaign-20260323T230423815871Z-next-step",
+  "executed_cycles": 2,
+  "max_cycles": 8,
+  "status": "stopped",
+  "stop_reason": "data_feature_audit_completed_retire_family",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "d51fb512a96818daa09f7846a5947b3c2b57562f29ab3e096c7b00ed10ad9e02",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260323T230158Z-program-cycle-01.json",
+      "stop_reason": "program_loop_max_lanes_reached",
+      "stop_class": "budget_exhausted",
+      "material_transition": true,
+      "approvals_issued": []
+    },
+    {
+      "cycle_index": 2,
+      "lane_id": "campaign-20260323T230325146533Z-next-step",
+      "program_report_path": "experiments\\program_loops\\manager-20260323T230158Z-program-cycle-02.json",
+      "stop_reason": "data_feature_audit_completed_retire_family",
+      "stop_class": "policy_decision",
+      "material_transition": true,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260323T230158Z.json"
+}

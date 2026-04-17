@@ -1,0 +1,33 @@
+{
+  "campaign_id": "campaign-20260323T220437489607Z-next-step",
+  "family": "horizon_momentum_research",
+  "baseline_candidate_id": "AF-CAND-0194",
+  "target_candidate_ids": [
+    "AF-CAND-0194",
+    "AF-CAND-0193",
+    "AF-CAND-0192"
+  ],
+  "parent_campaign_id": "campaign-20260323T220436251044Z-next-step",
+  "queue_kind": "promotion",
+  "throughput_target_count": 0,
+  "orthogonality_metadata": {},
+  "compile_budget": 0,
+  "smoke_budget": 0,
+  "max_rule_spec_reformulations_per_hypothesis": 0,
+  "max_ea_spec_rewrites_per_candidate": 0,
+  "max_compile_retries_per_candidate": 0,
+  "max_smoke_retries_per_candidate": 0,
+  "step_type": "data_feature_audit",
+  "allowed_step_types": [
+    "data_feature_audit"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 0,
+  "trial_cap_per_family": 3,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Single-step child campaign opened from campaign-20260323T220436251044Z-next-step.",
+    "Selected step: data_feature_audit.",
+    "This controller run must stop after exactly one legal step."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "program_id": "manager-20260324T020233Z-program-cycle-01",
+  "family": "session_momentum_band_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": "campaign-20260324T020234321912Z-next-step",
+  "executed_lanes": 1,
+  "max_lanes": 3,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "stop_class": "approval_required",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [
+    {
+      "lane_index": 1,
+      "lane_id": "promotion_session_momentum_band_quality_af_cand_0239",
+      "family": "session_momentum_band_research",
+      "hypothesis_class": "session_momentum_band",
+      "seed_candidate_id": "AF-CAND-0239",
+      "queue_kind": "promotion",
+      "seed_campaign_id": "campaign-20260324T020234094216Z-promotion_session_momentum_band_quality_af_cand_0239-seed",
+      "initial_parent_campaign_id": "campaign-20260324T020234094216Z-promotion_session_momentum_band_quality_af_cand_0239-seed",
+      "final_parent_campaign_id": "campaign-20260324T020234321912Z-next-step",
+      "governed_loop_report_path": "experiments\\governed_loops\\manager-20260324T020233Z-program-cycle-01-lane-01.json",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "stop_class": "approval_required",
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal"
+    }
+  ],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "8112c83b350aa05bbe8417c7a412a7476846a63f29c5df93587a0f81e6f2a123",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260324T020233Z-program-cycle-01.json"
+}

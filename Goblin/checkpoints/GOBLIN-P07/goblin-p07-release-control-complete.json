@@ -1,0 +1,30 @@
+{
+  "checkpoint_id": "goblin-p07-release-control-complete",
+  "phase_id": "GOBLIN-P07",
+  "title": "P07 Release, Approval, And Change Management — Complete",
+  "recorded_utc": "2026-04-12T21:00:00.000000Z",
+  "exit_criteria_met": [
+    "LiveAttachManifest carries ladder_state, broker_server, and bundle_id — no live/demo attachment can occur without a declared ladder state.",
+    "validate_attach_against_bundle checks inputs_hash between bundle and manifest; mismatch automatically opens a release_integrity_failure S1 incident.",
+    "IncidentClosurePacket carries deployed_bundle_id and ladder_state_at_incident for audit trail.",
+    "DeploymentLadderState type defined with all five states.",
+    "RELEASE_AND_ROLLBACK.md runbook references deployment ladder, bundle contracts, and environment reproducibility."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/deployment-bundle.md",
+    "Goblin/contracts/deployment-ladder.md",
+    "Goblin/contracts/environment-reproducibility.md",
+    "Goblin/runbooks/RELEASE_AND_ROLLBACK.md"
+  ],
+  "code_changes": [
+    "src/agentic_forex/goblin/models.py: added DeploymentLadderState; updated LiveAttachManifest with ladder_state/broker_server/bundle_id; updated IncidentClosurePacket with deployed_bundle_id/ladder_state_at_incident",
+    "src/agentic_forex/goblin/controls.py: added validate_attach_against_bundle with hash-check enforcement and auto S1 incident on mismatch",
+    "src/agentic_forex/goblin/__init__.py: exported DeploymentLadderState, validate_attach_against_bundle"
+  ],
+  "tests": [
+    "tests/test_goblin_release.py: 7 targeted tests, all passing"
+  ],
+  "notes": [
+    "P07 outputs (ladder state, bundle identity) are referenced in P06 incident closure packets — P07 was implemented before P06 enforcement was added, as the ROADMAP recommends."
+  ]
+}

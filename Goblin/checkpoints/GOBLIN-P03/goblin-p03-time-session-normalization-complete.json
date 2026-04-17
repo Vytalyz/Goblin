@@ -1,0 +1,19 @@
+{
+  "checkpoint_id": "goblin-p03-time-session-normalization-complete",
+  "phase_id": "GOBLIN-P03",
+  "created_utc": "2026-04-12T19:50:36.103773Z",
+  "summary": "Completed P03 by enforcing comparison time basis in truth-alignment reports, freezing OANDA acquisition contracts into ingest provenance, and verifying the targeted Goblin diagnostics.",
+  "authoritative_artifacts": [
+    "Goblin/contracts/time-session-contract.md",
+    "Goblin/contracts/research-data-contract.md",
+    "src/agentic_forex/goblin/models.py",
+    "src/agentic_forex/goblin/evidence.py",
+    "src/agentic_forex/market_data/ingest.py"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/STATUS.md",
+    "Goblin/phases/GOBLIN-P03.md"
+  ],
+  "status_at_checkpoint": "completed",
+  "checkpoint_path": "Goblin\\checkpoints\\GOBLIN-P03\\goblin-p03-time-session-normalization-complete.json"
+}

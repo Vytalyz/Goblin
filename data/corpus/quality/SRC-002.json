@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-002",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "high",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "John Wiley & Sons, Inc.",
+    "Founded in 1807, John Wiley & Sons is the oldest independent publishing",
+    "tralia, and Asia, Wiley is globally committed to developing and marketing"
+  ],
+  "front_matter_signals": [
+    "Includes bibliographical references and index.",
+    "Contents",
+    "Preface ix"
+  ],
+  "best_excerpt": "Pyramiding approaches, scale trading, stop reversals, breakouts, momentum trad-"
+}

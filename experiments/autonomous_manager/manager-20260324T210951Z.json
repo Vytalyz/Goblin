@@ -1,0 +1,40 @@
+{
+  "manager_run_id": "manager-20260324T210951Z",
+  "program_id": "manager-20260324T210951Z-program",
+  "family": "session_momentum_hold_research",
+  "initial_parent_campaign_id": "campaign-20260324T211201871366Z-next-step",
+  "final_parent_campaign_id": "campaign-20260324T211201871366Z-next-step",
+  "executed_cycles": 2,
+  "max_cycles": 30,
+  "status": "stopped",
+  "stop_reason": "watchdog_same_candidate_without_advancement",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "945f2111b829dbb593f4a8d868dc085c451db6d8d0a77e1c0cb217f915f31e45",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260324T210951Z-program-cycle-01.json",
+      "stop_reason": "program_loop_max_lanes_reached",
+      "stop_class": "budget_exhausted",
+      "material_transition": true,
+      "approvals_issued": []
+    },
+    {
+      "cycle_index": 2,
+      "lane_id": "campaign-20260324T211201871366Z-next-step",
+      "program_report_path": "experiments\\program_loops\\manager-20260324T210951Z-program-cycle-02.json",
+      "stop_reason": "program_loop_seed_candidate_truth_mismatch:session_momentum_hold_core_af_cand_0241:candidate_json_entry_style,strategy_spec_entry_style",
+      "stop_class": "integrity_issue",
+      "material_transition": false,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260324T210951Z.json"
+}

@@ -1,0 +1,47 @@
+# Agentic Forex Source of Truth
+
+- Discovery must not import or preload sibling-project strategy priors.
+- Market data, artifacts, and approvals remain local to this project.
+- OANDA is the canonical research data source.
+- Canonical research ingest must support historical backfill and emit QA reports for completeness and anomaly checks.
+- Scalping candidates must be benchmarked across multiple deterministic variants on the same canonical dataset before promotion.
+- New scalping candidate exploration should be deterministic and corpus-aligned by default, not dependent on a live paid LLM provider.
+- When iterating a weaker scalping challenger, the objective should be explicit and measurable rather than vague tuning.
+- FTMO fit is a non-blocking policy score and must be versioned by ruleset.
+- Economic-calendar blackout windows are allowed as a separate policy layer and must never contaminate canonical market data.
+- Account-size, position-sizing, margin, and leverage assumptions must be explicit in the compiled strategy spec.
+- Data provenance and environment snapshots are mandatory experiment artifacts for backtest, forward, parity, and publish stages.
+- Execution-cost models and risk envelopes are first-class contracts and must be versioned alongside the strategy spec.
+- Published research snapshots are archival evidence only and must never be treated as deployment approval.
+- Every discovery, mutation, backtest, review, parity, and forward run must append a structured trial-ledger entry.
+- Failure reasons must use the structured failure taxonomy under `knowledge/observational/`, not freeform notes alone.
+- Readiness states must be evidence-bound; until CSCV/PBO is available for the comparable family universe and passes configured thresholds, the highest machine-granted state is `review_eligible_provisional`.
+- CSCV/PBO is the current anti-overfit control; White-style family reality checks remain a later governance enhancement.
+- Experiment comparison must read existing artifacts, write a local registry under `experiments/`, and keep FTMO fit informative rather than dominant in ranking.
+- Safer autonomy must run through a single-step child-campaign controller that selects one legal next action, validates, persists recommendations, and stops.
+- MT5 is a downstream parity-validation lane only and never a research or training source.
+- The official primary MT5 parity gate is broker-history parity: export the exact broker bars seen by the MT5 tester and rebuild the executable baseline from that history for validation.
+- Official parity class is assigned prospectively at the approved family or hypothesis-root level before the first official parity run.
+- Child candidates inherit parity class through the existing seed-root plus parent-chain lineage; creating a child candidate does not reset parity policy.
+- No candidate lineage may switch to a more favorable official parity standard after first official parity evidence exists, unless a policy-approved class-wide migration is defined prospectively.
+- Families marked `tick_required` remain blocked from official promotion parity until a tick-aware official standard is approved in policy.
+- Real-ticks MT5 reruns are diagnostic-only unless explicitly promoted into policy; they may explain parity tails, but they do not replace the official broker-history parity gate.
+- Packet expected signals are fallback parity evidence only and must not override broker-history parity when exported history is available.
+- OANDA shadow-forward is the default forward gate after MT5 parity.
+- Automated MT5 runs must generate deterministic tester configs with `AllowLiveTrading=0` and `ShutdownTerminal=1`.
+- Until richer MT5 runtime ingestion exists, the EA audit CSV under the MT5 common-files audit path is the machine-readable runtime source of truth for active operator-side monitoring.
+- Later-stage true agentic monitoring should ingest MT5 `Experts` / terminal `Journal` logs in a candidate-scoped way, but that future capability must remain additive and must not override the structured audit ledger.
+- Publish requires a human-review approval record before creating a research snapshot.
+- Scalping research must include explicit fill-delay and broker-fee assumptions in the execution-cost model.
+- Deterministic rules remain primary; ML stays in shadow mode unless a later approval process explicitly promotes it.
+- Codex is the builder/operator; live LLM providers are optional and must prove payoff relative to cost before becoming part of the default workflow.
+- The repo-native control plane remains the authoritative bare system; Codex is an outer orchestration layer only.
+- Portfolio slot policy is authoritative for whether a lane is mutable, benchmark-only, or parity-eligible.
+- `AF-CAND-0263` is the locked overlap benchmark slot and must never be mutated through portfolio routing.
+- The next non-overlap deployable strategy must be researched through a blank-slate slot that inherits governance controls but not `AF-CAND-0263` strategy logic.
+- Repo-local Codex assets live under `.codex/` and must remain separate from the internal workflow-engine assets under `agents/roles/`, `workflows/`, and `skills/`.
+- On Windows, Codex hooks remain non-authoritative and must stay out of the critical path until a supported execution environment exists.
+- No lookahead, no leakage, and explicit execution-cost assumptions are mandatory.
+- Human approval is required before MT5 packet generation and practice validation.
+- OANDA MetaTrader 5 remains practice-only.
+- The detailed implementation baseline and interruption-recovery sequence live in `knowledge/recovery-implementation-plan.md`.

@@ -1,0 +1,18 @@
+{
+  "source_id": "SRC-063",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "There are no copyright laws in investment banking and no way to patent a"
+  ],
+  "front_matter_signals": [
+    "Preface",
+    "Preface",
+    "Acknowledgments"
+  ],
+  "best_excerpt": "built sufficient momentum to survive his"
+}

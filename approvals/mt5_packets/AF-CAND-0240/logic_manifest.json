@@ -1,0 +1,46 @@
+{
+  "logic_manifest_hash": "1460ad1ec3d2cce5576c00549213fec540a7dd6559473c9e26f7ce4cef4e5e54",
+  "component_hashes": {
+    "strategy_spec_sha256": "ee930c83fde145d1e28fa9777128a3ebbb1c7a4c0d2ec2a3c21f30d2f6cdbd2a",
+    "rendered_ea_sha256": "b5814bf46a028b1cae6b22f0e53712e489d89ae55d0447629f40d53aa3cf1592",
+    "expected_signals_sha256": "ed725e1a194e98d2ddea983ee009c74d7ed664f76c8b3bcd2197957ba1071350",
+    "compile_target_sha256": "a59d07df6f64392235bf122f309afa66e6bc4b8b89b92f594d1be5de55b4a0c3",
+    "expert_path_sha256": "cb35d9f849708e752e896586e6cb3cddf251d4ca7d8f1efa89aed83c80cd5355"
+  },
+  "source_artifact_hashes": {
+    "strategy_spec_path": "706f352466735d958e51578b3ae23e726235f7a99999cc11ea305b8c4cd8209d",
+    "review_packet_path": "c101ce1b0ac41cfecae41d229a2ff48ea823e50427b6cc32c9681b4faed228c9",
+    "expected_signal_path": "ed725e1a194e98d2ddea983ee009c74d7ed664f76c8b3bcd2197957ba1071350"
+  },
+  "candidate_id": "AF-CAND-0240",
+  "entry_style": "session_momentum_band",
+  "practice_only": true,
+  "parity_only": true,
+  "research_truth_boundary": "reports_only_never_mt5_artifacts",
+  "mt5_artifact_reuse_for_features_forbidden": true,
+  "signal_audit_fields": [
+    "timestamp_utc",
+    "exit_timestamp_utc",
+    "side",
+    "entry_price",
+    "exit_price",
+    "pnl_pips",
+    "pnl_dollars",
+    "candidate_id",
+    "run_id",
+    "magic_number",
+    "ticket"
+  ],
+  "approval_recommendation": "needs_human_review",
+  "run_spec_path": "approvals\\mt5_runs\\AF-CAND-0240\\mt5run-20260324T080435Z\\run_spec.json",
+  "ea_source_path": "approvals\\mt5_packets\\AF-CAND-0240\\CandidateEA.mq5",
+  "expected_signal_path": "approvals\\mt5_packets\\AF-CAND-0240\\expected_signals.csv",
+  "audit_relative_path": "AgenticForex\\Audit\\AF-CAND-0240__mt5run-20260324T080435Z__audit.csv",
+  "audit_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0240__mt5run-20260324T080435Z__audit.csv",
+  "broker_history_relative_path": "AgenticForex\\Audit\\AF-CAND-0240__broker_history.csv",
+  "broker_history_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0240__broker_history.csv",
+  "news_blackout_mode": "manual_calendar_alignment_required",
+  "expected_signal_mode": "mt5_executable_baseline",
+  "terminal_data_path": "data\\state\\mt5_automation_runtime",
+  "stale_packet_policy": "logic_manifest_hash_or_missing_ex5"
+}

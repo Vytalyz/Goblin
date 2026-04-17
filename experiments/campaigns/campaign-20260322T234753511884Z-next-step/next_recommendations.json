@@ -1,0 +1,19 @@
+[
+  {
+    "step_type": "re_evaluate_one_candidate",
+    "candidate_id": "AF-CAND-0180",
+    "rationale": "Mutation completed for AF-CAND-0180. Re-evaluate the mutated breakout candidate under the current canonical OANDA dataset and execution-cost assumptions before any further search.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0177",
+      "mutation_type": "refresh_execution_cost_defaults",
+      "refresh_reason": "align AF-CAND-0177 to the current session_alignment_research execution-cost contract before pullback_continuation lane evaluation",
+      "fill_delay_ms": 0,
+      "slippage_pips": 0.0,
+      "broker_fee_model": "oanda_spread_only",
+      "commission_per_standard_lot_usd": 0.0
+    }
+  }
+]

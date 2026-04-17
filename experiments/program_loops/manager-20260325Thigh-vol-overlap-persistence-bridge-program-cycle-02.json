@@ -1,0 +1,38 @@
+{
+  "program_id": "manager-20260325Thigh-vol-overlap-persistence-bridge-program-cycle-02",
+  "family": "high_vol_overlap_persistence_bridge_research",
+  "initial_parent_campaign_id": "campaign-20260325T004022352973Z-next-step",
+  "final_parent_campaign_id": "campaign-20260325T004022628469Z-next-step",
+  "executed_lanes": 1,
+  "max_lanes": 3,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_no_supported_next_step",
+  "stop_class": "ambiguity",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [
+    {
+      "lane_index": 1,
+      "lane_id": "promotion_high_vol_overlap_persistence_bridge_core_af_cand_0253",
+      "family": "high_vol_overlap_persistence_bridge_research",
+      "hypothesis_class": "high_vol_overlap_persistence_retest",
+      "seed_candidate_id": "AF-CAND-0253",
+      "queue_kind": "promotion",
+      "seed_campaign_id": "campaign-20260325T004022505014Z-promotion_high_vol_overlap_persistence_bridge_core_af_cand_0253-seed",
+      "initial_parent_campaign_id": "campaign-20260325T004022505014Z-promotion_high_vol_overlap_persistence_bridge_core_af_cand_0253-seed",
+      "final_parent_campaign_id": "campaign-20260325T004022628469Z-next-step",
+      "governed_loop_report_path": "experiments\\governed_loops\\manager-20260325Thigh-vol-overlap-persistence-bridge-program-cycle-02-lane-01.json",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_no_supported_next_step",
+      "stop_class": "ambiguity",
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal"
+    }
+  ],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "7213a00ae4f03faa707b1790ed6c6711b5b3f7f00e5c7102614e0b3d7fb5088a",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260325Thigh-vol-overlap-persistence-bridge-program-cycle-02.json"
+}

@@ -1,0 +1,24 @@
+{
+  "campaign_id": "campaign-20260322T165943238730Z-compression_breakout_af_cand_0060-seed",
+  "family": "day_trading",
+  "baseline_candidate_id": "AF-CAND-0060",
+  "target_candidate_ids": [
+    "AF-CAND-0060"
+  ],
+  "parent_campaign_id": "campaign-20260322T165759453966Z-next-step",
+  "step_type": "re_evaluate_one_candidate",
+  "allowed_step_types": [
+    "re_evaluate_one_candidate"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 1,
+  "trial_cap_per_family": 1,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Program-loop bounded seed campaign.",
+    "Approved lane: compression_breakout_af_cand_0060.",
+    "Seed candidate already matches the current execution-cost contract; reevaluate directly.",
+    "Fresh day-trading compression-break root generated under the path-aware label contract.",
+    "Use this as the higher-momentum orthogonal lane after the scalping family retirement."
+  ]
+}

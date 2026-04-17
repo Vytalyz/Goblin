@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-076",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "NEW FRONTIERS IN TECHNICAL ANALYSIS Since 1996, Bloomberg Press has published books for \ufb01nancial professionals on investing, economics, and policy affecting investors. Titles are written by leading practitioners and authorities, and have been translated into more than 20 language",
+    "Copyright \u00a9 2011 by Paul Ciana. All rights reserved. Published by John Wiley & Sons, Inc., Hoboken, New Jersey. Published simultaneously in Canada. No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, electronic,",
+    "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley & Sons, Inc., 111 River Street, Hoboken, NJ 07030, (201) 748\u20136011, fax (201) 748\u20136008, or online at www.wiley.com/go/permissions."
+  ],
+  "front_matter_signals": [
+    "Library of Congress Cataloging-in-Publication Data: Ciana, Paul, 1983\u2013 New frontiers in technical analysis : effective tools and strategies for trading and investing / Paul Ciana. p. cm. \u2013 (Bloomberg \ufb01nancial series) Includes index.",
+    "Contents Preface xi Acknowledgments xv CHAPTER 1 Evidence of the Most Popular T echnical Indicators 1 Paul Ciana, CMT De\ufb01ning T echnical Analysis 2 De\ufb01ning Chart T ypes 5 Evidence of Chart T ype Popularity 10 Evidence of T echnical Indicator Popularity 14 Applying the Most Popula",
+    "Kase, CMT, MFTA Introduction to KaseSwing 157 Kase DevStops 169 Kase Momentum Divergence Algorithm 177 Kase PeakOscillator and KaseCD 188 Why Use KasePO and KaseCD? 189 Kase Permission Stochastic and Screen 199 Entering T rades and the Kase Easy Entry System 201 About the Kase Ea"
+  ],
+  "best_excerpt": "See Erlanger Nantucket Sleighride (ENS) Entering trades, 201\u2013206 Entries ATM Add On Alert, 297 ATM Diversion Alert, 298\u2013299 ATM Exhaustion Alert, 297\u2013298 ATM First Alert, 296 ATM Pullback Alert, 297 ATM X Alert, 295 Entry signals, 295 Equal T rueRange Bar Chart, 211\u2013215 Erlanger "
+}

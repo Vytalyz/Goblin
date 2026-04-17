@@ -1,0 +1,4 @@
+window_id,start_broker,end_broker,side,expected_exit_reason,actual_exit_reason,expected_exit_utc,actual_exit_utc,likely_cause,expected_stop_loss_price,actual_stop_loss_price,expected_take_profit_price,actual_take_profit_price
+breach-01,2025.10.22 18:01:00,2025.10.22 18:43:40,long,take_profit,take_profit,2025-10-22T16:03:00Z,2025-10-22T16:41:40Z,timeout_or_bar_close_drift,1.15926,1.15927,1.16166,1.16167
+breach-02,2025.12.05 20:06:00,2025.12.05 20:17:00,long,take_profit,timeout,2025-12-05T19:08:00Z,2025-12-05T19:15:00Z,timeout_rule_mismatch,1.16247,1.16248,1.16487,1.16488
+breach-03,2026.03.10 16:04:00,2026.03.10 16:12:40,long,take_profit,take_profit,2026-03-10T15:06:00Z,2026-03-10T15:10:40Z,timeout_or_bar_close_drift,1.16192,1.16193,1.16432,1.16433

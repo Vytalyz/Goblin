@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-094",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright \u00a9 2012 by Constance M. Brown. All rights reserved. Printed in the United",
+    "States of America. Except as permitted under the United States Copyright Act of",
+    "1976, no part of this publication may be reproduced or distributed in any form or"
+  ],
+  "front_matter_signals": [
+    "CONTENTS",
+    "Foreword vii",
+    "Acknowledgments xii"
+  ],
+  "best_excerpt": "The range will be a horizontal trend line connecting momentum"
+}

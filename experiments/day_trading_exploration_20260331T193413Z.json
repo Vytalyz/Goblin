@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-03-31T19:34:13.986803Z",
+  "family": "day_trading",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "scan_report_path": "experiments\\day_trading_behavior_scan_20260331T193413Z.json",
+  "comparison_report_path": "experiments\\comparison_20260331T193413Z.json",
+  "recommended_candidate_id": "AF-CAND-0470",
+  "reference_candidate_id": null,
+  "continuation_gate": null,
+  "report_path": "experiments\\day_trading_exploration_20260331T193413Z.json",
+  "candidates": [
+    {
+      "candidate_id": "AF-CAND-0470",
+      "title": "Europe Bridge High-Vol Momentum Band",
+      "entry_style": "session_momentum_band",
+      "thesis": "Restore the bridge hour to the high-volatility momentum-band thesis, but keep the directional band and mean-alignment gates tight so density rises only if the earlier session state is genuinely persistent. Corpus anchor: SRC-002: Pyramiding approaches, scale trading, stop reversals, breakouts, momentum trad-",
+      "candidate_path": "reports\\AF-CAND-0470\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0470\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0470\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0470\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0470\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0469",
+      "title": "Europe High-Vol Momentum Band Day Trade",
+      "entry_style": "session_momentum_band",
+      "thesis": "Trade Europe-open continuation only when a high-volatility directional band is already established and the move persists inside that band without needing a reset, reclaim, or breakout chase. Corpus anchor: SRC-001: 3. The \ufb01 rst and second pro\ufb01 t targets are 50% and 90% of the range respec- tively, which are 103 pips and 185 pips below the resistance (1.6117). 4. Use risk to reward ratio of 1:1 to set the stop loss. (See Figure 8.41 .) From the long example in Figure 8.42 : Entry price = 1.6",
+      "candidate_path": "reports\\AF-CAND-0469\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0469\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0469\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0469\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0469\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0472",
+      "title": "Europe Fast-Fail High-Vol Momentum Band",
+      "entry_style": "session_momentum_band",
+      "thesis": "Test the same high-volatility momentum-band clue under a faster fail horizon so the family can admit more persistent bands while rejecting slower drift before it leaks into stress failure. Corpus anchor: SRC-004: The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once the market moves away from this region. Naturally this is all relative, not least because a market that has been consolidating on a daily chart for several weeks is likely t",
+      "candidate_path": "reports\\AF-CAND-0472\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0472\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0472\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0472\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0472\\review_packet.json"
+    }
+  ]
+}

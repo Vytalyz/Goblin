@@ -1,0 +1,20 @@
+{
+  "program_id": "portfolio-gap_blank_slate-europe_open_reclaim_research-20260329T203434443158Z-program-cycle-01",
+  "family": "europe_open_reclaim_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_lanes": 0,
+  "max_lanes": 3,
+  "status": "stopped",
+  "stop_reason": "program_loop_no_pending_approved_lanes",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "bff2767402f2d66a50db2079b214c91e497ad5e7140111f7293745186be80a47",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\portfolio-gap_blank_slate-europe_open_reclaim_research-20260329T203434443158Z-program-cycle-01.json"
+}

@@ -1,0 +1,9 @@
+window_id,start_broker,end_broker,side,expected_exit_reason,actual_exit_reason,expected_exit_utc,actual_exit_utc,likely_cause,expected_stop_loss_price,actual_stop_loss_price,expected_take_profit_price,actual_take_profit_price
+breach-01,2026.03.05 18:01:20,2026.03.05 18:24:00,short,take_profit,stop_loss,2026-03-05T17:22:00Z,2026-03-05T17:03:20Z,exit_reason_mismatch,1.1587,1.1587,1.15655,1.15655
+breach-02,2025.12.18 15:26:00,2025.12.18 15:32:40,long,stop_loss,take_profit,2025-12-18T14:28:00Z,2025-12-18T14:30:40Z,exit_reason_mismatch,1.1728,1.17275,1.17495,1.1749
+breach-03,2025.10.14 17:55:00,2025.10.14 18:25:00,long,take_profit,timeout,2025-10-14T15:57:00Z,2025-10-14T16:23:00Z,timeout_rule_mismatch,1.15759,1.1576,1.15974,1.15975
+breach-04,2025.11.25 17:34:00,2025.11.25 17:47:00,long,take_profit,timeout,2025-11-25T16:36:00Z,2025-11-25T16:45:00Z,timeout_rule_mismatch,1.15626,1.15627,1.15841,1.15842
+breach-05,2026.02.04 16:58:00,2026.02.04 17:24:40,long,stop_loss,stop_loss,2026-02-04T16:00:00Z,2026-02-04T16:22:40Z,exit_timing_and_price_drift,1.18123,1.18113,1.18338,1.18328
+breach-06,2026.02.19 17:00:00,2026.02.19 17:04:40,short,timeout,stop_loss,2026-02-19T16:02:00Z,2026-02-19T16:02:40Z,timeout_rule_mismatch,1.17619,1.17614,1.17404,1.17399
+breach-07,2025.10.15 19:46:40,2025.10.15 19:52:00,short,timeout,stop_loss,2025-10-15T17:50:00Z,2025-10-15T17:48:40Z,timeout_rule_mismatch,1.16405,1.16405,1.1619,1.1619
+breach-08,2026.01.21 17:38:40,2026.01.21 17:55:00,long,stop_loss,stop_loss,2026-01-21T16:53:00Z,2026-01-21T16:40:40Z,timeout_or_bar_close_drift,1.1707,1.17071,1.17285,1.17286

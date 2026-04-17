@@ -1,0 +1,3 @@
+Reframe the request below without introducing sibling-project priors, hidden assumptions, or inherited strategy doctrine.
+
+{{payload}}

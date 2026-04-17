@@ -1,0 +1,26 @@
+{
+  "candidate_id": "AF-CAND-0262",
+  "run_id": "mt5run-20260325T040632Z",
+  "terminal_path": "data\\state\\mt5_automation_runtime\\terminal64.exe",
+  "portable_mode": true,
+  "config_path": "approvals\\mt5_runs\\AF-CAND-0262\\mt5run-20260325T040632Z\\tester_config.ini",
+  "launch_mode": "/config",
+  "logic_manifest_hash": "2f2225863e3e1518b950a077a61191f5f7ec854909afa47e8f9b289b6628ec5a",
+  "packet_reused": false,
+  "diagnostic_only": false,
+  "tester_mode": "1 minute OHLC",
+  "lineage_root_candidate_id": "AF-CAND-0262",
+  "parity_class": "m1_official",
+  "parity_policy_lane_ids": [
+    "overlap_resolution_bridge_base_af_cand_0262",
+    "promotion_overlap_resolution_bridge_base_af_cand_0262"
+  ],
+  "parity_policy_snapshot_hash": "4ab176325caf6b68c49358f108c33a5636066fc62c7afdc012471ebd8fb0d744",
+  "broker_history_relative_path": "AgenticForex\\Audit\\AF-CAND-0262__broker_history.csv",
+  "broker_history_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0262__broker_history.csv",
+  "diagnostic_windows_relative_path": "AgenticForex\\Audit\\AF-CAND-0262__diagnostic_tick_windows.csv",
+  "diagnostic_windows_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0262__diagnostic_tick_windows.csv",
+  "diagnostic_ticks_relative_path": "AgenticForex\\Audit\\AF-CAND-0262__diagnostic_ticks.csv",
+  "diagnostic_ticks_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0262__diagnostic_ticks.csv",
+  "diagnostic_window_count": 4
+}

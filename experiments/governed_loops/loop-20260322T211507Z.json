@@ -1,0 +1,35 @@
+{
+  "loop_id": "loop-20260322T211507Z",
+  "family": "throughput_research",
+  "initial_parent_campaign_id": "campaign-20260322T211204064559Z-next-step",
+  "final_parent_campaign_id": "campaign-20260322T211508047784Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 2,
+  "status": "completed",
+  "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+  "stop_class": "lane_exhausted",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260322T211508047784Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260322T211508047784Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260322T211508047784Z-next-step",
+      "selected_step_type": "diagnose_existing_candidates",
+      "status": "completed",
+      "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+      "continuation_status": "stop",
+      "stop_class": "lane_exhausted",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": null,
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T211508047784Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "684e8f329d5a0cc1ebf7f79ef93718c2eefffbe2fd9fd56ced9d3e48c420f7c1",
+  "report_path": "experiments\\governed_loops\\loop-20260322T211507Z.json"
+}

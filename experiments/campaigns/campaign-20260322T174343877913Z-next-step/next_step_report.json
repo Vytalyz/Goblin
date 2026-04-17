@@ -1,0 +1,115 @@
+{
+  "campaign_id": "campaign-20260322T174343877913Z-next-step",
+  "parent_campaign_id": "campaign-20260322T174343852177Z-next-step",
+  "selected_step_type": "data_label_audit",
+  "step_reason": "The family-level data/feature audit retired the current family, so the next governed step is a bounded data/label contract audit before any new autonomous queue can be approved.",
+  "status": "completed",
+  "stop_reason": "data_label_audit_completed_family_retire_confirmed",
+  "candidate_scope": [
+    "AF-CAND-0061"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [
+    {
+      "family": "day_trading",
+      "audited_candidate_ids": [
+        "AF-CAND-0061"
+      ],
+      "reference_candidate_id": "AF-CAND-0061",
+      "contract_decision": "family_retire_confirmed",
+      "summary": "Data/label audit compared AF-CAND-0061. AF-CAND-0061 remains the empirical reference, but the family still fails under shared_label_contract_consistent. A label-only explanation is not enough to reopen this family.",
+      "suspected_contract_gaps": [
+        "shared_label_contract_consistent"
+      ],
+      "label_contract_snapshot": {
+        "dataset_snapshot_ids": [
+          "1f96882d88d8acd7"
+        ],
+        "feature_version_ids": [
+          "e602a112f25aff49"
+        ],
+        "label_version_ids": [
+          "4531e04082baf668"
+        ],
+        "feature_paths": [
+          "src\\agentic_forex\\features\\service.py"
+        ],
+        "label_paths": [
+          "src\\agentic_forex\\labels\\service.py"
+        ],
+        "entry_styles": [
+          "range_reclaim"
+        ],
+        "holding_bars": [
+          72
+        ],
+        "stop_loss_pips": [
+          7.0
+        ],
+        "take_profit_pips": [
+          11.0
+        ],
+        "risk_reward_ratios": [
+          1.571429
+        ],
+        "uses_future_return_pips_label": true,
+        "uses_binary_direction_label": true,
+        "uses_path_aware_exit_labels": true,
+        "mentions_exit_geometry": true
+      },
+      "recommended_actions": [
+        "Keep the current family retired under the existing research contract.",
+        "Do not assume a label-only change will rescue this family without a broader hypothesis redesign.",
+        "Approve the next autonomous queue only for a genuinely orthogonal hypothesis class."
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0061",
+          "family": "day_trading",
+          "entry_style": "range_reclaim",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 168,
+          "profit_factor": 0.9630206305955966,
+          "out_of_sample_profit_factor": 1.0188003581021638,
+          "expectancy_pips": -0.11309523809513147,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0061\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0061\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0061\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260322T174343877913Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260322T174343877913Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260322T174343877913Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": null,
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "hard_stop",
+  "transition_intent": "stop_terminal",
+  "policy_snapshot_hash": "bcfb8ea40b3f190401e87761dea41a34ebe01b06b721d6c61330a22dc8100949",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260322T174343877913Z-next-step\\next_step_report.json"
+}

@@ -1,0 +1,39 @@
+{
+  "campaign_id": "campaign-20260326T095658000543Z-europe_open_volatility_expansion_af_cand_0269-seed",
+  "family": "europe_open_continuation_research",
+  "baseline_candidate_id": "AF-CAND-0269",
+  "target_candidate_ids": [
+    "AF-CAND-0269"
+  ],
+  "parent_campaign_id": null,
+  "queue_kind": "throughput",
+  "throughput_target_count": 10,
+  "orthogonality_metadata": {
+    "market_hypothesis": "europe_open_directional_expansion",
+    "trigger_family": "volatility_expansion",
+    "holding_profile": "short_intraday_continuation",
+    "session_profile": "europe_open",
+    "regime_dependency": "moderate_to_high_vol_trend"
+  },
+  "compile_budget": 6,
+  "smoke_budget": 5,
+  "max_rule_spec_reformulations_per_hypothesis": 2,
+  "max_ea_spec_rewrites_per_candidate": 2,
+  "max_compile_retries_per_candidate": 2,
+  "max_smoke_retries_per_candidate": 1,
+  "step_type": "formalize_rule_candidate",
+  "allowed_step_types": [
+    "formalize_rule_candidate"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 1,
+  "trial_cap_per_family": 1,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Program-loop bounded seed campaign.",
+    "Approved lane: europe_open_volatility_expansion_af_cand_0269.",
+    "Throughput lane starts from deterministic rule formalization and MT5 executability checks.",
+    "First Europe-open continuation root seeded after the Asia/range family retired under governed evaluation.",
+    "Use this lane to test whether a simple Europe-open directional expansion can add pre-overlap coverage without overlap-style exit ambiguity."
+  ]
+}

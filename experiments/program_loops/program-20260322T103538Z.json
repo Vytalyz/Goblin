@@ -1,0 +1,14 @@
+{
+  "program_id": "program-20260322T103538Z",
+  "family": "scalping",
+  "initial_parent_campaign_id": "campaign-20260322T090519Z-next-step",
+  "final_parent_campaign_id": "campaign-20260322T103538Z-next-step",
+  "executed_lanes": 0,
+  "max_lanes": 4,
+  "status": "stopped",
+  "stop_reason": "data_label_audit_completed_upstream_contract_change_required",
+  "stop_class": "policy_decision",
+  "lane_summaries": [],
+  "final_audit_report_path": null,
+  "report_path": "experiments\\program_loops\\program-20260322T103538Z.json"
+}

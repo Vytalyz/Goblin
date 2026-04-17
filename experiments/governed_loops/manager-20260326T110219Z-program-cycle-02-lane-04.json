@@ -1,0 +1,50 @@
+{
+  "loop_id": "manager-20260326T110219Z-program-cycle-02-lane-04",
+  "family": "us_late_unwind_research",
+  "initial_parent_campaign_id": "campaign-20260326T110523174529Z-promotion_us_late_range_reclaim_af_cand_0276-seed",
+  "final_parent_campaign_id": "campaign-20260326T110628005235Z-next-step",
+  "executed_steps": 2,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+  "stop_class": "ambiguity",
+  "transition_intent": "stop_terminal",
+  "final_report_path": "experiments\\campaigns\\campaign-20260326T110628005235Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260326T110523312405Z-next-step",
+    "campaign-20260326T110628005235Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260326T110523312405Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260326T110523312405Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 2,
+      "campaign_id": "campaign-20260326T110628005235Z-next-step",
+      "selected_step_type": "diagnose_existing_candidates",
+      "status": "completed",
+      "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+      "continuation_status": "stop",
+      "stop_class": "ambiguity",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": null,
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal",
+      "report_path": "experiments\\campaigns\\campaign-20260326T110628005235Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "556a92f12b0cb9ab3bb11eb94b87e290c168b6bd2b384c7e3658faa44ed68cfb",
+  "report_path": "experiments\\governed_loops\\manager-20260326T110219Z-program-cycle-02-lane-04.json"
+}

@@ -1,0 +1,111 @@
+{
+  "campaign_id": "campaign-20260322T230435669482Z-next-step",
+  "parent_campaign_id": "campaign-20260322T230435586760Z-next-step",
+  "selected_step_type": "diagnose_existing_candidates",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0168 remains the strongest family reference after the data/feature audit. Run one bounded diagnosis pass on that branch before any further correction or retirement decision.",
+  "status": "completed",
+  "stop_reason": "diagnosis_completed_with_supported_recommendation",
+  "candidate_scope": [
+    "AF-CAND-0168"
+  ],
+  "candidate_reports": [
+    {
+      "candidate_id": "AF-CAND-0168",
+      "readiness_status": "robustness_provisional",
+      "walk_forward_failed_window": 1,
+      "first_window_start_utc": "2026-02-02T06:01:00Z",
+      "first_window_end_utc": "2026-03-02T10:39:00Z",
+      "first_window_trade_count": 79,
+      "first_window_profit_factor": 0.8655172413794446,
+      "first_window_expectancy_pips": -0.2468354430377224,
+      "later_window_trade_count": 159,
+      "later_window_profit_factor": 1.260757036557825,
+      "later_window_expectancy_pips": 0.506918238993851,
+      "spread_anomaly_rate_first_window": 0.0,
+      "spread_anomaly_rate_later_windows": 0.0,
+      "supported_slices": [
+        {
+          "slice_type": "context_bucket",
+          "slice_label": "trend_context",
+          "first_window_trade_count": 79,
+          "later_window_trade_count": 159,
+          "first_window_profit_factor": 0.8655172413794446,
+          "later_window_profit_factor": 1.260757036557825,
+          "first_window_expectancy_pips": -0.2468354430377224,
+          "later_window_expectancy_pips": 0.506918238993851,
+          "expectancy_improvement_pips": 0.7537536820315734,
+          "first_window_loss_share": 1.0,
+          "evidence_score": 3.788236,
+          "supported": true
+        },
+        {
+          "slice_type": "session_bucket",
+          "slice_label": "europe",
+          "first_window_trade_count": 71,
+          "later_window_trade_count": 151,
+          "first_window_profit_factor": 0.8244929797193375,
+          "later_window_profit_factor": 1.3484528832630969,
+          "first_window_expectancy_pips": -0.31690140845042614,
+          "later_window_expectancy_pips": 0.6562913907286246,
+          "expectancy_improvement_pips": 0.9731927991790508,
+          "first_window_loss_share": 0.8841379310344802,
+          "evidence_score": 3.701114,
+          "supported": true
+        }
+      ],
+      "primary_issue": "context_bucket:trend_context",
+      "recommended_mutation": null,
+      "diagnostic_confidence": 0.758,
+      "notes": [
+        "First walk-forward window spans 79 trades; later windows span 159 trades.",
+        "Spread anomaly threshold from QA is 6.882 pips.",
+        "Spread anomalies do not explain the failed first walk-forward window in this candidate."
+      ],
+      "artifact_paths": {
+        "review_packet_path": "reports\\AF-CAND-0168\\review_packet.json",
+        "trade_ledger_path": "reports\\AF-CAND-0168\\trade_ledger.csv",
+        "backtest_summary_path": "reports\\AF-CAND-0168\\backtest_summary.json",
+        "robustness_report_path": "reports\\AF-CAND-0168\\robustness_report.json"
+      }
+    }
+  ],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "hypothesis_audit",
+      "candidate_id": "AF-CAND-0168",
+      "rationale": "AF-CAND-0168 still shows a supported structural weakness, but no single bounded mutation remains narrow enough to justify another direct change. The next governed step should be a hypothesis audit before further search.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0168"
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "hypothesis_audit",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "3145a8cdd5d81297c989b3026bf7c0e86979b136a0b6212ae548bad29fb9cb6a",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260322T230435669482Z-next-step\\next_step_report.json"
+}

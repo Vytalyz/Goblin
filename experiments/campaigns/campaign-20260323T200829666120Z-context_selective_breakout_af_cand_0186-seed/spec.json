@@ -1,0 +1,39 @@
+{
+  "campaign_id": "campaign-20260323T200829666120Z-context_selective_breakout_af_cand_0186-seed",
+  "family": "context_selective_research",
+  "baseline_candidate_id": "AF-CAND-0186",
+  "target_candidate_ids": [
+    "AF-CAND-0186"
+  ],
+  "parent_campaign_id": null,
+  "queue_kind": "throughput",
+  "throughput_target_count": 10,
+  "orthogonality_metadata": {
+    "market_hypothesis": "context_filtered_breakout",
+    "trigger_family": "session_breakout",
+    "holding_profile": "intraday_continuation",
+    "session_profile": "europe",
+    "regime_dependency": "high_vol_mean_reversion"
+  },
+  "compile_budget": 6,
+  "smoke_budget": 5,
+  "max_rule_spec_reformulations_per_hypothesis": 2,
+  "max_ea_spec_rewrites_per_candidate": 2,
+  "max_compile_retries_per_candidate": 2,
+  "max_smoke_retries_per_candidate": 1,
+  "step_type": "formalize_rule_candidate",
+  "allowed_step_types": [
+    "formalize_rule_candidate"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 1,
+  "trial_cap_per_family": 1,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Program-loop bounded seed campaign.",
+    "Approved lane: context_selective_breakout_af_cand_0186.",
+    "Throughput lane starts from deterministic rule formalization and MT5 executability checks.",
+    "Fresh throughput root for a context-selective family that targets only the supported mean-reversion slice inside the strongest breakout lineage.",
+    "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage."
+  ]
+}

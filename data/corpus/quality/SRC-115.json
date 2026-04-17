@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-115",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright \u00a9 2011 by Kathy Lien. All rights reserved.",
+    "Published by John Wiley & Sons, Inc., Hoboken, New Jersey.",
+    "No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, scanning, or otherwise, except as permitted under Section 107 or 108 of the 1976 United States Copyright Act, "
+  ],
+  "front_matter_signals": [
+    "Contents",
+    "Introduction",
+    "Introduction"
+  ],
+  "best_excerpt": "In Chapter 8, we learned about many different ways to use the Double Bollinger Bands, and if you recall, one of those ways was to get into a new trend. With this specific strategy, positions are normally held for 1 to 12 hours and entered at the close of the New York trading sess"
+}

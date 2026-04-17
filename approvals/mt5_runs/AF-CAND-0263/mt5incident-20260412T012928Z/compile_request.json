@@ -1,0 +1,11 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5incident-20260412T012928Z",
+  "manual_run": true,
+  "compile_target_path": "data\\state\\mt5_automation_runtime\\MQL5\\Experts\\AgenticForex\\AF-CAND-0263-manual.mq5",
+  "packet_source_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012928Z\\CandidateEA.mq5",
+  "compiled_ex5_path": "data\\state\\mt5_automation_runtime\\MQL5\\Experts\\AgenticForex\\AF-CAND-0263-manual.ex5",
+  "compile_log_path": null,
+  "terminal_data_path": "data\\state\\mt5_automation_runtime",
+  "metaeditor_path": "data\\state\\mt5_automation_runtime\\MetaEditor64.exe"
+}

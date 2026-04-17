@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-057",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Irrational Exuberance This page intentionally left blank Irrational Exuberance Robert J. Shiller Princeton University Press Princeton, New Jersey Copyright \u00a9 2000 Robert J. Shiller Published by Princeton University Press, 41 William Street, Princeton, New Jersey 08540 In the Unit",
+    "Irrational exuberance / Robert J. Shiller. p. cm. Includes bibliographical references and index. ISBN 0-691-05062-7 (cloth : alk. paper) 1. Stocks\u2014United States. 2. Stock exchanges\u2014United States. 3. Stocks\u2014Prices\u2014United States. 4.",
+    "A top-heavy structure has collapsed of its own weight\u2014there has been no earthquake.\u201d The New York Timessaid, \u201cThe market smash has been caused by technical rather than fundamental considerations.\u201d The Guaranty Survey,published by the Guaranty Trust Company, remarked that \u201cto supp"
+  ],
+  "front_matter_signals": [
+    "Irrational exuberance / Robert J. Shiller. p. cm. Includes bibliographical references and index. ISBN 0-691-05062-7 (cloth : alk. paper) 1. Stocks\u2014United States. 2. Stock exchanges\u2014United States. 3. Stocks\u2014Prices\u2014United States. 4.",
+    "HG4910.S457 2000 332.63'222'0973\u2014dc21 99-088869 This book has been composed in Adobe Palatino and Berkeley Old Style Book and Black by Princeton Editorial Associates, Inc., Scottsdale, Arizona, and Roosevelt, New Jersey The paper used in this publication meets the requirements of",
+    "Why did the U.S. stock market reach such high levels by the turn of the millennium? What changed to cause the market to become so highly priced? What do these changes mean for the market xii PREFACE outlook in the opening decades of the new millennium?"
+  ],
+  "best_excerpt": "11. In addition to this long-run tendency toward reversal of trends, there is a shorter-run weak tendency toward momentum, for stock prices to continue 237NOTES TO PAGES 13\u201321 moving in the same direction. See John Y. Campbell, Andrew Lo, and Craig Mackin- lay,The Econometrics of"
+}

@@ -1,0 +1,21 @@
+{
+    "campaign_id":  "campaign-20260321T233951Z-refresh-0014-root-seed",
+    "family":  "scalping",
+    "status":  "completed",
+    "baseline_candidate_id":  "AF-CAND-0014",
+    "parent_campaign_id":  "campaign-20260321T021303Z-bounded-comparison",
+    "current_step_type":  "mutate_one_candidate",
+    "active_candidate_ids":  [
+                                 "AF-CAND-0014"
+                             ],
+    "promoted_candidate_ids":  [
+
+                               ],
+    "iterations_run":  0,
+    "trials_consumed":  0,
+    "stop_reason":  "manual_root_refresh_requested",
+    "state_path":  "experiments\\campaigns\\campaign-20260321T233951Z-refresh-0014-root-seed\\state.json",
+    "last_report_path":  null,
+    "next_recommendations_path":  null,
+    "updated_utc":  "2026-03-21T23:39:51.6363412Z"
+}

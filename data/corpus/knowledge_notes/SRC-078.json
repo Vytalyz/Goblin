@@ -1,0 +1,12 @@
+{
+  "source_id": "SRC-078",
+  "title": "Option Spread Strategies - Trading Up, Down, and Sideways Markets 2009",
+  "note": "SRC-078: When either one of these stop-loss levels is hit, the trader should exit the position. Short Straddles and Strangles \u2022 Breakout Underlying movement is the enemy of the short straddle or strangle. If the forecast of subdued or low magnitude movement is incorrect, one will have to ",
+  "concept_tags": [
+    "scalping",
+    "breakout"
+  ],
+  "family_relevance_tags": [
+    "scalping"
+  ]
+}

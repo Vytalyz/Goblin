@@ -1,0 +1,61 @@
+{
+  "phase_id": "GOBLIN-P05",
+  "title": "Live Demo Observability And Broker Reconciliation",
+  "objective": "Make live-demo evidence operationally trustworthy and externally reconcilable.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P04"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Define live attach manifests, runtime summaries, heartbeats, and broker/account reconciliation outputs.",
+    "Separate EA audit files from independent broker reconciliation so live truth is not self-referential.",
+    "Codify chaos and failure scenarios for terminal closure, sleep/wake, account changes, and audit gaps.",
+    "Author execution-cost-contract defining the single cross-channel execution assumption layer.",
+    "Author statistical-decision-policy defining strategy-class-based thresholds for incidents, promotion, and variance bands."
+  ],
+  "outputs": [
+    "runtime contract",
+    "broker reconciliation pipeline",
+    "execution cost contract",
+    "statistical decision policy",
+    "ops incident triggers"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/live-demo-contract.md",
+    "Goblin/contracts/broker-reconciliation.md",
+    "Goblin/contracts/execution-cost-contract.md",
+    "Goblin/contracts/statistical-decision-policy.md"
+  ],
+  "checkpoint_targets": [
+    "Live-demo contract exists with runtime observability requirements.",
+    "Broker reconciliation contract exists, distinguishes MT5 primitives, and is treated as external truth.",
+    "Execution cost contract exists and governs spread, commission, slippage, and fill assumptions across all channels.",
+    "Statistical decision policy exists with strategy-class-based thresholds for promotion and incident classification."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/live-demo-contract.md",
+    "Goblin/contracts/broker-reconciliation.md",
+    "Goblin/contracts/execution-cost-contract.md",
+    "Goblin/contracts/statistical-decision-policy.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P05.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P05\\goblin-p05-live-demo-observability-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P05",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P05 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-12T20:21:32.630308Z",
+  "updated_at": "2026-04-14T19:50:53.043253Z",
+  "completed_at": "2026-04-12T20:21:32.719347Z",
+  "exit_criteria": [
+    "Live/demo no longer relies only on EA audit files."
+  ],
+  "acceptance_result": {},
+  "notes": [],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P05.json"
+}

@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-137",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "TRADING FOR A LIVING WILEY FINANCE EDITIONS FINANCIAL STATEMENT ANALYSIS Martin S. Fridson DYNAMIC ASSET ALLOCATION David A. Hammer INTERMARKET TECHNICAL ANALYSIS John J. Murphy INVESTING IN INTANGIBLE ASSETS Russell L.",
+    "Alexander Elder TRADING FOR A LIVING Psychology Trading Tactics Money Management Dr. Alexander Elder Director Financial Trading Seminars, Inc. John Wiley & Sons, Inc. New York Chichester Brisbane Toronto Singapore CompuTracm is a trademark of CompuTrac Software Inc.",
+    "PageMakera is a registered trademark of Aldus Corporation. In recognition of the importance of preserving what has been written, it is a policy of John Wiley & Sons, Inc., to have books of enduring value printed on acid-free paper, and we exert our best efforts to that end."
+  ],
+  "front_matter_signals": [
+    "Includes bibliographical references and index. ISBN 0-471-59224-2 1. Stocks. 2. Futures. 3. Options (Futures) I. Title. HG4661.E43 1992 32.64'5 - dc20 92-35 165 Printed in the United States of America 10 9 To Lou Taylor - a trader; a wise man, a true friend",
+    "Contents Introduction 1. Trading -The Last Frontier 2. Psychology Is the Key 3. The Odds Against You I Individual Psychology 4. Why Trade? 5. Fantasy versus Reality 6. Market Gurus 7. Self-Destructiveness 8. Trading Psychology 9.",
+    "The Directional System 28. Momentum, Rate of Change, and Smoothed Rate of Change 29. Williams %R 30. Stochastic 31. Relative Strength Index -,/V The Neglected Essentials 32. Volume 33. Volume-Based Indicators 34. Open Interest 35."
+  ],
+  "best_excerpt": "After prices break out of a rectangle, they often return and touch its wall from the outside (B, D, and E). These pullbacks offer excellent entries into low-risk trades in the direction of the breakout, with a pro- tective stop inside the rectangle."
+}

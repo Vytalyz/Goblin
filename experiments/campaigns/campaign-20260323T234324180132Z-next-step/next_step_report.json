@@ -1,0 +1,110 @@
+{
+  "campaign_id": "campaign-20260323T234324180132Z-next-step",
+  "parent_campaign_id": "campaign-20260323T234218593294Z-next-step",
+  "selected_step_type": "hypothesis_audit",
+  "step_reason": "The parent lane is already marked lane_exhausted, so the next governed step is a bounded hypothesis audit rather than another mutation or diagnosis pass.",
+  "status": "completed",
+  "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+  "candidate_scope": [
+    "AF-CAND-0227",
+    "AF-CAND-0223"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [
+    {
+      "family": "high_vol_overlap_persistence_research",
+      "audited_candidate_ids": [
+        "AF-CAND-0227",
+        "AF-CAND-0223"
+      ],
+      "reference_candidate_id": "AF-CAND-0223",
+      "lane_decision": "hold_reference_blocked_by_robustness",
+      "summary": "Hypothesis audit compared AF-CAND-0227, AF-CAND-0223. AF-CAND-0223 remains the strongest empirical reference branch, but it is still blocked by walk-forward or search-adjusted robustness gates. Archived comparators no archived comparators do not justify continuing mutation in the current lane.",
+      "common_failure_modes": [
+        "walk_forward_instability",
+        "execution_cost_stress_failure",
+        "negative_or_flat_expectancy",
+        "insufficient_trade_count",
+        "white_reality_check_failure"
+      ],
+      "recommended_actions": [
+        "Keep AF-CAND-0223 as the empirical reference branch at robustness_provisional.",
+        "Do not run MT5 parity or forward on this lane.",
+        "Stop further mutation in this lane until a separate hypothesis, data, or regime audit justifies one bounded correction."
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0227",
+          "family": "high_vol_overlap_persistence_research",
+          "entry_style": "high_vol_overlap_persistence_retest",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 17,
+          "profit_factor": 0.985042735042727,
+          "out_of_sample_profit_factor": 1.9533898305084882,
+          "expectancy_pips": -0.04117647058825709,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.0,
+          "white_reality_check_p_value": 0.673307,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0227\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0227\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0227\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0223",
+          "family": "high_vol_overlap_persistence_research",
+          "entry_style": "high_vol_overlap_persistence_retest",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 119,
+          "profit_factor": 1.3454472843450749,
+          "out_of_sample_profit_factor": 1.6714116251484632,
+          "expectancy_pips": 0.7268907563026051,
+          "stress_passed": true,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0223\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0223\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0223\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260323T234324180132Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260323T234324180132Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260323T234324180132Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": null,
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "da58ddd50e81fd5e28e5c89b77ad354a286a8271bedf95ea628303bbdf1366d4",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260323T234324180132Z-next-step\\next_step_report.json"
+}

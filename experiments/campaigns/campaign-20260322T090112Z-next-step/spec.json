@@ -1,0 +1,31 @@
+{
+  "campaign_id": "campaign-20260322T090112Z-next-step",
+  "family": "scalping",
+  "baseline_candidate_id": "AF-CAND-0001-FADE",
+  "target_candidate_ids": [
+    "AF-CAND-0045",
+    "AF-CAND-0037",
+    "AF-CAND-0032"
+  ],
+  "parent_campaign_id": "campaign-20260322T090056Z-next-step",
+  "step_type": "hypothesis_audit",
+  "allowed_step_types": [
+    "data_feature_audit",
+    "data_regime_audit",
+    "diagnose_existing_candidates",
+    "hypothesis_audit",
+    "mutate_one_candidate",
+    "re_evaluate_one_candidate",
+    "run_forward",
+    "run_parity"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 0,
+  "trial_cap_per_family": 3,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Single-step child campaign opened from campaign-20260322T090056Z-next-step.",
+    "Selected step: hypothesis_audit.",
+    "This controller run must stop after exactly one legal step."
+  ]
+}

@@ -1,0 +1,21 @@
+[autonomy]
+active = true
+queue_scope = "policy_queue_only"
+auto_approval_mode = "machine_approvals"
+notify_boundary = "ea_ready_or_blocked"
+machine_approvable_stages = ["mt5_packet", "mt5_parity_run", "mt5_validation"]
+human_only_stages = ["human_review"]
+blocked_stop_classes = [
+  "integrity_issue",
+  "budget_exhausted",
+  "policy_decision",
+  "blocked_upstream_contract",
+  "blocked_no_authorized_path",
+]
+max_cycles_per_manager_run = 12
+max_consecutive_blocked_runs = 1
+lease_ttl_seconds = 900
+watchdog_no_material_transition_cycles = 2
+watchdog_same_candidate_cycles = 2
+watchdog_same_blocked_reason_cycles = 2
+watchdog_repeated_insufficient_evidence_cycles = 2

@@ -1,0 +1,13 @@
+[
+  {
+    "step_type": "mutate_one_candidate",
+    "candidate_id": "AF-CAND-0018",
+    "rationale": "Clone AF-CAND-0018 and refresh it to the current governed scalping execution-cost defaults before any further diagnosis or mutation.",
+    "binding": true,
+    "evidence_status": "supported",
+    "step_payload": {
+      "mutation_type": "refresh_execution_cost_defaults",
+      "refresh_reason": "align stale execution-cost assumptions with the current governed scalping defaults"
+    }
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "workflow_id": "day_trading_discovery_v1",
+  "version": "1.0.0",
+  "start_node": "reframe_question",
+  "input_schema": "DiscoveryRequest",
+  "output_schema": "CandidateDraft",
+  "nodes": [
+    {
+      "id": "reframe_question",
+      "kind": "agent",
+      "name": "Reframe Question",
+      "input_schema": "DiscoveryRequest",
+      "output_schema": "ReframedQuestion",
+      "config": {
+        "task_name": "reframe_question",
+        "system_prompt": "reframe_system.txt",
+        "user_prompt": "reframe_user.txt"
+      },
+      "on_failure": "halt"
+    },
+    {
+      "id": "collect_corpus_context",
+      "kind": "tool",
+      "name": "Collect Corpus Context",
+      "input_schema": "ReframedQuestion",
+      "output_schema": "CorpusDigest",
+      "config": {
+        "tool_name": "collect_corpus_digest"
+      },
+      "on_failure": "halt"
+    },
+    {
+      "id": "day_trading_analyst",
+      "kind": "agent",
+      "name": "Day Trading Analyst",
+      "input_schema": "CorpusDigest",
+      "output_schema": "CandidateDraft",
+      "config": {
+        "task_name": "day_trading_analyst",
+        "system_prompt": "day_trading_system.txt",
+        "user_prompt": "day_trading_user.txt"
+      },
+      "on_failure": "halt"
+    },
+    {
+      "id": "finalize_candidate",
+      "kind": "finalize",
+      "name": "Finalize Candidate",
+      "input_schema": "CandidateDraft",
+      "output_schema": "CandidateDraft",
+      "config": {
+        "tool_name": "finalize_candidate"
+      },
+      "on_failure": "halt"
+    }
+  ],
+  "edges": [
+    {
+      "source": "reframe_question",
+      "target": "collect_corpus_context",
+      "contract": "ReframedQuestion"
+    },
+    {
+      "source": "collect_corpus_context",
+      "target": "day_trading_analyst",
+      "contract": "CorpusDigest"
+    },
+    {
+      "source": "day_trading_analyst",
+      "target": "finalize_candidate",
+      "contract": "CandidateDraft"
+    }
+  ],
+  "trigger": "cli:discover",
+  "rollback": "discard_draft"
+}

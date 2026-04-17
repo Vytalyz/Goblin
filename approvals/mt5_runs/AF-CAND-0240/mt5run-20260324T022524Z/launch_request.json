@@ -1,0 +1,10 @@
+{
+  "candidate_id": "AF-CAND-0240",
+  "run_id": "mt5run-20260324T022524Z",
+  "terminal_path": "data\\state\\mt5_automation_runtime\\terminal64.exe",
+  "portable_mode": true,
+  "config_path": "approvals\\mt5_runs\\AF-CAND-0240\\mt5run-20260324T022524Z\\tester_config.ini",
+  "launch_mode": "/config",
+  "logic_manifest_hash": "f0a4ddbc4bf59eead6694795f38f5a506baac982f632d9f739e546c4d953c56b",
+  "packet_reused": false
+}

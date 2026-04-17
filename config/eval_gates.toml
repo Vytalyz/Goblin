@@ -1,0 +1,45 @@
+[validation]
+out_of_sample_profit_factor_floor = 1.05
+expectancy_floor = 0.0
+minimum_test_trade_count = 100
+drawdown_review_trigger_pct = 12.0
+stress_spread_multiplier = 1.25
+stress_profit_factor_floor = 1.0
+stress_slippage_pips = 0.25
+stress_fill_delay_ms = 500
+walk_forward_windows = 3
+walk_forward_mode = "anchored_time_windows"
+walk_forward_profit_factor_floor = 0.90
+walk_forward_min_trades_per_window = 10
+walk_forward_min_window_days = 7
+max_relative_drawdown_degradation_pct = 15.0
+deflated_sharpe_floor = 0.0
+cscv_partition_count = 8
+pbo_threshold = 0.35
+white_reality_check_bootstrap_samples = 250
+white_reality_check_block_size = 5
+white_reality_check_pvalue_threshold = 0.10
+white_reality_check_random_seed = 1729
+forward_min_trading_days = 10
+forward_min_trade_count = 25
+forward_profit_factor_floor = 1.0
+forward_expectancy_floor = 0.0
+forward_expectancy_degradation_limit_pct = 50.0
+parity_timestamp_tolerance_seconds = 90
+parity_close_timing_tolerance_seconds = 120
+parity_price_tolerance_pips = 0.30
+parity_fill_tolerance_pips = 0.50
+parity_min_match_rate = 0.80
+parity_max_unmatched_expected_rate = 0.20
+parity_max_unmatched_actual_rate = 0.20
+parity_min_closed_trades = 10
+
+[campaign]
+default_family = "scalping"
+default_max_iterations = 2
+default_max_new_candidates = 8
+default_trial_cap_per_family = 50
+stop_on_review_eligible_provisional = true
+max_mt5_parity_retries_per_candidate = 2
+max_shadow_forward_retries_per_candidate = 1
+max_total_operational_runs_per_campaign = 4

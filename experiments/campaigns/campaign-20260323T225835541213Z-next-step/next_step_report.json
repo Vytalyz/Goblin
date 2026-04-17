@@ -1,0 +1,172 @@
+{
+  "campaign_id": "campaign-20260323T225835541213Z-next-step",
+  "parent_campaign_id": "campaign-20260323T225835486499Z-next-step",
+  "selected_step_type": "data_regime_audit",
+  "step_reason": "The parent hypothesis audit held the reference branch but blocked the lane on robustness, so the next governed step is a bounded data/regime audit on the audited candidates.",
+  "status": "completed",
+  "stop_reason": "data_regime_audit_completed_retire_lane",
+  "candidate_scope": [
+    "AF-CAND-0212",
+    "AF-CAND-0211"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [
+    {
+      "family": "release_retest_research",
+      "audited_candidate_ids": [
+        "AF-CAND-0212",
+        "AF-CAND-0211"
+      ],
+      "reference_candidate_id": "AF-CAND-0211",
+      "focus_candidate_id": "AF-CAND-0211",
+      "failed_window_index": 1,
+      "lane_decision": "retire_lane",
+      "summary": "Data/regime audit compared AF-CAND-0212, AF-CAND-0211. AF-CAND-0211 remains the strongest empirical branch, but the failed first walk-forward window is broadly weak across medium, europe, trend_context, so no narrow correction is justified.",
+      "dominant_first_window_loss_modes": [
+        "medium",
+        "europe",
+        "trend_context"
+      ],
+      "recommended_actions": [
+        "Retire the current strategy lane from further mutation.",
+        "Do not run MT5 parity or forward on this lane.",
+        "Open a different hypothesis class or perform a separate data/feature audit before resuming search."
+      ],
+      "slice_summaries": [
+        {
+          "slice_type": "volatility_bucket",
+          "slice_label": "medium",
+          "first_window_trade_count": 3,
+          "later_window_trade_count": 4,
+          "first_window_expectancy_pips": -0.5666666666659381,
+          "later_window_expectancy_pips": -4.224999999999854,
+          "expectancy_delta_pips": -3.658333333333916,
+          "first_window_loss_share": 0.9444444444440333,
+          "first_window_trade_share": 0.6,
+          "supported_narrow_correction": false
+        },
+        {
+          "slice_type": "session_bucket",
+          "slice_label": "europe",
+          "first_window_trade_count": 4,
+          "later_window_trade_count": 6,
+          "first_window_expectancy_pips": 1.1250000000001537,
+          "later_window_expectancy_pips": -2.1999999999997715,
+          "expectancy_delta_pips": -3.324999999999925,
+          "first_window_loss_share": 0.0,
+          "first_window_trade_share": 0.8,
+          "supported_narrow_correction": false
+        },
+        {
+          "slice_type": "context_bucket",
+          "slice_label": "trend_context",
+          "first_window_trade_count": 5,
+          "later_window_trade_count": 12,
+          "first_window_expectancy_pips": 3.160000000000123,
+          "later_window_expectancy_pips": -2.7249999999997647,
+          "expectancy_delta_pips": -5.884999999999888,
+          "first_window_loss_share": 0.0,
+          "first_window_trade_share": 1.0,
+          "supported_narrow_correction": false
+        },
+        {
+          "slice_type": "volatility_bucket",
+          "slice_label": "high",
+          "first_window_trade_count": 2,
+          "later_window_trade_count": 8,
+          "first_window_expectancy_pips": 8.749999999999215,
+          "later_window_expectancy_pips": -1.9749999999997199,
+          "expectancy_delta_pips": -10.724999999998936,
+          "first_window_loss_share": 0.0,
+          "first_window_trade_share": 0.4,
+          "supported_narrow_correction": false
+        },
+        {
+          "slice_type": "session_bucket",
+          "slice_label": "overlap",
+          "first_window_trade_count": 1,
+          "later_window_trade_count": 6,
+          "first_window_expectancy_pips": 11.3,
+          "later_window_expectancy_pips": -3.249999999999757,
+          "expectancy_delta_pips": -14.549999999999757,
+          "first_window_loss_share": 0.0,
+          "first_window_trade_share": 0.2,
+          "supported_narrow_correction": false
+        }
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0212",
+          "family": "release_retest_research",
+          "entry_style": "compression_retest_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 20,
+          "profit_factor": 0.6379613356766701,
+          "out_of_sample_profit_factor": 0.2608695652174174,
+          "expectancy_pips": -1.0299999999998692,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0212\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0212\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0212\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0211",
+          "family": "release_retest_research",
+          "entry_style": "compression_retest_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 17,
+          "profit_factor": 0.6404255319149568,
+          "out_of_sample_profit_factor": 0.37068965517262503,
+          "expectancy_pips": -0.9941176470586212,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0211\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0211\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0211\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260323T225835541213Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260323T225835541213Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260323T225835541213Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": null,
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "move_to_next_lane",
+  "transition_intent": "advance_next_lane",
+  "policy_snapshot_hash": "1bd5b794d7fffcc30320d6ee02d46f4cff3f3743fe8aeb593bdf89149084cbfd",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260323T225835541213Z-next-step\\next_step_report.json"
+}

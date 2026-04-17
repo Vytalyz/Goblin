@@ -1,0 +1,61 @@
+[llm]
+provider = "mock"
+openai_model = "gpt-4.1-mini"
+temperature = 0.2
+api_key_env = "OPENAI_API_KEY"
+credential_targets = ["openai-api-key"]
+
+[oanda]
+host = "https://api-fxpractice.oanda.com"
+token_env = "OANDA_API_TOKEN"
+credential_targets = ["goblin/oanda/practice", "agentic-forex/oanda/practice", "forex-research/oanda/practice", "api-token@forex-research/oanda/practice"]
+default_instrument = "EUR_USD"
+default_granularity = "M1"
+price_component = "BA"
+default_count = 5000
+timeout_seconds = 30
+
+[data]
+instrument = "EUR_USD"
+canonical_source = "oanda"
+base_granularity = "M1"
+execution_granularity = "M1"
+raw_csv_glob = "*.csv"
+catalog_filename = "catalog.json"
+duckdb_filename = "market.duckdb"
+mt5_parity_db_filename = "mt5_parity.duckdb"
+economic_calendar_filename = "economic_calendar.parquet"
+quarantine_relevance_floor = 0.55
+discovery_relevance_floor = 0.72
+extraction_confidence_floor = 0.75
+supplemental_source_paths = []
+
+[validation]
+out_of_sample_profit_factor_floor = 1.05
+expectancy_floor = 0.0
+minimum_test_trade_count = 100
+drawdown_review_trigger_pct = 12.0
+stress_spread_multiplier = 1.25
+stress_profit_factor_floor = 1.0
+stress_slippage_pips = 0.25
+walk_forward_windows = 3
+max_relative_drawdown_degradation_pct = 15.0
+
+[workflows]
+discovery_workflow_id = "strategy_discovery_router_v1"
+review_workflow_id = "candidate_review_v1"
+
+[policy]
+ftmo_ruleset_id = "ftmo_1step_2026_03"
+ftmo_timezone = "Europe/Prague"
+default_news_minimum_impact = "high"
+default_news_blackout_minutes_before = 15
+default_news_blackout_minutes_after = 15
+default_initial_balance = 100000.0
+default_account_currency = "USD"
+default_risk_per_trade_pct = 0.25
+default_leverage = 30.0
+default_contract_size = 100000.0
+default_pip_value_per_standard_lot = 10.0
+default_margin_buffer_pct = 10.0
+default_max_total_exposure_lots = 5.0

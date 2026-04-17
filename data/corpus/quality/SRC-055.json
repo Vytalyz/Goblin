@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-055",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "For other titles in the Wiley Trading Series",
+    "please see www.wiley.com/\ufb01nance",
+    "A John Wiley and Sons, Ltd., Publication"
+  ],
+  "front_matter_signals": [
+    "Includes bibliographical references and index.",
+    "Contents",
+    "Acknowledgments ix"
+  ],
+  "best_excerpt": "One of the major bene\ufb01ts of short-term intraday trading is the ability to exit or even"
+}

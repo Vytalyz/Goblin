@@ -1,0 +1,50 @@
+{
+  "loop_id": "program-20260329T212310Z-lane-06",
+  "family": "europe_open_failed_break_research",
+  "initial_parent_campaign_id": "campaign-20260329T212529655177Z-next-step",
+  "final_parent_campaign_id": "campaign-20260329T212536956438Z-next-step",
+  "executed_steps": 2,
+  "max_steps": 8,
+  "status": "completed",
+  "stop_reason": "data_feature_audit_completed_retire_family",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "final_report_path": "experiments\\campaigns\\campaign-20260329T212536956438Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260329T212536910927Z-next-step",
+    "campaign-20260329T212536956438Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260329T212536910927Z-next-step",
+      "selected_step_type": "diagnose_existing_candidates",
+      "status": "completed",
+      "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "data_feature_audit",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260329T212536910927Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 2,
+      "campaign_id": "campaign-20260329T212536956438Z-next-step",
+      "selected_step_type": "data_feature_audit",
+      "status": "completed",
+      "stop_reason": "data_feature_audit_completed_retire_family",
+      "continuation_status": "stop",
+      "stop_class": "policy_decision",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": "data_label_audit",
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal",
+      "report_path": "experiments\\campaigns\\campaign-20260329T212536956438Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "5936138f8baf0872cc273929d100dd35cfe7a10f82f929848a40f448b4a0c6af",
+  "report_path": "experiments\\governed_loops\\program-20260329T212310Z-lane-06.json"
+}

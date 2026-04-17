@@ -1,0 +1,47 @@
+{
+  "loop_id": "manager-20260325Toverlap-resolution-bridge-rerun2.json-program-cycle-01-lane-01",
+  "family": "overlap_resolution_bridge_research",
+  "initial_parent_campaign_id": "campaign-20260325T033330204845Z-promotion_overlap_resolution_bridge_buffered_af_cand_0264-seed",
+  "final_parent_campaign_id": "campaign-20260325T033330432456Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "stop_class": "approval_required",
+  "transition_intent": "stop_terminal",
+  "final_report_path": "experiments\\campaigns\\campaign-20260325T033330432456Z-next-step\\next_step_report.json",
+  "final_recommendations": [
+    {
+      "step_type": "run_parity",
+      "candidate_id": "AF-CAND-0264",
+      "rationale": "AF-CAND-0264 now meets the bounded empirical and provisional robustness gates for parity entry. The next governed step should be MT5 parity, still in practice-only mode.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0264"
+      }
+    }
+  ],
+  "executed_campaign_ids": [
+    "campaign-20260325T033330432456Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260325T033330432456Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "stop",
+      "stop_class": "approval_required",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": "run_parity",
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal",
+      "report_path": "experiments\\campaigns\\campaign-20260325T033330432456Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "4ab176325caf6b68c49358f108c33a5636066fc62c7afdc012471ebd8fb0d744",
+  "report_path": "experiments\\governed_loops\\manager-20260325Toverlap-resolution-bridge-rerun2.json-program-cycle-01-lane-01.json"
+}

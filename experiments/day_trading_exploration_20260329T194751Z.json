@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-03-29T19:47:51.930923Z",
+  "family": "day_trading",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "comparison_report_path": "experiments\\comparison_20260329T194751Z.json",
+  "recommended_candidate_id": null,
+  "report_path": "experiments\\day_trading_exploration_20260329T194751Z.json",
+  "candidates": [
+    {
+      "candidate_id": "AF-CAND-0278",
+      "title": "Europe Compression Break Day Trade",
+      "entry_style": "compression_breakout",
+      "thesis": "Trade directional expansion only when a compressed Europe-session range starts releasing with aligned momentum and range-position confirmation. Corpus anchor: SRC-001: 3. The \ufb01 rst and second pro\ufb01 t targets are 50% and 90% of the range respec- tively, which are 103 pips and 185 pips below the resistance (1.6117). 4. Use risk to reward ratio of 1:1 to set the stop loss. (See Figure 8.41 .) From the long example in Figure 8.42 : Entry price = 1.6",
+      "candidate_path": "reports\\AF-CAND-0278\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0278\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0278\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0278\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0278\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0279",
+      "title": "London Range Reclaim Day Trade",
+      "entry_style": "range_reclaim",
+      "thesis": "Fade failed London-session extension only after price starts reclaiming back into the recent range with a controlled reversal profile. Corpus anchor: SRC-002: Pyramiding approaches, scale trading, stop reversals, breakouts, momentum trad-",
+      "candidate_path": "reports\\AF-CAND-0279\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0279\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0279\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0279\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0279\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0280",
+      "title": "Overlap Trend Retest Day Trade",
+      "entry_style": "trend_retest",
+      "thesis": "Trade overlap-session continuation only after an established move retests without breaking trend structure, aiming for a longer directional follow-through than the retired scalping family. Corpus anchor: SRC-003: Always remember Wyckoff's second law, the law of cause and effect. If the cause is large, then this will be reflected in the effect, which applies to support and resistance. The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once",
+      "candidate_path": "reports\\AF-CAND-0280\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0280\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0280\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0280\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0280\\review_packet.json"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "step_type": "compile_ea_candidate",
+    "candidate_id": "AF-CAND-0152",
+    "rationale": "AF-CAND-0152 now has an EA spec and passed the minimum economic plausibility gate.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0152"
+    }
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-04-01T13:02:50.700733Z",
+  "family_filter": "asia_europe_transition_reclaim_research",
+  "candidate_filters": [
+    "AF-CAND-0573"
+  ],
+  "total_records": 1,
+  "registry_path": "experiments\\registry.csv",
+  "report_path": "experiments\\comparison_20260401T130250Z.json",
+  "latest_report_path": "experiments\\comparison_latest.json",
+  "recommended_candidate_id": null,
+  "records": [
+    {
+      "candidate_id": "AF-CAND-0573",
+      "family": "asia_europe_transition_reclaim_research",
+      "instrument": "EUR_USD",
+      "entry_style": "drift_reclaim",
+      "benchmark_group_id": "AF-CAND-0573",
+      "variant_name": "base",
+      "dataset_start_utc": "2025-10-01T06:26:00Z",
+      "dataset_end_utc": "2026-03-12T07:49:00Z",
+      "trading_days_observed": 15,
+      "trade_count": 16,
+      "profit_factor": 1.4271186440675918,
+      "out_of_sample_profit_factor": 1.9230769230769278,
+      "expectancy_pips": 0.7874999999996408,
+      "max_drawdown_pct": 1.1342683234190696,
+      "stressed_profit_factor": 1.2524509803918886,
+      "stress_passed": true,
+      "ftmo_fit_score": 83.09,
+      "ftmo_fit_band": "strong_fit",
+      "readiness": "robustness_provisional",
+      "approval_recommendation": "needs_human_review",
+      "ready_for_publish": false,
+      "walk_forward_ok": false,
+      "benchmark_ranking_score": null,
+      "comparison_score": -5.012452,
+      "spec_path": "reports\\AF-CAND-0573\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0573\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0573\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0573\\review_packet.json",
+      "benchmark_report_path": null
+    }
+  ]
+}

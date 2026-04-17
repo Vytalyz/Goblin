@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-036",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "6!:')Wiley Trading",
+    "- PerryKaufman, author of New TradingSystems and Methods, Fourth Edition - Fred Gehm, author of QuantitativeTradingand Money Management \"Thereareillusionsofthe mind thatareeverybitas realas opticalillusions.Aronson's criticismsofpopularforms oftechnicalanalysisarerighton target.\"",
+    "JacketDesign:Pro-ArtGraphicDesign Subscribetoour freeFinanceand InvestingeNewsletterat www.wiley.comJenewsletters IVisitwww.wileyfinance.comI G)WILEY wiley.com"
+  ],
+  "front_matter_signals": [
+    "Aronson. p. cm.-(Wiley tradingseries) Includesbibliographicalreferencesand index. ISBN-13:978-0-470-00874-4(cloth) ISBN-I0:0-470-00874-1(cloth) 1. Investmentanalysis. 1. Title. II.Series. HG4529.A77 2007 332.63'2042-dc22 2006014664 Printedinthe United StatesofAmerica.",
+    "Acknowledgments About theAuthor Introduction Contents Ix xi 1 PART I Methodological,Psychological, Philosophical,and Statistical Foundations CHAPTER' OblectiveRules and TheirEvaluation 15 CHAPTER 2 The IllusoryValidityofSublective TechnicalAnalysis 33 CHAPTER 3 The ScientiOcMetho",
+    "viii APPENDIX Notes Index ProofThat DetrendingIsEquivalentto Benchmarking Based on PositionBias CONTENTS 475 477 517"
+  ],
+  "best_excerpt": "106. The fivetrend-followingsystems were channel breakout,dual moving-aver\u00ad age crossover,two versionof momentum, and MACD versusitssignalline. For more descriptionsee Kestner'sQuantitativeTradingStrategies. 107. M. Cooper, \"FilterRules Based on Priceand Volume in IndividualSecur"
+}

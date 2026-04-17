@@ -1,0 +1,36 @@
+{
+  "candidate_id": "AF-CAND-0243",
+  "run_id": "mt5run-20260324T233209Z",
+  "lineage_root_candidate_id": "AF-CAND-0243",
+  "parity_class": "m1_official",
+  "parity_policy_lane_ids": [
+    "promotion_session_momentum_hold_extended_af_cand_0243",
+    "session_momentum_hold_extended_af_cand_0243"
+  ],
+  "parity_policy_snapshot_hash": "0a0910cc042aeb7c5a87bc0f2462e640986347bb81c9d84dfbf284592b6ec87a",
+  "validation_status": "failed",
+  "failure_classification": "parity_failure",
+  "parity_rate": 0.793706,
+  "audit_rows": 273,
+  "expected_signal_source": "broker_history_executable_baseline",
+  "expected_trade_count": 286,
+  "actual_trade_count": 273,
+  "matched_trade_count": 227,
+  "unmatched_expected_count": 59,
+  "unmatched_actual_count": 46,
+  "expected_signal_path": "approvals\\mt5_packets\\AF-CAND-0243\\expected_signals.csv",
+  "broker_history_csv_path": "approvals\\mt5_runs\\AF-CAND-0243\\mt5run-20260324T233209Z\\AF-CAND-0243__broker_history.csv",
+  "matched_trade_diagnostics_path": "approvals\\mt5_runs\\AF-CAND-0243\\mt5run-20260324T233209Z\\matched_trade_diagnostics.csv",
+  "diagnostics_report_path": "approvals\\mt5_runs\\AF-CAND-0243\\mt5run-20260324T233209Z\\parity_diagnostics.json",
+  "tolerances_used": {
+    "parity_timestamp_tolerance_seconds": 90,
+    "parity_close_timing_tolerance_seconds": 120,
+    "parity_price_tolerance_pips": 0.3,
+    "parity_fill_tolerance_pips": 0.5,
+    "parity_min_match_rate": 0.8,
+    "parity_max_unmatched_expected_rate": 0.2,
+    "parity_max_unmatched_actual_rate": 0.2,
+    "parity_min_closed_trades": 10
+  },
+  "report_path": "approvals\\mt5_runs\\AF-CAND-0243\\mt5run-20260324T233209Z\\validation_report.json"
+}

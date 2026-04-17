@@ -1,0 +1,17 @@
+{
+  "candidate_id": "AF-CAND-0241",
+  "run_id": "mt5run-20260324T232058Z",
+  "terminal_path": "data\\state\\mt5_automation_runtime\\terminal64.exe",
+  "install_id": "mt5_practice_01",
+  "portable_mode": true,
+  "config_path": "approvals\\mt5_runs\\AF-CAND-0241\\mt5run-20260324T232058Z\\tester_config.ini",
+  "launch_mode": "/config",
+  "audit_relative_path": "AgenticForex\\Audit\\AF-CAND-0241__mt5run-20260324T232058Z__audit.csv",
+  "audit_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0241__mt5run-20260324T232058Z__audit.csv",
+  "broker_history_relative_path": "AgenticForex\\Audit\\AF-CAND-0241__broker_history.csv",
+  "broker_history_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0241__broker_history.csv",
+  "diagnostic_windows_relative_path": "AgenticForex\\Audit\\AF-CAND-0241__diagnostic_tick_windows.csv",
+  "diagnostic_windows_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0241__diagnostic_tick_windows.csv",
+  "diagnostic_ticks_relative_path": "AgenticForex\\Audit\\AF-CAND-0241__diagnostic_ticks.csv",
+  "diagnostic_ticks_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0241__diagnostic_ticks.csv"
+}

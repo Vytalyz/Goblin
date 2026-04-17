@@ -1,0 +1,19 @@
+{
+  "source_id": "SRC-032",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "U.S. SESSION (NEW YORK): 8 a.m. \u2013 5 p.m. EST New York is the second largest FX mark et place, encompassing 19 percent of total FX market volume turnover accord ing to the 2004 Triennial Central Bank Survey of Foreign Exchange and Deri vatives Market Activity in April 2004 publish",
+    "The only publicly available report on positioning is the \u201cCo mmitments of Traders\" report published by the Commodity Futures Trading Commission, a nd even that is rel eased with a three- day delay. A useful alternative is to use risk reversals, which are provided on a real- time "
+  ],
+  "front_matter_signals": [
+    "2 Table of Contents",
+    "Asian Financial Crisis (1997\u20131998). Introduction of the Euro (1999). Chapter 3: What Moves the Currency Market in the Long Term? 29 Fundamental Analysis. Technical Analysis. Currency Forecasting\u2014What Bookwor ms and Economists Look At.",
+    "Currency Profile: Australian Dollar (AUD). Currency Profile: New Zealand Dollar (NZD). Currency Profile: Canadian Dollar (CAD). About the Author. Index. 4 Foreign Exchange \u2014 The Fastest-Growing Market of Our Time"
+  ],
+  "best_excerpt": "Taking a look at Figure 8.6, we see that CHF/JPY is indeed trading below the 200-day simple moving average with th e 20-day SMA crossing below the 100-day SMA. This confirms the bearish momentum in the currency pair. So as a day trader, we move on to the 15-minute chart to pinp o"
+}

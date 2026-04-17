@@ -1,0 +1,20 @@
+{
+  "program_id": "manager-20260324T210951Z-program-cycle-02",
+  "family": "session_momentum_hold_research",
+  "initial_parent_campaign_id": "campaign-20260324T211201871366Z-next-step",
+  "final_parent_campaign_id": "campaign-20260324T211201871366Z-next-step",
+  "executed_lanes": 0,
+  "max_lanes": 3,
+  "status": "stopped",
+  "stop_reason": "program_loop_seed_candidate_truth_mismatch:session_momentum_hold_core_af_cand_0241:candidate_json_entry_style,strategy_spec_entry_style",
+  "stop_class": "integrity_issue",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": null,
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260324T210951Z-program-cycle-02.json"
+}

@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-146",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "high",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Bulkowski For more information, please visit our Web site at www.wiley.com/go/bloombergpress. Visual Guide to Chart Patterns Thomas N. Bulkowski BLOOMBERG PRESS An Imprint of Cover image: C. Wallace Cover design: Background \u00a9 Naddi/Stockphoto Copyright \u00a9 2013 by Thomas N.",
+    "Bulkowski. All rights reserved. Published by John Wiley & Sons, Inc., Hoboken, New Jersey. Published simultaneously in Canada. No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, electronic, me- chanical, photoc",
+    "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley & Sons, Inc., 111 River Street, Hoboken, NJ 07030, (201) 748-6011, fax (201) 748-6008, or online at http://www.wiley.com/go/permissions."
+  ],
+  "front_matter_signals": [
+    "p. cm. In cludes bibliographical references and index. IS BN 978-1-118-30144-9; ISBN 978-1-118-41981-6 (ebk); ISBN 978-1-118-42150-5 (ebk); ISBN 978-1-118-43383-6 (ebk); IS BN 978-1-118-43846-6 (ebk); ISBN 978-1-118-43849-7 (ebk); ISBN 978-1-118-52108-3 (ebk) 1.",
+    "HG4638.B855 2012 332.63\u20192042\u2014dc23 2012030186 P rinted in the United States of America 10 9 8 7 6 5 4 3 2 1 v Contents How to Use This Book vii Acknowledgments ix Introduction xi n Part I: The Basics 1 n Chapter 1: Pattern Recognition Made Easy 3 n Chapter 2: Minor Highs and Lows ",
+    "ix I like dealing with the best. Th at is why writing and publishing a book is made easy by John Wiley & Sons and Pamela van Giessen. Th anks, Pamela. Th anks also to the other Wiley workers that played their part in acquiring or creating this book: Evan Burton, Meg Freeborn, Chr"
+  ],
+  "best_excerpt": "Th ey used the basic setup, that of buying after the breakout AA BB CC AA BB 25 2420.24 15 10 50M 06.472M JanDecNovOctSepAugJulJunMayAprMarFebJan 20062005 Exhibit 18.7: AMTD US Equity (TD Ameritrade Holding Corp) B B B When price jumps by 5 to 20 percent or more in one session, c"
+}

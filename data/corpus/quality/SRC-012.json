@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-012",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "JOHN WILEY & SONS, INC.",
+    "WILEY FINANCE EDITIONS",
+    "candleswould burn. She was a major factorin my choiceof John Wiley"
+  ],
+  "front_matter_signals": [
+    "ACKNOWLEDGMENTS..............................................................................",
+    "viii Acknowledgments",
+    "Acknowledgments ix"
+  ],
+  "best_excerpt": "bullishtrendwas confirmed.Note how therally fromthisbreakoutstalled"
+}

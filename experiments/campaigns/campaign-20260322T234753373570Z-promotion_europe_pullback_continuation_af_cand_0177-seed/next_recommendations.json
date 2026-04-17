@@ -1,0 +1,14 @@
+[
+  {
+    "candidate_id": "AF-CAND-0177",
+    "evidence_status": "supported",
+    "step_type": "mutate_one_candidate",
+    "rationale": "AF-CAND-0177 should be refreshed to the current governed execution-cost defaults before pullback_continuation lane evaluation.",
+    "step_payload": {
+      "mutation_type": "refresh_execution_cost_defaults",
+      "source_candidate_id": "AF-CAND-0177",
+      "refresh_reason": "align AF-CAND-0177 to the current session_alignment_research execution-cost contract before pullback_continuation lane evaluation"
+    },
+    "binding": true
+  }
+]

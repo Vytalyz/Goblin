@@ -1,0 +1,14 @@
+[
+  {
+    "step_type": "mutate_one_candidate",
+    "candidate_id": "AF-CAND-0022",
+    "rationale": "AF-CAND-0022 shows a persistent hour-level weakness at 11 UTC across the refreshed branch and its nearby comparators. Remove allowed_hours_utc [11] inside the current breakout family.",
+    "binding": true,
+    "evidence_status": "supported",
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0021",
+      "mutation_type": "trim_allowed_hours",
+      "removed_hours_utc": [11]
+    }
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "checkpoint_id": "goblin-t3-namespace-migration-complete",
+  "phase_id": "GOBLIN-T3",
+  "status": "passed",
+  "timestamp": "2026-04-13T14:30:00Z",
+  "evidence": [
+    "pyproject package identity switched to goblin",
+    "console scripts now resolve via goblin namespace",
+    "namespace compatibility tests added"
+  ]
+}

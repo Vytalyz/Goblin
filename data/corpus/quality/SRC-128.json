@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-128",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "THE WAR REN BUFFETT WAY Second Edition ROBERT G. HAGSTROM John Wiley & Sons, Inc. Copyright \u00a9 2005 by Robert G. Hagstrom. All rights reserved. Published by John Wiley & Sons, Inc., Hoboken, New Jersey. Published simultaneously in Canada.",
+    "No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, scanning, or otherwise, except as permitted under Section 107 or 108 of the 1976 United States Copyright Act, ",
+    "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley & Sons, Inc., 111 River Street, Hoboken, NJ 07030, 201-748-6011, fax 201-748-6008. Limit of Liability/Disclaimer of Warranty: While the publisher and author have used their best"
+  ],
+  "front_matter_signals": [
+    "1 0987654321 Wiley products, visit our web site at www .wiley.com. v Contents Foreword to the Second Edition vii Bill Miller Foreword to the First Edition ix Peter S. Lynch Preface xv Introduction xix Kenneth L.",
+    "Fisher 1 The World\u2019s Greatest Investor 1 2 The Education of Warren Buffett 11 3 \u201cOur Main Business Is Insurance\u201d: The Early Days of Berkshire Hathaway 29 4 Buying a Business 41 5 Investing Guidelines: Business Tenets 61 6 Investing Guidelines: Management Tenets 81 7 Investing Gui",
+    "I can almost viii FOREWORD TO THE SECOND EDITION hear Warren saying, with his wry smile, \u201cThat\u2019s why they call them principles.\u201d The past ten years have given us a vivid demonstration of that basic truth. In those ten years, the trends of the stock market changed several times ov"
+  ],
+  "best_excerpt": "Periodically, small capi talization, large capitalization, growth, value, momentum, thematic, and sector rotation have proven financially rewarding. At other times, these approaches have stranded their followers in periods of mediocrity."
+}

@@ -1,0 +1,38 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5incident-20260412T012358Z",
+  "incident_id": null,
+  "window_start": "2025-10-01",
+  "window_end": "2026-03-20",
+  "launch_status": "completed",
+  "harness_status": "harness_untrusted",
+  "report_trade_count": 130,
+  "manual_overrides": {
+    "deposit": null,
+    "leverage": null,
+    "fixed_lots": null,
+    "auto_scale_lots": false,
+    "canonical_deposit": 100000.0,
+    "canonical_leverage": 30.0,
+    "canonical_fixed_lots": 5.0,
+    "min_lot": 0.01,
+    "lot_step": 0.01,
+    "sizing_mode": "canonical_packet",
+    "effective_fixed_lots": 5.0
+  },
+  "tester_config_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012358Z\\tester_config.ini",
+  "launch_request_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012358Z\\launch_request.json",
+  "tester_inputs_profile_path": "data\\state\\mt5_automation_runtime\\MQL5\\Profiles\\Tester\\AF-CAND-0263-mt5incident-20260412T012358Z.set",
+  "tester_report_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012358Z\\AF-CAND-0263-mt5incident-20260412T012358Z-report.htm",
+  "audit_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012358Z\\AF-CAND-0263__mt5incident-20260412T012358Z__audit.csv",
+  "broker_history_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012358Z\\AF-CAND-0263__mt5incident-20260412T012358Z__broker_history.csv",
+  "diagnostic_ticks_csv_path": null,
+  "runtime_summary_json_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012358Z\\AF-CAND-0263__mt5incident-20260412T012358Z__runtime_summary.json",
+  "signal_trace_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012358Z\\AF-CAND-0263__mt5incident-20260412T012358Z__signal_trace.csv",
+  "launch_status_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012358Z\\launch_status.json",
+  "notes": [
+    "Old known-good baseline harness has not passed in the latest incident report; same-window replay remains non-authoritative.",
+    "Replay completed without a positive parsed Total Trades count; do not use this as strategy evidence."
+  ],
+  "report_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012358Z\\mt5_incident_replay_report.json"
+}

@@ -1,0 +1,191 @@
+{
+  "campaign_id": "campaign-20260321T234036Z-next-step",
+  "parent_campaign_id": "campaign-20260321T233951Z-refresh-0014-root-seed",
+  "selected_step_type": "mutate_one_candidate",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0014 should be refreshed to the current governed scalping execution-cost defaults before any further comparison or promotion decisions.",
+  "status": "completed",
+  "stop_reason": "mutation_completed_with_supported_recommendation",
+  "candidate_scope": [
+    "AF-CAND-0014"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [
+    {
+      "source_candidate_id": "AF-CAND-0014",
+      "mutated_candidate_id": "AF-CAND-0027",
+      "mutation_type": "refresh_execution_cost_defaults",
+      "rationale": "AF-CAND-0014 should be refreshed to the current governed scalping execution-cost defaults before any further comparison or promotion decisions.",
+      "readiness_status": "specified",
+      "changed_fields": [
+        "candidate_id",
+        "title",
+        "thesis",
+        "variant_name",
+        "market_context.execution_notes",
+        "cost_model.broker_fee_model",
+        "cost_model.slippage_pips",
+        "cost_model.commission_per_standard_lot_usd",
+        "cost_model.fill_delay_ms",
+        "execution_cost_model.broker_fee_model",
+        "execution_cost_model.slippage_pips",
+        "execution_cost_model.commission_per_standard_lot_usd",
+        "execution_cost_model.fill_delay_ms"
+      ],
+      "artifact_references": {
+        "dataset_snapshot": {
+          "snapshot_id": "331419c8cff165ca",
+          "source": "oanda",
+          "extraction_utc": "2026-03-21T02:10:40.493834Z",
+          "instrument": "EUR_USD",
+          "symbol_mapping": {
+            "EUR_USD": "EUR_USD"
+          },
+          "dataset_start_utc": "2026-02-01T22:04:00Z",
+          "dataset_end_utc": "2026-03-20T20:59:00Z",
+          "session_filters": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "qa_report_path": "reports\\market_data_quality\\eur_usd_m1.json",
+          "parquet_path": "data\\normalized\\research\\eur_usd_m1.parquet"
+        },
+        "feature_build": {
+          "feature_version_id": "758a61d83428e532",
+          "label_version_id": "104c608f5ff79a88",
+          "generated_utc": "2026-03-21T23:40:36.344933Z",
+          "feature_paths": [
+            "src\\agentic_forex\\features\\service.py"
+          ],
+          "label_paths": [
+            "src\\agentic_forex\\labels\\service.py"
+          ]
+        },
+        "data_provenance": {
+          "provenance_id": "9d5f33c3a63a237a",
+          "candidate_id": "AF-CAND-0027",
+          "stage": "specified",
+          "dataset_snapshot": {
+            "snapshot_id": "331419c8cff165ca",
+            "source": "oanda",
+            "extraction_utc": "2026-03-21T02:10:40.493834Z",
+            "instrument": "EUR_USD",
+            "symbol_mapping": {
+              "EUR_USD": "EUR_USD"
+            },
+            "dataset_start_utc": "2026-02-01T22:04:00Z",
+            "dataset_end_utc": "2026-03-20T20:59:00Z",
+            "session_filters": [
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "qa_report_path": "reports\\market_data_quality\\eur_usd_m1.json",
+            "parquet_path": "data\\normalized\\research\\eur_usd_m1.parquet"
+          },
+          "feature_build": {
+            "feature_version_id": "758a61d83428e532",
+            "label_version_id": "104c608f5ff79a88",
+            "generated_utc": "2026-03-21T23:40:36.344933Z",
+            "feature_paths": [
+              "src\\agentic_forex\\features\\service.py"
+            ],
+            "label_paths": [
+              "src\\agentic_forex\\labels\\service.py"
+            ]
+          },
+          "calendar_version_id": null,
+          "execution_cost_model_version": "4fd0bd1e049a2679",
+          "risk_envelope_version": "dc8c7660ba82c71f",
+          "strategy_spec_version": "268e2f31e78ccf8d",
+          "report_path": "reports\\AF-CAND-0027\\data_provenance.json"
+        },
+        "environment_snapshot": {
+          "environment_id": "700fb8c1a35e2065",
+          "captured_utc": "2026-03-21T23:40:36.398081Z",
+          "python_version": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+          "dependency_snapshot_hash": "eeb067bce139b07a",
+          "os_platform": "Windows-11-10.0.26200-SP0",
+          "machine_id": "Infinity",
+          "git_revision": null,
+          "mt5_build": null,
+          "metaeditor_version": null,
+          "report_path": "reports\\AF-CAND-0027\\environment_snapshot.json"
+        },
+        "execution_cost_model": {
+          "canonical_source": "oanda",
+          "spread_mode": "bid_ask",
+          "broker_fee_model": "oanda_spread_only",
+          "spread_multiplier": 1.0,
+          "slippage_pips": 0.05,
+          "commission_per_standard_lot_usd": 0.0,
+          "fill_delay_ms": 250,
+          "liquidity_session_assumption": "extended_session_quality_breakout",
+          "tick_model_assumption": "oanda_bid_ask_m1",
+          "notes": [
+            "Canonical research source is OANDA bid/ask data.",
+            "Versioned execution model for research, parity, and forward-stage evaluation.",
+            "OANDA spot FX is modeled as spread-only by default unless a non-zero commission is specified.",
+            "Scalping defaults include explicit fill-delay and round-turn broker-cost assumptions."
+          ]
+        },
+        "risk_envelope": {
+          "max_daily_loss_pct": 5.0,
+          "max_simultaneous_positions": 1,
+          "max_spread_allowed_pips": 2.0,
+          "session_boundaries_utc": [],
+          "news_event_policy": "calendar_blackout",
+          "kill_switch_conditions": [],
+          "leverage": 30.0,
+          "sizing_rule": "fixed_fractional",
+          "margin_buffer_pct": 10.0,
+          "notes": []
+        }
+      },
+      "artifact_paths": {
+        "source_candidate_path": "reports\\AF-CAND-0014\\candidate.json",
+        "source_spec_path": "reports\\AF-CAND-0014\\strategy_spec.json",
+        "candidate_path": "reports\\AF-CAND-0027\\candidate.json",
+        "spec_path": "reports\\AF-CAND-0027\\strategy_spec.json",
+        "data_provenance_path": "reports\\AF-CAND-0027\\data_provenance.json",
+        "environment_snapshot_path": "reports\\AF-CAND-0027\\environment_snapshot.json",
+        "mutation_report_path": "reports\\AF-CAND-0027\\mutation_report.json"
+      }
+    }
+  ],
+  "reevaluation_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "re_evaluate_one_candidate",
+      "candidate_id": "AF-CAND-0027",
+      "rationale": "Mutation completed for AF-CAND-0027. Re-evaluate the mutated breakout candidate under the current canonical OANDA dataset and execution-cost assumptions before any further search.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0014",
+        "mutation_type": "refresh_execution_cost_defaults",
+        "refresh_reason": "align AF-CAND-0014 to the current scalping execution-cost contract before further comparison",
+        "fill_delay_ms": 250,
+        "slippage_pips": 0.05,
+        "broker_fee_model": "oanda_spread_only",
+        "commission_per_standard_lot_usd": 0.0
+      }
+    }
+  ],
+  "report_path": "experiments\\campaigns\\campaign-20260321T234036Z-next-step\\next_step_report.json"
+}

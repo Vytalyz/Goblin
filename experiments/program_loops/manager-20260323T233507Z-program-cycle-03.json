@@ -1,0 +1,20 @@
+{
+  "program_id": "manager-20260323T233507Z-program-cycle-03",
+  "family": "high_vol_overlap_persistence_research",
+  "initial_parent_campaign_id": "campaign-20260323T234324180132Z-next-step",
+  "final_parent_campaign_id": "campaign-20260323T234324550450Z-next-step",
+  "executed_lanes": 0,
+  "max_lanes": 3,
+  "status": "stopped",
+  "stop_reason": "data_label_audit_completed_family_retire_confirmed",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [],
+  "final_audit_report_path": "experiments\\campaigns\\campaign-20260323T234324550450Z-next-step\\next_step_report.json",
+  "policy_snapshot_hash": "da58ddd50e81fd5e28e5c89b77ad354a286a8271bedf95ea628303bbdf1366d4",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260323T233507Z-program-cycle-03.json"
+}

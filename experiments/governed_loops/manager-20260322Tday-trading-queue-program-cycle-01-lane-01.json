@@ -1,0 +1,50 @@
+{
+  "loop_id": "manager-20260322Tday-trading-queue-program-cycle-01-lane-01",
+  "family": "day_trading",
+  "initial_parent_campaign_id": "campaign-20260322T165755037048Z-compression_breakout_af_cand_0060-seed",
+  "final_parent_campaign_id": "campaign-20260322T165759453966Z-next-step",
+  "executed_steps": 2,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+  "stop_class": "ambiguity",
+  "transition_intent": "stop_terminal",
+  "final_report_path": "experiments\\campaigns\\campaign-20260322T165759453966Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260322T165755088008Z-next-step",
+    "campaign-20260322T165759453966Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260322T165755088008Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T165755088008Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 2,
+      "campaign_id": "campaign-20260322T165759453966Z-next-step",
+      "selected_step_type": "diagnose_existing_candidates",
+      "status": "completed",
+      "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+      "continuation_status": "stop",
+      "stop_class": "ambiguity",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": null,
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal",
+      "report_path": "experiments\\campaigns\\campaign-20260322T165759453966Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "bcfb8ea40b3f190401e87761dea41a34ebe01b06b721d6c61330a22dc8100949",
+  "report_path": "experiments\\governed_loops\\manager-20260322Tday-trading-queue-program-cycle-01-lane-01.json"
+}

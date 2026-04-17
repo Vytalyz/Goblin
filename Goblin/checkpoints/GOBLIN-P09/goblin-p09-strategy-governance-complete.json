@@ -1,0 +1,30 @@
+{
+  "checkpoint_id": "goblin-p09-strategy-governance-complete",
+  "phase_id": "GOBLIN-P09",
+  "created_utc": "2026-04-13T01:15:00Z",
+  "status": "completed",
+  "summary": "P09 strategy governance is fully implemented across governed and legacy campaign paths with live/demo candidate and promotion-packet enforcement.",
+  "evidence": {
+    "contracts": [
+      "Goblin/contracts/strategy-rationale-card.md",
+      "Goblin/contracts/experiment-accounting.md",
+      "Goblin/contracts/strategy-methodology-rubric.md",
+      "Goblin/contracts/promotion-decision-packet.md"
+    ],
+    "enforcement_paths": [
+      "src/agentic_forex/campaigns/controller.py",
+      "src/agentic_forex/campaigns/next_step.py",
+      "src/agentic_forex/campaigns/governed_loop.py",
+      "src/agentic_forex/campaigns/program_loop.py",
+      "src/agentic_forex/campaigns/autonomous_manager.py",
+      "src/agentic_forex/approval/service.py",
+      "src/agentic_forex/mt5/service.py",
+      "src/agentic_forex/goblin/controls.py"
+    ],
+    "tests": {
+      "command": "python -m pytest tests/test_goblin_controls.py tests/test_codex_operator.py tests/test_governance_controls.py tests/test_validation_pipeline.py tests/test_production_incident.py tests/test_autonomous_manager.py tests/test_next_step_controller.py -q",
+      "result": "153 passed"
+    }
+  },
+  "next_step": "Await explicit user approval before starting GOBLIN-P10."
+}

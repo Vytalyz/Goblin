@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-078",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "SALIBA BLOOMBERG PRESS NEW YORK with Joseph C. Corona and Karen E. Johnson 00_Saliba_FM.indd iii 1/8/09 11:54:21 AM \u00a9 2009 by International Trading Institute, Ltd. All rights reserved. Protected under the Berne Convention. Printed in Canada.",
+    "BLP provides BFLP with all global marketing and operational support and service for these products and distributes the BPS either directly or through a non-BFLP subsidiary in the BLP Countries. All rights reserved. This publication contains the authors\u2019 opinions and is designed t",
+    "First edition published 2009 1 3 5 7 9 10 8 6 4 2 Library of Congress Cataloging-in-Publication Data Saliba, Anthony J. Option spread strategies : trading up, down, and sideways markets / Anthony J. Saliba with Joseph C. Corona and Karen E."
+  ],
+  "front_matter_signals": [
+    "Johnson. \u2014 1st ed. p. cm. Includes index. Summary: \u201cProven author Anthony Saliba provides step-by-step instructions for spread trading techniques for options traders. Saliba helps readers understand the nuances of each technique, when to employ each spread strategy, and how to ad",
+    "00_Saliba_FM.indd vi 1/8/09 11:54:22 AM Contents Acknowledgments ix Introduction xi 1 The Covered-Write 2 2 Verticals 28 3 Collars and Reverse-Collars 64 4 Straddles and Strangles 94 5 Butterflies and Condors 126 6 Calendar Spreads 156 7 Ratio Spreads 190 8 Backspreads 222 Append",
+    "00_Saliba_FM.indd vii 1/8/09 11:54:22 AM ix Acknowledgments Our goal with this book was to take a basic approach to teaching the in- tricacies of advanced option strategies so investors could successfully put them to use in their own portfolios."
+  ],
+  "best_excerpt": "When either one of these stop-loss levels is hit, the trader should exit the position. Short Straddles and Strangles \u2022 Breakout Underlying movement is the enemy of the short straddle or strangle. If the forecast of subdued or low magnitude movement is incorrect, one will have to "
+}

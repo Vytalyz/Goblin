@@ -1,0 +1,35 @@
+{
+  "loop_id": "manager-20260322Tautonomy-smoke-program-cycle-01-lane-02",
+  "family": "scalping",
+  "initial_parent_campaign_id": "campaign-20260322T143344Z-next-step",
+  "final_parent_campaign_id": "campaign-20260322T143401Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+  "stop_class": "policy_decision",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260322T143401Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260322T143401Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260322T143401Z-next-step",
+      "selected_step_type": "hypothesis_audit",
+      "status": "completed",
+      "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+      "continuation_status": "stop",
+      "stop_class": "policy_decision",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": null,
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T143401Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "ce4ef591c0a0cadb665ece64d74d3692cff126f9c3dbd00b8e78f7d452d58cc1",
+  "report_path": "experiments\\governed_loops\\manager-20260322Tautonomy-smoke-program-cycle-01-lane-02.json"
+}

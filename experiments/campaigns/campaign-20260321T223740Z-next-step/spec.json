@@ -1,0 +1,22 @@
+{
+  "campaign_id": "campaign-20260321T223740Z-next-step",
+  "family": "scalping",
+  "baseline_candidate_id": "AF-CAND-0014",
+  "target_candidate_ids": [
+    "AF-CAND-0022"
+  ],
+  "parent_campaign_id": "campaign-20260321T224200Z-hour11-trim-seed",
+  "step_type": "mutate_one_candidate",
+  "allowed_step_types": [
+    "mutate_one_candidate"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 0,
+  "trial_cap_per_family": 1,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Single-step child campaign opened from campaign-20260321T224200Z-hour11-trim-seed.",
+    "Selected step: mutate_one_candidate.",
+    "This controller run must stop after exactly one legal step."
+  ]
+}

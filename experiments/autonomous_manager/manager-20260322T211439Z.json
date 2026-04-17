@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "manager-20260322T211439Z",
+  "program_id": "manager-20260322T211439Z-program",
+  "family": "throughput_research",
+  "initial_parent_campaign_id": "campaign-20260322T211210182398Z-next-step",
+  "final_parent_campaign_id": "campaign-20260322T211210182398Z-next-step",
+  "executed_cycles": 1,
+  "max_cycles": 6,
+  "status": "stopped",
+  "stop_reason": "program_loop_parent_lane_hard_stop",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "684e8f329d5a0cc1ebf7f79ef93718c2eefffbe2fd9fd56ced9d3e48c420f7c1",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "campaign-20260322T211210182398Z-next-step",
+      "program_report_path": "experiments\\program_loops\\manager-20260322T211439Z-program-cycle-01.json",
+      "stop_reason": "program_loop_parent_lane_hard_stop",
+      "stop_class": "policy_decision",
+      "material_transition": false,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260322T211439Z.json"
+}

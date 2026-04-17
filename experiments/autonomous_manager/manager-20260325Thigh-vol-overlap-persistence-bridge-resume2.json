@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "manager-20260325Thigh-vol-overlap-persistence-bridge-resume2",
+  "program_id": "manager-20260325Thigh-vol-overlap-persistence-bridge-resume2-program",
+  "family": "high_vol_overlap_persistence_bridge_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": "campaign-20260325T004740519207Z-next-step",
+  "executed_cycles": 1,
+  "max_cycles": 16,
+  "status": "stopped",
+  "stop_reason": "data_label_audit_completed_family_retire_confirmed",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "7213a00ae4f03faa707b1790ed6c6711b5b3f7f00e5c7102614e0b3d7fb5088a",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260325Thigh-vol-overlap-persistence-bridge-resume2-program-cycle-01.json",
+      "stop_reason": "data_label_audit_completed_family_retire_confirmed",
+      "stop_class": "policy_decision",
+      "material_transition": true,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260325Thigh-vol-overlap-persistence-bridge-resume2.json"
+}

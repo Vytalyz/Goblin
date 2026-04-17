@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-093",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "She is the publisher of a daily newsletter on the foreign exchange market, \u201cThe Strategic Currency Briefing.\u201d Barbara is the author of CNBC 24/7 , Trading Around the Clock, Around the World, and The Global Trader (Wiley).",
+    "She also writes a monthly column for Currency Trader Magazine. $24.99 US / $29.99 CN / \u00a316.99 UK ISBN 978-0-470-88800-1 Business & Economics/Investments & Securities Go to Dummies.com \u00ae for videos, step-by-step examples, how-to articles, or to shop!",
+    "Technical Analysis For Dummies\u00ae, 2nd Edition Published by Wiley Publishing, Inc. 111 River St. Hoboken, NJ 07030-5774 www.wiley.com Copyright \u00a9 2011 by Wiley Publishing, Inc., Indianapolis, Indiana Published by Wiley Publishing, Inc., Indianapolis, Indiana Published simultaneousl"
+  ],
+  "front_matter_signals": [
+    "About the Author Barbara Rockefeller is a writer specializing in international economics and fi nance, with a focus on foreign exchange. She also trades in the foreign exchange market. She is the publisher of a daily newsletter on the foreign exchange market, \u201cThe Strategic Curre",
+    "Dedication This book is dedicated to Robert James Deadman, founder of Technical Systems Analysis Group, who taught as much of \u201cthe scientifi c way of thinking\u201d as it\u2019s possible to cram into a \u201csocial science\u201d mind, and with endless patience.",
+    "I also dedicate the book to Alfred A. \u201cChip\u201d Olbrycht, who forces me to question the easy way and to look at everything a second time, and a third time, too. Author\u2019s Acknowledgments For Dummies editors Mike Baker and Alissa Schwipps, who caused much suffering."
+  ],
+  "best_excerpt": "You take no risk when you\u2019re out of the market. Some setup trades are intraday, where you enter and exit the trade on the same day. Other setup trades are more long lasting because they lead to authentic trends that you stick to until your exit rules or stop is hit."
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "step_type": "mutate_one_candidate",
+    "candidate_id": "AF-CAND-0114",
+    "rationale": "The failed first walk-forward window is weakest in trend_context trades for AF-CAND-0114. The next bounded campaign should test one family-consistent filter adjustment that suppresses that context bucket.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "mutation_type": "suppress_context_bucket",
+      "context_bucket": "trend_context"
+    }
+  }
+]

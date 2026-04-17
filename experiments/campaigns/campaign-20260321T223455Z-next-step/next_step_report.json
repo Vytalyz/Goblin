@@ -1,0 +1,78 @@
+{
+  "campaign_id": "campaign-20260321T223455Z-next-step",
+  "parent_campaign_id": "campaign-20260321T193755Z-next-step",
+  "selected_step_type": "diagnose_existing_candidates",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0022 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+  "status": "completed",
+  "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+  "candidate_scope": [
+    "AF-CAND-0022"
+  ],
+  "candidate_reports": [
+    {
+      "candidate_id": "AF-CAND-0022",
+      "readiness_status": "robustness_provisional",
+      "walk_forward_failed_window": 1,
+      "first_window_start_utc": "2026-02-02T06:00:00Z",
+      "first_window_end_utc": "2026-03-02T08:53:00Z",
+      "first_window_trade_count": 83,
+      "first_window_profit_factor": 0.83806400693075,
+      "first_window_expectancy_pips": -0.3059086345378338,
+      "later_window_trade_count": 166,
+      "later_window_profit_factor": 1.4190198393662459,
+      "later_window_expectancy_pips": 0.7651455823294826,
+      "spread_anomaly_rate_first_window": 0.0,
+      "spread_anomaly_rate_later_windows": 0.0,
+      "supported_slices": [
+        {
+          "slice_type": "session_bucket",
+          "slice_label": "europe",
+          "first_window_trade_count": 75,
+          "later_window_trade_count": 159,
+          "first_window_profit_factor": 0.8048621072090615,
+          "later_window_profit_factor": 1.4533671281065554,
+          "first_window_expectancy_pips": -0.3665611111107411,
+          "later_window_expectancy_pips": 0.8193553459121317,
+          "expectancy_improvement_pips": 1.1859164570228726,
+          "first_window_loss_share": 0.8985445239607284,
+          "evidence_score": 3.976688,
+          "supported": true
+        },
+        {
+          "slice_type": "context_bucket",
+          "slice_label": "trend_context",
+          "first_window_trade_count": 28,
+          "later_window_trade_count": 56,
+          "first_window_profit_factor": 0.8444261824837819,
+          "later_window_profit_factor": 2.2338459199960896,
+          "first_window_expectancy_pips": -0.298616071428014,
+          "later_window_expectancy_pips": 1.8118898809526145,
+          "expectancy_improvement_pips": 2.1105059523806284,
+          "first_window_loss_share": 0.3427743068750208,
+          "evidence_score": 3.194403,
+          "supported": true
+        }
+      ],
+      "primary_issue": "session_bucket:europe",
+      "recommended_mutation": "Trim europe exposure by removing allowed_hours_utc [7, 8, 9, 10, 11, 12] inside the current breakout family.",
+      "diagnostic_confidence": 0.795,
+      "notes": [
+        "First walk-forward window spans 83 trades; later windows span 166 trades.",
+        "Spread anomaly threshold from QA is 6.882 pips.",
+        "Spread anomalies do not explain the failed first walk-forward window in this candidate."
+      ],
+      "artifact_paths": {
+        "review_packet_path": "reports\\AF-CAND-0022\\review_packet.json",
+        "trade_ledger_path": "reports\\AF-CAND-0022\\trade_ledger.csv",
+        "backtest_summary_path": "reports\\AF-CAND-0022\\backtest_summary.json",
+        "robustness_report_path": "reports\\AF-CAND-0022\\robustness_report.json"
+      }
+    }
+  ],
+  "mutation_reports": [],
+  "reevaluation_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "report_path": "experiments\\campaigns\\campaign-20260321T223455Z-next-step\\next_step_report.json"
+}

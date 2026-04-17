@@ -1,0 +1,15 @@
+{
+  "campaign_id": "campaign-20260321T024544Z-next-step",
+  "parent_campaign_id": "campaign-20260321T023849Z-next-step",
+  "selected_step_type": null,
+  "step_reason": "Binding recommendation mutate_one_candidate is outside the allowed step set.",
+  "status": "stopped",
+  "stop_reason": "binding_recommendation_outside_allowed_step_types",
+  "candidate_scope": [
+    "AF-CAND-0014",
+    "AF-CAND-0015"
+  ],
+  "candidate_reports": [],
+  "next_recommendations": [],
+  "report_path": "experiments\\campaigns\\campaign-20260321T024544Z-next-step\\next_step_report.json"
+}

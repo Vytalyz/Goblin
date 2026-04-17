@@ -1,0 +1,69 @@
+{
+  "campaign_id": "campaign-20260325T230118045849Z-next-step",
+  "parent_campaign_id": "campaign-20260325T230117765443Z-next-step",
+  "selected_step_type": "compile_ea_candidate",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0267 now has an EA spec and passed the minimum economic plausibility gate.",
+  "status": "completed",
+  "stop_reason": "compile_ea_candidate_completed_with_supported_smoke",
+  "candidate_scope": [
+    "AF-CAND-0267"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [
+    {
+      "candidate_id": "AF-CAND-0267",
+      "readiness_status": "ea_compiled",
+      "compile_status": "passed",
+      "failure_classification": null,
+      "logic_manifest_hash": "62e646c1991f4c59f505224c8817e5fb81679dc76050885b517ea0f600e59749",
+      "artifact_paths": {
+        "ea_spec_path": "reports\\AF-CAND-0267\\ea_spec.json",
+        "strategy_spec_path": "reports\\AF-CAND-0267\\strategy_spec.json",
+        "ea_source_path": "reports\\AF-CAND-0267\\throughput\\CandidateEA.mq5",
+        "deployed_source_path": "data\\state\\mt5_automation_runtime\\MQL5\\Experts\\AgenticForex\\AF-CAND-0267.mq5",
+        "compiled_ex5_path": "data\\state\\mt5_automation_runtime\\MQL5\\Experts\\AgenticForex\\AF-CAND-0267.ex5",
+        "compile_log_path": "",
+        "logic_manifest_path": "reports\\AF-CAND-0267\\throughput\\logic_manifest.json",
+        "compile_report_path": "reports\\AF-CAND-0267\\compile_report.json"
+      }
+    }
+  ],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "run_mt5_backtest_smoke",
+      "candidate_id": "AF-CAND-0267",
+      "rationale": "AF-CAND-0267 compiled successfully and is ready for an MT5 smoke backtest.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0267"
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "run_mt5_backtest_smoke",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "e91ff6b56e3b0a8b992f7eea32e0a3cbb0854b3886898bf22be58ff765fb757d",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260325T230118045849Z-next-step\\next_step_report.json"
+}

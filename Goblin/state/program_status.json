@@ -1,0 +1,836 @@
+{
+  "program_id": "goblin-v3",
+  "program_name": "Goblin",
+  "generated_utc": "2026-04-14T19:50:53.048207Z",
+  "total_phases": 13,
+  "phase_counts": {
+    "completed": 13
+  },
+  "ready_phase_ids": [],
+  "blocked_phase_ids": [],
+  "current_phase_id": null,
+  "phase_records": [
+    {
+      "phase_id": "GOBLIN-P00",
+      "title": "Program Foundation And Naming",
+      "objective": "Create Goblin as the tracked umbrella program without destabilizing the current runtime kernel.",
+      "status": "completed",
+      "dependencies": [],
+      "inputs": [],
+      "build_items": [
+        "Create the Goblin umbrella directory tree and machine-readable phase ledger.",
+        "Preserve `src/agentic_forex` as the runtime kernel while introducing Goblin at the control-plane layer.",
+        "Add the `goblin` CLI alias and the Goblin operator-orchestrator terminology to repo docs.",
+        "Record the first authoritative checkpoint so later phases can resume from a known-good foundation."
+      ],
+      "outputs": [
+        "Goblin master docs",
+        "phase ledger",
+        "naming ADR",
+        "CLI alias plan"
+      ],
+      "expected_artifacts": [
+        "Goblin/PROGRAM.md",
+        "Goblin/ROADMAP.md",
+        "Goblin/state/program_status.json"
+      ],
+      "checkpoint_targets": [
+        "Goblin directory tree exists under `/Goblin` with state, phases, contracts, decisions, templates, and runbooks.",
+        "CLI exposes `goblin-init`, `goblin-status`, `goblin-phase-update`, and `goblin-checkpoint`.",
+        "Phase state JSON exists for `GOBLIN-P00` through `GOBLIN-P12`."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/PROGRAM.md",
+        "Goblin/ROADMAP.md",
+        "Goblin/state/program_status.json",
+        "Goblin/state/phases/GOBLIN-P00.json",
+        "Goblin/decisions/ADR-0001-goblin-umbrella-program.md",
+        "src/agentic_forex/goblin/service.py",
+        "src/agentic_forex/goblin/models.py"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/STATUS.md",
+        "Goblin/phases/GOBLIN-P00.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P00\\goblin-p00-foundation.json",
+      "idempotency_key": "goblin:GOBLIN-P00",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P00 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T02:48:42.339295Z",
+      "updated_at": "2026-04-14T19:50:53.040431Z",
+      "completed_at": "2026-04-12T02:48:42.339295Z",
+      "exit_criteria": [
+        "Goblin exists as the canonical program layer.",
+        "All later phases have dependency graphs and state files."
+      ],
+      "acceptance_result": {},
+      "notes": [
+        "Established Goblin umbrella scaffolding, CLI alias, and phase/state tracking."
+      ],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P00.json"
+    },
+    {
+      "phase_id": "GOBLIN-P01",
+      "title": "Four-Channel Truth Stack",
+      "objective": "Replace the old three-layer hierarchy with a four-channel decision-specific truth stack.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P00"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Define the four decision-specific truth channels: research, MT5 replay, live demo, and broker/account reconciliation.",
+        "Write the comparison matrix that distinguishes structural consistency from executable parity and strict reconciliation.",
+        "Update governance wording so channels are no longer treated as interchangeable or globally identical."
+      ],
+      "outputs": [
+        "truth-stack contract",
+        "comparison matrix",
+        "governance language update"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/truth-stack.md",
+        "Goblin/contracts/comparison-matrix.md"
+      ],
+      "checkpoint_targets": [
+        "Truth-stack contract is written and accepted as the repo-wide reference.",
+        "Comparison rules exist for research <-> MT5, MT5 <-> live, and live <-> broker."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/truth-stack.md",
+        "Goblin/contracts/comparison-matrix.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P01.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P01\\goblin-p01-truth-stack-controls.json",
+      "idempotency_key": "goblin:GOBLIN-P01",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P01 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T03:25:44.093232Z",
+      "updated_at": "2026-04-14T19:50:53.041151Z",
+      "completed_at": "2026-04-12T03:25:44.274175Z",
+      "exit_criteria": [
+        "Promotion logic references the correct comparison rule for each channel pair."
+      ],
+      "acceptance_result": {
+        "truth_channels_defined": 4,
+        "comparison_contracts_defined": 3,
+        "goblin_cli_truth_commands": 4
+      },
+      "notes": [
+        "Implemented four-channel truth stack contracts, channel-owned roots, truth-alignment reporting, and CLI surfaces."
+      ],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P01.json"
+    },
+    {
+      "phase_id": "GOBLIN-P02",
+      "title": "Provenance And Artifact Contracts",
+      "objective": "Make provenance a hard gate everywhere.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P01"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Define artifact provenance fields and explicit `evidence_channel` tagging across governed artifacts.",
+        "Replace heuristic evidence discovery with channel-owned indexes and immutable run identity.",
+        "Treat ambiguous provenance as a hard validation failure rather than an operator warning."
+      ],
+      "outputs": [
+        "artifact provenance contract",
+        "channel-owned artifact indexes"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/artifact-provenance.md"
+      ],
+      "checkpoint_targets": [
+        "Artifact provenance contract is written and referenced from validation and incident flows.",
+        "Channel-owned artifact resolution replaces wildcard audit discovery in governed paths."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/artifact-provenance.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P02.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P02\\goblin-p02-provenance-registry.json",
+      "idempotency_key": "goblin:GOBLIN-P02",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P02 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T03:25:44.548972Z",
+      "updated_at": "2026-04-14T19:50:53.041783Z",
+      "completed_at": "2026-04-12T03:25:44.747280Z",
+      "exit_criteria": [
+        "Ambiguous provenance becomes impossible in governed workflows."
+      ],
+      "acceptance_result": {
+        "artifact_indexes_defined": 4,
+        "provenance_registry_available": true,
+        "heuristic_discovery_banned_in_goblin_flows": true
+      },
+      "notes": [
+        "Implemented artifact provenance models, channel indexes, managed artifact registration, and validation CLI surfaces."
+      ],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P02.json"
+    },
+    {
+      "phase_id": "GOBLIN-P03",
+      "title": "Time, Session, And Data Normalization",
+      "objective": "Eliminate hidden ambiguity in time handling and source-specific data interpretation.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P02"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Define a canonical time/session model for broker offsets, DST boundaries, holidays, and overlap windows.",
+        "Freeze the reproducibility contract for OANDA research downloads including price component and alignment settings.",
+        "Add data-quality gates for missing bars, duplicates, spread anomalies, session gaps, and malformed exports."
+      ],
+      "outputs": [
+        "time/session contract",
+        "research data contract",
+        "data quality gates"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/time-session-contract.md",
+        "Goblin/contracts/research-data-contract.md"
+      ],
+      "checkpoint_targets": [
+        "Time/session contract exists and declares the comparison time basis.",
+        "Research-data contract exists and captures the OANDA query settings that make research reproducible."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/time-session-contract.md",
+        "Goblin/contracts/research-data-contract.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P03.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P03\\goblin-p03-time-session-normalization-complete.json",
+      "idempotency_key": "goblin:GOBLIN-P03",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P03 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T03:25:45.050892Z",
+      "updated_at": "2026-04-14T19:50:53.042342Z",
+      "completed_at": "2026-04-12T19:50:35.950939Z",
+      "exit_criteria": [
+        "All comparisons share the same declared time basis.",
+        "OANDA research is reproducible."
+      ],
+      "acceptance_result": {
+        "research_data_contract_builder": true,
+        "time_session_contract_builder": true,
+        "existing_market_quality_gate_present": true,
+        "comparison_time_basis_declared": true,
+        "truth_alignment_time_basis_enforced": true,
+        "oanda_ingest_contract_recorded": true,
+        "data_quality_gates_present": true,
+        "targeted_test_count": 25,
+        "strict_operator_contract_passed": true
+      },
+      "notes": [
+        "Built default research-data and time-session contracts and aligned them to existing OANDA and broker timezone settings; global enforcement remains pending.",
+        "Verified comparison time basis enforcement and frozen OANDA acquisition provenance; P03 exit criteria now satisfied."
+      ],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P03.json"
+    },
+    {
+      "phase_id": "GOBLIN-P04",
+      "title": "MT5 Harness And Executable Certification",
+      "objective": "Make MT5 the authoritative executable validation layer for MT5-targeted deployment.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P03"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Define the MT5 certification envelope including tester mode, delay model, tick provenance, and symbol/account snapshots.",
+        "Require baseline known-good reproduction before treating incident replays as trustworthy.",
+        "Classify deterministic engines as `deployment_grade`, `research_only`, or `untrusted` based on MT5 parity."
+      ],
+      "outputs": [
+        "MT5 certification contract",
+        "deterministic-vs-MT5 certification"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/mt5-certification.md"
+      ],
+      "checkpoint_targets": [
+        "MT5 certification contract exists and includes tick provenance.",
+        "Harness trust status is separated from candidate alpha claims."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/mt5-certification.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P04.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P04\\goblin-p04-mt5-certification-complete.json",
+      "idempotency_key": "goblin:GOBLIN-P04",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P04 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T20:06:55.848529Z",
+      "updated_at": "2026-04-14T19:50:53.042828Z",
+      "completed_at": "2026-04-12T20:21:21.174159Z",
+      "exit_criteria": [
+        "No MT5 replay is treated as authoritative without harness certification."
+      ],
+      "acceptance_result": {
+        "authority_gate": "deployment_grade_required",
+        "incident_replay_baseline_gate": true,
+        "certification_artifacts_written": true
+      },
+      "notes": [
+        "Beginning Phase 4 implementation by wiring Goblin MT5 certification into the existing parity and replay trust flow.",
+        "Completed Phase 4 by writing Goblin MT5 certification artifacts for parity and incident replay runs, deriving tick provenance from tester mode, and requiring deployment-grade certification before MT5 replay evidence can lock official parity authority."
+      ],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P04.json"
+    },
+    {
+      "phase_id": "GOBLIN-P05",
+      "title": "Live Demo Observability And Broker Reconciliation",
+      "objective": "Make live-demo evidence operationally trustworthy and externally reconcilable.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P04"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Define live attach manifests, runtime summaries, heartbeats, and broker/account reconciliation outputs.",
+        "Separate EA audit files from independent broker reconciliation so live truth is not self-referential.",
+        "Codify chaos and failure scenarios for terminal closure, sleep/wake, account changes, and audit gaps.",
+        "Author execution-cost-contract defining the single cross-channel execution assumption layer.",
+        "Author statistical-decision-policy defining strategy-class-based thresholds for incidents, promotion, and variance bands."
+      ],
+      "outputs": [
+        "runtime contract",
+        "broker reconciliation pipeline",
+        "execution cost contract",
+        "statistical decision policy",
+        "ops incident triggers"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/live-demo-contract.md",
+        "Goblin/contracts/broker-reconciliation.md",
+        "Goblin/contracts/execution-cost-contract.md",
+        "Goblin/contracts/statistical-decision-policy.md"
+      ],
+      "checkpoint_targets": [
+        "Live-demo contract exists with runtime observability requirements.",
+        "Broker reconciliation contract exists, distinguishes MT5 primitives, and is treated as external truth.",
+        "Execution cost contract exists and governs spread, commission, slippage, and fill assumptions across all channels.",
+        "Statistical decision policy exists with strategy-class-based thresholds for promotion and incident classification."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/live-demo-contract.md",
+        "Goblin/contracts/broker-reconciliation.md",
+        "Goblin/contracts/execution-cost-contract.md",
+        "Goblin/contracts/statistical-decision-policy.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P05.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P05\\goblin-p05-live-demo-observability-complete.json",
+      "idempotency_key": "goblin:GOBLIN-P05",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P05 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T20:21:32.630308Z",
+      "updated_at": "2026-04-14T19:50:53.043253Z",
+      "completed_at": "2026-04-12T20:21:32.719347Z",
+      "exit_criteria": [
+        "Live/demo no longer relies only on EA audit files."
+      ],
+      "acceptance_result": {},
+      "notes": [],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P05.json"
+    },
+    {
+      "phase_id": "GOBLIN-P06",
+      "title": "Incident And Safety Envelope System",
+      "objective": "Turn failures into governed incidents instead of narrative debates, with severity-driven suspension rules and SLA obligations tied to operational events.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P05"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Define the incident severity matrix: S1-S4 levels, incident type classification, suspension rules, and candidate inheritance.",
+        "Define incident SLAs as operational-event-relative deadlines, not wall-clock times.",
+        "Update the incident response runbook to reference severity levels and required closure evidence by severity.",
+        "Integrate statistical decision policy thresholds into incident open/close triggers.",
+        "Add severity and SLA class fields to the IncidentRecord model.",
+        "Specify how related candidates inherit safety blocks when they depend on an untrusted validation stack."
+      ],
+      "outputs": [
+        "incident severity matrix",
+        "incident SLA contract",
+        "updated incident response runbook"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/incident-severity-matrix.md",
+        "Goblin/contracts/incident-sla.md",
+        "Goblin/runbooks/INCIDENT_RESPONSE.md"
+      ],
+      "checkpoint_targets": [
+        "Severity matrix classifies all incident types with default severity and escalation rules.",
+        "SLA contract uses operational-event-relative deadlines with required closure evidence per severity.",
+        "Incident response runbook references severity matrix and SLA contract.",
+        "IncidentRecord model carries severity and SLA class fields."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/incident-severity-matrix.md",
+        "Goblin/contracts/incident-sla.md",
+        "Goblin/runbooks/INCIDENT_RESPONSE.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P06.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P06\\goblin-p06-incident-system-complete.json",
+      "idempotency_key": "goblin:GOBLIN-P06",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P06 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T21:00:00.000000Z",
+      "updated_at": "2026-04-14T19:50:53.043916Z",
+      "completed_at": "2026-04-12T21:00:00.000000Z",
+      "exit_criteria": [
+        "Any unexplained material delta opens or keeps open an incident.",
+        "Incident severity drives suspension and closure evidence requirements, not operator discretion.",
+        "IncidentRecord carries severity and SLA class."
+      ],
+      "acceptance_result": {
+        "exit_criteria_satisfied": true,
+        "verified_by": "targeted tests: tests/test_goblin_incident.py (17 tests, all passing)"
+      },
+      "notes": [],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P06.json"
+    },
+    {
+      "phase_id": "GOBLIN-P07",
+      "title": "Release, Approval, And Change Management",
+      "objective": "Make every deployable artifact a governed release bundle with a declared deployment ladder state, so bundle approval and operational readiness are never conflated.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P05"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Define the deployment bundle, approval boundaries, rollback criteria, and immutable evidence retention policy.",
+        "Define the deployment ladder: shadow_only, limited_demo, observed_demo, challenger_demo, eligible_for_replacement.",
+        "Enforce that bundle approval does not imply operational readiness; every live/demo attach must reference both bundle and ladder state.",
+        "Define environment reproducibility requirements: terminal build pinning, config drift detection, secrets location policy, and critical-state backup.",
+        "Add ladder state to LiveAttachManifest and incident closure packet models.",
+        "Document the manual approval surfaces required before demo or production-facing changes."
+      ],
+      "outputs": [
+        "deployment bundle schema",
+        "deployment ladder contract",
+        "environment reproducibility contract",
+        "approval boundary policy",
+        "retention runbooks"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/deployment-bundle.md",
+        "Goblin/contracts/deployment-ladder.md",
+        "Goblin/contracts/environment-reproducibility.md",
+        "Goblin/runbooks/RELEASE_AND_ROLLBACK.md"
+      ],
+      "checkpoint_targets": [
+        "Deployment ladder defines all five states with verifiable transition requirements.",
+        "Environment reproducibility covers terminal build pinning, config drift, and secrets policy.",
+        "Release and rollback runbook references the ladder and bundle contracts.",
+        "LiveAttachManifest carries ladder state.",
+        "Bundle approval cannot be treated as permission to advance the ladder."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/deployment-bundle.md",
+        "Goblin/contracts/deployment-ladder.md",
+        "Goblin/contracts/environment-reproducibility.md",
+        "Goblin/runbooks/RELEASE_AND_ROLLBACK.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P07.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P07\\goblin-p07-release-control-complete.json",
+      "idempotency_key": "goblin:GOBLIN-P07",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P07 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T20:21:32Z",
+      "updated_at": "2026-04-14T19:50:53.044580Z",
+      "completed_at": "2026-04-12T21:00:00Z",
+      "exit_criteria": [
+        "No live/demo attachment occurs without a deployable bundle and a declared ladder state.",
+        "Config hash mismatch between bundle and attach triggers a release integrity incident."
+      ],
+      "acceptance_result": {
+        "exit_criteria_met": [
+          "LiveAttachManifest carries ladder_state, broker_server, and bundle_id",
+          "validate_attach_against_bundle checks inputs_hash and opens S1 on mismatch",
+          "7 targeted tests pass"
+        ]
+      },
+      "notes": [],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P07.json"
+    },
+    {
+      "phase_id": "GOBLIN-P08",
+      "title": "Investigation And Evaluation Framework",
+      "objective": "Add a Holmes-style, repo-native investigation and eval layer without making it critical-path runtime.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P06"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Define a repo-native investigation framework inspired by Holmes-style structured investigations and eval loops.",
+        "Make incident diagnosis reproducible through scenarios, traces, and benchmark history.",
+        "Keep investigation tooling advisory and outside the critical runtime path."
+      ],
+      "outputs": [
+        "investigation scenarios",
+        "evaluation suite",
+        "benchmark history"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/investigation-trace.md",
+        "Goblin/contracts/evaluation-suite.md"
+      ],
+      "checkpoint_targets": [
+        "Investigation trace contract exists.",
+        "Evaluation suite contract exists and separates deterministic regression from replay-backed reliability runs."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/investigation-trace.md",
+        "Goblin/contracts/evaluation-suite.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P08.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P08\\goblin-p08-investigation-framework-complete.json",
+      "idempotency_key": "goblin:GOBLIN-P08",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P08 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T22:10:18.941361Z",
+      "updated_at": "2026-04-14T19:50:53.045190Z",
+      "completed_at": "2026-04-12T22:10:18.941361Z",
+      "exit_criteria": [
+        "Serious incidents have reproducible investigation packs."
+      ],
+      "acceptance_result": {
+        "exit_criteria_satisfied": true,
+        "verified_by": "targeted tests: tests/test_goblin_investigation.py, tests/test_goblin_controls.py, tests/test_goblin_incident.py, tests/test_cli_and_boundaries.py, tests/test_goblin_program.py (40 tests, all passing); AF-CAND-0263 same-window-postpatch investigation pack built"
+      },
+      "notes": [
+        "Investigation artifact filenames are compact and deterministic so the workflow remains usable under Windows path-length limits."
+      ],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P08.json"
+    },
+    {
+      "phase_id": "GOBLIN-P09",
+      "title": "Strategy Methodology, Search-Bias, And Experiment Governance",
+      "objective": "Improve strategy quality without repeating the same research-control mistakes, with experiment budgeting that enforces search discipline rather than documenting it.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P08"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Translate the strategy book into a methodology rubric rather than a trading oracle.",
+        "Add strategy rationale cards and search-bias controls at the family level.",
+        "Add experiment budgeting: per-family budget caps, mutation depth limits, and suspension thresholds after failed refinements.",
+        "Define invalid comparison rules: prohibit in-sample vs out-of-sample comparisons and cross-window comparisons without regime accounting.",
+        "Use statistical decision policy thresholds as the research floor.",
+        "Prevent candidate churn from hiding multiple-testing or experiment-lineage risk."
+      ],
+      "outputs": [
+        "methodology rubric",
+        "strategy rationale cards",
+        "experiment accounting ledger with budget enforcement"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/strategy-rationale-card.md",
+        "Goblin/contracts/experiment-accounting.md"
+      ],
+      "checkpoint_targets": [
+        "Strategy rationale card contract exists.",
+        "Experiment-accounting contract captures per-family budget, mutation depth, invalid comparison rules, and suspension thresholds.",
+        "Both contracts reference the statistical decision policy as the shared research floor."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/strategy-rationale-card.md",
+        "Goblin/contracts/experiment-accounting.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P09.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P09\\goblin-p09-strategy-governance-complete.json",
+      "idempotency_key": "goblin:GOBLIN-P09",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P09 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T23:01:55.658517Z",
+      "updated_at": "2026-04-14T19:50:53.045664Z",
+      "completed_at": "2026-04-13T01:15:00Z",
+      "exit_criteria": [
+        "No live/demo candidate exists without a rationale card and experiment lineage.",
+        "Experiment accounting captures the budget consumed and whether suspension thresholds were hit."
+      ],
+      "acceptance_result": {
+        "phase_completion": "implemented",
+        "legacy_path_enforcement": [
+          "run_next_step",
+          "run_governed_loop",
+          "run_program_loop",
+          "run_autonomous_manager",
+          "run_bounded_campaign"
+        ],
+        "live_demo_candidate_gates": [
+          "publish_candidate",
+          "generate_mt5_packet",
+          "write_live_attach_manifest"
+        ],
+        "promotion_packet_wiring": "search_bias_summary_attached",
+        "validation": {
+          "pytest_suite": "tests/test_goblin_controls.py tests/test_codex_operator.py tests/test_governance_controls.py tests/test_validation_pipeline.py tests/test_production_incident.py tests/test_autonomous_manager.py tests/test_next_step_controller.py",
+          "tests_passed": 153
+        }
+      },
+      "notes": [
+        "P09 completed without advancing to P10; waiting for explicit user approval before next phase."
+      ],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P09.json"
+    },
+    {
+      "phase_id": "GOBLIN-P10",
+      "title": "Portfolio And Candidate Strategy Program",
+      "objective": "Resume and improve strategy search under repaired governance, with promotion decisions anchored to the statistical decision policy and deployment ladder.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P09"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Resume governed strategy search only after truth-stack, incident controls, and experiment governance are in place.",
+        "Separate alpha quality from deployment fit through candidate scorecards, deployment profiles, and risk overlays.",
+        "Enforce that promotion packets reference statistical decision policy keys, not free-text judgment.",
+        "Enforce that promotion packets reference the candidate's current deployment ladder state.",
+        "Block promotion for candidates below observed_demo ladder state.",
+        "Enforce benchmark/challenger rules and promotion packets across overlap and gap lanes.",
+        "Ensure deployment-fit changes that cross declared thresholds require a new bundle, not a promotion continuation."
+      ],
+      "outputs": [
+        "candidate scorecard",
+        "deployment profile",
+        "promotion decision packet"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/candidate-scorecard.md",
+        "Goblin/contracts/promotion-decision-packet.md"
+      ],
+      "checkpoint_targets": [
+        "Candidate scorecard contract exists.",
+        "Promotion decision packet exists and distinguishes alpha from deployment fit.",
+        "Promotion decision packet cites statistical policy keys for every criterion.",
+        "Promotion decision packet cites the candidate's deployment ladder state.",
+        "Promotion is blocked for candidates below observed_demo."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/candidate-scorecard.md",
+        "Goblin/contracts/promotion-decision-packet.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P10.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P10\\goblin-p10-portfolio-and-promotion-controls-complete.json",
+      "idempotency_key": "goblin:GOBLIN-P10",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P10 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-12T23:39:32.0902980Z",
+      "updated_at": "2026-04-14T19:50:53.046195Z",
+      "completed_at": "2026-04-12T23:39:32.0902980Z",
+      "exit_criteria": [
+        "No improvement claim can hide deployment changes inside alpha claims.",
+        "Promotion criteria reference statistical policy thresholds, not free-text judgment.",
+        "Deployment ladder state is required in every promotion decision packet."
+      ],
+      "acceptance_result": {
+        "targeted_tests": [
+          "pytest tests/test_goblin_controls.py tests/test_portfolio_layer.py -q"
+        ],
+        "code_enforcement": [
+          "promotion_packet_requires_statistical_policy_keys",
+          "promotion_packet_requires_ladder_state",
+          "promotion_blocked_below_observed_demo",
+          "deployment_fit_material_delta_requires_bundle",
+          "gap_lane_challenger_requires_promotion_packet"
+        ]
+      },
+      "notes": [
+        "P10 controls completed in goblin controls and portfolio lane orchestration with targeted regression coverage."
+      ],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P10.json"
+    },
+    {
+      "phase_id": "GOBLIN-P11",
+      "title": "Governed ML And Self-Learning",
+      "objective": "Add learning only after labels and provenance are trustworthy.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P10"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Add a governed model registry and trusted label policy for offline learning only.",
+        "Start with low-risk ML layers such as anomaly detection and regime classification.",
+        "Require offline validation, holdouts, and MT5-compatible replay if model output touches live decision logic."
+      ],
+      "outputs": [
+        "model registry",
+        "label policy",
+        "governed offline training cycle"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/model-registry.md"
+      ],
+      "checkpoint_targets": [
+        "Model registry contract exists.",
+        "Offline-only self-learning rule is documented and linked to governance."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/model-registry.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P11.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P11\\goblin-p11-governed-ml-complete.json",
+      "idempotency_key": "goblin:GOBLIN-P11",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P11 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-13T00:07:33.4660070Z",
+      "updated_at": "2026-04-14T19:50:53.046658Z",
+      "completed_at": "2026-04-13T00:07:33.4660070Z",
+      "exit_criteria": [
+        "No online self-tuning exists in live/demo execution."
+      ],
+      "acceptance_result": {
+        "targeted_tests": [
+          "pytest tests/test_goblin_ml.py -q"
+        ],
+        "code_enforcement": [
+          "trusted_label_policy_requires_ambiguity_rejection_criteria",
+          "offline_training_requires_holdout_windows",
+          "live_execution_model_requires_mt5_certification",
+          "ml_governance_blocked_online_self_tuning",
+          "ml_governance_blocked_unapproved_model"
+        ]
+      },
+      "notes": [
+        "P11 governed ML controls completed with offline-only enforcement and targeted regression coverage."
+      ],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P11.json"
+    },
+    {
+      "phase_id": "GOBLIN-P12",
+      "title": "Knowledge Store, Vector Memory, And Agentic Layer",
+      "objective": "Add retrieval and richer agent support without turning them into the source of truth.",
+      "status": "completed",
+      "dependencies": [
+        "GOBLIN-P11"
+      ],
+      "inputs": [],
+      "build_items": [
+        "Add a structured knowledge store first, then optional vector retrieval with provenance-cited outputs.",
+        "Define bounded Goblin agent roles that accelerate review without becoming the source of truth.",
+        "Keep the repo operational even if Codex is closed or the Goblin agent layer is unavailable."
+      ],
+      "outputs": [
+        "knowledge lineage model",
+        "retrieval index",
+        "bounded Goblin agent roles"
+      ],
+      "expected_artifacts": [
+        "Goblin/contracts/knowledge-lineage.md",
+        "Goblin/contracts/retrieval-policy.md"
+      ],
+      "checkpoint_targets": [
+        "Knowledge-lineage contract exists.",
+        "Retrieval-policy contract exists and keeps vector memory advisory only."
+      ],
+      "authoritative_artifacts": [
+        "Goblin/contracts/knowledge-lineage.md",
+        "Goblin/contracts/retrieval-policy.md"
+      ],
+      "regenerable_artifacts": [
+        "Goblin/phases/GOBLIN-P12.md"
+      ],
+      "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P12\\goblin-p12-knowledge-and-agent-layer-complete.json",
+      "idempotency_key": "goblin:GOBLIN-P12",
+      "rerun_mode": "resume_from_last_checkpoint",
+      "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P12 --status in_progress",
+      "verify_command": "goblin goblin-status",
+      "blockers": [],
+      "owner": "GoblinOrchestrator",
+      "started_at": "2026-04-13T00:16:37.0872744Z",
+      "updated_at": "2026-04-14T19:50:53.047117Z",
+      "completed_at": "2026-04-13T00:16:37.0872744Z",
+      "exit_criteria": [
+        "Agentic features do not weaken governance or runtime truth."
+      ],
+      "acceptance_result": {
+        "targeted_tests": [
+          "pytest tests/test_goblin_p12.py tests/test_goblin_ml.py -q"
+        ],
+        "code_enforcement": [
+          "knowledge_events_append_only_jsonl",
+          "retrieval_outputs_include_provenance_citations",
+          "bounded_agent_roles_block_governance_authority_actions",
+          "retrieval_advisory_only_boundary"
+        ]
+      },
+      "notes": [
+        "P12 completed with structured event store, vector-memory retrieval index, provenance-cited retrieval, and bounded agent-role enforcement."
+      ],
+      "record_path": "Goblin\\state\\phases\\GOBLIN-P12.json"
+    }
+  ],
+  "program_status_path": "Goblin\\state\\program_status.json",
+  "status_markdown_path": "Goblin\\STATUS.md",
+  "roadmap_markdown_path": "Goblin\\ROADMAP.md",
+  "program_markdown_path": "Goblin\\PROGRAM.md"
+}

@@ -1,0 +1,22 @@
+{
+  "campaign_id": "campaign-20260321T223455Z-next-step",
+  "family": "scalping",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0014",
+  "parent_campaign_id": "campaign-20260321T193755Z-next-step",
+  "current_step_type": "diagnose_existing_candidates",
+  "active_candidate_ids": [
+    "AF-CAND-0022"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 2,
+  "trials_consumed": 2,
+  "operational_runs_consumed": 0,
+  "mt5_parity_retries_by_candidate": {},
+  "shadow_forward_retries_by_candidate": {},
+  "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+  "state_path": "experiments\\campaigns\\campaign-20260321T223455Z-next-step\\state.json",
+  "last_report_path": "experiments\\campaigns\\campaign-20260321T223455Z-next-step\\next_step_report.json",
+  "next_recommendations_path": "experiments\\campaigns\\campaign-20260321T223455Z-next-step\\next_recommendations.json",
+  "updated_utc": "2026-03-21T22:34:55.818476Z"
+}

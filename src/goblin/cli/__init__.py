@@ -1,0 +1,1 @@
+"""Goblin CLI namespace wrappers."""

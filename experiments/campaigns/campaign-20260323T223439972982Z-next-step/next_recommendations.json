@@ -1,0 +1,13 @@
+[
+  {
+    "step_type": "diagnose_existing_candidates",
+    "candidate_id": "AF-CAND-0204",
+    "rationale": "AF-CAND-0204 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0202"
+    }
+  }
+]

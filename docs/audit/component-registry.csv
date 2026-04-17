@@ -1,0 +1,104 @@
+path,type,component_kind,provider_scope,classification,reason,has_yaml_frontmatter,refs_agentic_forex,refs_windows_paths,vendor_coupling
+AGENTS.md,file,governance_rules,provider-neutral,refactor,"Title says Agentic Forex; needs rename to Goblin",no,yes,no,none
+codex.md,file,operator_playbook,codex,refactor,"References Agentic Forex; needs identity update",no,yes,no,none
+README.md,file,documentation,provider-neutral,refactor,"22+ hardcoded Windows paths; Agentic Forex naming",no,yes,yes,none
+pyproject.toml,file,build_config,provider-neutral,keep,"Already project name=goblin; dual CLI entry points",no,no,no,none
+.gitignore,file,git_config,provider-neutral,keep,"Standard exclusions",no,no,no,none
+.agents/skills/artifact-audit/SKILL.md,file,skill_definition,provider-neutral,merge,"Canonical; delete .codex duplicate",yes,no,no,none
+.agents/skills/candidate-refinement/SKILL.md,file,skill_definition,provider-neutral,merge,"Canonical; delete .codex duplicate; refs agentic_forex CLI",yes,yes,no,none
+.agents/skills/capability-crawl/SKILL.md,file,skill_definition,provider-neutral,merge,"Canonical; delete .codex duplicate; refs agentic_forex CLI",yes,yes,no,none
+.agents/skills/governed-strategy-search/SKILL.md,file,skill_definition,provider-neutral,merge,"Canonical; delete .codex duplicate; refs agentic_forex CLI",yes,yes,no,none
+.agents/skills/incident-review/SKILL.md,file,skill_definition,provider-neutral,merge,"Canonical; delete .codex duplicate",yes,no,no,none
+.agents/skills/parity-packaging/SKILL.md,file,skill_definition,provider-neutral,merge,"Canonical; delete .codex duplicate; refs agentic_forex CLI",yes,yes,no,none
+.agents/skills/promotion-readiness-review/SKILL.md,file,skill_definition,provider-neutral,merge,"Canonical; delete .codex duplicate; refs agentic_forex CLI",yes,yes,no,none
+.agents/skills/runtime-monitoring/SKILL.md,file,skill_definition,provider-neutral,merge,"Canonical; delete .codex duplicate",yes,no,no,none
+.agents/plugins/marketplace.json,file,plugin_registry,provider-neutral,refactor,"Empty registry; populate or remove",no,no,no,none
+.codex/AGENTS.md,file,governance_rules,codex,keep,"Codex-specific rules; distinct from root AGENTS.md",no,no,no,codex
+.codex/config.toml,file,config,codex,keep,"Codex execution config; hooks disabled for Windows",no,no,no,codex
+.codex/rules/default.rules,file,rules,codex,refactor,"References python -m agentic_forex",no,yes,no,codex
+.codex/agents/portfolio_orchestrator.toml,file,agent_definition,codex,refactor,"Extract canonical definition; keep TOML as Codex adapter",no,no,no,codex/openai
+.codex/agents/gap_lane_explorer.toml,file,agent_definition,codex,refactor,"Extract canonical definition; keep TOML as Codex adapter",no,no,no,codex/openai
+.codex/agents/governance_auditor.toml,file,agent_definition,codex,refactor,"Extract canonical definition; keep TOML as Codex adapter",no,no,no,codex/openai
+.codex/agents/incident_reviewer.toml,file,agent_definition,codex,refactor,"Extract canonical definition; keep TOML as Codex adapter",no,no,no,codex/openai
+.codex/agents/lane_researcher.toml,file,agent_definition,codex,refactor,"Extract canonical definition; keep TOML as Codex adapter",no,no,no,codex/openai
+.codex/agents/runtime_observer.toml,file,agent_definition,codex,refactor,"Extract canonical definition; keep TOML as Codex adapter",no,no,no,codex/openai
+.codex/agents/throughput_worker.toml,file,agent_definition,codex,refactor,"Extract canonical definition; keep TOML as Codex adapter",no,no,no,codex/openai
+.codex/agents/validation_worker.toml,file,agent_definition,codex,refactor,"Extract canonical definition; keep TOML as Codex adapter",no,no,no,codex/openai
+.codex/skills-src/artifact-audit/SKILL.md,file,skill_definition,codex,delete,"Exact duplicate of .agents/skills/artifact-audit/SKILL.md",yes,no,no,none
+.codex/skills-src/candidate-refinement/SKILL.md,file,skill_definition,codex,delete,"Exact duplicate of .agents/skills/",yes,yes,no,none
+.codex/skills-src/capability-crawl/SKILL.md,file,skill_definition,codex,delete,"Exact duplicate of .agents/skills/",yes,yes,no,none
+.codex/skills-src/governed-strategy-search/SKILL.md,file,skill_definition,codex,delete,"Exact duplicate of .agents/skills/",yes,yes,no,none
+.codex/skills-src/incident-review/SKILL.md,file,skill_definition,codex,delete,"Exact duplicate of .agents/skills/",yes,no,no,none
+.codex/skills-src/parity-packaging/SKILL.md,file,skill_definition,codex,delete,"Exact duplicate of .agents/skills/",yes,yes,no,none
+.codex/skills-src/promotion-readiness-review/SKILL.md,file,skill_definition,codex,delete,"Exact duplicate of .agents/skills/",yes,yes,no,none
+.codex/skills-src/runtime-monitoring/SKILL.md,file,skill_definition,codex,delete,"Exact duplicate of .agents/skills/",yes,no,no,none
+.claude/settings.local.json,file,config,claude,keep,"Pytest permission allowlist",no,no,no,claude
+.vscode/settings.json,file,config,vscode,keep,"Git warning suppression",no,no,no,vscode
+skills/critic-review.md,file,skill_definition,provider-neutral,archive,"Legacy 3-bullet skill brief; absorb into agent contracts",no,no,no,none
+skills/fresh-lens-discovery.md,file,skill_definition,provider-neutral,archive,"Legacy 3-bullet skill brief; absorb into agent contracts",no,no,no,none
+skills/strategy-discovery.md,file,skill_definition,provider-neutral,archive,"Legacy 3-bullet skill brief; absorb into agent contracts",no,no,no,none
+agents/roles/corpus-librarian.md,file,agent_role_brief,provider-neutral,refactor,"Upgrade to full agent contract with canonical schema",no,no,no,none
+agents/roles/day-trading-strategist.md,file,agent_role_brief,provider-neutral,refactor,"Upgrade to full agent contract with canonical schema",no,no,no,none
+agents/roles/execution-realist.md,file,agent_role_brief,provider-neutral,refactor,"Upgrade to full agent contract with canonical schema",no,no,no,none
+agents/roles/extraction-reviewer.md,file,agent_role_brief,provider-neutral,refactor,"Upgrade to full agent contract with canonical schema",no,no,no,none
+agents/roles/lead-orchestrator.md,file,agent_role_brief,provider-neutral,refactor,"Upgrade to full agent contract with canonical schema",no,no,no,none
+agents/roles/quant-critic.md,file,agent_role_brief,provider-neutral,refactor,"Upgrade to full agent contract with canonical schema",no,no,no,none
+agents/roles/review-synthesizer.md,file,agent_role_brief,provider-neutral,refactor,"Upgrade to full agent contract with canonical schema",no,no,no,none
+agents/roles/risk-critic.md,file,agent_role_brief,provider-neutral,refactor,"Upgrade to full agent contract with canonical schema",no,no,no,none
+agents/roles/scalping-strategist.md,file,agent_role_brief,provider-neutral,refactor,"Upgrade to full agent contract with canonical schema",no,no,no,none
+workflows/strategy_discovery_router_v1.json,file,workflow_definition,provider-neutral,keep,"Node-based workflow; used by runtime engine",no,no,no,none
+workflows/day_trading_discovery_v1.json,file,workflow_definition,provider-neutral,keep,"Node-based workflow; used by runtime engine",no,no,no,none
+workflows/scalping_discovery_v1.json,file,workflow_definition,provider-neutral,keep,"Node-based workflow; used by runtime engine",no,no,no,none
+workflows/candidate_review_v1.json,file,workflow_definition,provider-neutral,keep,"Node-based workflow; used by runtime engine",no,no,no,none
+prompts/critic_system.txt,file,prompt_template,provider-neutral,keep,"System prompt for critic role",no,no,no,none
+prompts/critic_user.txt,file,prompt_template,provider-neutral,keep,"User prompt for critic role",no,no,no,none
+prompts/day_trading_system.txt,file,prompt_template,provider-neutral,keep,"System prompt for day trading",no,no,no,none
+prompts/day_trading_user.txt,file,prompt_template,provider-neutral,keep,"User prompt for day trading",no,no,no,none
+prompts/reframe_system.txt,file,prompt_template,provider-neutral,keep,"System prompt for reframing",no,no,no,none
+prompts/reframe_user.txt,file,prompt_template,provider-neutral,keep,"User prompt for reframing",no,no,no,none
+prompts/review_system.txt,file,prompt_template,provider-neutral,keep,"System prompt for review synthesizer",no,no,no,none
+prompts/review_user.txt,file,prompt_template,provider-neutral,keep,"User prompt for review",no,no,no,none
+prompts/scalping_system.txt,file,prompt_template,provider-neutral,keep,"System prompt for scalping",no,no,no,none
+prompts/scalping_user.txt,file,prompt_template,provider-neutral,keep,"User prompt for scalping",no,no,no,none
+automations/prompts/capability-refresh.md,file,automation_prompt,codex,keep,"Paused; awaiting manual success",no,no,no,codex
+automations/prompts/gap-lane-research.md,file,automation_prompt,codex,keep,"Paused; awaiting manual success",no,yes,no,codex
+automations/prompts/runtime-watch.md,file,automation_prompt,codex,keep,"Paused; awaiting manual success",no,no,no,codex
+automations/specs/capability-refresh.toml,file,automation_spec,codex,keep,"Paused; awaiting manual success",no,no,no,codex
+automations/specs/gap-lane-research.toml,file,automation_spec,codex,keep,"Paused; awaiting manual success",no,no,no,codex
+automations/specs/runtime-watch.toml,file,automation_spec,codex,keep,"Paused; awaiting manual success",no,no,no,codex
+config/default.toml,file,config,provider-neutral,refactor,"OANDA credential targets use agentic-forex; supplemental_source_paths hardcoded Windows path",no,no,yes,oanda
+config/autonomy_policy.toml,file,config,provider-neutral,keep,"Clean",no,no,no,none
+config/codex_capabilities.toml,file,config,codex,keep,"References src/agentic_forex accurately",no,yes,no,codex
+config/codex_operator_policy.toml,file,config,codex,keep,"Clean",no,no,no,codex
+config/data_contract.toml,file,config,provider-neutral,keep,"Clean",no,no,no,none
+config/eval_gates.toml,file,config,provider-neutral,keep,"Clean",no,no,no,none
+config/mt5_env.toml,file,config,provider-neutral,keep,"MT5-specific; expected",no,no,no,mt5
+config/openai-live.toml,file,config,openai,keep,"Guarded; no runtime dependency",no,no,no,openai
+config/portfolio_policy.toml,file,config,provider-neutral,keep,"Clean",no,no,no,none
+config/program_policy.toml,file,config,provider-neutral,keep,"Large (~3859 lines); approved_lanes",no,no,no,none
+config/risk_policy.toml,file,config,provider-neutral,keep,"Clean",no,no,no,none
+src/agentic_forex/__init__.py,file,package_root,provider-neutral,keep,"Legacy compatibility namespace marker",no,yes,no,none
+src/agentic_forex/__main__.py,file,entrypoint,provider-neutral,keep,"CLI entry point",no,yes,no,none
+src/goblin/__init__.py,file,package_root,provider-neutral,keep,"Bridge namespace; sys.modules aliasing for 24 packages",no,yes,no,none
+src/goblin/__main__.py,file,entrypoint,provider-neutral,keep,"Goblin CLI entry",no,no,no,none
+src/goblin/cli/app.py,file,entrypoint,provider-neutral,keep,"Shared CLI with agentic-forex",no,no,no,none
+Goblin/STATUS.md,file,phase_tracker,provider-neutral,keep,"19/19 phases complete; contains hardcoded Windows checkpoint paths",no,yes,yes,none
+Goblin/IMPLEMENTATION_TRACKER.md,file,phase_tracker,provider-neutral,keep,"Deliverable tracker",no,no,no,none
+Goblin/MATURITY.md,file,maturity_assessment,provider-neutral,keep,"M5 overall maturity",no,no,no,none
+Goblin/EVOLUTION.md,file,decision_log,provider-neutral,keep,"Evolution history",no,no,no,none
+Goblin/TAKEOVER_PLAN.md,file,migration_plan,provider-neutral,keep,"T1-T4 complete; S1+ ready",no,yes,no,none
+Goblin/PROGRAM.md,file,program_charter,provider-neutral,keep,"Mission and objectives",no,no,no,none
+Goblin/ROADMAP.md,file,strategic_roadmap,provider-neutral,keep,"Future milestones",no,no,no,none
+Goblin/PHASE_BRIEF.md,file,phase_brief,provider-neutral,keep,"Active phase scope",no,no,no,none
+Goblin/runbooks/INCIDENT_RESPONSE.md,file,runbook,provider-neutral,keep,"Incident procedures",no,no,no,none
+Goblin/runbooks/RELEASE_AND_ROLLBACK.md,file,runbook,provider-neutral,keep,"Release and rollback",no,no,no,none
+Goblin/runbooks/RESUME_PHASE.md,file,runbook,provider-neutral,keep,"Resume interrupted phases",no,no,no,none
+Goblin/decisions/ADR-0001-goblin-umbrella-program.md,file,adr,provider-neutral,keep,"Goblin umbrella rationale",no,no,no,none
+knowledge/codex_capability_catalog.json,file,capability_catalog,codex,keep,"Codex capabilities index",no,no,no,codex
+knowledge/codex_capability_index.md,file,capability_index,codex,keep,"Capability cross-references",no,no,no,codex
+knowledge/codex_capability_pages/,dir,empty_placeholder,codex,archive,"Empty; never populated",no,no,no,codex
+knowledge/observational/failure_records.jsonl,file,failure_log,provider-neutral,refactor,"50+ hardcoded Windows paths in records",no,yes,yes,none
+knowledge/source-of-truth.md,file,governance_policy,provider-neutral,keep,"23 governance rules",no,no,no,none
+knowledge/recovery-implementation-plan.md,file,recovery_plan,provider-neutral,refactor,"Hardcoded Windows path to project root",no,yes,yes,none
+tests/conftest.py,file,test_fixture,provider-neutral,keep,"Scaffold fixtures; uses relative paths",no,yes,no,none
+tests/test_cli_and_boundaries.py,file,test,provider-neutral,refactor,"Contains C:\\agentic-forex\\config hardcoded path",no,yes,yes,none

@@ -1,0 +1,37 @@
+{
+  "program_id": "manager-20260322Tpath-aware-reset-program-cycle-01",
+  "family": "scalping",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": "campaign-20260322T145819Z-next-step",
+  "executed_lanes": 1,
+  "max_lanes": 2,
+  "status": "completed",
+  "stop_reason": "mutation_instruction_had_no_effect",
+  "stop_class": "ambiguity",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [
+    {
+      "lane_index": 1,
+      "lane_id": "volatility_breakout_af_cand_0056",
+      "family": "scalping",
+      "hypothesis_class": "volatility_breakout",
+      "seed_candidate_id": "AF-CAND-0056",
+      "seed_campaign_id": "campaign-20260322T145819Z-volatility_breakout_af_cand_0056-seed",
+      "initial_parent_campaign_id": "campaign-20260322T145819Z-volatility_breakout_af_cand_0056-seed",
+      "final_parent_campaign_id": "campaign-20260322T145819Z-next-step",
+      "governed_loop_report_path": "experiments\\governed_loops\\manager-20260322Tpath-aware-reset-program-cycle-01-lane-01.json",
+      "status": "stopped",
+      "stop_reason": "mutation_instruction_had_no_effect",
+      "stop_class": "ambiguity",
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal"
+    }
+  ],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "dfbcadc1b21d7dbea50539283ece8c018dd0dd4102bcbd272a2f2030df593af1",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260322Tpath-aware-reset-program-cycle-01.json"
+}

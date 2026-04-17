@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-026",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Currency Trading For Dummies \u00ae , 2nd Edition by Brian Dolan Currency Trading For Dummies \u00ae , 2nd Edition Published by Wiley Publishing, Inc. 111 River St. Hoboken, NJ 07030-5774 www.wiley.com Copyright \u00a9 2011 by Wiley Publishing, Inc., Indianapolis, Indiana Published simultaneous",
+    "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley & Sons, Inc., 111 River Street, Hoboken, NJ 07030, (201) 748-6011, fax (201) 748-6008, or online at http://www.wiley.com/go/permissions .",
+    "Trademarks: Wiley, the Wiley Publishing logo, For Dummies, the Dummies Man logo, A Reference for the Rest of Us!, The Dummies Way, Dummies Daily, The Fun and Easy Way, Dummies.com, Making Everything Easier!, and related trade dress are trademarks or registered trademarks of John "
+  ],
+  "front_matter_signals": [
+    "For technical support, please visit www.wiley.com/techsupport . Wiley also publishes its books in a variety of electronic formats. Some content that appears in print may not be available in electronic books. Library of Congress Control Number: 2011930128 ISBN: 978-1-118-01851-4 M",
+    "Brian is a graduate of Dartmouth College. Dedication To Brigid, for her love and for hanging in there through the ups and downs; and to Frank and Catherine, for inspiring me to create a work for the future, just as you are.",
+    "In memoriam to my mother Peg, father Chuck, and sadly missed brother Tim, who taught me that life is not a dress rehearsal. Author\u2019s Acknowledgments My efforts to translate a career\u2019s worth of currency trading experience into a book would be extremely thin were it not for the man"
+  ],
+  "best_excerpt": "You can also use trend lines as entry points in trending moves, buying on pullbacks of up moves and selling on rebounds in downtrends. Depending if any chart pattern is evident, the breakout may have a target, or measured move objective (see Chapter 11), which you can use to esta"
+}

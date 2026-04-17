@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "manager-20260326T105825Z",
+  "program_id": "manager-20260326T105825Z-program",
+  "family": "new_york_event_retest_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_cycles": 1,
+  "max_cycles": 12,
+  "status": "stopped",
+  "stop_reason": "program_loop_low_novelty_seed:new_york_event_retest_core_af_cand_0272:AF-CAND-0213:0.83",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "39c5464b9f9a3f8af6e24cd5acc70a4e7dd130e76de4e4f629ee13ac17d558e6",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260326T105825Z-program-cycle-01.json",
+      "stop_reason": "program_loop_low_novelty_seed:new_york_event_retest_core_af_cand_0272:AF-CAND-0213:0.83",
+      "stop_class": "policy_decision",
+      "material_transition": false,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260326T105825Z.json"
+}

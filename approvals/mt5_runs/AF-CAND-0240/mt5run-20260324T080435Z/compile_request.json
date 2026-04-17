@@ -1,0 +1,18 @@
+{
+  "candidate_id": "AF-CAND-0240",
+  "run_id": "mt5run-20260324T080435Z",
+  "install_id": "mt5_practice_01",
+  "compile_target_path": "data\\state\\mt5_automation_runtime\\MQL5\\Experts\\AgenticForex\\AF-CAND-0240.mq5",
+  "packet_source_path": "approvals\\mt5_packets\\AF-CAND-0240\\CandidateEA.mq5",
+  "deployed_source_path": "data\\state\\mt5_automation_runtime\\MQL5\\Experts\\AgenticForex\\AF-CAND-0240.mq5",
+  "compiled_ex5_path": "data\\state\\mt5_automation_runtime\\MQL5\\Experts\\AgenticForex\\AF-CAND-0240.ex5",
+  "compile_log_path": null,
+  "terminal_data_path": "data\\state\\mt5_automation_runtime",
+  "metaeditor_path": "data\\state\\mt5_automation_runtime\\MetaEditor64.exe",
+  "metaeditor_command": "metaeditor64.exe /compile:<full path>",
+  "logic_manifest_hash": "1460ad1ec3d2cce5576c00549213fec540a7dd6559473c9e26f7ce4cef4e5e54",
+  "audit_relative_path": "AgenticForex\\Audit\\AF-CAND-0240__mt5run-20260324T080435Z__audit.csv",
+  "audit_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0240__mt5run-20260324T080435Z__audit.csv",
+  "broker_history_relative_path": "AgenticForex\\Audit\\AF-CAND-0240__broker_history.csv",
+  "broker_history_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0240__broker_history.csv"
+}

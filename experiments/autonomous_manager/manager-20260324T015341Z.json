@@ -1,0 +1,53 @@
+{
+  "manager_run_id": "manager-20260324T015341Z",
+  "program_id": "manager-20260324T015341Z-program",
+  "family": "session_momentum_band_research",
+  "initial_parent_campaign_id": "campaign-20260324T015546608905Z-next-step",
+  "final_parent_campaign_id": "campaign-20260324T015546608905Z-next-step",
+  "executed_cycles": 3,
+  "max_cycles": 12,
+  "status": "stopped",
+  "stop_reason": "watchdog_same_candidate_without_advancement",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "8112c83b350aa05bbe8417c7a412a7476846a63f29c5df93587a0f81e6f2a123",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260324T015341Z-program-cycle-01.json",
+      "stop_reason": "program_loop_max_lanes_reached",
+      "stop_class": "budget_exhausted",
+      "material_transition": true,
+      "approvals_issued": []
+    },
+    {
+      "cycle_index": 2,
+      "lane_id": "campaign-20260324T015546279094Z-next-step",
+      "program_report_path": "experiments\\program_loops\\manager-20260324T015341Z-program-cycle-02.json",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "stop_class": "approval_required",
+      "material_transition": true,
+      "approvals_issued": [
+        "mt5_packet",
+        "mt5_parity_run",
+        "mt5_validation"
+      ]
+    },
+    {
+      "cycle_index": 3,
+      "lane_id": "campaign-20260324T015546608905Z-next-step",
+      "program_report_path": "experiments\\program_loops\\manager-20260324T015341Z-program-cycle-03.json",
+      "stop_reason": "program_loop_parent_lane_hard_stop",
+      "stop_class": "policy_decision",
+      "material_transition": false,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260324T015341Z.json"
+}

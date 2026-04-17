@@ -1,0 +1,13 @@
+{
+  "checkpoint_id": "goblin-p13-inventory-complete",
+  "phase_id": "GOBLIN-P13",
+  "title": "Operational Inventory And Gap Analysis Complete",
+  "status": "passed",
+  "evidence": {
+    "inventory_path": "Goblin/reports/existing_goblin_coverage.md",
+    "subsystem_rows": 8,
+    "classification_coverage": "all rows classified as exists, partial, missing, or deferred",
+    "gap_analysis": "4 gaps identified; P14 and P15 build targets clearly separated from reuse targets"
+  },
+  "generated_utc": "2026-04-13T12:10:00Z"
+}

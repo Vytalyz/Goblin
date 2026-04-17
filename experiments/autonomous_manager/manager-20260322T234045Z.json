@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "manager-20260322T234045Z",
+  "program_id": "manager-20260322T234045Z-program",
+  "family": "quality_gate_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": "campaign-20260322T234219785111Z-next-step",
+  "executed_cycles": 1,
+  "max_cycles": 8,
+  "status": "stopped",
+  "stop_reason": "program_loop_max_lanes_reached",
+  "stop_class": "blocked_budget",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "b1146334d77abaad7e6ae57e39178cee6ac760de9a39dcc3e9ce61bac0288468",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260322T234045Z-program-cycle-01.json",
+      "stop_reason": "program_loop_max_lanes_reached",
+      "stop_class": "budget_exhausted",
+      "material_transition": true,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260322T234045Z.json"
+}

@@ -1,0 +1,19 @@
+{
+  "campaign_id": "campaign-20260321T021303Z-bounded-comparison",
+  "family": "scalping",
+  "baseline_candidate_id": "AF-CAND-0001",
+  "target_candidate_ids": [
+    "AF-CAND-0014",
+    "AF-CAND-0015"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 0,
+  "trial_cap_per_family": 12,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Bounded comparison campaign using expanded local canonical OANDA EUR_USD M1 dataset.",
+    "No mutations or new candidate families allowed.",
+    "AF-CAND-0001 baseline also refreshed and compared in this campaign.",
+    "Campaign ends at recommendation output and does not run MT5 parity."
+  ]
+}

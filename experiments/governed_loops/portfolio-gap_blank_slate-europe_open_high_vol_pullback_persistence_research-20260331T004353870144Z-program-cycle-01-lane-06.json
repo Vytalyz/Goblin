@@ -1,0 +1,50 @@
+{
+  "loop_id": "portfolio-gap_blank_slate-europe_open_high_vol_pullback_persistence_research-20260331T004353870144Z-program-cycle-01-lane-06",
+  "family": "europe_open_high_vol_pullback_persistence_research",
+  "initial_parent_campaign_id": "campaign-20260331T004624106414Z-next-step",
+  "final_parent_campaign_id": "campaign-20260331T004631364083Z-next-step",
+  "executed_steps": 2,
+  "max_steps": 8,
+  "status": "completed",
+  "stop_reason": "data_feature_audit_completed_retire_family",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "final_report_path": "experiments\\campaigns\\campaign-20260331T004631364083Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260331T004631312839Z-next-step",
+    "campaign-20260331T004631364083Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260331T004631312839Z-next-step",
+      "selected_step_type": "diagnose_existing_candidates",
+      "status": "completed",
+      "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "data_feature_audit",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260331T004631312839Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 2,
+      "campaign_id": "campaign-20260331T004631364083Z-next-step",
+      "selected_step_type": "data_feature_audit",
+      "status": "completed",
+      "stop_reason": "data_feature_audit_completed_retire_family",
+      "continuation_status": "stop",
+      "stop_class": "policy_decision",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": "data_label_audit",
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal",
+      "report_path": "experiments\\campaigns\\campaign-20260331T004631364083Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "731e1d2151ff379456a71b6c5dbc674f766e2f7d620ca7afbf6c644553c4d827",
+  "report_path": "experiments\\governed_loops\\portfolio-gap_blank_slate-europe_open_high_vol_pullback_persistence_research-20260331T004353870144Z-program-cycle-01-lane-06.json"
+}

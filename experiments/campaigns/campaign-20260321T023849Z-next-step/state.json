@@ -1,0 +1,20 @@
+{
+  "campaign_id": "campaign-20260321T023849Z-next-step",
+  "family": "scalping",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0001",
+  "parent_campaign_id": "campaign-20260321T021303Z-bounded-comparison",
+  "current_step_type": "diagnose_existing_candidates",
+  "active_candidate_ids": [
+    "AF-CAND-0014",
+    "AF-CAND-0015"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 2,
+  "trials_consumed": 2,
+  "stop_reason": "diagnosis_completed_with_supported_recommendation",
+  "state_path": "experiments\\campaigns\\campaign-20260321T023849Z-next-step\\state.json",
+  "last_report_path": "experiments\\campaigns\\campaign-20260321T023849Z-next-step\\next_step_report.json",
+  "next_recommendations_path": "experiments\\campaigns\\campaign-20260321T023849Z-next-step\\next_recommendations.json",
+  "updated_utc": "2026-03-21T02:38:49.679176Z"
+}

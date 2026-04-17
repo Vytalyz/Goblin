@@ -1,0 +1,11 @@
+{
+  "checkpoint_id": "goblin-t4-clean-takeover-complete",
+  "phase_id": "GOBLIN-T4",
+  "status": "passed",
+  "timestamp": "2026-04-13T14:40:00Z",
+  "evidence": [
+    "legacy namespace marked compatibility-only",
+    "takeover completion report published",
+    "deprecation path documented in namespace compatibility contract"
+  ]
+}

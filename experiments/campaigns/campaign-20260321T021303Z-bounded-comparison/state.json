@@ -1,0 +1,17 @@
+{
+  "campaign_id": "campaign-20260321T021303Z-bounded-comparison",
+  "family": "scalping",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0001",
+  "active_candidate_ids": [
+    "AF-CAND-0001",
+    "AF-CAND-0014",
+    "AF-CAND-0015"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 3,
+  "trials_consumed": 9,
+  "stop_reason": "bounded_comparison_completed",
+  "state_path": "experiments\\campaigns\\campaign-20260321T021303Z-bounded-comparison\\state.json",
+  "updated_utc": "2026-03-21T02:15:45.773307Z"
+}

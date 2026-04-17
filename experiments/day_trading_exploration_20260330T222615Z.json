@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-03-30T22:26:15.661193Z",
+  "family": "day_trading",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "scan_report_path": "experiments\\day_trading_behavior_scan_20260330T222615Z.json",
+  "comparison_report_path": "experiments\\comparison_20260330T222615Z.json",
+  "recommended_candidate_id": "AF-CAND-0416",
+  "reference_candidate_id": "AF-CAND-0414",
+  "continuation_gate": {
+    "reference_candidate_id": "AF-CAND-0414",
+    "reference_trade_count": 25,
+    "reference_min_walk_forward_trade_count": 2,
+    "reference_out_of_sample_profit_factor": 3.74528301886788,
+    "reference_expectancy_pips": 1.3399999999996934,
+    "reference_stressed_profit_factor": 1.5284866576867138,
+    "required_trade_count": 40,
+    "required_min_walk_forward_trade_count": 8,
+    "minimum_out_of_sample_profit_factor": 1.310849,
+    "minimum_expectancy_pips": 0.536,
+    "minimum_stressed_profit_factor": 1.0,
+    "decision": "reopen_discovery",
+    "selected_candidate_id": null,
+    "reason": "No sibling reached the density-first continuation gate. The densest result was AF-CAND-0419 with 41 trades, minimum walk-forward trade count 4, expectancy 0.190, and stressed profit factor 0.925."
+  },
+  "report_path": "experiments\\day_trading_exploration_20260330T222615Z.json",
+  "candidates": [
+    {
+      "candidate_id": "AF-CAND-0416",
+      "title": "Europe Bridge-To-Pre-Overlap High-Vol Pullback Persistence",
+      "entry_style": "pullback_continuation",
+      "thesis": "Restore the Europe bridge hour to the high-volatility persistence clue, but keep the same shallow-pullback geometry so density rises only if the earlier high-vol release hour is genuinely supportive. Corpus anchor: SRC-002: Pyramiding approaches, scale trading, stop reversals, breakouts, momentum trad-",
+      "candidate_path": "reports\\AF-CAND-0416\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0416\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0416\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0416\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0416\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0418",
+      "title": "Europe Buffered Pre-Overlap High-Vol Pullback Persistence",
+      "entry_style": "pullback_continuation",
+      "thesis": "Keep the existing pre-overlap window but widen the pullback band and slightly relax directional confirmation, so the family can collect more continuation resets without drifting into weak broad-release behavior. Corpus anchor: SRC-004: The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once the market moves away from this region. Naturally this is all relative, not least because a market that has been consolidating on a daily chart for several weeks is likely t",
+      "candidate_path": "reports\\AF-CAND-0418\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0418\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0418\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0418\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0418\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0415",
+      "title": "Europe High-Vol Pullback Persistence Day Trade",
+      "entry_style": "pullback_continuation",
+      "thesis": "Trade high-volatility Europe pre-overlap pullback persistence only when the initial release is already directional, the pullback remains shallow, and the branch keeps the stress-surviving continuation profile seen in the strongest late-window clue while explicitly searching for more density. Corpus anchor: SRC-001: 3. The \ufb01 rst and second pro\ufb01 t targets are 50% and 90% of the range respec- tively, which are 103 pips and 185 pips below the resistance (1.6117). 4. Use risk to reward ratio of 1:1 to set the stop loss. (See Figure 8.41 .) From the long example in Figure 8.42 : Entry price = 1.6",
+      "candidate_path": "reports\\AF-CAND-0415\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0415\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0415\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0415\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0415\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0419",
+      "title": "Europe Short-Hold High-Vol Pullback Persistence",
+      "entry_style": "pullback_continuation",
+      "thesis": "Keep the high-volatility persistence clue but shorten time-in-trade so the family can accept slightly more entry opportunities while still demanding fast continuation and strong cost discipline. Corpus anchor: SRC-005: Because the presumption is that momentum in the market will tend to perpetuate itself, the chartist interprets such a pattern as a bullish augury\u2014the stock can be expected to continue to rise. As Magee wrote in the bible of charting, Technical Analysis of Stock Trends , \u201cPrices m",
+      "candidate_path": "reports\\AF-CAND-0419\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0419\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0419\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0419\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0419\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0417",
+      "title": "Europe Buffered Open High-Vol Pullback Persistence",
+      "entry_style": "pullback_continuation",
+      "thesis": "Restore the full Europe pre-overlap block to the high-volatility persistence clue and slightly widen the continuation band, but keep the volatility bucket and cost control tight so density can rise without turning into a broad pullback-release family. Corpus anchor: SRC-003: Always remember Wyckoff's second law, the law of cause and effect. If the cause is large, then this will be reflected in the effect, which applies to support and resistance. The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once",
+      "candidate_path": "reports\\AF-CAND-0417\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0417\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0417\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0417\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0417\\review_packet.json"
+    }
+  ]
+}

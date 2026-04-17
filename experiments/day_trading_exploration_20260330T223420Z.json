@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-03-30T22:34:20.251761Z",
+  "family": "day_trading",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "scan_report_path": "experiments\\day_trading_behavior_scan_20260330T223420Z.json",
+  "comparison_report_path": "experiments\\comparison_20260330T223420Z.json",
+  "recommended_candidate_id": "AF-CAND-0421",
+  "reference_candidate_id": "AF-CAND-0414",
+  "continuation_gate": {
+    "reference_candidate_id": "AF-CAND-0414",
+    "reference_trade_count": 25,
+    "reference_min_walk_forward_trade_count": 2,
+    "reference_out_of_sample_profit_factor": 3.74528301886788,
+    "reference_expectancy_pips": 1.3399999999996934,
+    "reference_stressed_profit_factor": 1.5284866576867138,
+    "required_trade_count": 40,
+    "required_min_walk_forward_trade_count": 8,
+    "minimum_out_of_sample_profit_factor": 1.310849,
+    "minimum_expectancy_pips": 0.536,
+    "minimum_stressed_profit_factor": 1.0,
+    "decision": "reopen_discovery",
+    "selected_candidate_id": null,
+    "reason": "No sibling reached the density-first continuation gate. The densest result was AF-CAND-0422 with 43 trades, minimum walk-forward trade count 5, expectancy 0.244, and stressed profit factor 0.947."
+  },
+  "report_path": "experiments\\day_trading_exploration_20260330T223420Z.json",
+  "candidates": [
+    {
+      "candidate_id": "AF-CAND-0421",
+      "title": "Europe Buffered Core High-Vol Pullback Reset",
+      "entry_style": "pullback_continuation",
+      "thesis": "Keep the same high-volatility pullback clue inside the core pre-overlap window, but widen the reset band so the family can collect more valid continuation re-entries while preserving the stress-surviving context filters. Corpus anchor: SRC-002: Pyramiding approaches, scale trading, stop reversals, breakouts, momentum trad-",
+      "candidate_path": "reports\\AF-CAND-0421\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0421\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0421\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0421\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0421\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0422",
+      "title": "Europe Fast Re-Entry High-Vol Pullback Reset",
+      "entry_style": "pullback_continuation",
+      "thesis": "Test whether the high-volatility pullback clue becomes denser when the branch explicitly demands a faster re-entry instead of slower persistence, so the family can open more opportunities while failing quickly when continuation is weak. Corpus anchor: SRC-003: Always remember Wyckoff's second law, the law of cause and effect. If the cause is large, then this will be reflected in the effect, which applies to support and resistance. The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once",
+      "candidate_path": "reports\\AF-CAND-0422\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0422\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0422\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0422\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0422\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0420",
+      "title": "Europe High-Vol Pullback Reset Day Trade",
+      "entry_style": "pullback_continuation",
+      "thesis": "Reopen discovery around the high-volatility pullback clue by treating the continuation as a buffered reset rather than a pure persistence branch, so the family can add density without drifting into broad release-chase behavior. Corpus anchor: SRC-001: 3. The \ufb01 rst and second pro\ufb01 t targets are 50% and 90% of the range respec- tively, which are 103 pips and 185 pips below the resistance (1.6117). 4. Use risk to reward ratio of 1:1 to set the stop loss. (See Figure 8.41 .) From the long example in Figure 8.42 : Entry price = 1.6",
+      "candidate_path": "reports\\AF-CAND-0420\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0420\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0420\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0420\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0420\\review_packet.json"
+    }
+  ]
+}

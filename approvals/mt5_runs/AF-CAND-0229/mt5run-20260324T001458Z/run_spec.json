@@ -1,0 +1,22 @@
+{
+  "candidate_id": "AF-CAND-0229",
+  "run_id": "mt5run-20260324T001458Z",
+  "install_id": "mt5_practice_01",
+  "terminal_path": "data\\state\\mt5_automation_runtime\\terminal64.exe",
+  "portable_mode": true,
+  "tester_mode": "Every tick based on real ticks",
+  "tick_mode": "Every tick based on real ticks",
+  "spread_behavior": "configured_by_strategy_tester",
+  "allow_live_trading": false,
+  "shutdown_terminal": true,
+  "config_path": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T001458Z\\tester_config.ini",
+  "report_path": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T001458Z\\tester_report.htm",
+  "compile_target_path": "data\\state\\mt5_automation_runtime\\MQL5\\Experts\\AgenticForex\\AF-CAND-0229.mq5",
+  "compile_request_path": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T001458Z\\compile_request.json",
+  "launch_request_path": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T001458Z\\launch_request.json",
+  "run_dir": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T001458Z",
+  "audit_relative_path": "AgenticForex\\Audit\\AF-CAND-0229__mt5run-20260324T001458Z__audit.csv",
+  "audit_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0229__mt5run-20260324T001458Z__audit.csv",
+  "tester_timeout_seconds": 900,
+  "logic_manifest_hash": "43264c524c453b18ce61b0d3b93936b2b2ecb97167631cc771ad8227d355cf3f"
+}

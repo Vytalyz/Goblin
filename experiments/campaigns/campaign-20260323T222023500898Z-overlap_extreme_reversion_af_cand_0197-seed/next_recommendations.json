@@ -1,0 +1,13 @@
+[
+  {
+    "candidate_id": "AF-CAND-0197",
+    "evidence_status": "supported",
+    "step_type": "formalize_rule_candidate",
+    "rationale": "AF-CAND-0197 is an approved throughput root for session_extreme_reversion. Start by freezing a deterministic rule specification before EA-spec generation, compile, and MT5 smoke.",
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0197",
+      "queue_kind": "throughput"
+    },
+    "binding": true
+  }
+]

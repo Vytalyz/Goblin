@@ -1,0 +1,20 @@
+{
+  "program_id": "portfolio-gap_blank_slate-europe_open_opening_range_retest_research-20260413T174005793841Z-program-cycle-01",
+  "family": "europe_open_opening_range_retest_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_lanes": 0,
+  "max_lanes": 3,
+  "status": "stopped",
+  "stop_reason": "program_loop_no_pending_approved_lanes",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "44804f15450da7d206c32716910343f1a839eae366df33b5c9d090ebbfb607e9",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\portfolio-gap_blank_slate-europe_open_opening_range_retest_research-20260413T174005793841Z-program-cycle-01.json"
+}

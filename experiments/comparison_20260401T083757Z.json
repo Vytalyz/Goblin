@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-04-01T08:37:57.356850Z",
+  "family_filter": null,
+  "candidate_filters": [
+    "AF-CAND-0554"
+  ],
+  "total_records": 1,
+  "registry_path": "experiments\\registry.csv",
+  "report_path": "experiments\\comparison_20260401T083757Z.json",
+  "latest_report_path": "experiments\\comparison_latest.json",
+  "recommended_candidate_id": null,
+  "records": [
+    {
+      "candidate_id": "AF-CAND-0554",
+      "family": "europe_open_impulse_retest_research",
+      "instrument": "EUR_USD",
+      "entry_style": "volatility_retest_breakout",
+      "benchmark_group_id": "AF-CAND-0554",
+      "variant_name": "base",
+      "dataset_start_utc": "2025-10-08T07:30:00Z",
+      "dataset_end_utc": "2025-11-21T08:19:00Z",
+      "trading_days_observed": 4,
+      "trade_count": 4,
+      "profit_factor": 8000000000.004669,
+      "out_of_sample_profit_factor": 0.0,
+      "expectancy_pips": 2.0000000000011675,
+      "max_drawdown_pct": 0.0,
+      "stressed_profit_factor": 91.95774647967843,
+      "stress_passed": true,
+      "ftmo_fit_score": 82.72,
+      "ftmo_fit_band": "strong_fit",
+      "readiness": "robustness_provisional",
+      "approval_recommendation": "needs_human_review",
+      "ready_for_publish": false,
+      "walk_forward_ok": false,
+      "benchmark_ranking_score": null,
+      "comparison_score": -94.256,
+      "spec_path": "reports\\AF-CAND-0554\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0554\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0554\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0554\\review_packet.json",
+      "benchmark_report_path": null
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+name = "Runtime Watch"
+description = "Review latest governed manifests, queue state, and MT5 practice telemetry for blocked or reviewable outcomes."
+execution_mode = "worktree"
+status = "paused"
+prompt_file = "automations/prompts/runtime-watch.md"
+recommended_skill = "$runtime-monitoring"
+manual_validation_required = true
+
+notes = [
+  "Runtime evidence is telemetry only and cannot establish research truth.",
+  "Escalate manual MT5 testing or automation activation as explicit HITL boundaries.",
+]

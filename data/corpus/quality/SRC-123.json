@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-123",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "The New Tradi N g for a Livi N g The Wiley Trading series features books by traders who have survived the mar- ket\u2019s ever-changing environment and have prospered\u2014some by reinventing systems, others by getting back to basics.",
+    "Whether a novice trader, professional or somewhere in-between, these books will provide the advice and strategies needed to prosper today and well into the future. For more on this series, visit our website at www.WileyTrading.com.",
+    "Founded in 1807, John Wiley & Sons is the oldest independent publishing company in the United States. With offices in North America, Europe, Australia and Asia, Wiley is globally committed to developing and marketing print and electronic products and services for our customers\u2019 p"
+  ],
+  "front_matter_signals": [
+    "CONTENTS vii CONTENTS Preface xiii Introduction 1 1. Trading\u2014The Last Frontier 1",
+    "95 27. Relative Strength Index",
+    "107 30. Force Index"
+  ],
+  "best_excerpt": "If you aren\u2019t sure, consider entering in several steps: buy a third of the planned position in anticipation, a third on a breakout, and a third on a pullback. Whatever method you use, remember to apply the key risk management rule: the distance from your entry to the protective s"
+}

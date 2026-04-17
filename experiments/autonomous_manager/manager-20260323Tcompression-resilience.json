@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "manager-20260323Tcompression-resilience",
+  "program_id": "manager-20260323Tcompression-resilience-program",
+  "family": "compression_resilience_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_cycles": 1,
+  "max_cycles": 12,
+  "status": "stopped",
+  "stop_reason": "program_loop_invalid_throughput_orthogonality:europe_compression_release_af_cand_0201:high_vol_compression_release_af_cand_0202",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "a15f9ce4122cc02c5c1995ca7a1c68c0cd1471a6ca05504944aa9cbb1fbac170",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260323Tcompression-resilience-program-cycle-01.json",
+      "stop_reason": "program_loop_invalid_throughput_orthogonality:europe_compression_release_af_cand_0201:high_vol_compression_release_af_cand_0202",
+      "stop_class": "policy_decision",
+      "material_transition": false,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260323Tcompression-resilience.json"
+}

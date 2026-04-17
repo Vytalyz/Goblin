@@ -1,0 +1,36 @@
+{
+  "checkpoint_id": "goblin-p12-knowledge-and-agent-layer-complete",
+  "phase_id": "GOBLIN-P12",
+  "title": "Knowledge Store, Vector Memory, And Agentic Layer Complete",
+  "recorded_utc": "2026-04-13T00:16:37Z",
+  "exit_criteria_met": [
+    "Structured knowledge events are persisted as append-only JSONL records.",
+    "Vector-memory retrieval index is built from structured retrieval documents.",
+    "Retrieval outputs are provenance-cited and advisory-only.",
+    "Bounded agent roles enforce governance authority boundaries.",
+    "Agentic features do not weaken governance or runtime truth."
+  ],
+  "code_changes": [
+    "src/agentic_forex/goblin/models.py: added KnowledgeEventRecord, RetrievalIndex/Entry, RetrievalCitation/Response, AgentAction, and BoundedAgentRole",
+    "src/agentic_forex/goblin/controls.py: added append_knowledge_event, write_retrieval_document, build_retrieval_index, retrieve_with_provenance, write_bounded_agent_role, assert_agent_action_allowed",
+    "src/agentic_forex/utils/paths.py: added P12 knowledge/vector/roles/query path properties",
+    "src/agentic_forex/goblin/__init__.py: exported P12 models and controls",
+    "Goblin/contracts/knowledge-lineage.md: expanded with event-store, retrieval-document, and bounded-role rules",
+    "Goblin/contracts/retrieval-policy.md: expanded with indexing scope and governance boundaries",
+    "tests/test_goblin_p12.py: added focused P12 test coverage"
+  ],
+  "tests_run": [
+    "pytest tests/test_goblin_p12.py tests/test_goblin_ml.py -q"
+  ],
+  "artifacts_written": [
+    "Goblin/checkpoints/GOBLIN-P12/goblin-p12-knowledge-and-agent-layer-complete.json",
+    "Goblin/state/phases/GOBLIN-P12.json",
+    "Goblin/contracts/knowledge-lineage.md",
+    "Goblin/contracts/retrieval-policy.md",
+    "tests/test_goblin_p12.py"
+  ],
+  "assumptions": [
+    "Token-overlap retrieval scoring is acceptable for deterministic advisory retrieval in this phase.",
+    "Bounded agent roles are enforced through explicit action checks before role-driven operations."
+  ]
+}

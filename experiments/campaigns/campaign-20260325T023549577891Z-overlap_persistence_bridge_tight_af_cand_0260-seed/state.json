@@ -1,0 +1,27 @@
+{
+  "campaign_id": "campaign-20260325T023549577891Z-overlap_persistence_bridge_tight_af_cand_0260-seed",
+  "family": "overlap_persistence_bridge_research",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0260",
+  "parent_campaign_id": "campaign-20260325T023549557259Z-next-step",
+  "current_step_type": "formalize_rule_candidate",
+  "active_candidate_ids": [
+    "AF-CAND-0260"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 0,
+  "trials_consumed": 0,
+  "operational_runs_consumed": 0,
+  "rule_spec_reformulations_by_candidate": {},
+  "ea_spec_rewrites_by_candidate": {},
+  "compile_retries_by_candidate": {},
+  "smoke_retries_by_candidate": {},
+  "mt5_parity_retries_by_candidate": {},
+  "shadow_forward_retries_by_candidate": {},
+  "state_version": 1,
+  "stop_reason": "program_seed_requested",
+  "state_path": "experiments\\campaigns\\campaign-20260325T023549577891Z-overlap_persistence_bridge_tight_af_cand_0260-seed\\state.json",
+  "last_report_path": null,
+  "next_recommendations_path": null,
+  "updated_utc": "2026-03-25T02:35:49.578135Z"
+}

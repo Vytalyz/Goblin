@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-020",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "high",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "STUDY GUIDE FOR COME INTO MY TRADING ROOM Dr. Alexander Elder www.elder.com John Wiley & Sons, Inc. New Y ork\u2022 Chichester \u2022 Weinheim \u2022 Brisbane \u2022 Singapore \u2022 T oronto",
+    "Alexander Elder www.elder.com John Wiley & Sons, Inc. New Y ork\u2022 Chichester \u2022 Weinheim \u2022 Brisbane \u2022 Singapore \u2022 T oronto Copyright \u00a9 2002 by Dr. Alexander Elder. All rights reserved. Published by John Wiley & Sons, Inc. No part of this publication may be reproduced, stored in a r",
+    "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley & Sons, Inc., 605 Third Avenue, New York, NY 10158-0012, (212) 850-6011, fax (212) 850-6008, E-Mail: PERMREQ@WILEY.COM."
+  ],
+  "front_matter_signals": [
+    "First, the chapter on basic charting quizzes you on classical technical analysis. The next chapter, on indicators, delves into moving averages, channels, MACD, Force Index, Elder-ray, and Stochastic. The next chapter, on trad- ing, asks questions about system testing, timeframes,",
+    "Oscillators help identify reversal areas by showing when markets become overbought or oversold. Which of the following indicators belong to which group? 1. Moving average 2. MACD-Histogram 3. Stochastic 4. MACD-Lines 5. Force Index A.",
+    "Uptrend 2. Downtrend 3. Bullish divergence 4. Bearish divergence 5. Price tail And for extra credit: At the right edge of the chart, bullish, bearish, or neutral? Please explain. Question 34\u2014Force Index Which of the following phrases does not apply to Force Index?"
+  ],
+  "best_excerpt": "Give yourself three points for choosing the right answer. Buying an upside breakout puts you in the direction of the trend, whereas buying pullbacks provides less expensive entries. These are all acceptable methods, but it is seldom a good idea to put in orders without even knowi"
+}

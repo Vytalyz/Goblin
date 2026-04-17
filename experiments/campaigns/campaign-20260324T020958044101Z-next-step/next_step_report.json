@@ -1,0 +1,67 @@
+{
+  "campaign_id": "campaign-20260324T020958044101Z-next-step",
+  "parent_campaign_id": "campaign-20260324T020234321912Z-next-step",
+  "selected_step_type": "run_parity",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0239 now meets the bounded empirical and provisional robustness gates for parity entry. The next governed step should be MT5 parity, still in practice-only mode.",
+  "status": "completed",
+  "stop_reason": "parity_failed_requires_diagnosis",
+  "candidate_scope": [
+    "AF-CAND-0239"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [
+    {
+      "candidate_id": "AF-CAND-0239",
+      "run_id": "mt5run-20260324T021009Z",
+      "packet_reused": false,
+      "logic_manifest_hash": "b6ed4dada61b2cab091a4d57d5d127cd52f956116875f0d363ef8a1f19b28547",
+      "validation_status": "failed",
+      "failure_classification": "parity_failure",
+      "parity_rate": 0.022663,
+      "audit_rows": 353,
+      "tester_report_path": "approvals\\mt5_runs\\AF-CAND-0239\\mt5run-20260324T021009Z\\AF-CAND-0239-mt5run-20260324T021009Z-report.htm",
+      "audit_csv_path": "approvals\\mt5_runs\\AF-CAND-0239\\mt5run-20260324T021009Z\\AF-CAND-0239__mt5run-20260324T020958Z__audit.csv",
+      "launch_status_path": "approvals\\mt5_runs\\AF-CAND-0239\\mt5run-20260324T021009Z\\launch_status.json",
+      "validation_report_path": "approvals\\mt5_runs\\AF-CAND-0239\\mt5run-20260324T021009Z\\validation_report.json",
+      "report_path": "approvals\\mt5_runs\\AF-CAND-0239\\mt5run-20260324T021009Z\\mt5_parity_report.json"
+    }
+  ],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0239",
+      "rationale": "AF-CAND-0239 failed MT5 practice parity with classification parity_failure. The next legal step is diagnosis only; parity evidence must not mutate policy directly.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": "campaign-20260324T020958044101Z-next-step",
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0239"
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "diagnose_existing_candidates",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "8112c83b350aa05bbe8417c7a412a7476846a63f29c5df93587a0f81e6f2a123",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260324T020958044101Z-next-step\\next_step_report.json"
+}

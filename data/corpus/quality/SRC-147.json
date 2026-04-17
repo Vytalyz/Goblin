@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-147",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "WAY OFTHE TURTLE CURTIS M. FAITH McGraw-Hill New York Chicago San Francisco Lisbon London Madrid Mexico City Milan New Delhi San Juan Seoul Singapore Sydney Toronto",
+    "Copyright \u00a9 2007 by Curtis M. Faith. All rights reserved. Manufactured in the United States of America. Except as permitted under the United States Copyright Act of 1976, no part of this publica- tion may be reproduced or distributed in any form or by any means, or stored in a da",
+    "Where such designations appear in this book, they have been printed with initial caps. McGraw-Hill eBooks are available at special quantity discounts to use as premiums and sales promotions, or for use in corporate training programs."
+  ],
+  "front_matter_signals": [
+    "To Richard Dennis, who made it all possible, and to Juliet Mantiply, my \ufb01rst muse; may our paths cross again some day. This page intentionally left blank \u2022 v \u2022 ACKNOWLEDGMENTS A lthough I have learned from almost everyone I have interacted with over the years, there are a few peo",
+    "Mark \ufb01rst gave me the idea behind RAR% and much of what became R-cubed. Mark created the basis for the ATR channel breakout system when he published his PGO system a few years back. Mark also spent time reviewing this man- uscript and gave me important and detailed feedback, incl",
+    "Finally, I want to thank Van Tharp and Melita Hunt for recom- mending me to McGraw-Hill as a potential new author. And Van for taking the time out of his very busy schedule to read my book on short notice, for his candid feedback, and for writing a very nice foreword."
+  ],
+  "best_excerpt": "Using Figure 6-2 as an example, a countertrend trader who bought at $2.10 in anticipation of an upward move could place a stop 6\u00a2 below that entry, as that price would represent a breakdown of the support. Likewise, a trend-following trader who sold the breakout at $2.10 could pl"
+}

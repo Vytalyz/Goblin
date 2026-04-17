@@ -1,0 +1,63 @@
+{
+  "phase_id": "GOBLIN-P06",
+  "title": "Incident And Safety Envelope System",
+  "objective": "Turn failures into governed incidents instead of narrative debates, with severity-driven suspension rules and SLA obligations tied to operational events.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P05"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Define the incident severity matrix: S1-S4 levels, incident type classification, suspension rules, and candidate inheritance.",
+    "Define incident SLAs as operational-event-relative deadlines, not wall-clock times.",
+    "Update the incident response runbook to reference severity levels and required closure evidence by severity.",
+    "Integrate statistical decision policy thresholds into incident open/close triggers.",
+    "Add severity and SLA class fields to the IncidentRecord model.",
+    "Specify how related candidates inherit safety blocks when they depend on an untrusted validation stack."
+  ],
+  "outputs": [
+    "incident severity matrix",
+    "incident SLA contract",
+    "updated incident response runbook"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/incident-severity-matrix.md",
+    "Goblin/contracts/incident-sla.md",
+    "Goblin/runbooks/INCIDENT_RESPONSE.md"
+  ],
+  "checkpoint_targets": [
+    "Severity matrix classifies all incident types with default severity and escalation rules.",
+    "SLA contract uses operational-event-relative deadlines with required closure evidence per severity.",
+    "Incident response runbook references severity matrix and SLA contract.",
+    "IncidentRecord model carries severity and SLA class fields."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/incident-severity-matrix.md",
+    "Goblin/contracts/incident-sla.md",
+    "Goblin/runbooks/INCIDENT_RESPONSE.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P06.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P06\\goblin-p06-incident-system-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P06",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P06 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-12T21:00:00.000000Z",
+  "updated_at": "2026-04-14T19:50:53.043916Z",
+  "completed_at": "2026-04-12T21:00:00.000000Z",
+  "exit_criteria": [
+    "Any unexplained material delta opens or keeps open an incident.",
+    "Incident severity drives suspension and closure evidence requirements, not operator discretion.",
+    "IncidentRecord carries severity and SLA class."
+  ],
+  "acceptance_result": {
+    "exit_criteria_satisfied": true,
+    "verified_by": "targeted tests: tests/test_goblin_incident.py (17 tests, all passing)"
+  },
+  "notes": [],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P06.json"
+}

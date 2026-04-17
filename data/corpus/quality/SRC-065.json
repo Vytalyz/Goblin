@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-065",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "What advice would you give to other traders? While, on one level, my search for answers was a personal quest to help surpass my own barriers, in a broader sense, I saw myself as Everyman, asking the questions I thought others would ask if given the opportunity. * JackD.Schwager, ",
+    "I became more and more fascinated with how markets work. About that time, I saw a letter published by Richard Donchian, which implied that a purely mechanical trend-following system could beat the markets. This too seemed impossible to me.",
+    "The es timated breakeven point of 200,000 subscribers no longer seems far-fetched. O'Neil believes Investor's Daily can eventually grow to 800,000 readers. His unflagging confidence in the paper stems from the fact that Investor's Daily's financial tables contain statistical info"
+  ],
+  "front_matter_signals": [
+    "Preface...................................................................................................................................................4 Acknowledgments ............................................................................................................",
+    "4 Preface",
+    "There are some amazing stories here: A trader who, after wiping out several times early in his career, turned a $30,000 account into $80 million A fund manager who achieved what many t hought impossible\u2014five consecutive years of triple-digit percentage returns A trader from sm al"
+  ],
+  "best_excerpt": "That's hard to say. The only factor I can objectively identify is the tendency toward more false breakouts. Do you feel the recent prevalence of false breakouts is related to the tremendous increase in computerized trend-following trading during the past five to ten years?"
+}

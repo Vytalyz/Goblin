@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-142",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "All rights reserved. No part of this book may be reproduced, in any form or by any means, without permission in writing from the publisher. Printed in the United States of America First Printing February 2009 ISBN-10: 0-13-702018-X ISBN-13: 978-0-13-702018-8 Pearson Education Ltd",
+    "Ltd. The Library of Congress Cataloging-in-Publication data is on file.",
+    "And that\u2019s how I got started.\u201d 54 On how he first started trading: \u201cI saw a letter published by Richard Donchian, which implied that a purely mechanical trend following system could beat the markets. This too seemed impossible to me."
+  ],
+  "front_matter_signals": [
+    "Foreword . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . xiii Preface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . xvii Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .",
+    "294 Final Thoughts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 296 Foreword to the First Edition by Charles Faulkner . . . . . . . . . . . . . . . . 299 Appendices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ",
+    "303 Introduction to Appendices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 305 A Trend Following for Stocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 307 Does Trend Following Work on Stocks? . . . . . . . . . . . . . . . . . . . . . . . . . ."
+  ],
+  "best_excerpt": "Patrick Welton saw that there is no evidence that trend following has changed. To prove this fact, he constructed 120 trend following models. Some were reversal-based, and others were not. Some were breakout style trading systems based on price action with others relying on Chapt"
+}

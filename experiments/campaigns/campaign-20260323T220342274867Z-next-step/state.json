@@ -1,0 +1,27 @@
+{
+  "campaign_id": "campaign-20260323T220342274867Z-next-step",
+  "family": "horizon_momentum_research",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0192",
+  "parent_campaign_id": "campaign-20260323T220342192010Z-promotion_volatility_expansion_horizon_af_cand_0192-seed",
+  "current_step_type": "re_evaluate_one_candidate",
+  "active_candidate_ids": [
+    "AF-CAND-0192"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 1,
+  "trials_consumed": 1,
+  "operational_runs_consumed": 0,
+  "rule_spec_reformulations_by_candidate": {},
+  "ea_spec_rewrites_by_candidate": {},
+  "compile_retries_by_candidate": {},
+  "smoke_retries_by_candidate": {},
+  "mt5_parity_retries_by_candidate": {},
+  "shadow_forward_retries_by_candidate": {},
+  "state_version": 3,
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "state_path": "experiments\\campaigns\\campaign-20260323T220342274867Z-next-step\\state.json",
+  "last_report_path": "experiments\\campaigns\\campaign-20260323T220342274867Z-next-step\\next_step_report.json",
+  "next_recommendations_path": "experiments\\campaigns\\campaign-20260323T220342274867Z-next-step\\next_recommendations.json",
+  "updated_utc": "2026-03-23T22:03:59.276100Z"
+}

@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-04-01T08:54:49.348568Z",
+  "family_filter": "europe_open_impulse_retest_research",
+  "candidate_filters": [],
+  "total_records": 0,
+  "registry_path": "experiments\\registry.csv",
+  "report_path": "experiments\\comparison_20260401T085449Z.json",
+  "latest_report_path": "experiments\\comparison_latest.json",
+  "recommended_candidate_id": null,
+  "records": []
+}

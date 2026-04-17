@@ -1,0 +1,19 @@
+[
+  {
+    "step_type": "re_evaluate_one_candidate",
+    "candidate_id": "AF-CAND-0030",
+    "rationale": "Mutation completed for AF-CAND-0030. Re-evaluate the mutated breakout candidate under the current canonical OANDA dataset and execution-cost assumptions before any further search.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0014-FADE",
+      "mutation_type": "refresh_execution_cost_defaults",
+      "refresh_reason": "align AF-CAND-0014-FADE to the current scalping execution-cost contract before sibling-family comparison",
+      "fill_delay_ms": 250,
+      "slippage_pips": 0.05,
+      "broker_fee_model": "oanda_spread_only",
+      "commission_per_standard_lot_usd": 0.0
+    }
+  }
+]

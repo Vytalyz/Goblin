@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-005",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright \u00a9 2011, 2007, 2003, 1999, 1996, 1990, 1985, 1981, 1975, 1973 by W. W. Norton &amp; Company, Inc. The article on page 324 entitled \u201cRed Faces in Park\u201d appears courtesy of Thomson Reuters. All rights reserved. Republication or redistribution of Thomson Reuters content, in",
+    "All rights reserved For information about permission to reproduce selections from this book, write to Permissions, W. W. Norton &amp; Company, Inc., 500 Fifth Avenue, New York, NY 10110 Library of Congress Cataloging-in-Publication Data Malkiel, Burton Gordon.",
+    "A random walk down Wall Street: the time-tested strategy for successful investing / Burton G. Malkiel. p. cm. Rev. ed. ISBN: 978-0-393-08169-5 1. Investments. 2. Stocks. 3. Random walks (Mathematics) I. Title. HG4521.M284 2011 332.601\u2019519282\u2014dc22 2010041866 W."
+  ],
+  "front_matter_signals": [
+    "CONTENTS",
+    "Preface",
+    "Acknowledgments from Earlier Editions"
+  ],
+  "best_excerpt": "Because the presumption is that momentum in the market will tend to perpetuate itself, the chartist interprets such a pattern as a bullish augury\u2014the stock can be expected to continue to rise. As Magee wrote in the bible of charting, Technical Analysis of Stock Trends , \u201cPrices m"
+}

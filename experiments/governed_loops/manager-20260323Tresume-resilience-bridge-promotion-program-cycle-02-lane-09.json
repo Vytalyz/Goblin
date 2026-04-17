@@ -1,0 +1,50 @@
+{
+  "loop_id": "manager-20260323Tresume-resilience-bridge-promotion-program-cycle-02-lane-09",
+  "family": "resilience_bridge_research",
+  "initial_parent_campaign_id": "campaign-20260323T191916567662Z-next-step",
+  "final_parent_campaign_id": "campaign-20260323T191917622538Z-next-step",
+  "executed_steps": 2,
+  "max_steps": 8,
+  "status": "completed",
+  "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+  "stop_class": "policy_decision",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260323T191917622538Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260323T191917339992Z-next-step",
+    "campaign-20260323T191917622538Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260323T191917339992Z-next-step",
+      "selected_step_type": "diagnose_existing_candidates",
+      "status": "completed",
+      "stop_reason": "diagnosis_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "hypothesis_audit",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260323T191917339992Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 2,
+      "campaign_id": "campaign-20260323T191917622538Z-next-step",
+      "selected_step_type": "hypothesis_audit",
+      "status": "completed",
+      "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+      "continuation_status": "stop",
+      "stop_class": "policy_decision",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": null,
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260323T191917622538Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "7a7a1172984bf2804672a5fa818785c56428ad0d6e8d074d395e5d99ec071091",
+  "report_path": "experiments\\governed_loops\\manager-20260323Tresume-resilience-bridge-promotion-program-cycle-02-lane-09.json"
+}

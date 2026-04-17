@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-084",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "REMINISCENCES OF A STOCK OPERATOR Edwin Lef\u00e8vre Copyright \u00a9 2008 Published by John Wiley & Sons. Inc., Hoboken, New Jersey. Published simultaneously in Canada. Originally published in 1923 by George H. Doran and Company. No part of this publication may be reproduced, stored in a ",
+    "Inc.. 222 Rosewood Drive, Danvers, MA 01923, (978) 750-8400. fax (978) 750-4470, or on the web at http://www.copyright.com. Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley & Sons.",
+    "Inc.. 111 River Street, Hoboken. NJ 07030, (201) 748-6011, fax (201) 748-6008, or online at http://www.wiley.com/go/permissions. Limit of Liability/Disclaimer of Warranty: While the publisher and author have used their best efforts in preparing this book, they make no representat"
+  ],
+  "front_matter_signals": [
+    "Library of Congress Cataloging-in-Publication Data Lef\u00e8vre, Edwin, 1871-1943. Reminiscences of a stock operator / Edwin Lef\u00e8vre. p. cm.\u2014(Wiley investment classics) Originally published: New York : G.H. Doran, 1923. Includes index.",
+    "Index I..........................................................9 II......................................................",
+    "Wall Street remembers very little of an operator who for more than a generation was one of its Titans. His chief claim to immortality seems to be the phrase \"watering stock.\" Addison G. Jerome was the acknowledged king of the Public Board in the spring of 1863."
+  ],
+  "best_excerpt": "No end of bucket shops busted all over the country. Their game has changed. Trading in the old-fashioned bucket shop had some decided advantages over speculating in a reputable broker's office. For one thing, the automatic closing out of your trade when the margin reached the exh"
+}

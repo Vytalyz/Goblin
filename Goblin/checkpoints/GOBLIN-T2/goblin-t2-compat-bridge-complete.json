@@ -1,0 +1,11 @@
+{
+  "checkpoint_id": "goblin-t2-compat-bridge-complete",
+  "phase_id": "GOBLIN-T2",
+  "status": "passed",
+  "timestamp": "2026-04-13T14:20:00Z",
+  "evidence": [
+    "Goblin namespace package added",
+    "CLI forwarding wrapper added",
+    "Namespace compatibility contract added"
+  ]
+}

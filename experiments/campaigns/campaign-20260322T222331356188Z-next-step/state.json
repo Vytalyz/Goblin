@@ -1,0 +1,27 @@
+{
+  "campaign_id": "campaign-20260322T222331356188Z-next-step",
+  "family": "intraday_regime_research",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0155",
+  "parent_campaign_id": "campaign-20260322T222331255532Z-next-step",
+  "current_step_type": "data_feature_audit",
+  "active_candidate_ids": [
+    "AF-CAND-0157"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 4,
+  "trials_consumed": 4,
+  "operational_runs_consumed": 0,
+  "rule_spec_reformulations_by_candidate": {},
+  "ea_spec_rewrites_by_candidate": {},
+  "compile_retries_by_candidate": {},
+  "smoke_retries_by_candidate": {},
+  "mt5_parity_retries_by_candidate": {},
+  "shadow_forward_retries_by_candidate": {},
+  "state_version": 3,
+  "stop_reason": "data_feature_audit_completed_retire_family",
+  "state_path": "experiments\\campaigns\\campaign-20260322T222331356188Z-next-step\\state.json",
+  "last_report_path": "experiments\\campaigns\\campaign-20260322T222331356188Z-next-step\\next_step_report.json",
+  "next_recommendations_path": "experiments\\campaigns\\campaign-20260322T222331356188Z-next-step\\next_recommendations.json",
+  "updated_utc": "2026-03-22T22:23:31.363204Z"
+}

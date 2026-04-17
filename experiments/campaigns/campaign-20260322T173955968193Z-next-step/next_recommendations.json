@@ -1,0 +1,13 @@
+[
+  {
+    "step_type": "hypothesis_audit",
+    "candidate_id": "AF-CAND-0146",
+    "rationale": "AF-CAND-0146 still shows a supported structural weakness, but no single bounded mutation remains narrow enough to justify another direct change. The next governed step should be a hypothesis audit before further search.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0146"
+    }
+  }
+]

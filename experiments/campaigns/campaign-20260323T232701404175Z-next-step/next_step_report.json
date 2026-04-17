@@ -1,0 +1,191 @@
+{
+  "campaign_id": "campaign-20260323T232701404175Z-next-step",
+  "parent_campaign_id": "campaign-20260323T232701229167Z-next-step",
+  "selected_step_type": "re_evaluate_one_candidate",
+  "step_reason": "Following binding recommendation from the latest completed campaign: Mutation completed for AF-CAND-0220. Re-evaluate the mutated breakout candidate under the current canonical OANDA dataset and execution-cost assumptions before any further search.",
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "candidate_scope": [
+    "AF-CAND-0220"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [
+    {
+      "candidate_id": "AF-CAND-0220",
+      "source_candidate_id": "AF-CAND-0217",
+      "evaluation_revision": 1,
+      "supersedes_evaluation_revision": null,
+      "readiness_status": "robustness_provisional",
+      "robustness_mode": "full_search_adjusted_robustness",
+      "approval_recommendation": "needs_human_review",
+      "trade_count": 31,
+      "out_of_sample_profit_factor": 1.866396761133741,
+      "expectancy_pips": 0.7032258064515458,
+      "stressed_profit_factor": 1.1458757166635736,
+      "walk_forward_ok": false,
+      "stress_passed": true,
+      "artifact_references": {
+        "dataset_snapshot": {
+          "snapshot_id": "67ced0cdd14c984d",
+          "source": "oanda",
+          "extraction_utc": "2026-03-23T23:06:37.142125Z",
+          "instrument": "EUR_USD",
+          "symbol_mapping": {
+            "EUR_USD": "EUR_USD"
+          },
+          "dataset_start_utc": "2025-10-01T00:00:00Z",
+          "dataset_end_utc": "2026-03-20T20:59:00Z",
+          "session_filters": [
+            12
+          ],
+          "qa_report_path": "reports\\market_data_quality\\eur_usd_m1.json",
+          "parquet_path": "data\\normalized\\research\\eur_usd_m1.parquet"
+        },
+        "feature_build": {
+          "feature_version_id": "e602a112f25aff49",
+          "label_version_id": "4531e04082baf668",
+          "generated_utc": "2026-03-23T23:28:06.002594Z",
+          "feature_paths": [
+            "src\\agentic_forex\\features\\service.py"
+          ],
+          "label_paths": [
+            "src\\agentic_forex\\labels\\service.py"
+          ]
+        },
+        "data_provenance": {
+          "provenance_id": "809c2167d98f35a3",
+          "candidate_id": "AF-CAND-0220",
+          "stage": "backtested",
+          "dataset_snapshot": {
+            "snapshot_id": "67ced0cdd14c984d",
+            "source": "oanda",
+            "extraction_utc": "2026-03-23T23:06:37.142125Z",
+            "instrument": "EUR_USD",
+            "symbol_mapping": {
+              "EUR_USD": "EUR_USD"
+            },
+            "dataset_start_utc": "2025-10-01T00:00:00Z",
+            "dataset_end_utc": "2026-03-20T20:59:00Z",
+            "session_filters": [
+              12
+            ],
+            "qa_report_path": "reports\\market_data_quality\\eur_usd_m1.json",
+            "parquet_path": "data\\normalized\\research\\eur_usd_m1.parquet"
+          },
+          "feature_build": {
+            "feature_version_id": "e602a112f25aff49",
+            "label_version_id": "4531e04082baf668",
+            "generated_utc": "2026-03-23T23:28:06.002594Z",
+            "feature_paths": [
+              "src\\agentic_forex\\features\\service.py"
+            ],
+            "label_paths": [
+              "src\\agentic_forex\\labels\\service.py"
+            ]
+          },
+          "calendar_version_id": null,
+          "execution_cost_model_version": "3436e9349b387f22",
+          "risk_envelope_version": "f500e8e54a6b0973",
+          "strategy_spec_version": "cd8b36809e321552",
+          "report_path": "reports\\AF-CAND-0220\\data_provenance.json"
+        },
+        "environment_snapshot": {
+          "environment_id": "700fb8c1a35e2065",
+          "captured_utc": "2026-03-23T23:28:06.025672Z",
+          "python_version": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+          "dependency_snapshot_hash": "eeb067bce139b07a",
+          "os_platform": "Windows-11-10.0.26200-SP0",
+          "machine_id": "Infinity",
+          "git_revision": null,
+          "mt5_build": null,
+          "metaeditor_version": null,
+          "report_path": "reports\\AF-CAND-0220\\environment_snapshot.json"
+        },
+        "execution_cost_model": {
+          "canonical_source": "oanda",
+          "spread_mode": "bid_ask",
+          "broker_fee_model": "oanda_spread_only",
+          "spread_multiplier": 1.0,
+          "slippage_pips": 0.0,
+          "commission_per_standard_lot_usd": 0.0,
+          "fill_delay_ms": 0,
+          "liquidity_session_assumption": "broader_overlap_persistence_retest",
+          "tick_model_assumption": "oanda_bid_ask_m1",
+          "notes": [
+            "Canonical research source is OANDA bid/ask data.",
+            "Versioned execution model for research, parity, and forward-stage evaluation.",
+            "OANDA spot FX is modeled as spread-only by default unless a non-zero commission is specified."
+          ]
+        },
+        "risk_envelope": {
+          "max_daily_loss_pct": 5.0,
+          "max_simultaneous_positions": 1,
+          "max_spread_allowed_pips": 2.0,
+          "session_boundaries_utc": [
+            12
+          ],
+          "news_event_policy": "calendar_blackout",
+          "kill_switch_conditions": [
+            "disable entries when spread exceeds max_spread_allowed_pips",
+            "disable entries when max daily loss is exceeded"
+          ],
+          "leverage": 30.0,
+          "sizing_rule": "fixed_fractional",
+          "margin_buffer_pct": 10.0,
+          "notes": [
+            "Hard strategy-level risk envelope for research and downstream EA packaging."
+          ]
+        }
+      },
+      "artifact_paths": {
+        "spec_path": "reports\\AF-CAND-0220\\strategy_spec.json",
+        "backtest_summary_path": "reports\\AF-CAND-0220\\backtest_summary.json",
+        "trade_ledger_path": "reports\\AF-CAND-0220\\trade_ledger.csv",
+        "stress_report_path": "reports\\AF-CAND-0220\\stress_test.json",
+        "review_packet_path": "reports\\AF-CAND-0220\\review_packet.json",
+        "robustness_report_path": "reports\\AF-CAND-0220\\robustness_report.json",
+        "data_provenance_path": "reports\\AF-CAND-0220\\data_provenance.json",
+        "environment_snapshot_path": "reports\\AF-CAND-0220\\environment_snapshot.json",
+        "reevaluation_report_path": "reports\\AF-CAND-0220\\reevaluation_report.json"
+      }
+    }
+  ],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0220",
+      "rationale": "AF-CAND-0220 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0217"
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "diagnose_existing_candidates",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "2a53a70505590a830d817dbb28b83870b4ae364e8f76dd2a40def7ab0c09ac4e",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260323T232701404175Z-next-step\\next_step_report.json"
+}

@@ -1,0 +1,23 @@
+{
+  "campaign_id": "campaign-20260322T143343Z-failed_break_fade_af_cand_0001-seed",
+  "family": "scalping",
+  "baseline_candidate_id": "AF-CAND-0001-FADE",
+  "target_candidate_ids": [
+    "AF-CAND-0001-FADE"
+  ],
+  "parent_campaign_id": "campaign-20260322T103538Z-next-step",
+  "step_type": "mutate_one_candidate",
+  "allowed_step_types": [
+    "mutate_one_candidate"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 1,
+  "trial_cap_per_family": 1,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Program-loop bounded seed campaign.",
+    "Approved lane: failed_break_fade_af_cand_0001.",
+    "Program-approved restart lane from the failed-break fade hypothesis.",
+    "Refresh the root to the current execution-cost contract before bounded evaluation."
+  ]
+}

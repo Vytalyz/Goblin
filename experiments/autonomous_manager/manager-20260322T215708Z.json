@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "manager-20260322T215708Z",
+  "program_id": "manager-20260322T215708Z-program",
+  "family": "market_structure_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_cycles": 1,
+  "max_cycles": 8,
+  "status": "stopped",
+  "stop_reason": "program_loop_no_pending_approved_lanes",
+  "stop_class": "blocked_no_candidates",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "9a3fc3bdb9a53bd631b9aa679d6fb669c14e1e74ee0c3ce608bb24464608dff7",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260322T215708Z-program-cycle-01.json",
+      "stop_reason": "program_loop_no_pending_approved_lanes",
+      "stop_class": "policy_decision",
+      "material_transition": false,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260322T215708Z.json"
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "candidate_id": "AF-CAND-0151",
+    "evidence_status": "supported",
+    "step_type": "formalize_rule_candidate",
+    "rationale": "AF-CAND-0151 is an approved throughput root for drift_reclaim. Start by freezing a deterministic rule specification before EA-spec generation, compile, and MT5 smoke.",
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0151",
+      "queue_kind": "throughput"
+    },
+    "binding": true
+  }
+]

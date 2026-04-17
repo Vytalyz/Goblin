@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-091",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "SCHABACKER former Financial Editor of Forbes Magazine and author of Stock Market Theory and Practice and Stock Market Profits Introduced and edited by Donald Mack HARRIMAN HOUSE LTD 43 Chapel Street Petersfield Hampshire GU32 3DY Tel: +44 (0) 1730 233870 Fax: +44 (0) 1730 233880 ",
+    "All rights reserved; no part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise without either the prior written permission of the Publishers or a licence p",
+    "Barron\u2019s, published weekly by Dow, Jones & Company, offers approximately the same charts which the Wall Street Journal, published by the same company, gives daily. The New York Stock Exchange Bulletin, published monthly and sent free on appli- cation, contains a great valuable fu"
+  ],
+  "front_matter_signals": [
+    "Originally devised as a practical course for investors, it is as alive, vital and instructional today as the day it was written. It paved the way for Robert Edwards and John Magee's best-selling Technical Analysis of Stock Trends \u2013 a debt which is acknowledged in their foreword: ",
+    "This book may not be lent, resold, hired out or otherwise disposed of by way of trade in any form of binding or cover other than that in which it is published, without the prior consent of the Publishers. Printed and bound by Lightning Source ABOUT THE AUTHOR Richard W.",
+    "380 THE DOW-JONES INDUSTRIAL STOCKS AVERAGE Monthly High and Low of Closing Prices -- 1897 Through August, 1937. 1 2 3 4 5 MILLION SHARES 1 2 3 4 5 1897 1898 1899 1900 1901 1902 1903 1904 1905 1906 1907 1908 1909 1910 1911 1912 1913 1914 1915 1916 1917 1918 1919 1920 1921 1922 19"
+  ],
+  "best_excerpt": "Such trading switches amount almost to scalping 2 however, and, while they may well prove quite pro\ufb01table they still carry dangers, should always be protected with stop-loss orders, and are not recommended for the average chart trader."
+}

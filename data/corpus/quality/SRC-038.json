@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-038",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright \u00a9 2014 by Michael Lewis All rights reserved First Edition For information about permission to reproduce selections from this book, write to Permissions, W. W. Norton &amp; Company, Inc., 500 Fifth Avenue, New York, NY 10110 For information about special discounts for bu",
+    "W. Norton Special Sales at specialsales@wwnorton.com or 800-233-4830 Book design by Chris Welch Design Production manager: Julia Druskin The Library of Congress has cataloged the printed edition as follows: Lewis, Michael (Michael M.) Flash boys : a Wall Street revolt / Michael L",
+    "ISBN 978-0-393-24466-3 (hardcover : alk. paper) 1. Stockbrokers\u2014United States. 2. Wall Street (New York, N.Y.) 3. Finance\u2014United States\u2014History\u201421st century. I. Title. HG4628.5L49 2014 332.6'2092273\u2014dc23 2014003208 ISBN 978-0-393-24467-0 (e-book) W."
+  ],
+  "front_matter_signals": [
+    "CONTENTS",
+    "INTRODUCTION WINDOWS ON THE WORLD",
+    "Acknowledgments"
+  ],
+  "best_excerpt": "He needed, specifically, someone from deep inside the world of high-frequency trading. He\u2019d spent the better part of a year cold-calling strangers in search of an HFT strategist willing to defect. He now suspected that every human being who knew how high-frequency traders made mo"
+}

@@ -1,0 +1,58 @@
+{
+  "loop_id": "program-20260322T022430Z-lane-04",
+  "family": "scalping",
+  "initial_parent_campaign_id": "campaign-20260322T022448Z-failed_break_fade_af_cand_0015-seed",
+  "final_parent_campaign_id": "campaign-20260322T022448Z-next-step",
+  "executed_steps": 2,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "stop_class": "lane_exhausted",
+  "final_report_path": "experiments\\campaigns\\campaign-20260322T022448Z-next-step\\next_step_report.json",
+  "final_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0040",
+      "rationale": "AF-CAND-0040 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0015-FADE"
+      }
+    }
+  ],
+  "executed_campaign_ids": [
+    "campaign-20260322T022448Z-next-step",
+    "campaign-20260322T022448Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260322T022448Z-next-step",
+      "selected_step_type": "mutate_one_candidate",
+      "status": "completed",
+      "stop_reason": "mutation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "re_evaluate_one_candidate",
+      "transition_status": "continue_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T022448Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 2,
+      "campaign_id": "campaign-20260322T022448Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "stop",
+      "stop_class": "lane_exhausted",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T022448Z-next-step\\next_step_report.json"
+    }
+  ],
+  "report_path": "experiments\\governed_loops\\program-20260322T022430Z-lane-04.json"
+}

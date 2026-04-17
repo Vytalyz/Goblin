@@ -1,0 +1,47 @@
+{
+  "loop_id": "manager-20260322Trange-reclaim-actual-program-cycle-01-lane-01",
+  "family": "day_trading",
+  "initial_parent_campaign_id": "campaign-20260322T174338770016Z-range_reclaim_af_cand_0061-seed",
+  "final_parent_campaign_id": "campaign-20260322T174338856094Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "stop_class": "lane_exhausted",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260322T174338856094Z-next-step\\next_step_report.json",
+  "final_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0061",
+      "rationale": "AF-CAND-0061 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0061"
+      }
+    }
+  ],
+  "executed_campaign_ids": [
+    "campaign-20260322T174338856094Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260322T174338856094Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "stop",
+      "stop_class": "lane_exhausted",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T174338856094Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "bcfb8ea40b3f190401e87761dea41a34ebe01b06b721d6c61330a22dc8100949",
+  "report_path": "experiments\\governed_loops\\manager-20260322Trange-reclaim-actual-program-cycle-01-lane-01.json"
+}

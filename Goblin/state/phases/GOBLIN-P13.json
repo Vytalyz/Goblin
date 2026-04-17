@@ -1,0 +1,46 @@
+{
+  "phase_id": "GOBLIN-P13",
+  "title": "Operational Inventory And Gap Analysis",
+  "objective": "Catalog what exists, what half-exists, and what is genuinely missing before operational readiness work begins.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P12"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Produce existing_goblin_coverage.md with at least 8 subsystem rows.",
+    "Classify each subsystem as exists, partial, missing, or deferred.",
+    "Identify what P14 and P15 must build versus reuse."
+  ],
+  "outputs": [
+    "existing_goblin_coverage.md"
+  ],
+  "expected_artifacts": [
+    "Goblin/reports/existing_goblin_coverage.md"
+  ],
+  "checkpoint_targets": [
+    "Inventory has at least 8 rows, each classified with artifact paths.",
+    "Gap analysis identifies what P14 and P15 must build."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/reports/existing_goblin_coverage.md"
+  ],
+  "regenerable_artifacts": [],
+  "last_checkpoint": "Goblin/checkpoints/GOBLIN-P13/goblin-p13-inventory-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P13",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P13 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-13T12:00:00Z",
+  "updated_at": "2026-04-13T12:00:00Z",
+  "completed_at": "2026-04-13T12:10:00Z",
+  "exit_criteria": [
+    "Inventory complete with gap classification.",
+    "No ambiguity about what P14/P15 builds versus reuses."
+  ],
+  "acceptance_result": null,
+  "notes": [],
+  "record_path": "Goblin/state/phases/GOBLIN-P13.json"
+}

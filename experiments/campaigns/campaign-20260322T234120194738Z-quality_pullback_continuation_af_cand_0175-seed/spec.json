@@ -1,0 +1,39 @@
+{
+  "campaign_id": "campaign-20260322T234120194738Z-quality_pullback_continuation_af_cand_0175-seed",
+  "family": "quality_gate_research",
+  "baseline_candidate_id": "AF-CAND-0175",
+  "target_candidate_ids": [
+    "AF-CAND-0175"
+  ],
+  "parent_campaign_id": "campaign-20260322T234120175356Z-next-step",
+  "queue_kind": "throughput",
+  "throughput_target_count": 10,
+  "orthogonality_metadata": {
+    "market_hypothesis": "quality_filtered_resumption",
+    "trigger_family": "pullback_continuation",
+    "holding_profile": "intraday_continuation",
+    "session_profile": "overlap",
+    "regime_dependency": "moderate_vol_trend"
+  },
+  "compile_budget": 6,
+  "smoke_budget": 5,
+  "max_rule_spec_reformulations_per_hypothesis": 2,
+  "max_ea_spec_rewrites_per_candidate": 2,
+  "max_compile_retries_per_candidate": 2,
+  "max_smoke_retries_per_candidate": 1,
+  "step_type": "formalize_rule_candidate",
+  "allowed_step_types": [
+    "formalize_rule_candidate"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 1,
+  "trial_cap_per_family": 1,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Program-loop bounded seed campaign.",
+    "Approved lane: quality_pullback_continuation_af_cand_0175.",
+    "Throughput lane starts from deterministic rule formalization and MT5 executability checks.",
+    "Fresh quality-gated throughput root focused on cleaner overlap-session resumption after shallow resets.",
+    "Keep this lane separate from raw breakout-style directional hypotheses."
+  ]
+}

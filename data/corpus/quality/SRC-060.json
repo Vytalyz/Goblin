@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-060",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright",
+    "ISBN",
+    "Wiley"
+  ],
+  "front_matter_signals": [
+    "index",
+    "PREFACE",
+    "Preface"
+  ],
+  "best_excerpt": "Breakouts"
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "step_type": "generate_ea_spec",
+    "candidate_id": "AF-CAND-0186",
+    "rationale": "AF-CAND-0186 now has a deterministic rule spec. The next bounded throughput step is EA-spec generation under the same control-plane state.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0186"
+    }
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "loop_id": "portfolio-gap_blank_slate-us_late_unwind_research-20260329T191618157737Z-program-cycle-01-lane-01",
+  "family": "us_late_unwind_research",
+  "initial_parent_campaign_id": "campaign-20260329T191618318918Z-promotion_us_late_compression_reversion_af_cand_0277-seed",
+  "final_parent_campaign_id": "campaign-20260329T191725913407Z-next-step",
+  "executed_steps": 2,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+  "stop_class": "ambiguity",
+  "transition_intent": "stop_terminal",
+  "final_report_path": "experiments\\campaigns\\campaign-20260329T191725913407Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260329T191618638657Z-next-step",
+    "campaign-20260329T191725913407Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260329T191618638657Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260329T191618638657Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 2,
+      "campaign_id": "campaign-20260329T191725913407Z-next-step",
+      "selected_step_type": "diagnose_existing_candidates",
+      "status": "completed",
+      "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+      "continuation_status": "stop",
+      "stop_class": "ambiguity",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": null,
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal",
+      "report_path": "experiments\\campaigns\\campaign-20260329T191725913407Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "556a92f12b0cb9ab3bb11eb94b87e290c168b6bd2b384c7e3658faa44ed68cfb",
+  "report_path": "experiments\\governed_loops\\portfolio-gap_blank_slate-us_late_unwind_research-20260329T191618157737Z-program-cycle-01-lane-01.json"
+}

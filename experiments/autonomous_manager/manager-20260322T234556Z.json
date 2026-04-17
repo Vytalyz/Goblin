@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "manager-20260322T234556Z",
+  "program_id": "manager-20260322T234556Z-program",
+  "family": "session_alignment_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": "campaign-20260322T234736608374Z-next-step",
+  "executed_cycles": 1,
+  "max_cycles": 8,
+  "status": "stopped",
+  "stop_reason": "program_loop_max_lanes_reached",
+  "stop_class": "blocked_budget",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "2e2c6a86195f5e219826e6ccb7a8d7459b96dfffc6371df5b8ed0eb171df92a3",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260322T234556Z-program-cycle-01.json",
+      "stop_reason": "program_loop_max_lanes_reached",
+      "stop_class": "budget_exhausted",
+      "material_transition": true,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260322T234556Z.json"
+}

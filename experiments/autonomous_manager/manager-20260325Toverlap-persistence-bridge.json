@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "manager-20260325Toverlap-persistence-bridge",
+  "program_id": "manager-20260325Toverlap-persistence-bridge-program",
+  "family": "overlap_persistence_bridge_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_cycles": 1,
+  "max_cycles": 16,
+  "status": "stopped",
+  "stop_reason": "program_loop_seed_candidate_truth_mismatch:overlap_persistence_bridge_core_af_cand_0256:strategy_spec_family,candidate_strategy_family,candidate_strategy_entry_style,strategy_spec_entry_style",
+  "stop_class": "integrity_exception",
+  "terminal_boundary": "integrity_exception",
+  "policy_snapshot_hash": "e5041ccaa71f1abaa7c38d182e958faca94adc4797dfeb179f38ab61f1cd0ecd",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260325Toverlap-persistence-bridge-program-cycle-01.json",
+      "stop_reason": "program_loop_seed_candidate_truth_mismatch:overlap_persistence_bridge_core_af_cand_0256:strategy_spec_family,candidate_strategy_family,candidate_strategy_entry_style,strategy_spec_entry_style",
+      "stop_class": "integrity_issue",
+      "material_transition": false,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "integrity_exception",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260325Toverlap-persistence-bridge.json"
+}

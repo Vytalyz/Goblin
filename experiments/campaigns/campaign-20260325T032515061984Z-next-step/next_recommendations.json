@@ -1,0 +1,13 @@
+[
+  {
+    "step_type": "triage_reviewable_candidate",
+    "candidate_id": "AF-CAND-0262",
+    "rationale": "AF-CAND-0262 completed the bounded MT5 smoke stage with status passed. The next throughput step is triage.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0262"
+    }
+  }
+]

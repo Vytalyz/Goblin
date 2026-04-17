@@ -1,0 +1,29 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5manual-20260325T221210Z",
+  "packet_reused": true,
+  "tester_mode": "Every tick based on real ticks",
+  "launch_status": "completed",
+  "manual_overrides": {
+    "deposit": 100.0,
+    "leverage": 33.0,
+    "fixed_lots": null,
+    "auto_scale_lots": true,
+    "canonical_deposit": 100000.0,
+    "canonical_leverage": 30.0,
+    "canonical_fixed_lots": 5.0,
+    "min_lot": 0.01,
+    "lot_step": 0.01,
+    "sizing_mode": "scaled_from_canonical",
+    "scaled_fixed_lots_raw": 0.005,
+    "effective_fixed_lots": 0.01
+  },
+  "tester_config_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5manual-20260325T221210Z\\tester_config.ini",
+  "launch_request_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5manual-20260325T221210Z\\launch_request.json",
+  "tester_report_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5manual-20260325T221210Z\\AF-CAND-0263-mt5manual-20260325T221210Z-report.htm",
+  "audit_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5manual-20260325T221210Z\\AF-CAND-0263__mt5manual-20260325T221210Z__audit.csv",
+  "broker_history_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5manual-20260325T221210Z\\AF-CAND-0263__mt5manual-20260325T221210Z__broker_history.csv",
+  "diagnostic_ticks_csv_path": null,
+  "launch_status_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5manual-20260325T221210Z\\launch_status.json",
+  "report_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5manual-20260325T221210Z\\mt5_manual_run_report.json"
+}

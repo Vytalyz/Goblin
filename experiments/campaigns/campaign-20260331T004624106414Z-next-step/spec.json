@@ -1,0 +1,35 @@
+{
+  "campaign_id": "campaign-20260331T004624106414Z-next-step",
+  "family": "europe_open_high_vol_pullback_persistence_research",
+  "baseline_candidate_id": "AF-CAND-0416",
+  "target_candidate_ids": [
+    "AF-CAND-0415",
+    "AF-CAND-0419",
+    "AF-CAND-0418",
+    "AF-CAND-0417",
+    "AF-CAND-0414"
+  ],
+  "parent_campaign_id": "campaign-20260331T004623690219Z-next-step",
+  "queue_kind": "promotion",
+  "throughput_target_count": 0,
+  "orthogonality_metadata": {},
+  "compile_budget": 0,
+  "smoke_budget": 0,
+  "max_rule_spec_reformulations_per_hypothesis": 0,
+  "max_ea_spec_rewrites_per_candidate": 0,
+  "max_compile_retries_per_candidate": 0,
+  "max_smoke_retries_per_candidate": 0,
+  "step_type": "data_feature_audit",
+  "allowed_step_types": [
+    "data_feature_audit"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 0,
+  "trial_cap_per_family": 5,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Single-step child campaign opened from campaign-20260331T004623690219Z-next-step.",
+    "Selected step: data_feature_audit.",
+    "This controller run must stop after exactly one legal step."
+  ]
+}

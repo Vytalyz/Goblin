@@ -1,0 +1,16 @@
+{
+  "source_id": "SRC-050",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [],
+  "front_matter_signals": [
+    "Table of Contents Chapter 1: Introduction Chapter 2: How Day Trading Works Day Trading vs. Swing Trading Buying Long, Selling Short Retail vs. Institutional Traders High Frequency Trading (HFT) Trade the Best, Leave the Rest",
+    "Chapter 6: Introduction to Candlesticks Price Action and Mass Psychology Bullish Candlesticks Bearish Candlesticks Indecision Candlesticks Spinning Tops Dojis: Simple, Shooting Star, Hammer",
+    "Andrew\u2019s 11 Rules of Day Trading Glossary"
+  ],
+  "best_excerpt": "Some traders use moving averages as potential entry and exit points for day trading. Many stocks will start an upside or downside trend after the morning session (around 11 a.m. New York time) and you will see their moving averages in 1-minute and 5-minute charts as a type of mov"
+}

@@ -1,0 +1,40 @@
+{
+  "phase_id": "GOBLIN-P00",
+  "title": "Program Foundation And Naming",
+  "objective": "Create Goblin as the tracked umbrella program without destabilizing the current runtime kernel.",
+  "status": "ready",
+  "dependencies": [],
+  "inputs": [],
+  "build_items": [
+    "Create Goblin scaffolding."
+  ],
+  "outputs": [
+    "Goblin master docs"
+  ],
+  "expected_artifacts": [
+    "Goblin/PROGRAM.md"
+  ],
+  "checkpoint_targets": [
+    "Goblin state exists."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/PROGRAM.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/STATUS.md"
+  ],
+  "last_checkpoint": null,
+  "idempotency_key": "goblin:GOBLIN-P00",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P00 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": null,
+  "updated_at": "2026-04-12T00:00:00Z",
+  "completed_at": null,
+  "exit_criteria": [
+    "Goblin exists as the canonical program layer."
+  ],
+  "acceptance_result": {}
+}

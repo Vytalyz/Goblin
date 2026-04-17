@@ -1,0 +1,101 @@
+{
+  "campaign_id": "campaign-20260325T001736723181Z-next-step",
+  "parent_campaign_id": "campaign-20260325T001559075618Z-next-step",
+  "selected_step_type": "diagnose_existing_candidates",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0247 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+  "status": "completed",
+  "stop_reason": "diagnosis_completed_with_supported_recommendation",
+  "candidate_scope": [
+    "AF-CAND-0247"
+  ],
+  "candidate_reports": [
+    {
+      "candidate_id": "AF-CAND-0247",
+      "readiness_status": "robustness_provisional",
+      "walk_forward_failed_window": 1,
+      "first_window_start_utc": "2025-10-01T13:43:00Z",
+      "first_window_end_utc": "2025-12-02T15:47:00Z",
+      "first_window_trade_count": 34,
+      "first_window_profit_factor": 1.084805653710312,
+      "first_window_expectancy_pips": 0.35294117647084133,
+      "later_window_trade_count": 70,
+      "later_window_profit_factor": 1.2303102625298208,
+      "later_window_expectancy_pips": 1.102857142857068,
+      "spread_anomaly_rate_first_window": 0.0,
+      "spread_anomaly_rate_later_windows": 0.0,
+      "supported_slices": [
+        {
+          "slice_type": "session_bucket",
+          "slice_label": "europe",
+          "first_window_trade_count": 10,
+          "later_window_trade_count": 12,
+          "first_window_profit_factor": 0.4010989010989044,
+          "later_window_profit_factor": 1.7194899817847882,
+          "first_window_expectancy_pips": -3.2699999999999934,
+          "later_window_expectancy_pips": 3.291666666665767,
+          "expectancy_improvement_pips": 6.56166666666576,
+          "first_window_loss_share": 0.38586572438164507,
+          "evidence_score": 8.218165,
+          "supported": true
+        }
+      ],
+      "primary_issue": "session_bucket:europe",
+      "recommended_mutation": "Trim europe exposure by removing allowed_hours_utc [12] inside the current breakout family.",
+      "diagnostic_confidence": 0.95,
+      "notes": [
+        "First walk-forward window spans 34 trades; later windows span 70 trades.",
+        "Spread anomaly threshold from QA is 6.6 pips.",
+        "Spread anomalies do not explain the failed first walk-forward window in this candidate."
+      ],
+      "artifact_paths": {
+        "review_packet_path": "reports\\AF-CAND-0247\\review_packet.json",
+        "trade_ledger_path": "reports\\AF-CAND-0247\\trade_ledger.csv",
+        "backtest_summary_path": "reports\\AF-CAND-0247\\backtest_summary.json",
+        "robustness_report_path": "reports\\AF-CAND-0247\\robustness_report.json"
+      }
+    }
+  ],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "mutate_one_candidate",
+      "candidate_id": "AF-CAND-0247",
+      "rationale": "The failed first walk-forward window is weakest in the europe session slice for AF-CAND-0247. The next bounded campaign should remove hours [12] from allowed_hours_utc, then re-evaluate without broadening scope.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "mutation_type": "trim_allowed_hours",
+        "session_bucket": "europe",
+        "removed_hours_utc": [
+          12
+        ]
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "mutate_one_candidate",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "2426992c0101f5fa5e0ed06ad66d73aea3181cb777160c9ea115415c117d826f",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260325T001736723181Z-next-step\\next_step_report.json"
+}

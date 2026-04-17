@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-140",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Founded in 1807, John Wiley & Sons is the oldest independent publishing com-",
+    "Asia, Wiley is globally committed to developing and marketing print and electronic",
+    "The Wiley Trading series features books by traders who have survived the"
+  ],
+  "front_matter_signals": [
+    "Includes index.",
+    "Contents",
+    "Acknowledgments xi"
+  ],
+  "best_excerpt": "Bar 6 was a reasonable lower high breakout pullback short entry for a scalp"
+}

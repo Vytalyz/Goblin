@@ -1,0 +1,112 @@
+{
+  "campaign_id": "campaign-20260324T232723882034Z-next-step",
+  "parent_campaign_id": "campaign-20260324T232051283262Z-next-step",
+  "selected_step_type": "diagnose_existing_candidates",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0241 failed MT5 practice parity with classification execution_cost_failure. The next legal step is diagnosis only; parity evidence must not mutate policy directly.",
+  "status": "completed",
+  "stop_reason": "diagnosis_completed_with_supported_recommendation",
+  "candidate_scope": [
+    "AF-CAND-0241"
+  ],
+  "candidate_reports": [
+    {
+      "candidate_id": "AF-CAND-0241",
+      "readiness_status": "robustness_provisional",
+      "walk_forward_failed_window": 1,
+      "first_window_start_utc": "2025-10-01T13:26:00Z",
+      "first_window_end_utc": "2025-11-28T15:18:00Z",
+      "first_window_trade_count": 55,
+      "first_window_profit_factor": 0.9490302210194361,
+      "first_window_expectancy_pips": -0.20545454545437608,
+      "later_window_trade_count": 110,
+      "later_window_profit_factor": 1.2085187539733022,
+      "later_window_expectancy_pips": 0.8945454545454619,
+      "spread_anomaly_rate_first_window": 0.0,
+      "spread_anomaly_rate_later_windows": 0.0,
+      "supported_slices": [
+        {
+          "slice_type": "session_bucket",
+          "slice_label": "overlap",
+          "first_window_trade_count": 55,
+          "later_window_trade_count": 110,
+          "first_window_profit_factor": 0.9490302210194361,
+          "later_window_profit_factor": 1.2085187539733022,
+          "first_window_expectancy_pips": -0.20545454545437608,
+          "later_window_expectancy_pips": 0.8945454545454619,
+          "expectancy_improvement_pips": 1.099999999999838,
+          "first_window_loss_share": 1.0,
+          "evidence_score": 4.1,
+          "supported": true
+        },
+        {
+          "slice_type": "context_bucket",
+          "slice_label": "trend_context",
+          "first_window_trade_count": 55,
+          "later_window_trade_count": 110,
+          "first_window_profit_factor": 0.9490302210194361,
+          "later_window_profit_factor": 1.2085187539733022,
+          "first_window_expectancy_pips": -0.20545454545437608,
+          "later_window_expectancy_pips": 0.8945454545454619,
+          "expectancy_improvement_pips": 1.099999999999838,
+          "first_window_loss_share": 1.0,
+          "evidence_score": 4.1,
+          "supported": true
+        }
+      ],
+      "primary_issue": "session_bucket:overlap",
+      "recommended_mutation": "Trim overlap exposure by removing allowed_hours_utc [13, 14, 15] inside the current breakout family.",
+      "diagnostic_confidence": 0.82,
+      "notes": [
+        "First walk-forward window spans 55 trades; later windows span 110 trades.",
+        "Spread anomaly threshold from QA is 6.6 pips.",
+        "Spread anomalies do not explain the failed first walk-forward window in this candidate."
+      ],
+      "artifact_paths": {
+        "review_packet_path": "reports\\AF-CAND-0241\\review_packet.json",
+        "trade_ledger_path": "reports\\AF-CAND-0241\\trade_ledger.csv",
+        "backtest_summary_path": "reports\\AF-CAND-0241\\backtest_summary.json",
+        "robustness_report_path": "reports\\AF-CAND-0241\\robustness_report.json"
+      }
+    }
+  ],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "mutate_one_candidate",
+      "candidate_id": "AF-CAND-0241",
+      "rationale": "The failed first walk-forward window is weakest in trend_context trades for AF-CAND-0241. The next bounded campaign should test one family-consistent filter adjustment that suppresses that context bucket.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "mutation_type": "suppress_context_bucket",
+        "context_bucket": "trend_context"
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "mutate_one_candidate",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "0a0910cc042aeb7c5a87bc0f2462e640986347bb81c9d84dfbf284592b6ec87a",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260324T232723882034Z-next-step\\next_step_report.json"
+}

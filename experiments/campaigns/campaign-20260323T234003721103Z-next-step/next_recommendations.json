@@ -1,0 +1,20 @@
+[
+  {
+    "step_type": "mutate_one_candidate",
+    "candidate_id": "AF-CAND-0223",
+    "rationale": "The failed first walk-forward window is weakest in the overlap session slice for AF-CAND-0223. The next bounded campaign should remove hours [13, 14, 15, 16] from allowed_hours_utc, then re-evaluate without broadening scope.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "mutation_type": "trim_allowed_hours",
+      "session_bucket": "overlap",
+      "removed_hours_utc": [
+        13,
+        14,
+        15,
+        16
+      ]
+    }
+  }
+]

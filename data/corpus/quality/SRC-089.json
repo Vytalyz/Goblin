@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-089",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "All rights reserved. No part of this book may be reproduced, in any form or by any means, without permission in",
+    "ISBN-10: 0-13-705944-2",
+    "ISBN-13: 978-0-13-705944-7"
+  ],
+  "front_matter_signals": [
+    "Includes bibliographical references and index.",
+    "CONTENTS",
+    "Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .xxiv"
+  ],
+  "best_excerpt": "recognized can be profitable. This is called \u201centry date/exit date\u201d trading. Price action at or near"
+}

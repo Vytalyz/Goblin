@@ -1,0 +1,20 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5windowliveallow-20260411T210139Z",
+  "purpose": "allow_live_trading_control",
+  "from_date": "2026.03.25",
+  "to_date": "2026.04.11",
+  "manual_overrides": {
+    "deposit": 100.0,
+    "leverage": 33.0,
+    "fixed_lots": 0.01,
+    "auto_scale_lots": false,
+    "canonical_deposit": 100000.0,
+    "canonical_leverage": 30.0,
+    "canonical_fixed_lots": 5.0,
+    "min_lot": 0.01,
+    "lot_step": 0.01,
+    "sizing_mode": "explicit_fixed_lots",
+    "effective_fixed_lots": 0.01
+  }
+}

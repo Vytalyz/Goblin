@@ -1,0 +1,38 @@
+{
+  "checkpoint_id": "goblin-p10-portfolio-and-promotion-controls-complete",
+  "phase_id": "GOBLIN-P10",
+  "title": "Portfolio and Promotion Controls Complete",
+  "recorded_utc": "2026-04-12T23:39:32Z",
+  "exit_criteria_met": [
+    "Promotion decision packet requires explicit statistical policy key citations from config/eval_gates.toml.",
+    "Promotion packets require a declared deployment ladder state; missing state is a hard error.",
+    "Promotion approvals are blocked below observed_demo ladder state.",
+    "Material deployment-fit deltas (>= 0.05) require a new deployment bundle reference.",
+    "Portfolio challenger lane blocks handoff candidates without an existing promotion packet.",
+    "Challenger-vs-benchmark identity conflict is surfaced as a blocked slot report.",
+    "Improvement claims cannot hide deployment-fit changes inside alpha claims."
+  ],
+  "code_changes": [
+    "src/agentic_forex/goblin/models.py: PromotionDecisionPacket gained statistical_policy_keys, deployment_ladder_state, deployment_fit_delta, deployment_fit_change_requires_new_bundle, deployment_bundle_id",
+    "src/agentic_forex/goblin/controls.py: write_promotion_decision_packet enforces policy-key, ladder-state, ladder-floor, and deployment-fit-delta bundle checks; _resolve_latest_candidate_ladder_state helper added; P10 constants defined",
+    "src/agentic_forex/campaigns/portfolio.py: gap-slot blank-slate research path now checks for promotion packet on handoff candidate; locked benchmark candidate reference surfaced; challenger-vs-benchmark identity conflict blocked",
+    "Goblin/contracts/promotion-decision-packet.md: enforcement rules section added",
+    "Goblin/contracts/candidate-scorecard.md: governance rule for deployment-fit delta separation added"
+  ],
+  "tests_run": [
+    "pytest tests/test_goblin_controls.py tests/test_portfolio_layer.py -q: 24 passed"
+  ],
+  "artifacts_written": [
+    "Goblin/checkpoints/GOBLIN-P10/goblin-p10-portfolio-and-promotion-controls-complete.json",
+    "Goblin/state/phases/GOBLIN-P10.json",
+    "Goblin/STATUS.md",
+    "Goblin/MATURITY.md",
+    "Goblin/EVOLUTION.md",
+    "Goblin/IMPLEMENTATION_TRACKER.md",
+    "codex.md"
+  ],
+  "assumptions": [
+    "statistical-policy key floor uses the four core parity/validation keys from eval_gates.toml; operator can override by supplying explicit list.",
+    "deployment_fit_delta threshold of 0.05 is deterministic from P10 spec."
+  ]
+}

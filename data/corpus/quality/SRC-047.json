@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-047",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "All rights reserved. No part of this book may be reproduced, in any form or by any means, without permission in writing from th e publisher. Printed in the United States of America First Printing April 2010 ISBN-10: 0-13-705150-6 ISBN-13: 978-0-13-705150-2 Pearson Education LTD.",
+    "Ltd. Library of Congress Cataloging-in-Publication Data Carney, Scott M., 1969- Harmonic trading / Scott M. Carney. v. cm. Contents: v. 1. Profiting from the natural order of the financial \u2014 ISBN-13: 978-0-13-705150-2 (v. 1 : pbk. : alk. paper) ISBN-10: 0-13-705150-6 (v.",
+    "Bullish Harmonic Trade Management Model Chapter 11 The Harmonic Trade Management System 209 X B 0.886 C0.618 2.0 0.50 A D 0.382 TRAILER INITIAL PROFIT OBJECTIVE (I.P.O.): 0.382 OR 0.618 OF PATTERN HIGH (A) TO LOW (D) 0.618 0.382 POTENTIAL REVERSAL ZONE (P.R.Z.) PROFIT PROTECTION "
+  ],
+  "front_matter_signals": [
+    "This page intentionally left blank About the Author . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ix Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .",
+    "233 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 251 Bibliography . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 253 Index . . . . . . . . . . . . . . . . . . . . . . . . . . . . ",
+    "255 Contents Acknowledgments I want to thank my family. They have been there for me through it all. I am truly grateful for their love, support, and encouragement. My good friend and colleague, Jim Kane of KaneTrading.com, has been integral in the develop- ment of the Harmonic Tr"
+  ],
+  "best_excerpt": "It will take some time to grasp the intricacies of these trade management techniques. However, the system defines all possible parameters of the trade relative to the pattern and the price action in the PRZ. It is essential to establish entry points, profit targets, and stop loss"
+}

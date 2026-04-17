@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-035",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Horcher Essentials of Managing Corporate Cash, Michele Allman-Ward and James Sagner Essentials of XBRL, Bryan Bergeron For more information on any of the above titles, please visit www.wiley.com \u007f \u007f \u007f \u007f ffirs.indd iiffirs.indd ii 1/13/09 10:13:24 AM1/13/09 10:13:24 AM ESSENTIALS ",
+    "All rights reserved. Published by John Wiley & Sons, Inc., Hoboken, New Jersey. Published simultaneously in Canada. No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, electronic, mechanical, photocopying, recor",
+    "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley & Sons, Inc., 111 River Street, Hoboken, NJ 07030, 201-748-6011, fax 201-748-6008, or online at http://www.wiley .com/go/permissions."
+  ],
+  "front_matter_signals": [
+    "Library of Congress Cataloging-in-Publication Data: Chen, James. Essentials of foreign exchange trading / James Chen. p. cm. \u2014 (Essentials series) Includes index. ISBN 978-0-470-39086-3 (pbk.) 1. Foreign exchange market.",
+    "2. Foreign exchange futures. 3. Investments. I. Title. II. Series. HG3851.C437 2009 332.4'5\u2014dc22 2008048193 Printed in the United States of America 10 9 8 7 6 5 4 3 2 1 ffirs.indd ivffirs.indd iv 1/13/09 10:13:24 AM1/13/09 10:13:24 AM To my parents, my wife, my children, and fore",
+    "39 Interest\u2014Giving and Receiving 41 Hedging\u2014Two Sides of the Same Coin 44 Chapter Summary 45 Chapter 3 Technical Analysis\u2014Tools for Trading Foreign Exchange 49 Introduction to Technical Analysis\u2014 Interpreting Price Action 50 Basics of Bars and Candlesticks 52 Keeping Time with Ch"
+  ],
+  "best_excerpt": "If the long - term chart is bullish or bearish, return to the intermedi- ate charts and use oscillators to look for entry and exit points in the direction of the long - term trend. Set stops and pro\ufb01 t targets before switching to short - term charts, if available, to \ufb01 ne - tune "
+}

@@ -1,0 +1,217 @@
+{
+  "campaign_id": "campaign-20260323T223530728305Z-next-step",
+  "parent_campaign_id": "campaign-20260323T223530617336Z-next-step",
+  "selected_step_type": "data_label_audit",
+  "step_reason": "The family-level data/feature audit retired the current family, so the next governed step is a bounded data/label contract audit before any new autonomous queue can be approved.",
+  "status": "completed",
+  "stop_reason": "data_label_audit_completed_family_retire_confirmed",
+  "candidate_scope": [
+    "AF-CAND-0205",
+    "AF-CAND-0204",
+    "AF-CAND-0201",
+    "AF-CAND-0203",
+    "AF-CAND-0202"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [
+    {
+      "family": "compression_resilience_research",
+      "audited_candidate_ids": [
+        "AF-CAND-0205",
+        "AF-CAND-0204",
+        "AF-CAND-0201",
+        "AF-CAND-0203",
+        "AF-CAND-0202"
+      ],
+      "reference_candidate_id": "AF-CAND-0204",
+      "contract_decision": "family_retire_confirmed",
+      "summary": "Data/label audit compared AF-CAND-0205, AF-CAND-0204, AF-CAND-0201, AF-CAND-0203, AF-CAND-0202. AF-CAND-0204 remains the empirical reference, but the family still fails under shared_label_contract_consistent. A label-only explanation is not enough to reopen this family.",
+      "suspected_contract_gaps": [
+        "shared_label_contract_consistent"
+      ],
+      "label_contract_snapshot": {
+        "dataset_snapshot_ids": [
+          "3c97626186ca1b84",
+          "6d35229cbadaffbe"
+        ],
+        "feature_version_ids": [
+          "e602a112f25aff49"
+        ],
+        "label_version_ids": [
+          "4531e04082baf668"
+        ],
+        "feature_paths": [
+          "src\\agentic_forex\\features\\service.py"
+        ],
+        "label_paths": [
+          "src\\agentic_forex\\labels\\service.py"
+        ],
+        "entry_styles": [
+          "compression_breakout"
+        ],
+        "holding_bars": [
+          20,
+          22,
+          24
+        ],
+        "stop_loss_pips": [
+          5.6,
+          5.8,
+          5.9
+        ],
+        "take_profit_pips": [
+          8.5,
+          8.7,
+          8.9
+        ],
+        "risk_reward_ratios": [
+          1.440678,
+          1.5,
+          1.589286
+        ],
+        "uses_future_return_pips_label": true,
+        "uses_binary_direction_label": true,
+        "uses_path_aware_exit_labels": true,
+        "mentions_exit_geometry": true
+      },
+      "recommended_actions": [
+        "Keep the current family retired under the existing research contract.",
+        "Do not assume a label-only change will rescue this family without a broader hypothesis redesign.",
+        "Approve the next autonomous queue only for a genuinely orthogonal hypothesis class."
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0205",
+          "family": "compression_resilience_research",
+          "entry_style": "compression_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 341,
+          "profit_factor": 0.5581314477802474,
+          "out_of_sample_profit_factor": 1.041155234657196,
+          "expectancy_pips": -1.1178885630497752,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.771429,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0205\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0205\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0205\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0204",
+          "family": "compression_resilience_research",
+          "entry_style": "compression_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 237,
+          "profit_factor": 0.5156275303643931,
+          "out_of_sample_profit_factor": 0.6470588235294782,
+          "expectancy_pips": -1.262025316455701,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.628571,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0204\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0204\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0204\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0201",
+          "family": "compression_resilience_research",
+          "entry_style": "compression_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 390,
+          "profit_factor": 0.6049988841776607,
+          "out_of_sample_profit_factor": 0.8846380223660927,
+          "expectancy_pips": -0.9076923076922244,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0201\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0201\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0201\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0203",
+          "family": "compression_resilience_research",
+          "entry_style": "compression_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 421,
+          "profit_factor": 0.48246348497535096,
+          "out_of_sample_profit_factor": 0.601248884924195,
+          "expectancy_pips": -1.321377672209016,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0203\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0203\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0203\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0202",
+          "family": "compression_resilience_research",
+          "entry_style": "compression_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 356,
+          "profit_factor": 0.5997506234414253,
+          "out_of_sample_profit_factor": 1.063707945597856,
+          "expectancy_pips": -0.9918539325841804,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0202\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0202\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0202\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260323T223530728305Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260323T223530728305Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260323T223530728305Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": null,
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "hard_stop",
+  "transition_intent": "stop_terminal",
+  "policy_snapshot_hash": "a7babcbf595f0ca2097fa4a23e697cc71375ad6446d19b97c87f44eeef7cf16a",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260323T223530728305Z-next-step\\next_step_report.json"
+}

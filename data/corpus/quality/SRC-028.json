@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-028",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "EAN: 9780470377369 ISBN 978-0-470-37736-9",
+    "which are published by Wiley.",
+    "Founded in 1807, John Wiley & Sons is the oldest independent publish-"
+  ],
+  "front_matter_signals": [
+    "After an engaging introduction to how the foreign ex-",
+    "Includes index.",
+    "Contents"
+  ],
+  "best_excerpt": "group doesn\u2019t mean that a trend will not fade or a breakout will not occur."
+}

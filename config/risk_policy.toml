@@ -1,0 +1,13 @@
+[policy]
+default_initial_balance = 100000.0
+default_account_currency = "USD"
+default_risk_per_trade_pct = 0.25
+default_leverage = 30.0
+default_contract_size = 100000.0
+default_pip_value_per_standard_lot = 10.0
+default_margin_buffer_pct = 10.0
+default_max_total_exposure_lots = 5.0
+default_news_minimum_impact = "high"
+default_news_blackout_minutes_before = 15
+default_news_blackout_minutes_after = 15
+

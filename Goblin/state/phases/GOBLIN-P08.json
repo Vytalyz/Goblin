@@ -1,0 +1,56 @@
+{
+  "phase_id": "GOBLIN-P08",
+  "title": "Investigation And Evaluation Framework",
+  "objective": "Add a Holmes-style, repo-native investigation and eval layer without making it critical-path runtime.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P06"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Define a repo-native investigation framework inspired by Holmes-style structured investigations and eval loops.",
+    "Make incident diagnosis reproducible through scenarios, traces, and benchmark history.",
+    "Keep investigation tooling advisory and outside the critical runtime path."
+  ],
+  "outputs": [
+    "investigation scenarios",
+    "evaluation suite",
+    "benchmark history"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/investigation-trace.md",
+    "Goblin/contracts/evaluation-suite.md"
+  ],
+  "checkpoint_targets": [
+    "Investigation trace contract exists.",
+    "Evaluation suite contract exists and separates deterministic regression from replay-backed reliability runs."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/investigation-trace.md",
+    "Goblin/contracts/evaluation-suite.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P08.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P08\\goblin-p08-investigation-framework-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P08",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P08 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-12T22:10:18.941361Z",
+  "updated_at": "2026-04-14T19:50:53.045190Z",
+  "completed_at": "2026-04-12T22:10:18.941361Z",
+  "exit_criteria": [
+    "Serious incidents have reproducible investigation packs."
+  ],
+  "acceptance_result": {
+    "exit_criteria_satisfied": true,
+    "verified_by": "targeted tests: tests/test_goblin_investigation.py, tests/test_goblin_controls.py, tests/test_goblin_incident.py, tests/test_cli_and_boundaries.py, tests/test_goblin_program.py (40 tests, all passing); AF-CAND-0263 same-window-postpatch investigation pack built"
+  },
+  "notes": [
+    "Investigation artifact filenames are compact and deterministic so the workflow remains usable under Windows path-length limits."
+  ],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P08.json"
+}

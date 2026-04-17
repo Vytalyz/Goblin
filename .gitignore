@@ -1,0 +1,55 @@
+.pytest_cache/
+__pycache__/
+*.pyc
+.venv/
+dist/
+build/
+src/*.egg-info/
+src/**/*.egg-info/
+data/raw/
+data/normalized/
+data/features/
+data/labels/
+data/corpus/catalog.json
+data/corpus/extracted/
+traces/
+reports/
+published/
+approvals/approval_log.jsonl
+experiments/registry.csv
+
+# === Added for GitHub publish ===
+
+# --- Environment & secrets (defense-in-depth) ---
+.env
+.env.*
+.env.local
+config/local.toml
+
+# --- Local runtime state ---
+data/state/
+
+# --- Binary / compiled artifacts ---
+*.duckdb
+*.duckdb.wal
+*.exe
+*.ex5
+*.parquet
+*.log
+
+# --- Large MT5 data files (exceed GitHub 100 MB limit) ---
+*_broker_history.csv
+*_diagnostic_ticks.csv
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+*.swp
+
+# --- Build artifacts (defense-in-depth) ---
+*.egg-info/
+
+# --- Codex operator layer (local-only orchestration) ---
+.codex/

@@ -1,0 +1,14 @@
+{
+  "checkpoint_id": "goblin-p15-clean-room-complete",
+  "phase_id": "GOBLIN-P15",
+  "status": "passed",
+  "timestamp": "2026-04-13T14:00:00Z",
+  "deliverables": {
+    "clean_room_rules": "Goblin/contracts/clean-room-rules.md — 7 auditable rules",
+    "baseline_scenarios": "Goblin/reports/baseline_scenarios.md — 5 canonical scenarios",
+    "pattern_card_template": "Goblin/reports/pattern_cards/TEMPLATE.md",
+    "framework_gap_matrix": "Goblin/reports/framework_gap_matrix.md — 10 capability rows"
+  },
+  "clean_room_rules_count": 7,
+  "baseline_scenarios_count": 5
+}

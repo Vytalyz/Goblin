@@ -1,0 +1,8 @@
+{
+  "candidate_id": "AF-CAND-0022",
+  "run_id": "mt5run-20260321T194518Z",
+  "install_id": "mt5_practice_01",
+  "compile_target_path": "MQL5\\Experts\\AgenticForex\\CandidateEA.mq5",
+  "packet_source_path": "approvals\\mt5_packets\\AF-CAND-0022\\CandidateEA.mq5",
+  "metaeditor_command": "metaeditor64.exe /compile:<full path>"
+}

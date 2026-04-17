@@ -1,0 +1,55 @@
+{
+  "campaign_id": "campaign-20260324T211201871366Z-next-step",
+  "parent_campaign_id": "campaign-20260324T211131709545Z-next-step",
+  "selected_step_type": "triage_reviewable_candidate",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0243 completed the bounded MT5 smoke stage with status passed. The next throughput step is triage.",
+  "status": "completed",
+  "stop_reason": "triage_completed_send_to_research_lane",
+  "candidate_scope": [
+    "AF-CAND-0243"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [
+    {
+      "candidate_id": "AF-CAND-0243",
+      "readiness_status": "reviewable_candidate",
+      "classification": "send_to_research_lane",
+      "rationale": "AF-CAND-0243 completed rule formalization, EA specification, MT5 compile, and smoke backtest successfully. It is reviewable and may be admitted into a research promotion lane.",
+      "compile_status": "passed",
+      "smoke_status": "passed",
+      "artifact_paths": {
+        "rule_spec_path": "reports\\AF-CAND-0243\\rule_spec.json",
+        "ea_spec_path": "reports\\AF-CAND-0243\\ea_spec.json",
+        "compile_report_path": "reports\\AF-CAND-0243\\compile_report.json",
+        "mt5_smoke_report_path": "reports\\AF-CAND-0243\\mt5_smoke_report.json",
+        "triage_report_path": "reports\\AF-CAND-0243\\triage_report.json"
+      }
+    }
+  ],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": null,
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "move_to_next_lane",
+  "transition_intent": "advance_next_lane",
+  "policy_snapshot_hash": "945f2111b829dbb593f4a8d868dc085c451db6d8d0a77e1c0cb217f915f31e45",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260324T211201871366Z-next-step\\next_step_report.json"
+}

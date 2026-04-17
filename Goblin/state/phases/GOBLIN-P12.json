@@ -1,0 +1,63 @@
+{
+  "phase_id": "GOBLIN-P12",
+  "title": "Knowledge Store, Vector Memory, And Agentic Layer",
+  "objective": "Add retrieval and richer agent support without turning them into the source of truth.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P11"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Add a structured knowledge store first, then optional vector retrieval with provenance-cited outputs.",
+    "Define bounded Goblin agent roles that accelerate review without becoming the source of truth.",
+    "Keep the repo operational even if Codex is closed or the Goblin agent layer is unavailable."
+  ],
+  "outputs": [
+    "knowledge lineage model",
+    "retrieval index",
+    "bounded Goblin agent roles"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/knowledge-lineage.md",
+    "Goblin/contracts/retrieval-policy.md"
+  ],
+  "checkpoint_targets": [
+    "Knowledge-lineage contract exists.",
+    "Retrieval-policy contract exists and keeps vector memory advisory only."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/knowledge-lineage.md",
+    "Goblin/contracts/retrieval-policy.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P12.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P12\\goblin-p12-knowledge-and-agent-layer-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P12",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P12 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-13T00:16:37.0872744Z",
+  "updated_at": "2026-04-14T19:50:53.047117Z",
+  "completed_at": "2026-04-13T00:16:37.0872744Z",
+  "exit_criteria": [
+    "Agentic features do not weaken governance or runtime truth."
+  ],
+  "acceptance_result": {
+    "targeted_tests": [
+      "pytest tests/test_goblin_p12.py tests/test_goblin_ml.py -q"
+    ],
+    "code_enforcement": [
+      "knowledge_events_append_only_jsonl",
+      "retrieval_outputs_include_provenance_citations",
+      "bounded_agent_roles_block_governance_authority_actions",
+      "retrieval_advisory_only_boundary"
+    ]
+  },
+  "notes": [
+    "P12 completed with structured event store, vector-memory retrieval index, provenance-cited retrieval, and bounded agent-role enforcement."
+  ],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P12.json"
+}

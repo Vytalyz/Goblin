@@ -1,0 +1,47 @@
+{
+  "loop_id": "manager-20260325Thigh-vol-overlap-persistence-bridge-resume2-program-cycle-01-lane-01",
+  "family": "high_vol_overlap_persistence_bridge_research",
+  "initial_parent_campaign_id": "campaign-20260325T004452279848Z-promotion_high_vol_overlap_persistence_bridge_late_af_cand_0255-seed",
+  "final_parent_campaign_id": "campaign-20260325T004452502957Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "stop_class": "lane_exhausted",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260325T004452502957Z-next-step\\next_step_report.json",
+  "final_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0255",
+      "rationale": "AF-CAND-0255 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0255"
+      }
+    }
+  ],
+  "executed_campaign_ids": [
+    "campaign-20260325T004452502957Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260325T004452502957Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "stop",
+      "stop_class": "lane_exhausted",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260325T004452502957Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "7213a00ae4f03faa707b1790ed6c6711b5b3f7f00e5c7102614e0b3d7fb5088a",
+  "report_path": "experiments\\governed_loops\\manager-20260325Thigh-vol-overlap-persistence-bridge-resume2-program-cycle-01-lane-01.json"
+}

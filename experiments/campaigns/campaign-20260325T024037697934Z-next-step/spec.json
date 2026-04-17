@@ -1,0 +1,31 @@
+{
+  "campaign_id": "campaign-20260325T024037697934Z-next-step",
+  "family": "overlap_persistence_bridge_research",
+  "baseline_candidate_id": "AF-CAND-0259",
+  "target_candidate_ids": [
+    "AF-CAND-0259"
+  ],
+  "parent_campaign_id": "campaign-20260325T023907248161Z-next-step",
+  "queue_kind": "promotion",
+  "throughput_target_count": 0,
+  "orthogonality_metadata": {},
+  "compile_budget": 0,
+  "smoke_budget": 0,
+  "max_rule_spec_reformulations_per_hypothesis": 0,
+  "max_ea_spec_rewrites_per_candidate": 0,
+  "max_compile_retries_per_candidate": 0,
+  "max_smoke_retries_per_candidate": 0,
+  "step_type": "diagnose_existing_candidates",
+  "allowed_step_types": [
+    "diagnose_existing_candidates"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 0,
+  "trial_cap_per_family": 1,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Single-step child campaign opened from campaign-20260325T023907248161Z-next-step.",
+    "Selected step: diagnose_existing_candidates.",
+    "This controller run must stop after exactly one legal step."
+  ]
+}

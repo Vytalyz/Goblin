@@ -1,0 +1,20 @@
+{
+  "program_id": "manager-20260323Thorizon-momentum-resume-program-cycle-01",
+  "family": "horizon_momentum_research",
+  "initial_parent_campaign_id": "campaign-20260323T220517838656Z-next-step",
+  "final_parent_campaign_id": "campaign-20260323T221016161442Z-next-step",
+  "executed_lanes": 0,
+  "max_lanes": 3,
+  "status": "stopped",
+  "stop_reason": "data_label_audit_completed_family_retire_confirmed",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [],
+  "final_audit_report_path": "experiments\\campaigns\\campaign-20260323T221016161442Z-next-step\\next_step_report.json",
+  "policy_snapshot_hash": "23cf3cd8fd7de59fb2aefce1196c7219d4cf813ac96647afaaff5173f3dfc72e",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260323Thorizon-momentum-resume-program-cycle-01.json"
+}

@@ -1,0 +1,24 @@
+{
+  "campaign_id": "campaign-20260322T090055Z-next-step",
+  "family": "scalping",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0001-FADE",
+  "parent_campaign_id": "campaign-20260322T090039Z-next-step",
+  "current_step_type": "hypothesis_audit",
+  "active_candidate_ids": [
+    "AF-CAND-0044",
+    "AF-CAND-0033",
+    "AF-CAND-0030"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 4,
+  "trials_consumed": 4,
+  "operational_runs_consumed": 0,
+  "mt5_parity_retries_by_candidate": {},
+  "shadow_forward_retries_by_candidate": {},
+  "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+  "state_path": "experiments\\campaigns\\campaign-20260322T090055Z-next-step\\state.json",
+  "last_report_path": "experiments\\campaigns\\campaign-20260322T090055Z-next-step\\next_step_report.json",
+  "next_recommendations_path": "experiments\\campaigns\\campaign-20260322T090055Z-next-step\\next_recommendations.json",
+  "updated_utc": "2026-03-22T09:00:56.015830Z"
+}

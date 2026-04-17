@@ -1,0 +1,53 @@
+{
+  "program_id": "manager-20260322Tday-trading-dedupe-fix-program-cycle-01",
+  "family": "day_trading",
+  "initial_parent_campaign_id": "campaign-20260322T172653188006Z-next-step",
+  "final_parent_campaign_id": "campaign-20260322T173830179194Z-next-step",
+  "executed_lanes": 1,
+  "max_lanes": 2,
+  "status": "completed",
+  "stop_reason": "data_regime_audit_completed_structural_regime_instability",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [
+    {
+      "lane_index": 3,
+      "lane_id": "compression_breakout_af_cand_0060",
+      "family": "day_trading",
+      "hypothesis_class": "compression_breakout",
+      "seed_candidate_id": "AF-CAND-0060",
+      "seed_campaign_id": "campaign-20260322T173758695374Z-compression_breakout_af_cand_0060-seed",
+      "initial_parent_campaign_id": "campaign-20260322T173758695374Z-compression_breakout_af_cand_0060-seed",
+      "final_parent_campaign_id": "campaign-20260322T173830148030Z-next-step",
+      "governed_loop_report_path": "experiments\\governed_loops\\manager-20260322Tday-trading-dedupe-fix-program-cycle-01-lane-03.json",
+      "status": "completed",
+      "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+      "stop_class": "policy_decision",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane"
+    },
+    {
+      "lane_index": 4,
+      "lane_id": "compression_breakout_af_cand_0060",
+      "family": "day_trading",
+      "hypothesis_class": "compression_breakout",
+      "seed_candidate_id": "AF-CAND-0060",
+      "seed_campaign_id": null,
+      "initial_parent_campaign_id": "campaign-20260322T173830148030Z-next-step",
+      "final_parent_campaign_id": "campaign-20260322T173830179194Z-next-step",
+      "governed_loop_report_path": "experiments\\governed_loops\\manager-20260322Tday-trading-dedupe-fix-program-cycle-01-lane-04.json",
+      "status": "completed",
+      "stop_reason": "data_regime_audit_completed_structural_regime_instability",
+      "stop_class": "policy_decision",
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal"
+    }
+  ],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "bcfb8ea40b3f190401e87761dea41a34ebe01b06b721d6c61330a22dc8100949",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260322Tday-trading-dedupe-fix-program-cycle-01.json"
+}

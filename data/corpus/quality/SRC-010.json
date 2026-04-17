@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-010",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "IOHN WILEY & SONS, INC.",
+    "WILEY FINANCE EDITIONS",
+    "candles would burn. She was a major factor in my choice of ]ohn Wiley"
+  ],
+  "front_matter_signals": [
+    "ACKNOWLEDGMENTS",
+    "Acknowledgments",
+    "CONTENTS"
+  ],
+  "best_excerpt": "bullish trend was confirmed. Note how the rally from this breakout stalled"
+}

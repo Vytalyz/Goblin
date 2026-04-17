@@ -1,0 +1,195 @@
+{
+  "campaign_id": "campaign-20260325T004740519207Z-next-step",
+  "parent_campaign_id": "campaign-20260325T004740374617Z-next-step",
+  "selected_step_type": "data_label_audit",
+  "step_reason": "The family-level data/feature audit retired the current family, so the next governed step is a bounded data/label contract audit before any new autonomous queue can be approved.",
+  "status": "completed",
+  "stop_reason": "data_label_audit_completed_family_retire_confirmed",
+  "candidate_scope": [
+    "AF-CAND-0256",
+    "AF-CAND-0253",
+    "AF-CAND-0255",
+    "AF-CAND-0254"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [
+    {
+      "family": "high_vol_overlap_persistence_bridge_research",
+      "audited_candidate_ids": [
+        "AF-CAND-0256",
+        "AF-CAND-0253",
+        "AF-CAND-0255",
+        "AF-CAND-0254"
+      ],
+      "reference_candidate_id": "AF-CAND-0253",
+      "contract_decision": "family_retire_confirmed",
+      "summary": "Data/label audit compared AF-CAND-0256, AF-CAND-0253, AF-CAND-0255, AF-CAND-0254. AF-CAND-0253 remains the empirical reference, but the family still fails under shared_label_contract_consistent. A label-only explanation is not enough to reopen this family.",
+      "suspected_contract_gaps": [
+        "shared_label_contract_consistent"
+      ],
+      "label_contract_snapshot": {
+        "dataset_snapshot_ids": [
+          "02e31faa29059c89",
+          "208030d8d30094cd",
+          "d60bd19945f0d9c5"
+        ],
+        "feature_version_ids": [
+          "e602a112f25aff49"
+        ],
+        "label_version_ids": [
+          "4531e04082baf668"
+        ],
+        "feature_paths": [
+          "src\\agentic_forex\\features\\service.py"
+        ],
+        "label_paths": [
+          "src\\agentic_forex\\labels\\service.py"
+        ],
+        "entry_styles": [
+          "high_vol_overlap_persistence_retest"
+        ],
+        "holding_bars": [
+          102,
+          108
+        ],
+        "stop_loss_pips": [
+          5.5,
+          5.6,
+          5.7
+        ],
+        "take_profit_pips": [
+          9.4,
+          9.8,
+          10.2
+        ],
+        "risk_reward_ratios": [
+          1.709091,
+          1.75,
+          1.789474
+        ],
+        "uses_future_return_pips_label": true,
+        "uses_binary_direction_label": true,
+        "uses_path_aware_exit_labels": true,
+        "mentions_exit_geometry": true
+      },
+      "recommended_actions": [
+        "Keep the current family retired under the existing research contract.",
+        "Do not assume a label-only change will rescue this family without a broader hypothesis redesign.",
+        "Approve the next autonomous queue only for a genuinely orthogonal hypothesis class."
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0256",
+          "family": "high_vol_overlap_persistence_bridge_research",
+          "entry_style": "high_vol_overlap_persistence_retest",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 3,
+          "profit_factor": 0.8750000000000001,
+          "out_of_sample_profit_factor": 0.0,
+          "expectancy_pips": -0.4666666666666662,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0256\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0256\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0256\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0253",
+          "family": "high_vol_overlap_persistence_bridge_research",
+          "entry_style": "high_vol_overlap_persistence_retest",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 82,
+          "profit_factor": 1.556469298245588,
+          "out_of_sample_profit_factor": 2.00221729490023,
+          "expectancy_pips": 1.2378048780487392,
+          "stress_passed": true,
+          "walk_forward_ok": true,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0253\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0253\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0253\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0255",
+          "family": "high_vol_overlap_persistence_bridge_research",
+          "entry_style": "high_vol_overlap_persistence_retest",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 134,
+          "profit_factor": 0.9385919835560084,
+          "out_of_sample_profit_factor": 0.6198723792159934,
+          "expectancy_pips": -0.17835820895523183,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0255\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0255\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0255\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0254",
+          "family": "high_vol_overlap_persistence_bridge_research",
+          "entry_style": "high_vol_overlap_persistence_retest",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 60,
+          "profit_factor": 1.3877697841726435,
+          "out_of_sample_profit_factor": 1.2388392857142843,
+          "expectancy_pips": 0.898333333333342,
+          "stress_passed": true,
+          "walk_forward_ok": true,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0254\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0254\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0254\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260325T004740519207Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260325T004740519207Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260325T004740519207Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": null,
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "hard_stop",
+  "transition_intent": "stop_terminal",
+  "policy_snapshot_hash": "7213a00ae4f03faa707b1790ed6c6711b5b3f7f00e5c7102614e0b3d7fb5088a",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260325T004740519207Z-next-step\\next_step_report.json"
+}

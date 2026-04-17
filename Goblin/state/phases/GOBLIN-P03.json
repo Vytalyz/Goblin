@@ -1,0 +1,65 @@
+{
+  "phase_id": "GOBLIN-P03",
+  "title": "Time, Session, And Data Normalization",
+  "objective": "Eliminate hidden ambiguity in time handling and source-specific data interpretation.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P02"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Define a canonical time/session model for broker offsets, DST boundaries, holidays, and overlap windows.",
+    "Freeze the reproducibility contract for OANDA research downloads including price component and alignment settings.",
+    "Add data-quality gates for missing bars, duplicates, spread anomalies, session gaps, and malformed exports."
+  ],
+  "outputs": [
+    "time/session contract",
+    "research data contract",
+    "data quality gates"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/time-session-contract.md",
+    "Goblin/contracts/research-data-contract.md"
+  ],
+  "checkpoint_targets": [
+    "Time/session contract exists and declares the comparison time basis.",
+    "Research-data contract exists and captures the OANDA query settings that make research reproducible."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/time-session-contract.md",
+    "Goblin/contracts/research-data-contract.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P03.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P03\\goblin-p03-time-session-normalization-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P03",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P03 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-12T03:25:45.050892Z",
+  "updated_at": "2026-04-14T19:50:53.042342Z",
+  "completed_at": "2026-04-12T19:50:35.950939Z",
+  "exit_criteria": [
+    "All comparisons share the same declared time basis.",
+    "OANDA research is reproducible."
+  ],
+  "acceptance_result": {
+    "research_data_contract_builder": true,
+    "time_session_contract_builder": true,
+    "existing_market_quality_gate_present": true,
+    "comparison_time_basis_declared": true,
+    "truth_alignment_time_basis_enforced": true,
+    "oanda_ingest_contract_recorded": true,
+    "data_quality_gates_present": true,
+    "targeted_test_count": 25,
+    "strict_operator_contract_passed": true
+  },
+  "notes": [
+    "Built default research-data and time-session contracts and aligned them to existing OANDA and broker timezone settings; global enforcement remains pending.",
+    "Verified comparison time basis enforcement and frozen OANDA acquisition provenance; P03 exit criteria now satisfied."
+  ],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P03.json"
+}

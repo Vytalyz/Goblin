@@ -1,0 +1,13 @@
+[
+  {
+    "candidate_id": "AF-CAND-0224",
+    "evidence_status": "supported",
+    "step_type": "re_evaluate_one_candidate",
+    "rationale": "AF-CAND-0224 already matches the current governed execution-cost contract. Re-evaluate it directly before high_vol_overlap_persistence_retest lane progression.",
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0224",
+      "stale_packet_policy": "reuse_current_contract_root"
+    },
+    "binding": true
+  }
+]

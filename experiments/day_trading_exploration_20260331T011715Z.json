@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-03-31T01:17:15.855734Z",
+  "family": "day_trading",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "scan_report_path": "experiments\\day_trading_behavior_scan_20260331T011715Z.json",
+  "comparison_report_path": "experiments\\comparison_20260331T011715Z.json",
+  "recommended_candidate_id": "AF-CAND-0465",
+  "reference_candidate_id": null,
+  "continuation_gate": null,
+  "report_path": "experiments\\day_trading_exploration_20260331T011715Z.json",
+  "candidates": [
+    {
+      "candidate_id": "AF-CAND-0465",
+      "title": "Europe Bridge Release Persistence Expansion",
+      "entry_style": "volatility_expansion",
+      "thesis": "Restore the bridge hour to the release-persistence thesis, but only when volatility stays high and the move is still extending cleanly enough to justify continuation without waiting for a reset. Corpus anchor: SRC-002: Pyramiding approaches, scale trading, stop reversals, breakouts, momentum trad-",
+      "candidate_path": "reports\\AF-CAND-0465\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0465\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0465\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0465\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0465\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0467",
+      "title": "Europe Core Cost-Guard Release Persistence",
+      "entry_style": "volatility_expansion",
+      "thesis": "Keep the release-persistence thesis inside the core pre-overlap block and raise the expansion quality bar so the family can stay orthogonal to late weak drift and spread-heavy bridge noise. Corpus anchor: SRC-003: Always remember Wyckoff's second law, the law of cause and effect. If the cause is large, then this will be reflected in the effect, which applies to support and resistance. The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once",
+      "candidate_path": "reports\\AF-CAND-0467\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0467\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0467\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0467\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0467\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0463",
+      "title": "Europe Release Persistence Expansion Day Trade",
+      "entry_style": "volatility_expansion",
+      "thesis": "Trade Europe-open directional continuation only when the initial release is already expanding cleanly, volatility stays elevated, and the move is persisting rather than resetting into a pullback geometry. Corpus anchor: SRC-001: 3. The \ufb01 rst and second pro\ufb01 t targets are 50% and 90% of the range respec- tively, which are 103 pips and 185 pips below the resistance (1.6117). 4. Use risk to reward ratio of 1:1 to set the stop loss. (See Figure 8.41 .) From the long example in Figure 8.42 : Entry price = 1.6",
+      "candidate_path": "reports\\AF-CAND-0463\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0463\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0463\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0463\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0463\\review_packet.json"
+    }
+  ]
+}

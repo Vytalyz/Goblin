@@ -1,0 +1,14 @@
+{
+  "checkpoint_id": "GOBLIN-P00-20260412T000000Z",
+  "phase_id": "GOBLIN-P00",
+  "created_utc": "2026-04-12T00:00:00Z",
+  "summary": "Initialized Goblin scaffolding and phase ledger.",
+  "authoritative_artifacts": [
+    "Goblin/PROGRAM.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/STATUS.md"
+  ],
+  "status_at_checkpoint": "verification_pending",
+  "checkpoint_path": "Goblin/checkpoints/GOBLIN-P00/GOBLIN-P00-20260412T000000Z.json"
+}

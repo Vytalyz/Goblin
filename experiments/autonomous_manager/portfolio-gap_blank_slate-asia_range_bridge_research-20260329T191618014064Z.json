@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "portfolio-gap_blank_slate-asia_range_bridge_research-20260329T191618014064Z",
+  "program_id": "portfolio-gap_blank_slate-asia_range_bridge_research-20260329T191618014064Z-program",
+  "family": "asia_range_bridge_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_cycles": 1,
+  "max_cycles": 12,
+  "status": "stopped",
+  "stop_reason": "program_loop_low_novelty_seed:asia_to_europe_release_af_cand_0267:AF-CAND-0268:0.92",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "556a92f12b0cb9ab3bb11eb94b87e290c168b6bd2b384c7e3658faa44ed68cfb",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\portfolio-gap_blank_slate-asia_range_bridge_research-20260329T191618014064Z-program-cycle-01.json",
+      "stop_reason": "program_loop_low_novelty_seed:asia_to_europe_release_af_cand_0267:AF-CAND-0268:0.92",
+      "stop_class": "policy_decision",
+      "material_transition": false,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\portfolio-gap_blank_slate-asia_range_bridge_research-20260329T191618014064Z.json"
+}

@@ -1,0 +1,23 @@
+{
+  "campaign_id": "campaign-20260322T172719876978Z-next-step",
+  "family": "day_trading",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0060",
+  "parent_campaign_id": "campaign-20260322T172653188006Z-next-step",
+  "current_step_type": "diagnose_existing_candidates",
+  "active_candidate_ids": [
+    "AF-CAND-0128"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 194,
+  "trials_consumed": 194,
+  "operational_runs_consumed": 0,
+  "mt5_parity_retries_by_candidate": {},
+  "shadow_forward_retries_by_candidate": {},
+  "state_version": 3,
+  "stop_reason": "diagnosis_completed_with_supported_recommendation",
+  "state_path": "experiments\\campaigns\\campaign-20260322T172719876978Z-next-step\\state.json",
+  "last_report_path": "experiments\\campaigns\\campaign-20260322T172719876978Z-next-step\\next_step_report.json",
+  "next_recommendations_path": "experiments\\campaigns\\campaign-20260322T172719876978Z-next-step\\next_recommendations.json",
+  "updated_utc": "2026-03-22T17:27:19.910242Z"
+}

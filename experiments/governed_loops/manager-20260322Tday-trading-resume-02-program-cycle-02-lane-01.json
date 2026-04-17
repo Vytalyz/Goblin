@@ -1,0 +1,152 @@
+{
+  "loop_id": "manager-20260322Tday-trading-resume-02-program-cycle-02-lane-01",
+  "family": "day_trading",
+  "initial_parent_campaign_id": "campaign-20260322T172415176123Z-next-step",
+  "final_parent_campaign_id": "campaign-20260322T172532698380Z-next-step",
+  "executed_steps": 8,
+  "max_steps": 8,
+  "status": "completed",
+  "stop_reason": "governed_loop_max_steps_reached",
+  "stop_class": "budget_exhausted",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260322T172532698380Z-next-step\\next_step_report.json",
+  "final_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0125",
+      "rationale": "AF-CAND-0125 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0124"
+      }
+    }
+  ],
+  "executed_campaign_ids": [
+    "campaign-20260322T172415319689Z-next-step",
+    "campaign-20260322T172415502029Z-next-step",
+    "campaign-20260322T172501116053Z-next-step",
+    "campaign-20260322T172501237890Z-next-step",
+    "campaign-20260322T172501376984Z-next-step",
+    "campaign-20260322T172532502175Z-next-step",
+    "campaign-20260322T172532594140Z-next-step",
+    "campaign-20260322T172532698380Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260322T172415319689Z-next-step",
+      "selected_step_type": "mutate_one_candidate",
+      "status": "completed",
+      "stop_reason": "mutation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "re_evaluate_one_candidate",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T172415319689Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 2,
+      "campaign_id": "campaign-20260322T172415502029Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T172415502029Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 3,
+      "campaign_id": "campaign-20260322T172501116053Z-next-step",
+      "selected_step_type": "diagnose_existing_candidates",
+      "status": "completed",
+      "stop_reason": "diagnosis_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "mutate_one_candidate",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T172501116053Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 4,
+      "campaign_id": "campaign-20260322T172501237890Z-next-step",
+      "selected_step_type": "mutate_one_candidate",
+      "status": "completed",
+      "stop_reason": "mutation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "re_evaluate_one_candidate",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T172501237890Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 5,
+      "campaign_id": "campaign-20260322T172501376984Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T172501376984Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 6,
+      "campaign_id": "campaign-20260322T172532502175Z-next-step",
+      "selected_step_type": "diagnose_existing_candidates",
+      "status": "completed",
+      "stop_reason": "diagnosis_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "mutate_one_candidate",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T172532502175Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 7,
+      "campaign_id": "campaign-20260322T172532594140Z-next-step",
+      "selected_step_type": "mutate_one_candidate",
+      "status": "completed",
+      "stop_reason": "mutation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "re_evaluate_one_candidate",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T172532594140Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 8,
+      "campaign_id": "campaign-20260322T172532698380Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T172532698380Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "bcfb8ea40b3f190401e87761dea41a34ebe01b06b721d6c61330a22dc8100949",
+  "report_path": "experiments\\governed_loops\\manager-20260322Tday-trading-resume-02-program-cycle-02-lane-01.json"
+}

@@ -1,0 +1,3 @@
+Review the candidate context below and return a readiness packet with strengths, weaknesses, failure modes, contradiction summary, next actions, and approval recommendation.
+
+{{payload}}

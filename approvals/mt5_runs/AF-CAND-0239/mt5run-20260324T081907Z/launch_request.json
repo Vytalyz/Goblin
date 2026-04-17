@@ -1,0 +1,12 @@
+{
+  "candidate_id": "AF-CAND-0239",
+  "run_id": "mt5run-20260324T081907Z",
+  "terminal_path": "data\\state\\mt5_automation_runtime\\terminal64.exe",
+  "portable_mode": true,
+  "config_path": "approvals\\mt5_runs\\AF-CAND-0239\\mt5run-20260324T081907Z\\tester_config.ini",
+  "launch_mode": "/config",
+  "logic_manifest_hash": "219ec45a2346797922512913179b381abdd260c9e351b7006e5b30b4b737d956",
+  "packet_reused": false,
+  "broker_history_relative_path": "AgenticForex\\Audit\\AF-CAND-0239__broker_history.csv",
+  "broker_history_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0239__broker_history.csv"
+}

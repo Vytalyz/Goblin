@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-04-01T19:09:58.731575Z",
+  "target_candidate_id": "AF-CAND-0594",
+  "target_family": "asia_europe_transition_reclaim_research",
+  "challenger_family": "asia_europe_transition_reclaim_research",
+  "objective": "Concentrate the Asia-to-Europe drift-reclaim thesis on the high-volatility transition state, widen only where density can improve without losing stress survival, and test whether the weak trend-context slice should stay blocked.",
+  "comparison_report_path": "experiments\\comparison_20260401T190958Z.json",
+  "report_path": "experiments\\af-cand-0594_day_trading_refinement_20260401T190958Z.json",
+  "recommended_candidate_id": "AF-CAND-0600",
+  "variants": [
+    {
+      "candidate_id": "AF-CAND-0600",
+      "variant_label": "daytype_spread_guard_density",
+      "title": "Day-Type Spread-Guard Density Reclaim",
+      "family": "asia_europe_transition_reclaim_research",
+      "trade_count": 27,
+      "out_of_sample_profit_factor": 1.4,
+      "stressed_profit_factor": 1.4479897772355461,
+      "stress_passed": true,
+      "expectancy_pips": 1.1296296296300268,
+      "max_drawdown_pct": 1.0161298278498627,
+      "meets_requirement_subset": false,
+      "refinement_score": 139.002409,
+      "candidate_path": "reports\\AF-CAND-0600\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0600\\strategy_spec.json",
+      "review_packet_path": "reports\\AF-CAND-0600\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0601",
+      "variant_label": "daytype_spread_guard_late_core",
+      "title": "Day-Type Spread-Guard Late-Core Reclaim",
+      "family": "asia_europe_transition_reclaim_research",
+      "trade_count": 21,
+      "out_of_sample_profit_factor": 1.3958333333333335,
+      "stressed_profit_factor": 1.3867442951357716,
+      "stress_passed": true,
+      "expectancy_pips": 1.0142857142862627,
+      "max_drawdown_pct": 0.7194958566960838,
+      "meets_requirement_subset": false,
+      "refinement_score": 133.393965,
+      "candidate_path": "reports\\AF-CAND-0601\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0601\\strategy_spec.json",
+      "review_packet_path": "reports\\AF-CAND-0601\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0602",
+      "variant_label": "daytype_spread_guard_short_hold",
+      "title": "Day-Type Spread-Guard Short-Hold Reclaim",
+      "family": "asia_europe_transition_reclaim_research",
+      "trade_count": 27,
+      "out_of_sample_profit_factor": 1.3894736842099198,
+      "stressed_profit_factor": 0.8916312205708568,
+      "stress_passed": false,
+      "expectancy_pips": 0.29629629629598137,
+      "max_drawdown_pct": 0.9161521609244232,
+      "meets_requirement_subset": false,
+      "refinement_score": 52.40522,
+      "candidate_path": "reports\\AF-CAND-0602\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0602\\strategy_spec.json",
+      "review_packet_path": "reports\\AF-CAND-0602\\review_packet.json"
+    }
+  ]
+}

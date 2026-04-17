@@ -1,0 +1,22 @@
+{
+  "campaign_id": "campaign-20260322T022521Z-pullback_continuation_af_cand_0014-seed",
+  "family": "scalping",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0014-PULL",
+  "parent_campaign_id": "campaign-20260322T022521Z-next-step",
+  "current_step_type": "mutate_one_candidate",
+  "active_candidate_ids": [
+    "AF-CAND-0014-PULL"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 0,
+  "trials_consumed": 0,
+  "operational_runs_consumed": 0,
+  "mt5_parity_retries_by_candidate": {},
+  "shadow_forward_retries_by_candidate": {},
+  "stop_reason": "program_seed_requested",
+  "state_path": "experiments\\campaigns\\campaign-20260322T022521Z-pullback_continuation_af_cand_0014-seed\\state.json",
+  "last_report_path": null,
+  "next_recommendations_path": null,
+  "updated_utc": "2026-03-22T02:25:21.904060Z"
+}

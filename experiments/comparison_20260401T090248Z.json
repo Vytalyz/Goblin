@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-04-01T09:02:48.323744Z",
+  "family_filter": "europe_open_early_follow_through_research",
+  "candidate_filters": [],
+  "total_records": 0,
+  "registry_path": "experiments\\registry.csv",
+  "report_path": "experiments\\comparison_20260401T090248Z.json",
+  "latest_report_path": "experiments\\comparison_latest.json",
+  "recommended_candidate_id": null,
+  "records": []
+}

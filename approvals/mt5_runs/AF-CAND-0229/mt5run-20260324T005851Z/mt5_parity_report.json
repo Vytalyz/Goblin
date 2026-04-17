@@ -1,0 +1,15 @@
+{
+  "candidate_id": "AF-CAND-0229",
+  "run_id": "mt5run-20260324T005851Z",
+  "packet_reused": false,
+  "logic_manifest_hash": "cb744470099e858bcbd3e43380262a188b2999e9f0a0fff217637b08f7c758a0",
+  "validation_status": "failed",
+  "failure_classification": "parity_failure",
+  "parity_rate": 0.009804,
+  "audit_rows": 86,
+  "tester_report_path": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T005851Z\\AF-CAND-0229-mt5run-20260324T005851Z-report.htm",
+  "audit_csv_path": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T005851Z\\AF-CAND-0229__mt5run-20260324T005843Z__audit.csv",
+  "launch_status_path": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T005851Z\\launch_status.json",
+  "validation_report_path": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T005851Z\\validation_report.json",
+  "report_path": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T005851Z\\mt5_parity_report.json"
+}

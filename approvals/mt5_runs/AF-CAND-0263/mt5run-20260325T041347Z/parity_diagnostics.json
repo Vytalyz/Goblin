@@ -1,0 +1,76 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5run-20260325T041347Z",
+  "validation_status": "passed",
+  "failure_classification": null,
+  "expected_signal_source": "broker_history_executable_baseline",
+  "expected_trade_count": 142,
+  "actual_trade_count": 130,
+  "matched_trade_count": 119,
+  "unmatched_expected_count": 23,
+  "unmatched_actual_count": 11,
+  "tolerances_used": {
+    "parity_timestamp_tolerance_seconds": 90,
+    "parity_close_timing_tolerance_seconds": 120,
+    "parity_price_tolerance_pips": 0.3,
+    "parity_fill_tolerance_pips": 0.5,
+    "parity_min_match_rate": 0.8,
+    "parity_max_unmatched_expected_rate": 0.2,
+    "parity_max_unmatched_actual_rate": 0.2,
+    "parity_min_closed_trades": 10
+  },
+  "breach_counts": {
+    "entry_price": 0,
+    "exit_price": 0,
+    "fill_delta": 0,
+    "close_timing": 0,
+    "exit_reason_mismatch": 0,
+    "same_bar_collision_mismatch": 0,
+    "any_breach": 0
+  },
+  "likely_cause_counts": {},
+  "likely_cause_severity": {},
+  "primary_failure_mode": "within_tolerance",
+  "metric_summary": {
+    "entry_price_delta_pips": {
+      "median": 0.0,
+      "p95": 0.1,
+      "max": 0.2
+    },
+    "exit_price_delta_pips": {
+      "median": 0.0,
+      "p95": 0.1,
+      "max": 0.1
+    },
+    "fill_delta_pips": {
+      "median": 0.0,
+      "p95": 0.1,
+      "max": 0.1
+    },
+    "close_timing_delta_seconds": {
+      "median": 40.0,
+      "p95": 40.0,
+      "max": 140.0
+    }
+  },
+  "exit_reason_counts": {
+    "expected": {
+      "timeout": 46,
+      "stop_loss": 45,
+      "take_profit": 28
+    },
+    "actual": {
+      "timeout": 46,
+      "stop_loss": 45,
+      "take_profit": 28
+    }
+  },
+  "same_bar_collision_counts": {
+    "expected_true": 0,
+    "actual_true": 0
+  },
+  "expected_signal_path": "approvals\\mt5_packets\\AF-CAND-0263\\expected_signals.csv",
+  "broker_history_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5run-20260325T041347Z\\AF-CAND-0263__broker_history.csv",
+  "matched_trade_diagnostics_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5run-20260325T041347Z\\matched_trade_diagnostics.csv",
+  "top_breaches": []
+}

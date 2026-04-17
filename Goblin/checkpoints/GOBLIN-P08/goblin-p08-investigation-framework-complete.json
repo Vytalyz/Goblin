@@ -1,0 +1,31 @@
+{
+  "checkpoint_id": "goblin-p08-investigation-framework-complete",
+  "phase_id": "GOBLIN-P08",
+  "title": "P08 Investigation And Evaluation Framework - Complete",
+  "recorded_utc": "2026-04-12T22:10:18.941361Z",
+  "exit_criteria_met": [
+    "Serious incident production-incident-AF-CAND-0263-same-window-postpatch-20260412 now has a reproducible investigation pack with scenario, trace, evaluation-suite, and benchmark-history artifacts.",
+    "Investigation traces preserve evidence references, tool calls, intermediate classifications, final classification, confidence, and follow-up actions.",
+    "Evaluation suites separate deterministic regression, MT5 replay-backed, and live incident reconciliation scenarios while pointing to a frozen benchmark-history snapshot.",
+    "Investigation artifact filenames are compact and deterministic so the workflow remains usable under Windows path-length limits."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/investigation-trace.md",
+    "Goblin/contracts/evaluation-suite.md"
+  ],
+  "code_changes": [
+    "src/agentic_forex/goblin/models.py: expanded investigation scenario, trace, and evaluation-suite models and added InvestigationPack",
+    "src/agentic_forex/goblin/controls.py: added scenario/trace/suite writers, benchmark-history snapshotting, stable Windows-safe artifact filenames, and build_incident_investigation_pack",
+    "src/agentic_forex/utils/paths.py: added Goblin investigation, evaluation-suite, and benchmark-history report directories",
+    "src/agentic_forex/cli/app.py: added goblin-build-investigation-pack parser and command handling",
+    "src/agentic_forex/goblin/service.py: refreshed investigation/evaluation contract text",
+    "tests/test_goblin_investigation.py: added reproducible investigation-pack coverage"
+  ],
+  "tests": [
+    "tests/test_goblin_investigation.py, tests/test_goblin_controls.py, tests/test_goblin_incident.py, tests/test_cli_and_boundaries.py, tests/test_goblin_program.py: 40 targeted tests, all passing"
+  ],
+  "notes": [
+    "Real artifact written: Goblin/reports/investigations/AF-CAND-0263/production-incident-AF-CAND-0263-same-window-postpatch-20260412/investigation_pack.json",
+    "Companion artifacts written under Goblin/reports/evaluation_suites/AF-CAND-0263/production-incident-AF-CAND-0263-same-window-postpatch-20260412/ and Goblin/reports/benchmark_history/AF-CAND-0263/production-incident-AF-CAND-0263-same-window-postpatch-20260412/."
+  ]
+}

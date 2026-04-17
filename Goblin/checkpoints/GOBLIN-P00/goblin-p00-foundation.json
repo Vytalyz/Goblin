@@ -1,0 +1,15 @@
+{
+  "checkpoint_id": "goblin-p00-foundation",
+  "phase_id": "GOBLIN-P00",
+  "created_utc": "2026-04-12T02:48:42.499418Z",
+  "summary": "Created Goblin directory scaffolding, generated program documents, added CLI alias, and wired resumable phase tracking.",
+  "authoritative_artifacts": [
+    "Goblin/PROGRAM.md",
+    "Goblin/state/phases/GOBLIN-P00.json"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/STATUS.md"
+  ],
+  "status_at_checkpoint": "completed",
+  "checkpoint_path": "Goblin\\checkpoints\\GOBLIN-P00\\goblin-p00-foundation.json"
+}

@@ -1,0 +1,226 @@
+{
+  "campaign_id": "campaign-20260322T103538Z-next-step",
+  "parent_campaign_id": "campaign-20260322T090519Z-next-step",
+  "selected_step_type": "data_label_audit",
+  "step_reason": "The family-level data/feature audit retired the current family, so the next governed step is a bounded data/label contract audit before any new autonomous queue can be approved.",
+  "status": "completed",
+  "stop_reason": "data_label_audit_completed_upstream_contract_change_required",
+  "candidate_scope": [
+    "AF-CAND-0050",
+    "AF-CAND-0037",
+    "AF-CAND-0032",
+    "AF-CAND-0049",
+    "AF-CAND-0048",
+    "AF-CAND-0047"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [
+    {
+      "family": "scalping",
+      "audited_candidate_ids": [
+        "AF-CAND-0050",
+        "AF-CAND-0037",
+        "AF-CAND-0032",
+        "AF-CAND-0049",
+        "AF-CAND-0048",
+        "AF-CAND-0047"
+      ],
+      "reference_candidate_id": "AF-CAND-0050",
+      "contract_decision": "upstream_contract_change_required",
+      "summary": "Data/label audit compared AF-CAND-0050, AF-CAND-0037, AF-CAND-0032, AF-CAND-0049, AF-CAND-0048, AF-CAND-0047. AF-CAND-0050 remains the empirical reference, but the shared research contract shows shared_label_contract_consistent, label_contract_binary_direction_only, label_contract_ignores_trade_path_geometry, shared_label_contract_fails_across_styles. That points to an upstream label-contract problem before any new family queue should be approved.",
+      "suspected_contract_gaps": [
+        "shared_label_contract_consistent",
+        "label_contract_binary_direction_only",
+        "label_contract_ignores_trade_path_geometry",
+        "shared_label_contract_fails_across_styles"
+      ],
+      "label_contract_snapshot": {
+        "dataset_snapshot_ids": [
+          "61e89b30942a1ceb"
+        ],
+        "feature_version_ids": [
+          "758a61d83428e532"
+        ],
+        "label_version_ids": [
+          "104c608f5ff79a88"
+        ],
+        "feature_paths": [
+          "src\\agentic_forex\\features\\service.py"
+        ],
+        "label_paths": [
+          "src\\agentic_forex\\labels\\service.py"
+        ],
+        "entry_styles": [
+          "failed_break_fade",
+          "pullback_continuation"
+        ],
+        "holding_bars": [
+          18,
+          24
+        ],
+        "stop_loss_pips": [
+          4.5,
+          4.8
+        ],
+        "take_profit_pips": [
+          6.5,
+          7.2
+        ],
+        "risk_reward_ratios": [
+          1.444444,
+          1.5
+        ],
+        "uses_future_return_pips_label": true,
+        "uses_binary_direction_label": true,
+        "mentions_exit_geometry": false
+      },
+      "recommended_actions": [
+        "Freeze the current family and use AF-CAND-0050 only as the reference branch for contract redesign.",
+        "Replace the binary future-return label with a path-aware label aligned to stop, target, and timeout geometry.",
+        "Regenerate fresh roots under the new label contract before approving another autonomous queue."
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0050",
+          "family": "scalping",
+          "entry_style": "pullback_continuation",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 24,
+          "profit_factor": 0.7059359275028984,
+          "out_of_sample_profit_factor": 6.3144506584883695,
+          "expectancy_pips": -0.6726562499999528,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.0,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0050\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0050\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0050\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0037",
+          "family": "scalping",
+          "entry_style": "pullback_continuation",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 24,
+          "profit_factor": 0.7059359275028984,
+          "out_of_sample_profit_factor": 6.3144506584883695,
+          "expectancy_pips": -0.6726562499999528,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.0,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0037\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0037\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0037\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0032",
+          "family": "scalping",
+          "entry_style": "pullback_continuation",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 24,
+          "profit_factor": 0.7059359275028984,
+          "out_of_sample_profit_factor": 6.3144506584883695,
+          "expectancy_pips": -0.6726562499999528,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": true,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0032\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0032\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0032\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0049",
+          "family": "scalping",
+          "entry_style": "pullback_continuation",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 24,
+          "profit_factor": 0.7059359275028984,
+          "out_of_sample_profit_factor": 6.3144506584883695,
+          "expectancy_pips": -0.6726562499999528,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.0,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0049\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0049\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0049\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0048",
+          "family": "scalping",
+          "entry_style": "failed_break_fade",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 19,
+          "profit_factor": 0.4154865235268383,
+          "out_of_sample_profit_factor": 0.0,
+          "expectancy_pips": -1.1784868421049761,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.0,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0048\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0048\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0048\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0047",
+          "family": "scalping",
+          "entry_style": "failed_break_fade",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 19,
+          "profit_factor": 0.4154865235268383,
+          "out_of_sample_profit_factor": 0.0,
+          "expectancy_pips": -1.1784868421049761,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.0,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0047\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0047\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0047\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260322T103538Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260322T103538Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260322T103538Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": null,
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "hard_stop",
+  "report_path": "experiments\\campaigns\\campaign-20260322T103538Z-next-step\\next_step_report.json"
+}

@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-037",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright 2001 by Litrix Reading Room",
+    "During his learned leisure at Spannheim, he wrote several works upon the occult sciences, the chief of which are an essay on geomancy, or divination by means of lines and circles on the ground; another upon sorcery; a third upon alchymy; and a fourth upon the government of the wo",
+    "Richard, or, as some call him, Robert, also an Englishman, lived in 1330, and wrote a work entitled \"Correctorium Alchymiae,\" which was much esteemed till the time of Paracelsus. In the same year lived Peter of Lombardy, who wrote what he called a \"Complete Treatise upon the Herm"
+  ],
+  "front_matter_signals": [
+    "Contents",
+    "The personal character and career of one man are so intimately connected with the great scheme of the years 1719 and 1720, that a history of the Mississippi madness can have no fitter introduction than a sketch of the life of its great author, John Law.",
+    "The Chancellor, D'Aguesseau, who had been dismissed in 1718 for his opposition to the projects of Law, was now recalled to aid in the restoration of credit. The Regent acknowledged too late, that he had treated with unjustifiable harshness and mistrust one of the ablest, and perh"
+  ],
+  "best_excerpt": "The governor, sub-governor, and several directors were brought before them, and examined rigidly. They found that, at the time these entries were made, the Company was not in possession of such a quantity of stock, having in their own right only a small quantity, not exceeding th"
+}

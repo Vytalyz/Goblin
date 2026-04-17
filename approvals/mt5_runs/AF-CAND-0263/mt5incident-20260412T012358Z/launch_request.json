@@ -1,0 +1,29 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5incident-20260412T012358Z",
+  "incident_id": null,
+  "terminal_path": "data\\state\\mt5_automation_runtime\\terminal64.exe",
+  "portable_mode": true,
+  "config_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5incident-20260412T012358Z\\tester_config.ini",
+  "launch_mode": "/config",
+  "logic_manifest_hash": "d5387757d6d27910879f4ab94973a99f570bb3507b8aade1fcc5519d3a818616",
+  "packet_reused": false,
+  "incident_replay": true,
+  "tester_mode": "Every tick based on real ticks",
+  "tester_from_date": "2025.10.01",
+  "tester_to_date": "2026.03.20",
+  "tester_inputs_profile_path": "data\\state\\mt5_automation_runtime\\MQL5\\Profiles\\Tester\\AF-CAND-0263-mt5incident-20260412T012358Z.set",
+  "manual_overrides": {
+    "deposit": null,
+    "leverage": null,
+    "fixed_lots": null,
+    "auto_scale_lots": false,
+    "canonical_deposit": 100000.0,
+    "canonical_leverage": 30.0,
+    "canonical_fixed_lots": 5.0,
+    "min_lot": 0.01,
+    "lot_step": 0.01,
+    "sizing_mode": "canonical_packet",
+    "effective_fixed_lots": 5.0
+  }
+}

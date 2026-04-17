@@ -1,0 +1,40 @@
+[codex_operator]
+active = true
+runtime = "codex_app_repo_local"
+planning_authority = "codex"
+deterministic_kernel_authority = "python_toml_control_plane"
+default_governed_entrypoint = "run-governed-action"
+default_sandbox_mode = "workspace-write"
+allow_openai_legacy_llm = false
+allow_hooks_in_critical_path = false
+hooks_windows_policy = "disabled"
+require_operator_manifest = true
+capability_manifest_filename = "codex_capabilities.toml"
+capability_sync_timeout_seconds = 20
+capability_inventory_limit = 200
+capability_sample_bytes = 4000
+max_parallel_agents = 4
+max_agent_depth = 1
+repo_skill_source_dir = ".codex/skills-src"
+repo_skill_runtime_dir = ".agents/skills"
+repo_rules_file = ".codex/rules/default.rules"
+automation_specs_dir = "automations/specs"
+automation_prompts_dir = "automations/prompts"
+automation_default_execution = "worktree"
+automation_default_status = "paused"
+automation_manual_validation_required = true
+hitl_boundaries = ["manual_mt5_testing", "automation_activation", "external_manual_environment_step"]
+allowed_agent_roles = [
+  "portfolio_orchestrator",
+  "lane_researcher",
+  "governance_auditor",
+  "throughput_worker",
+  "validation_worker",
+  "runtime_observer",
+  "incident_reviewer",
+  "validation_auditor",
+  "incident_investigator",
+  "strategy_scientist",
+  "eval_analyst",
+  "memory_curator",
+]

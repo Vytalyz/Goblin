@@ -1,0 +1,13 @@
+﻿{
+  "candidate_id": "AF-CAND-0022",
+  "run_id": "mt5run-20260321T200439Z",
+  "install_id": "mt5_practice_01",
+  "compile_target_path": "MQL5\\Experts\\AgenticForex\\CandidateEA.mq5",
+  "packet_source_path": "approvals\\mt5_packets\\AF-CAND-0022\\CandidateEA.mq5",
+  "deployed_source_path": "<MT5_APPDATA>/Terminal\\<MT5_TERMINAL_HASH>\\MQL5\\Experts\\AgenticForex\\CandidateEA.mq5",
+  "compiled_ex5_path": "<MT5_APPDATA>/Terminal\\<MT5_TERMINAL_HASH>\\MQL5\\Experts\\AgenticForex\\CandidateEA.ex5",
+  "compile_log_path": null,
+  "terminal_data_path": "<MT5_APPDATA>/Terminal\\<MT5_TERMINAL_HASH>",
+  "metaeditor_path": "C:\\Program Files\\OANDA MetaTrader 5 Terminal\\MetaEditor64.exe",
+  "metaeditor_command": "metaeditor64.exe /compile:<full path>"
+}

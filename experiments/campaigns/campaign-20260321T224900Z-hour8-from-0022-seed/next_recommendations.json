@@ -1,0 +1,14 @@
+[
+  {
+    "step_type": "mutate_one_candidate",
+    "candidate_id": "AF-CAND-0022",
+    "rationale": "AF-CAND-0022 carries a localized hour-level weakness at 8 UTC. Remove allowed_hours_utc [8] inside the current breakout family.",
+    "binding": true,
+    "evidence_status": "supported",
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0021",
+      "mutation_type": "trim_allowed_hours",
+      "removed_hours_utc": [8]
+    }
+  }
+]

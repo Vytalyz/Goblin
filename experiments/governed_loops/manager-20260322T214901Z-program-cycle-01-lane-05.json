@@ -1,0 +1,35 @@
+{
+  "loop_id": "manager-20260322T214901Z-program-cycle-01-lane-05",
+  "family": "market_structure_research",
+  "initial_parent_campaign_id": "campaign-20260322T214940493592Z-next-step",
+  "final_parent_campaign_id": "campaign-20260322T215020895506Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+  "stop_class": "policy_decision",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260322T215020895506Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260322T215020895506Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260322T215020895506Z-next-step",
+      "selected_step_type": "hypothesis_audit",
+      "status": "completed",
+      "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+      "continuation_status": "stop",
+      "stop_class": "policy_decision",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": null,
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T215020895506Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "9a3fc3bdb9a53bd631b9aa679d6fb669c14e1e74ee0c3ce608bb24464608dff7",
+  "report_path": "experiments\\governed_loops\\manager-20260322T214901Z-program-cycle-01-lane-05.json"
+}

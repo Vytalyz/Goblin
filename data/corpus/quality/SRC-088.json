@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-088",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "All rights reserved. No part of this book may be reproduced, in any form or by any means, without permission in writing from the publisher. Printed in the United States of America Second Printing, August 2007 ISBN 0-13-153113-1 Pearson Education LTD.",
+    "Ltd. library of Congress Cataloging-in-Publication Data Kirkpatrick, Charles D. Technical analysis: the complete resource for financial market technicians / Charles D. Kirkpatrick and Julie R. Dahlquist. p. cm. Includes bibliographical references and index.",
+    "ISBN 0-13-153113-1 (hardback: alk. paper) 1. Investment analysis. I. Dahlquist, Julie R., 1962- II. Title. HG4529.K564 2007 332.63'2042\u2014dc22 Press \u00a9 2007 by Pearson Education, Inc. Publishing as FT Press 2006011756 This book is sold with the understanding that neither the authors"
+  ],
+  "front_matter_signals": [
+    "Ltd. library of Congress Cataloging-in-Publication Data Kirkpatrick, Charles D. Technical analysis: the complete resource for financial market technicians / Charles D. Kirkpatrick and Julie R. Dahlquist. p. cm. Includes bibliographical references and index.",
+    "The authors and the publisher disclaim any liability, loss or risk resulting, directly or indirectly, from the use or application of any of the contents of this book. CONTENTS Acknowledgments xxv About the Authors xxvii PART I: INTRODUCTION 1 1 INTRODUCTION TO TECHNICAL ANALYSIS ",
+    "114 Insiders 114 xii Contents Sentiment in Other Markets 120 Treasury Bond COT Data 120 Treasury Bond Primary Dealer Positions 121 Bond Market Fear Index 122 T-Bill Rate Expectations by Money Market Fund Managers 122 Conclusion 123 Review Questions 123 8 MEASURING MARKET STRENGTH"
+  ],
+  "best_excerpt": "When does a rever\u00ad sal occur? c. Locate a period when a decelerating uptrend occurs on the graph. When does a reversal occur? d. Find a period on the graph when the major trend is upward, but a retracement occurs. CHAPTER 13 BREAKOUTS, STOPS, AND RETRACEMENTS CHAPTER OBJECTIVES B"
+}

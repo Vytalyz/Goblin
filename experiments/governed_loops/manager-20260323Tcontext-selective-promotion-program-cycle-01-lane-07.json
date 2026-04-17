@@ -1,0 +1,47 @@
+{
+  "loop_id": "manager-20260323Tcontext-selective-promotion-program-cycle-01-lane-07",
+  "family": "context_selective_research",
+  "initial_parent_campaign_id": "campaign-20260323T201616969874Z-promotion_context_selective_mean_reversion_af_cand_0188-seed",
+  "final_parent_campaign_id": "campaign-20260323T201617069414Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "stop_class": "lane_exhausted",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260323T201617069414Z-next-step\\next_step_report.json",
+  "final_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0188",
+      "rationale": "AF-CAND-0188 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0188"
+      }
+    }
+  ],
+  "executed_campaign_ids": [
+    "campaign-20260323T201617069414Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260323T201617069414Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "stop",
+      "stop_class": "lane_exhausted",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260323T201617069414Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "a2d9478b29685fb48c87533e34051752ee0266e6e2f7c8e51103cf8ce7bf103b",
+  "report_path": "experiments\\governed_loops\\manager-20260323Tcontext-selective-promotion-program-cycle-01-lane-07.json"
+}

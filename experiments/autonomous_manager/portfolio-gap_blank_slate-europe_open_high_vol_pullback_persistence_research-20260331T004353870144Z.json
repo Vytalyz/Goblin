@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "portfolio-gap_blank_slate-europe_open_high_vol_pullback_persistence_research-20260331T004353870144Z",
+  "program_id": "portfolio-gap_blank_slate-europe_open_high_vol_pullback_persistence_research-20260331T004353870144Z-program",
+  "family": "europe_open_high_vol_pullback_persistence_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": "campaign-20260331T004631364083Z-next-step",
+  "executed_cycles": 1,
+  "max_cycles": 12,
+  "status": "stopped",
+  "stop_reason": "data_feature_audit_completed_retire_family",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "731e1d2151ff379456a71b6c5dbc674f766e2f7d620ca7afbf6c644553c4d827",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\portfolio-gap_blank_slate-europe_open_high_vol_pullback_persistence_research-20260331T004353870144Z-program-cycle-01.json",
+      "stop_reason": "data_feature_audit_completed_retire_family",
+      "stop_class": "policy_decision",
+      "material_transition": true,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\portfolio-gap_blank_slate-europe_open_high_vol_pullback_persistence_research-20260331T004353870144Z.json"
+}

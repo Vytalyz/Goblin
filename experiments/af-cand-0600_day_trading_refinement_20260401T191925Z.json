@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-04-01T19:19:25.807488Z",
+  "target_candidate_id": "AF-CAND-0600",
+  "target_family": "asia_europe_transition_reclaim_research",
+  "challenger_family": "asia_europe_transition_reclaim_research",
+  "objective": "Concentrate the Asia-to-Europe drift-reclaim thesis on the high-volatility transition state, widen only where density can improve without losing stress survival, and test whether the weak trend-context slice should stay blocked.",
+  "comparison_report_path": "experiments\\comparison_20260401T191925Z.json",
+  "report_path": "experiments\\af-cand-0600_day_trading_refinement_20260401T191925Z.json",
+  "recommended_candidate_id": "AF-CAND-0604",
+  "variants": [
+    {
+      "candidate_id": "AF-CAND-0604",
+      "variant_label": "daytype_density_early_follow",
+      "title": "Day-Type Density Early-Follow Reclaim",
+      "family": "asia_europe_transition_reclaim_research",
+      "trade_count": 6,
+      "out_of_sample_profit_factor": 0.0,
+      "stressed_profit_factor": 1.5637677132541685,
+      "stress_passed": true,
+      "expectancy_pips": 1.2833333333335366,
+      "max_drawdown_pct": 0.24346616317201614,
+      "meets_requirement_subset": false,
+      "refinement_score": 119.425803,
+      "candidate_path": "reports\\AF-CAND-0604\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0604\\strategy_spec.json",
+      "review_packet_path": "reports\\AF-CAND-0604\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0605",
+      "variant_label": "daytype_density_late_decay",
+      "title": "Day-Type Density Late-Decay Reclaim",
+      "family": "asia_europe_transition_reclaim_research",
+      "trade_count": 17,
+      "out_of_sample_profit_factor": 1.3800000000000001,
+      "stressed_profit_factor": 0.8717860184613067,
+      "stress_passed": false,
+      "expectancy_pips": 0.12352941176550669,
+      "max_drawdown_pct": 1.134129410949129,
+      "meets_requirement_subset": false,
+      "refinement_score": 45.447655,
+      "candidate_path": "reports\\AF-CAND-0605\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0605\\strategy_spec.json",
+      "review_packet_path": "reports\\AF-CAND-0605\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0603",
+      "variant_label": "daytype_density_handoff_bridge",
+      "title": "Day-Type Density Handoff Bridge Reclaim",
+      "family": "asia_europe_transition_reclaim_research",
+      "trade_count": 23,
+      "out_of_sample_profit_factor": 0.6900000000000001,
+      "stressed_profit_factor": 0.9596003240618086,
+      "stress_passed": false,
+      "expectancy_pips": 0.3000000000005251,
+      "max_drawdown_pct": 1.1860135381810522,
+      "meets_requirement_subset": false,
+      "refinement_score": 41.409189,
+      "candidate_path": "reports\\AF-CAND-0603\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0603\\strategy_spec.json",
+      "review_packet_path": "reports\\AF-CAND-0603\\review_packet.json"
+    }
+  ]
+}

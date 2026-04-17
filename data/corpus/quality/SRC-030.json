@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-030",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "&#13; &#13; &#13; Day Trading For Dummies\u00ae, 3rd Edition &#13; Published by: John Wiley &amp; Sons, Inc., 111 River Street, Hoboken, NJ 07030-5774, www.wiley.com &#13; Copyright \u00a9 2014 by John Wiley &amp; Sons, Inc., Hoboken, New Jersey &#13; Published simultaneously in Canada &#1",
+    "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley &amp; Sons, Inc., 111 River Street, Hoboken, NJ 07030, (201) 748-6011, fax (201) 748-6008, or online at http://www.wiley.com/go/permissions . &#13; Trademarks: Wiley, For Dummie",
+    "All other trademarks are the property of their respective owners. John Wiley &amp; Sons, Inc., is not associated with any product or vendor mentioned in this book. &#13; LIMIT OF LIABILITY/DISCLAIMER OF WARRANTY: WHILE THE PUBLISHER AND AUTHOR HAVE USED THEIR BEST EFFORTS IN PREP"
+  ],
+  "front_matter_signals": [
+    "Day Trading For Dummies\u00ae, 3rd Edition &#13; Visit www.dummies.com/cheatsheet/daytrading to view this book's cheat sheet. &#13; &#13; &#13; Table of Contents &#13; &#13; Introduction &#13; &#13; About This Book &#13; Foolish Assumptions &#13; Icons Used in This Book &#13; Beyond t",
+    "They give traders exposure to the prices at a much lower cost than buying all the stocks in the index individually. Of course, they tend to be more volatile than the indexes they track because they are based on expectations. &#13; Forex: Forex, short for foreign exchange, involve",
+    "They look for news on company performance and investor perception that affect stock prices, and they look to make money from those price changes. A similar asset is the exchange-traded fund, which trades like a stock but is based on a market index or strategy."
+  ],
+  "best_excerpt": "Covered in more detail in Chapter 2 , a stop limits the loss if the security keeps dropping below your entry point, and the limit order gets you out at a profit if the security moves to the top of the range. &#13; Range trading works in a normal market with just enough volatility"
+}

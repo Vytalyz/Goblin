@@ -1,0 +1,138 @@
+{
+  "campaign_id": "campaign-20260322T165947528886Z-next-step",
+  "parent_campaign_id": "campaign-20260322T165943281525Z-next-step",
+  "selected_step_type": "diagnose_existing_candidates",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0060 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+  "status": "completed",
+  "stop_reason": "diagnosis_completed_with_supported_recommendation",
+  "candidate_scope": [
+    "AF-CAND-0060"
+  ],
+  "candidate_reports": [
+    {
+      "candidate_id": "AF-CAND-0060",
+      "readiness_status": "robustness_provisional",
+      "walk_forward_failed_window": 1,
+      "first_window_start_utc": "2026-02-02T06:07:00Z",
+      "first_window_end_utc": "2026-02-17T07:31:00Z",
+      "first_window_trade_count": 57,
+      "first_window_profit_factor": 0.3468067906224489,
+      "first_window_expectancy_pips": -2.8350877192983375,
+      "later_window_trade_count": 116,
+      "later_window_profit_factor": 1.095136858889202,
+      "later_window_expectancy_pips": 0.3086206896552302,
+      "spread_anomaly_rate_first_window": 0.0,
+      "spread_anomaly_rate_later_windows": 0.0,
+      "supported_slices": [
+        {
+          "slice_type": "session_bucket",
+          "slice_label": "asia",
+          "first_window_trade_count": 12,
+          "later_window_trade_count": 23,
+          "first_window_profit_factor": 0.07122507122502675,
+          "later_window_profit_factor": 1.0489949748744904,
+          "first_window_expectancy_pips": -5.433333333333976,
+          "later_window_expectancy_pips": 0.1695652173917158,
+          "expectancy_improvement_pips": 5.602898550725691,
+          "first_window_loss_share": 0.2837510105093183,
+          "evidence_score": 7.282927,
+          "supported": true
+        },
+        {
+          "slice_type": "context_bucket",
+          "slice_label": "mean_reversion_context",
+          "first_window_trade_count": 35,
+          "later_window_trade_count": 76,
+          "first_window_profit_factor": 0.26787954830612887,
+          "later_window_profit_factor": 1.0483185156552386,
+          "first_window_expectancy_pips": -3.3342857142858193,
+          "later_window_expectancy_pips": 0.16447368421065808,
+          "expectancy_improvement_pips": 3.4987593984964773,
+          "first_window_loss_share": 0.6443007275667008,
+          "evidence_score": 6.063782,
+          "supported": true
+        },
+        {
+          "slice_type": "session_bucket",
+          "slice_label": "europe",
+          "first_window_trade_count": 45,
+          "later_window_trade_count": 93,
+          "first_window_profit_factor": 0.4559819413092497,
+          "later_window_profit_factor": 1.1075160094371326,
+          "first_window_expectancy_pips": -2.142222222222167,
+          "later_window_expectancy_pips": 0.3430107526881424,
+          "expectancy_improvement_pips": 2.4852329749103097,
+          "first_window_loss_share": 0.7162489894906817,
+          "evidence_score": 5.077998,
+          "supported": true
+        },
+        {
+          "slice_type": "context_bucket",
+          "slice_label": "trend_context",
+          "first_window_trade_count": 22,
+          "later_window_trade_count": 40,
+          "first_window_profit_factor": 0.4897727272726965,
+          "later_window_profit_factor": 1.1981292517006472,
+          "first_window_expectancy_pips": -2.040909090909162,
+          "later_window_expectancy_pips": 0.5824999999999172,
+          "expectancy_improvement_pips": 2.623409090909079,
+          "first_window_loss_share": 0.35569927243329935,
+          "evidence_score": 4.100734,
+          "supported": true
+        }
+      ],
+      "primary_issue": "session_bucket:asia",
+      "recommended_mutation": "Trim asia exposure by removing allowed_hours_utc [6] inside the current breakout family.",
+      "diagnostic_confidence": 0.95,
+      "notes": [
+        "First walk-forward window spans 57 trades; later windows span 116 trades.",
+        "Spread anomaly threshold from QA is 6.882 pips.",
+        "Spread anomalies do not explain the failed first walk-forward window in this candidate."
+      ],
+      "artifact_paths": {
+        "review_packet_path": "reports\\AF-CAND-0060\\review_packet.json",
+        "trade_ledger_path": "reports\\AF-CAND-0060\\trade_ledger.csv",
+        "backtest_summary_path": "reports\\AF-CAND-0060\\backtest_summary.json",
+        "robustness_report_path": "reports\\AF-CAND-0060\\robustness_report.json"
+      }
+    }
+  ],
+  "mutation_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "mutate_one_candidate",
+      "candidate_id": "AF-CAND-0060",
+      "rationale": "The failed first walk-forward window is weakest in the asia session slice for AF-CAND-0060. The next bounded campaign should remove hours [6] from allowed_hours_utc, then re-evaluate without broadening scope.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "mutation_type": "trim_allowed_hours",
+        "session_bucket": "asia",
+        "removed_hours_utc": [
+          6
+        ]
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "mutate_one_candidate",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "bcfb8ea40b3f190401e87761dea41a34ebe01b06b721d6c61330a22dc8100949",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260322T165947528886Z-next-step\\next_step_report.json"
+}

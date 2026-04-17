@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest tests/test_goblin_live.py -v)",
+      "Bash(python -m pytest tests/test_goblin_controls.py tests/test_goblin_evidence.py tests/test_goblin_program.py -v)",
+      "Bash(python -m pytest tests/test_goblin_program.py tests/test_goblin_controls.py tests/test_goblin_live.py -v)",
+      "Bash(python -m pytest tests/test_goblin_incident.py tests/test_goblin_release.py tests/test_goblin_program.py tests/test_goblin_controls.py tests/test_goblin_live.py -v)"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-03-30T21:59:07.637620Z",
+  "family": "day_trading",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "family_filter": "europe_open_high_vol_pullback_persistence_research",
+  "comparison_report_path": "experiments\\comparison_20260330T215907Z.json",
+  "recommended_candidate_id": "AF-CAND-0414",
+  "report_path": "experiments\\day_trading_behavior_scan_20260330T215907Z.json",
+  "records": [
+    {
+      "candidate_id": "AF-CAND-0414",
+      "family": "europe_open_high_vol_pullback_persistence_research",
+      "entry_style": "pullback_continuation",
+      "title": "Europe High-Vol Pullback Persistence Day Trade",
+      "trade_count": 25,
+      "min_walk_forward_trade_count": 2,
+      "walk_forward_ok": false,
+      "out_of_sample_profit_factor": 3.74528301886788,
+      "expectancy_pips": 1.3399999999996934,
+      "stressed_profit_factor": 1.5284866576867138,
+      "stress_passed": true,
+      "max_drawdown_pct": 0.4993750000000008,
+      "supported_slice_count": 3,
+      "scan_score": -7.704708,
+      "candidate_path": "reports\\AF-CAND-0414\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0414\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0414\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0414\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0414\\review_packet.json"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "campaign_id": "campaign-20260324T022502786342Z-next-step",
+  "family": "session_momentum_band_research",
+  "baseline_candidate_id": "AF-CAND-0240",
+  "target_candidate_ids": [
+    "AF-CAND-0240"
+  ],
+  "parent_campaign_id": "campaign-20260324T022338009073Z-next-step",
+  "queue_kind": "promotion",
+  "throughput_target_count": 0,
+  "orthogonality_metadata": {},
+  "compile_budget": 0,
+  "smoke_budget": 0,
+  "max_rule_spec_reformulations_per_hypothesis": 0,
+  "max_ea_spec_rewrites_per_candidate": 0,
+  "max_compile_retries_per_candidate": 0,
+  "max_smoke_retries_per_candidate": 0,
+  "step_type": "run_parity",
+  "allowed_step_types": [
+    "run_parity"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 0,
+  "trial_cap_per_family": 1,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Single-step child campaign opened from campaign-20260324T022338009073Z-next-step.",
+    "Selected step: run_parity.",
+    "This controller run must stop after exactly one legal step."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "campaign_id": "campaign-20260324T015206919294Z-next-step",
+  "family": "session_momentum_band_research",
+  "status": "running",
+  "baseline_candidate_id": "AF-CAND-0240",
+  "parent_campaign_id": "campaign-20260324T015155550197Z-next-step",
+  "current_step_type": "run_mt5_backtest_smoke",
+  "active_candidate_ids": [
+    "AF-CAND-0240"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 3,
+  "trials_consumed": 3,
+  "operational_runs_consumed": 0,
+  "rule_spec_reformulations_by_candidate": {
+    "AF-CAND-0240": 1
+  },
+  "ea_spec_rewrites_by_candidate": {
+    "AF-CAND-0240": 1
+  },
+  "compile_retries_by_candidate": {
+    "AF-CAND-0240": 1
+  },
+  "smoke_retries_by_candidate": {
+    "AF-CAND-0240": 1
+  },
+  "mt5_parity_retries_by_candidate": {},
+  "shadow_forward_retries_by_candidate": {},
+  "state_version": 3,
+  "stop_reason": null,
+  "state_path": "experiments\\campaigns\\campaign-20260324T015206919294Z-next-step\\state.json",
+  "last_report_path": null,
+  "next_recommendations_path": null,
+  "updated_utc": "2026-03-24T01:52:16.746771Z"
+}

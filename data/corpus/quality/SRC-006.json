@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-006",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright \u00a9 2015, 2012, 2011, 2007, 2003, 1999, 1996, 1990, 1985, 1981, 1975, 1973 by W. W. Norton &amp; Company Inc. &#13; The article on page 312 entitled \u201cRed Faces in Park\u201d appears courtesy of Thomson Reuters. All rights reserved.",
+    "Thomson Reuters journalists are subject to an Editorial Handbook, which requires fair presentation and disclosure of relevant interests. &#13; All rights reserved &#13; For information about permission to reproduce selections from this book, write to Permissions, W.",
+    "W. Norton &amp; Company, Inc., 500 Fifth Avenue, New York, NY 10110 &#13; For information about special discounts for bulk purchases, please contact W. W. Norton Special Sales at specialsales@wwnorton.com or 800-233-4830 &#13; Book design by Chris Welch Production manager: Julia "
+  ],
+  "front_matter_signals": [
+    "A random walk down Wall Street : the time-tested strategy for successful investing / Burton G. Malkiel. \u2014 [Revised and updated edition]. pages cm Includes index. ISBN 978-0-393-24611-7 (hardcover) 1. Investments. 2. Stocks. 3.",
+    "CONTENTS &#13; &#13; Preface &#13; Part One &#13; STOCKS AND THEIR VALUE &#13; 1. FIRM FOUNDATIONS AND CASTLES IN THE AIR &#13; What Is a Random Walk? &#13; Investing as a Way of Life Today &#13; Investing in Theory &#13; The Firm-Foundation Theory &#13; The Castle-in-the-Air The",
+    "Value Wins &#13; 2. Smaller Is Better &#13; 3. Momentum and Reversion to the Mean &#13; 4. Low Volatility Can Produce High Returns &#13; Blended Flavors and Strategies &#13; \u201cSmart Beta\u201d Funds Flunk the Risk Test &#13; Appraisal of \u201cSmart Beta\u201d &#13; How Well Have Factor Tilts Wo"
+  ],
+  "best_excerpt": "This kind of scalping, called \u201cfront-running,\u201d is a form of insider trading. If someone else is able to know that I want to buy 10,000 shares of a stock before I actually buy the shares, that\u2019s insider information, and it should be illegal to trade on such information."
+}

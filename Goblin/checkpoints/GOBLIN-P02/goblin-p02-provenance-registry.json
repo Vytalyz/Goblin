@@ -1,0 +1,21 @@
+{
+  "checkpoint_id": "goblin-p02-provenance-registry",
+  "phase_id": "GOBLIN-P02",
+  "created_utc": "2026-04-12T03:25:44.913099Z",
+  "summary": "Completed artifact provenance registry with explicit channel tagging and managed artifact snapshots.",
+  "authoritative_artifacts": [
+    "src/agentic_forex/goblin/models.py",
+    "src/agentic_forex/goblin/evidence.py",
+    "Goblin/contracts/artifact-provenance.md",
+    "Goblin/state/artifacts/indexes/research_backtest.json",
+    "Goblin/state/artifacts/indexes/mt5_replay.json",
+    "Goblin/state/artifacts/indexes/live_demo.json",
+    "Goblin/state/artifacts/indexes/broker_account_history.json"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P02.md",
+    "Goblin/STATUS.md"
+  ],
+  "status_at_checkpoint": "completed",
+  "checkpoint_path": "Goblin\\checkpoints\\GOBLIN-P02\\goblin-p02-provenance-registry.json"
+}

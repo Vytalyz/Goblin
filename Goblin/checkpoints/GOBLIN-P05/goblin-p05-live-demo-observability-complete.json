@@ -1,0 +1,24 @@
+{
+  "checkpoint_id": "goblin-p05-live-demo-observability-complete",
+  "phase_id": "GOBLIN-P05",
+  "created_utc": "2026-04-12T20:21:32.719347Z",
+  "summary": "Phase 5 completed by expanding the live-demo and broker-reconciliation contracts to full operational specs, adding write_live_attach_manifest, write_runtime_summary, write_runtime_heartbeat, detect_live_runtime_anomalies, and run_broker_reconciliation to the Goblin control surface, and verifying all five live-demo behaviors with 10 targeted tests. Live-demo evidence is no longer self-referential: heartbeat anomaly detection surfaces chaos conditions, and the broker reconciliation pipeline independently verifies EA audit against external broker account history.",
+  "authoritative_artifacts": [
+    "Goblin/contracts/live-demo-contract.md",
+    "Goblin/contracts/broker-reconciliation.md",
+    "Goblin/contracts/execution-cost-contract.md",
+    "Goblin/contracts/statistical-decision-policy.md",
+    "src/agentic_forex/goblin/controls.py",
+    "src/agentic_forex/goblin/__init__.py"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P05.md",
+    "Goblin/STATUS.md",
+    "Goblin/IMPLEMENTATION_TRACKER.md",
+    "Goblin/MATURITY.md",
+    "Goblin/EVOLUTION.md",
+    "tests/test_goblin_live.py"
+  ],
+  "status_at_checkpoint": "completed",
+  "checkpoint_path": "Goblin\\checkpoints\\GOBLIN-P05\\goblin-p05-live-demo-observability-complete.json"
+}

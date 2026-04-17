@@ -1,0 +1,13 @@
+[
+  {
+    "step_type": "run_parity",
+    "candidate_id": "AF-CAND-0263",
+    "rationale": "AF-CAND-0263 now meets the bounded empirical and provisional robustness gates for parity entry. The next governed step should be MT5 parity, still in practice-only mode.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0263"
+    }
+  }
+]

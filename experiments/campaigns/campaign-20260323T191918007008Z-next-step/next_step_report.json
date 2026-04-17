@@ -1,0 +1,215 @@
+{
+  "campaign_id": "campaign-20260323T191918007008Z-next-step",
+  "parent_campaign_id": "campaign-20260323T191917664410Z-next-step",
+  "selected_step_type": "data_feature_audit",
+  "step_reason": "The approved lane queue is exhausted after a retirement-level data/regime audit, so the next governed step is a bounded data/feature audit across the strongest recent family references.",
+  "status": "completed",
+  "stop_reason": "data_feature_audit_completed_bounded_correction_supported",
+  "candidate_scope": [
+    "AF-CAND-0184",
+    "AF-CAND-0183",
+    "AF-CAND-0182",
+    "AF-CAND-0185",
+    "AF-CAND-0181"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [
+    {
+      "family": "resilience_bridge_research",
+      "audited_candidate_ids": [
+        "AF-CAND-0184",
+        "AF-CAND-0183",
+        "AF-CAND-0182",
+        "AF-CAND-0185",
+        "AF-CAND-0181"
+      ],
+      "reference_candidate_id": "AF-CAND-0184",
+      "family_decision": "bounded_correction_supported",
+      "summary": "Data/feature audit compared AF-CAND-0184, AF-CAND-0183, AF-CAND-0182, AF-CAND-0185, AF-CAND-0181. AF-CAND-0184 remains the reference branch, and the audited family shows provenance_contract_mixed, low_sample_oos_spike, execution_cost_realism_consumes_edge, persistent_walk_forward_instability, broad_regime_dependence, which supports one bounded upstream correction before any new lane search.",
+      "suspected_root_causes": [
+        "provenance_contract_mixed",
+        "low_sample_oos_spike",
+        "execution_cost_realism_consumes_edge",
+        "persistent_walk_forward_instability",
+        "broad_regime_dependence"
+      ],
+      "provenance_consistency": {
+        "candidate_count_with_provenance": 5,
+        "archived_candidates_excluded": [],
+        "dataset_snapshot_ids": [
+          "18d14b971b542f1e",
+          "3c97626186ca1b84",
+          "61e89b30942a1ceb"
+        ],
+        "feature_version_ids": [
+          "e602a112f25aff49"
+        ],
+        "label_version_ids": [
+          "4531e04082baf668"
+        ],
+        "execution_cost_model_versions": [
+          "a28bc3999dde0718",
+          "afc26b6792558c30",
+          "d5b6c45328d6edcc"
+        ],
+        "dataset_snapshot_consistent": false,
+        "feature_version_consistent": true,
+        "label_version_consistent": true,
+        "execution_cost_model_consistent": false
+      },
+      "recent_regime_signals": [
+        "europe, high, trend_context"
+      ],
+      "recommended_actions": [
+        "Use AF-CAND-0184 as the only reference branch for one bounded upstream correction.",
+        "Stop again immediately after that correction and rerun the program queue only if the correction changes the research contract."
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0184",
+          "family": "resilience_bridge_research",
+          "entry_style": "session_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 320,
+          "profit_factor": 0.9595020034344803,
+          "out_of_sample_profit_factor": 1.292410714285707,
+          "expectancy_pips": -0.08843749999995403,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.771429,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0184\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0184\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0184\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0183",
+          "family": "resilience_bridge_research",
+          "entry_style": "failed_break_fade",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 177,
+          "profit_factor": 0.6219399538105765,
+          "out_of_sample_profit_factor": 0.3993399339933607,
+          "expectancy_pips": -0.9248587570622785,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0183\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0183\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0183\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0182",
+          "family": "resilience_bridge_research",
+          "entry_style": "trend_retest",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 10,
+          "profit_factor": 0.58215962441316,
+          "out_of_sample_profit_factor": 6.0588235294158,
+          "expectancy_pips": -0.8899999999999233,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0182\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0182\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0182\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0185",
+          "family": "resilience_bridge_research",
+          "entry_style": "session_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 276,
+          "profit_factor": 0.737390516460285,
+          "out_of_sample_profit_factor": 0.7217942908926205,
+          "expectancy_pips": -0.6300724637681184,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.828571,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0185\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0185\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0185\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0181",
+          "family": "resilience_bridge_research",
+          "entry_style": "session_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 396,
+          "profit_factor": 0.9364898702481301,
+          "out_of_sample_profit_factor": 1.1946188340807222,
+          "expectancy_pips": -0.14090909090907458,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0181\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0181\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0181\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260323T191918007008Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260323T191918007008Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260323T191918007008Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0184",
+      "rationale": "AF-CAND-0184 remains the strongest family reference after the data/feature audit. Run one bounded diagnosis pass on that branch before any further correction or retirement decision.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0184",
+        "audit_origin": "data_feature_audit"
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "diagnose_existing_candidates",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "7a7a1172984bf2804672a5fa818785c56428ad0d6e8d074d395e5d99ec071091",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260323T191918007008Z-next-step\\next_step_report.json"
+}

@@ -1,0 +1,54 @@
+{
+  "phase_id": "GOBLIN-P02",
+  "title": "Provenance And Artifact Contracts",
+  "objective": "Make provenance a hard gate everywhere.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P01"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Define artifact provenance fields and explicit `evidence_channel` tagging across governed artifacts.",
+    "Replace heuristic evidence discovery with channel-owned indexes and immutable run identity.",
+    "Treat ambiguous provenance as a hard validation failure rather than an operator warning."
+  ],
+  "outputs": [
+    "artifact provenance contract",
+    "channel-owned artifact indexes"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/artifact-provenance.md"
+  ],
+  "checkpoint_targets": [
+    "Artifact provenance contract is written and referenced from validation and incident flows.",
+    "Channel-owned artifact resolution replaces wildcard audit discovery in governed paths."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/artifact-provenance.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P02.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P02\\goblin-p02-provenance-registry.json",
+  "idempotency_key": "goblin:GOBLIN-P02",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P02 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-12T03:25:44.548972Z",
+  "updated_at": "2026-04-14T19:50:53.041783Z",
+  "completed_at": "2026-04-12T03:25:44.747280Z",
+  "exit_criteria": [
+    "Ambiguous provenance becomes impossible in governed workflows."
+  ],
+  "acceptance_result": {
+    "artifact_indexes_defined": 4,
+    "provenance_registry_available": true,
+    "heuristic_discovery_banned_in_goblin_flows": true
+  },
+  "notes": [
+    "Implemented artifact provenance models, channel indexes, managed artifact registration, and validation CLI surfaces."
+  ],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P02.json"
+}

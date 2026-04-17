@@ -1,0 +1,50 @@
+{
+  "campaign_id": "campaign-20260324T015432761490Z-next-step",
+  "family": "session_momentum_band_research",
+  "baseline_candidate_id": "AF-CAND-0239",
+  "target_candidate_ids": [
+    "AF-CAND-0239"
+  ],
+  "parent_campaign_id": "campaign-20260324T015432607572Z-session_momentum_band_quality_af_cand_0239-seed",
+  "queue_kind": "throughput",
+  "throughput_target_count": 10,
+  "orthogonality_metadata": {
+    "market_hypothesis": "late_overlap_quality_momentum_band",
+    "trigger_family": "session_momentum_band_quality",
+    "holding_profile": "medium_intraday_continuation",
+    "session_profile": "late_overlap_quality_window",
+    "regime_dependency": "high_vol_trend_quality"
+  },
+  "compile_budget": 6,
+  "smoke_budget": 5,
+  "max_rule_spec_reformulations_per_hypothesis": 2,
+  "max_ea_spec_rewrites_per_candidate": 2,
+  "max_compile_retries_per_candidate": 2,
+  "max_smoke_retries_per_candidate": 1,
+  "step_type": "formalize_rule_candidate",
+  "allowed_step_types": [
+    "compile_ea_candidate",
+    "data_feature_audit",
+    "data_label_audit",
+    "data_regime_audit",
+    "diagnose_existing_candidates",
+    "formalize_rule_candidate",
+    "generate_ea_spec",
+    "hypothesis_audit",
+    "mutate_one_candidate",
+    "re_evaluate_one_candidate",
+    "run_forward",
+    "run_mt5_backtest_smoke",
+    "run_parity",
+    "triage_reviewable_candidate"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 0,
+  "trial_cap_per_family": 1,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Single-step child campaign opened from campaign-20260324T015432607572Z-session_momentum_band_quality_af_cand_0239-seed.",
+    "Selected step: formalize_rule_candidate.",
+    "This controller run must stop after exactly one legal step."
+  ]
+}

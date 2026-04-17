@@ -1,0 +1,13 @@
+[
+  {
+    "candidate_id": "AF-CAND-0212",
+    "evidence_status": "supported",
+    "step_type": "formalize_rule_candidate",
+    "rationale": "AF-CAND-0212 is an approved throughput root for compression_retest_breakout. Start by freezing a deterministic rule specification before EA-spec generation, compile, and MT5 smoke.",
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0212",
+      "queue_kind": "throughput"
+    },
+    "binding": true
+  }
+]

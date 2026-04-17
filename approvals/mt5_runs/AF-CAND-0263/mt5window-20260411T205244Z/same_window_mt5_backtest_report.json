@@ -1,0 +1,28 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5window-20260411T205244Z",
+  "purpose": "same_window_mt5_real_ticks_backtest_after_live_underperformance",
+  "from_date": "2026.03.25",
+  "to_date": "2026.04.11",
+  "manual_overrides": {
+    "deposit": 100.0,
+    "leverage": 33.0,
+    "fixed_lots": 0.01,
+    "auto_scale_lots": false,
+    "canonical_deposit": 100000.0,
+    "canonical_leverage": 30.0,
+    "canonical_fixed_lots": 5.0,
+    "min_lot": 0.01,
+    "lot_step": 0.01,
+    "sizing_mode": "explicit_fixed_lots",
+    "effective_fixed_lots": 0.01
+  },
+  "launch_status": "completed",
+  "terminal_return_code": 0,
+  "timed_out": false,
+  "tester_report_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5window-20260411T205244Z\\AF-CAND-0263-mt5window-20260411T205244Z-report.htm",
+  "audit_csv_path": null,
+  "broker_history_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5window-20260411T205244Z\\AF-CAND-0263__mt5window-20260411T205244Z__broker_history.csv",
+  "launch_status_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5window-20260411T205244Z\\launch_status.json",
+  "tester_config_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5window-20260411T205244Z\\tester_config.ini"
+}

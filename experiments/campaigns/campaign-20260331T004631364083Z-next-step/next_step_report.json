@@ -1,0 +1,203 @@
+{
+  "campaign_id": "campaign-20260331T004631364083Z-next-step",
+  "parent_campaign_id": "campaign-20260331T004631312839Z-next-step",
+  "selected_step_type": "data_feature_audit",
+  "step_reason": "The bounded family correction proposed by the parent data/feature audit could not justify even one supported mutation on the reference branch, so the next governed step is to rerun the family audit and close the family if no new correction path exists.",
+  "status": "completed",
+  "stop_reason": "data_feature_audit_completed_retire_family",
+  "candidate_scope": [
+    "AF-CAND-0415",
+    "AF-CAND-0419",
+    "AF-CAND-0418",
+    "AF-CAND-0417",
+    "AF-CAND-0414"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [
+    {
+      "family": "europe_open_high_vol_pullback_persistence_research",
+      "audited_candidate_ids": [
+        "AF-CAND-0415",
+        "AF-CAND-0419",
+        "AF-CAND-0418",
+        "AF-CAND-0417",
+        "AF-CAND-0414"
+      ],
+      "reference_candidate_id": "AF-CAND-0415",
+      "family_decision": "retire_family",
+      "summary": "Data/feature audit compared AF-CAND-0415, AF-CAND-0419, AF-CAND-0418, AF-CAND-0417, AF-CAND-0414. AF-CAND-0415 remains the best empirical reference branch, but the audited candidates share provenance_contract_mixed, insufficient_trade_density, low_sample_oos_spike, persistent_walk_forward_instability, broad_regime_dependence under a mixed research contract. That points to structural family weakness rather than one more safe bounded mutation.",
+      "suspected_root_causes": [
+        "provenance_contract_mixed",
+        "insufficient_trade_density",
+        "low_sample_oos_spike",
+        "persistent_walk_forward_instability",
+        "broad_regime_dependence"
+      ],
+      "provenance_consistency": {
+        "candidate_count_with_provenance": 5,
+        "archived_candidates_excluded": [],
+        "dataset_snapshot_ids": [
+          "9cc5cb13a9d363e6",
+          "e4562f1ec22e6013"
+        ],
+        "feature_version_ids": [
+          "e602a112f25aff49"
+        ],
+        "label_version_ids": [
+          "4531e04082baf668"
+        ],
+        "execution_cost_model_versions": [
+          "32e8aca350c6766e",
+          "4d6c4bfe2ce0dca5",
+          "6acf0ffbdb1efb65",
+          "9894b9e4e12843cf"
+        ],
+        "dataset_snapshot_consistent": false,
+        "feature_version_consistent": true,
+        "label_version_consistent": true,
+        "execution_cost_model_consistent": false
+      },
+      "recent_regime_signals": [
+        "europe, trend_context, high"
+      ],
+      "recommended_actions": [
+        "Retire the current family from further mutation and parity work.",
+        "Do not extend the approved program queue with nearby variants of this family.",
+        "Open a different hypothesis class or a separate data/label audit before resuming autonomous search."
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0415",
+          "family": "europe_open_high_vol_pullback_persistence_research",
+          "entry_style": "pullback_continuation",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 25,
+          "profit_factor": 1.7754629629627603,
+          "out_of_sample_profit_factor": 3.74528301886788,
+          "expectancy_pips": 1.3399999999996934,
+          "stress_passed": true,
+          "walk_forward_ok": false,
+          "pbo": 0.0,
+          "white_reality_check_p_value": 0.01992,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0415\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0415\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0415\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0419",
+          "family": "europe_open_high_vol_pullback_persistence_research",
+          "entry_style": "pullback_continuation",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 41,
+          "profit_factor": 1.0911214953272268,
+          "out_of_sample_profit_factor": 1.9023437500002143,
+          "expectancy_pips": 0.190243902439273,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0419\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0419\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0419\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0418",
+          "family": "europe_open_high_vol_pullback_persistence_research",
+          "entry_style": "pullback_continuation",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 30,
+          "profit_factor": 1.2780748663103259,
+          "out_of_sample_profit_factor": 2.539130434783222,
+          "expectancy_pips": 0.520000000000269,
+          "stress_passed": true,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0418\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0418\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0418\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0417",
+          "family": "europe_open_high_vol_pullback_persistence_research",
+          "entry_style": "pullback_continuation",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 35,
+          "profit_factor": 0.9092071611254054,
+          "out_of_sample_profit_factor": 1.2719298245614772,
+          "expectancy_pips": -0.20285714285694265,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0417\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0417\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0417\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0414",
+          "family": "europe_open_high_vol_pullback_persistence_research",
+          "entry_style": "pullback_continuation",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 25,
+          "profit_factor": 1.7754629629627603,
+          "out_of_sample_profit_factor": 3.74528301886788,
+          "expectancy_pips": 1.3399999999996934,
+          "stress_passed": true,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0414\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0414\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0414\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260331T004631364083Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260331T004631364083Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260331T004631364083Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": "data_label_audit",
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "hard_stop",
+  "transition_intent": "stop_terminal",
+  "policy_snapshot_hash": "731e1d2151ff379456a71b6c5dbc674f766e2f7d620ca7afbf6c644553c4d827",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260331T004631364083Z-next-step\\next_step_report.json"
+}

@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-03-31T00:02:42.399610Z",
+  "family": "day_trading",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "scan_report_path": "experiments\\day_trading_behavior_scan_20260331T000242Z.json",
+  "comparison_report_path": "experiments\\comparison_20260331T000242Z.json",
+  "recommended_candidate_id": "AF-CAND-0427",
+  "reference_candidate_id": "AF-CAND-0414",
+  "continuation_gate": {
+    "reference_candidate_id": "AF-CAND-0414",
+    "reference_trade_count": 25,
+    "reference_min_walk_forward_trade_count": 2,
+    "reference_out_of_sample_profit_factor": 3.74528301886788,
+    "reference_expectancy_pips": 1.3399999999996934,
+    "reference_stressed_profit_factor": 1.5284866576867138,
+    "required_trade_count": 40,
+    "required_min_walk_forward_trade_count": 8,
+    "minimum_out_of_sample_profit_factor": 1.310849,
+    "minimum_expectancy_pips": 0.536,
+    "minimum_stressed_profit_factor": 1.0,
+    "decision": "reopen_discovery",
+    "selected_candidate_id": null,
+    "reason": "No sibling reached the density-first continuation gate. The densest result was AF-CAND-0427 with 6 trades, minimum walk-forward trade count 1, expectancy 3.450, and stressed profit factor 4.446."
+  },
+  "report_path": "experiments\\day_trading_exploration_20260331T000242Z.json",
+  "candidates": [
+    {
+      "candidate_id": "AF-CAND-0427",
+      "title": "Europe High-Vol Pullback Regime Quality",
+      "entry_style": "pullback_continuation",
+      "thesis": "Reopen the strongest high-volatility Europe pullback clue through regime quality instead of hour pruning, so the branch can admit more persistent continuation resets while explicitly filtering out the weak late-reset states that broke the sparse walk-forward window. Corpus anchor: SRC-001: 3. The \ufb01 rst and second pro\ufb01 t targets are 50% and 90% of the range respec- tively, which are 103 pips and 185 pips below the resistance (1.6117). 4. Use risk to reward ratio of 1:1 to set the stop loss. (See Figure 8.41 .) From the long example in Figure 8.42 : Entry price = 1.6",
+      "candidate_path": "reports\\AF-CAND-0427\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0427\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0427\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0427\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0427\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0429",
+      "title": "Europe Persistent Reset High-Vol Pullback",
+      "entry_style": "pullback_continuation",
+      "thesis": "Treat the clue as a persistent-reset problem rather than a strict high-bucket problem, so the family can pick up quieter but still live continuation states in the weak window without drifting back into broad pullback-release behavior. Corpus anchor: SRC-003: Always remember Wyckoff's second law, the law of cause and effect. If the cause is large, then this will be reflected in the effect, which applies to support and resistance. The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once",
+      "candidate_path": "reports\\AF-CAND-0429\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0429\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0429\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0429\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0429\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0428",
+      "title": "Europe Bridge High-Vol Pullback Regime Quality",
+      "entry_style": "pullback_continuation",
+      "thesis": "Add the Europe bridge hour back into the high-volatility pullback clue only when the reset quality still looks like persistent continuation rather than opening scramble, using regime-state guards instead of a blunt hour exclusion. Corpus anchor: SRC-002: Pyramiding approaches, scale trading, stop reversals, breakouts, momentum trad-",
+      "candidate_path": "reports\\AF-CAND-0428\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0428\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0428\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0428\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0428\\review_packet.json"
+    }
+  ]
+}

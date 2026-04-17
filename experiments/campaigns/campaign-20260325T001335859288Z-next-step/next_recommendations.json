@@ -1,0 +1,15 @@
+[
+  {
+    "step_type": "re_evaluate_one_candidate",
+    "candidate_id": "AF-CAND-0248",
+    "rationale": "Mutation completed for AF-CAND-0248. Re-evaluate the mutated breakout candidate under the current canonical OANDA dataset and execution-cost assumptions before any further search.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0246",
+      "mutation_type": "suppress_context_bucket",
+      "context_bucket": "trend_context"
+    }
+  }
+]

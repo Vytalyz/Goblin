@@ -1,0 +1,18 @@
+﻿{
+  "candidate_id": "AF-CAND-0022",
+  "entry_style": "session_breakout",
+  "practice_only": true,
+  "parity_only": true,
+  "signal_audit_fields": [
+    "timestamp_utc",
+    "side",
+    "entry_price",
+    "exit_price",
+    "pnl_pips"
+  ],
+  "approval_recommendation": "needs_human_review",
+  "run_spec_path": "approvals\\mt5_runs\\AF-CAND-0022\\mt5run-20260321T200439Z\\run_spec.json",
+  "ea_source_path": "approvals\\mt5_packets\\AF-CAND-0022\\CandidateEA.mq5",
+  "news_blackout_mode": "manual_calendar_alignment_required",
+  "terminal_data_path": "<MT5_APPDATA>/Terminal\\<MT5_TERMINAL_HASH>"
+}

@@ -1,0 +1,4 @@
+Review the candidate below from your assigned critic role.
+Preserve the existing candidate fields and append critique notes and quality flags only where justified.
+
+{{payload}}

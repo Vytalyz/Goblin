@@ -1,0 +1,14 @@
+[
+  {
+    "candidate_id": "AF-CAND-0001-FADE",
+    "evidence_status": "supported",
+    "step_type": "mutate_one_candidate",
+    "rationale": "AF-CAND-0001-FADE should be refreshed to the current governed execution-cost defaults before failed_break_fade lane evaluation.",
+    "step_payload": {
+      "mutation_type": "refresh_execution_cost_defaults",
+      "source_candidate_id": "AF-CAND-0001-FADE",
+      "refresh_reason": "align AF-CAND-0001-FADE to the current scalping execution-cost contract before failed_break_fade lane evaluation"
+    },
+    "binding": true
+  }
+]

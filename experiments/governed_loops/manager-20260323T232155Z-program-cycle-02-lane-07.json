@@ -1,0 +1,92 @@
+{
+  "loop_id": "manager-20260323T232155Z-program-cycle-02-lane-07",
+  "family": "overlap_persistence_research",
+  "initial_parent_campaign_id": "campaign-20260323T232806566537Z-promotion_tight_overlap_persistence_af_cand_0218-seed",
+  "final_parent_campaign_id": "campaign-20260323T232914363939Z-next-step",
+  "executed_steps": 4,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "stop_class": "lane_exhausted",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260323T232914363939Z-next-step\\next_step_report.json",
+  "final_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0221",
+      "rationale": "AF-CAND-0221 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0218"
+      }
+    }
+  ],
+  "executed_campaign_ids": [
+    "campaign-20260323T232806672432Z-next-step",
+    "campaign-20260323T232914009810Z-next-step",
+    "campaign-20260323T232914186643Z-next-step",
+    "campaign-20260323T232914363939Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260323T232806672432Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260323T232806672432Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 2,
+      "campaign_id": "campaign-20260323T232914009810Z-next-step",
+      "selected_step_type": "diagnose_existing_candidates",
+      "status": "completed",
+      "stop_reason": "diagnosis_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "mutate_one_candidate",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260323T232914009810Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 3,
+      "campaign_id": "campaign-20260323T232914186643Z-next-step",
+      "selected_step_type": "mutate_one_candidate",
+      "status": "completed",
+      "stop_reason": "mutation_completed_with_supported_recommendation",
+      "continuation_status": "continue",
+      "stop_class": "none",
+      "auto_continue_allowed": true,
+      "recommended_follow_on_step": "re_evaluate_one_candidate",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260323T232914186643Z-next-step\\next_step_report.json"
+    },
+    {
+      "step_index": 4,
+      "campaign_id": "campaign-20260323T232914363939Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "stop",
+      "stop_class": "lane_exhausted",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260323T232914363939Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "2a53a70505590a830d817dbb28b83870b4ae364e8f76dd2a40def7ab0c09ac4e",
+  "report_path": "experiments\\governed_loops\\manager-20260323T232155Z-program-cycle-02-lane-07.json"
+}

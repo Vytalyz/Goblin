@@ -1,0 +1,284 @@
+{
+  "audit_root": "<USER_HOME>/OneDrive\\Documents\\Playground",
+  "container_git_root": "<USER_HOME>/onedrive/documents/playground",
+  "entry_count": 17,
+  "entries": [
+    {
+      "name": ".codex-tmp",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\.codex-tmp",
+      "classification": "utility-or-cache",
+      "has_local_git": false,
+      "effective_git_root": "<USER_HOME>/onedrive/documents/playground",
+      "markers": {
+        "pyproject.toml": false,
+        "AGENTS.md": false,
+        "README.md": false,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": ".git",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\.git",
+      "classification": "utility-or-cache",
+      "has_local_git": false,
+      "effective_git_root": null,
+      "markers": {
+        "pyproject.toml": false,
+        "AGENTS.md": false,
+        "README.md": false,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": ".npm-cache",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\.npm-cache",
+      "classification": "utility-or-cache",
+      "has_local_git": false,
+      "effective_git_root": "<USER_HOME>/onedrive/documents/playground",
+      "markers": {
+        "pyproject.toml": false,
+        "AGENTS.md": false,
+        "README.md": false,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": ".venv",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\.venv",
+      "classification": "utility-or-cache",
+      "has_local_git": false,
+      "effective_git_root": "<USER_HOME>/onedrive/documents/playground",
+      "markers": {
+        "pyproject.toml": false,
+        "AGENTS.md": false,
+        "README.md": false,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "Agentic Forex",
+      "path": ".",
+      "classification": "standalone-repo",
+      "has_local_git": true,
+      "effective_git_root": ".",
+      "markers": {
+        "pyproject.toml": true,
+        "AGENTS.md": true,
+        "README.md": true,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "Agentic Forex-2",
+      "path": ".-2",
+      "classification": "standalone-repo",
+      "has_local_git": true,
+      "effective_git_root": ".-2",
+      "markers": {
+        "pyproject.toml": true,
+        "AGENTS.md": true,
+        "README.md": true,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "Agentic Forex-2-gap-lane",
+      "path": ".-2-gap-lane",
+      "classification": "git-worktree",
+      "has_local_git": true,
+      "effective_git_root": ".-2-gap-lane",
+      "markers": {
+        "pyproject.toml": true,
+        "AGENTS.md": true,
+        "README.md": true,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "Agentic Forex-2-overlap-benchmark",
+      "path": ".-2-overlap-benchmark",
+      "classification": "git-worktree",
+      "has_local_git": true,
+      "effective_git_root": ".-2-overlap-benchmark",
+      "markers": {
+        "pyproject.toml": true,
+        "AGENTS.md": true,
+        "README.md": true,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "Agentic Forex-2-overlap-challenger",
+      "path": ".-2-overlap-challenger",
+      "classification": "git-worktree",
+      "has_local_git": true,
+      "effective_git_root": ".-2-overlap-challenger",
+      "markers": {
+        "pyproject.toml": true,
+        "AGENTS.md": true,
+        "README.md": true,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "DND-world",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\DND-world",
+      "classification": "project-needs-local-repo",
+      "has_local_git": true,
+      "effective_git_root": null,
+      "markers": {
+        "pyproject.toml": false,
+        "AGENTS.md": true,
+        "README.md": true,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "Fallen-Kingdoms-Obsidian",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\Fallen-Kingdoms-Obsidian",
+      "classification": "standalone-repo",
+      "has_local_git": true,
+      "effective_git_root": "<USER_HOME>/onedrive/documents/playground/fallen-kingdoms-obsidian",
+      "markers": {
+        "pyproject.toml": false,
+        "AGENTS.md": false,
+        "README.md": true,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "Financial Planning",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\Financial Planning",
+      "classification": "standalone-repo",
+      "has_local_git": true,
+      "effective_git_root": "<USER_HOME>/onedrive/documents/playground/financial planning",
+      "markers": {
+        "pyproject.toml": false,
+        "AGENTS.md": false,
+        "README.md": false,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "Forex",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\Forex",
+      "classification": "standalone-repo",
+      "has_local_git": true,
+      "effective_git_root": "<USER_HOME>/onedrive/documents/playground/forex",
+      "markers": {
+        "pyproject.toml": true,
+        "AGENTS.md": true,
+        "README.md": true,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "gnidart",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\gnidart",
+      "classification": "standalone-repo",
+      "has_local_git": true,
+      "effective_git_root": "<USER_HOME>/onedrive/documents/playground/gnidart",
+      "markers": {
+        "pyproject.toml": false,
+        "AGENTS.md": false,
+        "README.md": false,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "Investment Strategy",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\Investment Strategy",
+      "classification": "standalone-repo",
+      "has_local_git": true,
+      "effective_git_root": "<USER_HOME>/onedrive/documents/playground/investment strategy",
+      "markers": {
+        "pyproject.toml": true,
+        "AGENTS.md": false,
+        "README.md": true,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    },
+    {
+      "name": "Prophet",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\Prophet",
+      "classification": "standalone-repo",
+      "has_local_git": true,
+      "effective_git_root": "<USER_HOME>/onedrive/documents/playground/prophet",
+      "markers": {
+        "pyproject.toml": true,
+        "AGENTS.md": true,
+        "README.md": false,
+        "STATUS.md": true,
+        "PLAN.md": true
+      },
+      "notes": []
+    },
+    {
+      "name": "tmp",
+      "path": "<USER_HOME>/OneDrive\\Documents\\Playground\\tmp",
+      "classification": "utility-or-cache",
+      "has_local_git": false,
+      "effective_git_root": "<USER_HOME>/onedrive/documents/playground",
+      "markers": {
+        "pyproject.toml": false,
+        "AGENTS.md": false,
+        "README.md": false,
+        "STATUS.md": false,
+        "PLAN.md": false
+      },
+      "notes": []
+    }
+  ],
+  "anomalies": [
+    {
+      "type": "git_worktree",
+      "folder": "Agentic Forex-2-gap-lane",
+      "detail": "Folder is a git worktree and should be managed through its owning repository."
+    },
+    {
+      "type": "git_worktree",
+      "folder": "Agentic Forex-2-overlap-benchmark",
+      "detail": "Folder is a git worktree and should be managed through its owning repository."
+    },
+    {
+      "type": "git_worktree",
+      "folder": "Agentic Forex-2-overlap-challenger",
+      "detail": "Folder is a git worktree and should be managed through its owning repository."
+    },
+    {
+      "type": "missing_local_repo",
+      "folder": "DND-world",
+      "detail": "Project markers exist, but the folder does not have its own git root."
+    }
+  ]
+}

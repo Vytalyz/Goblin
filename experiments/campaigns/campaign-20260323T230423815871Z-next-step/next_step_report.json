@@ -1,0 +1,159 @@
+{
+  "campaign_id": "campaign-20260323T230423815871Z-next-step",
+  "parent_campaign_id": "campaign-20260323T230423777175Z-next-step",
+  "selected_step_type": "data_feature_audit",
+  "step_reason": "The bounded family correction proposed by the parent data/feature audit could not justify even one supported mutation on the reference branch, so the next governed step is to rerun the family audit and close the family if no new correction path exists.",
+  "status": "completed",
+  "stop_reason": "data_feature_audit_completed_retire_family",
+  "candidate_scope": [
+    "AF-CAND-0215",
+    "AF-CAND-0213",
+    "AF-CAND-0214"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [
+    {
+      "family": "volatility_retest_research",
+      "audited_candidate_ids": [
+        "AF-CAND-0215",
+        "AF-CAND-0213",
+        "AF-CAND-0214"
+      ],
+      "reference_candidate_id": "AF-CAND-0215",
+      "family_decision": "retire_family",
+      "summary": "Data/feature audit compared AF-CAND-0215, AF-CAND-0213, AF-CAND-0214. AF-CAND-0215 remains the best empirical reference branch, but the audited candidates share provenance_contract_mixed, insufficient_trade_density, persistent_walk_forward_instability, broad_regime_dependence under a mixed research contract. That points to structural family weakness rather than one more safe bounded mutation.",
+      "suspected_root_causes": [
+        "provenance_contract_mixed",
+        "insufficient_trade_density",
+        "persistent_walk_forward_instability",
+        "broad_regime_dependence"
+      ],
+      "provenance_consistency": {
+        "candidate_count_with_provenance": 3,
+        "archived_candidates_excluded": [],
+        "dataset_snapshot_ids": [
+          "67bf4e6704f317a1",
+          "b526f3de0bb08ad5",
+          "c3f5ea6697188ce0"
+        ],
+        "feature_version_ids": [
+          "e602a112f25aff49"
+        ],
+        "label_version_ids": [
+          "4531e04082baf668"
+        ],
+        "execution_cost_model_versions": [
+          "2b8d6e2ca37f233d",
+          "65c4801f2e821317",
+          "d5cd4cc4847c41c1"
+        ],
+        "dataset_snapshot_consistent": false,
+        "feature_version_consistent": true,
+        "label_version_consistent": true,
+        "execution_cost_model_consistent": false
+      },
+      "recent_regime_signals": [
+        "europe, neutral_context, medium",
+        "neutral_context, high, overlap"
+      ],
+      "recommended_actions": [
+        "Retire the current family from further mutation and parity work.",
+        "Do not extend the approved program queue with nearby variants of this family.",
+        "Open a different hypothesis class or a separate data/label audit before resuming autonomous search."
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0215",
+          "family": "volatility_retest_research",
+          "entry_style": "volatility_retest_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 57,
+          "profit_factor": 1.9035874439462042,
+          "out_of_sample_profit_factor": 2.060509554140131,
+          "expectancy_pips": 1.4140350877193286,
+          "stress_passed": true,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0215\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0215\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0215\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0213",
+          "family": "volatility_retest_research",
+          "entry_style": "volatility_retest_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 76,
+          "profit_factor": 1.5498007968129375,
+          "out_of_sample_profit_factor": 1.2871485943776781,
+          "expectancy_pips": 1.0894736842108006,
+          "stress_passed": true,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0213\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0213\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0213\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0214",
+          "family": "volatility_retest_research",
+          "entry_style": "volatility_retest_breakout",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 68,
+          "profit_factor": 1.4966088922381544,
+          "out_of_sample_profit_factor": 1.41428571428557,
+          "expectancy_pips": 0.9691176470589039,
+          "stress_passed": true,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0214\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0214\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0214\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260323T230423815871Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260323T230423815871Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260323T230423815871Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": "data_label_audit",
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "hard_stop",
+  "transition_intent": "stop_terminal",
+  "policy_snapshot_hash": "d51fb512a96818daa09f7846a5947b3c2b57562f29ab3e096c7b00ed10ad9e02",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260323T230423815871Z-next-step\\next_step_report.json"
+}

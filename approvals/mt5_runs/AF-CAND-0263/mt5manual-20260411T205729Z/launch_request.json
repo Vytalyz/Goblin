@@ -1,0 +1,31 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5manual-20260411T205729Z",
+  "terminal_path": "data\\state\\mt5_automation_runtime\\terminal64.exe",
+  "portable_mode": true,
+  "config_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5manual-20260411T205729Z\\tester_config.ini",
+  "launch_mode": "/config",
+  "logic_manifest_hash": "ec9590fce55f33669dd1bd7ac86a1f6b8ec754ad15b1c192f40b0f90a649b398",
+  "packet_reused": false,
+  "manual_run": true,
+  "tester_mode": "Every tick based on real ticks",
+  "manual_overrides": {
+    "deposit": 100.0,
+    "leverage": 33.0,
+    "fixed_lots": 0.01,
+    "auto_scale_lots": false,
+    "canonical_deposit": 100000.0,
+    "canonical_leverage": 30.0,
+    "canonical_fixed_lots": 5.0,
+    "min_lot": 0.01,
+    "lot_step": 0.01,
+    "sizing_mode": "explicit_fixed_lots",
+    "effective_fixed_lots": 0.01
+  },
+  "broker_history_relative_path": "AgenticForex\\Audit\\AF-CAND-0263__mt5manual-20260411T205729Z__broker_history.csv",
+  "broker_history_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0263__mt5manual-20260411T205729Z__broker_history.csv",
+  "diagnostic_windows_relative_path": "AgenticForex\\Audit\\AF-CAND-0263__mt5manual-20260411T205729Z__diagnostic_tick_windows.csv",
+  "diagnostic_windows_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0263__mt5manual-20260411T205729Z__diagnostic_tick_windows.csv",
+  "diagnostic_ticks_relative_path": "AgenticForex\\Audit\\AF-CAND-0263__mt5manual-20260411T205729Z__diagnostic_ticks.csv",
+  "diagnostic_ticks_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0263__mt5manual-20260411T205729Z__diagnostic_ticks.csv"
+}

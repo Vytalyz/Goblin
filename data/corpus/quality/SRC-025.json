@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-025",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Wiley Trading",
+    "Founded in 1807, John Wiley & Sons is the oldest independent publish-",
+    "Australia and Asia, Wiley is globally committed to developing and market-"
+  ],
+  "front_matter_signals": [
+    "perfect introduction. And for the seasoned investor, it\u2019s a stimulating refresher course.\u201d",
+    "FOREWORD BY RON INSANA",
+    "Includes bibliographical references and index."
+  ],
+  "best_excerpt": "expand and momentum intensi\ufb01es, resulting in self-reinforcing trends,"
+}

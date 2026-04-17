@@ -1,0 +1,18 @@
+{
+  "source_id": "SRC-064",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "His first was The Mathematics of Money Management, followed by Portfolio Manageme nt Formulas, and my favorite, The New Money Management. These are all published by John Wiley and Sons, New York, and are mustreads for any serious trader or money manager."
+  ],
+  "front_matter_signals": [
+    "Introduction You Are Already a Commodity Trader 1",
+    "Chapter 8 Separating the Buyers from the Sellers 121 Greatest Swing Value 123 Stock Index Trading with Greatest Swing Value 124 Some Pointers 128",
+    "Chapter 9 Short-Term Trading from a Quote Screen 131 How a Quote-Screen Trader Makes Money 132 Swing Points as Trend Change Indication 134 The Three-Bar High/Low System 136 A New Indicator for Short-Term Traders: Will-Tell 138 Will-Spread and the S&P 500 Stock Index 141"
+  ],
+  "best_excerpt": "points where trend changes; we switc h from buying the lows to shorting the highs following these reversals. The 3-bar high and low entry points are also shown. Th e game goes like this; trend reversal up so we buy the 3-bar low line and take profits at the 3-bar high a nd await "
+}

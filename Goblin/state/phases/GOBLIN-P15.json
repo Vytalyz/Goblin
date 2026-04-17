@@ -1,0 +1,16 @@
+{
+  "phase_id": "GOBLIN-P15",
+  "title": "Clean-Room Rules And Baseline Scenarios",
+  "status": "completed",
+  "depends_on": ["GOBLIN-P13"],
+  "started_at": "2026-04-13T13:30:00Z",
+  "completed_at": "2026-04-13T14:00:00Z",
+  "primary_deliverable": "Goblin/contracts/clean-room-rules.md",
+  "artifacts": [
+    "Goblin/contracts/clean-room-rules.md",
+    "Goblin/reports/baseline_scenarios.md",
+    "Goblin/reports/pattern_cards/TEMPLATE.md",
+    "Goblin/reports/framework_gap_matrix.md"
+  ],
+  "last_checkpoint": "Goblin/checkpoints/GOBLIN-P15/goblin-p15-clean-room-complete.json"
+}

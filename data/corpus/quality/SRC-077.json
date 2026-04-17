@@ -1,0 +1,19 @@
+{
+  "source_id": "SRC-077",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "FIRESIDE Rockefeller Center 1230 Avenue of the Americas New York, NY 10020 www.SimonandSchuster.com Copyright \u00a9 1989 by Peter Lynch Introduction copyright \u00a9 2000 by Peter Lynch All rights reserved, including the right of reproduction in whole or in part in any form. First Firesid",
+    "According to information published by Investor\u2019s Intelligence, which tracks investor sentiment via the newsletters, at the end of 1972, when stocks were about to tumble, optimism was at an all-time high, with only 15 percent of the advisors bearish."
+  ],
+  "front_matter_signals": [
+    "Now, in a new introduction written specifically for this edition of One Up on Wall Street, Lynch gives his take on the incredible rise of Internet stocks, as well as a list of twenty winning companies of high-tech \u201990s. That many of these winners are low-tech supports his thesis ",
+    "FIRESIDE Rockefeller Center 1230 Avenue of the Americas New York, NY 10020 www.SimonandSchuster.com Copyright \u00a9 1989 by Peter Lynch Introduction copyright \u00a9 2000 by Peter Lynch All rights reserved, including the right of reproduction in whole or in part in any form. First Firesid",
+    "Contents Introduction to the Millennium Edition PROLOGUE: A Note from Ireland INTRODUCTION: The Advantages of Dumb Money PART I: Preparing to Invest 1: The Making of a Stockpicker 2: The Wall Street Oxymorons 3: Is This Gambling, or What?"
+  ],
+  "best_excerpt": "Does the brisk commerce in stock indexes have something to do with it? Whatever the cause (I see day traders as a major factor), frequent trading has made the stock markets more volatile. A decade ago stock prices moving up or down more than 1 percent in a single trading session "
+}

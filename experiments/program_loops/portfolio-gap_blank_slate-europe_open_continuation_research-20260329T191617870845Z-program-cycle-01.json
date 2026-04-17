@@ -1,0 +1,20 @@
+{
+  "program_id": "portfolio-gap_blank_slate-europe_open_continuation_research-20260329T191617870845Z-program-cycle-01",
+  "family": "europe_open_continuation_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_lanes": 0,
+  "max_lanes": 3,
+  "status": "stopped",
+  "stop_reason": "program_loop_no_pending_approved_lanes",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "556a92f12b0cb9ab3bb11eb94b87e290c168b6bd2b384c7e3658faa44ed68cfb",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\portfolio-gap_blank_slate-europe_open_continuation_research-20260329T191617870845Z-program-cycle-01.json"
+}

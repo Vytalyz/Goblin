@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-024",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "high",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "@Team-FLY Wiley Finance Series Currency Strategy: The Practitioner\u2019s Guide to Currency Investing, Hedging and F orecasting Callum Henderson Investors Guide to Market Fundamentals John Calverley Hedge Funds: Myths and Limits Francois-Serge Lhabitant The Manager\u2019s Concise Guide to ",
+    "2: New Markets and Products Carol Alexander (ed.) Implementing V alue at Risk Philip Best Implementing Derivatives Models Les Clewlow and Chris Strickland Interest-Rate Option Models: Understanding, Analysing and Using Models for Exotic Interest-Rate Options (second edition) Ricc",
+    "No part of this publication may be reproduced, stored in a retrieval system or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, scanning or otherwise, except under the terms of the Copyright, Designs and Patents Act 1988 or under the terms"
+  ],
+  "front_matter_signals": [
+    "@Team-FLY Contents Acknowledgements xiii Biography xv Introduction 1 Part One Theory and Practice 15 1 Fundamental Analysis: The Strengths and Weaknesses of Traditional Exchange Rate Models 17 1.1 Purchasing Power Parity 17 1.1.1 Reasons for \u201cMisalignments\u201d 19 1.1.2 Tradable and ",
+    "Acknowledgements In getting this book from the \ufb01rst stage of an idea to the printed edition, I am greatly indebted to Sally Smith and Rachael Wilkie of John Wiley & Sons publishing company for the initial invitation to write on this topic and subsequently for their advice, encour",
+    "I am also as ever indebted to my father and to the memory of my mother, who battled to get me to read at an early age, an effort that successfully unleashed an avalanche of reading, inquiry and travel. What little or otherwise I have become is down to their dedication and love an"
+  ],
+  "best_excerpt": "In line with this, the larger the outstanding speculative position, the more laboured the price action becomes in favour of the prevailing trend. This is not to say the prevailing trend cannot continue for some time. It is to say however that the momentum of that trend will conti"
+}

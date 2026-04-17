@@ -1,0 +1,38 @@
+{
+  "program_id": "manager-throughput-v4-program-cycle-01",
+  "family": "throughput_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": "campaign-20260322T191907527663Z-next-step",
+  "executed_lanes": 1,
+  "max_lanes": 3,
+  "status": "completed",
+  "stop_reason": "program_loop_no_pending_approved_lanes",
+  "stop_class": "policy_decision",
+  "transition_intent": "advance_next_lane",
+  "lane_summaries": [
+    {
+      "lane_index": 1,
+      "lane_id": "session_extreme_reversion_af_cand_0149",
+      "family": "throughput_research",
+      "hypothesis_class": "session_extreme_reversion",
+      "seed_candidate_id": "AF-CAND-0149",
+      "queue_kind": "throughput",
+      "seed_campaign_id": "campaign-20260322T191904388122Z-session_extreme_reversion_af_cand_0149-seed",
+      "initial_parent_campaign_id": "campaign-20260322T191904388122Z-session_extreme_reversion_af_cand_0149-seed",
+      "final_parent_campaign_id": "campaign-20260322T191907527663Z-next-step",
+      "governed_loop_report_path": "experiments\\governed_loops\\manager-throughput-v4-program-cycle-01-lane-01.json",
+      "status": "completed",
+      "stop_reason": "triage_completed_discard_candidate",
+      "stop_class": "policy_decision",
+      "transition_status": "move_to_next_lane",
+      "transition_intent": "advance_next_lane"
+    }
+  ],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "2b8370bca4ad6bc320a20a0ca369e9ca9ad6b020ceeb84ea843b3fa230074cb8",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-throughput-v4-program-cycle-01.json"
+}

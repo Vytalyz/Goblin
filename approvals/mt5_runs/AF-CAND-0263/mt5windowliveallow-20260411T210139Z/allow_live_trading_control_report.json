@@ -1,0 +1,10 @@
+{
+  "candidate_id": "AF-CAND-0263",
+  "run_id": "mt5windowliveallow-20260411T210139Z",
+  "purpose": "allow_live_trading_control",
+  "launch_status": "completed",
+  "tester_report_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5windowliveallow-20260411T210139Z\\AF-CAND-0263-mt5windowliveallow-20260411T210139Z-report.htm",
+  "audit_csv_path": null,
+  "broker_history_csv_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5windowliveallow-20260411T210139Z\\AF-CAND-0263__mt5windowliveallow-20260411T210139Z__broker_history.csv",
+  "tester_config_path": "approvals\\mt5_runs\\AF-CAND-0263\\mt5windowliveallow-20260411T210139Z\\tester_config.ini"
+}

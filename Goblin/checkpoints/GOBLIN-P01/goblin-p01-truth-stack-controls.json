@@ -1,0 +1,19 @@
+{
+  "checkpoint_id": "goblin-p01-truth-stack-controls",
+  "phase_id": "GOBLIN-P01",
+  "created_utc": "2026-04-12T03:25:44.431255Z",
+  "summary": "Completed truth-stack foundation with channel roots, comparison contracts, and truth-alignment reporting.",
+  "authoritative_artifacts": [
+    "src/agentic_forex/goblin/models.py",
+    "src/agentic_forex/goblin/evidence.py",
+    "src/agentic_forex/goblin/service.py",
+    "Goblin/contracts/truth-stack.md",
+    "Goblin/contracts/comparison-matrix.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P01.md",
+    "Goblin/STATUS.md"
+  ],
+  "status_at_checkpoint": "completed",
+  "checkpoint_path": "Goblin\\checkpoints\\GOBLIN-P01\\goblin-p01-truth-stack-controls.json"
+}

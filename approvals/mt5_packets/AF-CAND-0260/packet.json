@@ -1,0 +1,20 @@
+{
+  "candidate_id": "AF-CAND-0260",
+  "packet_dir": "approvals\\mt5_packets\\AF-CAND-0260",
+  "logic_manifest_path": "approvals\\mt5_packets\\AF-CAND-0260\\logic_manifest.json",
+  "expected_signal_path": "approvals\\mt5_packets\\AF-CAND-0260\\expected_signals.csv",
+  "notes_path": "approvals\\mt5_packets\\AF-CAND-0260\\notes.md",
+  "ea_source_path": "approvals\\mt5_packets\\AF-CAND-0260\\CandidateEA.mq5",
+  "deployed_source_path": "data\\state\\mt5_automation_runtime\\MQL5\\Experts\\AgenticForex\\AF-CAND-0260.mq5",
+  "compiled_ex5_path": "data\\state\\mt5_automation_runtime\\MQL5\\Experts\\AgenticForex\\AF-CAND-0260.ex5",
+  "compile_log_path": null,
+  "terminal_data_path": "data\\state\\mt5_automation_runtime",
+  "metaeditor_path": "data\\state\\mt5_automation_runtime\\MetaEditor64.exe",
+  "logic_manifest_hash": "2b36284b382751b6d3195e07176decca970de0a022025ab8717156339ec7811c",
+  "audit_relative_path": "AgenticForex\\Audit\\AF-CAND-0260__mt5run-20260325T024224Z__audit.csv",
+  "audit_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0260__mt5run-20260325T024224Z__audit.csv",
+  "run_spec_path": "approvals\\mt5_runs\\AF-CAND-0260\\mt5run-20260325T024224Z\\run_spec.json",
+  "tester_config_path": "approvals\\mt5_runs\\AF-CAND-0260\\mt5run-20260325T024224Z\\tester_config.ini",
+  "compile_request_path": "approvals\\mt5_runs\\AF-CAND-0260\\mt5run-20260325T024224Z\\compile_request.json",
+  "launch_request_path": "approvals\\mt5_runs\\AF-CAND-0260\\mt5run-20260325T024224Z\\launch_request.json"
+}

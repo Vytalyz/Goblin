@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-013",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright \u00a9 2011 by Michael Lewis",
+    "All rights reserved",
+    "Library of Congress Cataloging-in-Publication Data"
+  ],
+  "front_matter_signals": [
+    "CONTENTS",
+    "Preface: The Biggest Short",
+    "Acknowledgments"
+  ],
+  "best_excerpt": "single trading session, and a run on Irish"
+}

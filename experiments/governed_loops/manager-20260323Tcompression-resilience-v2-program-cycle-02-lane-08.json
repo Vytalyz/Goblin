@@ -1,0 +1,35 @@
+{
+  "loop_id": "manager-20260323Tcompression-resilience-v2-program-cycle-02-lane-08",
+  "family": "compression_resilience_research",
+  "initial_parent_campaign_id": "campaign-20260323T223457245277Z-next-step",
+  "final_parent_campaign_id": "campaign-20260323T223513654921Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+  "stop_class": "policy_decision",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260323T223513654921Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260323T223513654921Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260323T223513654921Z-next-step",
+      "selected_step_type": "hypothesis_audit",
+      "status": "completed",
+      "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+      "continuation_status": "stop",
+      "stop_class": "policy_decision",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": null,
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260323T223513654921Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "a7babcbf595f0ca2097fa4a23e697cc71375ad6446d19b97c87f44eeef7cf16a",
+  "report_path": "experiments\\governed_loops\\manager-20260323Tcompression-resilience-v2-program-cycle-02-lane-08.json"
+}

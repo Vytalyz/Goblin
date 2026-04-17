@@ -1,0 +1,27 @@
+[portfolio]
+
+[[portfolio.slots]]
+slot_id = "overlap_benchmark"
+mode = "locked_benchmark"
+purpose = "demo_monitoring_reference"
+active_candidate_id = "AF-CAND-0263"
+mutation_allowed = false
+allowed_families = ["overlap_resolution_bridge_research"]
+codex_execution_mode = "manual_or_readonly_summary"
+worktree_name = "codex-overlap-benchmark"
+automation_name = "portfolio-brief"
+
+[[portfolio.slots]]
+slot_id = "gap_blank_slate"
+mode = "blank_slate_research"
+purpose = "next_non_overlap_deployable_strategy"
+mutation_allowed = true
+allowed_families = [
+  "europe_open_impulse_retest_research",
+  "europe_open_opening_range_retest_research",
+  "europe_open_early_follow_through_research",
+]
+codex_execution_mode = "app_automation_worktree"
+worktree_name = "codex-gap-strategy-rd"
+automation_name = "gap-strategy-rd"
+strategy_inheritance = "none_from_AF-CAND-0263_logic"

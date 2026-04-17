@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-058",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Actual events may differ materially from those described in such forward-looking statements. &#13; &#13; Copyright \u00a9 2005 Robert J. Shiller &#13; Published by Princeton University Press, 41 William Street, Princeton, New Jersey 08540 &#13; In the United Kingdom: Princeton Univers",
+    "Shiller.\u20142nd ed. &#13; p. cm. &#13; Includes bibliographical references and index. &#13; ISBN 0-691-12335-7 (alk. paper) &#13; 1. Stocks\u2014United States. 2. Stock exchanges\u2014United States. 3. Stocks\u2014Prices\u2014United States.",
+    "A top-heavy structure has collapsed of its own weight\u2014there has been no earthquake.\u201d The New York Times said, \u201cThe market smash has been caused by technical rather than fundamental considerations.\u201d The Guaranty Survey , published by the Guaranty Trust Company, remarked that \u201cto s"
+  ],
+  "front_matter_signals": [
+    "Shiller.\u20142nd ed. &#13; p. cm. &#13; Includes bibliographical references and index. &#13; ISBN 0-691-12335-7 (alk. paper) &#13; 1. Stocks\u2014United States. 2. Stock exchanges\u2014United States. 3. Stocks\u2014Prices\u2014United States.",
+    "&#13; &#13; Contents &#13; &#13; &#13; &#13; &#13; List of Figures and Tables &#13; Preface to the Second Edition &#13; Preface to the First Edition, 2000 &#13; Acknowledgments &#13; &#13; One The Stock Market in Historical Perspective &#13; Two The Real Estate Market in Historic",
+    "Home Prices, Building Costs, Population, and Interest Rates, 1890\u20132004 &#13; 2.2 &#13; &#13; Home Prices in a Sample of Cities, Quarterly, 1983\u20132004 &#13; 2.3 &#13; &#13; Home Prices in Some Cities around the World, Quarterly, 1983\u20132004 &#13; 4.1 &#13; &#13; Valuation Confidence "
+  ],
+  "best_excerpt": "Years\u2019 work will probably be needed before these issues are fully resolved. &#13; 19 . In addition to this long-run tendency toward reversal of trends, there is a shorter-run weak tendency toward momentum, for stock prices to continue moving in the same direction."
+}

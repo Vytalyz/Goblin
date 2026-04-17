@@ -1,0 +1,14 @@
+{
+  "source_id": "SRC-066",
+  "extraction_confidence": 0.1,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": false,
+  "reasons": [
+    "Extraction confidence below discovery floor."
+  ],
+  "copyright_signals": [],
+  "front_matter_signals": [],
+  "best_excerpt": "Mastering the Trade - Proven Techniques for Profiting from Intraday and Swing Trading Setups 2006"
+}

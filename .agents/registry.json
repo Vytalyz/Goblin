@@ -1,0 +1,247 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Goblin component registry indexing all agents, skills, hooks, workflows, and Codex adapters.",
+  "agents": [
+    {
+      "name": "corpus-librarian",
+      "path": ".agents/agents/corpus-librarian.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "day-trading-strategist",
+      "path": ".agents/agents/day-trading-strategist.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "execution-realist",
+      "path": ".agents/agents/execution-realist.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "extraction-reviewer",
+      "path": ".agents/agents/extraction-reviewer.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "gap-lane-explorer",
+      "path": ".agents/agents/gap-lane-explorer.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "governance-auditor",
+      "path": ".agents/agents/governance-auditor.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "incident-reviewer",
+      "path": ".agents/agents/incident-reviewer.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "lane-researcher",
+      "path": ".agents/agents/lane-researcher.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "lead-orchestrator",
+      "path": ".agents/agents/lead-orchestrator.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "portfolio-orchestrator",
+      "path": ".agents/agents/portfolio-orchestrator.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "quant-critic",
+      "path": ".agents/agents/quant-critic.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "review-synthesizer",
+      "path": ".agents/agents/review-synthesizer.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "risk-critic",
+      "path": ".agents/agents/risk-critic.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "runtime-observer",
+      "path": ".agents/agents/runtime-observer.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "scalping-strategist",
+      "path": ".agents/agents/scalping-strategist.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "throughput-worker",
+      "path": ".agents/agents/throughput-worker.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "validation-worker",
+      "path": ".agents/agents/validation-worker.md",
+      "type": "canonical_definition"
+    },
+    {
+      "name": "publish-guardian",
+      "path": ".agents/agents/publish-guardian.md",
+      "type": "canonical_definition"
+    }
+  ],
+  "skills": [
+    {
+      "name": "artifact-audit",
+      "path": ".agents/skills/artifact-audit/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "candidate-refinement",
+      "path": ".agents/skills/candidate-refinement/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "capability-crawl",
+      "path": ".agents/skills/capability-crawl/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "governed-strategy-search",
+      "path": ".agents/skills/governed-strategy-search/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "incident-review",
+      "path": ".agents/skills/incident-review/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "industry-monitoring",
+      "path": ".agents/skills/industry-monitoring/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "parity-packaging",
+      "path": ".agents/skills/parity-packaging/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "promotion-readiness-review",
+      "path": ".agents/skills/promotion-readiness-review/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "runtime-monitoring",
+      "path": ".agents/skills/runtime-monitoring/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "publish-validation",
+      "path": ".agents/skills/publish-validation/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "artifact-sanitization",
+      "path": ".agents/skills/artifact-sanitization/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "gitignore-audit",
+      "path": ".agents/skills/gitignore-audit/SKILL.md",
+      "type": "skill_definition"
+    },
+    {
+      "name": "readme-license-audit",
+      "path": ".agents/skills/readme-license-audit/SKILL.md",
+      "type": "skill_definition"
+    }
+  ],
+  "hooks": [
+    {
+      "name": "hooks-contract",
+      "path": ".agents/hooks/README.md",
+      "type": "hook_contract_schema"
+    },
+    {
+      "name": "pre-push-validation",
+      "path": ".agents/hooks/pre-push-validation.md",
+      "type": "hook_contract"
+    }
+  ],
+  "workflows": [
+    {
+      "name": "candidate_review_v1",
+      "path": "workflows/candidate_review_v1.json",
+      "version": "2.0.0",
+      "trigger": "cli:review-candidate",
+      "approval_required": true
+    },
+    {
+      "name": "day_trading_discovery_v1",
+      "path": "workflows/day_trading_discovery_v1.json",
+      "version": "1.0.0",
+      "trigger": "cli:discover",
+      "approval_required": false
+    },
+    {
+      "name": "scalping_discovery_v1",
+      "path": "workflows/scalping_discovery_v1.json",
+      "version": "1.0.0",
+      "trigger": "cli:discover",
+      "approval_required": false
+    },
+    {
+      "name": "strategy_discovery_router_v1",
+      "path": "workflows/strategy_discovery_router_v1.json",
+      "version": "2.0.0",
+      "trigger": "cli:discover",
+      "approval_required": false
+    }
+  ],
+  "codex_adapters": [
+    {
+      "name": "gap_lane_explorer",
+      "path": ".codex/agents/gap_lane_explorer.toml",
+      "canonical_ref": ".agents/agents/gap-lane-explorer.md"
+    },
+    {
+      "name": "governance_auditor",
+      "path": ".codex/agents/governance_auditor.toml",
+      "canonical_ref": ".agents/agents/governance-auditor.md"
+    },
+    {
+      "name": "incident_reviewer",
+      "path": ".codex/agents/incident_reviewer.toml",
+      "canonical_ref": ".agents/agents/incident-reviewer.md"
+    },
+    {
+      "name": "lane_researcher",
+      "path": ".codex/agents/lane_researcher.toml",
+      "canonical_ref": ".agents/agents/lane-researcher.md"
+    },
+    {
+      "name": "portfolio_orchestrator",
+      "path": ".codex/agents/portfolio_orchestrator.toml",
+      "canonical_ref": ".agents/agents/portfolio-orchestrator.md"
+    },
+    {
+      "name": "runtime_observer",
+      "path": ".codex/agents/runtime_observer.toml",
+      "canonical_ref": ".agents/agents/runtime-observer.md"
+    },
+    {
+      "name": "throughput_worker",
+      "path": ".codex/agents/throughput_worker.toml",
+      "canonical_ref": ".agents/agents/throughput-worker.md"
+    },
+    {
+      "name": "validation_worker",
+      "path": ".codex/agents/validation_worker.toml",
+      "canonical_ref": ".agents/agents/validation-worker.md"
+    }
+  ]
+}

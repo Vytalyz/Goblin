@@ -1,0 +1,14 @@
+[
+  {
+    "step_type": "diagnose_existing_candidates",
+    "candidate_id": "AF-CAND-0174",
+    "rationale": "AF-CAND-0174 remains the strongest family reference after the data/feature audit. Run one bounded diagnosis pass on that branch before any further correction or retirement decision.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0174",
+      "audit_origin": "data_feature_audit"
+    }
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "campaign_id": "campaign-20260321T193750Z-next-step",
+  "family": "scalping",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0014",
+  "parent_campaign_id": "campaign-20260321T201500Z-overlap-trim-0021-seed",
+  "current_step_type": "mutate_one_candidate",
+  "active_candidate_ids": [
+    "AF-CAND-0022"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 1,
+  "trials_consumed": 1,
+  "stop_reason": "mutation_completed_with_supported_recommendation",
+  "state_path": "experiments\\campaigns\\campaign-20260321T193750Z-next-step\\state.json",
+  "last_report_path": "experiments\\campaigns\\campaign-20260321T193750Z-next-step\\next_step_report.json",
+  "next_recommendations_path": "experiments\\campaigns\\campaign-20260321T193750Z-next-step\\next_recommendations.json",
+  "updated_utc": "2026-03-21T19:37:50.569594Z"
+}

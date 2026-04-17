@@ -1,0 +1,24 @@
+{
+  "candidate_id": "AF-CAND-0240",
+  "run_id": "mt5run-20260324T022524Z",
+  "validation_status": "failed",
+  "failure_classification": "parity_failure",
+  "parity_rate": 0.017949,
+  "audit_rows": 343,
+  "expected_trade_count": 390,
+  "actual_trade_count": 343,
+  "matched_trade_count": 7,
+  "unmatched_expected_count": 383,
+  "unmatched_actual_count": 336,
+  "tolerances_used": {
+    "parity_timestamp_tolerance_seconds": 90,
+    "parity_close_timing_tolerance_seconds": 120,
+    "parity_price_tolerance_pips": 0.3,
+    "parity_fill_tolerance_pips": 0.5,
+    "parity_min_match_rate": 0.8,
+    "parity_max_unmatched_expected_rate": 0.2,
+    "parity_max_unmatched_actual_rate": 0.2,
+    "parity_min_closed_trades": 10
+  },
+  "report_path": "approvals\\mt5_runs\\AF-CAND-0240\\mt5run-20260324T022524Z\\validation_report.json"
+}

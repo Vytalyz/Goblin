@@ -1,0 +1,20 @@
+{
+  "program_id": "manager-20260322T233751Z-program-cycle-01",
+  "family": "impulse_transition_research",
+  "initial_parent_campaign_id": "campaign-20260322T233337927404Z-next-step",
+  "final_parent_campaign_id": "campaign-20260322T233751209762Z-next-step",
+  "executed_lanes": 0,
+  "max_lanes": 3,
+  "status": "stopped",
+  "stop_reason": "data_feature_audit_completed_retire_family",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "0783cf491f2d7d6dd62ed82482154bb7c08bdd703d54c46a5989500b0a1243da",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260322T233751Z-program-cycle-01.json"
+}

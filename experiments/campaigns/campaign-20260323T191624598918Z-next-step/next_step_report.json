@@ -1,0 +1,144 @@
+{
+  "campaign_id": "campaign-20260323T191624598918Z-next-step",
+  "parent_campaign_id": "campaign-20260323T191547855419Z-next-step",
+  "selected_step_type": "diagnose_existing_candidates",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0181 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+  "status": "completed",
+  "stop_reason": "diagnosis_completed_with_supported_recommendation",
+  "candidate_scope": [
+    "AF-CAND-0181"
+  ],
+  "candidate_reports": [
+    {
+      "candidate_id": "AF-CAND-0181",
+      "readiness_status": "robustness_provisional",
+      "walk_forward_failed_window": 1,
+      "first_window_start_utc": "2026-02-02T07:01:00Z",
+      "first_window_end_utc": "2026-03-02T10:02:00Z",
+      "first_window_trade_count": 132,
+      "first_window_profit_factor": 0.5505473277527847,
+      "first_window_expectancy_pips": -1.0575757575756557,
+      "later_window_trade_count": 264,
+      "later_window_profit_factor": 1.1475352112675916,
+      "later_window_expectancy_pips": 0.31742424242421585,
+      "spread_anomaly_rate_first_window": 0.0,
+      "spread_anomaly_rate_later_windows": 0.0,
+      "supported_slices": [
+        {
+          "slice_type": "session_bucket",
+          "slice_label": "overlap",
+          "first_window_trade_count": 32,
+          "later_window_trade_count": 44,
+          "first_window_profit_factor": 0.4105603448275108,
+          "later_window_profit_factor": 1.3126436781609845,
+          "first_window_expectancy_pips": -1.709375000000374,
+          "later_window_expectancy_pips": 0.6181818181819031,
+          "expectancy_improvement_pips": 2.327556818182277,
+          "first_window_loss_share": 0.29877656149390686,
+          "evidence_score": 3.713326,
+          "supported": true
+        },
+        {
+          "slice_type": "context_bucket",
+          "slice_label": "mean_reversion_context",
+          "first_window_trade_count": 80,
+          "later_window_trade_count": 154,
+          "first_window_profit_factor": 0.6778711484594507,
+          "later_window_profit_factor": 1.509084676036941,
+          "first_window_expectancy_pips": -0.718749999999858,
+          "later_window_expectancy_pips": 0.9642857142855576,
+          "expectancy_improvement_pips": 1.6830357142854155,
+          "first_window_loss_share": 0.5746941403734712,
+          "evidence_score": 3.629247,
+          "supported": true
+        },
+        {
+          "slice_type": "session_bucket",
+          "slice_label": "europe",
+          "first_window_trade_count": 100,
+          "later_window_trade_count": 220,
+          "first_window_profit_factor": 0.6101928374656722,
+          "later_window_profit_factor": 1.1176715176714924,
+          "first_window_expectancy_pips": -0.8489999999997454,
+          "later_window_expectancy_pips": 0.2572727272726785,
+          "expectancy_improvement_pips": 1.106272727272424,
+          "first_window_loss_share": 0.7012234385060931,
+          "evidence_score": 3.49975,
+          "supported": true
+        },
+        {
+          "slice_type": "context_bucket",
+          "slice_label": "trend_context",
+          "first_window_trade_count": 52,
+          "later_window_trade_count": 110,
+          "first_window_profit_factor": 0.37850113550342834,
+          "later_window_profit_factor": 0.7658342381470089,
+          "first_window_expectancy_pips": -1.5788461538461134,
+          "later_window_expectancy_pips": -0.5881818181816623,
+          "expectancy_improvement_pips": 0.9906643356644511,
+          "first_window_loss_share": 0.425305859626529,
+          "evidence_score": 2.788081,
+          "supported": true
+        }
+      ],
+      "primary_issue": "session_bucket:overlap",
+      "recommended_mutation": "Trim overlap exposure by removing allowed_hours_utc [13] inside the current breakout family.",
+      "diagnostic_confidence": 0.743,
+      "notes": [
+        "First walk-forward window spans 132 trades; later windows span 264 trades.",
+        "Spread anomaly threshold from QA is 6.882 pips.",
+        "Spread anomalies do not explain the failed first walk-forward window in this candidate."
+      ],
+      "artifact_paths": {
+        "review_packet_path": "reports\\AF-CAND-0181\\review_packet.json",
+        "trade_ledger_path": "reports\\AF-CAND-0181\\trade_ledger.csv",
+        "backtest_summary_path": "reports\\AF-CAND-0181\\backtest_summary.json",
+        "robustness_report_path": "reports\\AF-CAND-0181\\robustness_report.json"
+      }
+    }
+  ],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "mutate_one_candidate",
+      "candidate_id": "AF-CAND-0181",
+      "rationale": "The failed first walk-forward window is weakest in the overlap session slice for AF-CAND-0181. The next bounded campaign should remove hours [13] from allowed_hours_utc and enable the governed calendar blackout, then re-evaluate without broadening scope.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "mutation_type": "trim_allowed_hours",
+        "session_bucket": "overlap",
+        "removed_hours_utc": [
+          13
+        ],
+        "enable_news_blackout": true
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "mutate_one_candidate",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "7a7a1172984bf2804672a5fa818785c56428ad0d6e8d074d395e5d99ec071091",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260323T191624598918Z-next-step\\next_step_report.json"
+}

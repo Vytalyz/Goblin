@@ -1,0 +1,11 @@
+{
+  "source_id": "SRC-030",
+  "title": "Day Trading For Dummies 3rd edition 2014",
+  "note": "SRC-030: Covered in more detail in Chapter 2 , a stop limits the loss if the security keeps dropping below your entry point, and the limit order gets you out at a profit if the security moves to the top of the range. &#13; Range trading works in a normal market with just enough volatility",
+  "concept_tags": [
+    "day-trading"
+  ],
+  "family_relevance_tags": [
+    "day_trading"
+  ]
+}

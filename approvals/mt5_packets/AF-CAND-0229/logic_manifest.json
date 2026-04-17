@@ -1,0 +1,43 @@
+{
+  "logic_manifest_hash": "cb744470099e858bcbd3e43380262a188b2999e9f0a0fff217637b08f7c758a0",
+  "component_hashes": {
+    "strategy_spec_sha256": "5444797bef325e759740a09c6c4a1561f5ef347cf5ef0ee59ad270afdd57b454",
+    "rendered_ea_sha256": "d68ed64ded1eef5bb6bdf58ca66ad61ecef74824fe7317f3b4651eb22ad8bce3",
+    "expected_signals_sha256": "a853bfd68277d7e30af3054bdc24ad393154c82cff4c743c0c3a5e3332fcf7b1",
+    "compile_target_sha256": "a59d07df6f64392235bf122f309afa66e6bc4b8b89b92f594d1be5de55b4a0c3",
+    "expert_path_sha256": "cb35d9f849708e752e896586e6cb3cddf251d4ca7d8f1efa89aed83c80cd5355"
+  },
+  "source_artifact_hashes": {
+    "strategy_spec_path": "8c670b71f45849047d876184cb1a8ea391fd51726a403c6df0873eab76226746",
+    "review_packet_path": "7ca01f49bd4d626c798ee7f080e751db926d446d7ffd3a2935ec47cc5c3978c0",
+    "expected_signal_path": "a853bfd68277d7e30af3054bdc24ad393154c82cff4c743c0c3a5e3332fcf7b1"
+  },
+  "candidate_id": "AF-CAND-0229",
+  "entry_style": "overlap_event_retest_breakout",
+  "practice_only": true,
+  "parity_only": true,
+  "research_truth_boundary": "reports_only_never_mt5_artifacts",
+  "mt5_artifact_reuse_for_features_forbidden": true,
+  "signal_audit_fields": [
+    "timestamp_utc",
+    "exit_timestamp_utc",
+    "side",
+    "entry_price",
+    "exit_price",
+    "pnl_pips",
+    "pnl_dollars",
+    "candidate_id",
+    "run_id",
+    "magic_number",
+    "ticket"
+  ],
+  "approval_recommendation": "needs_human_review",
+  "run_spec_path": "approvals\\mt5_runs\\AF-CAND-0229\\mt5run-20260324T005843Z\\run_spec.json",
+  "ea_source_path": "approvals\\mt5_packets\\AF-CAND-0229\\CandidateEA.mq5",
+  "expected_signal_path": "approvals\\mt5_packets\\AF-CAND-0229\\expected_signals.csv",
+  "audit_relative_path": "AgenticForex\\Audit\\AF-CAND-0229__mt5run-20260324T005843Z__audit.csv",
+  "audit_output_path": "<MT5_COMMON_FILES>/AgenticForex\\Audit\\AF-CAND-0229__mt5run-20260324T005843Z__audit.csv",
+  "news_blackout_mode": "manual_calendar_alignment_required",
+  "terminal_data_path": "data\\state\\mt5_automation_runtime",
+  "stale_packet_policy": "logic_manifest_hash_or_missing_ex5"
+}

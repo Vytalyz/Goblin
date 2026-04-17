@@ -1,0 +1,10 @@
+{
+  "checkpoint_id": "goblin-t1-operator-identity-complete",
+  "phase_id": "GOBLIN-T1",
+  "status": "passed",
+  "timestamp": "2026-04-13T14:10:00Z",
+  "evidence": [
+    "CLI parser now describes Goblin project root",
+    "Goblin status/tracker/maturity surfaces are primary operator references"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "campaign_id": "campaign-20260325T003831024872Z-next-step",
+  "parent_campaign_id": "campaign-20260325T003830880851Z-next-step",
+  "selected_step_type": "generate_ea_spec",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0253 now has a deterministic rule spec. The next bounded throughput step is EA-spec generation under the same control-plane state.",
+  "status": "completed",
+  "stop_reason": "ea_spec_generation_completed_with_supported_compile",
+  "candidate_scope": [
+    "AF-CAND-0253"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [
+    {
+      "candidate_id": "AF-CAND-0253",
+      "readiness_status": "ea_spec_complete",
+      "economic_plausibility_passed": true,
+      "plausibility_findings": [],
+      "artifact_paths": {
+        "rule_spec_path": "reports\\AF-CAND-0253\\rule_spec.json",
+        "strategy_spec_path": "reports\\AF-CAND-0253\\strategy_spec.json",
+        "ea_spec_path": "reports\\AF-CAND-0253\\ea_spec.json"
+      }
+    }
+  ],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "compile_ea_candidate",
+      "candidate_id": "AF-CAND-0253",
+      "rationale": "AF-CAND-0253 now has an EA spec and passed the minimum economic plausibility gate.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0253"
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "compile_ea_candidate",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "7213a00ae4f03faa707b1790ed6c6711b5b3f7f00e5c7102614e0b3d7fb5088a",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260325T003831024872Z-next-step\\next_step_report.json"
+}

@@ -1,0 +1,15 @@
+name = "Gap Lane Research"
+description = "Inspect operator state and run the next safe governed action for the mutable non-overlap slot."
+execution_mode = "worktree"
+status = "paused"
+prompt_file = "automations/prompts/gap-lane-research.md"
+recommended_skill = "$governed-strategy-search"
+manual_validation_required = true
+
+notes = [
+  "Stay blank-slate relative to AF-CAND-0263.",
+  "Primary active discovery queue is book-guided and open-anchor only: europe_open_impulse_retest_research, europe_open_opening_range_retest_research, and europe_open_early_follow_through_research.",
+  "Objective is a governed non-overlap candidate that is strong enough to justify explicit human mt5_packet approval for EA manual testing.",
+  "Run cached scan, book-prior hypothesis screen, materialize only top eligible open-anchor families, compare, then run the anchored phase/density audit before allowing one bounded refinement.",
+  "Stop on HITL, approval, or integrity boundaries and surface the blocking artifact paths.",
+]

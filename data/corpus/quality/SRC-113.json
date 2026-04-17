@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-113",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Little Book Big Profits Series Title Page Copyright Page Dedication Introduction Don\u2019t allow a winner\u2019s game to become a loser\u2019s game.",
+    "Copyright \u00a9 2007 by John C. Bogle. All rights reserved. Published by John Wiley &amp; Sons, Inc., Hoboken, New Jersey. Published simultaneously in Canada. Wiley Bicentennial Logo: Richard J. Pacifico No part of this publication may be reproduced, stored in a retrieval system, or ",
+    "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley &amp; Sons, Inc., 111 River Street, Hoboken, NJ 07030, (201) 748-6011, fax (201) 748-6008, or online at http://www.wiley.com/go/permissions ."
+  ],
+  "front_matter_signals": [
+    "Table of Contents",
+    "Little Book Big Profits Series Title Page Copyright Page Dedication Introduction Don\u2019t allow a winner\u2019s game to become a loser\u2019s game.",
+    "Hold Index Funds That Own the Entire Stock Market."
+  ],
+  "best_excerpt": "In the Little Book Big Profits series, the brightest icons in the financial world write on topics that range from tried-and-true investment strategies we\u2019ve come to appreciate to tomorrow\u2019s new trends. Books in the Little Book Big Profits series include: The Little Book That Beat"
+}

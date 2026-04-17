@@ -1,0 +1,23 @@
+{
+  "checkpoint_id": "af-cand-0733-bundle-a-status-20260414",
+  "bundle_id": "S1-BUNDLE-A",
+  "candidate_id": "AF-CAND-0733",
+  "status": "bundle_hashes_finalized",
+  "summary": "Shadow-only EA compiled in MetaEditor (2026-04-14T22:27:35). v2 bundle hashes finalized: ea_build_hash 98891E7A..., inputs_hash 279302E5... (from .mq5 source, no .set override). Ready for governed attach during next Europe-open session (08:00-13:59 UTC).",
+  "completed_phases": [
+    "S1-P01"
+  ],
+  "pending_phases": [
+    "S1-P02"
+  ],
+  "required_artifacts_for_completion": [
+    "Goblin/reports/live_demo/AF-CAND-0733/<run_id>/live_attach_manifest.json",
+    "Goblin/reports/live_demo/AF-CAND-0733/<run_id>/runtime_summary.json",
+    "Goblin/reports/live_demo/AF-CAND-0733/<run_id>/heartbeats/heartbeat_<timestamp>.json"
+  ],
+  "operator_handoff": [
+    "Use the shadow-only attach checklist and template under Goblin/reports/deployment_bundles/AF-CAND-0733/.",
+    "Record the real MT5 terminal build, run id, and attach timestamp at attach time.",
+    "Do not mark Bundle A complete until the live-demo artifacts exist for the same run id."
+  ]
+}

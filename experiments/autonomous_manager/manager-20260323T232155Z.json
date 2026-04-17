@@ -1,0 +1,40 @@
+{
+  "manager_run_id": "manager-20260323T232155Z",
+  "program_id": "manager-20260323T232155Z-program",
+  "family": "overlap_persistence_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": "campaign-20260323T233023138513Z-next-step",
+  "executed_cycles": 2,
+  "max_cycles": 12,
+  "status": "stopped",
+  "stop_reason": "data_feature_audit_completed_retire_family",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "2a53a70505590a830d817dbb28b83870b4ae364e8f76dd2a40def7ab0c09ac4e",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260323T232155Z-program-cycle-01.json",
+      "stop_reason": "program_loop_max_lanes_reached",
+      "stop_class": "budget_exhausted",
+      "material_transition": true,
+      "approvals_issued": []
+    },
+    {
+      "cycle_index": 2,
+      "lane_id": "campaign-20260323T232338165817Z-next-step",
+      "program_report_path": "experiments\\program_loops\\manager-20260323T232155Z-program-cycle-02.json",
+      "stop_reason": "data_feature_audit_completed_retire_family",
+      "stop_class": "policy_decision",
+      "material_transition": true,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260323T232155Z.json"
+}

@@ -1,0 +1,24 @@
+{
+  "checkpoint_id": "af-cand-0733-s1-p01-complete-20260414",
+  "phase_id": "S1-P01",
+  "status": "completed",
+  "candidate_id": "AF-CAND-0733",
+  "summary": "Formalized AF-CAND-0733 as the first post-takeover operational candidate, froze the shadow-only deployment bundle, benchmark relationship, and Europe-open session scope in a stage card, and confirmed no open blocking S1/S2 incidents exist before activation.",
+  "authoritative_artifacts": [
+    "Goblin/reports/candidate_stage_cards/AF-CAND-0733-s1-p01-stage-card.md",
+    "Goblin/reports/deployment_bundles/AF-CAND-0733/AF-CAND-0733-shadow-only-20260414.json",
+    "Goblin/reports/mt5_certification/AF-CAND-0733/mt5run-20260414T002341Z/mt5_certification_report.json",
+    "approvals/mt5_packets/AF-CAND-0733/packet.json",
+    "reports/AF-CAND-0733/strategy_spec.json",
+    "reports/AF-CAND-0733/review_packet.json"
+  ],
+  "acceptance_result": {
+    "candidate_declared": true,
+    "bundle_frozen": true,
+    "session_scope_declared": true,
+    "benchmark_relationship_declared": true,
+    "blocking_incidents_present": false
+  },
+  "next_phase": "S1-P02",
+  "next_gate": "Perform the first governed shadow_only attach and record live-demo evidence."
+}

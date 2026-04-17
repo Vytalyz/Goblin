@@ -1,0 +1,19 @@
+{
+  "checkpoint_id": "goblin-p03-time-session-foundation",
+  "phase_id": "GOBLIN-P03",
+  "created_utc": "2026-04-12T03:25:45.382252Z",
+  "summary": "Started time/session normalization with explicit contract builders tied to current OANDA and broker timezone settings.",
+  "authoritative_artifacts": [
+    "src/agentic_forex/goblin/models.py",
+    "src/agentic_forex/goblin/evidence.py",
+    "src/agentic_forex/market_data/qa.py",
+    "Goblin/contracts/research-data-contract.md",
+    "Goblin/contracts/time-session-contract.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P03.md",
+    "Goblin/STATUS.md"
+  ],
+  "status_at_checkpoint": "in_progress",
+  "checkpoint_path": "Goblin\\checkpoints\\GOBLIN-P03\\goblin-p03-time-session-foundation.json"
+}

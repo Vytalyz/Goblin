@@ -1,0 +1,15 @@
+{
+  "source_id": "SRC-111",
+  "extraction_confidence": 0.1,
+  "relevance_score": 0.2,
+  "duplicate_group_id": null,
+  "trust_band": "high",
+  "allowed_for_discovery": false,
+  "reasons": [
+    "Extraction confidence below discovery floor.",
+    "Relevance score below discovery floor."
+  ],
+  "copyright_signals": [],
+  "front_matter_signals": [],
+  "best_excerpt": "The Five Rules for Successful Stock Investing - Morningstar's Guide to Building Wealth and Winning in the Market 2004"
+}

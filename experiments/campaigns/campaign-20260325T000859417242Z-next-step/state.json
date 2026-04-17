@@ -1,0 +1,35 @@
+{
+  "campaign_id": "campaign-20260325T000859417242Z-next-step",
+  "family": "session_momentum_cushion_research",
+  "status": "completed",
+  "baseline_candidate_id": "AF-CAND-0247",
+  "parent_campaign_id": "campaign-20260325T000850994592Z-next-step",
+  "current_step_type": "run_mt5_backtest_smoke",
+  "active_candidate_ids": [
+    "AF-CAND-0247"
+  ],
+  "promoted_candidate_ids": [],
+  "iterations_run": 4,
+  "trials_consumed": 4,
+  "operational_runs_consumed": 0,
+  "rule_spec_reformulations_by_candidate": {
+    "AF-CAND-0247": 1
+  },
+  "ea_spec_rewrites_by_candidate": {
+    "AF-CAND-0247": 1
+  },
+  "compile_retries_by_candidate": {
+    "AF-CAND-0247": 1
+  },
+  "smoke_retries_by_candidate": {
+    "AF-CAND-0247": 1
+  },
+  "mt5_parity_retries_by_candidate": {},
+  "shadow_forward_retries_by_candidate": {},
+  "state_version": 3,
+  "stop_reason": "mt5_smoke_completed_with_supported_triage",
+  "state_path": "experiments\\campaigns\\campaign-20260325T000859417242Z-next-step\\state.json",
+  "last_report_path": "experiments\\campaigns\\campaign-20260325T000859417242Z-next-step\\next_step_report.json",
+  "next_recommendations_path": "experiments\\campaigns\\campaign-20260325T000859417242Z-next-step\\next_recommendations.json",
+  "updated_utc": "2026-03-25T00:09:30.798432Z"
+}

@@ -1,0 +1,9 @@
+{
+  "candidate_id": "AF-CAND-0022",
+  "run_id": "mt5run-20260321T194518Z",
+  "terminal_path": null,
+  "install_id": "mt5_practice_01",
+  "portable_mode": false,
+  "config_path": "approvals\\mt5_runs\\AF-CAND-0022\\mt5run-20260321T194518Z\\tester_config.ini",
+  "launch_mode": "/config"
+}

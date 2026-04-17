@@ -1,0 +1,55 @@
+{
+  "campaign_id": "campaign-20260322T191817591518Z-next-step",
+  "parent_campaign_id": "campaign-20260322T191816778407Z-next-step",
+  "selected_step_type": "triage_reviewable_candidate",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0148 completed the bounded MT5 smoke stage with status failed. The next throughput step is triage.",
+  "status": "completed",
+  "stop_reason": "triage_completed_discard_candidate",
+  "candidate_scope": [
+    "AF-CAND-0148"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [
+    {
+      "candidate_id": "AF-CAND-0148",
+      "readiness_status": "ea_compiled",
+      "classification": "discard",
+      "rationale": "AF-CAND-0148 compiled but failed MT5 smoke with artifact_write_failure. Retry budget is exhausted.",
+      "compile_status": "passed",
+      "smoke_status": "failed",
+      "artifact_paths": {
+        "rule_spec_path": "reports\\AF-CAND-0148\\rule_spec.json",
+        "ea_spec_path": "reports\\AF-CAND-0148\\ea_spec.json",
+        "compile_report_path": "reports\\AF-CAND-0148\\compile_report.json",
+        "mt5_smoke_report_path": "reports\\AF-CAND-0148\\mt5_smoke_report.json",
+        "triage_report_path": "reports\\AF-CAND-0148\\triage_report.json"
+      }
+    }
+  ],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": null,
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "move_to_next_lane",
+  "transition_intent": "advance_next_lane",
+  "policy_snapshot_hash": "2b8370bca4ad6bc320a20a0ca369e9ca9ad6b020ceeb84ea843b3fa230074cb8",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260322T191817591518Z-next-step\\next_step_report.json"
+}

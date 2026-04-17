@@ -1,0 +1,21 @@
+{
+  "checkpoint_id": "goblin-p04-mt5-certification-complete",
+  "phase_id": "GOBLIN-P04",
+  "created_utc": "2026-04-12T20:21:21.350505Z",
+  "summary": "Phase 4 completed by wiring Goblin MT5 certification artifacts into official parity and incident replay flows, separating harness trust from alpha claims, and requiring deployment-grade certification before MT5 replay evidence becomes authoritative.",
+  "authoritative_artifacts": [
+    "Goblin/contracts/mt5-certification.md",
+    "src/agentic_forex/mt5/service.py",
+    "src/agentic_forex/goblin/controls.py"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/PHASE_BRIEF.md",
+    "Goblin/STATUS.md",
+    "Goblin/IMPLEMENTATION_TRACKER.md",
+    "Goblin/MATURITY.md",
+    "Goblin/EVOLUTION.md",
+    "codex.md"
+  ],
+  "status_at_checkpoint": "completed",
+  "checkpoint_path": "Goblin\\checkpoints\\GOBLIN-P04\\goblin-p04-mt5-certification-complete.json"
+}

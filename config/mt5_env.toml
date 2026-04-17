@@ -1,0 +1,16 @@
+[mt5_env]
+terminal_install_ids = ["mt5_practice_01"]
+terminal_paths = []
+portable_mode = false
+report_root = "approvals/mt5_runs"
+tester_mode = "Every tick based on real ticks"
+parity_tester_mode = "1 minute OHLC"
+parity_diagnostic_tester_mode = "Every tick based on real ticks"
+allow_live_trading = false
+shutdown_terminal = true
+expert_relative_path = "Experts\\AgenticForex\\CandidateEA.ex5"
+compile_target_relative_path = "MQL5\\Experts\\AgenticForex\\CandidateEA.mq5"
+parity_launch_timeout_seconds = 900
+audit_file_mode = "common_files"
+audit_subdirectory = "AgenticForex\\Audit"
+stale_packet_policy = "logic_manifest_hash_or_missing_ex5"

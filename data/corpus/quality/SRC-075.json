@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-075",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Founded in 1807, John Wiley & Sons is the oldest independent publishing company in the",
+    "United States. With of\ufb01ces in North America, Europe, Australia, and Asia, Wiley is glob-",
+    "The Wiley Trading series features books by traders who have survived the mar-"
+  ],
+  "front_matter_signals": [
+    "Includes bibliographical references and index.",
+    "Contents",
+    "Preface xi"
+  ],
+  "best_excerpt": "Concept This trade setup times the entry into the pullback by using the momentum"
+}

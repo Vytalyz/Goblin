@@ -1,0 +1,28 @@
+{
+  "candidate_id": "AF-CAND-0259",
+  "run_id": "mt5run-20260325T035533Z",
+  "diagnostic_only": false,
+  "lineage_root_candidate_id": "AF-CAND-0259",
+  "parity_class": "m1_official",
+  "parity_policy_lane_ids": [
+    "overlap_persistence_bridge_core_af_cand_0259",
+    "promotion_overlap_persistence_bridge_core_af_cand_0259"
+  ],
+  "parity_policy_snapshot_hash": "4ab176325caf6b68c49358f108c33a5636066fc62c7afdc012471ebd8fb0d744",
+  "tester_mode": "1 minute OHLC",
+  "packet_reused": false,
+  "logic_manifest_hash": "fa0477c5ae5bc1de4af6a6dbd59a49fbfec60677f2fafb4ca228a17955e4f9df",
+  "validation_status": "failed",
+  "failure_classification": "execution_cost_failure",
+  "parity_rate": 0.847059,
+  "audit_rows": 153,
+  "tester_report_path": "approvals\\mt5_runs\\AF-CAND-0259\\mt5run-20260325T035533Z\\AF-CAND-0259-mt5run-20260325T035533Z-report.htm",
+  "audit_csv_path": "approvals\\mt5_runs\\AF-CAND-0259\\mt5run-20260325T035533Z\\AF-CAND-0259__mt5run-20260325T035516Z__audit.csv",
+  "broker_history_csv_path": "approvals\\mt5_runs\\AF-CAND-0259\\mt5run-20260325T035533Z\\AF-CAND-0259__broker_history.csv",
+  "diagnostic_ticks_csv_path": "approvals\\mt5_runs\\AF-CAND-0259\\mt5run-20260325T035533Z\\AF-CAND-0259__diagnostic_ticks.csv",
+  "diagnostic_tick_analysis_path": null,
+  "launch_status_path": "approvals\\mt5_runs\\AF-CAND-0259\\mt5run-20260325T035533Z\\launch_status.json",
+  "validation_report_path": "approvals\\mt5_runs\\AF-CAND-0259\\mt5run-20260325T035533Z\\validation_report.json",
+  "diagnostics_report_path": "approvals\\mt5_runs\\AF-CAND-0259\\mt5run-20260325T035533Z\\parity_diagnostics.json",
+  "report_path": "approvals\\mt5_runs\\AF-CAND-0259\\mt5run-20260325T035533Z\\mt5_parity_report.json"
+}

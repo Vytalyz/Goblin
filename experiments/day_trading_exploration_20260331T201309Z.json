@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-03-31T20:13:09.664613Z",
+  "family": "day_trading",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "scan_report_path": "experiments\\day_trading_behavior_scan_20260331T201309Z.json",
+  "comparison_report_path": "experiments\\comparison_20260331T201309Z.json",
+  "recommended_candidate_id": "AF-CAND-0474",
+  "reference_candidate_id": null,
+  "continuation_gate": null,
+  "report_path": "experiments\\day_trading_exploration_20260331T201309Z.json",
+  "candidates": [
+    {
+      "candidate_id": "AF-CAND-0474",
+      "title": "Europe Bridge Compression Retest Breakout",
+      "entry_style": "compression_retest_breakout",
+      "thesis": "Test whether the compression-retest breakout clue gains density when the Europe bridge hour is allowed, but still require the break to survive a live-side retest before entering. Corpus anchor: SRC-002: Pyramiding approaches, scale trading, stop reversals, breakouts, momentum trad-",
+      "candidate_path": "reports\\AF-CAND-0474\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0474\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0474\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0474\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0474\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0475",
+      "title": "Europe Core Compression Retest Cost Guard",
+      "entry_style": "compression_retest_breakout",
+      "thesis": "Keep the compression-retest breakout thesis inside the strongest Europe-core pocket and tighten cost guards so the family proves it can survive realistic friction before any broader release is admitted. Corpus anchor: SRC-003: Always remember Wyckoff's second law, the law of cause and effect. If the cause is large, then this will be reflected in the effect, which applies to support and resistance. The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once",
+      "candidate_path": "reports\\AF-CAND-0475\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0475\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0475\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0475\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0475\\review_packet.json"
+    }
+  ]
+}

@@ -1,0 +1,4145 @@
+[program]
+active = true
+max_lanes_per_run = 3
+require_seed_market_rationale = true
+family_evidence_guard_enabled = true
+archetype_retirement_enabled = true
+archetype_retirement_lookback_days = 45
+archetype_retirement_failure_threshold = 7
+novelty_guard_enabled = true
+novelty_similarity_threshold = 0.80
+
+[[program.approved_lanes]]
+lane_id = "volatility_expansion_af_cand_0147"
+family = "throughput_research"
+hypothesis_class = "volatility_expansion"
+seed_candidate_id = "AF-CAND-0147"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "directional_follow_through", trigger_family = "volatility_expansion", holding_profile = "intraday_continuation", session_profile = "london_open", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root seeded after retiring the old scalping and day_trading promotion lanes.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "trend_pullback_retest_af_cand_0148"
+family = "throughput_research"
+hypothesis_class = "trend_pullback_retest"
+seed_candidate_id = "AF-CAND-0148"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "trend_resumption", trigger_family = "pullback_retest", holding_profile = "intraday_retest", session_profile = "overlap", regime_dependency = "moderate_vol_trend" }
+notes = [
+  "Orthogonal throughput root centered on trend pullback continuation instead of breakout expansion.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_extreme_reversion_af_cand_0149"
+family = "throughput_research"
+hypothesis_class = "session_extreme_reversion"
+seed_candidate_id = "AF-CAND-0149"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "failed_extension_reversion", trigger_family = "session_extreme_reclaim", holding_profile = "intraday_mean_reversion", session_profile = "new_york", regime_dependency = "moderate_vol_range" }
+notes = [
+  "Orthogonal throughput root focused on failed-extension mean reversion rather than continuation mechanics.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_volatility_expansion_af_cand_0147"
+family = "throughput_research"
+hypothesis_class = "volatility_expansion"
+seed_candidate_id = "AF-CAND-0147"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_trend_pullback_retest_af_cand_0148"
+family = "throughput_research"
+hypothesis_class = "trend_pullback_retest"
+seed_candidate_id = "AF-CAND-0148"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_extreme_reversion_af_cand_0149"
+family = "throughput_research"
+hypothesis_class = "session_extreme_reversion"
+seed_candidate_id = "AF-CAND-0149"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "compression_reversion_af_cand_0150"
+family = "market_structure_research"
+hypothesis_class = "compression_reversion"
+seed_candidate_id = "AF-CAND-0150"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "post_compression_snapback", trigger_family = "compression_reversion", holding_profile = "short_intraday_reversion", session_profile = "london_midday", regime_dependency = "low_vol_range" }
+notes = [
+  "Fresh orthogonal family focused on low-volatility compression snapback rather than breakout continuation.",
+]
+
+[[program.approved_lanes]]
+lane_id = "drift_reclaim_af_cand_0151"
+family = "market_structure_research"
+hypothesis_class = "drift_reclaim"
+seed_candidate_id = "AF-CAND-0151"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overextended_drift_reclaim", trigger_family = "mean_reclaim_reversal", holding_profile = "intraday_reclaim", session_profile = "new_york_midday", regime_dependency = "moderate_vol_exhaustion" }
+notes = [
+  "Fresh orthogonal family centered on reclaiming back from an overextended intraday drift.",
+]
+
+[[program.approved_lanes]]
+lane_id = "balance_area_breakout_af_cand_0152"
+family = "market_structure_research"
+hypothesis_class = "balance_area_breakout"
+seed_candidate_id = "AF-CAND-0152"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "balance_area_transition_breakout", trigger_family = "balance_breakout", holding_profile = "intraday_continuation", session_profile = "london_open", regime_dependency = "low_vol_transition" }
+notes = [
+  "Fresh orthogonal family focused on balance-area breakouts after early-session compression.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_compression_reversion_af_cand_0150"
+family = "market_structure_research"
+hypothesis_class = "compression_reversion"
+seed_candidate_id = "AF-CAND-0150"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_drift_reclaim_af_cand_0151"
+family = "market_structure_research"
+hypothesis_class = "drift_reclaim"
+seed_candidate_id = "AF-CAND-0151"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_balance_area_breakout_af_cand_0152"
+family = "market_structure_research"
+hypothesis_class = "balance_area_breakout"
+seed_candidate_id = "AF-CAND-0152"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "volatility_breakout_af_cand_0153"
+family = "intraday_regime_research"
+hypothesis_class = "volatility_breakout"
+seed_candidate_id = "AF-CAND-0153"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "directional_follow_through", trigger_family = "volatility_breakout", holding_profile = "short_intraday_continuation", session_profile = "london_open", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root for a high-volatility directional regime family.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "mean_reversion_pullback_af_cand_0154"
+family = "intraday_regime_research"
+hypothesis_class = "mean_reversion_pullback"
+seed_candidate_id = "AF-CAND-0154"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "midday_mean_reversion", trigger_family = "pullback_reversion", holding_profile = "short_intraday_reversion", session_profile = "new_york_midday", regime_dependency = "moderate_vol_range" }
+notes = [
+  "Fresh throughput root for a quieter-session mean-reversion family.",
+  "Keep this lane separate from breakout-style directional hypotheses.",
+]
+
+[[program.approved_lanes]]
+lane_id = "pullback_continuation_af_cand_0155"
+family = "intraday_regime_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0155"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_trend_resumption", trigger_family = "pullback_continuation", holding_profile = "intraday_continuation", session_profile = "london_new_york_overlap", regime_dependency = "moderate_vol_trend" }
+notes = [
+  "Fresh throughput root for overlap-session continuation after a controlled reset.",
+  "This lane is the strongest empirical preflight root in the new family and should be kept distinct from midday reversion and pure breakout logic.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_volatility_breakout_af_cand_0153"
+family = "intraday_regime_research"
+hypothesis_class = "volatility_breakout"
+seed_candidate_id = "AF-CAND-0153"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_mean_reversion_pullback_af_cand_0154"
+family = "intraday_regime_research"
+hypothesis_class = "mean_reversion_pullback"
+seed_candidate_id = "AF-CAND-0154"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_pullback_continuation_af_cand_0155"
+family = "intraday_regime_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0155"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "compression_breakout_af_cand_0158"
+family = "structure_transition_research"
+hypothesis_class = "compression_breakout"
+seed_candidate_id = "AF-CAND-0158"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "compressed_range_release", trigger_family = "compression_breakout", holding_profile = "intraday_expansion", session_profile = "europe", regime_dependency = "low_to_moderate_vol_transition" }
+notes = [
+  "Fresh throughput root for a structure-transition family centered on compressed-range release.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "range_reclaim_af_cand_0159"
+family = "structure_transition_research"
+hypothesis_class = "range_reclaim"
+seed_candidate_id = "AF-CAND-0159"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "failed_extension_reclaim", trigger_family = "range_reclaim", holding_profile = "intraday_reversion", session_profile = "london", regime_dependency = "moderate_vol_range" }
+notes = [
+  "Fresh throughput root for a structure-transition family centered on reclaiming back into range after failed extension.",
+  "Keep this lane separate from compression-release and trend-retest continuation mechanics.",
+]
+
+[[program.approved_lanes]]
+lane_id = "trend_retest_af_cand_0160"
+family = "structure_transition_research"
+hypothesis_class = "trend_retest"
+seed_candidate_id = "AF-CAND-0160"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "established_direction_retest", trigger_family = "trend_retest", holding_profile = "intraday_continuation", session_profile = "overlap", regime_dependency = "moderate_to_high_vol_trend" }
+notes = [
+  "Fresh throughput root for a structure-transition continuation family under the current path-aware contract.",
+  "This lane stays distinct from range reclaim and compression breakout by hypothesis, holding profile, and regime dependency.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_compression_breakout_af_cand_0158"
+family = "structure_transition_research"
+hypothesis_class = "compression_breakout"
+seed_candidate_id = "AF-CAND-0158"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_range_reclaim_af_cand_0159"
+family = "structure_transition_research"
+hypothesis_class = "range_reclaim"
+seed_candidate_id = "AF-CAND-0159"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_trend_retest_af_cand_0160"
+family = "structure_transition_research"
+hypothesis_class = "trend_retest"
+seed_candidate_id = "AF-CAND-0160"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_breakout_af_cand_0163"
+family = "directional_edge_research"
+hypothesis_class = "session_breakout"
+seed_candidate_id = "AF-CAND-0163"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "extended_session_breakout", trigger_family = "session_breakout", holding_profile = "short_intraday_continuation", session_profile = "europe_to_overlap", regime_dependency = "high_vol_directional" }
+notes = [
+  "Fresh directional throughput root seeded after correcting non-scalping style-filter mapping.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "pullback_continuation_af_cand_0164"
+family = "directional_edge_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0164"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "shallow_reset_continuation", trigger_family = "pullback_continuation", holding_profile = "short_intraday_continuation", session_profile = "europe", regime_dependency = "moderate_vol_trend" }
+notes = [
+  "Fresh directional throughput root for continuation after a shallow reset under the corrected style-filter mapping.",
+  "Keep this lane separate from direct breakout and extension-failure reversal mechanics.",
+]
+
+[[program.approved_lanes]]
+lane_id = "failed_break_fade_af_cand_0165"
+family = "directional_edge_research"
+hypothesis_class = "failed_break_fade"
+seed_candidate_id = "AF-CAND-0165"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "failed_extension_reversal", trigger_family = "failed_break_fade", holding_profile = "short_intraday_reversion", session_profile = "europe", regime_dependency = "moderate_vol_reversal" }
+notes = [
+  "Fresh directional throughput root for extension-failure reversals under the corrected style-filter mapping.",
+  "This lane is intentionally distinct from direct breakout continuation and shallow-reset continuation.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_breakout_af_cand_0163"
+family = "directional_edge_research"
+hypothesis_class = "session_breakout"
+seed_candidate_id = "AF-CAND-0163"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_pullback_continuation_af_cand_0164"
+family = "directional_edge_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0164"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_failed_break_fade_af_cand_0165"
+family = "directional_edge_research"
+hypothesis_class = "failed_break_fade"
+seed_candidate_id = "AF-CAND-0165"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "volatility_expansion_af_cand_0170"
+family = "impulse_transition_research"
+hypothesis_class = "volatility_expansion"
+seed_candidate_id = "AF-CAND-0170"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "directional_follow_through", trigger_family = "impulse_expansion", holding_profile = "short_intraday_continuation", session_profile = "london_open", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root for the impulse-transition family after the MT5 and research backtester support gaps were closed.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "trend_pullback_retest_af_cand_0171"
+family = "impulse_transition_research"
+hypothesis_class = "trend_pullback_retest"
+seed_candidate_id = "AF-CAND-0171"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "trend_resumption_retest", trigger_family = "pullback_retest", holding_profile = "intraday_retest_continuation", session_profile = "overlap", regime_dependency = "moderate_vol_trend" }
+notes = [
+  "Fresh throughput root for a retest-continuation family that waits for structure to reset before continuation.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_extreme_reversion_af_cand_0172"
+family = "impulse_transition_research"
+hypothesis_class = "session_extreme_reversion"
+seed_candidate_id = "AF-CAND-0172"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "failed_terminal_extension_reversion", trigger_family = "session_extreme_reclaim", holding_profile = "short_intraday_reversion", session_profile = "new_york", regime_dependency = "moderate_vol_exhaustion" }
+notes = [
+  "Fresh throughput root for a session-extreme reversion family focused on failed terminal extension.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_volatility_expansion_af_cand_0170"
+family = "impulse_transition_research"
+hypothesis_class = "volatility_expansion"
+seed_candidate_id = "AF-CAND-0170"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_trend_pullback_retest_af_cand_0171"
+family = "impulse_transition_research"
+hypothesis_class = "trend_pullback_retest"
+seed_candidate_id = "AF-CAND-0171"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_extreme_reversion_af_cand_0172"
+family = "impulse_transition_research"
+hypothesis_class = "session_extreme_reversion"
+seed_candidate_id = "AF-CAND-0172"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "quality_session_breakout_af_cand_0174"
+family = "quality_gate_research"
+hypothesis_class = "session_breakout"
+seed_candidate_id = "AF-CAND-0174"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "quality_filtered_breakout", trigger_family = "session_breakout", holding_profile = "short_intraday_continuation", session_profile = "early_europe", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh quality-gated throughput root focused on the cleanest early-session directional breaks.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "quality_pullback_continuation_af_cand_0175"
+family = "quality_gate_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0175"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "quality_filtered_resumption", trigger_family = "pullback_continuation", holding_profile = "intraday_continuation", session_profile = "overlap", regime_dependency = "moderate_vol_trend" }
+notes = [
+  "Fresh quality-gated throughput root focused on cleaner overlap-session resumption after shallow resets.",
+  "Keep this lane separate from raw breakout-style directional hypotheses.",
+]
+
+[[program.approved_lanes]]
+lane_id = "quality_balance_breakout_af_cand_0176"
+family = "quality_gate_research"
+hypothesis_class = "balance_area_breakout"
+seed_candidate_id = "AF-CAND-0176"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "quality_filtered_structure_transition", trigger_family = "balance_area_breakout", holding_profile = "intraday_transition", session_profile = "london_open", regime_dependency = "moderate_vol_transition" }
+notes = [
+  "Fresh quality-gated throughput root focused on cleaner balance-to-break transitions.",
+  "Keep this lane separate from both directional session breaks and overlap pullback continuation.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_quality_session_breakout_af_cand_0174"
+family = "quality_gate_research"
+hypothesis_class = "session_breakout"
+seed_candidate_id = "AF-CAND-0174"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_quality_pullback_continuation_af_cand_0175"
+family = "quality_gate_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0175"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_quality_balance_breakout_af_cand_0176"
+family = "quality_gate_research"
+hypothesis_class = "balance_area_breakout"
+seed_candidate_id = "AF-CAND-0176"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_pullback_continuation_af_cand_0177"
+family = "session_alignment_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0177"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "session_aligned_continuation", trigger_family = "pullback_continuation", holding_profile = "intraday_continuation", session_profile = "europe", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root aligned to the cleaner Europe-session continuation slice seen in the prior family.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "high_vol_balance_breakout_af_cand_0178"
+family = "session_alignment_research"
+hypothesis_class = "balance_area_breakout"
+seed_candidate_id = "AF-CAND-0178"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "high_vol_transition_release", trigger_family = "balance_area_breakout", holding_profile = "intraday_transition", session_profile = "london_open", regime_dependency = "high_vol_transition" }
+notes = [
+  "Fresh throughput root aligned to the only positive high-volatility slice in the previous balance-break branch.",
+  "Keep this lane separate from continuation-style pullback alignment.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_trend_retest_af_cand_0179"
+family = "session_alignment_research"
+hypothesis_class = "trend_retest"
+seed_candidate_id = "AF-CAND-0179"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "session_aligned_retest", trigger_family = "trend_retest", holding_profile = "intraday_continuation", session_profile = "europe_to_midday", regime_dependency = "moderate_vol_trend" }
+notes = [
+  "Fresh throughput root focused on cleaner Europe-session retest structure instead of raw extension entries.",
+  "Keep this lane separate from both balance-break transitions and direct pullback continuation.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_pullback_continuation_af_cand_0177"
+family = "session_alignment_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0177"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_high_vol_balance_breakout_af_cand_0178"
+family = "session_alignment_research"
+hypothesis_class = "balance_area_breakout"
+seed_candidate_id = "AF-CAND-0178"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_trend_retest_af_cand_0179"
+family = "session_alignment_research"
+hypothesis_class = "trend_retest"
+seed_candidate_id = "AF-CAND-0179"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "resilient_session_breakout_af_cand_0181"
+family = "resilience_bridge_research"
+hypothesis_class = "session_breakout"
+seed_candidate_id = "AF-CAND-0181"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "cost_resilient_breakout", trigger_family = "session_breakout", holding_profile = "intraday_continuation", session_profile = "europe_to_overlap", regime_dependency = "high_vol_directional" }
+notes = [
+  "Fresh throughput root seeded after the seed-truth guard was added; clean candidate folder with no reused strategy artifacts.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "balanced_trend_retest_af_cand_0182"
+family = "resilience_bridge_research"
+hypothesis_class = "trend_retest"
+seed_candidate_id = "AF-CAND-0182"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "sample_balanced_retest", trigger_family = "trend_retest", holding_profile = "intraday_continuation", session_profile = "europe", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root designed to bridge the low-sample retest lineage into a more statistically usable candidate.",
+  "Keep this lane separate from both raw breakout continuation and failed-break fade mechanics.",
+]
+
+[[program.approved_lanes]]
+lane_id = "high_vol_failed_break_fade_af_cand_0183"
+family = "resilience_bridge_research"
+hypothesis_class = "failed_break_fade"
+seed_candidate_id = "AF-CAND-0183"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "high_vol_failure_reversal", trigger_family = "failed_break_fade", holding_profile = "intraday_reversion", session_profile = "europe", regime_dependency = "high_vol_reversal" }
+notes = [
+  "Fresh throughput root retesting the fade thesis only under the cleaner high-volatility Europe window.",
+  "This lane is intentionally distinct from both breakout and retest-style continuation logic.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_resilient_session_breakout_af_cand_0181"
+family = "resilience_bridge_research"
+hypothesis_class = "session_breakout"
+seed_candidate_id = "AF-CAND-0181"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_balanced_trend_retest_af_cand_0182"
+family = "resilience_bridge_research"
+hypothesis_class = "trend_retest"
+seed_candidate_id = "AF-CAND-0182"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_high_vol_failed_break_fade_af_cand_0183"
+family = "resilience_bridge_research"
+hypothesis_class = "failed_break_fade"
+seed_candidate_id = "AF-CAND-0183"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "context_selective_breakout_af_cand_0186"
+family = "context_selective_research"
+hypothesis_class = "session_breakout"
+seed_candidate_id = "AF-CAND-0186"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "context_filtered_breakout", trigger_family = "session_breakout", holding_profile = "intraday_continuation", session_profile = "europe", regime_dependency = "high_vol_mean_reversion" }
+notes = [
+  "Fresh throughput root for a context-selective family that targets only the supported mean-reversion slice inside the strongest breakout lineage.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "context_selective_pullback_af_cand_0187"
+family = "context_selective_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0187"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "context_filtered_trend_resume", trigger_family = "pullback_continuation", holding_profile = "intraday_continuation", session_profile = "overlap", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root for a context-selective continuation lane that keeps the strongest overlap pullback lineage but adds governed event discipline.",
+  "Keep this lane separate from both Europe breakout filtering and explicit mean-reversion reset logic.",
+]
+
+[[program.approved_lanes]]
+lane_id = "context_selective_mean_reversion_af_cand_0188"
+family = "context_selective_research"
+hypothesis_class = "mean_reversion_pullback"
+seed_candidate_id = "AF-CAND-0188"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "context_filtered_mean_reversion", trigger_family = "mean_reversion_pullback", holding_profile = "intraday_reversion", session_profile = "europe", regime_dependency = "high_vol_mean_reversion" }
+notes = [
+  "Fresh throughput root for a direct Europe-session mean-reversion reset lane under the current path-aware contract.",
+  "Keep this lane separate from both breakout continuation and overlap pullback continuation mechanics.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_context_selective_breakout_af_cand_0186"
+family = "context_selective_research"
+hypothesis_class = "session_breakout"
+seed_candidate_id = "AF-CAND-0186"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_context_selective_pullback_af_cand_0187"
+family = "context_selective_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0187"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_context_selective_mean_reversion_af_cand_0188"
+family = "context_selective_research"
+hypothesis_class = "mean_reversion_pullback"
+seed_candidate_id = "AF-CAND-0188"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_pullback_balance_af_cand_0189"
+family = "overlap_balance_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0189"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_pullback_balance", trigger_family = "pullback_continuation", holding_profile = "intraday_continuation", session_profile = "overlap_core", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root centered on the only overlap continuation lineage that stayed positively biased under realistic costs.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_retest_balance_af_cand_0190"
+family = "overlap_balance_research"
+hypothesis_class = "trend_retest"
+seed_candidate_id = "AF-CAND-0190"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_retest_balance", trigger_family = "trend_retest", holding_profile = "intraday_retest_continuation", session_profile = "overlap_extended", regime_dependency = "moderate_to_high_vol_trend" }
+notes = [
+  "Fresh throughput root for a slower overlap retest continuation lane under the current path-aware contract.",
+  "Keep this lane separate from both raw pullback continuation and broad directional breakout.",
+]
+
+[[program.approved_lanes]]
+lane_id = "extended_breakout_balance_af_cand_0191"
+family = "overlap_balance_research"
+hypothesis_class = "session_breakout"
+seed_candidate_id = "AF-CAND-0191"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "extended_breakout_balance", trigger_family = "session_breakout", holding_profile = "intraday_breakout_continuation", session_profile = "europe_to_overlap", regime_dependency = "high_vol_directional" }
+notes = [
+  "Fresh throughput root for the broad directional breakout lineage under governed news discipline.",
+  "Keep this lane separate from overlap continuation and overlap retest mechanics.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_pullback_balance_af_cand_0189"
+family = "overlap_balance_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0189"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_retest_balance_af_cand_0190"
+family = "overlap_balance_research"
+hypothesis_class = "trend_retest"
+seed_candidate_id = "AF-CAND-0190"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_extended_breakout_balance_af_cand_0191"
+family = "overlap_balance_research"
+hypothesis_class = "session_breakout"
+seed_candidate_id = "AF-CAND-0191"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "volatility_expansion_horizon_af_cand_0192"
+family = "horizon_momentum_research"
+hypothesis_class = "volatility_expansion"
+seed_candidate_id = "AF-CAND-0192"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "horizon_acceleration", trigger_family = "volatility_expansion", holding_profile = "medium_intraday_acceleration", session_profile = "europe_to_overlap", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh momentum-horizon throughput root that requires explicit lagged-return evidence before seeding.",
+  "Use this lane only for deterministic rule formalization, EA spec generation, compile, smoke, and triage.",
+]
+
+[[program.approved_lanes]]
+lane_id = "trend_retest_horizon_af_cand_0193"
+family = "horizon_momentum_research"
+hypothesis_class = "trend_retest"
+seed_candidate_id = "AF-CAND-0193"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "lagged_retest_momentum", trigger_family = "trend_retest", holding_profile = "medium_intraday_retest", session_profile = "overlap_core", regime_dependency = "moderate_vol_trend" }
+notes = [
+  "Fresh momentum-horizon throughput root that uses deeper retests rather than raw breakout continuation.",
+  "Keep this lane separate from volatility-expansion acceleration and event-driven breakout momentum.",
+]
+
+[[program.approved_lanes]]
+lane_id = "volatility_breakout_horizon_af_cand_0194"
+family = "horizon_momentum_research"
+hypothesis_class = "volatility_breakout"
+seed_candidate_id = "AF-CAND-0194"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "event_window_breakout_momentum", trigger_family = "volatility_breakout", holding_profile = "short_intraday_breakout", session_profile = "new_york_open", regime_dependency = "event_vol_trend" }
+notes = [
+  "Fresh momentum-horizon throughput root for an event-window breakout lane under governed news discipline.",
+  "Keep this lane separate from retest momentum and Europe-to-overlap acceleration mechanics.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_volatility_expansion_horizon_af_cand_0192"
+family = "horizon_momentum_research"
+hypothesis_class = "volatility_expansion"
+seed_candidate_id = "AF-CAND-0192"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_trend_retest_horizon_af_cand_0193"
+family = "horizon_momentum_research"
+hypothesis_class = "trend_retest"
+seed_candidate_id = "AF-CAND-0193"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_volatility_breakout_horizon_af_cand_0194"
+family = "horizon_momentum_research"
+hypothesis_class = "volatility_breakout"
+seed_candidate_id = "AF-CAND-0194"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_extreme_reversion_af_cand_0197"
+family = "stationary_reclaim_research"
+hypothesis_class = "session_extreme_reversion"
+seed_candidate_id = "AF-CAND-0197"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["mean_reversion_stationarity", "mean_reversion_half_life"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_extension_reversion", trigger_family = "session_extreme_reversion", holding_profile = "short_intraday_reversion", session_profile = "overlap_core", regime_dependency = "high_vol_reversion" }
+notes = [
+  "Fresh mean-reversion throughput root seeded only from an archetype still below the retirement threshold.",
+  "Use this lane to test whether overlap-session extension reversals with explicit stationarity and half-life evidence can survive costs better than the exhausted directional families.",
+]
+
+[[program.approved_lanes]]
+lane_id = "drift_reclaim_stability_af_cand_0198"
+family = "stationary_reclaim_research"
+hypothesis_class = "drift_reclaim"
+seed_candidate_id = "AF-CAND-0198"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["mean_reversion_stationarity", "mean_reversion_half_life"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "drift_exhaustion_reclaim", trigger_family = "drift_reclaim", holding_profile = "medium_intraday_reversion", session_profile = "overlap_to_new_york", regime_dependency = "moderate_vol_exhaustion" }
+notes = [
+  "Fresh mean-reversion throughput root focused on reclaiming back from an exhausted intraday drift after a measurable short-horizon decay.",
+  "Keep this lane separate from pure range reclaim and extreme one-shot reversion mechanics by using a longer reclaim window and explicit half-life reasoning.",
+]
+
+[[program.approved_lanes]]
+lane_id = "london_range_reclaim_af_cand_0199"
+family = "stationary_reclaim_research"
+hypothesis_class = "range_reclaim"
+seed_candidate_id = "AF-CAND-0199"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["mean_reversion_stationarity", "mean_reversion_half_life"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "failed_london_extension_reclaim", trigger_family = "range_reclaim", holding_profile = "medium_intraday_reversion", session_profile = "london_to_overlap", regime_dependency = "moderate_vol_range" }
+notes = [
+  "Fresh mean-reversion throughput root for reclaiming back into range after an early London extension fails under a stationarity-style evidence contract.",
+  "Keep this lane separate from drift reclaim by focusing on failed range escape rather than one-way drift exhaustion.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_extreme_reversion_af_cand_0197"
+family = "stationary_reclaim_research"
+hypothesis_class = "session_extreme_reversion"
+seed_candidate_id = "AF-CAND-0197"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_drift_reclaim_stability_af_cand_0198"
+family = "stationary_reclaim_research"
+hypothesis_class = "drift_reclaim"
+seed_candidate_id = "AF-CAND-0198"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_london_range_reclaim_af_cand_0199"
+family = "stationary_reclaim_research"
+hypothesis_class = "range_reclaim"
+seed_candidate_id = "AF-CAND-0199"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_compression_release_af_cand_0201"
+family = "compression_resilience_research"
+hypothesis_class = "compression_breakout"
+seed_candidate_id = "AF-CAND-0201"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "europe_compression_release", trigger_family = "compression_breakout", holding_profile = "short_intraday_continuation", session_profile = "europe_core", regime_dependency = "moderate_vol_transition" }
+notes = [
+  "Fresh compression-breakout throughput root seeded from the best remaining live direction style after the stationary-reclaim family retired.",
+  "This lane shortens the hold and enables governed news discipline from the first seed to address the prior stress-only failure pattern.",
+]
+
+[[program.approved_lanes]]
+lane_id = "high_vol_compression_release_af_cand_0202"
+family = "compression_resilience_research"
+hypothesis_class = "compression_breakout"
+seed_candidate_id = "AF-CAND-0202"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "high_vol_imbalance_release", trigger_family = "high_vol_compression_breakout", holding_profile = "micro_intraday_release", session_profile = "europe_open_core", regime_dependency = "high_vol_release" }
+notes = [
+  "Fresh compression-breakout throughput root focused on the higher-volatility slice that looked healthiest in the earlier near-miss lineage.",
+  "Keep this lane distinct from the baseline release seed by requiring stronger release strength and a tighter high-volatility filter.",
+]
+
+[[program.approved_lanes]]
+lane_id = "delayed_compression_followthrough_af_cand_0203"
+family = "compression_resilience_research"
+hypothesis_class = "compression_breakout"
+seed_candidate_id = "AF-CAND-0203"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "delayed_compression_followthrough", trigger_family = "compression_breakout", holding_profile = "short_intraday_continuation", session_profile = "europe_to_overlap_handoff", regime_dependency = "moderate_vol_acceleration" }
+notes = [
+  "Fresh compression-breakout throughput root that waits for a second-stage release instead of the earliest break, testing whether delayed confirmation improves cost resilience.",
+  "Keep this lane distinct from the first two by shifting the active window later and requiring stronger release continuation evidence.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_compression_release_af_cand_0201"
+family = "compression_resilience_research"
+hypothesis_class = "compression_breakout"
+seed_candidate_id = "AF-CAND-0201"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_high_vol_compression_release_af_cand_0202"
+family = "compression_resilience_research"
+hypothesis_class = "compression_breakout"
+seed_candidate_id = "AF-CAND-0202"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_delayed_compression_followthrough_af_cand_0203"
+family = "compression_resilience_research"
+hypothesis_class = "compression_breakout"
+seed_candidate_id = "AF-CAND-0203"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_release_retest_af_cand_0210"
+family = "release_retest_research"
+hypothesis_class = "compression_retest_breakout"
+seed_candidate_id = "AF-CAND-0210"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "early_release_retest", trigger_family = "compression_retest_breakout", holding_profile = "short_intraday_retest", session_profile = "europe_core", regime_dependency = "moderate_vol_release" }
+notes = [
+  "Fresh throughput root for a new release-retest archetype created to address the stress failure pattern of raw compression breakout entries.",
+  "Use this lane to test whether waiting for the first retest improves cost resilience without collapsing trade count.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_release_retest_af_cand_0211"
+family = "release_retest_research"
+hypothesis_class = "compression_retest_breakout"
+seed_candidate_id = "AF-CAND-0211"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_release_balance_retest", trigger_family = "overlap_release_retest", holding_profile = "medium_intraday_retest", session_profile = "overlap_core", regime_dependency = "moderate_to_high_vol_trend" }
+notes = [
+  "Fresh throughput root that waits for overlap retests instead of the first Europe impulse.",
+  "This lane adds explicit context exclusion so it stays directional rather than mean-reversion contaminated.",
+]
+
+[[program.approved_lanes]]
+lane_id = "high_vol_release_retest_af_cand_0212"
+family = "release_retest_research"
+hypothesis_class = "compression_retest_breakout"
+seed_candidate_id = "AF-CAND-0212"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "high_vol_micro_retest_release", trigger_family = "high_vol_release_retest", holding_profile = "micro_intraday_retest", session_profile = "europe_open_to_overlap", regime_dependency = "high_vol_release" }
+notes = [
+  "Fresh throughput root for the strictest high-volatility release-retest slice.",
+  "Use this lane to test whether the strongest release conditions can survive costs once the entry waits for a retest.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_release_retest_af_cand_0210"
+family = "release_retest_research"
+hypothesis_class = "compression_retest_breakout"
+seed_candidate_id = "AF-CAND-0210"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_release_retest_af_cand_0211"
+family = "release_retest_research"
+hypothesis_class = "compression_retest_breakout"
+seed_candidate_id = "AF-CAND-0211"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_high_vol_release_retest_af_cand_0212"
+family = "release_retest_research"
+hypothesis_class = "compression_retest_breakout"
+seed_candidate_id = "AF-CAND-0212"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "new_york_volatility_retest_af_cand_0213"
+family = "volatility_retest_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0213"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "event_window_retest_momentum", trigger_family = "volatility_retest_breakout", holding_profile = "short_intraday_retest", session_profile = "new_york_event_window", regime_dependency = "high_vol_event_trend" }
+notes = [
+  "Fresh throughput root that starts from the highest-activity near-miss surface and changes entry timing rather than recycling a dead low-trade family.",
+  "Use this lane to test whether volatility breakout retests can keep trade count while improving cost resilience.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_volatility_retest_af_cand_0214"
+family = "volatility_retest_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0214"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_retest_continuation", trigger_family = "overlap_volatility_retest", holding_profile = "medium_intraday_retest", session_profile = "overlap_core", regime_dependency = "moderate_to_high_vol_trend" }
+notes = [
+  "Fresh throughput root for the overlap slice that stayed closest to viable in the prior momentum family.",
+  "This lane keeps trade density higher than the New York-only variant while still changing entry timing away from the raw breakout.",
+]
+
+[[program.approved_lanes]]
+lane_id = "high_vol_overlap_retest_af_cand_0215"
+family = "volatility_retest_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0215"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "high_vol_overlap_retest", trigger_family = "high_volatility_retest_breakout", holding_profile = "micro_intraday_retest", session_profile = "overlap_core_short", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root for the strictest high-volatility retest slice.",
+  "Use this lane to test whether the strongest directional window can survive costs once the first-spike entry is removed.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_new_york_volatility_retest_af_cand_0213"
+family = "volatility_retest_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0213"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_volatility_retest_af_cand_0214"
+family = "volatility_retest_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0214"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_high_vol_overlap_retest_af_cand_0215"
+family = "volatility_retest_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0215"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_persistence_retest_af_cand_0216"
+family = "overlap_persistence_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0216"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_persistence_after_retest", trigger_family = "overlap_persistence_retest", holding_profile = "medium_intraday_retest", session_profile = "overlap_core_late", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root created from the only slice that cleared promotion thresholds in longer-dataset ledger analysis before official rerun.",
+  "Use this lane to verify that the isolated overlap high-volatility persistence slice survives full governed evaluation.",
+]
+
+[[program.approved_lanes]]
+lane_id = "broader_overlap_persistence_af_cand_0217"
+family = "overlap_persistence_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0217"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "broader_overlap_persistence_after_retest", trigger_family = "broader_overlap_persistence_retest", holding_profile = "medium_intraday_retest", session_profile = "overlap_broad", regime_dependency = "high_vol_trend" }
+notes = [
+  "Density probe for the overlap persistence family.",
+  "Use this lane only to test whether a slightly broader overlap window preserves trade count without reopening the weak middle window.",
+]
+
+[[program.approved_lanes]]
+lane_id = "tight_overlap_persistence_af_cand_0218"
+family = "overlap_persistence_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0218"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "tight_overlap_persistence_after_retest", trigger_family = "tight_overlap_persistence_retest", holding_profile = "short_intraday_retest", session_profile = "overlap_core_short", regime_dependency = "high_vol_trend" }
+notes = [
+  "Strict quality probe for the overlap persistence family.",
+  "Use this lane to test whether a tighter hold and stricter thresholds improve stress resilience without collapsing the sample too far.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_persistence_retest_af_cand_0216"
+family = "overlap_persistence_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0216"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_broader_overlap_persistence_af_cand_0217"
+family = "overlap_persistence_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0217"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_tight_overlap_persistence_af_cand_0218"
+family = "overlap_persistence_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0218"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "high_vol_overlap_persistence_af_cand_0222"
+family = "high_vol_overlap_persistence_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0222"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "high_vol_overlap_persistence_after_retest", trigger_family = "high_vol_overlap_persistence_retest", holding_profile = "medium_intraday_retest", session_profile = "overlap_core_late", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root that encodes the exact high-volatility overlap slice that passed the ledger threshold sweep.",
+  "Use this lane to confirm the slice through the official governed workflow with an explicit high-volatility bucket requirement.",
+]
+
+[[program.approved_lanes]]
+lane_id = "broader_high_vol_overlap_persistence_af_cand_0223"
+family = "high_vol_overlap_persistence_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0223"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "broader_high_vol_overlap_persistence_after_retest", trigger_family = "broader_high_vol_overlap_persistence_retest", holding_profile = "medium_intraday_retest", session_profile = "overlap_broad", regime_dependency = "high_vol_trend" }
+notes = [
+  "Density probe for the corrected high-volatility overlap family.",
+  "Use this lane only to test whether timing can broaden without losing the exact high-volatility regime requirement.",
+]
+
+[[program.approved_lanes]]
+lane_id = "tight_high_vol_overlap_persistence_af_cand_0224"
+family = "high_vol_overlap_persistence_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0224"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "tight_high_vol_overlap_persistence_after_retest", trigger_family = "tight_high_vol_overlap_persistence_retest", holding_profile = "short_intraday_retest", session_profile = "overlap_core_short", regime_dependency = "high_vol_trend" }
+notes = [
+  "Strict quality probe for the corrected high-volatility overlap family.",
+  "Use this lane to test whether a shorter hold improves stress resilience without collapsing the sample too far.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_high_vol_overlap_persistence_af_cand_0222"
+family = "high_vol_overlap_persistence_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0222"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_broader_high_vol_overlap_persistence_af_cand_0223"
+family = "high_vol_overlap_persistence_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0223"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_tight_high_vol_overlap_persistence_af_cand_0224"
+family = "high_vol_overlap_persistence_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0224"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_event_retest_core_af_cand_0228"
+family = "overlap_event_retest_research"
+hypothesis_class = "overlap_event_retest_breakout"
+seed_candidate_id = "AF-CAND-0228"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_event_retest_continuation", trigger_family = "overlap_event_retest_breakout", holding_profile = "medium_intraday_retest", session_profile = "overlap_core", regime_dependency = "high_vol_event_trend" }
+notes = [
+  "Exact governed encoding of the only raw ledger slice that has cleared the promotion thresholds so far.",
+  "Use this lane to verify that the overlap core and explicit high-volatility bucket reproduce through the official workflow.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_event_retest_stability_af_cand_0229"
+family = "overlap_event_retest_research"
+hypothesis_class = "overlap_event_retest_breakout"
+seed_candidate_id = "AF-CAND-0229"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_event_retest_quality_screen", trigger_family = "overlap_event_retest_quality_screen", holding_profile = "short_intraday_retest", session_profile = "overlap_core_quality_screen", regime_dependency = "high_vol_orderly_trend" }
+notes = [
+  "Bounded stability tilt from the exact overlap-event retest root.",
+  "Use this lane only to test whether the weak time window improves without collapsing the sample below promotion floors.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_event_retest_density_af_cand_0230"
+family = "overlap_event_retest_research"
+hypothesis_class = "overlap_event_retest_breakout"
+seed_candidate_id = "AF-CAND-0230"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_event_retest_density_restore", trigger_family = "overlap_event_retest_band_expansion", holding_profile = "medium_intraday_density", session_profile = "overlap_core_density_probe", regime_dependency = "high_vol_broader_retest_trend" }
+notes = [
+  "Density probe from the exact overlap-event retest root.",
+  "Use this lane to test whether a slightly broader retest band keeps the edge while improving sample size.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_event_retest_core_af_cand_0228"
+family = "overlap_event_retest_research"
+hypothesis_class = "overlap_event_retest_breakout"
+seed_candidate_id = "AF-CAND-0228"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_event_retest_stability_af_cand_0229"
+family = "overlap_event_retest_research"
+hypothesis_class = "overlap_event_retest_breakout"
+seed_candidate_id = "AF-CAND-0229"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_event_retest_density_af_cand_0230"
+family = "overlap_event_retest_research"
+hypothesis_class = "overlap_event_retest_breakout"
+seed_candidate_id = "AF-CAND-0230"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_persistence_band_core_af_cand_0233"
+family = "overlap_persistence_band_research"
+hypothesis_class = "overlap_persistence_band"
+seed_candidate_id = "AF-CAND-0233"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_continuation_band", trigger_family = "overlap_persistence_band", holding_profile = "medium_intraday_continuation", session_profile = "overlap_core", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root for a simpler overlap continuation band that should be less feed-sensitive than the narrow event retest branch.",
+  "Use this lane to test whether broader continuation geometry can preserve promotion quality while improving MT5 parity stability.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_persistence_band_broader_af_cand_0234"
+family = "overlap_persistence_band_research"
+hypothesis_class = "overlap_persistence_band"
+seed_candidate_id = "AF-CAND-0234"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "broader_overlap_continuation_band", trigger_family = "broader_overlap_persistence_band", holding_profile = "medium_intraday_continuation", session_profile = "overlap_plus_lead_in", regime_dependency = "high_vol_trend" }
+notes = [
+  "Density probe for the overlap continuation band family.",
+  "Use this lane only to test whether a slightly earlier overlap lead-in improves sample size without reopening the brittle first-spike behavior.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_persistence_band_tight_af_cand_0235"
+family = "overlap_persistence_band_research"
+hypothesis_class = "overlap_persistence_band"
+seed_candidate_id = "AF-CAND-0235"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "tight_overlap_continuation_band", trigger_family = "tight_overlap_persistence_band", holding_profile = "short_intraday_continuation", session_profile = "late_overlap_core", regime_dependency = "high_vol_trend" }
+notes = [
+  "Strict quality probe for the overlap continuation band family.",
+  "Use this lane to test whether a later overlap core and tighter continuation band preserve parity stability without collapsing the sample too far.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_persistence_band_core_af_cand_0233"
+family = "overlap_persistence_band_research"
+hypothesis_class = "overlap_persistence_band"
+seed_candidate_id = "AF-CAND-0233"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_persistence_band_broader_af_cand_0234"
+family = "overlap_persistence_band_research"
+hypothesis_class = "overlap_persistence_band"
+seed_candidate_id = "AF-CAND-0234"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_persistence_band_tight_af_cand_0235"
+family = "overlap_persistence_band_research"
+hypothesis_class = "overlap_persistence_band"
+seed_candidate_id = "AF-CAND-0235"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_band_core_af_cand_0238"
+family = "session_momentum_band_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0238"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_hardening_2026_03_24"
+parity_class_assigned_at = "2026-03-24T12:00:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "late_overlap_session_momentum_band", trigger_family = "session_momentum_band_core", holding_profile = "medium_intraday_continuation", session_profile = "late_overlap_core", regime_dependency = "high_vol_trend" }
+notes = [
+  "Fresh throughput root for a slower late-overlap momentum band designed to be less feed-sensitive than exact retest logic.",
+  "Use this lane to test whether broader momentum persistence can keep research quality while improving MT5 parity stability.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_band_quality_af_cand_0239"
+family = "session_momentum_band_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0239"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_hardening_2026_03_24"
+parity_class_assigned_at = "2026-03-24T12:00:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "late_overlap_quality_momentum_band", trigger_family = "session_momentum_band_quality", holding_profile = "medium_intraday_continuation", session_profile = "late_overlap_quality_window", regime_dependency = "high_vol_trend_quality" }
+notes = [
+  "Quality-skewed variant with a higher continuation position floor to keep only stronger late-overlap directional persistence.",
+  "Use this lane to test whether higher-quality continuation geometry improves promotion durability without collapsing density.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_band_slow_af_cand_0240"
+family = "session_momentum_band_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0240"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_hardening_2026_03_24"
+parity_class_assigned_at = "2026-03-24T12:00:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "late_overlap_persistent_momentum_band", trigger_family = "session_momentum_band_slow", holding_profile = "longer_intraday_continuation", session_profile = "late_overlap_core", regime_dependency = "high_vol_trend_persistent" }
+notes = [
+  "Longer-hold variant of the late-overlap momentum band to test whether slightly slower exits improve MT5-consistent durability.",
+  "Use this lane to keep the same late-overlap structure but reduce sensitivity to short-horizon exit timing.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_band_core_af_cand_0238"
+family = "session_momentum_band_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0238"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_hardening_2026_03_24"
+parity_class_assigned_at = "2026-03-24T12:00:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_band_quality_af_cand_0239"
+family = "session_momentum_band_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0239"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_hardening_2026_03_24"
+parity_class_assigned_at = "2026-03-24T12:00:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_band_slow_af_cand_0240"
+family = "session_momentum_band_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0240"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_hardening_2026_03_24"
+parity_class_assigned_at = "2026-03-24T12:00:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only; MT5 smoke artifacts remain excluded from research truth.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_hold_core_af_cand_0241"
+family = "session_momentum_hold_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0241"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T16:45:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_momentum_carry_core", trigger_family = "session_momentum_hold_core", holding_profile = "extended_intraday_continuation", session_profile = "full_overlap_core", regime_dependency = "high_vol_trend_carry" }
+notes = [
+  "Fresh throughput root for an overlap carry family intentionally designed to be more M1-certifiable than the narrower late-overlap band family.",
+  "Use this lane to test whether longer overlap holds and wider geometry preserve research quality while reducing parity-fragile exits.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_hold_balanced_af_cand_0242"
+family = "session_momentum_hold_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0242"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T16:45:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_momentum_carry_balanced", trigger_family = "session_momentum_hold_balanced", holding_profile = "extended_intraday_continuation", session_profile = "full_overlap_balanced", regime_dependency = "high_vol_trend_carry_balanced" }
+notes = [
+  "Balanced throughput root for the overlap carry family, with broader overlap coverage and the same time-dominant hold geometry.",
+  "Use this lane to test whether a broader overlap window improves promotable density without reintroducing parity-fragile behavior.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_hold_extended_af_cand_0243"
+family = "session_momentum_hold_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0243"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T16:45:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_momentum_carry_extended", trigger_family = "session_momentum_hold_extended", holding_profile = "extended_intraday_continuation", session_profile = "full_overlap_extended", regime_dependency = "high_vol_trend_carry_slow" }
+notes = [
+  "Longest-hold throughput root for the overlap carry family.",
+  "Use this lane to test whether the slowest hold profile shifts more trades into time-based resolution and improves M1 parity durability.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_hold_core_af_cand_0241"
+family = "session_momentum_hold_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0241"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T16:45:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_open_volatility_breakout_core_af_cand_0733"
+family = "europe_open_impulse_retest_research"
+hypothesis_class = "volatility_breakout"
+seed_candidate_id = "AF-CAND-0733"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_04_14"
+parity_class_assigned_at = "2026-04-14T00:00:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["holdout_pf_confirmed", "stress_pf_confirmed", "walk_forward_confirmed"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "europe_open_directional_breakout", trigger_family = "volatility_breakout", holding_profile = "short_intraday_breakout", session_profile = "london_open_to_overlap", regime_dependency = "moderate_to_high_vol_trend" }
+notes = [
+  "Fresh throughput root for the gap blank-slate Europe-open volatility breakout branch promoted from deterministic holdout evidence.",
+  "AF-CAND-0733 is the primary parity seed because it delivered the strongest combined stressed PF and drawdown profile in the blank-slate search.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_open_volatility_breakout_challenger_af_cand_0730"
+family = "europe_open_impulse_retest_research"
+hypothesis_class = "volatility_breakout"
+seed_candidate_id = "AF-CAND-0730"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_04_14"
+parity_class_assigned_at = "2026-04-14T00:00:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["holdout_pf_confirmed", "stress_pf_confirmed", "walk_forward_confirmed"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "europe_open_directional_breakout", trigger_family = "volatility_breakout", holding_profile = "short_intraday_breakout", session_profile = "london_open_to_overlap", regime_dependency = "moderate_to_high_vol_trend" }
+notes = [
+  "Challenger throughput root for the same blank-slate Europe-open volatility breakout family.",
+  "AF-CAND-0730 remains in-scope as the highest holdout-PF challenger and should be compared directly against AF-CAND-0733 under the same parity class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_open_volatility_breakout_core_af_cand_0733"
+family = "europe_open_impulse_retest_research"
+hypothesis_class = "volatility_breakout"
+seed_candidate_id = "AF-CAND-0733"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_04_14"
+parity_class_assigned_at = "2026-04-14T00:00:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic holdout, stress, and walk-forward all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_open_volatility_breakout_challenger_af_cand_0730"
+family = "europe_open_impulse_retest_research"
+hypothesis_class = "volatility_breakout"
+seed_candidate_id = "AF-CAND-0730"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_04_14"
+parity_class_assigned_at = "2026-04-14T00:00:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable challenger candidate admitted from the throughput lane after deterministic holdout, stress, and walk-forward all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_hold_balanced_af_cand_0242"
+family = "session_momentum_hold_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0242"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T16:45:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_hold_extended_af_cand_0243"
+family = "session_momentum_hold_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0243"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T16:45:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_cushion_core_af_cand_0245"
+family = "session_momentum_cushion_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0245"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T23:45:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_momentum_cushion_core", trigger_family = "session_momentum_cushion_core", holding_profile = "medium_intraday_continuation", session_profile = "overlap_core", regime_dependency = "high_vol_trend_cushion" }
+notes = [
+  "Fresh throughput root for a momentum cushion family designed to reduce early stop-touch parity fragility without shifting entirely into timeout-heavy resolution.",
+  "Use this lane to test whether a wider protective cushion and moderate carry horizon can preserve research quality while improving official M1 parity.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_cushion_balanced_af_cand_0246"
+family = "session_momentum_cushion_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0246"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T23:45:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_momentum_cushion_balanced", trigger_family = "session_momentum_cushion_balanced", holding_profile = "extended_intraday_continuation", session_profile = "full_overlap_balanced", regime_dependency = "high_vol_trend_cushion_balanced" }
+notes = [
+  "Balanced throughput root for the momentum cushion family, with broader overlap coverage and the same wider protective geometry.",
+  "Use this lane to test whether broader carry density can stay promotable without recreating the prior family's parity-fragile stop timing.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_cushion_quality_af_cand_0247"
+family = "session_momentum_cushion_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0247"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T23:45:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_momentum_cushion_quality", trigger_family = "session_momentum_cushion_quality", holding_profile = "medium_intraday_continuation", session_profile = "pre_overlap_quality", regime_dependency = "high_vol_trend_cushion_quality" }
+notes = [
+  "Quality-skewed throughput root for the momentum cushion family.",
+  "Use this lane to test whether stricter continuation quality plus a wider protective cushion can produce the first official-parity pass under the current M1 regime.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_cushion_core_af_cand_0245"
+family = "session_momentum_cushion_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0245"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T23:45:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_cushion_balanced_af_cand_0246"
+family = "session_momentum_cushion_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0246"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T23:45:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_cushion_quality_af_cand_0247"
+family = "session_momentum_cushion_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0247"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_24"
+parity_class_assigned_at = "2026-03-24T23:45:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_bridge_core_af_cand_0250"
+family = "session_momentum_bridge_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0250"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T00:30:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_momentum_bridge_core", trigger_family = "session_momentum_bridge_core", holding_profile = "medium_intraday_continuation", session_profile = "full_overlap_quality_bridge", regime_dependency = "high_vol_trend_bridge" }
+notes = [
+  "Fresh throughput root that blends the density of the balanced cushion branch with the stability of the quality branch.",
+  "Use this lane to test whether a quality-weighted overlap bridge can become the first momentum-band branch to clear promotion honestly.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_bridge_balanced_af_cand_0251"
+family = "session_momentum_bridge_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0251"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T00:30:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_momentum_bridge_balanced", trigger_family = "session_momentum_bridge_balanced", holding_profile = "medium_intraday_continuation", session_profile = "full_overlap_shorter_carry", regime_dependency = "high_vol_trend_bridge_balanced" }
+notes = [
+  "Balanced throughput root for the bridge family with a slightly shorter carry horizon.",
+  "Use this lane to test whether the bridge thesis works better with earlier realization and more promotable density.",
+]
+
+[[program.approved_lanes]]
+lane_id = "session_momentum_bridge_quality_af_cand_0252"
+family = "session_momentum_bridge_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0252"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T00:30:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_momentum_bridge_quality", trigger_family = "session_momentum_bridge_quality", holding_profile = "medium_intraday_continuation", session_profile = "core_overlap_quality", regime_dependency = "high_vol_trend_bridge_quality" }
+notes = [
+  "Quality-skewed throughput root for the bridge family.",
+  "Use this lane to test whether the cleanest overlap regime can cross promotion with a slightly richer payoff profile.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_bridge_core_af_cand_0250"
+family = "session_momentum_bridge_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0250"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T00:30:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_bridge_balanced_af_cand_0251"
+family = "session_momentum_bridge_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0251"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T00:30:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_session_momentum_bridge_quality_af_cand_0252"
+family = "session_momentum_bridge_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0252"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T00:30:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "high_vol_overlap_persistence_bridge_core_af_cand_0253"
+family = "high_vol_overlap_persistence_bridge_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0253"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T01:05:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "high_vol_overlap_persistence_bridge_core", trigger_family = "high_vol_overlap_persistence_retest_bridge", holding_profile = "extended_intraday_continuation", session_profile = "core_overlap_bridge", regime_dependency = "high_vol_overlap_persistence" }
+notes = [
+  "Fresh throughput root that revives the high-volatility overlap retest class with a wider, longer bridge profile.",
+  "Use this lane to test whether removing pre-overlap contamination can recover walk-forward stability without sacrificing promotable density.",
+]
+
+[[program.approved_lanes]]
+lane_id = "high_vol_overlap_persistence_bridge_balanced_af_cand_0254"
+family = "high_vol_overlap_persistence_bridge_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0254"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T01:05:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "high_vol_overlap_persistence_bridge_balanced", trigger_family = "high_vol_overlap_persistence_retest_bridge", holding_profile = "extended_intraday_continuation", session_profile = "core_overlap_balanced", regime_dependency = "high_vol_overlap_persistence_balanced" }
+notes = [
+  "Balanced throughput root for the revived high-volatility overlap retest class.",
+  "Use this lane to test whether the core overlap hours plus longer carry can improve the weak first walk-forward window.",
+]
+
+[[program.approved_lanes]]
+lane_id = "high_vol_overlap_persistence_bridge_late_af_cand_0255"
+family = "high_vol_overlap_persistence_bridge_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0255"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T01:05:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "high_vol_overlap_persistence_bridge_late", trigger_family = "high_vol_overlap_persistence_retest_bridge", holding_profile = "extended_intraday_continuation", session_profile = "late_overlap_bridge", regime_dependency = "high_vol_overlap_persistence_late" }
+notes = [
+  "Late-overlap throughput root for the revived high-volatility overlap retest class.",
+  "Use this lane to test whether a later overlap slice can restore density without reopening the weak pre-overlap regime.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_high_vol_overlap_persistence_bridge_core_af_cand_0253"
+family = "high_vol_overlap_persistence_bridge_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0253"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T01:05:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_high_vol_overlap_persistence_bridge_balanced_af_cand_0254"
+family = "high_vol_overlap_persistence_bridge_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0254"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T01:05:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_high_vol_overlap_persistence_bridge_late_af_cand_0255"
+family = "high_vol_overlap_persistence_bridge_research"
+hypothesis_class = "high_vol_overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0255"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T01:05:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_persistence_bridge_core_af_cand_0259"
+family = "overlap_persistence_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0259"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T15:00:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_persistence_bridge_core", trigger_family = "overlap_persistence_retest_bridge", holding_profile = "extended_intraday_bridge", session_profile = "overlap_plus_post_overlap", regime_dependency = "balanced_vol_persistence" }
+notes = [
+  "Fresh throughput root for a novelty-safe overlap persistence bridge family that extends into the first post-overlap hour.",
+  "Use this lane to test whether slower bridge exits can produce the first official parity-ready overlap persistence branch under the current M1 standard.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_persistence_bridge_tight_af_cand_0260"
+family = "overlap_persistence_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0260"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T15:00:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "filtered_overlap_persistence_bridge", trigger_family = "tighter_overlap_persistence_retest", holding_profile = "extended_intraday_precision", session_profile = "overlap_plus_post_overlap", regime_dependency = "balanced_vol_persistence_filtered" }
+notes = [
+  "Quality-skewed throughput root for the overlap persistence bridge family.",
+  "Use this lane to test whether tighter continuation filters plus the bridge hour can preserve a strong research edge without slipping back into archived narrow-slice behavior.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_persistence_bridge_late_af_cand_0261"
+family = "overlap_persistence_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0261"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T15:00:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "late_overlap_persistence_bridge", trigger_family = "late_overlap_retest_bridge", holding_profile = "extended_intraday_late", session_profile = "late_overlap_plus_post_overlap", regime_dependency = "balanced_vol_late_persistence" }
+notes = [
+  "Late-overlap throughput root for the overlap persistence bridge family.",
+  "Use this lane to test whether the cleaner later slice plus the bridge hour is the most M1-certifiable path back to promotion.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_persistence_bridge_core_af_cand_0259"
+family = "overlap_persistence_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0259"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T15:00:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_persistence_bridge_tight_af_cand_0260"
+family = "overlap_persistence_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0260"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T15:00:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_persistence_bridge_late_af_cand_0261"
+family = "overlap_persistence_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0261"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T15:00:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_resolution_bridge_base_af_cand_0262"
+family = "overlap_resolution_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0262"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T18:20:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_resolution_bridge_base", trigger_family = "overlap_persistence_retest_resolution", holding_profile = "extended_intraday_resolution", session_profile = "overlap_plus_resolution_window", regime_dependency = "balanced_vol_persistence_wide" }
+notes = [
+  "Fresh throughput root for a wider overlap resolution bridge family derived from the real timeout-dominant local search.",
+  "Use this lane to test whether broader stop-target geometry and a longer bridge window can produce the first official parity-ready overlap retest branch under the current M1 standard.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_resolution_bridge_balanced_af_cand_0263"
+family = "overlap_resolution_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0263"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T18:20:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_resolution_bridge_balanced", trigger_family = "overlap_persistence_retest_timeout_lean", holding_profile = "extended_intraday_balanced_resolution", session_profile = "overlap_plus_resolution_window", regime_dependency = "balanced_vol_timeout_lean" }
+notes = [
+  "Balanced throughput root for the overlap resolution bridge family.",
+  "Use this lane to test whether the longer resolution window can improve official parity without taking the widest target profile.",
+]
+
+[[program.approved_lanes]]
+lane_id = "overlap_resolution_bridge_buffered_af_cand_0264"
+family = "overlap_resolution_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0264"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T18:20:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "overlap_resolution_bridge_buffered", trigger_family = "overlap_persistence_retest_buffered", holding_profile = "extended_intraday_buffered_resolution", session_profile = "overlap_plus_resolution_window", regime_dependency = "balanced_vol_buffered" }
+notes = [
+  "Buffered throughput root for the overlap resolution bridge family.",
+  "Use this lane to test whether the wider stop profile removes the last stop-first parity failures without losing promotion-grade research quality.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_resolution_bridge_base_af_cand_0262"
+family = "overlap_resolution_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0262"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T18:20:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_resolution_bridge_balanced_af_cand_0263"
+family = "overlap_resolution_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0263"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T18:20:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_overlap_resolution_bridge_buffered_af_cand_0264"
+family = "overlap_resolution_bridge_research"
+hypothesis_class = "overlap_persistence_retest"
+seed_candidate_id = "AF-CAND-0264"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T18:20:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Reviewable candidate admitted from the throughput lane after deterministic rule spec, compile, and MT5 smoke all passed.",
+  "Promotion lane uses canonical research evaluation only, with official parity constrained to the prospectively assigned m1_official class.",
+]
+
+[[program.approved_lanes]]
+lane_id = "asia_compression_reversion_af_cand_0265"
+family = "asia_range_bridge_research"
+hypothesis_class = "compression_reversion"
+seed_candidate_id = "AF-CAND-0265"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T22:30:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["mean_reversion_stationarity", "mean_reversion_half_life"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "asia_compression_snapback", trigger_family = "compression_reversion", holding_profile = "short_intraday_reversion", session_profile = "asia", regime_dependency = "low_vol_range" }
+notes = [
+  "Next orthogonal family seeded while AF-CAND-0263 remains locked for overlap-session demo observation.",
+  "Use this root to explore quiet Asia-session compression reversion with M1-certifiable, slower exits.",
+]
+
+[[program.approved_lanes]]
+lane_id = "asia_range_reclaim_af_cand_0266"
+family = "asia_range_bridge_research"
+hypothesis_class = "range_reclaim"
+seed_candidate_id = "AF-CAND-0266"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T22:30:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["mean_reversion_stationarity", "mean_reversion_half_life"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "failed_asia_range_escape", trigger_family = "range_reclaim", holding_profile = "intraday_reclaim", session_profile = "asia", regime_dependency = "low_vol_range" }
+notes = [
+  "Second orthogonal Asia/range root focused on reclaiming failed overnight range escapes.",
+  "Kept separate from the overlap family so the portfolio can add time coverage without diluting AF-CAND-0263.",
+]
+
+[[program.approved_lanes]]
+lane_id = "asia_to_europe_release_af_cand_0267"
+family = "asia_range_bridge_research"
+hypothesis_class = "drift_reclaim"
+seed_candidate_id = "AF-CAND-0267"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T22:30:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["mean_reversion_stationarity", "mean_reversion_half_life"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "asia_to_europe_drift_reclaim", trigger_family = "drift_reclaim", holding_profile = "intraday_handoff_reclaim", session_profile = "asia_to_europe", regime_dependency = "balanced_vol_exhaustion" }
+notes = [
+  "Third orthogonal Asia/range root focused on a reclaim-style handoff from late Asia into Europe open.",
+  "The release window ends before overlap to preserve orthogonality against AF-CAND-0263.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_asia_compression_reversion_af_cand_0265"
+family = "asia_range_bridge_research"
+hypothesis_class = "compression_reversion"
+seed_candidate_id = "AF-CAND-0265"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T22:30:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the Asia compression reversion root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_asia_range_reclaim_af_cand_0266"
+family = "asia_range_bridge_research"
+hypothesis_class = "range_reclaim"
+seed_candidate_id = "AF-CAND-0266"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T22:30:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the Asia range reclaim root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_asia_to_europe_release_af_cand_0267"
+family = "asia_range_bridge_research"
+hypothesis_class = "drift_reclaim"
+seed_candidate_id = "AF-CAND-0267"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_25"
+parity_class_assigned_at = "2026-03-25T22:30:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the Asia-to-Europe release root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_open_reclaim_dual_pocket_af_cand_0291"
+family = "europe_open_reclaim_research"
+hypothesis_class = "range_reclaim"
+seed_candidate_id = "AF-CAND-0291"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_29"
+parity_class_assigned_at = "2026-03-29T20:30:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["mean_reversion_stationarity", "mean_reversion_half_life"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "europe_open_failed_extension_reclaim", trigger_family = "range_reclaim", holding_profile = "short_intraday_reversion", session_profile = "europe_open_dual_pocket", regime_dependency = "moderate_vol_reclaim" }
+notes = [
+  "Fresh Europe-open reclaim root seeded from the dual-pocket non-overlap refinement winner.",
+  "Use this lane to test whether two bounded London reclaim pockets can produce a deployable pre-overlap strategy without inheriting AF-CAND-0263 logic.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_open_reclaim_dual_pocket_af_cand_0291"
+family = "europe_open_reclaim_research"
+hypothesis_class = "range_reclaim"
+seed_candidate_id = "AF-CAND-0291"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_29"
+parity_class_assigned_at = "2026-03-29T20:30:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the Europe-open dual-pocket reclaim root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_open_high_vol_pullback_persistence_af_cand_0416"
+family = "europe_open_high_vol_pullback_persistence_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0416"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_31"
+parity_class_assigned_at = "2026-03-31T00:36:15Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "europe_bridge_to_pre_overlap_high_vol_persistence", trigger_family = "pullback_continuation", holding_profile = "short_intraday_continuation", session_profile = "bridge_to_pre_overlap", regime_dependency = "high_vol_trend_persistence" }
+notes = [
+  "Official throughput root for the strongest current non-overlap persistence branch.",
+  "Use this lane to drive AF-CAND-0416 through deterministic rule formalization, EA spec generation, compile, smoke, and triage before any manual MT5 testing decision.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_open_high_vol_pullback_persistence_af_cand_0416"
+family = "europe_open_high_vol_pullback_persistence_research"
+hypothesis_class = "pullback_continuation"
+seed_candidate_id = "AF-CAND-0416"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_31"
+parity_class_assigned_at = "2026-03-31T00:36:15Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for AF-CAND-0416 once the throughput artifacts are complete and a manual-review decision is warranted.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_open_balance_breakout_core_release_af_cand_0328"
+family = "europe_open_balance_breakout_research"
+hypothesis_class = "balance_area_breakout"
+seed_candidate_id = "AF-CAND-0328"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_29"
+parity_class_assigned_at = "2026-03-29T22:09:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "europe_core_balance_release_breakout", trigger_family = "balance_breakout", holding_profile = "short_intraday_continuation", session_profile = "europe_core_release", regime_dependency = "high_vol_transition" }
+notes = [
+  "Fresh Europe-open balance-breakout challenger seeded from the core-release buffered refinement winner.",
+  "Use this lane to test whether a tighter high-volatility core release can challenge the reclaim incumbent without inheriting AF-CAND-0263 logic.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_open_balance_breakout_core_release_af_cand_0328"
+family = "europe_open_balance_breakout_research"
+hypothesis_class = "balance_area_breakout"
+seed_candidate_id = "AF-CAND-0328"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_29"
+parity_class_assigned_at = "2026-03-29T22:09:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the Europe-open balance-breakout challenger once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_open_failed_break_late_morning_af_cand_0301"
+family = "europe_open_failed_break_research"
+hypothesis_class = "failed_break_fade"
+seed_candidate_id = "AF-CAND-0301"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_29"
+parity_class_assigned_at = "2026-03-29T21:15:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "failed_extension_reversal", trigger_family = "failed_break_fade", holding_profile = "intraday_reversion", session_profile = "europe_late_morning", regime_dependency = "moderate_vol_reversal" }
+notes = [
+  "Fresh blank-slate Europe-open failed-break root seeded from the late-morning refinement winner.",
+  "Use this lane to test whether medium-volatility late-morning failure fades can supply a non-overlap strategy distinct from the exhausted reclaim lane and independent of AF-CAND-0263 logic.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_open_failed_break_late_morning_af_cand_0301"
+family = "europe_open_failed_break_research"
+hypothesis_class = "failed_break_fade"
+seed_candidate_id = "AF-CAND-0301"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_29"
+parity_class_assigned_at = "2026-03-29T21:15:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the Europe-open failed-break late-morning root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_open_volatility_expansion_af_cand_0269"
+family = "europe_open_continuation_research"
+hypothesis_class = "volatility_expansion"
+seed_candidate_id = "AF-CAND-0269"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T00:20:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "europe_open_directional_expansion", trigger_family = "volatility_expansion", holding_profile = "short_intraday_continuation", session_profile = "europe_open", regime_dependency = "moderate_to_high_vol_trend" }
+notes = [
+  "First Europe-open continuation root seeded after the Asia/range family retired under governed evaluation.",
+  "Use this lane to test whether a simple Europe-open directional expansion can add pre-overlap coverage without overlap-style exit ambiguity.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_open_volatility_retest_af_cand_0270"
+family = "europe_open_continuation_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0270"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T00:20:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "europe_open_retest_continuation", trigger_family = "volatility_retest_breakout", holding_profile = "intraday_retest_continuation", session_profile = "europe_open_to_pre_overlap", regime_dependency = "moderate_to_high_vol_trend" }
+notes = [
+  "Second Europe-open continuation root built around a retest entry instead of the raw release bar.",
+  "Use this lane to test whether Europe-open retests are the cleanest bar-based continuation path before overlap begins.",
+]
+
+[[program.approved_lanes]]
+lane_id = "europe_open_momentum_band_af_cand_0271"
+family = "europe_open_continuation_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0271"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T00:20:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "europe_open_momentum_band", trigger_family = "session_momentum_band", holding_profile = "pre_overlap_band_continuation", session_profile = "europe_open_to_pre_overlap", regime_dependency = "medium_vol_persistence" }
+notes = [
+  "Third Europe-open continuation root replaces the low-novelty compression-retest seed with a broader momentum-band lane.",
+  "Use this lane to test whether earlier Europe continuation can survive under the current M1 standard without relying on overlap-specific behavior.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_open_volatility_expansion_af_cand_0269"
+family = "europe_open_continuation_research"
+hypothesis_class = "volatility_expansion"
+seed_candidate_id = "AF-CAND-0269"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T00:20:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the Europe-open volatility-expansion root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_open_volatility_retest_af_cand_0270"
+family = "europe_open_continuation_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0270"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T00:20:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the Europe-open volatility-retest root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_europe_open_momentum_band_af_cand_0271"
+family = "europe_open_continuation_research"
+hypothesis_class = "session_momentum_band"
+seed_candidate_id = "AF-CAND-0271"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T00:20:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the Europe-open momentum-band root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "new_york_event_retest_core_af_cand_0272"
+family = "new_york_event_retest_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0272"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T10:20:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "new_york_event_retest_core", trigger_family = "volatility_retest_breakout", holding_profile = "short_event_retest_continuation", session_profile = "new_york_event_to_early_overlap", regime_dependency = "high_volatility_event_continuation" }
+notes = [
+  "Core New York event retest root seeded after both Asia/range and Europe-open families retired cleanly.",
+  "Use this lane to test whether the first high-volatility event retest can add a second portfolio slot without inheriting late-overlap drift.",
+]
+
+[[program.approved_lanes]]
+lane_id = "new_york_high_vol_persistence_af_cand_0273"
+family = "new_york_event_retest_research"
+hypothesis_class = "volatility_expansion"
+seed_candidate_id = "AF-CAND-0273"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T10:20:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "new_york_event_expansion", trigger_family = "volatility_expansion", holding_profile = "short_event_continuation", session_profile = "new_york_event_window", regime_dependency = "high_volatility_event_expansion" }
+notes = [
+  "Fallback New York event expansion root introduced after the high-volatility persistence archetype hit the retirement threshold.",
+  "Use this lane to test whether raw event continuation can recover density inside the release window without reopening broad breakout drift.",
+]
+
+[[program.approved_lanes]]
+lane_id = "new_york_event_retest_density_af_cand_0274"
+family = "new_york_event_retest_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0274"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T10:20:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["momentum_horizon_correlation"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "new_york_event_retest_density", trigger_family = "volatility_retest_breakout", holding_profile = "extended_event_retest_continuation", session_profile = "new_york_event_to_overlap", regime_dependency = "moderate_to_high_volatility_event_continuation" }
+notes = [
+  "Density-oriented New York event retest sibling that allows one extra hour relative to the strict core root.",
+  "Use this lane to test whether density can improve without fully reopening the broader late-session drift.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_new_york_event_retest_core_af_cand_0272"
+family = "new_york_event_retest_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0272"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T10:20:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the New York event retest core root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_new_york_high_vol_persistence_af_cand_0273"
+family = "new_york_event_retest_research"
+hypothesis_class = "volatility_expansion"
+seed_candidate_id = "AF-CAND-0273"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T10:20:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the New York event expansion root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_new_york_event_retest_density_af_cand_0274"
+family = "new_york_event_retest_research"
+hypothesis_class = "volatility_retest_breakout"
+seed_candidate_id = "AF-CAND-0274"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T10:20:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the New York event retest density root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "us_late_extreme_reversion_af_cand_0275"
+family = "us_late_unwind_research"
+hypothesis_class = "session_extreme_reversion"
+seed_candidate_id = "AF-CAND-0275"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T11:05:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["mean_reversion_stationarity", "mean_reversion_half_life"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "us_late_extreme_unwind", trigger_family = "session_extreme_reversion", holding_profile = "short_late_session_reversion", session_profile = "late_us", regime_dependency = "post_overlap_unwind" }
+notes = [
+  "First late-U.S. unwind root seeded after continuation-style gap families either retired or hit novelty boundaries.",
+  "Use this lane to test whether the weakest part of the overlap regime can be converted into an orthogonal mean-reversion slot.",
+]
+
+[[program.approved_lanes]]
+lane_id = "us_late_range_reclaim_af_cand_0276"
+family = "us_late_unwind_research"
+hypothesis_class = "range_reclaim"
+seed_candidate_id = "AF-CAND-0276"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T11:05:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["mean_reversion_stationarity", "mean_reversion_half_life"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "us_late_range_reclaim", trigger_family = "range_reclaim", holding_profile = "late_session_reclaim_reversion", session_profile = "late_us", regime_dependency = "post_overlap_failed_extension" }
+notes = [
+  "Reclaim-oriented sibling for the late-U.S. unwind family.",
+  "Use this lane to test whether failed late-session extensions need a reclaim back into range rather than a raw fade.",
+]
+
+[[program.approved_lanes]]
+lane_id = "us_late_compression_reversion_af_cand_0277"
+family = "us_late_unwind_research"
+hypothesis_class = "compression_reversion"
+seed_candidate_id = "AF-CAND-0277"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T11:05:00Z"
+queue_kind = "throughput"
+throughput_target_count = 10
+required_evidence_tags = ["mean_reversion_stationarity", "mean_reversion_half_life"]
+compile_budget = 6
+smoke_budget = 5
+max_rule_spec_reformulations_per_hypothesis = 2
+max_ea_spec_rewrites_per_candidate = 2
+max_compile_retries_per_candidate = 2
+max_smoke_retries_per_candidate = 1
+max_steps = 5
+orthogonality_metadata = { market_hypothesis = "us_late_compression_unwind", trigger_family = "compression_reversion", holding_profile = "slow_late_session_snapback", session_profile = "late_us", regime_dependency = "post_overlap_compression" }
+notes = [
+  "Compression-oriented sibling for the late-U.S. unwind family.",
+  "Use this lane to test whether the quietest part of the late session can support a slower bar-based snapback after overlap exhaustion.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_us_late_extreme_reversion_af_cand_0275"
+family = "us_late_unwind_research"
+hypothesis_class = "session_extreme_reversion"
+seed_candidate_id = "AF-CAND-0275"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T11:05:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the late-U.S. extreme reversion root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_us_late_range_reclaim_af_cand_0276"
+family = "us_late_unwind_research"
+hypothesis_class = "range_reclaim"
+seed_candidate_id = "AF-CAND-0276"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T11:05:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the late-U.S. range reclaim root once it becomes reviewable.",
+]
+
+[[program.approved_lanes]]
+lane_id = "promotion_us_late_compression_reversion_af_cand_0277"
+family = "us_late_unwind_research"
+hypothesis_class = "compression_reversion"
+seed_candidate_id = "AF-CAND-0277"
+parity_class = "m1_official"
+parity_class_assigned_by = "policy_seed_2026_03_26"
+parity_class_assigned_at = "2026-03-26T11:05:00Z"
+queue_kind = "promotion"
+throughput_target_count = 0
+compile_budget = 0
+smoke_budget = 0
+max_rule_spec_reformulations_per_hypothesis = 0
+max_ea_spec_rewrites_per_candidate = 0
+max_compile_retries_per_candidate = 0
+max_smoke_retries_per_candidate = 0
+max_steps = 6
+notes = [
+  "Promotion lane for the late-U.S. compression reversion root once it becomes reviewable.",
+]

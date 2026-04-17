@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-081",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright \u00a9 2005 by John Wiley &amp; Sons, Inc. All rights reserved. Published by John Wiley &amp; Sons, Inc., Hoboken, New Jersey. Published simultaneously in Canada. No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by an",
+    "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley &amp; Sons, Inc., 111 River Street, Hoboken, NJ 07030, 201-748-6011, fax 201-748-6008, e-mail: permcoordinator@wiley.com .",
+    "Wiley also publishes its books in a variety of electronic formats. Some content that appears in print may not be available in electronic books. For more information about Wiley products, visit our web site at www.wiley.com ."
+  ],
+  "front_matter_signals": [
+    "Contents Foreword Introduction I: The Biggest Plunger Wall Street Ever Saw Reminiscences of a Stock Operator: June 10, 1922 Lawrence Livingston\u2019s Raid Who Was Wall Street\u2019s Biggest Plunger? The Livingston Personality A Pointed Question Merchants in Wall Street An Undeserved Reput",
+    "Foreword This new edition of Reminiscences of a Stock Operator is a must-read classic for all investors, whether brand new or experienced. It is about the invaluable knowledge and experiences of Jesse Livermore, a market speculator who made and lost millions during the period fro",
+    "Introduction In its long history, Wall Street has never been short of legend and myth. Stories abound of traders making fortunes using nothing more than their instinct and nerves of steel. The nineteenth century in particular produced many of these tales, telling the stories of m"
+  ],
+  "best_excerpt": "These were stocks that traded frequently and were always on the ticker tape, so determining their momentum was easier than trying to decipher the trading patterns of smaller, lesser known stocks. The outdoor market, or curb market, that existed on Wall and Broad Streets until the"
+}

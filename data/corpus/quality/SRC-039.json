@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-039",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Acknowledgments for the First Edition A Trip to the Library: Notes and Reading Recommendations Notes References About the Author Also by Nassim Nicholas Taleb Copyright",
+    "The answer seems to be yes. Aside from the hoax by Alan Sokal (the same of the hilarious book a few lines ago), who managed to produce nonsense and get it published by some prominent journal, there are Monte Carlo generators designed to structure such texts and write entire paper",
+    "Wiley &amp; Sons. Myles understood that books need not be written to satisfy a predefined labeled audience, but that a book will find its own unique set of readers\u2014thus giving more credit to the reader than the off-the-rack publisher."
+  ],
+  "front_matter_signals": [
+    "CONTENTS Title Page Dedication Preface Acknowledgments for the Updated Second Edition Chapter Summaries Prologue",
+    "Acknowledgments for the First Edition A Trip to the Library: Notes and Reading Recommendations Notes References About the Author Also by Nassim Nicholas Taleb Copyright",
+    "PREFACE TAKING KNOWLEDGE LESS SERIOUSLY T his book is the synthesis of, on one hand, the no-nonsense practitioner of uncertainty whospen this professional life trying to resist being fooled by randomness and trick the emotions associated with probabilistic outcomes and, on the ot"
+  ],
+  "best_excerpt": "The risk managers\u2019 job feels strange: As we said, the generator of reality is not observable. They are limited in their power to stop profitable traders from taking risks, given that they would, ex post, be accused by the George Wills around of costing the shareholder some precio"
+}

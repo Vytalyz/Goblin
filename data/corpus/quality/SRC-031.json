@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-031",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Logue, MBA Day Trading For Dummies\u00ae, 3rd Edition Published by: John Wiley & Sons, Inc., 111 River Street, Hoboken, NJ 07030-5774, www.wiley.com Copyright \u00a9 2014 by John Wiley & Sons, Inc., Hoboken, New Jersey Published simultaneously in Canada No part of this publication may be r",
+    "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley & Sons, Inc., 111 River Street, Hoboken, NJ 07030, (201) 748-6011, fax (201) 748-6008, or online at http://www.wiley.com/go/permissions.",
+    "Trademarks: Wiley, For Dummies, the Dummies Man logo, Dummies.com, Making Everything Easier, and related trade dress are trademarks or registered trademarks of John Wiley & Sons, Inc., and may not be used without written permission."
+  ],
+  "front_matter_signals": [
+    "Library of Congress Control Number: 2013954192 ISBN 978-1-118-77960-6 (pbk); ISBN 978-1-118-80813-9 (ebk); ISBN 978-1-118-80808-5 (ebk) Manufactured in the United States of America 10 9 8 7 6 5 4 3 2 1 Contents at a Glance Introduction ............................................",
+    "321 Index ...................................................................... 329",
+    "Table of Contents Introduction ................................................................. 1 About This Book ..............................................................................................2 Foolish Assumptions ................................................."
+  ],
+  "best_excerpt": "It just stays within the trading range. A consolida- tion phase is good for scalpers, who make a large volume of trades in search of very small profits. It can be boring for everyone else. \u2713 Retracement (also called correction or pullback): Retracement is a secondary trend, a sho"
+}

@@ -1,0 +1,55 @@
+{
+  "phase_id": "GOBLIN-P04",
+  "title": "MT5 Harness And Executable Certification",
+  "objective": "Make MT5 the authoritative executable validation layer for MT5-targeted deployment.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P03"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Define the MT5 certification envelope including tester mode, delay model, tick provenance, and symbol/account snapshots.",
+    "Require baseline known-good reproduction before treating incident replays as trustworthy.",
+    "Classify deterministic engines as `deployment_grade`, `research_only`, or `untrusted` based on MT5 parity."
+  ],
+  "outputs": [
+    "MT5 certification contract",
+    "deterministic-vs-MT5 certification"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/mt5-certification.md"
+  ],
+  "checkpoint_targets": [
+    "MT5 certification contract exists and includes tick provenance.",
+    "Harness trust status is separated from candidate alpha claims."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/mt5-certification.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P04.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P04\\goblin-p04-mt5-certification-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P04",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P04 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-12T20:06:55.848529Z",
+  "updated_at": "2026-04-14T19:50:53.042828Z",
+  "completed_at": "2026-04-12T20:21:21.174159Z",
+  "exit_criteria": [
+    "No MT5 replay is treated as authoritative without harness certification."
+  ],
+  "acceptance_result": {
+    "authority_gate": "deployment_grade_required",
+    "incident_replay_baseline_gate": true,
+    "certification_artifacts_written": true
+  },
+  "notes": [
+    "Beginning Phase 4 implementation by wiring Goblin MT5 certification into the existing parity and replay trust flow.",
+    "Completed Phase 4 by writing Goblin MT5 certification artifacts for parity and incident replay runs, deriving tick provenance from tester mode, and requiring deployment-grade certification before MT5 replay evidence can lock official parity authority."
+  ],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P04.json"
+}

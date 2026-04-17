@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-096",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Technical Analysis of Stock Trends Explained: An Easy-to-Understand System for Successful Trading by Michael Thomsett. Published by Ethan Hathaway Co Ltd Copyright \u00a9 2012. Michael Thomsett. All Rights Reserved. Be sure to check out the companion course to this book at: http://www",
+    "Among his best-selling books are six that have sold over one million copies in total. These are Getting Started in Options, The Mathematics of Investing, and Getting Started in Real Estate Investing (John Wiley &amp; Sons), Builders Guide to Accounting (Craftsman), How to Buy a H",
+    "Thomsett lives near Nashville, Tennessee and writes for several publishers, notably John Wiley &amp; Sons, Amacom Books, Financial Times/Prentice Hall, and McFarland &amp; Company. He also is an active blogger and contributor of educational articles on L:inkedIn, Twitter, Seeking"
+  ],
+  "front_matter_signals": [
+    "PART I: INTRODUCTION Traders have heard about \u201cfundamental analysis\u201d and \u201ctechnical analysis\u201d and often decide to become adherents to one or the other. However, you can use both of these to: a. complement one another and improve skills in timing of trades. b. confirm and cross-co",
+    "This serves as the basis for technical analysis. The underlying tenet states that the market is in a bullish (upward) trend when one of the averages advances above a previously establish high index value; and when this advance is confirmed by another average.",
+    "The entire market is assigned a beta value of 1. (This may be applied to any index, but for stocks it usually is used for the S&amp;P 500.) If a stock tracks the market exactly - meaning it rises or falls exactly in line with the index - then that stock\u2019s beta is also 1."
+  ],
+  "best_excerpt": "The session following the engulfing signal had an exceptionally long upper shadow, indicating lost momentum among buyers. Proximity to resistance (and the breakout) added strength to the bearish indicator, making the resulting downtrend a near certainty."
+}

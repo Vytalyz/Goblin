@@ -1,0 +1,6 @@
+[data]
+instrument = "EUR_USD"
+canonical_source = "oanda"
+base_granularity = "M1"
+execution_granularity = "M1"
+

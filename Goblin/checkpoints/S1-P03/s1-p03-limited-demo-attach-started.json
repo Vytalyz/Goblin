@@ -1,0 +1,19 @@
+﻿{
+    "shadow_mode_disabled_utc":  "2026-04-17T20:38:39.849989Z",
+    "checkpoint_utc":  "2026-04-17T20:39:25.5697244Z",
+    "candidate_id":  "AF-CAND-0733",
+    "bundle_id":  "AF-CAND-0733-limited-demo-20260414",
+    "notes":  [
+                  "InpShadowModeOnly set to false in packet EA",
+                  "EA compiled and deployed via goblin-live-attach",
+                  "Pending: MT5 manual re-attach on EURUSD M1 with Algo Trading enabled",
+                  "Pending: first real demo orders and broker reconciliation report"
+              ],
+    "phase":  "S1-P03",
+    "status":  "in_progress",
+    "ea_build_hash":  "6CF53134917D962DFFD3B149701705A24EA0552F389157BEF766DB2E0C729DBF",
+    "live_attach_manifest":  "Goblin\\reports\\live_demo\\AF-CAND-0733\\live-demo-20260417T000000Z\\live_attach_manifest.json",
+    "title":  "Controlled Demo Advancement",
+    "inputs_hash":  "59B22838E97D58F5F572C2F7EEF57DDCF41729A8278DE0B7F354F55E888847FB",
+    "ladder_state":  "limited_demo"
+}

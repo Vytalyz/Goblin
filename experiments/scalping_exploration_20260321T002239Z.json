@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-03-21T00:22:39.303938Z",
+  "family": "scalping",
+  "digest_source_count": 5,
+  "approved_source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "comparison_report_path": "experiments\\comparison_20260321T002239Z.json",
+  "recommended_candidate_id": "AF-CAND-0002",
+  "report_path": "experiments\\scalping_exploration_20260321T002239Z.json",
+  "candidates": [
+    {
+      "candidate_id": "AF-CAND-0002",
+      "title": "Europe Breakout Retest Scalp",
+      "entry_style": "session_breakout",
+      "thesis": "Trade the first clean Europe-session expansion after structure confirms, keeping cost and momentum alignment explicit. Corpus anchor: SRC-001: The entry price is de\ufb01 ned as the price at which a trade is triggered. The pro\ufb01 t target is de\ufb01 ned as the price where the trade exits with a pro\ufb01 t. The stop loss is de\ufb01 ned as the price where the trade exits with a loss.",
+      "candidate_path": "reports\\AF-CAND-0002\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0002\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0002\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0002\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0002\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0003",
+      "title": "Volatility Expansion Scalp",
+      "entry_style": "volatility_breakout",
+      "thesis": "Only trade the strongest Europe-session expansions when both volatility and directional momentum accelerate together. Corpus anchor: SRC-002: Pyramiding approaches, scale trading, stop reversals, breakouts, momentum trad-",
+      "candidate_path": "reports\\AF-CAND-0003\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0003\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0003\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0003\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0003\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0004",
+      "title": "Trend Pullback Continuation Scalp",
+      "entry_style": "pullback_continuation",
+      "thesis": "Trade shallow Europe-session pullbacks only when the broader intraday move still points in the original direction. Corpus anchor: SRC-003: Price action - weakness The clue is in the name! Just as stopping volume was stopping the market from falling further, so topping out volume is the market topping out after a bullish run higher. Once again, the market does not simply stop and reverse, it has momentum, both in up ",
+      "candidate_path": "reports\\AF-CAND-0004\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0004\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0004\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0004\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0004\\review_packet.json"
+    },
+    {
+      "candidate_id": "AF-CAND-0005",
+      "title": "Mean Reversion Exhaustion Scalp",
+      "entry_style": "mean_reversion_pullback",
+      "thesis": "Fade short-lived exhaustion only after a stretched move begins to reverse back through the short-term mean. Corpus anchor: SRC-004: The longer a market consolidates in a narrow range, then the more dramatic the resulting price action once the market moves away from this region. Naturally this is all relative, not least because a market that has been consolidating on a daily chart for several weeks is likely t",
+      "candidate_path": "reports\\AF-CAND-0005\\candidate.json",
+      "spec_path": "reports\\AF-CAND-0005\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0005\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0005\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0005\\review_packet.json"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "phase_id": "GOBLIN-P07",
+  "title": "Release, Approval, And Change Management",
+  "objective": "Make every deployable artifact a governed release bundle with a declared deployment ladder state, so bundle approval and operational readiness are never conflated.",
+  "status": "completed",
+  "dependencies": [
+    "GOBLIN-P05"
+  ],
+  "inputs": [],
+  "build_items": [
+    "Define the deployment bundle, approval boundaries, rollback criteria, and immutable evidence retention policy.",
+    "Define the deployment ladder: shadow_only, limited_demo, observed_demo, challenger_demo, eligible_for_replacement.",
+    "Enforce that bundle approval does not imply operational readiness; every live/demo attach must reference both bundle and ladder state.",
+    "Define environment reproducibility requirements: terminal build pinning, config drift detection, secrets location policy, and critical-state backup.",
+    "Add ladder state to LiveAttachManifest and incident closure packet models.",
+    "Document the manual approval surfaces required before demo or production-facing changes."
+  ],
+  "outputs": [
+    "deployment bundle schema",
+    "deployment ladder contract",
+    "environment reproducibility contract",
+    "approval boundary policy",
+    "retention runbooks"
+  ],
+  "expected_artifacts": [
+    "Goblin/contracts/deployment-bundle.md",
+    "Goblin/contracts/deployment-ladder.md",
+    "Goblin/contracts/environment-reproducibility.md",
+    "Goblin/runbooks/RELEASE_AND_ROLLBACK.md"
+  ],
+  "checkpoint_targets": [
+    "Deployment ladder defines all five states with verifiable transition requirements.",
+    "Environment reproducibility covers terminal build pinning, config drift, and secrets policy.",
+    "Release and rollback runbook references the ladder and bundle contracts.",
+    "LiveAttachManifest carries ladder state.",
+    "Bundle approval cannot be treated as permission to advance the ladder."
+  ],
+  "authoritative_artifacts": [
+    "Goblin/contracts/deployment-bundle.md",
+    "Goblin/contracts/deployment-ladder.md",
+    "Goblin/contracts/environment-reproducibility.md",
+    "Goblin/runbooks/RELEASE_AND_ROLLBACK.md"
+  ],
+  "regenerable_artifacts": [
+    "Goblin/phases/GOBLIN-P07.md"
+  ],
+  "last_checkpoint": "Goblin\\checkpoints\\GOBLIN-P07\\goblin-p07-release-control-complete.json",
+  "idempotency_key": "goblin:GOBLIN-P07",
+  "rerun_mode": "resume_from_last_checkpoint",
+  "resume_command": "goblin goblin-phase-update --phase-id GOBLIN-P07 --status in_progress",
+  "verify_command": "goblin goblin-status",
+  "blockers": [],
+  "owner": "GoblinOrchestrator",
+  "started_at": "2026-04-12T20:21:32Z",
+  "updated_at": "2026-04-14T19:50:53.044580Z",
+  "completed_at": "2026-04-12T21:00:00Z",
+  "exit_criteria": [
+    "No live/demo attachment occurs without a deployable bundle and a declared ladder state.",
+    "Config hash mismatch between bundle and attach triggers a release integrity incident."
+  ],
+  "acceptance_result": {
+    "exit_criteria_met": [
+      "LiveAttachManifest carries ladder_state, broker_server, and bundle_id",
+      "validate_attach_against_bundle checks inputs_hash and opens S1 on mismatch",
+      "7 targeted tests pass"
+    ]
+  },
+  "notes": [],
+  "record_path": "Goblin\\state\\phases\\GOBLIN-P07.json"
+}

@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-03-30T00:09:11.282770Z",
+  "family_filter": null,
+  "candidate_filters": [
+    "AF-CAND-0350"
+  ],
+  "total_records": 1,
+  "registry_path": "experiments\\registry.csv",
+  "report_path": "experiments\\comparison_20260330T000911Z.json",
+  "latest_report_path": "experiments\\comparison_latest.json",
+  "recommended_candidate_id": null,
+  "records": [
+    {
+      "candidate_id": "AF-CAND-0350",
+      "family": "europe_open_pullback_continuation_research",
+      "instrument": "EUR_USD",
+      "entry_style": "pullback_continuation",
+      "benchmark_group_id": "AF-CAND-0350",
+      "variant_name": "base",
+      "dataset_start_utc": "2025-10-02T12:13:00Z",
+      "dataset_end_utc": "2026-03-19T10:57:00Z",
+      "trading_days_observed": 46,
+      "trade_count": 53,
+      "profit_factor": 0.9738924050634061,
+      "out_of_sample_profit_factor": 1.1963190184048862,
+      "expectancy_pips": -0.06226415094311889,
+      "max_drawdown_pct": 1.1044539578300725,
+      "stressed_profit_factor": 0.8000060020407999,
+      "stress_passed": false,
+      "ftmo_fit_score": 79.5,
+      "ftmo_fit_band": "moderate_fit",
+      "readiness": "robustness_provisional",
+      "approval_recommendation": "needs_human_review",
+      "ready_for_publish": false,
+      "walk_forward_ok": false,
+      "benchmark_ranking_score": null,
+      "comparison_score": -138.85854,
+      "spec_path": "reports\\AF-CAND-0350\\strategy_spec.json",
+      "backtest_summary_path": "reports\\AF-CAND-0350\\backtest_summary.json",
+      "stress_report_path": "reports\\AF-CAND-0350\\stress_test.json",
+      "review_packet_path": "reports\\AF-CAND-0350\\review_packet.json",
+      "benchmark_report_path": null
+    }
+  ]
+}

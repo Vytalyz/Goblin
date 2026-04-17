@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-114",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "John Wiley & Sons, Inc.",
+    "John Wiley & Sons, Inc.",
+    "Copyright \u00a9 2007 by John C. Bogle. All rights reserved."
+  ],
+  "front_matter_signals": [
+    "1. Index mutual funds. I. Title.",
+    "ation of the world\u2019s first index mutual fund. In",
+    "1993, he wrote the foreword to my first book, and"
+  ],
+  "best_excerpt": "ily derail the steady long-range upward trend in the eco-"
+}

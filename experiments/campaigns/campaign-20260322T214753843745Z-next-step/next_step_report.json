@@ -1,0 +1,65 @@
+{
+  "campaign_id": "campaign-20260322T214753843745Z-next-step",
+  "parent_campaign_id": "campaign-20260322T214747245950Z-next-step",
+  "selected_step_type": "run_mt5_backtest_smoke",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0152 compiled successfully and is ready for an MT5 smoke backtest.",
+  "status": "completed",
+  "stop_reason": "mt5_smoke_completed_with_supported_triage",
+  "candidate_scope": [
+    "AF-CAND-0152"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [
+    {
+      "candidate_id": "AF-CAND-0152",
+      "readiness_status": "mt5_backtest_executed",
+      "smoke_status": "passed",
+      "failure_classification": null,
+      "trade_count": 295,
+      "artifact_paths": {
+        "launch_status_path": "reports\\AF-CAND-0152\\mt5_smoke\\throughput-smoke-20260322T214754Z\\launch_status.json",
+        "tester_report_path": "reports\\AF-CAND-0152\\mt5_smoke\\throughput-smoke-20260322T214754Z\\AF-CAND-0152-throughput-smoke-20260322T214754Z-report.htm",
+        "audit_csv_path": "reports\\AF-CAND-0152\\mt5_smoke\\throughput-smoke-20260322T214754Z\\AF-CAND-0152__throughput-smoke-20260322T214754Z__audit.csv",
+        "mt5_smoke_report_path": "reports\\AF-CAND-0152\\mt5_smoke_report.json"
+      }
+    }
+  ],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "triage_reviewable_candidate",
+      "candidate_id": "AF-CAND-0152",
+      "rationale": "AF-CAND-0152 completed the bounded MT5 smoke stage with status passed. The next throughput step is triage.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0152"
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "triage_reviewable_candidate",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "9eca49e72bc38d8973f6a2063a87e01ad359c1e0f82728cc06ee796775616df6",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260322T214753843745Z-next-step\\next_step_report.json"
+}

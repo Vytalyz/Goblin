@@ -1,0 +1,31 @@
+{
+  "manager_run_id": "manager-20260326T095444Z",
+  "program_id": "manager-20260326T095444Z-program",
+  "family": "europe_open_continuation_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_cycles": 1,
+  "max_cycles": 12,
+  "status": "stopped",
+  "stop_reason": "program_loop_low_novelty_seed:europe_open_compression_retest_af_cand_0271:AF-CAND-0210:0.88",
+  "stop_class": "blocked_policy",
+  "terminal_boundary": "blocked_no_authorized_path",
+  "policy_snapshot_hash": "7bd7fe7b3ee7561a1988cd2834cb6d6cfca30d75e9eeacc942d7a47fb3788ff7",
+  "cycle_summaries": [
+    {
+      "cycle_index": 1,
+      "lane_id": "policy_queue",
+      "program_report_path": "experiments\\program_loops\\manager-20260326T095444Z-program-cycle-01.json",
+      "stop_reason": "program_loop_low_novelty_seed:europe_open_compression_retest_af_cand_0271:AF-CAND-0210:0.88",
+      "stop_class": "policy_decision",
+      "material_transition": false,
+      "approvals_issued": []
+    }
+  ],
+  "notification_required": true,
+  "notification_reason": "blocked_no_authorized_path",
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "incident_report_path": null,
+  "report_path": "experiments\\autonomous_manager\\manager-20260326T095444Z.json"
+}

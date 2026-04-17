@@ -1,0 +1,20 @@
+{
+  "program_id": "manager-20260322T201431Z-program-cycle-01",
+  "family": "throughput_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_lanes": 0,
+  "max_lanes": 3,
+  "status": "stopped",
+  "stop_reason": "program_loop_no_pending_approved_lanes",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "2b8370bca4ad6bc320a20a0ca369e9ca9ad6b020ceeb84ea843b3fa230074cb8",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260322T201431Z-program-cycle-01.json"
+}

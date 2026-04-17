@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-014",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "&#13; 2008 Random House Trade Paperback Edition &#13; Copyright \u00a9 1995, 2008 by Roger Lowenstein &#13; All rights reserved. &#13; Published in the United States by Random House Trade Paperbacks, an imprint of The Random House Publishing Group, a division of Random House, Inc., Ne",
+    "Copyright \u00a9 1974 by Forbes Inc. Reprinted by permission of Forbes magazine. OMAHA WORLD-HERALD : Excerpts from \u201cSusie Sings for More Than Her Supper\u201d by Al Pagel (April 17, 1977) and \u201cKlewitt Legacy as Unusual as His Life\u201d by Warren Buffett (January 20, 1980).",
+    "Copyright \u00a9 1973, 1974 by The Wall Street Transcript Corporation. Reprinted by permission of The Wall Street Transcript . &#13; eISBN: 978-0-8041-5060-6 &#13; www.atrandom.com &#13; v3.1_r3 &#13; &#13;"
+  ],
+  "front_matter_signals": [
+    "&#13; 2008 Random House Trade Paperback Edition &#13; Copyright \u00a9 1995, 2008 by Roger Lowenstein &#13; All rights reserved. &#13; Published in the United States by Random House Trade Paperbacks, an imprint of The Random House Publishing Group, a division of Random House, Inc., Ne",
+    "Contents &#13; &#13; Cover &#13; Title Page &#13; Copyright &#13; I NTRODUCTION &#13; &#13; 1. O MAHA &#13; 2. R UNAWAY &#13; 3. G RAHAM &#13; 4. B EGINNINGS &#13; 5. P ARTNERS &#13; 6. G O -G O &#13; 7. B ERKSHIRE H ATHAWAY &#13; 8. R ETURN OF THE N ATIVE &#13; 9. A LTER E GO &#",
+    "&#13; INTRODUCTION &#13; &#13; In the annals of investing, Warren Buffett stands alone. Starting from scratch, simply by picking stocks and companies for investment, Buffett amassed one of the epochal fortunes of the twentieth century."
+  ],
+  "best_excerpt": "His policy is to disclose what he will about the company and let trading follow its course. &#13; But the obsession with Buffett\u2019s longevity is one that Buffett, though for different reasons, feels more keenly than anyone."
+}

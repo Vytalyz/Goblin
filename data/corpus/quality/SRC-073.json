@@ -1,0 +1,22 @@
+{
+  "source_id": "SRC-073",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": "1c8b27ebee9f",
+  "trust_band": "low",
+  "allowed_for_discovery": false,
+  "reasons": [
+    "Duplicate content fingerprint."
+  ],
+  "copyright_signals": [
+    "ALGORITHMIC TRADING Founded in 1807, John Wiley & Sons is the oldest independent publish- ing company in the United States. With offi ces in North America, Europe, Australia, and Asia, Wiley is globally committed to developing and mar- keting print and electronic products and ser",
+    "The Wiley Trading series features books by traders who have survived the market\u2019s ever changing temperament and have prospered\u2014some by reinventing systems, others by getting back to basics. Whether a novice trader, professional, or somewhere in-between, these books will provide t",
+    "For a list of available titles, visit our website at www.WileyFinance.com. ALGORITHMIC TRADING Winning Strategies and Their Rationale Ernest P. Chan Cover image: \u00a9 Oleksiy Lebedyev/istock Cover design: Wiley Copyright \u00a9 2013 by Ernest P ."
+  ],
+  "front_matter_signals": [
+    "For more information about Wiley products, visit www .wiley.com. Library of Congress Cataloging-in-Publication Data: Chan, Ernest P ., 1966\u2013 Algorithmic trading : winning strategies and their rationale / Ernest P . Chan. pages cm. \u2014 (Wiley trading series) Includes bibliographical",
+    "vii CONTENTS Preface ix CHAPTER 1 Backtesting and Automated Execution 1 CHAPTER 2 The Basics of Mean Reversion 39 CHAPTER 3 Implementing Mean Reversion Strategies 63 CHAPTER 4 Mean Reversion of Stocks and ETFs 87 CHAPTER 5 Mean Reversion of Currencies and Futures 107 CHAPTER 6 In",
+    "ix PREFACE T his book is a practical guide to algorithmic trading strategies that can be readily implemented by both retail and institutional traders. It is not an academic treatise on fi nancial theory. Rather, I hope to make accessible to the reader some of the most useful fi n"
+  ],
+  "best_excerpt": "Such triggers often lead to the so-called breakout strategies. W e\u2019ll see one examp le that involves an entry at the market open, and another one that involves intraday entry at various support or resistance levels. Intraday momentum can be triggered by specifi c events beyond ju"
+}

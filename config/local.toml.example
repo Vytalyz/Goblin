@@ -1,0 +1,16 @@
+# Local Environment Overrides
+#
+# Copy this file to  config/local.toml  and edit it.
+# local.toml is gitignored — it will never be pushed.
+#
+# Any section here is deep-merged on top of config/default.toml
+# and the domain-specific config files (mt5_env.toml, etc.).
+#
+# Only add keys you actually need to override.
+
+# [mt5_env]
+# terminal_paths = ["C:\\Program Files\\OANDA MetaTrader 5 Terminal\\terminal64.exe"]
+# portable_mode = false
+
+# [oanda]
+# host = "https://api-fxpractice.oanda.com"

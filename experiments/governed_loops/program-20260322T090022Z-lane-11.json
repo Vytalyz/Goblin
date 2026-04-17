@@ -1,0 +1,32 @@
+{
+  "loop_id": "program-20260322T090022Z-lane-11",
+  "family": "scalping",
+  "initial_parent_campaign_id": "campaign-20260322T090112Z-next-step",
+  "final_parent_campaign_id": "campaign-20260322T090128Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+  "stop_class": "policy_decision",
+  "final_report_path": "experiments\\campaigns\\campaign-20260322T090128Z-next-step\\next_step_report.json",
+  "final_recommendations": [],
+  "executed_campaign_ids": [
+    "campaign-20260322T090128Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260322T090128Z-next-step",
+      "selected_step_type": "hypothesis_audit",
+      "status": "completed",
+      "stop_reason": "hypothesis_audit_completed_hold_reference_blocked_by_robustness",
+      "continuation_status": "stop",
+      "stop_class": "policy_decision",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": null,
+      "transition_status": "continue_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T090128Z-next-step\\next_step_report.json"
+    }
+  ],
+  "report_path": "experiments\\governed_loops\\program-20260322T090022Z-lane-11.json"
+}

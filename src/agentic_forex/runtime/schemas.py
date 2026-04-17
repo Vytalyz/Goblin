@@ -1,0 +1,155 @@
+from __future__ import annotations
+
+from typing import Any
+
+from pydantic import BaseModel
+
+from agentic_forex.approval.models import ApprovalRecord, PublishManifest
+from agentic_forex.backtesting.models import BacktestArtifact, StressScenarioResult, StressTestReport
+from agentic_forex.corpus.models import (
+    ContradictionRecord,
+    CorpusCatalog,
+    CorpusDigest,
+    KnowledgeNote,
+    SourceQualityReport,
+    StrategyClaim,
+)
+from agentic_forex.governance.models import (
+    AutonomousManagerReport,
+    CampaignSpec,
+    CampaignState,
+    CandidateDiagnosticReport,
+    CandidateMutationReport,
+    CandidateReevaluationReport,
+    DataFeatureAuditReport,
+    DataLabelAuditReport,
+    DataRegimeAuditReport,
+    DataRegimeSliceSummary,
+    DatasetSnapshot,
+    DiagnosticSliceReport,
+    EnvironmentSnapshot,
+    ExperimentDataProvenance,
+    FailureRecord,
+    FeatureBuildVersion,
+    ForwardStageReport,
+    GovernedLoopReport,
+    GovernedLoopStepSummary,
+    HypothesisAuditCandidateSummary,
+    HypothesisAuditReport,
+    IdempotencyRecord,
+    IntegrityIncident,
+    LeaseRecord,
+    NextStepControllerReport,
+    NextStepRecommendation,
+    OperatorSafetyEnvelope,
+    ProgramEvent,
+    ProgramLoopLaneSummary,
+    ProgramLoopReport,
+    ProductionIncidentReport,
+    ReproducibilityManifest,
+    RobustnessReport,
+    TrialLedgerEntry,
+)
+from agentic_forex.market_data.models import MarketIngestResult
+from agentic_forex.mt5.models import MT5IncidentReplayReport, MT5Packet, MT5ParityReport, MT5RunResult, MT5ValidationReport
+from agentic_forex.workflows.contracts import (
+    CandidateDraft,
+    CandidatePublication,
+    CriticNote,
+    DiscoveryRequest,
+    MT5ValidationRequest,
+    ExecutionCostModel,
+    RiskEnvelope,
+    SessionPolicy,
+    SetupLogic,
+    ShadowMLPolicy,
+    ReviewContext,
+    ReviewPacket,
+    ReframedQuestion,
+    RiskPolicy,
+    RouteDecision,
+    StrategySpec,
+    ValidationProfile,
+)
+
+SCHEMA_REGISTRY: dict[str, type[BaseModel]] = {
+    "ApprovalRecord": ApprovalRecord,
+    "AutonomousManagerReport": AutonomousManagerReport,
+    "BacktestArtifact": BacktestArtifact,
+    "CandidateDraft": CandidateDraft,
+    "CandidatePublication": CandidatePublication,
+    "CampaignSpec": CampaignSpec,
+    "CampaignState": CampaignState,
+    "CandidateDiagnosticReport": CandidateDiagnosticReport,
+    "CandidateMutationReport": CandidateMutationReport,
+    "CandidateReevaluationReport": CandidateReevaluationReport,
+    "DataFeatureAuditReport": DataFeatureAuditReport,
+    "DataLabelAuditReport": DataLabelAuditReport,
+    "DataRegimeAuditReport": DataRegimeAuditReport,
+    "DataRegimeSliceSummary": DataRegimeSliceSummary,
+    "ContradictionRecord": ContradictionRecord,
+    "CorpusCatalog": CorpusCatalog,
+    "CorpusDigest": CorpusDigest,
+    "CriticNote": CriticNote,
+    "DatasetSnapshot": DatasetSnapshot,
+    "DiagnosticSliceReport": DiagnosticSliceReport,
+    "DiscoveryRequest": DiscoveryRequest,
+    "EnvironmentSnapshot": EnvironmentSnapshot,
+    "ExecutionCostModel": ExecutionCostModel,
+    "ExperimentDataProvenance": ExperimentDataProvenance,
+    "FailureRecord": FailureRecord,
+    "FeatureBuildVersion": FeatureBuildVersion,
+    "ForwardStageReport": ForwardStageReport,
+    "GovernedLoopReport": GovernedLoopReport,
+    "GovernedLoopStepSummary": GovernedLoopStepSummary,
+    "HypothesisAuditCandidateSummary": HypothesisAuditCandidateSummary,
+    "HypothesisAuditReport": HypothesisAuditReport,
+    "IdempotencyRecord": IdempotencyRecord,
+    "IntegrityIncident": IntegrityIncident,
+    "KnowledgeNote": KnowledgeNote,
+    "MarketIngestResult": MarketIngestResult,
+    "MT5Packet": MT5Packet,
+    "MT5IncidentReplayReport": MT5IncidentReplayReport,
+    "MT5ParityReport": MT5ParityReport,
+    "MT5RunResult": MT5RunResult,
+    "MT5ValidationReport": MT5ValidationReport,
+    "MT5ValidationRequest": MT5ValidationRequest,
+    "LeaseRecord": LeaseRecord,
+    "OperatorSafetyEnvelope": OperatorSafetyEnvelope,
+    "PublishManifest": PublishManifest,
+    "NextStepControllerReport": NextStepControllerReport,
+    "NextStepRecommendation": NextStepRecommendation,
+    "ProgramEvent": ProgramEvent,
+    "ProgramLoopLaneSummary": ProgramLoopLaneSummary,
+    "ProgramLoopReport": ProgramLoopReport,
+    "ProductionIncidentReport": ProductionIncidentReport,
+    "ReframedQuestion": ReframedQuestion,
+    "ReviewContext": ReviewContext,
+    "ReviewPacket": ReviewPacket,
+    "RiskEnvelope": RiskEnvelope,
+    "RiskPolicy": RiskPolicy,
+    "ReproducibilityManifest": ReproducibilityManifest,
+    "RobustnessReport": RobustnessReport,
+    "RouteDecision": RouteDecision,
+    "SessionPolicy": SessionPolicy,
+    "SetupLogic": SetupLogic,
+    "ShadowMLPolicy": ShadowMLPolicy,
+    "SourceQualityReport": SourceQualityReport,
+    "StrategySpec": StrategySpec,
+    "StrategyClaim": StrategyClaim,
+    "StressScenarioResult": StressScenarioResult,
+    "StressTestReport": StressTestReport,
+    "TrialLedgerEntry": TrialLedgerEntry,
+    "ValidationProfile": ValidationProfile,
+}
+
+
+def schema_model(schema_name: str) -> type[BaseModel]:
+    return SCHEMA_REGISTRY[schema_name]
+
+
+def validate_named(schema_name: str, payload: dict[str, Any] | BaseModel) -> BaseModel:
+    model = schema_model(schema_name)
+    if isinstance(payload, BaseModel):
+        return model.model_validate(payload.model_dump(mode="json"))
+    return model.model_validate(payload)

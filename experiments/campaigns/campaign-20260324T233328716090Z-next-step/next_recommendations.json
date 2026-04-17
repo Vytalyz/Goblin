@@ -1,0 +1,13 @@
+[
+  {
+    "step_type": "diagnose_existing_candidates",
+    "candidate_id": "AF-CAND-0242",
+    "rationale": "AF-CAND-0242 failed MT5 practice parity with classification execution_cost_failure. The next legal step is diagnosis only; parity evidence must not mutate policy directly.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": "campaign-20260324T233328716090Z-next-step",
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0242"
+    }
+  }
+]

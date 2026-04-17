@@ -1,0 +1,20 @@
+{
+  "checkpoint_id": "goblin-p14-run-logging-complete",
+  "phase_id": "GOBLIN-P14",
+  "status": "passed",
+  "timestamp": "2026-04-13T13:30:00Z",
+  "deliverables": {
+    "model": "GoblinRunRecord added to goblin/models.py",
+    "classifier": "classify_session_window() — 5 session windows from UTC hour",
+    "helpers": "start_goblin_run_record(), finalize_goblin_run_record()",
+    "contract": "Goblin/contracts/run-record.md",
+    "storage": "append-only JSONL at goblin_run_records_dir/run_records.jsonl",
+    "integration": "portfolio.py, program_loop.py, autonomous_manager.py all emit records",
+    "tests": "tests/test_goblin_run_records.py — 18 tests covering session classification, model round-trip, JSONL write, append semantics"
+  },
+  "test_results": {
+    "new_tests": 18,
+    "existing_tests": 44,
+    "all_green": true
+  }
+}

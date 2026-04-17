@@ -1,0 +1,61 @@
+{
+  "workflow_id": "candidate_review_v1",
+  "version": "2.0.0",
+  "start_node": "prepare_review_context",
+  "input_schema": "StrategySpec",
+  "output_schema": "ReviewPacket",
+  "nodes": [
+    {
+      "id": "prepare_review_context",
+      "kind": "tool",
+      "name": "Prepare Review Context",
+      "input_schema": "StrategySpec",
+      "output_schema": "ReviewContext",
+      "config": {
+        "tool_name": "prepare_review_context"
+      },
+      "on_failure": "halt"
+    },
+    {
+      "id": "review_synthesis",
+      "kind": "agent",
+      "name": "Review Synthesis",
+      "input_schema": "ReviewContext",
+      "output_schema": "ReviewPacket",
+      "config": {
+        "task_name": "review_candidate",
+        "system_prompt": "review_system.txt",
+        "user_prompt": "review_user.txt",
+        "role_brief": "review-synthesizer.md",
+        "skill_guide": "critic-review.md"
+      },
+      "on_failure": "halt"
+    },
+    {
+      "id": "finalize_review",
+      "kind": "finalize",
+      "name": "Finalize Review",
+      "input_schema": "ReviewPacket",
+      "output_schema": "ReviewPacket",
+      "config": {
+        "tool_name": "finalize_review_packet"
+      },
+      "on_failure": "halt"
+    }
+  ],
+  "edges": [
+    {
+      "source": "prepare_review_context",
+      "target": "review_synthesis",
+      "contract": "ReviewContext"
+    },
+    {
+      "source": "review_synthesis",
+      "target": "finalize_review",
+      "contract": "ReviewPacket"
+    }
+  ],
+  "trigger": "cli:review-candidate",
+  "rollback": "discard_review",
+  "approval_required": true
+}

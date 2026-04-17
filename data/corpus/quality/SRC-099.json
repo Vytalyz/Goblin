@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-099",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    ", THE ALCHEMY READING THE MIND OF THE MARKET GEORGE SOROS NEW PREFACE FOREWORD BY PAUL TUDOR JONES 11 ,crP* John Wiley & Sons, Inc. New York Chichester Brisbane Toronto Singapore ' TO SUSAN, without whom this book would have been ready much sooner A number of people have read all",
+    "The FCS is a publication of Commodity Research Bureau, a Knight-Ridder Business Information Service. Editorial offices of CRB are located at 100 Church St., Suite 1850, New York, NY 10007. All material is protected by copyright and may not be reproduced without pennission. broken",
+    "The FCS is a publication of Commodity Research Bureau, a Knight-Ridder Business Information Service. Editorial offices of CRB are located at 100 Church St., Suite 1850, New York, NY 10007. All material is protected by copyright and may not be reproduced without permission. on an "
+  ],
+  "front_matter_signals": [
+    ", THE ALCHEMY READING THE MIND OF THE MARKET GEORGE SOROS NEW PREFACE FOREWORD BY PAUL TUDOR JONES 11 ,crP* John Wiley & Sons, Inc. New York Chichester Brisbane Toronto Singapore ' TO SUSAN, without whom this book would have been ready much sooner A number of people have read all",
+    "' I CONTENTS Foreword 1 Preface 4 : Introduction 11 I Part I THEORY 1. The Theory of Reflexivity Anti-equilibrium 27 The Problem of Imperfect Understanding 31 The Problem of the Social Sciences 34 e The Participants' Bias 40 The Concept of Reflexivity 41 Reflexivity versus Equili",
+    "Free Markets Versus Regulation 18. Toward an international Central Bank Exchange Rates 328 International Debt 329 Oil 333 An International Currency 338 19. The Paradox of Systemic Reform 20. The Crash of '87 Epilogue 361 Notes 366 Appendix 368 I I 1 FOREWORD Four hundred seventy-"
+  ],
+  "best_excerpt": "The imbalance between risk and reward became more pronounced as the trend toward deregulation gained momentum, and it reached a critical point in the crisis of 1984. The Federal Reserve was forced to expand its role as lender of last resort and guaranteb all depositors against lo"
+}

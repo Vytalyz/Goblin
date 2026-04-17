@@ -1,0 +1,31 @@
+{
+  "checkpoint_id": "af-cand-0733-bundle-a-complete-20260417",
+  "bundle_id": "S1-BUNDLE-A",
+  "candidate_id": "AF-CAND-0733",
+  "status": "complete",
+  "summary": "S1-P02 shadow-only attach completed. Shadow week Apr 15-17: 208 signals (116 long, 92 short) across 2 trading days (Apr 16-17), 0 real orders placed (shadow mode confirmed working). All 4 artifact types collected under Goblin/reports/live_demo/AF-CAND-0733/live-demo-20260414T230000Z/.",
+  "completed_phases": [
+    "S1-P01",
+    "S1-P02"
+  ],
+  "pending_phases": [],
+  "artifacts": [
+    "Goblin/reports/live_demo/AF-CAND-0733/live-demo-20260414T230000Z/live_attach_manifest.json",
+    "Goblin/reports/live_demo/AF-CAND-0733/live-demo-20260414T230000Z/runtime_summary.json",
+    "Goblin/reports/live_demo/AF-CAND-0733/live-demo-20260414T230000Z/signal_trace.csv",
+    "Goblin/reports/live_demo/AF-CAND-0733/live-demo-20260414T230000Z/heartbeats/heartbeat_20260417T202313993492Z.json"
+  ],
+  "shadow_week_summary": {
+    "trading_days": 2,
+    "total_signals": 208,
+    "long_signals": 116,
+    "short_signals": 92,
+    "bars_processed": 2635,
+    "signals_per_day": 104,
+    "signals_per_hour": 17.3,
+    "avg_spread_at_signal": 0.83,
+    "max_consecutive_longs": 27,
+    "max_consecutive_shorts": 31,
+    "zero_failures": true
+  }
+}

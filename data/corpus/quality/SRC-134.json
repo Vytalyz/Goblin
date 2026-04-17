@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-134",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "I\u2019d like to thank my editors at McGraw-Hill for their wonder-",
+    "2. Tom Basso, Pnzic ProofInvesting. New York: John Wiley & Sons, 1994.",
+    "9. John Murphy, Intcr~wket Technical Analysis (New York: Wiley, 1986)."
+  ],
+  "front_matter_signals": [
+    "Foreword by David Mob& Sr. xiii",
+    "Acknowledgements xvii",
+    "Preface xxi"
+  ],
+  "best_excerpt": "include setups, entry or timing techniques, stop-loss exits, profit-"
+}

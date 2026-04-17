@@ -1,0 +1,71 @@
+{
+  "campaign_id": "campaign-20260322T231411946319Z-next-step",
+  "parent_campaign_id": "campaign-20260322T231354410033Z-next-step",
+  "selected_step_type": "diagnose_existing_candidates",
+  "step_reason": "Following binding recommendation from the latest completed campaign: AF-CAND-0173 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+  "status": "completed",
+  "stop_reason": "diagnosis_ambiguous_no_mutation_justified",
+  "candidate_scope": [
+    "AF-CAND-0173"
+  ],
+  "candidate_reports": [
+    {
+      "candidate_id": "AF-CAND-0173",
+      "readiness_status": "robustness_provisional",
+      "walk_forward_failed_window": 1,
+      "first_window_start_utc": "2026-02-02T13:27:00Z",
+      "first_window_end_utc": "2026-02-16T15:38:00Z",
+      "first_window_trade_count": 41,
+      "first_window_profit_factor": 0.6574746008709038,
+      "first_window_expectancy_pips": -1.1512195121947844,
+      "later_window_trade_count": 82,
+      "later_window_profit_factor": 0.4167004458856762,
+      "later_window_expectancy_pips": -1.754878048780569,
+      "spread_anomaly_rate_first_window": 0.0,
+      "spread_anomaly_rate_later_windows": 0.0,
+      "supported_slices": [],
+      "primary_issue": null,
+      "recommended_mutation": null,
+      "diagnostic_confidence": 0.0,
+      "notes": [
+        "First walk-forward window spans 41 trades; later windows span 82 trades.",
+        "Spread anomaly threshold from QA is 6.882 pips.",
+        "Spread anomalies do not explain the failed first walk-forward window in this candidate.",
+        "No single supported session, context, or spread slice was strong enough to justify mutation."
+      ],
+      "artifact_paths": {
+        "review_packet_path": "reports\\AF-CAND-0173\\review_packet.json",
+        "trade_ledger_path": "reports\\AF-CAND-0173\\trade_ledger.csv",
+        "backtest_summary_path": "reports\\AF-CAND-0173\\backtest_summary.json",
+        "robustness_report_path": "reports\\AF-CAND-0173\\robustness_report.json"
+      }
+    }
+  ],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "ambiguity",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": null,
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "hard_stop",
+  "transition_intent": "stop_terminal",
+  "policy_snapshot_hash": "0783cf491f2d7d6dd62ed82482154bb7c08bdd703d54c46a5989500b0a1243da",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260322T231411946319Z-next-step\\next_step_report.json"
+}

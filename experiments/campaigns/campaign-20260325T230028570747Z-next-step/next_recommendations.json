@@ -1,0 +1,13 @@
+[
+  {
+    "step_type": "run_mt5_backtest_smoke",
+    "candidate_id": "AF-CAND-0266",
+    "rationale": "AF-CAND-0266 compiled successfully and is ready for an MT5 smoke backtest.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0266"
+    }
+  }
+]

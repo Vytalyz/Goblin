@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-095",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "For permission to photocopy or use material electronically from this work, please access www.copyright. com (http://www.copyright.com/) or contact the Copyright Clearance Center, Inc. (CCC) 222 Rosewood Drive, Danvers, MA 01923, 978-750-8400.",
+    "Trademark Notice: Product or corporate names may be trademarks or registered trademarks, and are used only for identi\ufb01cation and explanation without intent to infringe. Library of Congress Cataloging-in-Publication Data Edwards, Robert D. (Robert Davis), 1893- Technical analysis ",
+    "Edwards, John Magee, W.H.C. Bassetti. -- 9th ed. p. cm. Includes bibliographical references and index. ISBN 0-8493-3772-0 (alk. paper) 1. Investment analysis. 2. Stock exchanges--United States. 3. Securities--United States. I. Magee, John, 1901- II."
+  ],
+  "front_matter_signals": [
+    "Edwards, John Magee, W.H.C. Bassetti. -- 9th ed. p. cm. Includes bibliographical references and index. ISBN 0-8493-3772-0 (alk. paper) 1. Investment analysis. 2. Stock exchanges--United States. 3. Securities--United States. I. Magee, John, 1901- II.",
+    "Preface to the 9th Edition",
+    "Acknowledgments for the Ninth Edition"
+  ],
+  "best_excerpt": "The slide in Amdahl occupied the Bears from March\u2013June before a sharp rally gave notice that the Bulls were still alive. After that, a choppy sideways trading range evolved with Support near the Pullback lows established earlier in the year. Overall, there was a \ufb01ne symmetry to t"
+}

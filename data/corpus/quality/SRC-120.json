@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-120",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "This book was originally published in 1992 by HarperBusiness, a division of Harper-Coltins Publishers. THE NEW MARKET WIZARDS . Copyright \u00a9 1992 by Jack D. Schwager. A ll rights reserve d. Printed in the United States of America.",
+    "First paperback edition published 1994. Designed by Alma Hochhauser Orenstein The Library of Congress has catalogued the hardcover edition as follows: Schwager, Jack D., 1948- The new market wizards : conversations with America's top traders / Jack D.",
+    "Schwager.- Isted-p. cm. Sequel to: Market wizards. ISBN 0-88730-587-3 1. Floor traders (Finance)-United States-Interviews. 2. Futures market-United States. 3. Financial futures- United States. 1. Schwager, Jack D., 1948- Market Wizards."
+  ],
+  "front_matter_signals": [
+    "3 3 Contents Preface ________________________________________________________________________ 4 Acknowledgments________________________________________________________________ 5 Prologue _______________________________________________________________________ 6 PART I Trading Pers",
+    "4 4 Preface TO MY FAMILY Joe Ann Daniel Zachary Samantha Who are all very special to me With love Here's what I believe: 1. The markets are not random. I don't care if the num ber of academicians who have argued the efficient market hypothesis would stretch to the moon and back i",
+    "5 5 Acknowledgments My thanks to those who graciously agreed to be interviewed for this volume, freely sharing their thoughts and experiences while refraining from requests for cosmetic changes when presented with the finished manuscript for review. (Not all those I interviewed p"
+  ],
+  "best_excerpt": "This is it. I'm out.\" Instead, I start to lighten up as I see the fundamentals or price action changing.\" ==== Do you believe your scaling type of approach in entering and exiting positions is an essential element in your overall trading success? ==== I think it has enabled me to"
+}

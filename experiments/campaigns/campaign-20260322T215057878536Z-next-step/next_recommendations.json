@@ -1,0 +1,21 @@
+[
+  {
+    "step_type": "mutate_one_candidate",
+    "candidate_id": "AF-CAND-0152",
+    "rationale": "The failed first walk-forward window is weakest in the europe session slice for AF-CAND-0152. The next bounded campaign should remove hours [7, 8, 9, 10] from allowed_hours_utc and enable the governed calendar blackout, then re-evaluate without broadening scope.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "mutation_type": "trim_allowed_hours",
+      "session_bucket": "europe",
+      "removed_hours_utc": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "enable_news_blackout": true
+    }
+  }
+]

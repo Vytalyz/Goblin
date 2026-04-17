@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-149",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright \\251zooo by Roger Lowenstein All rights reserved under Internationaland Pan-American Copyright Conven- tions.Published in the United Statesby Random House Trade Paperbacks,a division of Random House, Inc.,New York, and simultaneously in Canada by Random House of Canada ",
+    "RANDOM HOOSE TRADE PAPERBACKS and colophon aretrademarks of Random House, Inc. This work was originallypublishedin hardcover by Random House in September zooo. Library of CongressCataloging-in-Publication Data Lowenstein, Roger.",
+    "When genius failed : the riseand fall of Long-Term Capital Management / RogerLowenstein. p. cm. Includes index. ISBN o-375-758z5- 9 I. Hedge funds--United States. 1. Long-term Capital Management (Firm) 11.Title."
+  ],
+  "front_matter_signals": [
+    "When genius failed : the riseand fall of Long-Term Capital Management / RogerLowenstein. p. cm. Includes index. ISBN o-375-758z5- 9 I. Hedge funds--United States. 1. Long-term Capital Management (Firm) 11.Title.",
+    "HG4930.L69 2.000 33 z.6--dc2.l oo-o2.8o9I Random House website address:www.atrandom.com Printed in the United StatesofAmerica on acid-free paper 98765432 \\225 Book design by Carole Lowenstein Contents Author'sNoteand AcknowledgmentsxiIntroductionxvii THE RISE OF LONG-TERM CAPITAL",
+    "Although McDonough was a public official, the meeting was se- cret.As far as the publicknew, America was in the saladdaysofone of history's great bull markets,although recently, as in many previous INTRODUCTION \\225xix autumns, ithad seensomebacksliding.Sincemid-August, when Rus-"
+  ],
+  "best_excerpt": "Such momentum trading has nothing to do with log- ically appraising securities;it doesn't fit the idealofrational investors in efficientmarkets.But it's human. After threebad \\\"flips\\\" in the mar- ket,the fourth flip may no longerbe completelyrandom.Some traders may have taken lo"
+}

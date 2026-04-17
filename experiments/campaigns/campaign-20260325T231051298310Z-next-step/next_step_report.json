@@ -1,0 +1,182 @@
+{
+  "campaign_id": "campaign-20260325T231051298310Z-next-step",
+  "parent_campaign_id": "campaign-20260325T231050879430Z-next-step",
+  "selected_step_type": "data_feature_audit",
+  "step_reason": "The approved lane queue is exhausted after a retirement-level data/regime audit, so the next governed step is a bounded data/feature audit across the strongest recent family references.",
+  "status": "completed",
+  "stop_reason": "data_feature_audit_completed_retire_family",
+  "candidate_scope": [
+    "AF-CAND-0268",
+    "AF-CAND-0267",
+    "AF-CAND-0266",
+    "AF-CAND-0265"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [
+    {
+      "family": "asia_range_bridge_research",
+      "audited_candidate_ids": [
+        "AF-CAND-0268",
+        "AF-CAND-0267",
+        "AF-CAND-0266",
+        "AF-CAND-0265"
+      ],
+      "reference_candidate_id": "AF-CAND-0268",
+      "family_decision": "retire_family",
+      "summary": "Data/feature audit compared AF-CAND-0268, AF-CAND-0267, AF-CAND-0266, AF-CAND-0265. AF-CAND-0268 remains the best empirical reference branch, but the audited candidates share provenance_contract_mixed, execution_cost_realism_consumes_edge, persistent_walk_forward_instability, broad_regime_dependence under a mixed research contract. That points to structural family weakness rather than one more safe bounded mutation.",
+      "suspected_root_causes": [
+        "provenance_contract_mixed",
+        "execution_cost_realism_consumes_edge",
+        "persistent_walk_forward_instability",
+        "broad_regime_dependence"
+      ],
+      "provenance_consistency": {
+        "candidate_count_with_provenance": 4,
+        "archived_candidates_excluded": [],
+        "dataset_snapshot_ids": [
+          "19dacde30ea012f9",
+          "6a896d5226cef51f",
+          "c91d833ae037f74c"
+        ],
+        "feature_version_ids": [
+          "e602a112f25aff49"
+        ],
+        "label_version_ids": [
+          "4531e04082baf668"
+        ],
+        "execution_cost_model_versions": [
+          "096b806c95fba422",
+          "2b8aabf4ebb477ec",
+          "a66f69d8892bf28c"
+        ],
+        "dataset_snapshot_consistent": false,
+        "feature_version_consistent": true,
+        "label_version_consistent": true,
+        "execution_cost_model_consistent": false
+      },
+      "recent_regime_signals": [
+        "low, asia, trend_context",
+        "trend_context, medium, europe",
+        "asia, mean_reversion_context, medium"
+      ],
+      "recommended_actions": [
+        "Retire the current family from further mutation and parity work.",
+        "Do not extend the approved program queue with nearby variants of this family.",
+        "Open a different hypothesis class or a separate data/label audit before resuming autonomous search."
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0268",
+          "family": "asia_range_bridge_research",
+          "entry_style": "drift_reclaim",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 164,
+          "profit_factor": 0.8011544011544401,
+          "out_of_sample_profit_factor": 0.758823529411664,
+          "expectancy_pips": -0.4201219512194165,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.4,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0268\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0268\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0268\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0267",
+          "family": "asia_range_bridge_research",
+          "entry_style": "drift_reclaim",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 293,
+          "profit_factor": 0.7637224853719967,
+          "out_of_sample_profit_factor": 0.828510938602647,
+          "expectancy_pips": -0.5788395904436003,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0267\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0267\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0267\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0266",
+          "family": "asia_range_bridge_research",
+          "entry_style": "range_reclaim",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 572,
+          "profit_factor": 0.5807611627210058,
+          "out_of_sample_profit_factor": 0.6540930979133172,
+          "expectancy_pips": -0.9783216783216877,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0266\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0266\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0266\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0265",
+          "family": "asia_range_bridge_research",
+          "entry_style": "compression_reversion",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 453,
+          "profit_factor": 0.53783728951108,
+          "out_of_sample_profit_factor": 0.6011038635223792,
+          "expectancy_pips": -1.0057395143487673,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0265\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0265\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0265\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260325T231051298310Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260325T231051298310Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260325T231051298310Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [],
+  "continuation_status": "stop",
+  "stop_class": "policy_decision",
+  "auto_continue_allowed": false,
+  "recommended_follow_on_step": "data_label_audit",
+  "max_safe_follow_on_steps": 0,
+  "transition_status": "hard_stop",
+  "transition_intent": "stop_terminal",
+  "policy_snapshot_hash": "e91ff6b56e3b0a8b992f7eea32e0a3cbb0854b3886898bf22be58ff765fb757d",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260325T231051298310Z-next-step\\next_step_report.json"
+}

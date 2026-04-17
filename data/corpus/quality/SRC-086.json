@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-086",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "STOCK MARKET WIZARDS. Copyright \u00a9 2001 by Jack D. Schwager.",
+    "All rights reserved. Printed in the United States of America.",
+    "Library of Congress Cataloging-in-Publication Data"
+  ],
+  "front_matter_signals": [
+    "CONTENTS",
+    "Acknowledgments \u00ab",
+    "Index"
+  ],
+  "best_excerpt": "Entry and exit strategies are employed to minimize transaction costs."
+}

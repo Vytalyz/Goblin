@@ -1,0 +1,47 @@
+{
+  "loop_id": "manager-20260323T235710Z-program-cycle-02-lane-04",
+  "family": "overlap_event_retest_research",
+  "initial_parent_campaign_id": "campaign-20260324T000106704929Z-promotion_overlap_event_retest_stability_af_cand_0229-seed",
+  "final_parent_campaign_id": "campaign-20260324T000106818174Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "stop_class": "approval_required",
+  "transition_intent": "stop_terminal",
+  "final_report_path": "experiments\\campaigns\\campaign-20260324T000106818174Z-next-step\\next_step_report.json",
+  "final_recommendations": [
+    {
+      "step_type": "run_parity",
+      "candidate_id": "AF-CAND-0229",
+      "rationale": "AF-CAND-0229 now meets the bounded empirical and provisional robustness gates for parity entry. The next governed step should be MT5 parity, still in practice-only mode.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0229"
+      }
+    }
+  ],
+  "executed_campaign_ids": [
+    "campaign-20260324T000106818174Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260324T000106818174Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "stop",
+      "stop_class": "approval_required",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": "run_parity",
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal",
+      "report_path": "experiments\\campaigns\\campaign-20260324T000106818174Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "cf9b21e9ccf61d4f4db94cb4026ea377f67cadaaa4b5714aad054a0ad68263c3",
+  "report_path": "experiments\\governed_loops\\manager-20260323T235710Z-program-cycle-02-lane-04.json"
+}

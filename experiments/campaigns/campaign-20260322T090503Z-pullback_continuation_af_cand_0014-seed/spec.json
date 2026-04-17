@@ -1,0 +1,22 @@
+{
+  "campaign_id": "campaign-20260322T090503Z-pullback_continuation_af_cand_0014-seed",
+  "family": "scalping",
+  "baseline_candidate_id": "AF-CAND-0014-PULL",
+  "target_candidate_ids": [
+    "AF-CAND-0014-PULL"
+  ],
+  "parent_campaign_id": "campaign-20260322T090503Z-next-step",
+  "step_type": "mutate_one_candidate",
+  "allowed_step_types": [
+    "mutate_one_candidate"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 1,
+  "trial_cap_per_family": 1,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Program-loop bounded seed campaign.",
+    "Approved lane: pullback_continuation_af_cand_0014.",
+    "Second pullback continuation root under the same governed program queue."
+  ]
+}

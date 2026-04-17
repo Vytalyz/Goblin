@@ -1,0 +1,38 @@
+{
+  "program_id": "manager-20260325Toverlap-resolution-bridge.json-program-cycle-02",
+  "family": "overlap_resolution_bridge_research",
+  "initial_parent_campaign_id": "campaign-20260325T032704251453Z-next-step",
+  "final_parent_campaign_id": "campaign-20260325T032704527767Z-next-step",
+  "executed_lanes": 1,
+  "max_lanes": 3,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "stop_class": "approval_required",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [
+    {
+      "lane_index": 1,
+      "lane_id": "promotion_overlap_resolution_bridge_base_af_cand_0262",
+      "family": "overlap_resolution_bridge_research",
+      "hypothesis_class": "overlap_persistence_retest",
+      "seed_candidate_id": "AF-CAND-0262",
+      "queue_kind": "promotion",
+      "seed_campaign_id": "campaign-20260325T032704414664Z-promotion_overlap_resolution_bridge_base_af_cand_0262-seed",
+      "initial_parent_campaign_id": "campaign-20260325T032704414664Z-promotion_overlap_resolution_bridge_base_af_cand_0262-seed",
+      "final_parent_campaign_id": "campaign-20260325T032704527767Z-next-step",
+      "governed_loop_report_path": "experiments\\governed_loops\\manager-20260325Toverlap-resolution-bridge.json-program-cycle-02-lane-01.json",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "stop_class": "approval_required",
+      "transition_status": "hard_stop",
+      "transition_intent": "stop_terminal"
+    }
+  ],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "4ab176325caf6b68c49358f108c33a5636066fc62c7afdc012471ebd8fb0d744",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260325Toverlap-resolution-bridge.json-program-cycle-02.json"
+}

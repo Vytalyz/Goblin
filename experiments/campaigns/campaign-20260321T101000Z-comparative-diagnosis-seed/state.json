@@ -1,0 +1,23 @@
+{
+    "campaign_id":  "campaign-20260321T101000Z-comparative-diagnosis-seed",
+    "family":  "scalping",
+    "status":  "completed",
+    "baseline_candidate_id":  "AF-CAND-0014",
+    "parent_campaign_id":  "campaign-20260321T091435Z-next-step",
+    "current_step_type":  null,
+    "active_candidate_ids":  [
+                                 "AF-CAND-0014",
+                                 "AF-CAND-0019",
+                                 "AF-CAND-0018"
+                             ],
+    "promoted_candidate_ids":  [
+
+                               ],
+    "iterations_run":  0,
+    "trials_consumed":  0,
+    "stop_reason":  "manual_comparative_diagnosis_seed",
+    "state_path":  "experiments\\campaigns\\campaign-20260321T101000Z-comparative-diagnosis-seed\\state.json",
+    "last_report_path":  null,
+    "next_recommendations_path":  "experiments\\campaigns\\campaign-20260321T101000Z-comparative-diagnosis-seed\\next_recommendations.json",
+    "updated_utc":  "2026-03-21T10:10:00Z"
+}

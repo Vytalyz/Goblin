@@ -1,0 +1,18 @@
+{
+  "source_id": "SRC-101",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Copyright (c) 2010 by Michael Lewis All rights reserved For information about permission to reproduce selections from this book, write to Permissions, W. W. Norton &amp; Company, Inc., 500 Fifth Avenue, New York, NY 10110 ISBN: 978-0-393-07819-0 W. W. Norton &amp; Company, Inc. 5"
+  ],
+  "front_matter_signals": [
+    "Contents",
+    "Acknowledgments",
+    "You're still not facing up to how badly you have mismanaged your business. You're still not acknowledging billions of dollars in losses on subprime mortgage bonds. The value of your securities is as illusory as the value of your people."
+  ],
+  "best_excerpt": "His obsession with fairness, for example. When he noticed that pro basketball stars were far less likely to be called for traveling than lesser players, he didn't just holler at the refs. He stopped watching basketball altogether; the injustice of it killed his interest in the sp"
+}

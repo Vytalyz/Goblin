@@ -1,0 +1,20 @@
+{
+  "program_id": "manager-20260322T221145Z-program-cycle-01",
+  "family": "market_structure_research",
+  "initial_parent_campaign_id": null,
+  "final_parent_campaign_id": null,
+  "executed_lanes": 0,
+  "max_lanes": 3,
+  "status": "stopped",
+  "stop_reason": "program_loop_no_pending_approved_lanes",
+  "stop_class": "policy_decision",
+  "transition_intent": "stop_terminal",
+  "lane_summaries": [],
+  "final_audit_report_path": null,
+  "policy_snapshot_hash": "9a3fc3bdb9a53bd631b9aa679d6fb669c14e1e74ee0c3ce608bb24464608dff7",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\program_loops\\manager-20260322T221145Z-program-cycle-01.json"
+}

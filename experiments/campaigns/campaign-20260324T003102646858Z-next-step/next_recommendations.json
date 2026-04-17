@@ -1,0 +1,14 @@
+[
+  {
+    "step_type": "diagnose_existing_candidates",
+    "candidate_id": "AF-CAND-0229",
+    "rationale": "AF-CAND-0229 remains the strongest audited reference branch and still clears the research promotion gates. Run one fresh bounded diagnosis on that branch to justify exactly one more correction before any further lane expansion or retirement.",
+    "binding": true,
+    "evidence_status": "supported",
+    "source_campaign_id": null,
+    "step_payload": {
+      "source_candidate_id": "AF-CAND-0229",
+      "audit_origin": "hypothesis_audit"
+    }
+  }
+]

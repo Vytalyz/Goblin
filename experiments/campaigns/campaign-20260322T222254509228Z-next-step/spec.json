@@ -1,0 +1,45 @@
+{
+  "campaign_id": "campaign-20260322T222254509228Z-next-step",
+  "family": "intraday_regime_research",
+  "baseline_candidate_id": "AF-CAND-0154",
+  "target_candidate_ids": [
+    "AF-CAND-0156",
+    "AF-CAND-0154"
+  ],
+  "parent_campaign_id": "campaign-20260322T222254463118Z-next-step",
+  "queue_kind": "promotion",
+  "throughput_target_count": 0,
+  "orthogonality_metadata": {},
+  "compile_budget": 0,
+  "smoke_budget": 0,
+  "max_rule_spec_reformulations_per_hypothesis": 0,
+  "max_ea_spec_rewrites_per_candidate": 0,
+  "max_compile_retries_per_candidate": 0,
+  "max_smoke_retries_per_candidate": 0,
+  "step_type": "data_regime_audit",
+  "allowed_step_types": [
+    "compile_ea_candidate",
+    "data_feature_audit",
+    "data_label_audit",
+    "data_regime_audit",
+    "diagnose_existing_candidates",
+    "formalize_rule_candidate",
+    "generate_ea_spec",
+    "hypothesis_audit",
+    "mutate_one_candidate",
+    "re_evaluate_one_candidate",
+    "run_forward",
+    "run_mt5_backtest_smoke",
+    "run_parity",
+    "triage_reviewable_candidate"
+  ],
+  "max_iterations": 1,
+  "max_new_candidates": 0,
+  "trial_cap_per_family": 2,
+  "stop_on_review_eligible_provisional": false,
+  "notes": [
+    "Single-step child campaign opened from campaign-20260322T222254463118Z-next-step.",
+    "Selected step: data_regime_audit.",
+    "This controller run must stop after exactly one legal step."
+  ]
+}

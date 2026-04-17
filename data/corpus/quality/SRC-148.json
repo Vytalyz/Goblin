@@ -1,0 +1,20 @@
+{
+  "source_id": "SRC-148",
+  "extraction_confidence": 1.0,
+  "relevance_score": 1.0,
+  "duplicate_group_id": null,
+  "trust_band": "low",
+  "allowed_for_discovery": true,
+  "reasons": [],
+  "copyright_signals": [
+    "Contents Title Page Dedication Epigraph Author\u2019s Note and Acknowledgments Introduction THE RISE OF LONG-TERM CAPITAL MANAGEMENT 1 \u2022 Meriwether 2 \u2022 Hedge Fund 3 \u2022 On the Run 4 \u2022 Dear Investors 5 \u2022 Tug-of-War 6 \u2022 A Nobel Prize THE FALL OF LONG-TERM CAPITAL MANAGEMENT 7 \u2022 Bank of Vo",
+    "10. Peter L. Bernstein, Against the Gods: The Remarkable Story of Risk (New York: John Wiley &amp; Sons, 1996), 310\u201316. See also Bernstein\u2019s account of the Black-Scholes model in Capital Ideas: The Improbable Origins of Modern Wall Street (New York: Free Press, 1992), 207\u201316.",
+    "2. Leah Nathans Spiro, \u201cDream Team,\u201d Business Week, August 29, 1994. 3. Peter L. Bernstein, Against the Gods: The Remarkable Story of Risk (New York: John Wiley &amp; Sons, 1996), 141\u20132. 4. Fischer Black and Myron Scholes, \u201cThe Pricing of Options and Corporate Liabilities,\u201d Journ"
+  ],
+  "front_matter_signals": [
+    "Contents Title Page Dedication Epigraph Author\u2019s Note and Acknowledgments Introduction THE RISE OF LONG-TERM CAPITAL MANAGEMENT 1 \u2022 Meriwether 2 \u2022 Hedge Fund 3 \u2022 On the Run 4 \u2022 Dear Investors 5 \u2022 Tug-of-War 6 \u2022 A Nobel Prize THE FALL OF LONG-TERM CAPITAL MANAGEMENT 7 \u2022 Bank of Vo",
+    "AUTHOR\u2019S NOTE AND ACKNOWLEDGMENTS This history of Long-Term Capital Management is unauthorized. At the project\u2019s outset, I was granted several formal interviews with two of the firm\u2019s partners, Eric Rosenfeld and David Mullins, but such formal cooperation quickly ceased.",
+    "INTRODUCTION The Federal Reserve Bank of New York is perched in a gray sandstone slab in the heart of Wall Street. Though a city landmark building constructed in 1924, the bank is a muted, almost unseen presence among its lively, entrepreneurial neighbors."
+  ],
+  "best_excerpt": "Investors may slavishly follow the trend for no other reason than that they think enough others will do likewise. Such momentum trading has nothing to do with logically appraising securities; it doesn\u2019t fit the ideal of rational investors in efficient markets."
+}

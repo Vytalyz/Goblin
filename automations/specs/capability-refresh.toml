@@ -1,0 +1,12 @@
+name = "Capability Refresh"
+description = "Refresh the Codex capability catalog from official docs and repo-local operator surfaces."
+execution_mode = "worktree"
+status = "paused"
+prompt_file = "automations/prompts/capability-refresh.md"
+recommended_skill = "$capability-crawl"
+manual_validation_required = true
+
+notes = [
+  "Run only after the same prompt succeeds manually in a normal thread.",
+  "Keep findings in the inbox; do not auto-archive when the capability surface changes.",
+]

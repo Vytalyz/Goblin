@@ -1,0 +1,195 @@
+{
+  "campaign_id": "campaign-20260323T222301889167Z-next-step",
+  "parent_campaign_id": "campaign-20260323T222301709130Z-next-step",
+  "selected_step_type": "data_feature_audit",
+  "step_reason": "The approved lane queue is exhausted after a retirement-level data/regime audit, so the next governed step is a bounded data/feature audit across the strongest recent family references.",
+  "status": "completed",
+  "stop_reason": "data_feature_audit_completed_bounded_correction_supported",
+  "candidate_scope": [
+    "AF-CAND-0199",
+    "AF-CAND-0198",
+    "AF-CAND-0200",
+    "AF-CAND-0197"
+  ],
+  "candidate_reports": [],
+  "mutation_reports": [],
+  "rule_formalization_reports": [],
+  "ea_spec_generation_reports": [],
+  "compile_reports": [],
+  "mt5_smoke_reports": [],
+  "triage_reports": [],
+  "reevaluation_reports": [],
+  "hypothesis_audit_reports": [],
+  "data_regime_audit_reports": [],
+  "data_feature_audit_reports": [
+    {
+      "family": "stationary_reclaim_research",
+      "audited_candidate_ids": [
+        "AF-CAND-0199",
+        "AF-CAND-0198",
+        "AF-CAND-0200",
+        "AF-CAND-0197"
+      ],
+      "reference_candidate_id": "AF-CAND-0200",
+      "family_decision": "bounded_correction_supported",
+      "summary": "Data/feature audit compared AF-CAND-0199, AF-CAND-0198, AF-CAND-0200, AF-CAND-0197. AF-CAND-0200 remains the reference branch, and the audited family shows provenance_contract_mixed, execution_cost_realism_consumes_edge, persistent_walk_forward_instability, broad_regime_dependence, which supports one bounded upstream correction before any new lane search.",
+      "suspected_root_causes": [
+        "provenance_contract_mixed",
+        "execution_cost_realism_consumes_edge",
+        "persistent_walk_forward_instability",
+        "broad_regime_dependence"
+      ],
+      "provenance_consistency": {
+        "candidate_count_with_provenance": 4,
+        "archived_candidates_excluded": [],
+        "dataset_snapshot_ids": [
+          "67bf4e6704f317a1",
+          "6bb60ef8f3d503f1",
+          "6d35229cbadaffbe",
+          "e7a19f2bd4d0ca5f"
+        ],
+        "feature_version_ids": [
+          "e602a112f25aff49"
+        ],
+        "label_version_ids": [
+          "4531e04082baf668"
+        ],
+        "execution_cost_model_versions": [
+          "6d8b62f0ed279476",
+          "81b477ec52ef461a",
+          "a9a8c8e0ab0cd56a"
+        ],
+        "dataset_snapshot_consistent": false,
+        "feature_version_consistent": true,
+        "label_version_consistent": true,
+        "execution_cost_model_consistent": false
+      },
+      "recent_regime_signals": [
+        "medium, europe, mean_reversion_context",
+        "medium, trend_context, europe",
+        "overlap, trend_context, high"
+      ],
+      "recommended_actions": [
+        "Use AF-CAND-0200 as the only reference branch for one bounded upstream correction.",
+        "Stop again immediately after that correction and rerun the program queue only if the correction changes the research contract."
+      ],
+      "candidate_summaries": [
+        {
+          "candidate_id": "AF-CAND-0199",
+          "family": "stationary_reclaim_research",
+          "entry_style": "range_reclaim",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 128,
+          "profit_factor": 0.829110651499491,
+          "out_of_sample_profit_factor": 0.8997555012225527,
+          "expectancy_pips": -0.5164062499999779,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0199\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0199\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0199\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0198",
+          "family": "stationary_reclaim_research",
+          "entry_style": "drift_reclaim",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 88,
+          "profit_factor": 0.30203185063151267,
+          "out_of_sample_profit_factor": 0.5699481865283649,
+          "expectancy_pips": -2.88863636363639,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0198\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0198\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0198\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0200",
+          "family": "stationary_reclaim_research",
+          "entry_style": "session_extreme_reversion",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 143,
+          "profit_factor": 0.7171764705882663,
+          "out_of_sample_profit_factor": 1.0014450867051197,
+          "expectancy_pips": -0.8405594405593495,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": 0.028571,
+          "white_reality_check_p_value": 1.0,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0200\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0200\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0200\\robustness_report.json"
+          }
+        },
+        {
+          "candidate_id": "AF-CAND-0197",
+          "family": "stationary_reclaim_research",
+          "entry_style": "session_extreme_reversion",
+          "readiness_status": "robustness_provisional",
+          "trade_count": 275,
+          "profit_factor": 0.5975531229878264,
+          "out_of_sample_profit_factor": 1.0670261941448833,
+          "expectancy_pips": -1.136363636363429,
+          "stress_passed": false,
+          "walk_forward_ok": false,
+          "pbo": null,
+          "white_reality_check_p_value": null,
+          "archived": false,
+          "artifact_paths": {
+            "strategy_spec_path": "reports\\AF-CAND-0197\\strategy_spec.json",
+            "review_packet_path": "reports\\AF-CAND-0197\\review_packet.json",
+            "robustness_report_path": "reports\\AF-CAND-0197\\robustness_report.json"
+          }
+        }
+      ],
+      "artifact_paths": {
+        "campaign_state_path": "experiments\\campaigns\\campaign-20260323T222301889167Z-next-step\\state.json",
+        "next_step_report_path": "experiments\\campaigns\\campaign-20260323T222301889167Z-next-step\\next_step_report.json",
+        "next_recommendations_path": "experiments\\campaigns\\campaign-20260323T222301889167Z-next-step\\next_recommendations.json"
+      }
+    }
+  ],
+  "data_label_audit_reports": [],
+  "mt5_parity_reports": [],
+  "forward_reports": [],
+  "next_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0200",
+      "rationale": "AF-CAND-0200 remains the strongest family reference after the data/feature audit. Run one bounded diagnosis pass on that branch before any further correction or retirement decision.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0200",
+        "audit_origin": "data_feature_audit"
+      }
+    }
+  ],
+  "continuation_status": "continue",
+  "stop_class": "none",
+  "auto_continue_allowed": true,
+  "recommended_follow_on_step": "diagnose_existing_candidates",
+  "max_safe_follow_on_steps": 1,
+  "transition_status": "continue_lane",
+  "transition_intent": "advance_same_lane",
+  "policy_snapshot_hash": "54d818f71373bd1ffb85067be0c7e073b1f02d2251798f4aeff159576c4245e7",
+  "notification_required": false,
+  "notification_reason": null,
+  "handoff_candidate_id": null,
+  "handoff_artifact_paths": {},
+  "report_path": "experiments\\campaigns\\campaign-20260323T222301889167Z-next-step\\next_step_report.json"
+}

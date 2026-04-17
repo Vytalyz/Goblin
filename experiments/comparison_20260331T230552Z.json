@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-03-31T23:05:52.382183Z",
+  "family_filter": null,
+  "candidate_filters": [],
+  "total_records": 0,
+  "registry_path": "experiments\\registry.csv",
+  "report_path": "experiments\\comparison_20260331T230552Z.json",
+  "latest_report_path": "experiments\\comparison_latest.json",
+  "recommended_candidate_id": null,
+  "records": []
+}

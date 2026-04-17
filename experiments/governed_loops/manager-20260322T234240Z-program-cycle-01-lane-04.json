@@ -1,0 +1,47 @@
+{
+  "loop_id": "manager-20260322T234240Z-program-cycle-01-lane-04",
+  "family": "quality_gate_research",
+  "initial_parent_campaign_id": "campaign-20260322T234257369151Z-promotion_quality_pullback_continuation_af_cand_0175-seed",
+  "final_parent_campaign_id": "campaign-20260322T234257446937Z-next-step",
+  "executed_steps": 1,
+  "max_steps": 6,
+  "status": "completed",
+  "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+  "stop_class": "lane_exhausted",
+  "transition_intent": "advance_same_lane",
+  "final_report_path": "experiments\\campaigns\\campaign-20260322T234257446937Z-next-step\\next_step_report.json",
+  "final_recommendations": [
+    {
+      "step_type": "diagnose_existing_candidates",
+      "candidate_id": "AF-CAND-0175",
+      "rationale": "AF-CAND-0175 remains provisionally governed but still fails walk-forward stability after the bounded mutation. The next step should be a fresh diagnosis before any additional mutation.",
+      "binding": true,
+      "evidence_status": "supported",
+      "source_campaign_id": null,
+      "step_payload": {
+        "source_candidate_id": "AF-CAND-0175"
+      }
+    }
+  ],
+  "executed_campaign_ids": [
+    "campaign-20260322T234257446937Z-next-step"
+  ],
+  "step_summaries": [
+    {
+      "step_index": 1,
+      "campaign_id": "campaign-20260322T234257446937Z-next-step",
+      "selected_step_type": "re_evaluate_one_candidate",
+      "status": "completed",
+      "stop_reason": "re_evaluation_completed_with_supported_recommendation",
+      "continuation_status": "stop",
+      "stop_class": "lane_exhausted",
+      "auto_continue_allowed": false,
+      "recommended_follow_on_step": "diagnose_existing_candidates",
+      "transition_status": "continue_lane",
+      "transition_intent": "advance_same_lane",
+      "report_path": "experiments\\campaigns\\campaign-20260322T234257446937Z-next-step\\next_step_report.json"
+    }
+  ],
+  "policy_snapshot_hash": "b1146334d77abaad7e6ae57e39178cee6ac760de9a39dcc3e9ce61bac0288468",
+  "report_path": "experiments\\governed_loops\\manager-20260322T234240Z-program-cycle-01-lane-04.json"
+}
