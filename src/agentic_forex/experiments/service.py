@@ -60,8 +60,7 @@ def compare_experiments(
         records.append(record)
     if explicitly_rejected:
         reasons = "; ".join(
-            f"{candidate_id}: {', '.join(details)}"
-            for candidate_id, details in sorted(explicitly_rejected.items())
+            f"{candidate_id}: {', '.join(details)}" for candidate_id, details in sorted(explicitly_rejected.items())
         )
         raise ValueError(f"Invalid comparison inputs rejected: {reasons}")
     ordered = sorted(records, key=lambda item: item.comparison_score, reverse=True)
@@ -112,12 +111,16 @@ def _build_record(
     if not isinstance(grades, dict):
         grades = grade_candidate(backtest, resolved_stress, settings)
     walk_forward_ok = grades.get("walk_forward_ok") if isinstance(grades.get("walk_forward_ok"), bool) else None
-    ftmo_fit = FTMOFitReport.model_validate(review.ftmo_fit) if review and review.ftmo_fit else score_ftmo_fit(
-        spec=spec,
-        backtest=backtest,
-        stress=resolved_stress,
-        trade_ledger=trade_ledger,
-        settings=settings,
+    ftmo_fit = (
+        FTMOFitReport.model_validate(review.ftmo_fit)
+        if review and review.ftmo_fit
+        else score_ftmo_fit(
+            spec=spec,
+            backtest=backtest,
+            stress=resolved_stress,
+            trade_ledger=trade_ledger,
+            settings=settings,
+        )
     )
     empirical_score = benchmark_meta.get("benchmark_ranking_score")
     if empirical_score is None:
@@ -224,7 +227,10 @@ def _read_trade_ledger(path: Path) -> pd.DataFrame:
 
 
 def _research_dataset_path(spec: StrategySpec, settings: Settings) -> Path:
-    return settings.paths().normalized_research_dir / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    return (
+        settings.paths().normalized_research_dir
+        / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    )
 
 
 def _normalize_trade_ledger(trade_ledger: pd.DataFrame, spec: StrategySpec) -> pd.DataFrame:
@@ -239,7 +245,9 @@ def _normalize_trade_ledger(trade_ledger: pd.DataFrame, spec: StrategySpec) -> p
         ledger["pnl_dollars"] = (
             pd.to_numeric(ledger["pnl_pips"], errors="coerce").fillna(0.0)
             * spec.account_model.pip_value_per_standard_lot
-            * pd.to_numeric(ledger["position_size_lots"], errors="coerce").fillna(spec.account_model.max_total_exposure_lots)
+            * pd.to_numeric(ledger["position_size_lots"], errors="coerce").fillna(
+                spec.account_model.max_total_exposure_lots
+            )
         )
     if "balance_after" not in ledger.columns:
         pnl_dollars = pd.to_numeric(ledger["pnl_dollars"], errors="coerce").fillna(0.0)
@@ -249,7 +257,9 @@ def _normalize_trade_ledger(trade_ledger: pd.DataFrame, spec: StrategySpec) -> p
             entry_price = pd.to_numeric(ledger["entry_price"], errors="coerce").fillna(1.0)
         else:
             entry_price = pd.Series([1.0] * len(ledger), index=ledger.index, dtype="float64")
-        lots = pd.to_numeric(ledger["position_size_lots"], errors="coerce").fillna(spec.account_model.max_total_exposure_lots)
+        lots = pd.to_numeric(ledger["position_size_lots"], errors="coerce").fillna(
+            spec.account_model.max_total_exposure_lots
+        )
         notional = entry_price * spec.account_model.contract_size * lots
         required_margin = notional / max(spec.account_model.leverage, 1e-9)
         ledger["margin_utilization_pct"] = (required_margin / spec.account_model.initial_balance) * 100

@@ -44,7 +44,12 @@ def resolve_readiness_status(
 def required_evidence(status: ReadinessStatus) -> list[str]:
     mapping: dict[ReadinessStatus, list[str]] = {
         "discovered": ["candidate draft", "corpus citations"],
-        "rule_spec_complete": ["rule spec", "deterministic entry/exit contract", "risk envelope", "session/news filters"],
+        "rule_spec_complete": [
+            "rule spec",
+            "deterministic entry/exit contract",
+            "risk envelope",
+            "session/news filters",
+        ],
         "ea_spec_complete": ["ea spec", "parameter schema", "order-construction contract", "state-machine behavior"],
         "ea_compiled": ["ea source", "compile report", "deterministic code-generation manifest"],
         "mt5_backtest_executed": ["mt5 smoke report", "tester config", "smoke artifacts"],
@@ -52,7 +57,12 @@ def required_evidence(status: ReadinessStatus) -> list[str]:
         "specified": ["strategy spec", "execution cost model", "risk envelope", "initial provenance skeleton"],
         "backtested": ["backtest summary", "trade ledger", "data provenance", "environment snapshot"],
         "robustness_provisional": ["DSR", "walk-forward summary", "stress report", "trial warnings"],
-        "parity_passed": ["MT5 tester config", "compile request", "parsed parity report", "live-trading disabled proof"],
+        "parity_passed": [
+            "MT5 tester config",
+            "compile request",
+            "parsed parity report",
+            "live-trading disabled proof",
+        ],
         "forward_passed": ["OANDA shadow-forward report", "forward gate metrics", "no hard risk-envelope violations"],
         "review_eligible_provisional": [
             "backtest summary",

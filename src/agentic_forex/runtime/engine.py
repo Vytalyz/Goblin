@@ -126,7 +126,9 @@ class WorkflowEngine:
         result = tool(payload=payload, settings=self.settings, config=config, read_policy=self.read_policy)
         return validate_named(output_schema, result).model_dump(mode="json")
 
-    def _resolve_next_node(self, edges: list[EdgeSpec], source: str, route_target: str | None, payload: dict) -> str | None:
+    def _resolve_next_node(
+        self, edges: list[EdgeSpec], source: str, route_target: str | None, payload: dict
+    ) -> str | None:
         outgoing = [edge for edge in edges if edge.source == source]
         if not outgoing:
             return None

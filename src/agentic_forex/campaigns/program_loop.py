@@ -8,9 +8,19 @@ from agentic_forex.campaigns.governed_loop import run_governed_loop
 from agentic_forex.campaigns.next_step import run_next_step
 from agentic_forex.config import Settings
 from agentic_forex.config.models import ProgramLanePolicy
-from agentic_forex.goblin.controls import enforce_strategy_governance, finalize_goblin_run_record, start_goblin_run_record
+from agentic_forex.goblin.controls import (
+    enforce_strategy_governance,
+    finalize_goblin_run_record,
+    start_goblin_run_record,
+)
 from agentic_forex.governance.control_plane import policy_snapshot_hash
-from agentic_forex.governance.models import CampaignSpec, CampaignState, NextStepControllerReport, ProgramLoopLaneSummary, ProgramLoopReport
+from agentic_forex.governance.models import (
+    CampaignSpec,
+    CampaignState,
+    NextStepControllerReport,
+    ProgramLoopLaneSummary,
+    ProgramLoopReport,
+)
 from agentic_forex.nodes.toolkit import default_execution_cost_fields
 from agentic_forex.utils.ids import next_campaign_id
 from agentic_forex.utils.io import read_json, write_json
@@ -63,7 +73,9 @@ def run_program_loop(
 
     initial_lane = _active_lane_placeholder(family=family) if parent_campaign_id else None
     current_lane = initial_lane
-    initial_transition_status = _campaign_transition_status(settings, parent_campaign_id) if parent_campaign_id else None
+    initial_transition_status = (
+        _campaign_transition_status(settings, parent_campaign_id) if parent_campaign_id else None
+    )
     resuming_active_lane = bool(parent_campaign_id and initial_transition_status != "move_to_next_lane")
     if initial_transition_status == "move_to_next_lane":
         current_parent_campaign_id = None
@@ -174,7 +186,9 @@ def run_program_loop(
     while cycle_index < max_cycles:
         cycle_index += 1
         if current_parent_campaign_id is None:
-            current_lane = _next_pending_lane(settings, approved_lanes=approved_lanes, executed_lane_ids=executed_lane_ids)
+            current_lane = _next_pending_lane(
+                settings, approved_lanes=approved_lanes, executed_lane_ids=executed_lane_ids
+            )
             if current_lane is None:
                 if carry_forward_parent_campaign_id and _family_requires_post_queue_audit(approved_lanes):
                     final_audit = run_next_step(
@@ -247,7 +261,9 @@ def run_program_loop(
                     hypothesis_class=current_lane.hypothesis_class,
                     seed_candidate_id=current_lane.seed_candidate_id,
                     queue_kind=current_lane.queue_kind,
-                    seed_campaign_id=current_parent_campaign_id if current_parent_campaign_id and current_parent_campaign_id.endswith("-seed") else None,
+                    seed_campaign_id=current_parent_campaign_id
+                    if current_parent_campaign_id and current_parent_campaign_id.endswith("-seed")
+                    else None,
                     initial_parent_campaign_id=lane_initial_parent,
                     final_parent_campaign_id=loop_report.final_parent_campaign_id,
                     governed_loop_report_path=loop_report.report_path,
@@ -280,7 +296,9 @@ def run_program_loop(
         family=family,
         initial_parent_campaign_id=parent_campaign_id,
         final_parent_campaign_id=current_parent_campaign_id or carry_forward_parent_campaign_id,
-        executed_lanes=len(seeded_lane_ids) if seeded_lane_ids else len({summary.lane_id for summary in lane_summaries}),
+        executed_lanes=len(seeded_lane_ids)
+        if seeded_lane_ids
+        else len({summary.lane_id for summary in lane_summaries}),
         max_lanes=lane_budget,
         status="completed" if lane_summaries else "stopped",
         stop_reason=stop_reason,
@@ -294,7 +312,9 @@ def run_program_loop(
         report_path=report_path,
     )
     write_json(report_path, report.model_dump(mode="json"))
-    finalize_goblin_run_record(settings, run_record, notes=[f"status={report.status}", f"stop_reason={report.stop_reason}"])
+    finalize_goblin_run_record(
+        settings, run_record, notes=[f"status={report.status}", f"stop_reason={report.stop_reason}"]
+    )
     return report
 
 
@@ -436,8 +456,14 @@ def _seed_program_lane(
     campaign_id = next_campaign_id(settings, suffix=f"-{lane.lane_id}-seed")
     parent_id = parent_campaign_id or _latest_completed_campaign_id(settings, family=lane.family)
     campaign_dir = settings.paths().campaigns_dir / campaign_id
-    refresh_required = lane.queue_kind == "promotion" and _seed_requires_execution_refresh(settings, lane.seed_candidate_id)
-    step_type = "formalize_rule_candidate" if lane.queue_kind == "throughput" else ("mutate_one_candidate" if refresh_required else "re_evaluate_one_candidate")
+    refresh_required = lane.queue_kind == "promotion" and _seed_requires_execution_refresh(
+        settings, lane.seed_candidate_id
+    )
+    step_type = (
+        "formalize_rule_candidate"
+        if lane.queue_kind == "throughput"
+        else ("mutate_one_candidate" if refresh_required else "re_evaluate_one_candidate")
+    )
     allowed_step_types = [step_type]
     spec = CampaignSpec(
         campaign_id=campaign_id,
@@ -447,7 +473,9 @@ def _seed_program_lane(
         parent_campaign_id=parent_id,
         queue_kind=lane.queue_kind,
         throughput_target_count=lane.throughput_target_count,
-        orthogonality_metadata=lane.orthogonality_metadata.model_dump(mode="json") if lane.orthogonality_metadata else {},
+        orthogonality_metadata=lane.orthogonality_metadata.model_dump(mode="json")
+        if lane.orthogonality_metadata
+        else {},
         compile_budget=lane.compile_budget,
         smoke_budget=lane.smoke_budget,
         max_rule_spec_reformulations_per_hypothesis=lane.max_rule_spec_reformulations_per_hypothesis,
@@ -569,8 +597,7 @@ def _seed_requires_execution_refresh(settings: Settings, candidate_id: str) -> b
     cost_model = spec_payload.get("cost_model") or {}
     execution_cost_model = spec_payload.get("execution_cost_model") or {}
     return not all(
-        cost_model.get(key) == value and execution_cost_model.get(key) == value
-        for key, value in cost_defaults.items()
+        cost_model.get(key) == value and execution_cost_model.get(key) == value for key, value in cost_defaults.items()
     )
 
 
@@ -787,7 +814,9 @@ def _iter_recent_failure_payloads(settings: Settings) -> list[dict[str, object]]
     if not failure_path.exists():
         return []
     payloads: list[dict[str, object]] = []
-    cutoff = datetime.now(UTC).timestamp() - (max(int(settings.program.archetype_retirement_lookback_days or 0), 1) * 86_400)
+    cutoff = datetime.now(UTC).timestamp() - (
+        max(int(settings.program.archetype_retirement_lookback_days or 0), 1) * 86_400
+    )
     for line in failure_path.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
@@ -850,11 +879,7 @@ def _load_seed_profile(settings: Settings, candidate_id: str) -> dict[str, objec
         allowed_hours = tuple(
             sorted(
                 int(item)
-                for item in (
-                    market_context.get("allowed_hours_utc")
-                    or session_policy.get("allowed_hours_utc")
-                    or []
-                )
+                for item in (market_context.get("allowed_hours_utc") or session_policy.get("allowed_hours_utc") or [])
             )
         )
         custom_filters = tuple(
@@ -864,27 +889,21 @@ def _load_seed_profile(settings: Settings, candidate_id: str) -> dict[str, objec
                 if str(item.get("name") or "").strip()
             )
         )
-        side_policy = str(
-            market_context.get("directional_bias")
-            or spec_payload.get("side_policy")
-            or "both"
-        )
+        side_policy = str(market_context.get("directional_bias") or spec_payload.get("side_policy") or "both")
         news_blackout = bool(
-            candidate_payload.get("enable_news_blackout")
-            or (spec_payload.get("news_policy") or {}).get("enabled")
+            candidate_payload.get("enable_news_blackout") or (spec_payload.get("news_policy") or {}).get("enabled")
         )
         entry_style = str(candidate_payload.get("entry_style") or spec_payload.get("entry_style") or "")
         holding_bars = int(candidate_payload.get("holding_bars") or spec_payload.get("holding_bars") or 0)
         stop_loss_pips = float(candidate_payload.get("stop_loss_pips") or spec_payload.get("stop_loss_pips") or 0.0)
-        take_profit_pips = float(candidate_payload.get("take_profit_pips") or spec_payload.get("take_profit_pips") or 0.0)
+        take_profit_pips = float(
+            candidate_payload.get("take_profit_pips") or spec_payload.get("take_profit_pips") or 0.0
+        )
         evidence_tags = tuple(
             sorted(
                 {
                     str(tag).strip()
-                    for tag in (
-                        (market_rationale.get("evidence_tags") or [])
-                        + list(inferred_candidate_evidence_tags)
-                    )
+                    for tag in ((market_rationale.get("evidence_tags") or []) + list(inferred_candidate_evidence_tags))
                     if str(tag).strip()
                 }
             )

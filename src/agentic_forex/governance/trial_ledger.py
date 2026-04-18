@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-from contextlib import contextmanager
 import json
 import os
 import time
 import uuid
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
 from agentic_forex.config import Settings
 from agentic_forex.governance.models import FailureCode, FailureRecord, TrialLedgerEntry
-
 
 _JSONL_LOCK_RETRY_SECONDS = 0.01
 _JSONL_LOCK_TIMEOUT_SECONDS = 5.0
@@ -68,7 +67,9 @@ def append_failure_record(
         details=details or {},
         artifact_paths=artifact_paths or {},
     )
-    _append_jsonl(settings.paths().observational_knowledge_dir / "failure_records.jsonl", record.model_dump(mode="json"))
+    _append_jsonl(
+        settings.paths().observational_knowledge_dir / "failure_records.jsonl", record.model_dump(mode="json")
+    )
     return record
 
 

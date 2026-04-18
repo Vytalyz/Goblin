@@ -11,7 +11,6 @@ Triage gates: >= 50 trades AND profit_factor >= 1.0
 
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
 
@@ -352,29 +351,37 @@ def main():
         artifact = run_backtest(spec, settings)
 
         passed = artifact.trade_count >= 50 and artifact.profit_factor >= 1.0
-        results.append({
-            "candidate_id": cid,
-            "type": style_label,
-            "entry_style": raw_spec["entry_style"],
-            "trades": artifact.trade_count,
-            "pf": round(artifact.profit_factor, 3),
-            "win_rate": round(artifact.win_rate, 3),
-            "expectancy": round(artifact.expectancy_pips, 3),
-            "max_dd": round(artifact.max_drawdown_pct, 2),
-            "oos_pf": round(artifact.out_of_sample_profit_factor, 3),
-            "trailing": "yes" if raw_spec.get("trailing_stop_enabled") else "no",
-            "passed_triage": passed,
-        })
+        results.append(
+            {
+                "candidate_id": cid,
+                "type": style_label,
+                "entry_style": raw_spec["entry_style"],
+                "trades": artifact.trade_count,
+                "pf": round(artifact.profit_factor, 3),
+                "win_rate": round(artifact.win_rate, 3),
+                "expectancy": round(artifact.expectancy_pips, 3),
+                "max_dd": round(artifact.max_drawdown_pct, 2),
+                "oos_pf": round(artifact.out_of_sample_profit_factor, 3),
+                "trailing": "yes" if raw_spec.get("trailing_stop_enabled") else "no",
+                "passed_triage": passed,
+            }
+        )
         status = "PASS" if passed else "FAIL"
-        print(f"   -> {artifact.trade_count} trades | PF {artifact.profit_factor:.3f} | WR {artifact.win_rate:.1%} | [{status}]")
+        print(
+            f"   -> {artifact.trade_count} trades | PF {artifact.profit_factor:.3f} | WR {artifact.win_rate:.1%} | [{status}]"
+        )
 
     # Summary table
     print("\n" + "=" * 100)
-    print(f"{'ID':<16} {'Type':<7} {'Style':<28} {'Trades':>6} {'PF':>7} {'WR':>6} {'Exp':>8} {'DD%':>6} {'OOS_PF':>7} {'Trail':>5} {'Gate':>6}")
+    print(
+        f"{'ID':<16} {'Type':<7} {'Style':<28} {'Trades':>6} {'PF':>7} {'WR':>6} {'Exp':>8} {'DD%':>6} {'OOS_PF':>7} {'Trail':>5} {'Gate':>6}"
+    )
     print("-" * 100)
     for r in results:
         gate = "PASS" if r["passed_triage"] else "FAIL"
-        print(f"{r['candidate_id']:<16} {r['type']:<7} {r['entry_style']:<28} {r['trades']:>6} {r['pf']:>7.3f} {r['win_rate']:>5.1%} {r['expectancy']:>8.3f} {r['max_dd']:>5.2f}% {r['oos_pf']:>7.3f} {r['trailing']:>5} {gate:>6}")
+        print(
+            f"{r['candidate_id']:<16} {r['type']:<7} {r['entry_style']:<28} {r['trades']:>6} {r['pf']:>7.3f} {r['win_rate']:>5.1%} {r['expectancy']:>8.3f} {r['max_dd']:>5.2f}% {r['oos_pf']:>7.3f} {r['trailing']:>5} {gate:>6}"
+        )
     print("=" * 100)
 
     passed_count = sum(1 for r in results if r["passed_triage"])

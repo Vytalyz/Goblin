@@ -289,7 +289,7 @@ def test_run_broker_reconciliation_mismatch(settings, tmp_path):
     assert report.reconciliation_status == "mismatch"
     assert report.matched_trade_count == 1
     assert report.missing_broker_trade_count == 1  # ticket 22222 in EA but not broker
-    assert report.extra_broker_trade_count == 1   # ticket 33333 in broker but not EA
+    assert report.extra_broker_trade_count == 1  # ticket 33333 in broker but not EA
     assert report.report_path is not None
     assert report.report_path.exists()
     payload = json.loads(report.report_path.read_text(encoding="utf-8"))

@@ -3,11 +3,15 @@ from __future__ import annotations
 import json
 
 import pandas as pd
-
-from agentic_forex.market_data.ingest import backfill_oanda_history, ingest_market_csv, ingest_mt5_parity_csv, ingest_oanda_json
-from agentic_forex.market_data.qa import build_market_data_quality_report
-
 from conftest import create_market_csv, create_oanda_candles_json
+
+from agentic_forex.market_data.ingest import (
+    backfill_oanda_history,
+    ingest_market_csv,
+    ingest_mt5_parity_csv,
+    ingest_oanda_json,
+)
+from agentic_forex.market_data.qa import build_market_data_quality_report
 
 
 def test_oanda_and_mt5_ingest_are_isolated(settings, tmp_path):

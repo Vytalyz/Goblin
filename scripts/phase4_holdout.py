@@ -46,7 +46,7 @@ def main():
     results = []
 
     for cid in ALL_SURVIVORS:
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"Phase 4 holdout evaluation: {cid}")
         print("=" * 70, flush=True)
 
@@ -82,12 +82,12 @@ def main():
         if stress_path.exists():
             stress_data = json.loads(stress_path.read_text())
             stressed_pf = stress_data.get("stressed_profit_factor", 0)
-            stress_passed = stress_data.get("passed", False)
+            _stress_passed = stress_data.get("passed", False)
         else:
             # Re-run stress
             stress = run_stress_test(spec, settings)
             stressed_pf = stress.stressed_profit_factor
-            stress_passed = stress.passed
+            _stress_passed = stress.passed
 
         # Walk-forward eval
         wf_passing = sum(1 for w in wf if w.get("profit_factor", 0) >= 0.9)
@@ -113,15 +113,21 @@ def main():
         vtype = "scalp" if cid in SCALP_SURVIVORS else "swing"
 
         print(f"  Type: {vtype} | Entry: {spec.entry_style}")
-        print(f"  Overall: {artifact.trade_count} trades, PF {artifact.profit_factor:.3f}, DD {artifact.max_drawdown_pct:.2f}%")
-        print(f"  Splits:")
-        print(f"    Train:       {train.get('trade_count', 0):>4} trades, PF {train_pf:.3f}, Exp {train.get('expectancy_pips', 0):+.3f}")
-        print(f"    Validation:  {val.get('trade_count', 0):>4} trades, PF {val_pf:.3f}, Exp {val.get('expectancy_pips', 0):+.3f}")
+        print(
+            f"  Overall: {artifact.trade_count} trades, PF {artifact.profit_factor:.3f}, DD {artifact.max_drawdown_pct:.2f}%"
+        )
+        print("  Splits:")
+        print(
+            f"    Train:       {train.get('trade_count', 0):>4} trades, PF {train_pf:.3f}, Exp {train.get('expectancy_pips', 0):+.3f}"
+        )
+        print(
+            f"    Validation:  {val.get('trade_count', 0):>4} trades, PF {val_pf:.3f}, Exp {val.get('expectancy_pips', 0):+.3f}"
+        )
         print(f"    HOLDOUT:     {oos_trades:>4} trades, PF {oos_pf:.3f}, Exp {oos_exp:+.3f}")
         print(f"  Stability (OOS/Train PF): {stability_ratio:.2f}")
         print(f"  Stressed PF: {stressed_pf:.3f}")
         print(f"  Walk-forward: {wf_passing}/{wf_total} pass")
-        print(f"\n  Gate checks:")
+        print("\n  Gate checks:")
         print(f"    OOS PF >= 1.05:        {'PASS' if gate_oos_pf else 'FAIL'} ({oos_pf:.3f})")
         print(f"    OOS Exp > 0:           {'PASS' if gate_oos_exp else 'FAIL'} ({oos_exp:+.3f})")
         print(f"    Stress >= 1.0:         {'PASS' if gate_stress else 'FAIL'} ({stressed_pf:.3f})")
@@ -132,38 +138,42 @@ def main():
         print(f"    OOS Trades >= 30:      {'PASS' if gate_oos_count_relaxed else 'FAIL'} ({oos_trades}) [relaxed]")
         print(f"\n  >>> PROMOTION READY: {'YES' if promotion_ready else 'NO'}")
 
-        results.append({
-            "candidate_id": cid,
-            "type": vtype,
-            "entry_style": spec.entry_style,
-            "total_trades": artifact.trade_count,
-            "total_pf": round(artifact.profit_factor, 3),
-            "max_dd_pct": round(artifact.max_drawdown_pct, 2),
-            "train_trades": train.get("trade_count", 0),
-            "train_pf": round(train_pf, 3),
-            "val_trades": val.get("trade_count", 0),
-            "val_pf": round(val_pf, 3),
-            "oos_trades": oos_trades,
-            "oos_pf": round(oos_pf, 3),
-            "oos_exp": round(oos_exp, 3),
-            "stability_ratio": round(stability_ratio, 2),
-            "stressed_pf": round(stressed_pf, 3),
-            "wf_passing": wf_passing,
-            "wf_total": wf_total,
-            "gate_oos_pf": gate_oos_pf,
-            "gate_oos_exp": gate_oos_exp,
-            "gate_stress": gate_stress,
-            "gate_wf": gate_wf,
-            "gate_dd": gate_dd,
-            "gate_stability": gate_stability,
-            "gate_oos_count_strict": gate_oos_count,
-            "gate_oos_count_relaxed": gate_oos_count_relaxed,
-            "promotion_ready": promotion_ready,
-        })
+        results.append(
+            {
+                "candidate_id": cid,
+                "type": vtype,
+                "entry_style": spec.entry_style,
+                "total_trades": artifact.trade_count,
+                "total_pf": round(artifact.profit_factor, 3),
+                "max_dd_pct": round(artifact.max_drawdown_pct, 2),
+                "train_trades": train.get("trade_count", 0),
+                "train_pf": round(train_pf, 3),
+                "val_trades": val.get("trade_count", 0),
+                "val_pf": round(val_pf, 3),
+                "oos_trades": oos_trades,
+                "oos_pf": round(oos_pf, 3),
+                "oos_exp": round(oos_exp, 3),
+                "stability_ratio": round(stability_ratio, 2),
+                "stressed_pf": round(stressed_pf, 3),
+                "wf_passing": wf_passing,
+                "wf_total": wf_total,
+                "gate_oos_pf": gate_oos_pf,
+                "gate_oos_exp": gate_oos_exp,
+                "gate_stress": gate_stress,
+                "gate_wf": gate_wf,
+                "gate_dd": gate_dd,
+                "gate_stability": gate_stability,
+                "gate_oos_count_strict": gate_oos_count,
+                "gate_oos_count_relaxed": gate_oos_count_relaxed,
+                "promotion_ready": promotion_ready,
+            }
+        )
 
     # Summary table
     print("\n\n" + "=" * 140)
-    print(f"{'ID':<16} {'Type':<6} {'Total':>5} {'Train PF':>9} {'Val PF':>7} {'OOS Tr':>6} {'OOS PF':>7} {'OOS Exp':>8} {'Stab':>5} {'StressPF':>9} {'WF':>5} {'DD%':>6} {'Promo':>6}")
+    print(
+        f"{'ID':<16} {'Type':<6} {'Total':>5} {'Train PF':>9} {'Val PF':>7} {'OOS Tr':>6} {'OOS PF':>7} {'OOS Exp':>8} {'Stab':>5} {'StressPF':>9} {'WF':>5} {'DD%':>6} {'Promo':>6}"
+    )
     print("-" * 140)
     for r in results:
         promo = "YES" if r["promotion_ready"] else "NO"
@@ -182,10 +192,12 @@ def main():
     if promoted:
         print("\nPromotion-ready candidates ranked by OOS PF:")
         for rank, r in enumerate(sorted(promoted, key=lambda x: x["oos_pf"], reverse=True), 1):
-            print(f"  #{rank} {r['candidate_id']} — OOS PF {r['oos_pf']:.3f}, Stressed {r['stressed_pf']:.3f}, {r['oos_trades']} OOS trades, DD {r['max_dd_pct']:.2f}%")
+            print(
+                f"  #{rank} {r['candidate_id']} — OOS PF {r['oos_pf']:.3f}, Stressed {r['stressed_pf']:.3f}, {r['oos_trades']} OOS trades, DD {r['max_dd_pct']:.2f}%"
+            )
 
     write_json(PROJECT_ROOT / "reports" / "phase4_holdout_results.json", results)
-    print(f"\nSaved to: reports/phase4_holdout_results.json")
+    print("\nSaved to: reports/phase4_holdout_results.json")
 
 
 if __name__ == "__main__":

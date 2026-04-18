@@ -13,6 +13,11 @@ repos:
         types: [python]
         pass_filenames: false
         verbose: true
+      - id: ruff-format
+        name: "Goblin Guardian: Format Check"
+        args: [--check]
+        types: [python]
+        verbose: true
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
@@ -35,4 +40,11 @@ repos:
         language: system
         types: [python]
         pass_filenames: false
+        verbose: true
+      - id: goblin-guardian-publish-gate
+        name: "Goblin Guardian: Publish Validation"
+        entry: python scripts/validate_for_publish.py --skip-tests
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
         verbose: true

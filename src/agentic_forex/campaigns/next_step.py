@@ -14,35 +14,37 @@ from agentic_forex.approval.service import is_stage_approved
 from agentic_forex.campaigns.controller import load_or_create_campaign_state
 from agentic_forex.campaigns.throughput import (
     compile_ea_candidate as build_compile_report,
+)
+from agentic_forex.campaigns.throughput import (
     formalize_rule_candidate,
-    generate_ea_spec as build_ea_spec_report,
-    run_mt5_backtest_smoke as build_mt5_smoke_report,
     triage_candidate,
 )
+from agentic_forex.campaigns.throughput import (
+    generate_ea_spec as build_ea_spec_report,
+)
+from agentic_forex.campaigns.throughput import (
+    run_mt5_backtest_smoke as build_mt5_smoke_report,
+)
 from agentic_forex.config import Settings
+from agentic_forex.forward.service import run_shadow_forward
+from agentic_forex.goblin.controls import enforce_strategy_governance
 from agentic_forex.governance.control_plane import policy_snapshot_hash
-from agentic_forex.forward.service import load_forward_stage_report, run_shadow_forward
 from agentic_forex.governance.models import (
     CampaignSpec,
     CampaignState,
-    CandidateCompileReport,
     CandidateDiagnosticReport,
     CandidateMutationReport,
     CandidateReevaluationReport,
-    CandidateTriageReport,
     DataFeatureAuditReport,
     DataLabelAuditReport,
     DataRegimeAuditReport,
     DataRegimeSliceSummary,
     DiagnosticSliceReport,
-    EASpecGenerationReport,
     HypothesisAuditCandidateSummary,
     HypothesisAuditReport,
-    MT5SmokeBacktestReport,
     NextStepControllerReport,
     NextStepRecommendation,
     NextStepType,
-    RuleFormalizationReport,
 )
 from agentic_forex.governance.provenance import (
     build_data_provenance,
@@ -52,17 +54,15 @@ from agentic_forex.governance.provenance import (
 )
 from agentic_forex.governance.readiness import resolve_readiness_status
 from agentic_forex.governance.trial_ledger import append_failure_record, append_trial_entry
-from agentic_forex.goblin.controls import enforce_strategy_governance
 from agentic_forex.llm import MockLLMClient
 from agentic_forex.mt5.service import ParityPolicyError, load_latest_mt5_validation, run_mt5_parity
 from agentic_forex.nodes import build_tool_registry
 from agentic_forex.nodes.toolkit import default_execution_cost_fields
 from agentic_forex.runtime import ReadPolicy, WorkflowEngine
-from agentic_forex.utils.ids import next_candidate_id, next_campaign_id
+from agentic_forex.utils.ids import next_campaign_id, next_candidate_id
 from agentic_forex.utils.io import read_json, write_json
 from agentic_forex.workflows import WorkflowRepository
 from agentic_forex.workflows.contracts import CandidateDraft, FilterRule, ReviewPacket, StrategySpec
-
 
 DEFAULT_ALLOWED_STEP_TYPES: list[NextStepType] = ["diagnose_existing_candidates"]
 SUPPORTED_STEP_TYPES: set[NextStepType] = {
@@ -647,10 +647,10 @@ def _run_mutate_one_candidate(
             evidence_status="supported",
             step_payload={
                 "source_candidate_id": source_candidate_id,
-            "mutation_type": mutation_payload["mutation_type"],
-            **mutation_blueprint["step_payload"],
-        },
-    )
+                "mutation_type": mutation_payload["mutation_type"],
+                **mutation_blueprint["step_payload"],
+            },
+        )
     ]
     report = NextStepControllerReport(
         campaign_id=child_spec.campaign_id,
@@ -799,7 +799,9 @@ def _run_generate_ea_spec(
         write_json(recommendations_path, [])
         return report
 
-    follow_on_step: NextStepType = "compile_ea_candidate" if ea_spec_report.economic_plausibility_passed else "triage_reviewable_candidate"
+    follow_on_step: NextStepType = (
+        "compile_ea_candidate" if ea_spec_report.economic_plausibility_passed else "triage_reviewable_candidate"
+    )
     next_recommendations = [
         NextStepRecommendation(
             step_type=follow_on_step,
@@ -868,7 +870,9 @@ def _run_compile_ea_candidate(
     compile_report = build_compile_report(settings, candidate_id=candidate_id)
     next_recommendations = [
         NextStepRecommendation(
-            step_type="run_mt5_backtest_smoke" if compile_report.compile_status == "passed" else "triage_reviewable_candidate",
+            step_type="run_mt5_backtest_smoke"
+            if compile_report.compile_status == "passed"
+            else "triage_reviewable_candidate",
             candidate_id=candidate_id,
             rationale=(
                 f"{candidate_id} "
@@ -1239,7 +1243,9 @@ def _run_hypothesis_audit(
             family=child_spec.family,
             stage="hypothesis_audit",
             campaign_id=child_spec.campaign_id,
-            parent_candidate_ids=[candidate_id for candidate_id in candidate_ids if candidate_id != summary_item.candidate_id],
+            parent_candidate_ids=[
+                candidate_id for candidate_id in candidate_ids if candidate_id != summary_item.candidate_id
+            ],
             mutation_policy="audit_only",
             artifact_paths={
                 "campaign_state_path": str(state.state_path),
@@ -1358,7 +1364,9 @@ def _run_data_regime_audit(
             family=child_spec.family,
             stage="data_regime_audit",
             campaign_id=child_spec.campaign_id,
-            parent_candidate_ids=[candidate_id for candidate_id in candidate_ids if candidate_id != summary_item.candidate_id],
+            parent_candidate_ids=[
+                candidate_id for candidate_id in candidate_ids if candidate_id != summary_item.candidate_id
+            ],
             mutation_policy="audit_only",
             artifact_paths={
                 "campaign_state_path": str(state.state_path),
@@ -1482,7 +1490,9 @@ def _run_data_feature_audit(
             family=child_spec.family,
             stage="data_feature_audit",
             campaign_id=child_spec.campaign_id,
-            parent_candidate_ids=[candidate_id for candidate_id in candidate_ids if candidate_id != summary_item.candidate_id],
+            parent_candidate_ids=[
+                candidate_id for candidate_id in candidate_ids if candidate_id != summary_item.candidate_id
+            ],
             mutation_policy="audit_only",
             artifact_paths={
                 "campaign_state_path": str(state.state_path),
@@ -1610,7 +1620,9 @@ def _run_parity_step(
         parent_campaign_id=child_spec.parent_campaign_id,
         selected_step_type="run_parity",
         step_reason=step_reason,
-        status="completed" if parity_report.validation_status in {"passed", "failed", "insufficient_evidence"} else "stopped",
+        status="completed"
+        if parity_report.validation_status in {"passed", "failed", "insufficient_evidence"}
+        else "stopped",
         stop_reason=stop_reason,
         candidate_scope=candidate_ids,
         mt5_parity_reports=[parity_report.model_dump(mode="json")],
@@ -1652,7 +1664,9 @@ def _run_forward_step(
     spec = _load_spec(settings, candidate_id)
     forward_report = run_shadow_forward(spec, settings)
     state.operational_runs_consumed += 1
-    state.shadow_forward_retries_by_candidate[candidate_id] = state.shadow_forward_retries_by_candidate.get(candidate_id, 0) + 1
+    state.shadow_forward_retries_by_candidate[candidate_id] = (
+        state.shadow_forward_retries_by_candidate.get(candidate_id, 0) + 1
+    )
 
     parity_validation = load_latest_mt5_validation(candidate_id, settings)
     readiness_status = resolve_readiness_status(
@@ -1703,7 +1717,9 @@ def _run_forward_step(
         selected_step_type="run_forward",
         step_reason=step_reason,
         status="completed",
-        stop_reason="forward_completed_with_supported_recommendation" if next_recommendations else "forward_completed_no_supported_next_step",
+        stop_reason="forward_completed_with_supported_recommendation"
+        if next_recommendations
+        else "forward_completed_no_supported_next_step",
         candidate_scope=candidate_ids,
         forward_reports=[forward_report],
         next_recommendations=next_recommendations,
@@ -1754,11 +1770,15 @@ def _diagnose_candidate(
     first_loss_total = abs(first_window.loc[first_window["pnl_pips"] < 0, "pnl_pips"].sum()) or 1e-9
     supported_slices = _collect_supported_slices(first_window, later_windows, first_loss_total)
     primary_issue = supported_slices[0].slice_type + ":" + supported_slices[0].slice_label if supported_slices else None
-    recommended_mutation = _recommend_mutation(
-        candidate_id,
-        supported_slices[0],
-        report_dir / "strategy_spec.json",
-    ) if supported_slices else None
+    recommended_mutation = (
+        _recommend_mutation(
+            candidate_id,
+            supported_slices[0],
+            report_dir / "strategy_spec.json",
+        )
+        if supported_slices
+        else None
+    )
     diagnostic_confidence = round(min(0.95, supported_slices[0].evidence_score / 5.0), 3) if supported_slices else 0.0
 
     return CandidateDiagnosticReport(
@@ -1773,8 +1793,12 @@ def _diagnose_candidate(
         later_window_trade_count=int(len(later_windows)),
         later_window_profit_factor=_profit_factor(later_windows["pnl_pips"]) if not later_windows.empty else 0.0,
         later_window_expectancy_pips=float(later_windows["pnl_pips"].mean()) if not later_windows.empty else 0.0,
-        spread_anomaly_rate_first_window=float(first_window["is_spread_anomaly"].mean()) if not first_window.empty else 0.0,
-        spread_anomaly_rate_later_windows=float(later_windows["is_spread_anomaly"].mean()) if not later_windows.empty else 0.0,
+        spread_anomaly_rate_first_window=float(first_window["is_spread_anomaly"].mean())
+        if not first_window.empty
+        else 0.0,
+        spread_anomaly_rate_later_windows=float(later_windows["is_spread_anomaly"].mean())
+        if not later_windows.empty
+        else 0.0,
         supported_slices=supported_slices[:4],
         primary_issue=primary_issue,
         recommended_mutation=recommended_mutation,
@@ -1946,12 +1970,9 @@ def _build_slice_report(
     first_pf = _profit_factor(first_group["pnl_pips"]) if not first_group.empty else 0.0
     later_pf = _profit_factor(later_group["pnl_pips"]) if not later_group.empty else 0.0
     expectancy_improvement = later_expectancy - first_expectancy
-    evidence_score = ((loss_share * 3) + max(expectancy_improvement, 0.0) + max(0.9 - first_pf, 0.0))
+    evidence_score = (loss_share * 3) + max(expectancy_improvement, 0.0) + max(0.9 - first_pf, 0.0)
     supported = (
-        len(first_group) >= 10
-        and first_expectancy < -0.2
-        and expectancy_improvement >= 0.75
-        and loss_share >= 0.25
+        len(first_group) >= 10 and first_expectancy < -0.2 and expectancy_improvement >= 0.75 and loss_share >= 0.25
     )
     return DiagnosticSliceReport(
         slice_type=slice_type,  # type: ignore[arg-type]
@@ -1999,7 +2020,9 @@ def _build_next_recommendations(
 ) -> list[NextStepRecommendation]:
     if not candidate_reports:
         return []
-    primary = next((report for report in candidate_reports if report.candidate_id == candidate_scope[0]), candidate_reports[0])
+    primary = next(
+        (report for report in candidate_reports if report.candidate_id == candidate_scope[0]), candidate_reports[0]
+    )
     if len(candidate_reports) == 1:
         session_slice = next(
             (
@@ -2029,9 +2052,7 @@ def _build_next_recommendations(
                 )
             ):
                 blackout_rationale = (
-                    " and enable the governed calendar blackout"
-                    if session_trim_policy["enable_news_blackout"]
-                    else ""
+                    " and enable the governed calendar blackout" if session_trim_policy["enable_news_blackout"] else ""
                 )
                 return [
                     NextStepRecommendation(
@@ -2089,7 +2110,9 @@ def _build_next_recommendations(
                 )
             ]
         return []
-    secondary = next((report for report in candidate_reports if report.candidate_id == candidate_scope[-1]), candidate_reports[-1])
+    secondary = next(
+        (report for report in candidate_reports if report.candidate_id == candidate_scope[-1]), candidate_reports[-1]
+    )
     common_session = _shared_supported_slice(candidate_reports, "session_bucket")
     if common_session and common_session.slice_label in SESSION_BUCKET_HOURS:
         hours = _recommended_session_hours(primary, common_session.slice_label)
@@ -2111,9 +2134,7 @@ def _build_next_recommendations(
             )
         ):
             blackout_rationale = (
-                " and enable the governed calendar blackout"
-                if session_trim_policy["enable_news_blackout"]
-                else ""
+                " and enable the governed calendar blackout" if session_trim_policy["enable_news_blackout"] else ""
             )
             return [
                 NextStepRecommendation(
@@ -2202,10 +2223,8 @@ def _allowed_session_hours(report: CandidateDiagnosticReport) -> list[int]:
     spec_path = Path(report.artifact_paths["review_packet_path"]).parent / "strategy_spec.json"
     spec_payload = read_json(spec_path)
     return list(
-        (
-            ((spec_payload.get("session_policy") or {}).get("allowed_hours_utc"))
-            or spec_payload.get("session_policy", {}).get("allowed_hours_utc", [])
-        )
+        ((spec_payload.get("session_policy") or {}).get("allowed_hours_utc"))
+        or spec_payload.get("session_policy", {}).get("allowed_hours_utc", [])
     )
 
 
@@ -2258,7 +2277,9 @@ def _candidate_notes(
     if first_window.empty:
         notes.append("No trades were present in the first walk-forward window.")
         return notes
-    first_anomaly_rate = float(first_window["is_spread_anomaly"].mean()) if "is_spread_anomaly" in first_window.columns else 0.0
+    first_anomaly_rate = (
+        float(first_window["is_spread_anomaly"].mean()) if "is_spread_anomaly" in first_window.columns else 0.0
+    )
     if first_anomaly_rate == 0.0:
         notes.append("Spread anomalies do not explain the failed first walk-forward window in this candidate.")
     if not supported_slices:
@@ -2280,7 +2301,9 @@ def _load_parent_controller_report(settings: Settings, parent_state: CampaignSta
     return _load_controller_report_from_path(settings, report_path)
 
 
-def _load_controller_report_for_campaign(settings: Settings, campaign_id: str | None) -> NextStepControllerReport | None:
+def _load_controller_report_for_campaign(
+    settings: Settings, campaign_id: str | None
+) -> NextStepControllerReport | None:
     if not campaign_id:
         return None
     report_path = settings.paths().campaigns_dir / campaign_id / "next_step_report.json"
@@ -2553,11 +2576,7 @@ def _hypothesis_audit_should_hold_reference(
     if parent_report.selected_step_type != "diagnose_existing_candidates":
         return False
     binding_follow_on = next(
-        (
-            item
-            for item in parent_report.next_recommendations
-            if item.binding and item.evidence_status == "supported"
-        ),
+        (item for item in parent_report.next_recommendations if item.binding and item.evidence_status == "supported"),
         None,
     )
     if binding_follow_on is not None:
@@ -2624,9 +2643,14 @@ def _build_hypothesis_audit_summary(
 ) -> str:
     audited_ids = ", ".join(item.candidate_id for item in candidate_summaries) or "no candidates"
     if lane_decision == "hold_reference_blocked_by_robustness" and reference_summary:
-        archived_ids = ", ".join(
-            item.candidate_id for item in candidate_summaries if item.archived and item.candidate_id != reference_summary.candidate_id
-        ) or "no archived comparators"
+        archived_ids = (
+            ", ".join(
+                item.candidate_id
+                for item in candidate_summaries
+                if item.archived and item.candidate_id != reference_summary.candidate_id
+            )
+            or "no archived comparators"
+        )
         return (
             f"Hypothesis audit compared {audited_ids}. {reference_summary.candidate_id} remains the strongest empirical "
             f"reference branch, but it is still blocked by walk-forward or search-adjusted robustness gates. Archived "
@@ -2729,7 +2753,11 @@ def _build_data_regime_slice_summaries(settings: Settings, candidate_id: str) ->
         if slice_type not in trade_frame.columns:
             continue
         first_groups = first_window.groupby(slice_type)["pnl_pips"].agg(["count", "mean", "sum"])
-        later_groups = later_windows.groupby(slice_type)["pnl_pips"].agg(["count", "mean", "sum"]) if not later_windows.empty else pd.DataFrame()
+        later_groups = (
+            later_windows.groupby(slice_type)["pnl_pips"].agg(["count", "mean", "sum"])
+            if not later_windows.empty
+            else pd.DataFrame()
+        )
         slice_labels = list(dict.fromkeys(list(first_groups.index) + list(later_groups.index)))
         for slice_label in slice_labels:
             first_count = int(first_groups.loc[slice_label, "count"]) if slice_label in first_groups.index else 0
@@ -2841,7 +2869,9 @@ def _build_data_regime_summary(
             f"Data/regime audit compared {audited_ids}. {reference_summary.candidate_id} shows persistent first-window instability "
             f"across {top_modes}, which points to structural regime dependence rather than one repairable slice."
         )
-    return f"Data/regime audit compared {audited_ids}, but the evidence was insufficient to support a bounded correction."
+    return (
+        f"Data/regime audit compared {audited_ids}, but the evidence was insufficient to support a bounded correction."
+    )
 
 
 def _build_data_regime_actions(
@@ -3250,7 +3280,9 @@ def _build_data_feature_root_causes(
     else:
         root_causes.append("provenance_contract_mixed")
 
-    if sum(item.trade_count < validation.minimum_test_trade_count for item in candidate_summaries) >= max(2, len(candidate_summaries) // 2):
+    if sum(item.trade_count < validation.minimum_test_trade_count for item in candidate_summaries) >= max(
+        2, len(candidate_summaries) // 2
+    ):
         root_causes.append("insufficient_trade_density")
     if any(
         item.trade_count < validation.minimum_test_trade_count
@@ -3259,9 +3291,9 @@ def _build_data_feature_root_causes(
         for item in candidate_summaries
     ):
         root_causes.append("low_sample_oos_spike")
-    if sum((not item.stress_passed) and item.expectancy_pips <= validation.expectancy_floor for item in candidate_summaries) >= max(
-        2, len(candidate_summaries) // 2
-    ):
+    if sum(
+        (not item.stress_passed) and item.expectancy_pips <= validation.expectancy_floor for item in candidate_summaries
+    ) >= max(2, len(candidate_summaries) // 2):
         root_causes.append("execution_cost_realism_consumes_edge")
     if sum(not item.walk_forward_ok for item in candidate_summaries) >= max(2, len(candidate_summaries) // 2):
         root_causes.append("persistent_walk_forward_instability")
@@ -3340,9 +3372,7 @@ def _bounded_data_feature_correction_already_attempted(
             if str(follow_on_payload.get("stop_reason") or "") != "diagnosis_ambiguous_no_mutation_justified":
                 continue
             diagnostic_candidate_ids = {
-                str(item)
-                for item in follow_on_payload.get("candidate_scope") or []
-                if str(item)
+                str(item) for item in follow_on_payload.get("candidate_scope") or [] if str(item)
             }
             if diagnostic_candidate_ids & current_candidate_ids:
                 return True
@@ -3496,7 +3526,9 @@ def _run_data_label_audit(
             family=child_spec.family,
             stage="data_label_audit",
             campaign_id=child_spec.campaign_id,
-            parent_candidate_ids=[candidate_id for candidate_id in candidate_ids if candidate_id != summary_item.candidate_id],
+            parent_candidate_ids=[
+                candidate_id for candidate_id in candidate_ids if candidate_id != summary_item.candidate_id
+            ],
             mutation_policy="audit_only",
             artifact_paths={
                 "campaign_state_path": str(state.state_path),
@@ -3517,7 +3549,9 @@ def _run_data_label_audit(
             settings,
             candidate_id=target_candidate,
             stage="data_label_audit",
-            failure_code="provenance_failure" if contract_decision == "upstream_contract_change_required" else "robustness_failure",
+            failure_code="provenance_failure"
+            if contract_decision == "upstream_contract_change_required"
+            else "robustness_failure",
             campaign_id=child_spec.campaign_id,
             details={
                 "decision": contract_decision,
@@ -3644,17 +3678,18 @@ def _build_data_label_contract_gaps(
         gaps.append("shared_label_contract_consistent")
     else:
         gaps.append("label_contract_mixed")
-    if bool(label_contract_snapshot.get("uses_future_return_pips_label")) and bool(
-        label_contract_snapshot.get("uses_binary_direction_label")
-    ) and not bool(label_contract_snapshot.get("uses_path_aware_exit_labels")):
+    if (
+        bool(label_contract_snapshot.get("uses_future_return_pips_label"))
+        and bool(label_contract_snapshot.get("uses_binary_direction_label"))
+        and not bool(label_contract_snapshot.get("uses_path_aware_exit_labels"))
+    ):
         gaps.append("label_contract_binary_direction_only")
     if len(label_contract_snapshot.get("holding_bars") or []) <= 1 and sum(
         not item.walk_forward_ok for item in candidate_summaries
     ) >= max(2, len(candidate_summaries) // 2):
         gaps.append("single_horizon_contract_undervalidated")
-    if (
-        len(label_contract_snapshot.get("risk_reward_ratios") or []) >= 1
-        and not bool(label_contract_snapshot.get("uses_path_aware_exit_labels"))
+    if len(label_contract_snapshot.get("risk_reward_ratios") or []) >= 1 and not bool(
+        label_contract_snapshot.get("uses_path_aware_exit_labels")
     ):
         gaps.append("label_contract_ignores_trade_path_geometry")
     if len(label_contract_snapshot.get("entry_styles") or []) >= 2 and sum(
@@ -3836,7 +3871,9 @@ def _select_next_step(
     ):
         return _NextStepDecision(
             step_type="data_feature_audit",
-            candidate_scope=list(grandparent_report.data_feature_audit_reports[0].audited_candidate_ids or candidate_scope),
+            candidate_scope=list(
+                grandparent_report.data_feature_audit_reports[0].audited_candidate_ids or candidate_scope
+            ),
             rationale=(
                 "The bounded family correction proposed by the parent data/feature audit could not justify even one "
                 "supported mutation on the reference branch, so the next governed step is to rerun the family audit "
@@ -3887,7 +3924,9 @@ def _select_next_step(
             ),
         )
     if binding_recommendations:
-        recommendation = next((item for item in binding_recommendations if _is_binding_recommendation(settings, parent_state, item)), None)
+        recommendation = next(
+            (item for item in binding_recommendations if _is_binding_recommendation(settings, parent_state, item)), None
+        )
         if recommendation:
             if recommendation.step_type not in allowed_step_types:
                 return _NextStepDecision(
@@ -3937,19 +3976,31 @@ def _select_next_step(
                 candidate_scope=[candidate_id],
                 rationale="Throughput lane defaulted to rule formalization because no rule_spec artifact exists yet.",
             )
-        if "generate_ea_spec" in allowed_step_types and (report_dir / "rule_spec.json").exists() and not (report_dir / "ea_spec.json").exists():
+        if (
+            "generate_ea_spec" in allowed_step_types
+            and (report_dir / "rule_spec.json").exists()
+            and not (report_dir / "ea_spec.json").exists()
+        ):
             return _NextStepDecision(
                 step_type="generate_ea_spec",
                 candidate_scope=[candidate_id],
                 rationale="Throughput lane defaulted to EA-spec generation because rule_spec exists but ea_spec is missing.",
             )
-        if "compile_ea_candidate" in allowed_step_types and (report_dir / "ea_spec.json").exists() and not (report_dir / "compile_report.json").exists():
+        if (
+            "compile_ea_candidate" in allowed_step_types
+            and (report_dir / "ea_spec.json").exists()
+            and not (report_dir / "compile_report.json").exists()
+        ):
             return _NextStepDecision(
                 step_type="compile_ea_candidate",
                 candidate_scope=[candidate_id],
                 rationale="Throughput lane defaulted to compile because the EA spec exists but no compile report was found.",
             )
-        if "run_mt5_backtest_smoke" in allowed_step_types and (report_dir / "compile_report.json").exists() and not (report_dir / "mt5_smoke_report.json").exists():
+        if (
+            "run_mt5_backtest_smoke" in allowed_step_types
+            and (report_dir / "compile_report.json").exists()
+            and not (report_dir / "mt5_smoke_report.json").exists()
+        ):
             return _NextStepDecision(
                 step_type="run_mt5_backtest_smoke",
                 candidate_scope=[candidate_id],
@@ -3966,7 +4017,9 @@ def _select_next_step(
                 rationale="Throughput lane defaulted to triage because compile/smoke evidence exists and no later throughput step is pending.",
             )
     if "diagnose_existing_candidates" in allowed_step_types:
-        diagnostic_scope = [candidate_id for candidate_id in candidate_scope if _candidate_needs_diagnosis(settings, candidate_id)]
+        diagnostic_scope = [
+            candidate_id for candidate_id in candidate_scope if _candidate_needs_diagnosis(settings, candidate_id)
+        ]
         if diagnostic_scope:
             return _NextStepDecision(
                 step_type="diagnose_existing_candidates",
@@ -3984,7 +4037,9 @@ def _select_next_step(
     )
 
 
-def _is_binding_recommendation(settings: Settings, parent_state: CampaignState, recommendation: NextStepRecommendation) -> bool:
+def _is_binding_recommendation(
+    settings: Settings, parent_state: CampaignState, recommendation: NextStepRecommendation
+) -> bool:
     if not recommendation.binding or recommendation.evidence_status != "supported":
         return False
     if _has_newer_completed_child_campaign(settings, parent_state, recommendation):
@@ -4072,7 +4127,11 @@ def _candidate_needs_diagnosis(settings: Settings, candidate_id: str) -> bool:
 def _candidate_scope(parent_spec: CampaignSpec, parent_state: CampaignState) -> list[str]:
     scoped = list(parent_spec.target_candidate_ids)
     if not scoped:
-        scoped = [candidate_id for candidate_id in parent_state.active_candidate_ids if candidate_id != parent_state.baseline_candidate_id]
+        scoped = [
+            candidate_id
+            for candidate_id in parent_state.active_candidate_ids
+            if candidate_id != parent_state.baseline_candidate_id
+        ]
     if not scoped:
         scoped = list(parent_state.active_candidate_ids)
     return list(dict.fromkeys(scoped))
@@ -4222,7 +4281,9 @@ def _resolve_mutation_payload(
     if mutation_type == "refresh_execution_cost_defaults":
         return {
             "mutation_type": mutation_type,
-            "refresh_reason": str(payload.get("refresh_reason") or "apply current governed scalping execution-cost defaults"),
+            "refresh_reason": str(
+                payload.get("refresh_reason") or "apply current governed scalping execution-cost defaults"
+            ),
         }
     if mutation_type == "suppress_context_bucket":
         context_bucket = str(payload.get("context_bucket") or "").strip()
@@ -4254,7 +4315,9 @@ def _build_mutation_blueprint(
     if mutation_type == "trim_allowed_hours":
         removed_hours = list(mutation_payload["removed_hours_utc"])
         enable_news_blackout = bool(mutation_payload.get("enable_news_blackout"))
-        updated_hours = [hour for hour in source_spec.session_policy.allowed_hours_utc if hour not in set(removed_hours)]
+        updated_hours = [
+            hour for hour in source_spec.session_policy.allowed_hours_utc if hour not in set(removed_hours)
+        ]
         if not updated_hours or updated_hours == list(source_spec.session_policy.allowed_hours_utc):
             return None
         updated_notes = list(source_spec.notes) + [
@@ -4350,7 +4413,9 @@ def _build_mutation_blueprint(
             current_execution_payload.get(key) == value for key, value in cost_defaults.items()
         ):
             return None
-        refresh_reason = str(mutation_payload.get("refresh_reason") or "apply current governed scalping execution-cost defaults")
+        refresh_reason = str(
+            mutation_payload.get("refresh_reason") or "apply current governed scalping execution-cost defaults"
+        )
         return {
             "candidate": source_candidate.model_copy(
                 update={
@@ -4439,7 +4504,9 @@ def _build_mutation_blueprint(
                     "market_context": source_candidate.market_context.model_copy(
                         update={
                             "execution_notes": list(source_candidate.market_context.execution_notes)
-                            + [f"Single-step controller suppresses {context_bucket} entries from {source_candidate_id}."],
+                            + [
+                                f"Single-step controller suppresses {context_bucket} entries from {source_candidate_id}."
+                            ],
                         }
                     ),
                     "notes": list(source_candidate.notes)
@@ -4513,7 +4580,9 @@ def _apply_continuation_metadata(settings: Settings, report: NextStepControllerR
 
 
 def _determine_continuation_decision(settings: Settings, report: NextStepControllerReport) -> _ContinuationDecision:
-    follow_on = next((item for item in report.next_recommendations if item.binding and item.evidence_status == "supported"), None)
+    follow_on = next(
+        (item for item in report.next_recommendations if item.binding and item.evidence_status == "supported"), None
+    )
     recommended_follow_on_step = follow_on.step_type if follow_on else None
     diagnosis_family_follow_on = _diagnosis_follow_on_after_family_correction(settings, report)
 
@@ -4528,11 +4597,7 @@ def _determine_continuation_decision(settings: Settings, report: NextStepControl
         )
 
     if report.selected_step_type == "hypothesis_audit":
-        lane_decision = (
-            report.hypothesis_audit_reports[0].lane_decision
-            if report.hypothesis_audit_reports
-            else None
-        )
+        lane_decision = report.hypothesis_audit_reports[0].lane_decision if report.hypothesis_audit_reports else None
         if lane_decision == "narrow_correction_supported" and follow_on is not None:
             return _ContinuationDecision(
                 continuation_status="continue",
@@ -4751,7 +4816,10 @@ def _lane_exhausted_from_report(report: NextStepControllerReport, settings: Sett
             return False
         if reevaluation.stress_passed:
             return False
-        if reevaluation.trade_count >= validation.minimum_test_trade_count and reevaluation.expectancy_pips > validation.expectancy_floor:
+        if (
+            reevaluation.trade_count >= validation.minimum_test_trade_count
+            and reevaluation.expectancy_pips > validation.expectancy_floor
+        ):
             return False
         if (
             reevaluation.trade_count >= validation.minimum_test_trade_count
@@ -4786,7 +4854,10 @@ def _diagnosis_follow_on_after_family_correction(
         return None
     if report.next_recommendations or not report.candidate_reports:
         return None
-    if any(candidate_report.supported_slices or candidate_report.recommended_mutation for candidate_report in report.candidate_reports):
+    if any(
+        candidate_report.supported_slices or candidate_report.recommended_mutation
+        for candidate_report in report.candidate_reports
+    ):
         return None
     parent_report = _load_controller_report_for_campaign(settings, report.parent_campaign_id)
     if parent_report is None or parent_report.selected_step_type != "data_feature_audit":

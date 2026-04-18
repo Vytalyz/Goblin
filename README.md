@@ -1,16 +1,18 @@
 # Goblin Guardian Agent: Guarding the Coins
 
 All code changes are protected by the Goblin Guardian agent:
+- Ruff linting and format checking (modern, fast, and strict)
 - Syntax checks (no sneaky syntax errors)
-- Ruff linting (modern, fast, and strict)
 - Test gate (all tests must pass)
+- Publish validation (secrets, paths, binaries, terminal hashes)
 - Runs automatically on every commit and push (via pre-commit hooks)
 - Runs in CI for every PR and push
 
 **How it works:**
-- On every commit, the Guardian agent checks your code for syntax, style, and test failures.
-- If any check fails, the commit is blocked—no code escapes the goblin’s vault!
-- To activate locally: `pre-commit install`
+- On every commit, the Guardian agent checks your code for syntax, style, format, and test failures.
+- On every push, the Guardian runs a full publish-validation gate (secrets, paths, binaries, hashes).
+- If any check fails, the commit or push is blocked—no code escapes the goblin's vault!
+- One-command setup: `.\scripts\setup-guardian.ps1` (Windows) or `bash scripts/setup-guardian.sh` (Linux/macOS)
 - To run manually: `pre-commit run --all-files`
 
 **Guardian is always watching—your coins (codebase) are safe!**
@@ -211,11 +213,16 @@ python scripts/sanitize_paths_for_publish.py
 
 ## Contributing
 
-1. Fork the repository and create a feature branch
-2. Run `python scripts/validate_for_publish.py` before submitting a PR
-3. Ensure all tests pass with `python -m pytest`
-4. Do not commit `.env`, `config/local.toml`, or any files under `data/state/`
-5. Never modify the locked benchmark `AF-CAND-0263` unless you know what you are doing
+See [CONTRIBUTING.md](CONTRIBUTING.md) for full setup instructions, Guardian check details, troubleshooting, and PR guidelines.
+
+**Quick start:**
+```powershell
+# Windows
+.\scripts\setup-guardian.ps1
+
+# Linux/macOS
+bash scripts/setup-guardian.sh
+```
 
 See [SECURITY.md](SECURITY.md) for vulnerability reporting.
 

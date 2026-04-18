@@ -7,9 +7,9 @@ from pathlib import Path
 
 from agentic_forex.industry.report import (
     IndustryReport,
-    generate_industry_report,
     _escape_html,
     _md_body_to_html,
+    generate_industry_report,
 )
 
 
@@ -18,9 +18,7 @@ def test_generate_industry_report(tmp_path: Path, monkeypatch):
     # Set up minimal project structure
     (tmp_path / "experiments").mkdir()
     exp_data = {"candidate_id": "AF-CAND-0001", "family": "test"}
-    (tmp_path / "experiments" / "af-cand-0001_test_family_20260101T000000Z.json").write_text(
-        json.dumps(exp_data)
-    )
+    (tmp_path / "experiments" / "af-cand-0001_test_family_20260101T000000Z.json").write_text(json.dumps(exp_data))
 
     (tmp_path / "reports").mkdir()
     (tmp_path / "reports" / "AF-CAND-0001").mkdir()
@@ -59,7 +57,7 @@ def test_generate_industry_report(tmp_path: Path, monkeypatch):
 
 def test_escape_html():
     assert _escape_html("<script>alert('xss')</script>") == "&lt;script&gt;alert('xss')&lt;/script&gt;"
-    assert _escape_html('a & b "c"') == 'a &amp; b &quot;c&quot;'
+    assert _escape_html('a & b "c"') == "a &amp; b &quot;c&quot;"
 
 
 def test_md_body_to_html():

@@ -11,7 +11,12 @@ from pathlib import Path
 import pandas as pd
 
 from agentic_forex.config import Settings
-from agentic_forex.governance.models import DatasetSnapshot, EnvironmentSnapshot, ExperimentDataProvenance, FeatureBuildVersion
+from agentic_forex.governance.models import (
+    DatasetSnapshot,
+    EnvironmentSnapshot,
+    ExperimentDataProvenance,
+    FeatureBuildVersion,
+)
 from agentic_forex.utils.io import read_json, write_json
 from agentic_forex.workflows.contracts import StrategySpec
 
@@ -83,8 +88,14 @@ def build_environment_snapshot(
 
 
 def build_dataset_snapshot(spec: StrategySpec, settings: Settings) -> DatasetSnapshot:
-    parquet_path = settings.paths().normalized_research_dir / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
-    qa_path = settings.paths().market_quality_reports_dir / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.json"
+    parquet_path = (
+        settings.paths().normalized_research_dir
+        / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    )
+    qa_path = (
+        settings.paths().market_quality_reports_dir
+        / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.json"
+    )
     extraction_utc = _path_mtime_utc(parquet_path)
     dataset_start_utc = None
     dataset_end_utc = None

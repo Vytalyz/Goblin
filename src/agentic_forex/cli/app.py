@@ -49,12 +49,6 @@ from agentic_forex.goblin import (
     write_runtime_summary,
     write_strategy_rationale_card,
 )
-from agentic_forex.goblin.models import (
-    DeploymentBundle,
-    LiveAttachManifest,
-    RuntimeHeartbeat,
-    RuntimeSummary,
-)
 from agentic_forex.goblin.evidence import (
     artifact_by_id,
     build_default_research_data_contract,
@@ -64,8 +58,15 @@ from agentic_forex.goblin.evidence import (
     register_artifact,
     validate_artifact_provenance,
 )
+from agentic_forex.goblin.models import (
+    DeploymentBundle,
+    LiveAttachManifest,
+    RuntimeHeartbeat,
+    RuntimeSummary,
+)
 from agentic_forex.governance import CampaignSpec
 from agentic_forex.governance.incident import run_production_incident_analysis
+from agentic_forex.industry.report import generate_industry_report
 from agentic_forex.llm import MockLLMClient, OpenAIClient
 from agentic_forex.market_data.ingest import (
     backfill_oanda_history,
@@ -75,7 +76,6 @@ from agentic_forex.market_data.ingest import (
     ingest_oanda_json,
 )
 from agentic_forex.market_data.qa import assess_market_data_quality
-from agentic_forex.policy.calendar import ingest_economic_calendar
 from agentic_forex.ml.train import train_models
 from agentic_forex.mt5.service import (
     cleanup_mt5_experts,
@@ -97,13 +97,13 @@ from agentic_forex.operator import (
     sync_codex_capabilities,
     validate_operator_contract,
 )
+from agentic_forex.policy.calendar import ingest_economic_calendar
 from agentic_forex.policy.parity_scope import build_parity_scope_audit
 from agentic_forex.runtime import ReadPolicy, WorkflowEngine
 from agentic_forex.utils.io import read_json
 from agentic_forex.utils.secrets import write_windows_credential
 from agentic_forex.workflows import WorkflowRepository
 from agentic_forex.workflows.contracts import CandidateDraft, DiscoveryRequest, MT5ValidationRequest, StrategySpec
-from agentic_forex.industry.report import generate_industry_report
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -583,7 +583,9 @@ def build_parser() -> argparse.ArgumentParser:
     live_heartbeat.add_argument("--run-id", required=True)
     live_heartbeat.add_argument("--status", choices=["healthy", "warning", "stale", "offline"], default="healthy")
     live_heartbeat.add_argument("--terminal-active", type=lambda v: v.lower() in ("true", "1", "yes"), default=True)
-    live_heartbeat.add_argument("--algo-trading-enabled", type=lambda v: v.lower() in ("true", "1", "yes"), default=True)
+    live_heartbeat.add_argument(
+        "--algo-trading-enabled", type=lambda v: v.lower() in ("true", "1", "yes"), default=True
+    )
     live_heartbeat.add_argument("--note", action="append", dest="notes")
 
     live_session_end = subparsers.add_parser("goblin-live-session-end", parents=[common])
@@ -593,10 +595,16 @@ def build_parser() -> argparse.ArgumentParser:
     live_session_end.add_argument("--note", action="append", dest="notes")
 
     mt5_cleanup = subparsers.add_parser("goblin-mt5-cleanup", parents=[common])
-    mt5_cleanup.add_argument("--keep", action="append", dest="keep_ids", default=[],
-                             help="Candidate IDs to keep (repeatable). CandidateEA is always kept.")
-    mt5_cleanup.add_argument("--dry-run", action="store_true",
-                             help="List files that would be removed without deleting them")
+    mt5_cleanup.add_argument(
+        "--keep",
+        action="append",
+        dest="keep_ids",
+        default=[],
+        help="Candidate IDs to keep (repeatable). CandidateEA is always kept.",
+    )
+    mt5_cleanup.add_argument(
+        "--dry-run", action="store_true", help="List files that would be removed without deleting them"
+    )
 
     return parser
 
@@ -677,7 +685,9 @@ def main(argv: list[str] | None = None) -> int:
         read_policy = ReadPolicy(project_root=settings.project_root, allowed_external_roots=allowed_roots)
         if not settings.catalog_path.exists():
             catalog_corpus(mirror_path, settings, read_policy)
-        engine = WorkflowEngine(settings=settings, llm_client=llm_client, tool_registry=tool_registry, read_policy=read_policy)
+        engine = WorkflowEngine(
+            settings=settings, llm_client=llm_client, tool_registry=tool_registry, read_policy=read_policy
+        )
         workflow = repo.load(args.workflow or settings.workflows.discovery_workflow_id)
         payload = DiscoveryRequest(
             question=args.question,
@@ -779,7 +789,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "review-candidate":
         spec = StrategySpec.model_validate(read_json(Path(args.spec_json)))
         read_policy = ReadPolicy(project_root=settings.project_root)
-        engine = WorkflowEngine(settings=settings, llm_client=llm_client, tool_registry=tool_registry, read_policy=read_policy)
+        engine = WorkflowEngine(
+            settings=settings, llm_client=llm_client, tool_registry=tool_registry, read_policy=read_policy
+        )
         workflow = repo.load(args.workflow or settings.workflows.review_workflow_id)
         trace = engine.run(workflow, spec.model_dump(mode="json"))
         return _print_trace_result(trace, settings)
@@ -906,7 +918,9 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "validate-mt5-practice":
-        request = MT5ValidationRequest(candidate_id=args.candidate_id, audit_csv=Path(args.audit_csv) if args.audit_csv else None)
+        request = MT5ValidationRequest(
+            candidate_id=args.candidate_id, audit_csv=Path(args.audit_csv) if args.audit_csv else None
+        )
         report = validate_mt5_practice(request.candidate_id, settings, request.audit_csv)
         print(json.dumps(report.model_dump(mode="json"), indent=2, default=str))
         return 0
@@ -1109,7 +1123,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "goblin-build-truth-report":
         artifact_records = {
-            "research_backtest": artifact_by_id(settings, channel="research_backtest", artifact_id=args.research_artifact_id)
+            "research_backtest": artifact_by_id(
+                settings, channel="research_backtest", artifact_id=args.research_artifact_id
+            )
             if args.research_artifact_id
             else latest_registered_artifact(settings, channel="research_backtest", candidate_id=args.candidate_id),
             "mt5_replay": artifact_by_id(settings, channel="mt5_replay", artifact_id=args.mt5_artifact_id)
@@ -1287,7 +1303,10 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         result = write_live_attach_manifest(settings, manifest=manifest)
         print(json.dumps(result.model_dump(mode="json"), indent=2, default=str))
-        print(f"\nNext: Attach CandidateEA to {args.chart_symbol} {args.timeframe} in MT5, enable Algo Trading.", flush=True)
+        print(
+            f"\nNext: Attach CandidateEA to {args.chart_symbol} {args.timeframe} in MT5, enable Algo Trading.",
+            flush=True,
+        )
         return 0
 
     if args.command == "goblin-live-heartbeat":
@@ -1335,6 +1354,7 @@ def main(argv: list[str] | None = None) -> int:
             dest_dir = settings.paths().goblin_live_demo_reports_dir / args.candidate_id / args.run_id
             dest_dir.mkdir(parents=True, exist_ok=True)
             import shutil
+
             shutil.copy2(ea_signal_trace_path, dest_dir / "signal_trace.csv")
             notes.append(f"signal_trace_copied={ea_signal_trace_path}")
         else:
@@ -1373,10 +1393,10 @@ def main(argv: list[str] | None = None) -> int:
 
 
 _GOBLIN_STARTUP_BANNER = """\
-    _____       _     _ _       
-  / ____|     | |   | (_)      
- | |  __  ___ | |__ | |_ _ __  
- | | |_ |/ _ \\| '_ \\| | | '_ \\ 
+    _____       _     _ _
+  / ____|     | |   | (_)
+ | |  __  ___ | |__ | |_ _ __
+ | | |_ |/ _ \\| '_ \\| | | '_ \\
  | |__| | (_) | |_) | | | | | |
   \\_____|\\___/|_.__/|_|_|_| |_|
 """

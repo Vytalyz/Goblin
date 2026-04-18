@@ -3,7 +3,13 @@ from __future__ import annotations
 from pydantic import BaseModel
 
 from agentic_forex.llm.base import BaseLLMClient
-from agentic_forex.workflows.contracts import CandidateDraft, MarketContextSummary, MarketRationale, ReviewPacket, ReframedQuestion
+from agentic_forex.workflows.contracts import (
+    CandidateDraft,
+    MarketContextSummary,
+    MarketRationale,
+    ReframedQuestion,
+    ReviewPacket,
+)
 
 
 class MockLLMClient(BaseLLMClient):
@@ -67,7 +73,10 @@ class MockLLMClient(BaseLLMClient):
                     "Performance decays outside the intended intraday context.",
                     "Spread and slippage expansion can compress expectancy.",
                 ],
-                contradiction_summary=list(context.get("contradiction_summary") or ["Momentum and fade sources disagree on optimal entry timing."]),
+                contradiction_summary=list(
+                    context.get("contradiction_summary")
+                    or ["Momentum and fade sources disagree on optimal entry timing."]
+                ),
                 next_actions=[
                     "Inspect walk-forward windows and worst stress scenario.",
                     "Approve only if the deterministic baseline remains stable against costs.",

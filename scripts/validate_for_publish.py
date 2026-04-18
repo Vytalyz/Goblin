@@ -49,15 +49,42 @@ FORBIDDEN_TRACKED_EXTENSIONS = {".log"}
 
 # Extensions worth scanning for secrets and paths (skip large data files)
 TEXT_SCAN_EXTENSIONS = {
-    ".py", ".md", ".toml", ".yml", ".yaml", ".json", ".jsonl",
-    ".txt", ".csv", ".ini", ".cfg", ".conf", ".env", ".sh",
-    ".ps1", ".bat", ".cmd", ".mq5", ".mqh", ".html",
+    ".py",
+    ".md",
+    ".toml",
+    ".yml",
+    ".yaml",
+    ".json",
+    ".jsonl",
+    ".txt",
+    ".csv",
+    ".ini",
+    ".cfg",
+    ".conf",
+    ".env",
+    ".sh",
+    ".ps1",
+    ".bat",
+    ".cmd",
+    ".mq5",
+    ".mqh",
+    ".html",
 }
 
 # Directories to skip during content scanning (large artifact dirs)
 SKIP_SCAN_DIRS = {
-    "data", ".git", ".venv", "__pycache__", ".pytest_cache", "dist", "build",
-    "experiments", "approvals", "published", "reports", "traces",
+    "data",
+    ".git",
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    "dist",
+    "build",
+    "experiments",
+    "approvals",
+    "published",
+    "reports",
+    "traces",
 }
 
 FORBIDDEN_TRACKED_PREFIXES = ["data/state/", ".codex/"]
@@ -136,16 +163,14 @@ def _scan_content(tracked_files: list[str]) -> tuple[list[Finding], list[Finding
             for pattern in SECRET_PATTERNS:
                 if pattern.search(line):
                     safe_line = line.strip()[:120]
-                    secret_findings.append(Finding(
-                        "SECRET", "CRITICAL", rel_path, line_num,
-                        f"Potential secret: {safe_line}…"
-                    ))
+                    secret_findings.append(
+                        Finding("SECRET", "CRITICAL", rel_path, line_num, f"Potential secret: {safe_line}…")
+                    )
             for pattern in PATH_PATTERNS:
                 if pattern.search(line):
-                    path_findings.append(Finding(
-                        "PATH", "HIGH", rel_path, line_num,
-                        f"Absolute user path found: {line.strip()[:120]}"
-                    ))
+                    path_findings.append(
+                        Finding("PATH", "HIGH", rel_path, line_num, f"Absolute user path found: {line.strip()[:120]}")
+                    )
     print(f"  … scanned {total}/{total} files", flush=True)
     return secret_findings, path_findings
 
@@ -155,15 +180,9 @@ def scan_binaries(tracked_files: list[str]) -> list[Finding]:
     for rel_path in tracked_files:
         suffix = Path(rel_path).suffix.lower()
         if suffix in BINARY_EXTENSIONS:
-            findings.append(Finding(
-                "BINARY", "HIGH", rel_path, None,
-                f"Binary file tracked: {suffix}"
-            ))
+            findings.append(Finding("BINARY", "HIGH", rel_path, None, f"Binary file tracked: {suffix}"))
         if suffix in FORBIDDEN_TRACKED_EXTENSIONS:
-            findings.append(Finding(
-                "LOG_FILE", "HIGH", rel_path, None,
-                f"Log/temp file tracked: {suffix}"
-            ))
+            findings.append(Finding("LOG_FILE", "HIGH", rel_path, None, f"Log/temp file tracked: {suffix}"))
     return findings
 
 
@@ -177,10 +196,11 @@ def scan_terminal_hashes(tracked_files: list[str]) -> list[Finding]:
             continue
         for line_num, line in enumerate(content.splitlines(), 1):
             if TERMINAL_HASH_PATTERN.search(line):
-                findings.append(Finding(
-                    "TERMINAL_HASH", "HIGH", rel_path, line_num,
-                    "MT5 terminal hash exposes local install identity"
-                ))
+                findings.append(
+                    Finding(
+                        "TERMINAL_HASH", "HIGH", rel_path, line_num, "MT5 terminal hash exposes local install identity"
+                    )
+                )
                 break  # one finding per file is enough
     return findings
 
@@ -205,16 +225,16 @@ def scan_sensitive_dirs(tracked_files: list[str]) -> list[Finding]:
         normalized = rel_path.replace("\\", "/")
         for prefix in FORBIDDEN_TRACKED_PREFIXES:
             if normalized.startswith(prefix):
-                findings.append(Finding(
-                    "SENSITIVE_DIR", "CRITICAL", rel_path, None,
-                    f"File in forbidden tracked directory: {prefix}"
-                ))
+                findings.append(
+                    Finding(
+                        "SENSITIVE_DIR", "CRITICAL", rel_path, None, f"File in forbidden tracked directory: {prefix}"
+                    )
+                )
         for forbidden in FORBIDDEN_TRACKED_FILES:
             if normalized == forbidden:
-                findings.append(Finding(
-                    "SENSITIVE_FILE", "CRITICAL", rel_path, None,
-                    "Local config file must not be tracked"
-                ))
+                findings.append(
+                    Finding("SENSITIVE_FILE", "CRITICAL", rel_path, None, "Local config file must not be tracked")
+                )
     return findings
 
 
@@ -228,15 +248,16 @@ def scan_config_hygiene() -> list[Finding]:
     required_patterns = [".env", "config/local.toml", "data/state/", ".codex/", "*.log"]
     for pattern in required_patterns:
         if pattern not in content:
-            findings.append(Finding(
-                "CONFIG", "HIGH", ".gitignore", None,
-                f"Missing required gitignore pattern: {pattern}"
-            ))
+            findings.append(
+                Finding("CONFIG", "HIGH", ".gitignore", None, f"Missing required gitignore pattern: {pattern}")
+            )
     # Verify .env.example and local.toml.example exist
     if not (REPO_ROOT / ".env.example").exists():
         findings.append(Finding("CONFIG", "MEDIUM", ".env.example", None, "Missing .env.example template"))
     if not (REPO_ROOT / "config" / "local.toml.example").exists():
-        findings.append(Finding("CONFIG", "MEDIUM", "config/local.toml.example", None, "Missing local.toml.example template"))
+        findings.append(
+            Finding("CONFIG", "MEDIUM", "config/local.toml.example", None, "Missing local.toml.example template")
+        )
     return findings
 
 
@@ -244,7 +265,9 @@ def run_sanitizer_dry_run() -> list[Finding]:
     findings: list[Finding] = []
     sanitizer = REPO_ROOT / "scripts" / "sanitize_paths_for_publish.py"
     if not sanitizer.exists():
-        findings.append(Finding("SANITIZER", "MEDIUM", "scripts/sanitize_paths_for_publish.py", None, "Sanitizer script not found"))
+        findings.append(
+            Finding("SANITIZER", "MEDIUM", "scripts/sanitize_paths_for_publish.py", None, "Sanitizer script not found")
+        )
         return findings
     result = subprocess.run(
         [sys.executable, str(sanitizer), "--dry-run"],
@@ -253,16 +276,20 @@ def run_sanitizer_dry_run() -> list[Finding]:
         text=True,
     )
     if result.returncode != 0:
-        findings.append(Finding(
-            "SANITIZER", "HIGH", "scripts/sanitize_paths_for_publish.py", None,
-            f"Sanitizer dry-run failed: {result.stderr.strip()[:200]}"
-        ))
+        findings.append(
+            Finding(
+                "SANITIZER",
+                "HIGH",
+                "scripts/sanitize_paths_for_publish.py",
+                None,
+                f"Sanitizer dry-run failed: {result.stderr.strip()[:200]}",
+            )
+        )
     # Check output for "files would be changed"
     if "would be changed" in result.stdout and "0 files would be changed" not in result.stdout:
-        findings.append(Finding(
-            "SANITIZER", "HIGH", "artifacts", None,
-            "Sanitizer found unsanitized paths in artifact files"
-        ))
+        findings.append(
+            Finding("SANITIZER", "HIGH", "artifacts", None, "Sanitizer found unsanitized paths in artifact files")
+        )
     return findings
 
 
@@ -277,10 +304,7 @@ def run_tests() -> list[Finding]:
     )
     if result.returncode != 0:
         summary_lines = result.stdout.strip().splitlines()[-5:]
-        findings.append(Finding(
-            "TESTS", "HIGH", "tests/", None,
-            f"Test suite failed: {' | '.join(summary_lines)}"
-        ))
+        findings.append(Finding("TESTS", "HIGH", "tests/", None, f"Test suite failed: {' | '.join(summary_lines)}"))
     return findings
 
 
@@ -342,13 +366,13 @@ def _print_report(findings: list[Finding]) -> None:
     high = [f for f in findings if f.severity == "HIGH"]
     medium = [f for f in findings if f.severity == "MEDIUM"]
 
-    print(f"\n{'='*60}")
-    print(f"PUBLISH VALIDATION REPORT")
-    print(f"{'='*60}")
+    print(f"\n{'=' * 60}")
+    print("PUBLISH VALIDATION REPORT")
+    print(f"{'=' * 60}")
     print(f"  CRITICAL: {len(critical)}")
     print(f"  HIGH:     {len(high)}")
     print(f"  MEDIUM:   {len(medium)}")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
 
     for finding in findings:
         print(f"  {finding}")

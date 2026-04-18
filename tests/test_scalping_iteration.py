@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from conftest import create_economic_calendar_csv, create_oanda_candles_json
+
 from agentic_forex.experiments import iterate_scalping_target
 from agentic_forex.market_data.ingest import ingest_oanda_json
 from agentic_forex.nodes.toolkit import compile_strategy_spec_tool
@@ -7,8 +9,6 @@ from agentic_forex.policy.calendar import ingest_economic_calendar
 from agentic_forex.runtime import ReadPolicy
 from agentic_forex.utils.io import read_json, write_json
 from agentic_forex.workflows.contracts import CandidateDraft, MarketContextSummary, StrategySpec
-
-from conftest import create_economic_calendar_csv, create_oanda_candles_json
 
 
 def test_iterate_scalping_target_generates_variants_and_report(settings, tmp_path):

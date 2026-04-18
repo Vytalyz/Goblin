@@ -19,9 +19,9 @@ def build_features(frame: pd.DataFrame) -> pd.DataFrame:
     data["momentum_12"] = data["mid_c"].diff(12).fillna(0.0) * 10000
     data["volatility_5"] = data["ret_1"].rolling(5).std().bfill()
     data["volatility_20"] = data["ret_1"].rolling(20).std().bfill()
-    data["volatility_ratio_5_to_20"] = (
-        data["volatility_5"] / data["volatility_20"].replace(0, 1e-9)
-    ).clip(lower=0.0, upper=5.0)
+    data["volatility_ratio_5_to_20"] = (data["volatility_5"] / data["volatility_20"].replace(0, 1e-9)).clip(
+        lower=0.0, upper=5.0
+    )
     data["intrabar_range_pips"] = (mid_high - mid_low) * 10000
     data["range_width_10_pips"] = rolling_range_10 * 10000
     data["net_change_10_pips"] = data["mid_c"].diff(10).fillna(0.0) * 10000

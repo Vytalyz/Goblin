@@ -1,6 +1,11 @@
 from __future__ import annotations
 
-from agentic_forex.goblin import create_goblin_checkpoint, get_goblin_program_status, initialize_goblin_program, update_goblin_phase
+from agentic_forex.goblin import (
+    create_goblin_checkpoint,
+    get_goblin_program_status,
+    initialize_goblin_program,
+    update_goblin_phase,
+)
 
 
 def test_goblin_init_creates_program_structure(settings):

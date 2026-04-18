@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import pytest
@@ -338,7 +337,9 @@ def test_run_autonomous_manager_continues_after_max_lanes_when_advancing_next_la
     throughput_payload["recommended_follow_on_step"] = None
     throughput_payload["transition_status"] = "move_to_next_lane"
     throughput_payload["transition_intent"] = "advance_next_lane"
-    write_json(settings.paths().campaigns_dir / "campaign-throughput-reviewable" / "next_step_report.json", throughput_payload)
+    write_json(
+        settings.paths().campaigns_dir / "campaign-throughput-reviewable" / "next_step_report.json", throughput_payload
+    )
 
     _seed_next_step_report(
         settings,
@@ -615,7 +616,9 @@ def _strategy_spec(candidate_id: str) -> StrategySpec:
         family="scalping",
         benchmark_group_id=candidate_id,
         variant_name="pytest",
-        session_policy=SessionPolicy(name="pytest_session", allowed_sessions=["europe"], allowed_hours_utc=[7, 8, 9, 10]),
+        session_policy=SessionPolicy(
+            name="pytest_session", allowed_sessions=["europe"], allowed_hours_utc=[7, 8, 9, 10]
+        ),
         side_policy="both",
         setup_logic=SetupLogic(style="session_breakout", summary="pytest", trigger_conditions=["breakout"]),
         entry_logic=["entry"],

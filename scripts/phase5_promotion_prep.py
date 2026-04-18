@@ -12,7 +12,6 @@ from agentic_forex.backtesting.engine import run_backtest, run_stress_test
 from agentic_forex.config import load_settings
 from agentic_forex.evals.robustness import build_robustness_report
 from agentic_forex.governance.readiness import required_evidence, resolve_readiness_status
-from agentic_forex.runtime import ReadPolicy
 from agentic_forex.utils.io import read_json, write_json
 from agentic_forex.workflows.contracts import CandidateDraft, ReviewPacket, StrategySpec
 
@@ -32,7 +31,9 @@ def _build_review_packet(candidate: CandidateDraft, spec: StrategySpec, settings
     artifact = run_backtest(spec, settings)
     stress = run_stress_test(spec, settings)
     trade_ledger = pd.read_csv(artifact.trade_ledger_path)
-    robustness = build_robustness_report(spec, backtest=artifact, stress=stress, trade_ledger=trade_ledger, settings=settings)
+    robustness = build_robustness_report(
+        spec, backtest=artifact, stress=stress, trade_ledger=trade_ledger, settings=settings
+    )
     write_json(robustness.report_path, robustness.model_dump(mode="json"))
 
     readiness = resolve_readiness_status(
@@ -70,7 +71,7 @@ def _build_review_packet(candidate: CandidateDraft, spec: StrategySpec, settings
         strengths.append(f"Worst stressed PF remains robust at {stress.stressed_profit_factor:.3f}.")
     if artifact.max_drawdown_pct < 2.5:
         strengths.append(f"Drawdown stayed low at {artifact.max_drawdown_pct:.2f}%.")
-    if sum(1 for window in artifact.walk_forward_summary if window.get('profit_factor', 0) >= 0.9) >= 3:
+    if sum(1 for window in artifact.walk_forward_summary if window.get("profit_factor", 0) >= 0.9) >= 3:
         strengths.append("All walk-forward windows cleared the PF floor.")
 
     weaknesses = [

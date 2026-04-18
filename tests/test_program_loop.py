@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
 
 from agentic_forex.campaigns import run_program_loop
 from agentic_forex.config.models import ProgramLanePolicy
@@ -87,7 +86,15 @@ def test_run_program_loop_rejects_throughput_lane_missing_required_family_eviden
             "take_profit_pips": 15.0,
         },
     )
-    write_strategy_rationale_card(settings, family="research", thesis="Overnight cross-rate reversion seed requiring explicit invalidation and regime controls.", invalidation_conditions=["spread fails stationarity check"], hostile_regimes=["spread widening regime"], execution_assumptions=["bounded overnight spread"], non_deployable_conditions=["walk-forward instability"])
+    write_strategy_rationale_card(
+        settings,
+        family="research",
+        thesis="Overnight cross-rate reversion seed requiring explicit invalidation and regime controls.",
+        invalidation_conditions=["spread fails stationarity check"],
+        hostile_regimes=["spread widening regime"],
+        execution_assumptions=["bounded overnight spread"],
+        non_deployable_conditions=["walk-forward instability"],
+    )
 
     report = run_program_loop(
         settings,
@@ -210,7 +217,15 @@ def test_run_program_loop_accepts_throughput_lane_when_family_evidence_present(s
         return loop_report
 
     monkeypatch.setattr("agentic_forex.campaigns.program_loop.run_governed_loop", _fake_run_governed_loop)
-    write_strategy_rationale_card(settings, family="research", thesis="Overnight cross-rate reversion seed requiring explicit invalidation and regime controls.", invalidation_conditions=["spread fails stationarity check"], hostile_regimes=["spread widening regime"], execution_assumptions=["bounded overnight spread"], non_deployable_conditions=["walk-forward instability"])
+    write_strategy_rationale_card(
+        settings,
+        family="research",
+        thesis="Overnight cross-rate reversion seed requiring explicit invalidation and regime controls.",
+        invalidation_conditions=["spread fails stationarity check"],
+        hostile_regimes=["spread widening regime"],
+        execution_assumptions=["bounded overnight spread"],
+        non_deployable_conditions=["walk-forward instability"],
+    )
 
     report = run_program_loop(
         settings,
@@ -607,7 +622,10 @@ def test_run_program_loop_executes_final_family_audit_when_queue_exhausts(settin
     assert report.stop_reason == "data_label_audit_completed_upstream_contract_change_required"
     assert report.stop_class == "policy_decision"
     assert report.final_parent_campaign_id == "campaign-label-audit"
-    assert report.final_audit_report_path == settings.paths().campaigns_dir / "campaign-label-audit" / "next_step_report.json"
+    assert (
+        report.final_audit_report_path
+        == settings.paths().campaigns_dir / "campaign-label-audit" / "next_step_report.json"
+    )
     assert next_step_calls == [["data_feature_audit"], ["data_label_audit"]]
 
 
@@ -1275,7 +1293,15 @@ def test_run_program_loop_stops_on_seed_candidate_truth_mismatch(settings):
             "entry_style": "session_breakout",
         },
     )
-    write_strategy_rationale_card(settings, family="session_alignment_research", thesis="Session alignment seed requiring explicit invalidation and regime controls.", invalidation_conditions=["session structure breaks"], hostile_regimes=["macro-event dislocation"], execution_assumptions=["bounded session window"], non_deployable_conditions=["walk-forward instability"])
+    write_strategy_rationale_card(
+        settings,
+        family="session_alignment_research",
+        thesis="Session alignment seed requiring explicit invalidation and regime controls.",
+        invalidation_conditions=["session structure breaks"],
+        hostile_regimes=["macro-event dislocation"],
+        execution_assumptions=["bounded session window"],
+        non_deployable_conditions=["walk-forward instability"],
+    )
 
     report = run_program_loop(
         settings,
@@ -1403,7 +1429,9 @@ def test_run_program_loop_allows_materially_distinct_archetype_despite_shared_en
     assert report.stop_reason != "program_loop_archetype_retired:throughput-breakout-seed:session_breakout:7"
 
 
-def test_run_program_loop_allows_new_pullback_family_despite_generic_archived_entry_style_overlap(settings, monkeypatch):
+def test_run_program_loop_allows_new_pullback_family_despite_generic_archived_entry_style_overlap(
+    settings, monkeypatch
+):
     settings.program.approved_lanes = [
         ProgramLanePolicy(
             lane_id="throughput-high-vol-pullback-seed",
@@ -1496,7 +1524,15 @@ def test_run_program_loop_allows_new_pullback_family_despite_generic_archived_en
         return loop_report
 
     monkeypatch.setattr("agentic_forex.campaigns.program_loop.run_governed_loop", _fake_run_governed_loop)
-    write_strategy_rationale_card(settings, family="europe_open_high_vol_pullback_persistence_research", thesis="High-vol pullback persistence seed requiring explicit invalidation and regime controls.", invalidation_conditions=["pullback depth exceeds threshold"], hostile_regimes=["low-vol compression"], execution_assumptions=["bounded spread envelope"], non_deployable_conditions=["walk-forward instability"])
+    write_strategy_rationale_card(
+        settings,
+        family="europe_open_high_vol_pullback_persistence_research",
+        thesis="High-vol pullback persistence seed requiring explicit invalidation and regime controls.",
+        invalidation_conditions=["pullback depth exceeds threshold"],
+        hostile_regimes=["low-vol compression"],
+        execution_assumptions=["bounded spread envelope"],
+        non_deployable_conditions=["walk-forward instability"],
+    )
 
     report = run_program_loop(
         settings,
@@ -1505,7 +1541,9 @@ def test_run_program_loop_allows_new_pullback_family_despite_generic_archived_en
         max_lanes=1,
     )
 
-    assert report.stop_reason != "program_loop_archetype_retired:throughput-high-vol-pullback-seed:pullback_continuation:9"
+    assert (
+        report.stop_reason != "program_loop_archetype_retired:throughput-high-vol-pullback-seed:pullback_continuation:9"
+    )
     assert report.executed_lanes == 1
 
 
@@ -1687,7 +1725,15 @@ def test_run_program_loop_resumes_active_parent_lane_without_reapplying_seed_gat
         return loop_report
 
     monkeypatch.setattr("agentic_forex.campaigns.program_loop.run_governed_loop", _fake_run_governed_loop)
-    write_strategy_rationale_card(settings, family="horizon_momentum_research", thesis="Horizon momentum retest seed requiring explicit invalidation and regime controls.", invalidation_conditions=["momentum horizon breaks"], hostile_regimes=["volatility regime shift"], execution_assumptions=["bounded retest window"], non_deployable_conditions=["walk-forward instability"])
+    write_strategy_rationale_card(
+        settings,
+        family="horizon_momentum_research",
+        thesis="Horizon momentum retest seed requiring explicit invalidation and regime controls.",
+        invalidation_conditions=["momentum horizon breaks"],
+        hostile_regimes=["volatility regime shift"],
+        execution_assumptions=["bounded retest window"],
+        non_deployable_conditions=["walk-forward instability"],
+    )
 
     report = run_program_loop(
         settings,

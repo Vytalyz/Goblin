@@ -87,7 +87,16 @@ def test_build_deployment_bundle_uses_packet_and_certified_run_hashes(settings):
     run_id = "mt5run-20260414T002341Z"
     run_dir = settings.paths().mt5_runs_dir / candidate_id / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
-    ex5_path = settings.paths().root / "data" / "state" / "mt5_automation_runtime" / "MQL5" / "Experts" / "AgenticForex" / f"{candidate_id}.ex5"
+    ex5_path = (
+        settings.paths().root
+        / "data"
+        / "state"
+        / "mt5_automation_runtime"
+        / "MQL5"
+        / "Experts"
+        / "AgenticForex"
+        / f"{candidate_id}.ex5"
+    )
     ex5_path.parent.mkdir(parents=True, exist_ok=True)
     ex5_path.write_bytes(b"compiled-ex5")
     set_path = run_dir / f"{candidate_id}-{run_id}.set"

@@ -73,7 +73,9 @@ def _summarize_locked_benchmark(settings: Settings, slot: PortfolioSlotPolicy) -
     if forward_stage_path.exists():
         artifact_paths["forward_stage_report_path"] = str(forward_stage_path)
 
-    latest_manual_report = _latest_run_file(settings.paths().mt5_runs_dir / str(candidate_id or ""), "mt5_manual_run_report.json")
+    latest_manual_report = _latest_run_file(
+        settings.paths().mt5_runs_dir / str(candidate_id or ""), "mt5_manual_run_report.json"
+    )
     if latest_manual_report is not None:
         artifact_paths["latest_manual_run_report_path"] = str(latest_manual_report)
 
@@ -123,7 +125,9 @@ def _run_blank_slate_research_slot(settings: Settings, slot: PortfolioSlotPolicy
         )
         artifact_paths[f"autonomous_manager_report_path_{family}"] = str(manager_report.report_path)
         if _manager_report_is_slot_fallback_boundary(manager_report):
-            attempted_notes.append(f"{family}: slot fallback triggered ({manager_report.stop_reason}), trying next allowed family.")
+            attempted_notes.append(
+                f"{family}: slot fallback triggered ({manager_report.stop_reason}), trying next allowed family."
+            )
             last_fallback_family = family
             last_fallback_report = manager_report
             continue

@@ -17,7 +17,6 @@ from agentic_forex.corpus.models import (
 from agentic_forex.runtime.security import ReadPolicy
 from agentic_forex.utils.io import read_json, write_json
 
-
 SUPPORTED_SUFFIXES = {".txt", ".pdf", ".epub"}
 TRUST_KEYWORDS = {
     "high": ["playbook", "guide", "research", "manual"],
@@ -384,7 +383,12 @@ def _write_quality_side_artifacts(catalog: CorpusCatalog, settings: Settings) ->
             settings.paths().corpus_quality_dir / f"{entry.source_id}.json",
             entry.quality_report.model_dump(mode="json"),
         )
-        note = _build_knowledge_note(entry, "scalping" if _family_relevance(entry, "scalping") >= _family_relevance(entry, "day_trading") else "day_trading")
+        note = _build_knowledge_note(
+            entry,
+            "scalping"
+            if _family_relevance(entry, "scalping") >= _family_relevance(entry, "day_trading")
+            else "day_trading",
+        )
         write_json(settings.paths().corpus_notes_dir / f"{entry.source_id}.json", note.model_dump(mode="json"))
         claims = _build_strategy_claims([entry], note.family_relevance_tags[0])
         write_json(
@@ -607,23 +611,28 @@ def _extract_typed_claims(entry: CorpusCatalogEntry, family: str, text: str) -> 
             )
         )
 
-    if any(token in lowered for token in ("london session", "london open", "opening gap", "opening impulse", "opening range")):
+    if any(
+        token in lowered
+        for token in ("london session", "london open", "opening gap", "opening impulse", "opening range")
+    ):
         add_claim(
             claim="Prefer explicit Europe/London-open session anchors instead of broad unanchored intraday persistence.",
             claim_type="session_anchor",
             prior_effect="support",
             concept_tags=["europe-open", "session-anchor", "momentum"],
         )
-    if any(token in lowered for token in ("short holding", "short horizon", "time-based exit", "time based exit", "time exit")):
+    if any(
+        token in lowered
+        for token in ("short holding", "short horizon", "time-based exit", "time based exit", "time exit")
+    ):
         add_claim(
             claim="Momentum families should use short holding horizons and explicit time exits.",
             claim_type="holding_horizon",
             prior_effect="support",
             concept_tags=["short-horizon", "time-exit"],
         )
-    if (
-        "overnight" in lowered
-        and any(token in lowered for token in ("no overnight", "without overnight", "avoid overnight", "flat by end of day"))
+    if "overnight" in lowered and any(
+        token in lowered for token in ("no overnight", "without overnight", "avoid overnight", "flat by end of day")
     ):
         add_claim(
             claim="Do not carry these intraday momentum families overnight; same-day flat is preferred.",
@@ -631,14 +640,20 @@ def _extract_typed_claims(entry: CorpusCatalogEntry, family: str, text: str) -> 
             prior_effect="veto",
             concept_tags=["overnight", "same-day-flat"],
         )
-    if any(token in lowered for token in ("markets adapt", "horizons compress", "momentum horizons compress", "edge decays")):
+    if any(
+        token in lowered
+        for token in ("markets adapt", "horizons compress", "momentum horizons compress", "edge decays")
+    ):
         add_claim(
             claim="Momentum drift decays quickly, so late-morning persistence should be penalized unless density support is explicit.",
             claim_type="momentum_event_decay",
             prior_effect="penalty",
             concept_tags=["decay", "adaptation", "late-morning"],
         )
-    if any(token in lowered for token in ("spread", "risk day", "risk filter", "realized volatility", "blackout", "news blackout")):
+    if any(
+        token in lowered
+        for token in ("spread", "risk day", "risk filter", "realized volatility", "blackout", "news blackout")
+    ):
         add_claim(
             claim="Discovery should use spread, realized-volatility, and calendar-risk filters as a veto layer on fragile momentum setups.",
             claim_type="risk_day_filter",

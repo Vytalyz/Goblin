@@ -4,11 +4,10 @@ import subprocess
 import sys
 
 import pytest
+from conftest import TEMPLATE_ROOT, create_corpus_mirror, create_oanda_candles_json
 
 from agentic_forex.cli.app import build_parser
 from agentic_forex.runtime.security import ProjectIsolationError, ReadPolicy
-
-from conftest import TEMPLATE_ROOT, create_corpus_mirror, create_oanda_candles_json
 
 
 def test_parser_preserves_root_level_common_args():

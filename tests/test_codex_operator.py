@@ -93,9 +93,7 @@ def test_run_and_inspect_governed_action_write_operator_manifest(settings, monke
     assert manifest.manifest_path.exists()
     assert manifest.output_report_path == fake_report_path
     strategy_gate = next(
-        item
-        for item in manifest.delegated_agent_summaries
-        if item.get("gate") == "strategy_governance"
+        item for item in manifest.delegated_agent_summaries if item.get("gate") == "strategy_governance"
     )
     assert strategy_gate["methodology_audit_path"] is not None
     assert strategy_gate["methodology_audit_passed"] is True
@@ -158,7 +156,9 @@ def test_audit_candidate_branches_opens_new_family_when_both_branches_are_termin
                         "supported_slices": [],
                         "recommended_mutation": None,
                         "diagnostic_confidence": 0.0,
-                        "notes": ["No single supported session, context, or spread slice was strong enough to justify mutation."],
+                        "notes": [
+                            "No single supported session, context, or spread slice was strong enough to justify mutation."
+                        ],
                     }
                 ],
             },

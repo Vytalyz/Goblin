@@ -5,8 +5,8 @@ from collections.abc import Callable
 
 import pandas as pd
 
-from agentic_forex.backtesting.models import BacktestArtifact
 from agentic_forex.backtesting.engine import run_backtest
+from agentic_forex.backtesting.models import BacktestArtifact
 from agentic_forex.config import Settings
 from agentic_forex.governance.models import ForwardStageReport
 from agentic_forex.governance.provenance import build_data_provenance, build_environment_snapshot
@@ -16,7 +16,10 @@ from agentic_forex.workflows.contracts import StrategySpec
 
 
 def run_shadow_forward(spec: StrategySpec, settings: Settings) -> ForwardStageReport:
-    parquet_path = settings.paths().normalized_research_dir / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    parquet_path = (
+        settings.paths().normalized_research_dir
+        / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    )
     frame = pd.read_parquet(parquet_path)
     frame["timestamp_utc"] = pd.to_datetime(frame["timestamp_utc"], utc=True)
     forward_frame, artifact = _select_forward_frame_for_minimum_evidence(frame, spec, settings)
@@ -142,7 +145,9 @@ def _select_forward_frame_for_minimum_evidence(
     normalized["trade_date_utc"] = normalized["timestamp_utc"].dt.normalize()
     unique_trade_dates = list(pd.Index(normalized["trade_date_utc"].dropna().unique()).sort_values())
     if not unique_trade_dates:
-        artifact = evaluator(spec, settings, output_prefix="forward_shadow", frame=normalized.drop(columns=["trade_date_utc"]))
+        artifact = evaluator(
+            spec, settings, output_prefix="forward_shadow", frame=normalized.drop(columns=["trade_date_utc"])
+        )
         return normalized.drop(columns=["trade_date_utc"]), artifact
 
     min_days = max(int(settings.validation.forward_min_trading_days), 1)

@@ -16,14 +16,21 @@ from agentic_forex.workflows.contracts import StrategySpec
 
 
 def train_models(spec: StrategySpec, settings: Settings) -> Path:
-    parquet_path = settings.paths().normalized_research_dir / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    parquet_path = (
+        settings.paths().normalized_research_dir
+        / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    )
     frame = pd.read_parquet(parquet_path)
-    dataset = build_labels(
-        build_features(frame),
-        spec.holding_bars,
-        stop_loss_pips=spec.stop_loss_pips,
-        take_profit_pips=spec.take_profit_pips,
-    ).dropna().reset_index(drop=True)
+    dataset = (
+        build_labels(
+            build_features(frame),
+            spec.holding_bars,
+            stop_loss_pips=spec.stop_loss_pips,
+            take_profit_pips=spec.take_profit_pips,
+        )
+        .dropna()
+        .reset_index(drop=True)
+    )
     feature_columns = [
         "ret_1",
         "ret_5",
@@ -72,7 +79,9 @@ def train_models(spec: StrategySpec, settings: Settings) -> Path:
         },
         "modes": {
             "ml_primary": _binary_metrics(y_test, (logit_prob >= 0.5).astype(int)),
-            "ml_filter": _binary_metrics(y_test[logit_prob >= 0.55], (forest_prob[logit_prob >= 0.55] >= 0.5).astype(int))
+            "ml_filter": _binary_metrics(
+                y_test[logit_prob >= 0.55], (forest_prob[logit_prob >= 0.55] >= 0.5).astype(int)
+            )
             if (logit_prob >= 0.55).any()
             else {"accuracy": 0.0, "precision": 0.0, "recall": 0.0, "sample_count": 0},
             "hybrid": _binary_metrics(y_test, (hybrid_prob >= 0.5).astype(int)),

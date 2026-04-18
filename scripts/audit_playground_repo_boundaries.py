@@ -5,7 +5,6 @@ import json
 import subprocess
 from pathlib import Path
 
-
 PROJECT_MARKERS = (
     "pyproject.toml",
     "AGENTS.md",

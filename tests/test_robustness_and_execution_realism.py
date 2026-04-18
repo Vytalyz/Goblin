@@ -1,17 +1,16 @@
 from __future__ import annotations
 
 import pandas as pd
+from conftest import create_economic_calendar_csv, create_oanda_candles_json
 
 from agentic_forex.backtesting.engine import _generate_signal, run_backtest, run_stress_test
-from agentic_forex.evals.robustness import build_robustness_report, _estimate_family_white_reality_check_from_ledgers
+from agentic_forex.evals.robustness import _estimate_family_white_reality_check_from_ledgers, build_robustness_report
 from agentic_forex.market_data.ingest import ingest_oanda_json
 from agentic_forex.nodes.toolkit import compile_strategy_spec_tool
 from agentic_forex.policy.calendar import ingest_economic_calendar
 from agentic_forex.runtime import ReadPolicy
 from agentic_forex.utils.io import write_json
 from agentic_forex.workflows.contracts import CandidateDraft, FilterRule, MarketContextSummary, StrategySpec
-
-from conftest import create_economic_calendar_csv, create_oanda_candles_json
 
 
 def test_family_cscv_pbo_is_emitted_when_comparable_candidates_exist(settings, tmp_path):
@@ -21,8 +20,12 @@ def test_family_cscv_pbo_is_emitted_when_comparable_candidates_exist(settings, t
     ingest_economic_calendar(calendar_csv, settings)
 
     active_hours = list(range(24))
-    primary = _build_candidate("AF-CAND-ANTI-01", "Anti-Overfit Primary", signal_threshold=0.75, allowed_hours=active_hours)
-    secondary = _build_candidate("AF-CAND-ANTI-02", "Anti-Overfit Secondary", signal_threshold=0.65, allowed_hours=active_hours)
+    primary = _build_candidate(
+        "AF-CAND-ANTI-01", "Anti-Overfit Primary", signal_threshold=0.75, allowed_hours=active_hours
+    )
+    secondary = _build_candidate(
+        "AF-CAND-ANTI-02", "Anti-Overfit Secondary", signal_threshold=0.65, allowed_hours=active_hours
+    )
 
     primary_spec = _compile_candidate(primary, settings)
     secondary_spec = _compile_candidate(secondary, settings)
@@ -48,7 +51,10 @@ def test_family_cscv_pbo_is_emitted_when_comparable_candidates_exist(settings, t
     assert robustness.white_reality_check_candidate_count == robustness.cscv_candidate_count
     assert primary_spec.candidate_id in robustness.candidate_universe
     assert secondary_spec.candidate_id in robustness.candidate_universe
-    assert robustness.comparable_universe_contract["execution_cost_model_version"] == primary_backtest.artifact_references["data_provenance"]["execution_cost_model_version"]
+    assert (
+        robustness.comparable_universe_contract["execution_cost_model_version"]
+        == primary_backtest.artifact_references["data_provenance"]["execution_cost_model_version"]
+    )
 
 
 def test_family_cscv_pbo_excludes_non_comparable_execution_contracts(settings, tmp_path):
@@ -58,8 +64,12 @@ def test_family_cscv_pbo_excludes_non_comparable_execution_contracts(settings, t
     ingest_economic_calendar(calendar_csv, settings)
 
     active_hours = list(range(24))
-    primary = _build_candidate("AF-CAND-ANTI-COMP-01", "Comparable Primary", signal_threshold=0.75, allowed_hours=active_hours)
-    secondary = _build_candidate("AF-CAND-ANTI-COMP-02", "Comparable Secondary", signal_threshold=0.65, allowed_hours=active_hours)
+    primary = _build_candidate(
+        "AF-CAND-ANTI-COMP-01", "Comparable Primary", signal_threshold=0.75, allowed_hours=active_hours
+    )
+    secondary = _build_candidate(
+        "AF-CAND-ANTI-COMP-02", "Comparable Secondary", signal_threshold=0.65, allowed_hours=active_hours
+    )
 
     primary_spec = _compile_candidate(primary, settings)
     secondary_spec = _compile_candidate(secondary, settings)
@@ -133,7 +143,9 @@ def test_fill_delay_and_commission_reduce_scalping_edge(settings, tmp_path):
     ingest_oanda_json(oanda_json, settings)
     ingest_economic_calendar(calendar_csv, settings)
 
-    candidate = _build_candidate("AF-CAND-COST-BASE", "Execution Realism Baseline", signal_threshold=1.2, allowed_hours=[7, 8, 9, 10, 11, 12])
+    candidate = _build_candidate(
+        "AF-CAND-COST-BASE", "Execution Realism Baseline", signal_threshold=1.2, allowed_hours=[7, 8, 9, 10, 11, 12]
+    )
     base_spec = _compile_candidate(candidate, settings)
     stressed_cost_spec = base_spec.model_copy(
         update={
@@ -167,7 +179,9 @@ def test_fill_delay_and_commission_reduce_scalping_edge(settings, tmp_path):
 
     assert stressed_backtest.expectancy_pips < base_backtest.expectancy_pips
     assert stressed_backtest.profit_factor <= base_backtest.profit_factor
-    assert any(scenario.name == "spread_slippage_delay" and scenario.fill_delay_ms > 0 for scenario in stress_report.scenarios)
+    assert any(
+        scenario.name == "spread_slippage_delay" and scenario.fill_delay_ms > 0 for scenario in stress_report.scenarios
+    )
 
 
 def test_exclude_context_bucket_filter_removes_target_context_trades(settings, tmp_path):
@@ -176,14 +190,17 @@ def test_exclude_context_bucket_filter_removes_target_context_trades(settings, t
     ingest_oanda_json(oanda_json, settings)
     ingest_economic_calendar(calendar_csv, settings)
 
-    candidate = _build_candidate("AF-CAND-CONTEXT-BASE", "Context Filter Baseline", signal_threshold=1.0, allowed_hours=[7, 8, 9, 10, 11, 12])
+    candidate = _build_candidate(
+        "AF-CAND-CONTEXT-BASE", "Context Filter Baseline", signal_threshold=1.0, allowed_hours=[7, 8, 9, 10, 11, 12]
+    )
     base_spec = _compile_candidate(candidate, settings)
     filtered_spec = base_spec.model_copy(
         update={
             "candidate_id": "AF-CAND-CONTEXT-FILTERED",
             "benchmark_group_id": "AF-CAND-CONTEXT-FILTERED",
             "variant_name": "exclude_mean_reversion_context",
-            "filters": list(base_spec.filters) + [FilterRule(name="exclude_context_bucket", rule="mean_reversion_context")],
+            "filters": list(base_spec.filters)
+            + [FilterRule(name="exclude_context_bucket", rule="mean_reversion_context")],
         }
     )
     write_json(
@@ -274,7 +291,9 @@ def test_pullback_regime_quality_filters_reduce_low_quality_continuation_entries
     assert _generate_signal(weak_row, filtered_spec) == 0
 
 
-def _build_candidate(candidate_id: str, title: str, *, signal_threshold: float, allowed_hours: list[int]) -> CandidateDraft:
+def _build_candidate(
+    candidate_id: str, title: str, *, signal_threshold: float, allowed_hours: list[int]
+) -> CandidateDraft:
     return CandidateDraft(
         candidate_id=candidate_id,
         family="scalping",

@@ -4,7 +4,6 @@ import ctypes
 import os
 from ctypes import wintypes
 
-
 _CRED_TYPE_GENERIC = 1
 _ERROR_NOT_FOUND = 1168
 _CRED_PERSIST_LOCAL_MACHINE = 2

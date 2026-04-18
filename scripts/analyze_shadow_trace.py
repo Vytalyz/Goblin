@@ -1,4 +1,5 @@
 """Analyze AF-CAND-0733 shadow week signal trace."""
+
 import csv
 import json
 from collections import Counter, defaultdict
@@ -24,7 +25,7 @@ print(f"Bars processed by end: {rows[-1]['bars_processed']}")
 if SUMMARY.exists():
     with open(SUMMARY) as f:
         rs = json.load(f)
-    print(f"\n--- Runtime Summary (from last deinit) ---")
+    print("\n--- Runtime Summary (from last deinit) ---")
     print(f"  deinit_reason: {rs['deinit_reason']}")
     print(f"  bars_processed: {rs['bars_processed']}")
     print(f"  allowed_hour_bars: {rs['allowed_hour_bars']}")
@@ -41,7 +42,7 @@ if SUMMARY.exists():
 # Signal direction breakdown
 longs = sum(1 for r in rows if r["signal"] == "1")
 shorts = sum(1 for r in rows if r["signal"] == "-1")
-print(f"\n--- Direction Breakdown ---")
+print("\n--- Direction Breakdown ---")
 print(f"  Long signals:  {longs}")
 print(f"  Short signals: {shorts}")
 print(f"  L/S ratio: {longs / max(shorts, 1):.2f}")
@@ -56,7 +57,7 @@ for r in rows:
     else:
         by_day[day]["short"] += 1
 
-print(f"\n--- Signals by Day ---")
+print("\n--- Signals by Day ---")
 for day in sorted(by_day):
     d = by_day[day]
     print(f"  {day}: {d['total']:3d} signals (L:{d['long']:3d} S:{d['short']:3d})")
@@ -67,14 +68,14 @@ for r in rows:
     hour = r["timestamp_utc"][11:13]
     by_hour[hour] += 1
 
-print(f"\n--- Signals by Hour (UTC) ---")
+print("\n--- Signals by Hour (UTC) ---")
 for hour in sorted(by_hour):
     bar = "#" * (by_hour[hour] // 2)
     print(f"  {hour}:00  {by_hour[hour]:3d}  {bar}")
 
 # Spread analysis
 spreads = [float(r["spread_pips"]) for r in rows]
-print(f"\n--- Spread at Signal Time ---")
+print("\n--- Spread at Signal Time ---")
 print(f"  Min: {min(spreads):.1f} pips")
 print(f"  Max: {max(spreads):.1f} pips")
 print(f"  Avg: {sum(spreads) / len(spreads):.2f} pips")
@@ -100,18 +101,18 @@ for i in range(1, len(rows)):
         current_cluster = [rows[i]]
 clusters.append(current_cluster)
 
-print(f"\n--- Signal Clustering (gap > 5 min) ---")
+print("\n--- Signal Clustering (gap > 5 min) ---")
 print(f"  Total clusters: {len(clusters)}")
 print(f"  Avg signals per cluster: {len(rows) / len(clusters):.1f}")
 print(f"  Longest cluster: {max(len(c) for c in clusters)} signals")
 
 # Top 5 longest clusters
 sorted_clusters = sorted(clusters, key=len, reverse=True)
-print(f"\n--- Top 5 Clusters ---")
+print("\n--- Top 5 Clusters ---")
 for i, c in enumerate(sorted_clusters[:5]):
     directions = Counter(r["signal"] for r in c)
     d_str = f"L:{directions.get('1', 0)} S:{directions.get('-1', 0)}"
-    print(f"  #{i+1}: {len(c)} signals, {c[0]['timestamp_utc']} - {c[-1]['timestamp_utc']}, {d_str}")
+    print(f"  #{i + 1}: {len(c)} signals, {c[0]['timestamp_utc']} - {c[-1]['timestamp_utc']}, {d_str}")
 
 # Consecutive same-direction
 max_consec_long = 0
@@ -127,7 +128,7 @@ for r in rows:
         cur_l = 0
     max_consec_long = max(max_consec_long, cur_l)
     max_consec_short = max(max_consec_short, cur_s)
-print(f"\n--- Direction Persistence ---")
+print("\n--- Direction Persistence ---")
 print(f"  Max consecutive longs:  {max_consec_long}")
 print(f"  Max consecutive shorts: {max_consec_short}")
 
@@ -138,7 +139,7 @@ print(f"  Direction flips: {flips} ({100 * flips / max(len(rows) - 1, 1):.1f}% o
 # Signal rate (signals per in-window hour)
 unique_days = len(by_day)
 in_window_hours = unique_days * 6  # 08-13 = 6 hours
-print(f"\n--- Signal Rate ---")
+print("\n--- Signal Rate ---")
 print(f"  Trading days observed: {unique_days}")
 print(f"  In-window hours: {in_window_hours}")
 print(f"  Signals per hour: {len(rows) / max(in_window_hours, 1):.1f}")

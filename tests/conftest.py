@@ -1,9 +1,10 @@
-
 from __future__ import annotations
+
 import os
 
 # --- Ensure .codex directory exists for all test environments (local and CI) ---
 import pytest
+
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_codex_directory():
@@ -11,6 +12,7 @@ def setup_codex_directory():
     if not os.path.exists(codex_path):
         os.makedirs(codex_path, exist_ok=True)
     yield
+
 
 import json
 import math
@@ -27,13 +29,23 @@ from agentic_forex.config import load_settings
 from agentic_forex.goblin.controls import write_strategy_rationale_card
 from agentic_forex.utils.paths import ProjectPaths
 
-
 TEMPLATE_ROOT = Path(__file__).resolve().parents[1]
 
 
 def scaffold_project(root: Path) -> Path:
     root.mkdir(parents=True, exist_ok=True)
-    for name in ("workflows", "prompts", "config", "agents", "skills", "knowledge", ".codex", ".agents", "automations", "src"):
+    for name in (
+        "workflows",
+        "prompts",
+        "config",
+        "agents",
+        "skills",
+        "knowledge",
+        ".codex",
+        ".agents",
+        "automations",
+        "src",
+    ):
         shutil.copytree(TEMPLATE_ROOT / name, root / name, dirs_exist_ok=True)
     ProjectPaths.from_root(root).ensure_directories()
     return root
@@ -54,7 +66,7 @@ def create_corpus_mirror(base_dir: Path) -> Path:
                     "title": "Noisy Archive",
                     "author": "Unknown",
                     "rating": 1,
-                }
+                },
             ],
             indent=2,
         ),
@@ -94,8 +106,7 @@ def create_corpus_mirror(base_dir: Path) -> Path:
     book.set_language("en")
     chapter = epub.EpubHtml(title="Guide", file_name="guide.xhtml", lang="en")
     chapter.content = (
-        "<h1>Day Trading Session Guide</h1>"
-        "<p>Focus on session range breaks and clean intraday structure.</p>"
+        "<h1>Day Trading Session Guide</h1><p>Focus on session range breaks and clean intraday structure.</p>"
     )
     book.add_item(chapter)
     book.add_item(epub.EpubNcx())

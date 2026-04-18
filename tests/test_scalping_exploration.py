@@ -1,10 +1,10 @@
 from __future__ import annotations
 
+from conftest import create_corpus_mirror, create_economic_calendar_csv, create_oanda_candles_json
+
 from agentic_forex.experiments import explore_scalping_candidates
 from agentic_forex.market_data.ingest import ingest_oanda_json
 from agentic_forex.policy.calendar import ingest_economic_calendar
-
-from conftest import create_corpus_mirror, create_economic_calendar_csv, create_oanda_candles_json
 
 
 def test_explore_scalping_candidates_generates_reviewed_candidate_set(settings, tmp_path):

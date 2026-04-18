@@ -1,11 +1,10 @@
 from __future__ import annotations
 
+import re
 from datetime import UTC, datetime
 from pathlib import Path
-import re
 
 import pandas as pd
-from pandas.errors import EmptyDataError
 
 from agentic_forex.config import Settings
 from agentic_forex.governance.models import (
@@ -33,10 +32,10 @@ from agentic_forex.mt5.service import (
     _tester_ini,
     build_logic_manifest_payload,
 )
+from agentic_forex.nodes.toolkit import compile_strategy_spec_tool
 from agentic_forex.runtime import ReadPolicy
 from agentic_forex.utils.io import read_json, write_json
 from agentic_forex.workflows.contracts import CandidateDraft, EASpec, RuleSpec, StrategySpec
-from agentic_forex.nodes.toolkit import compile_strategy_spec_tool
 
 
 def ensure_strategy_spec(settings: Settings, *, candidate_id: str) -> StrategySpec:
@@ -184,7 +183,9 @@ def generate_ea_spec(settings: Settings, *, candidate_id: str) -> EASpecGenerati
         notes=[f"Deterministic MT5 rendering contract for {candidate_id}."],
     )
     write_json(ea_spec_path, ea_spec.model_dump(mode="json"))
-    plausibility_findings = minimum_economic_plausibility(settings, candidate_id=candidate_id, rule_spec=rule_spec, spec=spec)
+    plausibility_findings = minimum_economic_plausibility(
+        settings, candidate_id=candidate_id, rule_spec=rule_spec, spec=spec
+    )
     report = EASpecGenerationReport(
         candidate_id=candidate_id,
         readiness_status="ea_spec_complete",
@@ -395,7 +396,9 @@ def run_mt5_backtest_smoke(settings: Settings, *, candidate_id: str) -> MT5Smoke
             "strategy_spec_path": report_dir / "strategy_spec.json",
             "rule_spec_path": report_dir / "rule_spec.json",
             "ea_spec_path": report_dir / "ea_spec.json",
-            "compile_manifest_path": Path(compile_report.artifact_paths.get("logic_manifest_path", "")) if compile_report.artifact_paths.get("logic_manifest_path") else None,
+            "compile_manifest_path": Path(compile_report.artifact_paths.get("logic_manifest_path", ""))
+            if compile_report.artifact_paths.get("logic_manifest_path")
+            else None,
         },
     )
     logic_manifest_hash = str(logic_manifest["logic_manifest_hash"])
@@ -467,7 +470,9 @@ def run_mt5_backtest_smoke(settings: Settings, *, candidate_id: str) -> MT5Smoke
     run_spec = MT5RunSpec(
         candidate_id=candidate_id,
         run_id=run_id,
-        install_id=settings.mt5_env.terminal_install_ids[0] if settings.mt5_env.terminal_install_ids else "mt5_practice_01",
+        install_id=settings.mt5_env.terminal_install_ids[0]
+        if settings.mt5_env.terminal_install_ids
+        else "mt5_practice_01",
         terminal_path=str(terminal_path) if terminal_path else None,
         portable_mode=bool(terminal_path and terminal_data_path and terminal_path.parent == terminal_data_path),
         tester_mode=settings.mt5_env.tester_mode,
@@ -543,7 +548,12 @@ def triage_candidate(
         else None
     )
 
-    if compile_report and compile_report.compile_status == "passed" and smoke_report and smoke_report.smoke_status == "passed":
+    if (
+        compile_report
+        and compile_report.compile_status == "passed"
+        and smoke_report
+        and smoke_report.smoke_status == "passed"
+    ):
         classification = "send_to_research_lane"
         readiness_status = "reviewable_candidate"
         rationale = (
@@ -589,8 +599,12 @@ def triage_candidate(
         artifact_paths={
             "rule_spec_path": str(report_dir / "rule_spec.json") if (report_dir / "rule_spec.json").exists() else "",
             "ea_spec_path": str(report_dir / "ea_spec.json") if (report_dir / "ea_spec.json").exists() else "",
-            "compile_report_path": str(report_dir / "compile_report.json") if (report_dir / "compile_report.json").exists() else "",
-            "mt5_smoke_report_path": str(report_dir / "mt5_smoke_report.json") if (report_dir / "mt5_smoke_report.json").exists() else "",
+            "compile_report_path": str(report_dir / "compile_report.json")
+            if (report_dir / "compile_report.json").exists()
+            else "",
+            "mt5_smoke_report_path": str(report_dir / "mt5_smoke_report.json")
+            if (report_dir / "mt5_smoke_report.json").exists()
+            else "",
             "triage_report_path": str(report_dir / "triage_report.json"),
         },
     )
@@ -837,7 +851,9 @@ def _load_market_quality(settings: Settings, *, instrument: str, granularity: st
             "spread_p95_pips": float(payload.get("spread_p95_pips") or 0.0),
         }
     try:
-        payload = assess_market_data_quality(settings, instrument=instrument, granularity=granularity).model_dump(mode="json")
+        payload = assess_market_data_quality(settings, instrument=instrument, granularity=granularity).model_dump(
+            mode="json"
+        )
     except Exception:  # noqa: BLE001
         return {"spread_median_pips": 0.8, "spread_p95_pips": 1.2}
     return {
@@ -864,7 +880,10 @@ def _no_trade_hours(allowed_hours: list[int]) -> list[int]:
 
 
 def _smoke_expected_signal_frame(settings: Settings, spec: StrategySpec) -> pd.DataFrame:
-    parquet_path = settings.paths().normalized_research_dir / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    parquet_path = (
+        settings.paths().normalized_research_dir
+        / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    )
     if parquet_path.exists():
         try:
             frame = pd.read_parquet(parquet_path, columns=["timestamp_utc"])

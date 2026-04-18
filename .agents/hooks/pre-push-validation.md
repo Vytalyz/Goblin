@@ -1,7 +1,7 @@
 ---
 name: pre-push-validation
-event: pre-commit
-description: "Run publish-guardian validation before any commit on a push-targeted branch."
+event: pre-push
+description: "Run publish-guardian validation before any push to a remote branch."
 timing:
   phase: before
   blocking: true
@@ -20,42 +20,33 @@ log_to: traces/pre-push-validation/
 
 ## Purpose
 
-Block commits that would introduce secrets, absolute user paths, tracked
+Block pushes that would introduce secrets, absolute user paths, tracked
 binaries, log files, or MT5 terminal hashes into the repository.
 
-## Implementation Notes
+## Implementation Status
 
-This hook is defined as a **contract** — provider-specific implementations
-vary:
+### pre-commit (Local)
+
+Implemented in `.pre-commit-config.yaml` as the `goblin-guardian-publish-gate`
+hook with `stages: [pre-push]`. Activated by running:
+
+```powershell
+# Windows
+.\scripts\setup-guardian.ps1
+
+# Or manually
+pre-commit install --hook-type pre-push
+```
+
+**Windows caveat**: Per `AGENTS.md`, git hooks have reliability issues on
+Windows. The pre-push hook is a convenience, not a replacement for manual
+validation. Always run the validation script manually before important pushes.
 
 ### GitHub Actions (CI)
 
-Already implemented in `.github/workflows/ci.yml`. Runs
-`validate_for_publish.py --skip-tests` then `pytest` on every push and PR.
-
-### Local Git Hook
-
-On Windows, git hooks have reliability issues (see `AGENTS.md`: "Do not rely
-on hooks for critical control behavior on Windows"). The recommended workflow
-is to run the validation script manually:
-
-```powershell
-python scripts/validate_for_publish.py --skip-tests
-```
-
-If you want a local pre-push hook as a convenience (not a replacement for
-manual validation):
-
-```bash
-#!/bin/sh
-# .git/hooks/pre-push
-python scripts/validate_for_publish.py --skip-tests
-```
-
-### Claude Code / Codex
-
-Provider-specific hook implementations can wire this contract into
-`pre-tool-use` events for write operations.
+Implemented in `.github/workflows/ci.yml`. Runs `validate_for_publish.py
+--skip-tests`, `ruff check .`, `ruff format --check .`, and `pytest` on every
+push and PR.
 
 ## Checks Performed
 

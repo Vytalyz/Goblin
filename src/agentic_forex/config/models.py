@@ -9,10 +9,11 @@ from pydantic import BaseModel, Field, model_validator
 from agentic_forex.utils.paths import ProjectPaths
 from agentic_forex.utils.secrets import resolve_secret
 
-
 ParityClass = Literal["m1_official", "tick_required"]
 PortfolioSlotMode = Literal["locked_benchmark", "blank_slate_research"]
-CodexExecutionMode = Literal["disabled", "manual_or_readonly_summary", "app_automation_worktree", "app_automation_local"]
+CodexExecutionMode = Literal[
+    "disabled", "manual_or_readonly_summary", "app_automation_worktree", "app_automation_local"
+]
 LLMProvider = Literal["mock", "openai", "openai_legacy"]
 CodexAutomationExecution = Literal["worktree", "local"]
 CodexAutomationDefaultStatus = Literal["paused", "active"]
@@ -30,7 +31,7 @@ class LLMSettings(BaseModel):
         return resolve_secret(env_var=self.api_key_env, credential_targets=self.credential_targets)
 
     @model_validator(mode="after")
-    def _normalize_legacy_provider(self) -> "LLMSettings":
+    def _normalize_legacy_provider(self) -> LLMSettings:
         if self.provider == "openai":
             self.provider = "openai_legacy"
         if self.provider == "openai_legacy":
@@ -134,7 +135,7 @@ class OrthogonalityMetadata(BaseModel):
     session_profile: str
     regime_dependency: str
 
-    def distance_to(self, other: "OrthogonalityMetadata") -> int:
+    def distance_to(self, other: OrthogonalityMetadata) -> int:
         return sum(
             1
             for field_name in (
@@ -215,7 +216,7 @@ class PortfolioSlotPolicy(BaseModel):
     strategy_inheritance: str | None = None
 
     @model_validator(mode="after")
-    def _validate_policy(self) -> "PortfolioSlotPolicy":
+    def _validate_policy(self) -> PortfolioSlotPolicy:
         if self.mode == "locked_benchmark":
             if self.mutation_allowed:
                 raise ValueError("locked_benchmark slots cannot allow mutation.")

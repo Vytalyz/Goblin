@@ -5,11 +5,12 @@ from pathlib import Path
 
 import pandas as pd
 import pytest
+from conftest import create_oanda_candles_json
 
-from agentic_forex.campaigns import run_governed_loop, run_next_step
-from agentic_forex.campaigns.next_step import _apply_continuation_metadata, _build_next_recommendations
 from agentic_forex.approval.models import ApprovalRecord
 from agentic_forex.approval.service import record_approval
+from agentic_forex.campaigns import run_governed_loop, run_next_step
+from agentic_forex.campaigns.next_step import _apply_continuation_metadata, _build_next_recommendations
 from agentic_forex.governance import CampaignSpec, CampaignState
 from agentic_forex.governance.models import (
     CandidateDiagnosticReport,
@@ -25,9 +26,14 @@ from agentic_forex.market_data.ingest import ingest_oanda_json
 from agentic_forex.mt5.models import MT5ParityReport, MT5ValidationReport
 from agentic_forex.mt5.service import ParityPolicyError
 from agentic_forex.utils.io import read_json, write_json
-from agentic_forex.workflows.contracts import CandidateDraft, MarketContextSummary, RiskPolicy, SessionPolicy, SetupLogic, StrategySpec
-
-from conftest import create_oanda_candles_json
+from agentic_forex.workflows.contracts import (
+    CandidateDraft,
+    MarketContextSummary,
+    RiskPolicy,
+    SessionPolicy,
+    SetupLogic,
+    StrategySpec,
+)
 
 
 def test_run_next_step_creates_child_campaign_and_diagnostic_recommendation(settings, tmp_path):
@@ -574,7 +580,9 @@ def test_run_next_step_mutates_throughput_candidate_with_news_blackout(settings,
             notes=["controller_seed"],
         ),
         side_policy="both",
-        setup_logic=SetupLogic(style="trend_pullback_retest", summary="Test throughput setup.", trigger_conditions=["Retest confirmation"]),
+        setup_logic=SetupLogic(
+            style="trend_pullback_retest", summary="Test throughput setup.", trigger_conditions=["Retest confirmation"]
+        ),
         filters=[{"name": "volatility_preference", "rule": "moderate"}],
         risk_policy=RiskPolicy(stop_loss_pips=9.0, take_profit_pips=15.0, notes=["Controller test risk policy."]),
         source_citations=["SRC-THRU"],
@@ -1038,7 +1046,9 @@ def test_run_next_step_stops_when_run_parity_binding_lacks_approval(settings, tm
     oanda_json = create_oanda_candles_json(tmp_path, rows=5000)
     ingest_oanda_json(oanda_json, settings)
     _seed_candidate_spec(settings, candidate_id="AF-CAND-0099", allowed_hours=[7, 8, 9, 10, 11, 12])
-    _seed_candidate_review_packet(settings.paths().reports_dir / "AF-CAND-0099", "AF-CAND-0099", walk_forward_ok=True, stress_passed=True)
+    _seed_candidate_review_packet(
+        settings.paths().reports_dir / "AF-CAND-0099", "AF-CAND-0099", walk_forward_ok=True, stress_passed=True
+    )
 
     parent_campaign_id = "campaign-parent-parity-blocked"
     parent_dir = settings.paths().campaigns_dir / parent_campaign_id
@@ -1091,9 +1101,13 @@ def test_run_next_step_keeps_binding_recommendation_when_newer_child_is_unrelate
     oanda_json = create_oanda_candles_json(tmp_path, rows=5000)
     ingest_oanda_json(oanda_json, settings)
     _seed_candidate_spec(settings, candidate_id="AF-CAND-0099", allowed_hours=[7, 8, 9, 10, 11, 12])
-    _seed_candidate_review_packet(settings.paths().reports_dir / "AF-CAND-0099", "AF-CAND-0099", walk_forward_ok=True, stress_passed=True)
+    _seed_candidate_review_packet(
+        settings.paths().reports_dir / "AF-CAND-0099", "AF-CAND-0099", walk_forward_ok=True, stress_passed=True
+    )
     _seed_candidate_spec(settings, candidate_id="AF-CAND-0101", allowed_hours=[7, 8, 9, 10, 11, 12])
-    _seed_candidate_review_packet(settings.paths().reports_dir / "AF-CAND-0101", "AF-CAND-0101", walk_forward_ok=True, stress_passed=True)
+    _seed_candidate_review_packet(
+        settings.paths().reports_dir / "AF-CAND-0101", "AF-CAND-0101", walk_forward_ok=True, stress_passed=True
+    )
 
     parent_campaign_id = "campaign-parent-diagnose-binding"
     parent_dir = settings.paths().campaigns_dir / parent_campaign_id
@@ -1141,7 +1155,9 @@ def test_run_next_step_keeps_binding_recommendation_when_newer_child_is_unrelate
     )
     write_json(sibling_dir / "state.json", sibling_state.model_dump(mode="json"))
 
-    def _fake_diagnose(settings, *, child_spec, state, parent_spec, candidate_ids, step_reason, report_path, recommendations_path):
+    def _fake_diagnose(
+        settings, *, child_spec, state, parent_spec, candidate_ids, step_reason, report_path, recommendations_path
+    ):
         report = NextStepControllerReport(
             campaign_id=child_spec.campaign_id,
             parent_campaign_id=child_spec.parent_campaign_id,
@@ -1175,7 +1191,9 @@ def test_run_next_step_executes_run_parity_and_emits_run_forward(settings, tmp_p
     oanda_json = create_oanda_candles_json(tmp_path, rows=5000)
     ingest_oanda_json(oanda_json, settings)
     _seed_candidate_spec(settings, candidate_id="AF-CAND-0100", allowed_hours=[7, 8, 9, 10, 11, 12])
-    _seed_candidate_review_packet(settings.paths().reports_dir / "AF-CAND-0100", "AF-CAND-0100", walk_forward_ok=True, stress_passed=True)
+    _seed_candidate_review_packet(
+        settings.paths().reports_dir / "AF-CAND-0100", "AF-CAND-0100", walk_forward_ok=True, stress_passed=True
+    )
     for stage in ("mt5_packet", "mt5_parity_run", "mt5_validation"):
         record_approval(
             ApprovalRecord(
@@ -1283,7 +1301,9 @@ def test_run_next_step_stops_when_parity_policy_blocks_official_run(settings, tm
     oanda_json = create_oanda_candles_json(tmp_path, rows=5000)
     ingest_oanda_json(oanda_json, settings)
     _seed_candidate_spec(settings, candidate_id="AF-CAND-0100P", allowed_hours=[7, 8, 9, 10, 11, 12])
-    _seed_candidate_review_packet(settings.paths().reports_dir / "AF-CAND-0100P", "AF-CAND-0100P", walk_forward_ok=True, stress_passed=True)
+    _seed_candidate_review_packet(
+        settings.paths().reports_dir / "AF-CAND-0100P", "AF-CAND-0100P", walk_forward_ok=True, stress_passed=True
+    )
     for stage in ("mt5_packet", "mt5_parity_run", "mt5_validation"):
         record_approval(
             ApprovalRecord(
@@ -1355,7 +1375,9 @@ def test_run_next_step_executes_run_forward_and_emits_human_review(settings, tmp
     oanda_json = create_oanda_candles_json(tmp_path, rows=5000)
     ingest_oanda_json(oanda_json, settings)
     _seed_candidate_spec(settings, candidate_id="AF-CAND-0101", allowed_hours=[7, 8, 9, 10, 11, 12])
-    _seed_candidate_review_packet(settings.paths().reports_dir / "AF-CAND-0101", "AF-CAND-0101", walk_forward_ok=True, stress_passed=True)
+    _seed_candidate_review_packet(
+        settings.paths().reports_dir / "AF-CAND-0101", "AF-CAND-0101", walk_forward_ok=True, stress_passed=True
+    )
     run_dir = settings.paths().mt5_runs_dir / "AF-CAND-0101" / "mt5run-test"
     run_dir.mkdir(parents=True, exist_ok=True)
     write_json(
@@ -2172,7 +2194,9 @@ def test_run_next_step_reruns_data_feature_audit_after_family_correction_fails_t
             walk_forward_ok=False,
             pbo=0.2 if candidate_id == "AF-CAND-0173" else None,
             white_reality_check_p_value=1.0 if candidate_id == "AF-CAND-0173" else None,
-            entry_style="session_extreme_reversion" if candidate_id in {"AF-CAND-0172", "AF-CAND-0173"} else "trend_pullback_retest",
+            entry_style="session_extreme_reversion"
+            if candidate_id in {"AF-CAND-0172", "AF-CAND-0173"}
+            else "trend_pullback_retest",
             dataset_snapshot_id="snap-itr-family",
             feature_version_id="feat-itr-family",
             label_version_id="label-itr-family",
@@ -2465,8 +2489,10 @@ def test_run_next_step_executes_data_regime_audit_after_hypothesis_audit_hold(se
     _seed_data_regime_candidate(
         settings.paths().reports_dir / "AF-CAND-REF",
         "AF-CAND-REF",
-        first_window_pattern=[("europe", "mean_reversion_context", -0.8)] * 6 + [("overlap", "trend_context", -0.8)] * 6,
-        later_window_pattern=[("europe", "mean_reversion_context", 0.6)] * 12 + [("overlap", "trend_context", 0.6)] * 12,
+        first_window_pattern=[("europe", "mean_reversion_context", -0.8)] * 6
+        + [("overlap", "trend_context", -0.8)] * 6,
+        later_window_pattern=[("europe", "mean_reversion_context", 0.6)] * 12
+        + [("overlap", "trend_context", 0.6)] * 12,
         trade_count=36,
         profit_factor=1.15,
         out_of_sample_profit_factor=1.30,
@@ -3296,11 +3322,37 @@ def test_run_next_step_data_feature_audit_retires_family_after_bounded_correctio
 
     seed_payloads = [
         ("AF-CAND-0163", 378, 1.18, 1.57, 0.35, True, False, 0.80, 1.0, "session_breakout", "snapshot-a", "cost-a"),
-        ("AF-CAND-0164", 24, 0.72, 6.68, -0.64, False, False, 0.10, 0.50, "pullback_continuation", "snapshot-b", "cost-b"),
+        (
+            "AF-CAND-0164",
+            24,
+            0.72,
+            6.68,
+            -0.64,
+            False,
+            False,
+            0.10,
+            0.50,
+            "pullback_continuation",
+            "snapshot-b",
+            "cost-b",
+        ),
         ("AF-CAND-0165", 220, 0.86, 0.84, -0.26, False, False, 0.10, 0.40, "failed_break_fade", "snapshot-b", "cost-c"),
         ("AF-CAND-0169", 257, 1.15, 1.27, 0.30, False, False, 0.77, 0.36, "session_breakout", "snapshot-c", "cost-a"),
     ]
-    for candidate_id, trade_count, profit_factor, oos_pf, expectancy, stress_passed, walk_forward_ok, pbo, wrc, entry_style, snapshot_id, cost_version in seed_payloads:
+    for (
+        candidate_id,
+        trade_count,
+        profit_factor,
+        oos_pf,
+        expectancy,
+        stress_passed,
+        walk_forward_ok,
+        pbo,
+        wrc,
+        entry_style,
+        snapshot_id,
+        cost_version,
+    ) in seed_payloads:
         _seed_data_feature_candidate(
             settings.paths().reports_dir / candidate_id,
             candidate_id,
@@ -3388,9 +3440,7 @@ def test_run_next_step_executes_data_label_audit_after_family_retirement(setting
                     "execution_cost_realism_consumes_edge",
                     "persistent_walk_forward_instability",
                 ],
-                "recommended_actions": [
-                    "Open a separate data/label audit before resuming autonomous search."
-                ],
+                "recommended_actions": ["Open a separate data/label audit before resuming autonomous search."],
             }
         ],
         continuation_status="stop",
@@ -3509,9 +3559,7 @@ def test_run_next_step_treats_path_aware_label_contract_as_family_level_signal(s
                     "execution_cost_realism_consumes_edge",
                     "persistent_walk_forward_instability",
                 ],
-                "recommended_actions": [
-                    "Open a separate data/label audit before resuming autonomous search."
-                ],
+                "recommended_actions": ["Open a separate data/label audit before resuming autonomous search."],
             }
         ],
         continuation_status="stop",
@@ -3529,9 +3577,7 @@ def test_run_next_step_treats_path_aware_label_contract_as_family_level_signal(s
     feature_path.parent.mkdir(parents=True, exist_ok=True)
     label_path.parent.mkdir(parents=True, exist_ok=True)
     feature_path.write_text(
-        "def build_features(frame):\n"
-        "    frame['range_position_10'] = 0.5\n"
-        "    return frame\n",
+        "def build_features(frame):\n    frame['range_position_10'] = 0.5\n    return frame\n",
         encoding="utf-8",
     )
     label_path.write_text(
@@ -3707,7 +3753,9 @@ def _seed_candidate_spec(settings, *, candidate_id: str, allowed_hours: list[int
             notes=["controller_seed"],
         ),
         side_policy="both",
-        setup_logic=SetupLogic(style="session_breakout", summary="Test setup summary.", trigger_conditions=["Breakout confirmation"]),
+        setup_logic=SetupLogic(
+            style="session_breakout", summary="Test setup summary.", trigger_conditions=["Breakout confirmation"]
+        ),
         filters=[
             {"name": "volatility_preference", "rule": "high"},
             {"name": "max_spread_pips", "rule": "1.9"},
@@ -3745,18 +3793,9 @@ def _seed_candidate_reports(report_dir: Path, candidate_id: str) -> None:
     start = datetime(2024, 1, 1, 7, 0, tzinfo=UTC)
     rows = []
     balance = 100000.0
-    first_window_pattern = (
-        [("europe", "mean_reversion_context", -1.0)] * 2
-        + [("overlap", "trend_context", -2.1)] * 10
-    )
-    second_window_pattern = (
-        [("europe", "trend_context", 1.2)] * 8
-        + [("overlap", "trend_context", 1.8)] * 4
-    )
-    third_window_pattern = (
-        [("europe", "trend_context", 1.1)] * 8
-        + [("overlap", "trend_context", 1.7)] * 4
-    )
+    first_window_pattern = [("europe", "mean_reversion_context", -1.0)] * 2 + [("overlap", "trend_context", -2.1)] * 10
+    second_window_pattern = [("europe", "trend_context", 1.2)] * 8 + [("overlap", "trend_context", 1.8)] * 4
+    third_window_pattern = [("europe", "trend_context", 1.1)] * 8 + [("overlap", "trend_context", 1.7)] * 4
     for index, (session_bucket, context_bucket, pnl_pips) in enumerate(
         first_window_pattern + second_window_pattern + third_window_pattern
     ):
@@ -3786,7 +3825,9 @@ def _seed_candidate_reports(report_dir: Path, candidate_id: str) -> None:
         )
     pd.DataFrame.from_records(rows).to_csv(report_dir / "trade_ledger.csv", index=False)
     write_json(report_dir / "backtest_summary.json", {"candidate_id": candidate_id})
-    write_json(report_dir / "robustness_report.json", {"candidate_id": candidate_id, "status": "robustness_provisional"})
+    write_json(
+        report_dir / "robustness_report.json", {"candidate_id": candidate_id, "status": "robustness_provisional"}
+    )
     write_json(
         report_dir / "review_packet.json",
         {
@@ -3846,7 +3887,9 @@ def _seed_context_comparison_reports(report_dir: Path, candidate_id: str) -> Non
         )
     pd.DataFrame.from_records(rows).to_csv(report_dir / "trade_ledger.csv", index=False)
     write_json(report_dir / "backtest_summary.json", {"candidate_id": candidate_id})
-    write_json(report_dir / "robustness_report.json", {"candidate_id": candidate_id, "status": "robustness_provisional"})
+    write_json(
+        report_dir / "robustness_report.json", {"candidate_id": candidate_id, "status": "robustness_provisional"}
+    )
     write_json(
         report_dir / "review_packet.json",
         {
@@ -3864,10 +3907,14 @@ def _seed_context_comparison_reports(report_dir: Path, candidate_id: str) -> Non
     )
 
 
-def _seed_candidate_review_packet(report_dir: Path, candidate_id: str, *, walk_forward_ok: bool, stress_passed: bool) -> None:
+def _seed_candidate_review_packet(
+    report_dir: Path, candidate_id: str, *, walk_forward_ok: bool, stress_passed: bool
+) -> None:
     report_dir.mkdir(parents=True, exist_ok=True)
     write_json(report_dir / "backtest_summary.json", {"candidate_id": candidate_id})
-    write_json(report_dir / "robustness_report.json", {"candidate_id": candidate_id, "status": "robustness_provisional"})
+    write_json(
+        report_dir / "robustness_report.json", {"candidate_id": candidate_id, "status": "robustness_provisional"}
+    )
     write_json(
         report_dir / "review_packet.json",
         {
@@ -4005,9 +4052,24 @@ def _seed_data_regime_candidate(
                 "expectancy_pips": expectancy_pips,
                 "stress_passed": stress_passed,
                 "walk_forward_summary": [
-                    {"window": 1, "trade_count": len(first_window_pattern), "profit_factor": 0.7, "expectancy_pips": -0.8},
-                    {"window": 2, "trade_count": len(later_window_pattern) // 2, "profit_factor": 1.3, "expectancy_pips": 0.6},
-                    {"window": 3, "trade_count": len(later_window_pattern) - (len(later_window_pattern) // 2), "profit_factor": 1.3, "expectancy_pips": 0.6},
+                    {
+                        "window": 1,
+                        "trade_count": len(first_window_pattern),
+                        "profit_factor": 0.7,
+                        "expectancy_pips": -0.8,
+                    },
+                    {
+                        "window": 2,
+                        "trade_count": len(later_window_pattern) // 2,
+                        "profit_factor": 1.3,
+                        "expectancy_pips": 0.6,
+                    },
+                    {
+                        "window": 3,
+                        "trade_count": len(later_window_pattern) - (len(later_window_pattern) // 2),
+                        "profit_factor": 1.3,
+                        "expectancy_pips": 0.6,
+                    },
                 ],
                 "grades": {"walk_forward_ok": walk_forward_ok},
             },

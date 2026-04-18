@@ -92,7 +92,9 @@ def _path_outcomes(
 
         resolved = False
         for offset, lookahead_index in enumerate(range(index + 1, timeout_index + 1), start=1):
-            target_hit = high[lookahead_index] >= target_price if side == "long" else low[lookahead_index] <= target_price
+            target_hit = (
+                high[lookahead_index] >= target_price if side == "long" else low[lookahead_index] <= target_price
+            )
             stop_hit = low[lookahead_index] <= stop_price if side == "long" else high[lookahead_index] >= stop_price
             if not target_hit and not stop_hit:
                 continue

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pandas as pd
+from conftest import create_economic_calendar_csv, create_oanda_candles_json
 
 from agentic_forex.backtesting.engine import run_backtest
 from agentic_forex.config.models import ProgramLanePolicy
@@ -12,8 +13,6 @@ from agentic_forex.policy.parity_scope import build_parity_scope_audit
 from agentic_forex.runtime import ReadPolicy
 from agentic_forex.utils.io import write_json
 from agentic_forex.workflows.contracts import CandidateDraft, MarketContextSummary, StrategySpec
-
-from conftest import create_economic_calendar_csv, create_oanda_candles_json
 
 
 def _candidate() -> CandidateDraft:
@@ -63,7 +62,9 @@ def test_calendar_blackout_and_account_metrics(settings, tmp_path):
     spec = StrategySpec.model_validate(spec_payload)
 
     with_news = run_backtest(spec, settings)
-    without_news = run_backtest(spec.model_copy(update={"news_policy": spec.news_policy.model_copy(update={"enabled": False})}), settings)
+    without_news = run_backtest(
+        spec.model_copy(update={"news_policy": spec.news_policy.model_copy(update={"enabled": False})}), settings
+    )
 
     assert with_news.trade_count <= without_news.trade_count
     assert with_news.account_metrics["news_blocked_entries"] > 0
@@ -92,8 +93,13 @@ def test_compile_strategy_spec_propagates_market_rationale_and_walk_forward_cont
     assert spec.market_rationale.failure_regimes
     assert spec.market_rationale.evidence_tags == []
     assert spec.validation_profile.walk_forward_mode == "anchored_time_windows"
-    assert spec.validation_profile.walk_forward_profit_factor_floor == settings.validation.walk_forward_profit_factor_floor
-    assert spec.validation_profile.walk_forward_min_trades_per_window == settings.validation.walk_forward_min_trades_per_window
+    assert (
+        spec.validation_profile.walk_forward_profit_factor_floor == settings.validation.walk_forward_profit_factor_floor
+    )
+    assert (
+        spec.validation_profile.walk_forward_min_trades_per_window
+        == settings.validation.walk_forward_min_trades_per_window
+    )
     assert spec.validation_profile.walk_forward_min_window_days == settings.validation.walk_forward_min_window_days
 
 
@@ -253,9 +259,14 @@ def test_build_parity_scope_audit_generates_scope_docs_and_counts(settings):
 
     lineages = {(lineage.family, lineage.hypothesis_class): lineage for lineage in report.lineages}
     assert lineages[("live_family", "trend_retest")].current_scope_status == "in_scope_under_current_m1"
-    assert lineages[("review_family", "session_breakout")].current_scope_status == "review_needed_before_official_parity"
+    assert (
+        lineages[("review_family", "session_breakout")].current_scope_status == "review_needed_before_official_parity"
+    )
     assert lineages[("archival_family", "range_reclaim")].current_scope_status == "archival_or_reference_only"
-    assert lineages[("tick_family", "micro_path_probe")].current_scope_status == "blocked_tick_required_pending_official_standard"
+    assert (
+        lineages[("tick_family", "micro_path_probe")].current_scope_status
+        == "blocked_tick_required_pending_official_standard"
+    )
 
     assert report.frozen_reference_candidates[0].candidate_id == "AF-CAND-0239"
     assert settings.paths().knowledge_dir.joinpath("parity-lineage-audit.md").exists()

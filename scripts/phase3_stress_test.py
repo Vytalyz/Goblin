@@ -36,7 +36,7 @@ def main():
     results = []
 
     for cid in WINNERS:
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"Stress-testing {cid}")
         print("=" * 70, flush=True)
 
@@ -55,12 +55,14 @@ def main():
         spec = StrategySpec.model_validate(spec_payload)
 
         # Run stress test (3 adversarial scenarios)
-        print(f"  Running stress test (spread 1.25x + 0.25 pip slip + 500 ms delay)...")
+        print("  Running stress test (spread 1.25x + 0.25 pip slip + 500 ms delay)...")
         stress_report = run_stress_test(spec, settings)
 
         print(f"  Base PF:     {stress_report.base_profit_factor:.3f}")
         for sc in stress_report.scenarios:
-            print(f"  {sc.name}: PF {sc.profit_factor:.3f} (spread {sc.spread_multiplier}x, slip {sc.slippage_pips} pips, delay {sc.fill_delay_ms} ms)")
+            print(
+                f"  {sc.name}: PF {sc.profit_factor:.3f} (spread {sc.spread_multiplier}x, slip {sc.slippage_pips} pips, delay {sc.fill_delay_ms} ms)"
+            )
         print(f"  Worst stressed PF: {stress_report.stressed_profit_factor:.3f}")
         print(f"  Stress passed: {stress_report.passed}")
 
@@ -81,31 +83,33 @@ def main():
 
         overall_pass = stress_report.passed and wf_passed
 
-        results.append({
-            "candidate_id": cid,
-            "entry_style": spec.entry_style,
-            "base_pf": round(stress_report.base_profit_factor, 3),
-            "stressed_pf": round(stress_report.stressed_profit_factor, 3),
-            "stress_passed": stress_report.passed,
-            "scenarios": [
-                {"name": sc.name, "pf": round(sc.profit_factor, 3)} for sc in stress_report.scenarios
-            ],
-            "wf_windows": wf_windows,
-            "wf_passing": wf_passing,
-            "wf_total": wf_total,
-            "wf_passed": wf_passed,
-            "oos_pf": round(base_artifact.out_of_sample_profit_factor, 3),
-            "trades": base_artifact.trade_count,
-            "max_dd_pct": round(base_artifact.max_drawdown_pct, 2),
-            "overall_pass": overall_pass,
-        })
+        results.append(
+            {
+                "candidate_id": cid,
+                "entry_style": spec.entry_style,
+                "base_pf": round(stress_report.base_profit_factor, 3),
+                "stressed_pf": round(stress_report.stressed_profit_factor, 3),
+                "stress_passed": stress_report.passed,
+                "scenarios": [{"name": sc.name, "pf": round(sc.profit_factor, 3)} for sc in stress_report.scenarios],
+                "wf_windows": wf_windows,
+                "wf_passing": wf_passing,
+                "wf_total": wf_total,
+                "wf_passed": wf_passed,
+                "oos_pf": round(base_artifact.out_of_sample_profit_factor, 3),
+                "trades": base_artifact.trade_count,
+                "max_dd_pct": round(base_artifact.max_drawdown_pct, 2),
+                "overall_pass": overall_pass,
+            }
+        )
 
         overall_label = "PASS" if overall_pass else "FAIL"
         print(f"\n  >>> {cid} Phase 3: [{overall_label}]")
 
     # Summary table
     print("\n\n" + "=" * 110)
-    print(f"{'ID':<16} {'Style':<28} {'Trades':>6} {'Base PF':>8} {'Stress PF':>10} {'Stress':>7} {'WF Win':>7} {'WF':>5} {'Overall':>8}")
+    print(
+        f"{'ID':<16} {'Style':<28} {'Trades':>6} {'Base PF':>8} {'Stress PF':>10} {'Stress':>7} {'WF Win':>7} {'WF':>5} {'Overall':>8}"
+    )
     print("-" * 110)
     for r in results:
         stress_lbl = "PASS" if r["stress_passed"] else "FAIL"

@@ -1,4 +1,4 @@
-name: CI
+name: "Goblin Guardian CI"
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  guardian:
+    name: "Goblin Guardian"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,8 +30,27 @@ jobs:
       - name: Create .codex directory
         run: mkdir -p .codex
 
-      - name: Publish validation gate
+      - name: "Goblin Guardian: Ruff Lint"
+        run: ruff check .
+
+      - name: "Goblin Guardian: Format Check"
+        run: ruff format --check .
+
+      - name: "Goblin Guardian: Publish Validation"
         run: python scripts/validate_for_publish.py --skip-tests
 
-      - name: Run tests
+      - name: "Goblin Guardian: Test Gate"
         run: pytest --tb=short -q
+
+      - name: "Goblin Guardian: Summary"
+        if: always()
+        run: |
+          echo "## Goblin Guardian Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          for step_name in "Ruff Lint" "Format Check" "Publish Validation" "Test Gate"; do
+            echo "| $step_name | See job log |" >> $GITHUB_STEP_SUMMARY
+          done
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "*Guardian is always watching — your coins are safe!*" >> $GITHUB_STEP_SUMMARY

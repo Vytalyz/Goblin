@@ -13,7 +13,7 @@ class ProjectPaths:
     root: Path
 
     @classmethod
-    def from_root(cls, root: str | Path | None = None) -> "ProjectPaths":
+    def from_root(cls, root: str | Path | None = None) -> ProjectPaths:
         resolved_root = Path(root).resolve() if root else discover_project_root()
         return cls(root=resolved_root)
 

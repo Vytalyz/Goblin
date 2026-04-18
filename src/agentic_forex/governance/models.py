@@ -6,7 +6,6 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
-
 FailureCode = Literal[
     "empirical_failure",
     "robustness_failure",
@@ -45,7 +44,9 @@ ContinuationStatus = Literal["continue", "stop"]
 ProgramTransitionStatus = Literal["continue_lane", "move_to_next_lane", "hard_stop"]
 TransitionIntent = Literal["resume_same_candidate", "advance_same_lane", "advance_next_lane", "stop_terminal"]
 NotificationReason = Literal["ea_test_ready", "blocked_no_authorized_path", "integrity_exception"]
-PortfolioSlotExecutionStatus = Literal["monitoring_summary_only", "research_manager_executed", "research_manager_blocked"]
+PortfolioSlotExecutionStatus = Literal[
+    "monitoring_summary_only", "research_manager_executed", "research_manager_blocked"
+]
 ProductionIncidentStatus = Literal[
     "validation_suspended",
     "harness_untrusted",

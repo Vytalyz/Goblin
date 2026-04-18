@@ -20,7 +20,6 @@ from agentic_forex.goblin.models import (
 from agentic_forex.goblin.service import TRUTH_CONTRACTS
 from agentic_forex.utils.io import read_json, write_json
 
-
 CHANNEL_DIR_MAP: dict[TruthChannel, str] = {
     "research_backtest": "research_backtest",
     "mt5_replay": "mt5_replay",
@@ -119,7 +118,11 @@ def register_artifact(
     if not validation.valid:
         raise ValueError(f"artifact_validation_failed:{'|'.join(validation.reasons)}")
 
-    managed_root = channel_root(settings, resolved_provenance.evidence_channel) / resolved_provenance.candidate_id / resolved_provenance.run_id
+    managed_root = (
+        channel_root(settings, resolved_provenance.evidence_channel)
+        / resolved_provenance.candidate_id
+        / resolved_provenance.run_id
+    )
     managed_root.mkdir(parents=True, exist_ok=True)
     managed_path = managed_root / resolved_original.name
     if snapshot:
@@ -269,8 +272,10 @@ def build_truth_alignment_report(
     return report
 
 
-def _artifact_id(channel: TruthChannel, candidate_id: str, run_id: str, filename: str, artifact_hash: str | None) -> str:
-    payload = f"{channel}|{candidate_id}|{run_id}|{filename}|{artifact_hash or 'none'}".encode("utf-8")
+def _artifact_id(
+    channel: TruthChannel, candidate_id: str, run_id: str, filename: str, artifact_hash: str | None
+) -> str:
+    payload = f"{channel}|{candidate_id}|{run_id}|{filename}|{artifact_hash or 'none'}".encode()
     return hashlib.sha256(payload).hexdigest()[:16]
 
 

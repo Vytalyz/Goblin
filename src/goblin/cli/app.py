@@ -8,5 +8,4 @@ from __future__ import annotations
 
 from agentic_forex.cli.app import main
 
-
 __all__ = ["main"]

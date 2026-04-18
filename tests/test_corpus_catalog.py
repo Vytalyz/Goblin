@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from conftest import create_book_prior_file, create_corpus_mirror, scaffold_project
+
 from agentic_forex.config import load_settings
 from agentic_forex.corpus.catalog import build_digest, catalog_corpus
 from agentic_forex.runtime.security import ReadPolicy
-
-from conftest import create_book_prior_file, create_corpus_mirror, scaffold_project
 
 
 def test_catalog_corpus_includes_supplemental_book_and_emits_typed_claims(tmp_path: Path):
@@ -30,9 +30,7 @@ def test_catalog_corpus_includes_supplemental_book_and_emits_typed_claims(tmp_pa
     assert any(entry.path.resolve() == book_path.resolve() for entry in catalog.entries)
     assert digest.book_prior_source_ids
     claim_types = {
-        claim.claim_type
-        for claim in digest.strategy_claims
-        if claim.source_id in digest.book_prior_source_ids
+        claim.claim_type for claim in digest.strategy_claims if claim.source_id in digest.book_prior_source_ids
     }
     assert {
         "session_anchor",

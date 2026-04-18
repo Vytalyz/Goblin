@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from pydantic import BaseModel
@@ -60,24 +59,25 @@ def generate_industry_report(settings: GoblinConfig) -> IndustryReport:
     for family, count in sorted(families.items(), key=lambda x: -x[1])[:10]:
         pipeline_lines.append(f"  - `{family}`: {count} experiments")
 
-    sections.append(IndustryReportSection(
-        title="Experiment Pipeline",
-        body="\n".join(pipeline_lines),
-    ))
+    sections.append(
+        IndustryReportSection(
+            title="Experiment Pipeline",
+            body="\n".join(pipeline_lines),
+        )
+    )
 
     # ── Section 2: Candidate Reports ──
     reports_dir = paths.root / "reports"
     candidate_dirs = []
     if reports_dir.exists():
-        candidate_dirs = [
-            d for d in sorted(reports_dir.iterdir())
-            if d.is_dir() and d.name.startswith("AF-CAND-")
-        ]
+        candidate_dirs = [d for d in sorted(reports_dir.iterdir()) if d.is_dir() and d.name.startswith("AF-CAND-")]
 
-    sections.append(IndustryReportSection(
-        title="Candidate Portfolio",
-        body=f"- **Total candidate report directories:** {len(candidate_dirs)}",
-    ))
+    sections.append(
+        IndustryReportSection(
+            title="Candidate Portfolio",
+            body=f"- **Total candidate report directories:** {len(candidate_dirs)}",
+        )
+    )
 
     # ── Section 3: Approval Activity ──
     approval_log = paths.root / "approvals" / "approval_log.jsonl"
@@ -100,20 +100,24 @@ def generate_industry_report(settings: GoblinConfig) -> IndustryReport:
         approval_lines.append("- **Recent approvals:**")
         approval_lines.extend(recent_approvals)
 
-    sections.append(IndustryReportSection(
-        title="Approval Activity",
-        body="\n".join(approval_lines),
-    ))
+    sections.append(
+        IndustryReportSection(
+            title="Approval Activity",
+            body="\n".join(approval_lines),
+        )
+    )
 
     # ── Section 4: Data Corpus ──
     corpus_dir = paths.root / "data" / "corpus"
     corpus_files = list(corpus_dir.rglob("*")) if corpus_dir.exists() else []
     corpus_file_count = sum(1 for f in corpus_files if f.is_file())
 
-    sections.append(IndustryReportSection(
-        title="Data Corpus",
-        body=f"- **Corpus files:** {corpus_file_count}",
-    ))
+    sections.append(
+        IndustryReportSection(
+            title="Data Corpus",
+            body=f"- **Corpus files:** {corpus_file_count}",
+        )
+    )
 
     # ── Section 5: Goblin Program Status ──
     status_file = paths.root / "Goblin" / "STATUS.md"
@@ -126,17 +130,19 @@ def generate_industry_report(settings: GoblinConfig) -> IndustryReport:
                 status_summary = stripped
                 break
 
-    sections.append(IndustryReportSection(
-        title="Goblin Program Status",
-        body=f"- {status_summary}",
-    ))
+    sections.append(
+        IndustryReportSection(
+            title="Goblin Program Status",
+            body=f"- {status_summary}",
+        )
+    )
 
     # ── Build Markdown ──
     md_parts = [
-        f"# Goblin Industry Update",
-        f"",
+        "# Goblin Industry Update",
+        "",
         f"**Generated:** {generated}",
-        f"",
+        "",
     ]
     for section in sections:
         md_parts.append(f"## {section.title}")
@@ -175,9 +181,7 @@ def _render_html(generated: str, sections: list[IndustryReportSection]) -> str:
     for section in sections:
         # Convert markdown-style bullets to HTML
         body_html = _md_body_to_html(section.body)
-        section_html_parts.append(
-            f'<section><h2>{_escape_html(section.title)}</h2>{body_html}</section>'
-        )
+        section_html_parts.append(f"<section><h2>{_escape_html(section.title)}</h2>{body_html}</section>")
     sections_html = "\n".join(section_html_parts)
 
     return f"""<!DOCTYPE html>
@@ -207,12 +211,7 @@ def _render_html(generated: str, sections: list[IndustryReportSection]) -> str:
 
 def _escape_html(text: str) -> str:
     """Escape HTML special characters."""
-    return (
-        text.replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-        .replace('"', "&quot;")
-    )
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 
 def _md_body_to_html(body: str) -> str:

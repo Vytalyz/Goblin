@@ -1,14 +1,12 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime
-from pathlib import Path
 import os
 import re
 import time
 from contextlib import contextmanager
+from datetime import UTC, datetime
 
 from agentic_forex.config import Settings
-
 
 _CANDIDATE_ID_PATTERN = re.compile(r"AF-CAND-(\d{4})$")
 _COUNTER_LOCK_RETRY_SECONDS = 0.01

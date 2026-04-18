@@ -89,7 +89,9 @@ def score_ftmo_fit(
             real_market_behavior_fit=0.0,
             blockers=["No trades were generated, so FTMO fit cannot be established."],
             strengths=[],
-            next_actions=["Increase data coverage or adjust the deterministic setup before using FTMO fit as a signal."],
+            next_actions=[
+                "Increase data coverage or adjust the deterministic setup before using FTMO fit as a signal."
+            ],
         )
 
     ledger = trade_ledger.copy()
@@ -109,7 +111,9 @@ def score_ftmo_fit(
     )
     trading_days_observed = int(ledger["ftmo_day"].nunique())
     leverage_observed = spec.account_model.leverage
-    max_margin_utilization_pct = float(ledger["margin_utilization_pct"].max()) if "margin_utilization_pct" in ledger.columns else 0.0
+    max_margin_utilization_pct = (
+        float(ledger["margin_utilization_pct"].max()) if "margin_utilization_pct" in ledger.columns else 0.0
+    )
 
     daily_loss_fit = _inverse_fit(daily_loss_observed_pct, ruleset.maximum_daily_loss_pct)
     overall_drawdown_fit = _inverse_fit(backtest.max_drawdown_pct, ruleset.maximum_loss_pct)
@@ -162,7 +166,15 @@ def score_ftmo_fit(
         blockers.append("Margin utilization is too aggressive for a conservative FTMO fit.")
 
     fit_score = max(min(round(weighted, 2), 100.0), 0.0)
-    fit_band = "strong_fit" if fit_score >= 80 else "moderate_fit" if fit_score >= 60 else "weak_fit" if fit_score >= 40 else "poor_fit"
+    fit_band = (
+        "strong_fit"
+        if fit_score >= 80
+        else "moderate_fit"
+        if fit_score >= 60
+        else "weak_fit"
+        if fit_score >= 40
+        else "poor_fit"
+    )
 
     return FTMOFitReport(
         ruleset_id=ruleset.ruleset_id,

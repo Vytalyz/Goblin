@@ -1,13 +1,13 @@
 from __future__ import annotations
 
+from conftest import create_corpus_mirror
+
 from agentic_forex.corpus.catalog import catalog_corpus
 from agentic_forex.llm import MockLLMClient
 from agentic_forex.nodes import build_tool_registry
 from agentic_forex.runtime import ReadPolicy, WorkflowEngine
 from agentic_forex.workflows import WorkflowRepository
 from agentic_forex.workflows.contracts import CandidateDraft, DiscoveryRequest
-
-from conftest import create_corpus_mirror
 
 
 def test_discovery_workflow_routes_scalping_and_writes_trace(settings, tmp_path):

@@ -14,7 +14,6 @@ from agentic_forex.market_data.models import MarketIngestResult
 from agentic_forex.market_data.qa import assess_market_data_quality
 from agentic_forex.utils.io import read_json, write_json
 
-
 REQUIRED_COLUMNS = [
     "timestamp_utc",
     "bid_o",
@@ -100,7 +99,10 @@ def fetch_oanda_candles(
             "count": resolved_count,
         },
     )
-    raw_path = settings.paths().raw_oanda_dir / f"{resolved_instrument.lower()}_{resolved_granularity.lower()}_{_timestamp_slug()}.json"
+    raw_path = (
+        settings.paths().raw_oanda_dir
+        / f"{resolved_instrument.lower()}_{resolved_granularity.lower()}_{_timestamp_slug()}.json"
+    )
     raw_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     frame, _, _ = _normalize_oanda_payload(payload, settings)
     return _persist_market_frame(
@@ -204,7 +206,11 @@ def backfill_oanda_history(
         (combined["timestamp_utc"] >= pd.Timestamp(resolved_start))
         & (combined["timestamp_utc"] <= pd.Timestamp(resolved_end))
     ]
-    filtered = filtered.sort_values("timestamp_utc").drop_duplicates(subset=["timestamp_utc"], keep="last").reset_index(drop=True)
+    filtered = (
+        filtered.sort_values("timestamp_utc")
+        .drop_duplicates(subset=["timestamp_utc"], keep="last")
+        .reset_index(drop=True)
+    )
     manifest_path = (
         settings.paths().raw_oanda_backfill_dir
         / f"{resolved_instrument.lower()}_{resolved_granularity.lower()}_{_timestamp_slug()}_manifest.json"

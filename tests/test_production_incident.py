@@ -64,7 +64,9 @@ def test_trade_diff_classifies_missing_extra_and_path_delta(settings, tmp_path: 
 
 def test_production_incident_marks_harness_untrusted_without_baseline(settings, tmp_path: Path):
     live_csv = tmp_path / "live.csv"
-    _write_ledger(live_csv, [("2026-04-01T13:00:00Z", "2026-04-01T14:00:00Z", "long", 1.1000, 1.0988, -12.0, "stop_loss", 0.01)])
+    _write_ledger(
+        live_csv, [("2026-04-01T13:00:00Z", "2026-04-01T14:00:00Z", "long", 1.1000, 1.0988, -12.0, "stop_loss", 0.01)]
+    )
 
     report = run_production_incident_analysis(
         settings,
@@ -153,7 +155,9 @@ def test_tester_ini_uses_explicit_profile_and_date_override(settings, tmp_path: 
 def test_publish_blocks_validation_suspended_candidate(settings, tmp_path: Path):
     report_dir = settings.paths().reports_dir / "AF-CAND-0263"
     report_dir.mkdir(parents=True, exist_ok=True)
-    (report_dir / "review_packet.json").write_text('{"family":"scalping","readiness":"human_review_passed"}', encoding="utf-8")
+    (report_dir / "review_packet.json").write_text(
+        '{"family":"scalping","readiness":"human_review_passed"}', encoding="utf-8"
+    )
     run_production_incident_analysis(
         settings,
         candidate_id="AF-CAND-0263",

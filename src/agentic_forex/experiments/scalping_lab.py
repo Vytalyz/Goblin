@@ -14,7 +14,13 @@ from agentic_forex.runtime import ReadPolicy, WorkflowEngine
 from agentic_forex.utils.ids import next_candidate_id
 from agentic_forex.utils.io import write_json
 from agentic_forex.workflows import WorkflowRepository
-from agentic_forex.workflows.contracts import CandidateDraft, MarketContextSummary, MarketRationale, ReviewPacket, StrategySpec
+from agentic_forex.workflows.contracts import (
+    CandidateDraft,
+    MarketContextSummary,
+    MarketRationale,
+    ReviewPacket,
+    StrategySpec,
+)
 
 
 def explore_scalping_candidates(
@@ -163,13 +169,17 @@ def _generate_candidate_set(digest, settings: Settings, *, max_candidates: int) 
     drafts: list[CandidateDraft] = []
     for template in templates[: max(max_candidates, 0)]:
         candidate_id = next_candidate_id(settings)
-        highlight = highlights[len(drafts) % len(highlights)] if highlights else "Corpus digest favors explicit entry, exit, and cost control for scalping."
+        highlight = (
+            highlights[len(drafts) % len(highlights)]
+            if highlights
+            else "Corpus digest favors explicit entry, exit, and cost control for scalping."
+        )
         drafts.append(
             CandidateDraft(
                 candidate_id=candidate_id,
                 family="scalping",
                 title=template["title"],
-                thesis=f'{template["thesis"]} Corpus anchor: {highlight}',
+                thesis=f"{template['thesis']} Corpus anchor: {highlight}",
                 source_citations=citations or ["SRC-001"],
                 strategy_hypothesis=highlight,
                 market_context=MarketContextSummary(
@@ -179,7 +189,7 @@ def _generate_candidate_set(digest, settings: Settings, *, max_candidates: int) 
                     execution_notes=[
                         "Use canonical OANDA bid/ask data for research.",
                         "Do not allow MT5 parity data into research or training.",
-                        f'Exploration archetype: {template["entry_style"]}.',
+                        f"Exploration archetype: {template['entry_style']}.",
                     ],
                     allowed_hours_utc=template["allowed_hours_utc"],
                 ),

@@ -1,22 +1,19 @@
 """P07 targeted tests — deployment ladder, bundle validation, and attach enforcement."""
+
 from __future__ import annotations
 
 import json
 
 from agentic_forex.goblin.controls import (
-    build_deployment_bundle,
     list_open_blocking_incidents,
-    open_incident_record,
     validate_attach_against_bundle,
     write_live_attach_manifest,
 )
 from agentic_forex.goblin.models import (
     DeploymentBundle,
-    DeploymentLadderState,
     IncidentClosurePacket,
     LiveAttachManifest,
 )
-
 
 # ---------------------------------------------------------------------------
 # Model field presence
@@ -53,7 +50,6 @@ def test_incident_closure_packet_carries_bundle_and_ladder_fields():
 
 def test_live_attach_manifest_ladder_state_persisted(settings):
     """ladder_state is written to disk in the live attach manifest JSON."""
-    import json
     report_dir = settings.paths().reports_dir / "AF-CAND-0263"
     report_dir.mkdir(parents=True, exist_ok=True)
     (report_dir / "strategy_spec.json").write_text(
@@ -61,7 +57,10 @@ def test_live_attach_manifest_ladder_state_persisted(settings):
         encoding="utf-8",
     )
     from agentic_forex.governance.trial_ledger import append_trial_entry
-    append_trial_entry(settings, candidate_id="AF-CAND-0263", family="overlap_resolution_bridge_research", stage="backtested")
+
+    append_trial_entry(
+        settings, candidate_id="AF-CAND-0263", family="overlap_resolution_bridge_research", stage="backtested"
+    )
     manifest = write_live_attach_manifest(
         settings,
         manifest=LiveAttachManifest(

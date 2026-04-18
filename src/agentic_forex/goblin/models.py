@@ -6,7 +6,6 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
-
 TruthChannel = Literal["research_backtest", "mt5_replay", "live_demo", "broker_account_history"]
 ComparisonEnforcement = Literal["structural_consistency", "strict_executable_parity", "strict_reconciliation"]
 PhaseStatus = Literal[
@@ -333,6 +332,7 @@ class ExperimentBudgetCaps(BaseModel):
     max_mutation_depth: int = 8
     max_failed_refinements: int = 48
 
+
 class StrategyMethodologyAudit(BaseModel):
     family: str
     generated_utc: str = Field(default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z"))
@@ -345,6 +345,7 @@ class StrategyMethodologyAudit(BaseModel):
     missing_requirements: list[str] = Field(default_factory=list)
     notes: list[str] = Field(default_factory=list)
     report_path: Path | None = None
+
 
 class ExperimentAccountingLedger(BaseModel):
     family: str

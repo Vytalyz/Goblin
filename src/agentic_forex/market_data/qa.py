@@ -15,7 +15,6 @@ from agentic_forex.market_data.models import (
 )
 from agentic_forex.utils.io import write_json
 
-
 GRANULARITY_DELTAS = {
     "S5": timedelta(seconds=5),
     "S10": timedelta(seconds=10),
@@ -53,7 +52,8 @@ def assess_market_data_quality(
     resolved_instrument = instrument or settings.data.instrument
     resolved_granularity = granularity or settings.data.base_granularity
     resolved_path = parquet_path or (
-        settings.paths().normalized_research_dir / f"{resolved_instrument.lower()}_{resolved_granularity.lower()}.parquet"
+        settings.paths().normalized_research_dir
+        / f"{resolved_instrument.lower()}_{resolved_granularity.lower()}.parquet"
     )
     if not resolved_path.exists():
         raise FileNotFoundError(f"Market parquet not found: {resolved_path}")
@@ -141,7 +141,9 @@ def build_market_data_quality_report(
         expected_interval_seconds=int(expected_delta.total_seconds()),
         duplicate_row_count=int(duplicate_mask.sum()),
         duplicate_unique_timestamp_count=int(duplicate_rows.nunique()),
-        duplicate_timestamp_samples=[item.to_pydatetime() for item in duplicate_rows.drop_duplicates().head(MAX_SAMPLE_COUNT)],
+        duplicate_timestamp_samples=[
+            item.to_pydatetime() for item in duplicate_rows.drop_duplicates().head(MAX_SAMPLE_COUNT)
+        ],
         missing_bar_count=missing_bar_count,
         missing_gap_samples=missing_gaps[:MAX_SAMPLE_COUNT],
         market_closure_gap_count=len(closure_gaps),
@@ -155,7 +157,9 @@ def build_market_data_quality_report(
         spread_anomaly_threshold_pips=round(float(spread_threshold), 6),
         spread_anomaly_count=int(len(anomalies)),
         spread_anomaly_samples=[
-            SpreadAnomalySample(timestamp_utc=row.timestamp_utc.to_pydatetime(), spread_pips=round(float(row.spread_pips), 6))
+            SpreadAnomalySample(
+                timestamp_utc=row.timestamp_utc.to_pydatetime(), spread_pips=round(float(row.spread_pips), 6)
+            )
             for row in anomalies.head(MAX_SAMPLE_COUNT).itertuples(index=False)
         ],
         session_coverage=[

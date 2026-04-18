@@ -21,10 +21,10 @@ from agentic_forex.goblin.controls import (
 )
 from agentic_forex.goblin.models import GoblinRunRecord
 
-
 # ---------------------------------------------------------------------------
 # classify_session_window
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.parametrize(
     "hour, expected",
@@ -57,6 +57,7 @@ def test_classify_session_window_from_iso_string() -> None:
 # GoblinRunRecord model
 # ---------------------------------------------------------------------------
 
+
 def test_goblin_run_record_round_trip() -> None:
     record = GoblinRunRecord(
         run_id="test-run-001",
@@ -78,6 +79,7 @@ def test_goblin_run_record_round_trip() -> None:
 # start + finalize helpers
 # ---------------------------------------------------------------------------
 
+
 def test_start_goblin_run_record_populates_session_window() -> None:
     record = start_goblin_run_record(
         run_id="test-start-001",
@@ -87,7 +89,11 @@ def test_start_goblin_run_record_populates_session_window() -> None:
     assert record.run_id == "test-start-001"
     assert record.entrypoint == "run_portfolio_cycle"
     assert record.session_window in {
-        "tokyo", "london", "london_new_york_overlap", "new_york", "off_hours",
+        "tokyo",
+        "london",
+        "london_new_york_overlap",
+        "new_york",
+        "off_hours",
     }
     assert record.started_utc is not None
     assert record.ended_utc is None
@@ -102,7 +108,8 @@ def test_finalize_writes_jsonl(tmp_path: str) -> None:
         candidate_id="AF-CAND-9999",
     )
     result_path = finalize_goblin_run_record(
-        settings, record,
+        settings,
+        record,
         trace_id="trace-abc",
         trial_id="trial-xyz",
         notes=["test note"],
@@ -118,7 +125,11 @@ def test_finalize_writes_jsonl(tmp_path: str) -> None:
     assert "test note" in payload["notes"]
     assert payload["ended_utc"] is not None
     assert payload["session_window"] in {
-        "tokyo", "london", "london_new_york_overlap", "new_york", "off_hours",
+        "tokyo",
+        "london",
+        "london_new_york_overlap",
+        "new_york",
+        "off_hours",
     }
 
 

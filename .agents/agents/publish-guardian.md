@@ -16,6 +16,8 @@ skills:
   - readme-license-audit
 hooks:
   - pre-push-validation
+  - pre-commit-lint
+  - pre-commit-format
 ---
 
 # publish-guardian

@@ -1,7 +1,9 @@
 """P06 targeted tests — incident severity, SLA validation, and blocking logic."""
+
 from __future__ import annotations
 
 import json
+
 import pytest
 
 from agentic_forex.goblin.controls import (
@@ -13,10 +15,7 @@ from agentic_forex.goblin.controls import (
 from agentic_forex.goblin.models import (
     IncidentClosurePacket,
     IncidentRecord,
-    IncidentSeverity,
-    IncidentSlaClass,
 )
-
 
 # ---------------------------------------------------------------------------
 # Model field presence

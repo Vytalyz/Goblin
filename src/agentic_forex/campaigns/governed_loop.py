@@ -9,11 +9,8 @@ from agentic_forex.governance.control_plane import policy_snapshot_hash
 from agentic_forex.governance.models import GovernedLoopReport, GovernedLoopStepSummary, NextStepType
 from agentic_forex.utils.io import write_json
 
-
 DEFAULT_GOVERNED_LOOP_STEP_TYPES: list[NextStepType] = [
-    step_type
-    for step_type in sorted(SUPPORTED_STEP_TYPES)
-    if step_type != "human_review"
+    step_type for step_type in sorted(SUPPORTED_STEP_TYPES) if step_type != "human_review"
 ]
 
 

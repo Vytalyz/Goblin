@@ -105,7 +105,10 @@ def run_backtest(
     output_prefix: str | None = None,
     frame: pd.DataFrame | None = None,
 ) -> BacktestArtifact:
-    parquet_path = settings.paths().normalized_research_dir / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    parquet_path = (
+        settings.paths().normalized_research_dir
+        / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    )
     frame = frame.copy() if frame is not None else pd.read_parquet(parquet_path)
     features = build_features(frame).reset_index(drop=True)
     blackout_windows = _load_blackout_windows(spec, settings)
@@ -145,7 +148,9 @@ def run_backtest(
             gross_pips = trailing_result[2]
         else:
             gross_pips = (exit_row["mid_c"] - entry_row["mid_c"]) * 10000 * signal
-        spread_cost_pips = ((float(entry_row["spread_pips"]) + float(exit_row["spread_pips"])) / 2.0) * spec.cost_model.spread_multiplier
+        spread_cost_pips = (
+            (float(entry_row["spread_pips"]) + float(exit_row["spread_pips"])) / 2.0
+        ) * spec.cost_model.spread_multiplier
         delay_cost_pips = _fill_delay_penalty_pips(
             fill_row=entry_row,
             signal=signal,
@@ -184,7 +189,9 @@ def run_backtest(
                 exit_reason = "stop_loss"
         pnl_dollars = net_pips * spec.account_model.pip_value_per_standard_lot * position_size_lots
         balance = balance + pnl_dollars
-        margin_utilization_pct = _margin_utilization_pct(float(entry_row["mid_c"]), balance - pnl_dollars, position_size_lots, spec)
+        margin_utilization_pct = _margin_utilization_pct(
+            float(entry_row["mid_c"]), balance - pnl_dollars, position_size_lots, spec
+        )
         trade_rows.append(
             {
                 "timestamp_utc": str(entry_row["timestamp_utc"]),
@@ -207,7 +214,9 @@ def run_backtest(
                 "delay_cost_pips": float(delay_cost_pips),
                 "commission_cost_pips": float(commission_cost_pips),
                 "commission_cost_usd": float(commission_cost_usd),
-                "total_cost_pips": float(spread_cost_pips + slippage_cost_pips + delay_cost_pips + commission_cost_pips),
+                "total_cost_pips": float(
+                    spread_cost_pips + slippage_cost_pips + delay_cost_pips + commission_cost_pips
+                ),
                 "fill_delay_ms": int(spec.cost_model.fill_delay_ms),
                 "broker_fee_model": spec.cost_model.broker_fee_model,
             }
@@ -662,7 +671,9 @@ def _generate_signal(row: pd.Series, spec: StrategySpec) -> int:
                 return 0
             if require_mean_location_alignment and row["mid_c"] > row["rolling_mean_10"]:
                 return 0
-            if pullback_range_position_floor is not None and row["range_position_10"] > (1 - pullback_range_position_floor):
+            if pullback_range_position_floor is not None and row["range_position_10"] > (
+                1 - pullback_range_position_floor
+            ):
                 return 0
             if recovery_zscore_floor is not None and row["zscore_10"] > -recovery_zscore_floor:
                 return 0
@@ -968,19 +979,32 @@ def _summarize_backtest(
         },
         "walk_forward_summary": _walk_forward_summary(trade_ledger, validation_profile),
         "failure_attribution": {
-            reason: int(count)
-            for reason, count in trade_ledger["exit_reason"].value_counts().to_dict().items()
+            reason: int(count) for reason, count in trade_ledger["exit_reason"].value_counts().to_dict().items()
         },
         "account_metrics": {
             "initial_balance": initial_balance,
             "final_balance": final_balance,
-            "total_return_pct": float(((final_balance - initial_balance) / initial_balance) * 100 if initial_balance else 0.0),
+            "total_return_pct": float(
+                ((final_balance - initial_balance) / initial_balance) * 100 if initial_balance else 0.0
+            ),
             "max_daily_loss_pct": float((worst_daily_loss / initial_balance) * 100 if initial_balance else 0.0),
             "average_position_size_lots": float(trade_ledger["position_size_lots"].mean()),
             "max_margin_utilization_pct": float(trade_ledger["margin_utilization_pct"].max()),
-            "average_total_cost_pips": float(trade_ledger.get("total_cost_pips", pd.Series(dtype=float)).mean() if "total_cost_pips" in trade_ledger.columns else 0.0),
-            "total_commission_usd": float(trade_ledger.get("commission_cost_usd", pd.Series(dtype=float)).sum() if "commission_cost_usd" in trade_ledger.columns else 0.0),
-            "average_fill_delay_ms": float(trade_ledger.get("fill_delay_ms", pd.Series(dtype=float)).mean() if "fill_delay_ms" in trade_ledger.columns else 0.0),
+            "average_total_cost_pips": float(
+                trade_ledger.get("total_cost_pips", pd.Series(dtype=float)).mean()
+                if "total_cost_pips" in trade_ledger.columns
+                else 0.0
+            ),
+            "total_commission_usd": float(
+                trade_ledger.get("commission_cost_usd", pd.Series(dtype=float)).sum()
+                if "commission_cost_usd" in trade_ledger.columns
+                else 0.0
+            ),
+            "average_fill_delay_ms": float(
+                trade_ledger.get("fill_delay_ms", pd.Series(dtype=float)).mean()
+                if "fill_delay_ms" in trade_ledger.columns
+                else 0.0
+            ),
             "news_blocked_entries": int(news_blocked_entries),
             "configured_leverage": float(leverage),
             "trading_days_observed": int(_daily_pnl(trade_ledger).shape[0]),
@@ -1018,7 +1042,9 @@ def _equal_trade_walk_forward_summary(frame: pd.DataFrame, validation_profile) -
         start = window_index * window_size
         end = len(frame) if window_index == windows - 1 else min((window_index + 1) * window_size, len(frame))
         chunk = frame.iloc[start:end].copy()
-        summary.append(_walk_forward_window_summary(chunk, window_index=window_index + 1, validation_profile=validation_profile))
+        summary.append(
+            _walk_forward_window_summary(chunk, window_index=window_index + 1, validation_profile=validation_profile)
+        )
     return summary
 
 
@@ -1041,9 +1067,13 @@ def _anchored_time_walk_forward_summary(frame: pd.DataFrame, validation_profile)
         window_start = start + (window_span * window_index)
         window_end = end if window_index == windows - 1 else start + (window_span * (window_index + 1))
         if window_index == windows - 1:
-            chunk = ordered[(ordered["exit_timestamp_utc"] >= window_start) & (ordered["exit_timestamp_utc"] <= window_end)].copy()
+            chunk = ordered[
+                (ordered["exit_timestamp_utc"] >= window_start) & (ordered["exit_timestamp_utc"] <= window_end)
+            ].copy()
         else:
-            chunk = ordered[(ordered["exit_timestamp_utc"] >= window_start) & (ordered["exit_timestamp_utc"] < window_end)].copy()
+            chunk = ordered[
+                (ordered["exit_timestamp_utc"] >= window_start) & (ordered["exit_timestamp_utc"] < window_end)
+            ].copy()
         summary.append(
             _walk_forward_window_summary(
                 chunk,
@@ -1069,8 +1099,24 @@ def _walk_forward_window_summary(
     min_trades = int(getattr(validation_profile, "walk_forward_min_trades_per_window", 1) or 1)
     min_days = int(getattr(validation_profile, "walk_forward_min_window_days", 1) or 1)
     profit_factor_floor = float(getattr(validation_profile, "walk_forward_profit_factor_floor", 0.9) or 0.9)
-    start_utc = _timestamp(window_start if window_start is not None else (pd.to_datetime(chunk["exit_timestamp_utc"], utc=True, errors="coerce").min() if not chunk.empty and "exit_timestamp_utc" in chunk.columns else None))
-    end_utc = _timestamp(window_end if window_end is not None else (pd.to_datetime(chunk["exit_timestamp_utc"], utc=True, errors="coerce").max() if not chunk.empty and "exit_timestamp_utc" in chunk.columns else None))
+    start_utc = _timestamp(
+        window_start
+        if window_start is not None
+        else (
+            pd.to_datetime(chunk["exit_timestamp_utc"], utc=True, errors="coerce").min()
+            if not chunk.empty and "exit_timestamp_utc" in chunk.columns
+            else None
+        )
+    )
+    end_utc = _timestamp(
+        window_end
+        if window_end is not None
+        else (
+            pd.to_datetime(chunk["exit_timestamp_utc"], utc=True, errors="coerce").max()
+            if not chunk.empty and "exit_timestamp_utc" in chunk.columns
+            else None
+        )
+    )
     window_days = _window_day_span(window_start, window_end, chunk)
     trade_count = int(len(chunk))
     profit_factor = float(_profit_factor(chunk["pnl_pips"])) if trade_count else 0.0
@@ -1240,7 +1286,9 @@ def _passes_common_filters(row: pd.Series, spec: StrategySpec) -> bool:
     if required_phase_bucket:
         open_anchor_hour_utc = spec.open_anchor_hour_utc
         if open_anchor_hour_utc is None:
-            open_anchor_hour_utc = min(spec.session_policy.allowed_hours_utc) if spec.session_policy.allowed_hours_utc else 7
+            open_anchor_hour_utc = (
+                min(spec.session_policy.allowed_hours_utc) if spec.session_policy.allowed_hours_utc else 7
+            )
         if _phase_bucket_for_hour(int(row["hour"]), open_anchor_hour_utc=open_anchor_hour_utc) != required_phase_bucket:
             return False
     blocked_context = _filter_value(spec, "exclude_context_bucket")
@@ -1282,7 +1330,9 @@ def _margin_cap_lots(entry_price: float, balance: float, spec: StrategySpec) -> 
     return usable_margin / margin_per_lot
 
 
-def _margin_utilization_pct(entry_price: float, balance_before_trade: float, position_size_lots: float, spec: StrategySpec) -> float:
+def _margin_utilization_pct(
+    entry_price: float, balance_before_trade: float, position_size_lots: float, spec: StrategySpec
+) -> float:
     if balance_before_trade <= 0 or spec.account_model.leverage <= 0:
         return 0.0
     margin_used = (entry_price * spec.account_model.contract_size * position_size_lots) / spec.account_model.leverage

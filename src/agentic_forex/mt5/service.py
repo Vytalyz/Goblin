@@ -127,7 +127,9 @@ def generate_mt5_packet(candidate_id: str, settings: Settings) -> MT5Packet:
     launch_request_path = run_dir / "launch_request.json"
     report_path = run_dir / "tester_report.htm"
 
-    install_id = settings.mt5_env.terminal_install_ids[0] if settings.mt5_env.terminal_install_ids else "mt5_practice_01"
+    install_id = (
+        settings.mt5_env.terminal_install_ids[0] if settings.mt5_env.terminal_install_ids else "mt5_practice_01"
+    )
     terminal_path = _resolve_terminal_path(settings)
     compile_target_path = _candidate_compile_target_relative_path(candidate_id, settings)
     base_terminal_data_path = _resolve_terminal_data_path(settings, terminal_path)
@@ -231,7 +233,9 @@ def generate_mt5_packet(candidate_id: str, settings: Settings) -> MT5Packet:
             "broker_history_relative_path": broker_history_relative_path,
             "broker_history_output_path": str(broker_history_output_path) if broker_history_output_path else None,
             "diagnostic_windows_relative_path": diagnostic_windows_relative_path,
-            "diagnostic_windows_output_path": str(diagnostic_windows_output_path) if diagnostic_windows_output_path else None,
+            "diagnostic_windows_output_path": str(diagnostic_windows_output_path)
+            if diagnostic_windows_output_path
+            else None,
             "diagnostic_ticks_relative_path": diagnostic_ticks_relative_path,
             "diagnostic_ticks_output_path": str(diagnostic_ticks_output_path) if diagnostic_ticks_output_path else None,
             "news_blackout_mode": "manual_calendar_alignment_required",
@@ -276,7 +280,9 @@ def generate_mt5_packet(candidate_id: str, settings: Settings) -> MT5Packet:
                 terminal_data_path=terminal_data_path,
             )
 
-    tester_config_path.write_text(_tester_ini(candidate_id, run_spec, settings, spec, expected_signal_frame), encoding="utf-8")
+    tester_config_path.write_text(
+        _tester_ini(candidate_id, run_spec, settings, spec, expected_signal_frame), encoding="utf-8"
+    )
     write_json(run_dir / "run_spec.json", run_spec.model_dump(mode="json"))
     write_json(
         compile_request_path,
@@ -298,7 +304,9 @@ def generate_mt5_packet(candidate_id: str, settings: Settings) -> MT5Packet:
             "broker_history_relative_path": broker_history_relative_path,
             "broker_history_output_path": str(broker_history_output_path) if broker_history_output_path else None,
             "diagnostic_windows_relative_path": diagnostic_windows_relative_path,
-            "diagnostic_windows_output_path": str(diagnostic_windows_output_path) if diagnostic_windows_output_path else None,
+            "diagnostic_windows_output_path": str(diagnostic_windows_output_path)
+            if diagnostic_windows_output_path
+            else None,
             "diagnostic_ticks_relative_path": diagnostic_ticks_relative_path,
             "diagnostic_ticks_output_path": str(diagnostic_ticks_output_path) if diagnostic_ticks_output_path else None,
         },
@@ -318,7 +326,9 @@ def generate_mt5_packet(candidate_id: str, settings: Settings) -> MT5Packet:
             "broker_history_relative_path": broker_history_relative_path,
             "broker_history_output_path": str(broker_history_output_path) if broker_history_output_path else None,
             "diagnostic_windows_relative_path": diagnostic_windows_relative_path,
-            "diagnostic_windows_output_path": str(diagnostic_windows_output_path) if diagnostic_windows_output_path else None,
+            "diagnostic_windows_output_path": str(diagnostic_windows_output_path)
+            if diagnostic_windows_output_path
+            else None,
             "diagnostic_ticks_relative_path": diagnostic_ticks_relative_path,
             "diagnostic_ticks_output_path": str(diagnostic_ticks_output_path) if diagnostic_ticks_output_path else None,
         },
@@ -335,17 +345,29 @@ def generate_mt5_packet(candidate_id: str, settings: Settings) -> MT5Packet:
                 "- Primary parity gate: rebuild the executable baseline from MT5-exported broker history captured during the tester run.",
                 "- Packet expected signals remain a fallback artifact only when broker history export is unavailable.",
                 f"- MT5 packet run id: {packet_run_id}",
-                f"- Automated terminal path: {terminal_path}" if terminal_path else "- Automated terminal path: unavailable",
-                f"- Automated terminal data path: {terminal_data_path}" if terminal_data_path else "- Automated terminal data path: unavailable",
-                f"- Automated MetaEditor path: {metaeditor_path}" if metaeditor_path else "- Automated MetaEditor path: unavailable",
-                f"- Audit output path: {audit_output_path}" if audit_output_path else "- Audit output path: unavailable",
+                f"- Automated terminal path: {terminal_path}"
+                if terminal_path
+                else "- Automated terminal path: unavailable",
+                f"- Automated terminal data path: {terminal_data_path}"
+                if terminal_data_path
+                else "- Automated terminal data path: unavailable",
+                f"- Automated MetaEditor path: {metaeditor_path}"
+                if metaeditor_path
+                else "- Automated MetaEditor path: unavailable",
+                f"- Audit output path: {audit_output_path}"
+                if audit_output_path
+                else "- Audit output path: unavailable",
                 (
                     f"- Broker history output path: {broker_history_output_path}"
                     if broker_history_output_path
                     else "- Broker history output path: unavailable"
                 ),
-                f"- Deployed MQ5 path: {deployed_source_path}" if deployed_source_path else "- Deployed MQ5 path: unavailable",
-                f"- Compiled EX5 path: {compiled_ex5_path}" if compiled_ex5_path else "- Compiled EX5 path: unavailable",
+                f"- Deployed MQ5 path: {deployed_source_path}"
+                if deployed_source_path
+                else "- Deployed MQ5 path: unavailable",
+                f"- Compiled EX5 path: {compiled_ex5_path}"
+                if compiled_ex5_path
+                else "- Compiled EX5 path: unavailable",
                 f"- Compile log path: {compile_log_path}" if compile_log_path else "- Compile log path: unavailable",
             ]
         ),
@@ -622,7 +644,9 @@ def run_mt5_incident_replay(
     if run_result.launch_status != "completed":
         notes.append("Replay did not complete cleanly; treat the MT5 harness as untrusted for incident attribution.")
     if harness_status == "harness_untrusted":
-        notes.append("Replay completed without a positive parsed Total Trades count; do not use this as strategy evidence.")
+        notes.append(
+            "Replay completed without a positive parsed Total Trades count; do not use this as strategy evidence."
+        )
     certification_report = _build_mt5_certification_report(
         settings,
         strategy_spec=replay_spec,
@@ -818,7 +842,9 @@ def _run_mt5_parity_mode(
         },
     )
     run_spec.config_path.write_text(
-        _tester_ini(candidate_id, run_spec, settings, parity_spec, _load_expected_signal_frame(packet.expected_signal_path)),
+        _tester_ini(
+            candidate_id, run_spec, settings, parity_spec, _load_expected_signal_frame(packet.expected_signal_path)
+        ),
         encoding="utf-8",
     )
     _clear_previous_parity_outputs(run_spec)
@@ -907,15 +933,25 @@ def _run_mt5_parity_mode(
             "launch_status_path": str(run_result.launch_status_path),
             "tester_report_path": str(run_result.tester_report_path) if run_result.tester_report_path else "",
             "audit_csv_path": str(run_result.audit_csv_path) if run_result.audit_csv_path else "",
-            "broker_history_csv_path": str(run_result.broker_history_csv_path) if run_result.broker_history_csv_path else "",
+            "broker_history_csv_path": str(run_result.broker_history_csv_path)
+            if run_result.broker_history_csv_path
+            else "",
             "diagnostic_tick_windows_path": str(run_spec.run_dir / "diagnostic_tick_windows.csv")
             if (run_spec.run_dir / "diagnostic_tick_windows.csv").exists()
             else "",
-            "diagnostic_ticks_csv_path": str(run_result.diagnostic_ticks_csv_path) if run_result.diagnostic_ticks_csv_path else "",
-            "diagnostic_tick_analysis_path": str(diagnostic_tick_analysis_path) if diagnostic_tick_analysis_path else "",
+            "diagnostic_ticks_csv_path": str(run_result.diagnostic_ticks_csv_path)
+            if run_result.diagnostic_ticks_csv_path
+            else "",
+            "diagnostic_tick_analysis_path": str(diagnostic_tick_analysis_path)
+            if diagnostic_tick_analysis_path
+            else "",
             "validation_report_path": str(validation_report.report_path),
-            "diagnostics_report_path": str(validation_report.diagnostics_report_path) if validation_report.diagnostics_report_path else "",
-            "mt5_certification_report_path": str(certification_report.report_path) if certification_report.report_path else "",
+            "diagnostics_report_path": str(validation_report.diagnostics_report_path)
+            if validation_report.diagnostics_report_path
+            else "",
+            "mt5_certification_report_path": str(certification_report.report_path)
+            if certification_report.report_path
+            else "",
             "mt5_parity_report_path": str(parity_report.report_path),
             "environment_snapshot_path": str(environment_snapshot.report_path),
         },
@@ -936,7 +972,9 @@ def _run_mt5_parity_mode(
             "baseline_reproduction_passed": certification_report.baseline_reproduction_passed,
             "certification_status": certification_report.certification.status,
         },
-        failure_code=None if diagnostic_only else _failure_code_from_classification(validation_report.failure_classification),
+        failure_code=None
+        if diagnostic_only
+        else _failure_code_from_classification(validation_report.failure_classification),
     )
     if validation_report.failure_classification and not diagnostic_only:
         append_failure_record(
@@ -955,9 +993,15 @@ def _run_mt5_parity_mode(
             artifact_paths={
                 "mt5_parity_report_path": str(parity_report.report_path),
                 "validation_report_path": str(validation_report.report_path),
-                "diagnostics_report_path": str(validation_report.diagnostics_report_path) if validation_report.diagnostics_report_path else "",
-                "diagnostic_ticks_csv_path": str(run_result.diagnostic_ticks_csv_path) if run_result.diagnostic_ticks_csv_path else "",
-                "mt5_certification_report_path": str(certification_report.report_path) if certification_report.report_path else "",
+                "diagnostics_report_path": str(validation_report.diagnostics_report_path)
+                if validation_report.diagnostics_report_path
+                else "",
+                "diagnostic_ticks_csv_path": str(run_result.diagnostic_ticks_csv_path)
+                if run_result.diagnostic_ticks_csv_path
+                else "",
+                "mt5_certification_report_path": str(certification_report.report_path)
+                if certification_report.report_path
+                else "",
             },
         )
     return parity_report
@@ -1038,7 +1082,10 @@ def validate_mt5_practice(
         failure_classification = "parity_failure"
     elif actual.empty or expected.empty:
         validation_status = "insufficient_evidence"
-    elif len(actual) < settings.validation.parity_min_closed_trades or len(expected) < settings.validation.parity_min_closed_trades:
+    elif (
+        len(actual) < settings.validation.parity_min_closed_trades
+        or len(expected) < settings.validation.parity_min_closed_trades
+    ):
         validation_status = "insufficient_evidence"
     else:
         uses_broker_history_baseline = expected_signal_source in {
@@ -1149,8 +1196,12 @@ def validate_mt5_practice(
             "validation_report_path": str(report_path),
             "audit_csv_path": str(audit_csv) if audit_csv else "",
             "expected_signal_path": str(expected_signal_path),
-            "broker_history_csv_path": str(broker_history_csv) if broker_history_csv and broker_history_csv.exists() else "",
-            "matched_trade_diagnostics_path": str(matched_trade_diagnostics_path) if matched_trade_diagnostics_path else "",
+            "broker_history_csv_path": str(broker_history_csv)
+            if broker_history_csv and broker_history_csv.exists()
+            else "",
+            "matched_trade_diagnostics_path": str(matched_trade_diagnostics_path)
+            if matched_trade_diagnostics_path
+            else "",
             "diagnostics_report_path": str(diagnostics_report_path) if diagnostics_report_path else "",
             "environment_snapshot_path": str(environment_snapshot.report_path),
         },
@@ -1186,7 +1237,9 @@ def validate_mt5_practice(
             artifact_paths={
                 "validation_report_path": str(report_path),
                 "diagnostics_report_path": str(diagnostics_report_path) if diagnostics_report_path else "",
-                "matched_trade_diagnostics_path": str(matched_trade_diagnostics_path) if matched_trade_diagnostics_path else "",
+                "matched_trade_diagnostics_path": str(matched_trade_diagnostics_path)
+                if matched_trade_diagnostics_path
+                else "",
             },
         )
     return report
@@ -1255,13 +1308,7 @@ def _resolve_effective_parity_policy(
         }
 
     furthest_depth = max(depth for _, depth in seeded_matches)
-    root_seed_candidates = sorted(
-        {
-            lane.seed_candidate_id
-            for lane, depth in seeded_matches
-            if depth == furthest_depth
-        }
-    )
+    root_seed_candidates = sorted({lane.seed_candidate_id for lane, depth in seeded_matches if depth == furthest_depth})
     if len(root_seed_candidates) != 1:
         raise ParityPolicyError(
             f"parity_policy_ambiguous_root:family={spec.family}:hypothesis_class={spec.entry_style}:candidate={candidate_id}"
@@ -1396,7 +1443,9 @@ def _build_mt5_certification_report(
     login, broker_server = _configured_mt5_account(_run_spec_terminal_data_path(run_spec, settings))
     certification_notes = list(notes or [])
     if deployment_target:
-        certification_notes.append("Official parity authority is granted only through deployment-grade MT5 certification.")
+        certification_notes.append(
+            "Official parity authority is granted only through deployment-grade MT5 certification."
+        )
     if tick_provenance == "unknown":
         certification_notes.append("Tick provenance could not be derived from the configured tester mode.")
     certification_status = _resolve_mt5_certification_status(
@@ -1635,7 +1684,14 @@ def _load_diagnostic_windows_frame(path: Path) -> pd.DataFrame:
         return pd.DataFrame()
     if frame.empty:
         return pd.DataFrame()
-    required = {"window_id", "side", "expected_exit_reason", "actual_exit_reason", "expected_exit_utc", "actual_exit_utc"}
+    required = {
+        "window_id",
+        "side",
+        "expected_exit_reason",
+        "actual_exit_reason",
+        "expected_exit_utc",
+        "actual_exit_utc",
+    }
     if not required.issubset(set(frame.columns)):
         return pd.DataFrame()
     normalized = frame.copy()
@@ -1689,7 +1745,9 @@ def _load_diagnostic_ticks_frame(path: Path) -> pd.DataFrame:
     return normalized.dropna(subset=["timestamp_utc"]).reset_index(drop=True)
 
 
-def _analyze_diagnostic_tick_window(window_id: str, breach: dict[str, Any], window_ticks: pd.DataFrame) -> dict[str, Any]:
+def _analyze_diagnostic_tick_window(
+    window_id: str, breach: dict[str, Any], window_ticks: pd.DataFrame
+) -> dict[str, Any]:
     expected_exit_utc = _parse_optional_utc(breach.get("expected_exit_utc"))
     actual_exit_utc = _parse_optional_utc(breach.get("actual_exit_utc"))
     expected_stop = _optional_float(breach.get("expected_stop_loss_price"))
@@ -1708,8 +1766,12 @@ def _analyze_diagnostic_tick_window(window_id: str, breach: dict[str, Any], wind
         "likely_cause": str(breach.get("likely_cause", "")),
         "side": side,
         "tick_count": int(len(window_ticks)),
-        "window_start_utc": _format_optional_timestamp(window_ticks["timestamp_utc"].min()) if not window_ticks.empty else None,
-        "window_end_utc": _format_optional_timestamp(window_ticks["timestamp_utc"].max()) if not window_ticks.empty else None,
+        "window_start_utc": _format_optional_timestamp(window_ticks["timestamp_utc"].min())
+        if not window_ticks.empty
+        else None,
+        "window_end_utc": _format_optional_timestamp(window_ticks["timestamp_utc"].max())
+        if not window_ticks.empty
+        else None,
         "expected_exit_reason": str(breach.get("expected_exit_reason", "")),
         "actual_exit_reason": str(breach.get("actual_exit_reason", "")),
         "expected_exit_timestamp_utc": _format_optional_timestamp(expected_exit_utc),
@@ -1798,8 +1860,12 @@ def _parity_run_spec_from_packet(
     diagnostic_only: bool = False,
 ) -> MT5RunSpec:
     packet_spec = MT5RunSpec.model_validate(read_json(packet.run_spec_path))
-    resolved_terminal_path = Path(packet_spec.terminal_path) if packet_spec.terminal_path else _resolve_terminal_path(settings)
-    resolved_terminal_data_path = packet.terminal_data_path or _resolve_terminal_data_path(settings, resolved_terminal_path)
+    resolved_terminal_path = (
+        Path(packet_spec.terminal_path) if packet_spec.terminal_path else _resolve_terminal_path(settings)
+    )
+    resolved_terminal_data_path = packet.terminal_data_path or _resolve_terminal_data_path(
+        settings, resolved_terminal_path
+    )
     terminal_path, terminal_data_path, _ = _prepare_automated_terminal_runtime(
         settings,
         terminal_path=resolved_terminal_path,
@@ -1888,8 +1954,12 @@ def _manual_run_spec_from_packet(
     base_terminal_path = _resolve_terminal_path(settings)
     base_terminal_data_path = _resolve_terminal_data_path(settings, base_terminal_path)
     base_metaeditor_path = _resolve_metaeditor_path(base_terminal_path)
-    resolved_terminal_path = Path(packet_spec.terminal_path) if packet_spec.terminal_path else _resolve_terminal_path(settings)
-    resolved_terminal_data_path = packet.terminal_data_path or _resolve_terminal_data_path(settings, resolved_terminal_path)
+    resolved_terminal_path = (
+        Path(packet_spec.terminal_path) if packet_spec.terminal_path else _resolve_terminal_path(settings)
+    )
+    resolved_terminal_data_path = packet.terminal_data_path or _resolve_terminal_data_path(
+        settings, resolved_terminal_path
+    )
     terminal_path, terminal_data_path, metaeditor_path = _prepare_automated_terminal_runtime(
         settings,
         terminal_path=resolved_terminal_path,
@@ -1897,7 +1967,9 @@ def _manual_run_spec_from_packet(
     )
     audit_relative_path = _audit_relative_path(packet.candidate_id, run_id, settings)
     broker_history_relative_path = _run_scoped_broker_history_relative_path(packet.candidate_id, run_id, settings)
-    diagnostic_windows_relative_path = _run_scoped_diagnostic_windows_relative_path(packet.candidate_id, run_id, settings)
+    diagnostic_windows_relative_path = _run_scoped_diagnostic_windows_relative_path(
+        packet.candidate_id, run_id, settings
+    )
     diagnostic_ticks_relative_path = _run_scoped_diagnostic_ticks_relative_path(packet.candidate_id, run_id, settings)
     runtime_summary_relative_path = _run_scoped_runtime_summary_relative_path(packet.candidate_id, run_id, settings)
     signal_trace_relative_path = _run_scoped_signal_trace_relative_path(packet.candidate_id, run_id, settings)
@@ -2060,8 +2132,7 @@ def _signal_trace_expected_signal_frame(
     if broker_history.empty or signal_trace.empty:
         return pd.DataFrame(columns=EXPECTED_SIGNAL_COLUMNS)
     timestamp_to_index = {
-        pd.Timestamp(timestamp): int(index)
-        for index, timestamp in broker_history["timestamp_utc"].items()
+        pd.Timestamp(timestamp): int(index) for index, timestamp in broker_history["timestamp_utc"].items()
     }
     pip_scale = _pip_scale(spec.instrument)
     rows: list[dict[str, Any]] = []
@@ -2078,12 +2149,10 @@ def _signal_trace_expected_signal_frame(
         exit_result = _resolve_executable_exit(broker_history, entry_index, signal_value, entry_price, spec, pip_scale)
         if exit_result is None:
             continue
-        exit_timestamp = broker_history.iloc[int(exit_result["exit_index"])] ["timestamp_utc"]
+        exit_timestamp = broker_history.iloc[int(exit_result["exit_index"])]["timestamp_utc"]
         exit_price = float(exit_result["exit_price"])
         pnl_pips = (
-            (exit_price - entry_price) * pip_scale
-            if signal_value > 0
-            else (entry_price - exit_price) * pip_scale
+            (exit_price - entry_price) * pip_scale if signal_value > 0 else (entry_price - exit_price) * pip_scale
         )
         rows.append(
             {
@@ -2120,7 +2189,14 @@ def _trade_ledger_expected_signal_frame(report_dir: Path, candidate_id: str) -> 
     expected["candidate_id"] = candidate_id
     for column in EXPECTED_SIGNAL_COLUMNS:
         if column not in expected.columns:
-            if column in {"timestamp_utc", "exit_timestamp_utc", "side", "candidate_id", "exit_reason", "collision_resolution"}:
+            if column in {
+                "timestamp_utc",
+                "exit_timestamp_utc",
+                "side",
+                "candidate_id",
+                "exit_reason",
+                "collision_resolution",
+            }:
                 expected[column] = ""
             elif column == "same_bar_collision":
                 expected[column] = False
@@ -2130,7 +2206,10 @@ def _trade_ledger_expected_signal_frame(report_dir: Path, candidate_id: str) -> 
 
 
 def _executable_expected_signal_frame(settings: Settings, spec: StrategySpec, candidate_id: str) -> pd.DataFrame:
-    parquet_path = settings.paths().normalized_research_dir / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    parquet_path = (
+        settings.paths().normalized_research_dir
+        / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
+    )
     if not parquet_path.exists():
         return pd.DataFrame(columns=EXPECTED_SIGNAL_COLUMNS)
     raw = pd.read_parquet(parquet_path)
@@ -2172,7 +2251,10 @@ def _executable_expected_signal_frame_from_market_frame(
         entry_row = features.iloc[index]
         signal_row = features.iloc[index - 1]
 
-        if spec.session_policy.allowed_hours_utc and int(entry_row["hour"]) not in spec.session_policy.allowed_hours_utc:
+        if (
+            spec.session_policy.allowed_hours_utc
+            and int(entry_row["hour"]) not in spec.session_policy.allowed_hours_utc
+        ):
             continue
         if float(entry_row["spread_pips"]) > spec.risk_envelope.max_spread_allowed_pips:
             continue
@@ -2257,9 +2339,13 @@ def _normalize_broker_history_frame(frame: pd.DataFrame) -> pd.DataFrame:
             normalized[column] = 0.0
         normalized[column] = pd.to_numeric(normalized[column], errors="coerce").fillna(0.0)
     normalized = _ensure_market_mid_columns(normalized)
-    normalized = normalized.dropna(subset=["timestamp_utc"]).sort_values("timestamp_utc").drop_duplicates(
-        subset=["timestamp_utc"],
-        keep="last",
+    normalized = (
+        normalized.dropna(subset=["timestamp_utc"])
+        .sort_values("timestamp_utc")
+        .drop_duplicates(
+            subset=["timestamp_utc"],
+            keep="last",
+        )
     )
     return normalized.reset_index(drop=True)
 
@@ -2280,9 +2366,13 @@ def _load_signal_trace_frame(path: Path) -> pd.DataFrame:
         if column not in normalized.columns:
             normalized[column] = 0.0
         normalized[column] = pd.to_numeric(normalized[column], errors="coerce").fillna(0.0)
-    normalized = normalized.dropna(subset=["timestamp_utc"]).sort_values("timestamp_utc").drop_duplicates(
-        subset=["timestamp_utc"],
-        keep="last",
+    normalized = (
+        normalized.dropna(subset=["timestamp_utc"])
+        .sort_values("timestamp_utc")
+        .drop_duplicates(
+            subset=["timestamp_utc"],
+            keep="last",
+        )
     )
     return normalized.reset_index(drop=True)
 
@@ -2326,8 +2416,7 @@ def _constrain_expected_frame_to_packet_range(expected: pd.DataFrame, packet_exp
     else:
         stop = pd.to_datetime(normalized_packet["timestamp_utc"], utc=True, errors="coerce").max()
     constrained = normalized_expected.loc[
-        (normalized_expected["timestamp_utc"] >= start)
-        & (normalized_expected["timestamp_utc"] <= stop)
+        (normalized_expected["timestamp_utc"] >= start) & (normalized_expected["timestamp_utc"] <= stop)
     ]
     if "exit_timestamp_utc" in constrained.columns:
         constrained = constrained.loc[
@@ -2466,7 +2555,11 @@ def _resolve_executable_exit(
 def _normalize_expected_frame(frame: pd.DataFrame) -> pd.DataFrame:
     normalized = frame.copy()
     normalized["timestamp_utc"] = pd.to_datetime(normalized["timestamp_utc"], utc=True, errors="coerce")
-    exit_series = normalized["exit_timestamp_utc"] if "exit_timestamp_utc" in normalized.columns else pd.Series(pd.NaT, index=normalized.index)
+    exit_series = (
+        normalized["exit_timestamp_utc"]
+        if "exit_timestamp_utc" in normalized.columns
+        else pd.Series(pd.NaT, index=normalized.index)
+    )
     normalized["exit_timestamp_utc"] = pd.to_datetime(exit_series, utc=True, errors="coerce")
     normalized["side"] = normalized["side"].astype(str).str.lower().str.strip()
     for column in ("entry_price", "exit_price", "pnl_pips"):
@@ -2546,14 +2639,13 @@ def _match_expected_to_actual(
     if spec is not None and broker_history_frame is not None and not broker_history_frame.empty:
         executable_features = build_features(_ensure_market_mid_columns(broker_history_frame)).reset_index(drop=True)
         feature_index_by_timestamp = {
-            pd.Timestamp(timestamp): int(index)
-            for index, timestamp in executable_features["timestamp_utc"].items()
+            pd.Timestamp(timestamp): int(index) for index, timestamp in executable_features["timestamp_utc"].items()
         }
         pip_scale = _pip_scale(spec.instrument)
     for expected_index, expected_row in expected.iterrows():
         best_actual_index: int | None = None
         best_score: float | None = None
-        best_exit_delta = 0.0
+        _best_exit_delta = 0.0
         for actual_index, actual_row in actual.iterrows():
             if actual_index in used_actual:
                 continue
@@ -2567,7 +2659,7 @@ def _match_expected_to_actual(
             if best_score is None or score < best_score:
                 best_actual_index = actual_index
                 best_score = score
-                best_exit_delta = exit_delta
+                _best_exit_delta = exit_delta
         if best_actual_index is None:
             continue
         used_actual.add(best_actual_index)
@@ -2585,7 +2677,8 @@ def _match_expected_to_actual(
         if (
             executable_features is not None
             and spec is not None
-            and _price_delta_pips(expected_row["entry_price"], actual_row["entry_price"]) <= settings.validation.parity_price_tolerance_pips
+            and _price_delta_pips(expected_row["entry_price"], actual_row["entry_price"])
+            <= settings.validation.parity_price_tolerance_pips
         ):
             adjusted_exit = _matched_actual_fill_exit_baseline(
                 executable_features=executable_features,
@@ -2676,9 +2769,12 @@ def _match_expected_to_actual(
                 "actual_take_profit_price": round(float(actual_row.get("take_profit_price", 0.0)), 6),
                 "expected_same_bar_collision": expected_same_bar_collision,
                 "actual_same_bar_collision": bool(actual_row.get("same_bar_collision", False)),
-                "same_bar_collision_match": expected_same_bar_collision == bool(actual_row.get("same_bar_collision", False)),
+                "same_bar_collision_match": expected_same_bar_collision
+                == bool(actual_row.get("same_bar_collision", False)),
                 "expected_collision_resolution": expected_collision_resolution,
-                "baseline_expected_exit_timestamp_utc": _format_optional_timestamp(expected_row.get("exit_timestamp_utc")),
+                "baseline_expected_exit_timestamp_utc": _format_optional_timestamp(
+                    expected_row.get("exit_timestamp_utc")
+                ),
                 "baseline_expected_exit_price": round(float(expected_row["exit_price"]), 6),
                 "baseline_expected_pnl_pips": round(float(expected_row["pnl_pips"]), 6),
                 "baseline_expected_exit_reason": str(expected_row.get("exit_reason", "")),
@@ -2687,7 +2783,9 @@ def _match_expected_to_actual(
                 "comparison_basis": comparison_basis,
                 "boundary_ambiguous_close_timing": bool(boundary_ambiguous_close_timing),
                 "boundary_ambiguous_exit_semantics": bool(boundary_ambiguous_exit_semantics),
-                "entry_price_delta_pips": round(_price_delta_pips(expected_row["entry_price"], actual_row["entry_price"]), 6),
+                "entry_price_delta_pips": round(
+                    _price_delta_pips(expected_row["entry_price"], actual_row["entry_price"]), 6
+                ),
                 "exit_price_delta_pips": round(_price_delta_pips(expected_exit_price, actual_row["exit_price"]), 6),
                 "fill_delta_pips": round(abs(float(expected_pnl_pips) - float(actual_row["pnl_pips"])), 6),
                 "close_timing_delta_seconds": round(
@@ -2720,15 +2818,15 @@ def _matched_actual_fill_exit_baseline(
     if entry_index is None:
         return None
     signal = 1 if side == "long" else -1
-    exit_result = _resolve_executable_exit(executable_features, entry_index, signal, actual_entry_price, spec, pip_scale)
+    exit_result = _resolve_executable_exit(
+        executable_features, entry_index, signal, actual_entry_price, spec, pip_scale
+    )
     if exit_result is None:
         return None
     exit_timestamp = executable_features.iloc[int(exit_result["exit_index"])]["timestamp_utc"]
     exit_price = float(exit_result["exit_price"])
     pnl_pips = (
-        (exit_price - actual_entry_price) * pip_scale
-        if signal > 0
-        else (actual_entry_price - exit_price) * pip_scale
+        (exit_price - actual_entry_price) * pip_scale if signal > 0 else (actual_entry_price - exit_price) * pip_scale
     )
     return {
         "exit_timestamp_utc": _format_optional_timestamp(exit_timestamp),
@@ -2855,7 +2953,12 @@ def _is_expected_boundary_ambiguous_timeout(
 ) -> bool:
     if actual_exit_reason != "timeout" or expected_exit_reason not in {"stop_loss", "take_profit"}:
         return False
-    if expected_exit_timestamp is None or pd.isna(expected_exit_timestamp) or actual_exit_timestamp is None or pd.isna(actual_exit_timestamp):
+    if (
+        expected_exit_timestamp is None
+        or pd.isna(expected_exit_timestamp)
+        or actual_exit_timestamp is None
+        or pd.isna(actual_exit_timestamp)
+    ):
         return False
     entry_index = _resolve_feature_entry_index(
         feature_index_by_timestamp,
@@ -2985,7 +3088,12 @@ def _boundary_hit_window(
 
 
 def _optional_timestamp_delta_seconds(expected_timestamp: Any, actual_timestamp: Any) -> float:
-    if expected_timestamp is None or pd.isna(expected_timestamp) or actual_timestamp is None or pd.isna(actual_timestamp):
+    if (
+        expected_timestamp is None
+        or pd.isna(expected_timestamp)
+        or actual_timestamp is None
+        or pd.isna(actual_timestamp)
+    ):
         return 0.0
     expected_ts = pd.Timestamp(expected_timestamp)
     if expected_ts.tzinfo is None:
@@ -3094,7 +3202,9 @@ def _write_parity_diagnostics(
             diagnostics_frame["close_timing_delta_seconds"] > settings.validation.parity_close_timing_tolerance_seconds
         )
         pure_timing_match = (
-            diagnostics_frame.get("exit_reason_match", pd.Series(False, index=diagnostics_frame.index, dtype=bool)).fillna(False).astype(bool)
+            diagnostics_frame.get("exit_reason_match", pd.Series(False, index=diagnostics_frame.index, dtype=bool))
+            .fillna(False)
+            .astype(bool)
             & (diagnostics_frame["exit_price_delta_pips"] <= settings.validation.parity_price_tolerance_pips)
             & (diagnostics_frame["fill_delta_pips"] <= settings.validation.parity_fill_tolerance_pips)
         )
@@ -3133,17 +3243,28 @@ def _write_parity_diagnostics(
 
     summary = _parity_diagnostics_summary(diagnostics_frame)
     breach_counts = {
-        "entry_price": int(diagnostics_frame["breach_entry_price"].sum()) if "breach_entry_price" in diagnostics_frame else 0,
-        "exit_price": int(diagnostics_frame["breach_exit_price"].sum()) if "breach_exit_price" in diagnostics_frame else 0,
-        "fill_delta": int(diagnostics_frame["breach_fill_delta"].sum()) if "breach_fill_delta" in diagnostics_frame else 0,
-        "close_timing": int(diagnostics_frame["breach_close_timing"].sum()) if "breach_close_timing" in diagnostics_frame else 0,
-        "exit_reason_mismatch": int(diagnostics_frame["breach_exit_reason"].sum()) if "breach_exit_reason" in diagnostics_frame else 0,
-        "same_bar_collision_mismatch": int(diagnostics_frame["breach_same_bar_collision"].sum()) if "breach_same_bar_collision" in diagnostics_frame else 0,
+        "entry_price": int(diagnostics_frame["breach_entry_price"].sum())
+        if "breach_entry_price" in diagnostics_frame
+        else 0,
+        "exit_price": int(diagnostics_frame["breach_exit_price"].sum())
+        if "breach_exit_price" in diagnostics_frame
+        else 0,
+        "fill_delta": int(diagnostics_frame["breach_fill_delta"].sum())
+        if "breach_fill_delta" in diagnostics_frame
+        else 0,
+        "close_timing": int(diagnostics_frame["breach_close_timing"].sum())
+        if "breach_close_timing" in diagnostics_frame
+        else 0,
+        "exit_reason_mismatch": int(diagnostics_frame["breach_exit_reason"].sum())
+        if "breach_exit_reason" in diagnostics_frame
+        else 0,
+        "same_bar_collision_mismatch": int(diagnostics_frame["breach_same_bar_collision"].sum())
+        if "breach_same_bar_collision" in diagnostics_frame
+        else 0,
         "any_breach": int(diagnostics_frame["breach_any"].sum()) if "breach_any" in diagnostics_frame else 0,
     }
     likely_causes = (
-        diagnostics_frame.loc[diagnostics_frame.get("breach_any", pd.Series(dtype=bool))]
-        ["likely_cause"]
+        diagnostics_frame.loc[diagnostics_frame.get("breach_any", pd.Series(dtype=bool))]["likely_cause"]
         .value_counts()
         .to_dict()
         if "likely_cause" in diagnostics_frame
@@ -3245,8 +3366,10 @@ def _classify_parity_breach_row(row: pd.Series) -> str:
         actual_reason = str(row.get("actual_exit_reason", "")).strip().lower()
         if "timeout" in {expected_reason, actual_reason}:
             return "timeout_rule_mismatch"
-        if bool(row.get("breach_same_bar_collision")) or bool(row.get("expected_same_bar_collision")) or bool(
-            row.get("actual_same_bar_collision")
+        if (
+            bool(row.get("breach_same_bar_collision"))
+            or bool(row.get("expected_same_bar_collision"))
+            or bool(row.get("actual_same_bar_collision"))
         ):
             return "intrabar_collision_mismatch"
         return "exit_reason_mismatch"
@@ -3276,7 +3399,9 @@ def _primary_failure_mode(
         return max(likely_cause_severity.items(), key=lambda item: item[1])[0]
     if likely_causes:
         return max(likely_causes.items(), key=lambda item: item[1])[0]
-    if breach_counts["exit_price"] >= max(breach_counts["entry_price"], breach_counts["fill_delta"], breach_counts["close_timing"]):
+    if breach_counts["exit_price"] >= max(
+        breach_counts["entry_price"], breach_counts["fill_delta"], breach_counts["close_timing"]
+    ):
         return "exit_semantics_drift"
     if breach_counts["close_timing"] > 0:
         return "timeout_or_bar_close_drift"
@@ -3344,7 +3469,9 @@ def _run_scoped_signal_trace_relative_path(candidate_id: str, run_id: str, setti
     return f"{settings.mt5_env.audit_subdirectory}\\{candidate_id}__{run_id}__signal_trace.csv"
 
 
-def _resolve_audit_output_path(settings: Settings, terminal_data_path: Path | None, audit_relative_path: str) -> Path | None:
+def _resolve_audit_output_path(
+    settings: Settings, terminal_data_path: Path | None, audit_relative_path: str
+) -> Path | None:
     if settings.mt5_env.audit_file_mode != "common_files":
         if terminal_data_path is None:
             return None
@@ -3567,27 +3694,27 @@ def _logic_manifest_hash(
 
 def _normalized_rendered_source(rendered_source: str) -> str:
     normalized = re.sub(
-        r'input string InpPacketRunId = .*?;',
+        r"input string InpPacketRunId = .*?;",
         'input string InpPacketRunId = "__RUN_ID__";',
         rendered_source,
     )
     normalized = re.sub(
-        r'input string InpAuditRelativePath = .*?;',
+        r"input string InpAuditRelativePath = .*?;",
         'input string InpAuditRelativePath = "__AUDIT_PATH__";',
         normalized,
     )
     normalized = re.sub(
-        r'input string InpBrokerHistoryRelativePath = .*?;',
+        r"input string InpBrokerHistoryRelativePath = .*?;",
         'input string InpBrokerHistoryRelativePath = "__BROKER_HISTORY_PATH__";',
         normalized,
     )
     normalized = re.sub(
-        r'input string InpDiagnosticWindowsRelativePath = .*?;',
+        r"input string InpDiagnosticWindowsRelativePath = .*?;",
         'input string InpDiagnosticWindowsRelativePath = "__DIAGNOSTIC_WINDOWS_PATH__";',
         normalized,
     )
     normalized = re.sub(
-        r'input string InpDiagnosticTicksRelativePath = .*?;',
+        r"input string InpDiagnosticTicksRelativePath = .*?;",
         'input string InpDiagnosticTicksRelativePath = "__DIAGNOSTIC_TICKS_PATH__";',
         normalized,
     )
@@ -3753,10 +3880,14 @@ def _launch_mt5_tester(run_spec: MT5RunSpec, settings: Settings) -> MT5RunResult
             "tester_report_path": str(archived_tester_report_path) if archived_tester_report_path else None,
             "audit_csv_path": str(archived_audit_path) if archived_audit_path else None,
             "broker_history_csv_path": str(archived_broker_history_path) if archived_broker_history_path else None,
-            "diagnostic_ticks_csv_path": str(archived_diagnostic_ticks_path) if archived_diagnostic_ticks_path else None,
+            "diagnostic_ticks_csv_path": str(archived_diagnostic_ticks_path)
+            if archived_diagnostic_ticks_path
+            else None,
             "runtime_summary_json_path": str(archived_runtime_summary_path) if archived_runtime_summary_path else None,
             "signal_trace_csv_path": str(archived_signal_trace_path) if archived_signal_trace_path else None,
-            "tester_inputs_profile_path": str(run_spec.tester_inputs_profile_path) if run_spec.tester_inputs_profile_path else None,
+            "tester_inputs_profile_path": str(run_spec.tester_inputs_profile_path)
+            if run_spec.tester_inputs_profile_path
+            else None,
             "started_utc": started_utc.isoformat().replace("+00:00", "Z"),
             "finished_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
             "stdout": stdout[-4000:],
@@ -3866,7 +3997,10 @@ def _tester_date_range(expected_signal_frame: pd.DataFrame) -> tuple[str, str]:
         return now.strftime("%Y.%m.%d"), now.strftime("%Y.%m.%d")
     start_series = pd.to_datetime(expected_signal_frame["timestamp_utc"], utc=True, errors="coerce")
     start = start_series.min().to_pydatetime().astimezone(UTC)
-    if "exit_timestamp_utc" in expected_signal_frame.columns and expected_signal_frame["exit_timestamp_utc"].notna().any():
+    if (
+        "exit_timestamp_utc" in expected_signal_frame.columns
+        and expected_signal_frame["exit_timestamp_utc"].notna().any()
+    ):
         stop_series = pd.to_datetime(expected_signal_frame["exit_timestamp_utc"], utc=True, errors="coerce")
         stop = stop_series.max().to_pydatetime().astimezone(UTC)
     else:
@@ -4225,23 +4359,71 @@ def _tester_inputs_profile_content(run_spec: MT5RunSpec, spec: StrategySpec) -> 
         ("InpSignalThreshold", f"{spec.signal_threshold:.5f}", True),
         ("InpStopLossPips", f"{spec.stop_loss_pips:.5f}", True),
         ("InpTakeProfitPips", f"{spec.take_profit_pips:.5f}", True),
-        ("InpMaxSpreadPips", f"{_profile_float_or_default(filters.get('max_spread_pips'), spec.risk_envelope.max_spread_allowed_pips):.5f}", True),
+        (
+            "InpMaxSpreadPips",
+            f"{_profile_float_or_default(filters.get('max_spread_pips'), spec.risk_envelope.max_spread_allowed_pips):.5f}",
+            True,
+        ),
         ("InpMinVolatility20", f"{_profile_float_or_default(filters.get('min_volatility_20'), 0.0):.8f}", True),
         ("InpBreakoutZscoreFloor", f"{_profile_float_or_default(filters.get('breakout_zscore_floor'), 0.0):.5f}", True),
-        ("InpMaxRangeWidth10Pips", f"{_profile_float_or_default(filters.get('max_range_width_10_pips'), 0.0):.5f}", True),
-        ("InpCompressionRangePositionFloor", f"{_profile_float_or_default(filters.get('compression_range_position_floor'), 0.65):.5f}", True),
-        ("InpExtensionZscoreFloor", f"{_profile_float_or_default(filters.get('extension_zscore_floor'), 0.0):.5f}", True),
-        ("InpReclaimRangePositionFloor", f"{_profile_float_or_default(filters.get('reclaim_range_position_floor'), 0.12):.5f}", True),
-        ("InpReclaimRangePositionCeiling", f"{_profile_float_or_default(filters.get('reclaim_range_position_ceiling'), 0.42):.5f}", True),
-        ("InpReclaimMomentumCeiling", f"{_profile_float_or_default(filters.get('reclaim_momentum_ceiling'), 4.0):.5f}", True),
+        (
+            "InpMaxRangeWidth10Pips",
+            f"{_profile_float_or_default(filters.get('max_range_width_10_pips'), 0.0):.5f}",
+            True,
+        ),
+        (
+            "InpCompressionRangePositionFloor",
+            f"{_profile_float_or_default(filters.get('compression_range_position_floor'), 0.65):.5f}",
+            True,
+        ),
+        (
+            "InpExtensionZscoreFloor",
+            f"{_profile_float_or_default(filters.get('extension_zscore_floor'), 0.0):.5f}",
+            True,
+        ),
+        (
+            "InpReclaimRangePositionFloor",
+            f"{_profile_float_or_default(filters.get('reclaim_range_position_floor'), 0.12):.5f}",
+            True,
+        ),
+        (
+            "InpReclaimRangePositionCeiling",
+            f"{_profile_float_or_default(filters.get('reclaim_range_position_ceiling'), 0.42):.5f}",
+            True,
+        ),
+        (
+            "InpReclaimMomentumCeiling",
+            f"{_profile_float_or_default(filters.get('reclaim_momentum_ceiling'), 4.0):.5f}",
+            True,
+        ),
         ("InpRet5Floor", f"{_profile_float_or_default(filters.get('ret_5_floor'), 0.0):.8f}", True),
         ("InpTrendRet5Min", f"{_profile_float_or_default(filters.get('trend_ret_5_min'), 0.0):.8f}", True),
-        ("InpPullbackZscoreLimit", f"{_profile_float_or_default(filters.get('pullback_zscore_limit'), 0.45):.5f}", True),
+        (
+            "InpPullbackZscoreLimit",
+            f"{_profile_float_or_default(filters.get('pullback_zscore_limit'), 0.45):.5f}",
+            True,
+        ),
         ("InpRetestZscoreLimit", f"{_profile_float_or_default(filters.get('retest_zscore_limit'), 0.35):.5f}", True),
-        ("InpRetestRangePositionFloor", f"{_profile_float_or_default(filters.get('retest_range_position_floor'), 0.52):.5f}", True),
-        ("InpContinuationZscoreFloor", f"{_profile_float_or_default(filters.get('continuation_zscore_floor'), 0.08):.5f}", True),
-        ("InpContinuationZscoreCeiling", f"{_profile_float_or_default(filters.get('continuation_zscore_ceiling'), 0.72):.5f}", True),
-        ("InpContinuationRangePositionFloor", f"{_profile_float_or_default(filters.get('continuation_range_position_floor'), 0.60):.5f}", True),
+        (
+            "InpRetestRangePositionFloor",
+            f"{_profile_float_or_default(filters.get('retest_range_position_floor'), 0.52):.5f}",
+            True,
+        ),
+        (
+            "InpContinuationZscoreFloor",
+            f"{_profile_float_or_default(filters.get('continuation_zscore_floor'), 0.08):.5f}",
+            True,
+        ),
+        (
+            "InpContinuationZscoreCeiling",
+            f"{_profile_float_or_default(filters.get('continuation_zscore_ceiling'), 0.72):.5f}",
+            True,
+        ),
+        (
+            "InpContinuationRangePositionFloor",
+            f"{_profile_float_or_default(filters.get('continuation_range_position_floor'), 0.60):.5f}",
+            True,
+        ),
         ("InpFadeRet5Floor", f"{_profile_float_or_default(filters.get('fade_ret_5_floor'), 0.0):.8f}", True),
         ("InpFadeMomentumCeiling", f"{_profile_float_or_default(filters.get('fade_momentum_ceiling'), 3.2):.5f}", True),
         ("InpRequireRet5Alignment", _bool_profile_value(filters.get("require_ret_5_alignment")), False),
@@ -4436,8 +4618,7 @@ def deploy_and_compile_candidate_ea(
     source_path = packet_dir / "CandidateEA.mq5"
     if not source_path.exists():
         raise FileNotFoundError(
-            f"Packet source not found: {source_path}. "
-            f"Run 'generate-mt5-packet --candidate-id {candidate_id}' first."
+            f"Packet source not found: {source_path}. Run 'generate-mt5-packet --candidate-id {candidate_id}' first."
         )
     terminal_path = _resolve_terminal_path(settings)
     terminal_data_path = _resolve_terminal_data_path(settings, terminal_path)

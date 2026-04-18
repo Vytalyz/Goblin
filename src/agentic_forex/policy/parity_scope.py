@@ -12,7 +12,6 @@ from agentic_forex.config.models import ParityClass, ProgramLanePolicy
 from agentic_forex.governance.models import AutonomousManagerReport
 from agentic_forex.utils.io import read_json, write_json
 
-
 ScopeStatus = Literal[
     "in_scope_under_current_m1",
     "blocked_tick_required_pending_official_standard",
@@ -322,7 +321,10 @@ def _write_parity_lineage_audit_doc(settings: Settings, report: ParityScopeAudit
                 ]
             )
             if any(candidate.candidate_id == "AF-CAND-0239" for candidate in report.frozen_reference_candidates):
-                if lineage.family == "session_momentum_band_research" and lineage.hypothesis_class == "session_momentum_band":
+                if (
+                    lineage.family == "session_momentum_band_research"
+                    and lineage.hypothesis_class == "session_momentum_band"
+                ):
                     lines.append(
                         "    - `AF-CAND-0239` remains frozen as `research-valid, parity-blocked, operationally unproven under current official M1 parity standard`"
                     )
@@ -503,11 +505,7 @@ def _write_parity_operator_matrix_doc(settings: Settings, report: ParityScopeAud
     )
 
     archival_families = sorted(
-        {
-            lineage.family
-            for lineage in report.lineages
-            if lineage.current_scope_status == "archival_or_reference_only"
-        }
+        {lineage.family for lineage in report.lineages if lineage.current_scope_status == "archival_or_reference_only"}
     )
     lines.extend(["", "## Archival Or Reference-Only Families", ""])
     if archival_families:
@@ -527,7 +525,7 @@ def _write_parity_operator_matrix_doc(settings: Settings, report: ParityScopeAud
             "",
             "## Working Rule",
             "",
-            '- Only explicit `m1_official` lineages are currently eligible for official parity.',
+            "- Only explicit `m1_official` lineages are currently eligible for official parity.",
             "- `<unset>` never means implicit `m1_official`.",
             "- Diagnostic parity may be used to explain failures, but it cannot establish promotion truth.",
             "- If a review-needed lineage is reopened, classify it prospectively before any official parity run.",

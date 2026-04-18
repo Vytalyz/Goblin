@@ -1,12 +1,12 @@
 from __future__ import annotations
 
+from conftest import create_oanda_candles_json
+
 from agentic_forex.backtesting.benchmark import build_scalping_variants, run_scalping_benchmark
 from agentic_forex.market_data.ingest import ingest_oanda_json
 from agentic_forex.nodes.toolkit import compile_strategy_spec_tool
 from agentic_forex.runtime import ReadPolicy
 from agentic_forex.workflows.contracts import CandidateDraft, MarketContextSummary, StrategySpec
-
-from conftest import create_oanda_candles_json
 
 
 def test_scalping_benchmark_generates_ranked_variants(settings, tmp_path):

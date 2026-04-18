@@ -3,9 +3,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from pathlib import Path
 
-from agentic_forex.backtesting.engine import run_backtest, run_stress_test
 from agentic_forex.config import Settings
-from agentic_forex.evals.graders import grade_candidate
 from agentic_forex.experiments.models import ScalpingIterationReport, ScalpingIterationVariant
 from agentic_forex.experiments.service import compare_experiments
 from agentic_forex.llm import MockLLMClient
@@ -73,7 +71,9 @@ def iterate_scalping_target(
         drawdown = float(backtest_summary["max_drawdown_pct"])
         stress_passed = bool(backtest_summary["stress_passed"])
         kept_oos_guardrail = oos_pf >= oos_guardrail
-        meets_iteration_objective = bool(stress_passed and trade_count >= target_review.metrics["trade_count"] and kept_oos_guardrail)
+        meets_iteration_objective = bool(
+            stress_passed and trade_count >= target_review.metrics["trade_count"] and kept_oos_guardrail
+        )
         iteration_score = _iteration_score(
             target_trade_count=int(target_review.metrics["trade_count"]),
             trade_count=trade_count,
@@ -165,7 +165,7 @@ def _variant_candidate(target: CandidateDraft, settings: Settings, template: dic
         update={
             "candidate_id": next_candidate_id(settings),
             "title": template["title"],
-            "thesis": f'{template["thesis"]} Derived from {target.candidate_id} as an iteration target.',
+            "thesis": f"{template['thesis']} Derived from {target.candidate_id} as an iteration target.",
             "setup_summary": template["setup_summary"],
             "entry_summary": template["entry_summary"],
             "exit_summary": template["exit_summary"],
@@ -176,10 +176,10 @@ def _variant_candidate(target: CandidateDraft, settings: Settings, template: dic
                     "volatility_preference": template["volatility_preference"],
                     "allowed_hours_utc": template["allowed_hours_utc"],
                     "execution_notes": list(target.market_context.execution_notes)
-                    + [f'Iteration variant: {template["variant_label"]}.'],
+                    + [f"Iteration variant: {template['variant_label']}."],
                 }
             ),
-            "notes": list(target.notes) + [f'Iteration target derived from {target.candidate_id}.'],
+            "notes": list(target.notes) + [f"Iteration target derived from {target.candidate_id}."],
             "entry_style": "session_breakout",
             "holding_bars": template["holding_bars"],
             "signal_threshold": template["signal_threshold"],
@@ -220,13 +220,13 @@ def _apply_session_breakout_filters(spec: StrategySpec, template: dict) -> Strat
             "take_profit_pips": template["take_profit_pips"],
             "entry_logic": [
                 template["entry_summary"],
-                f'Signal threshold {template["signal_threshold"]}',
+                f"Signal threshold {template['signal_threshold']}",
             ],
             "exit_logic": [
                 template["exit_summary"],
-                f'Time exit after {template["holding_bars"]} bars',
+                f"Time exit after {template['holding_bars']} bars",
             ],
-            "notes": list(spec.notes) + [f'Iteration label: {template["variant_label"]}.'],
+            "notes": list(spec.notes) + [f"Iteration label: {template['variant_label']}."],
         }
     )
     return StrategySpec.model_validate(updated.model_dump(mode="json"))

@@ -21,7 +21,6 @@ from agentic_forex.governance.models import (
 )
 from agentic_forex.utils.io import read_json, write_json
 
-
 DEFAULT_BLOCKED_RELATED_CANDIDATES = {
     "AF-CAND-0263": ["AF-CAND-0263", "AF-CAND-0320", "AF-CAND-0332"],
 }
@@ -132,7 +131,9 @@ def run_production_incident_analysis(
         report_path=incident_dir / "incident_report.json",
     )
     write_json(report.report_path, report.model_dump(mode="json"))
-    write_json(settings.paths().incidents_dir / candidate_id / "latest_incident_report.json", report.model_dump(mode="json"))
+    write_json(
+        settings.paths().incidents_dir / candidate_id / "latest_incident_report.json", report.model_dump(mode="json")
+    )
     return report
 
 
@@ -251,9 +252,7 @@ def candidate_validation_suspended(candidate_id: str, settings: Settings) -> boo
     latest_paths = [incidents_dir / candidate_id / "latest_incident_report.json"]
     if incidents_dir.exists():
         latest_paths.extend(
-            path
-            for path in incidents_dir.glob("*/latest_incident_report.json")
-            if path != latest_paths[0]
+            path for path in incidents_dir.glob("*/latest_incident_report.json") if path != latest_paths[0]
         )
     suspended_ids = {candidate_id}
     for latest_path in latest_paths:
@@ -292,7 +291,16 @@ def _freeze_artifacts(settings: Settings, candidate_id: str, *, live_audit_path:
     if latest_run is not None:
         artifact_paths["latest_mt5_run_dir"] = str(latest_run)
         for candidate in latest_run.glob("*"):
-            if candidate.is_file() and candidate.suffix.lower() in {".mq5", ".ex5", ".set", ".ini", ".json", ".csv", ".htm", ".html"}:
+            if candidate.is_file() and candidate.suffix.lower() in {
+                ".mq5",
+                ".ex5",
+                ".set",
+                ".ini",
+                ".json",
+                ".csv",
+                ".htm",
+                ".html",
+            }:
                 artifact_hashes[f"latest_mt5_run/{candidate.name}"] = _sha256_file(candidate)
     if live_audit_path is not None and live_audit_path.exists():
         artifact_paths["live_audit_csv_path"] = str(live_audit_path)
@@ -309,7 +317,9 @@ def _freeze_artifacts(settings: Settings, candidate_id: str, *, live_audit_path:
     )
 
 
-def _build_harness_check(settings: Settings, candidate_id: str, baseline_tester_report: Path | None) -> TesterHarnessCheck:
+def _build_harness_check(
+    settings: Settings, candidate_id: str, baseline_tester_report: Path | None
+) -> TesterHarnessCheck:
     defaults = _known_good_window_defaults(settings, candidate_id)
     expected_min_trade_count = int(defaults.get("expected_min_trade_count", 1))
     observed_trade_count = parse_tester_report_trade_count(baseline_tester_report)
@@ -321,7 +331,9 @@ def _build_harness_check(settings: Settings, candidate_id: str, baseline_tester_
         notes = ["Baseline tester report could not be parsed for Total Trades."]
     elif observed_trade_count < expected_min_trade_count:
         status = "failed"
-        notes = [f"Baseline replay produced {observed_trade_count} trades below required minimum {expected_min_trade_count}."]
+        notes = [
+            f"Baseline replay produced {observed_trade_count} trades below required minimum {expected_min_trade_count}."
+        ]
     else:
         status = "passed"
         notes = ["Baseline known-good replay reproduced a nonzero/acceptable trade count."]
@@ -439,7 +451,9 @@ def _load_trade_ledger(csv_path: Path) -> pd.DataFrame:
     return frame.dropna(subset=["timestamp_utc"]).reset_index(drop=True)
 
 
-def _best_match(reference_row: pd.Series, observed: pd.DataFrame, matched_observed: set[int], tolerance_seconds: int) -> int | None:
+def _best_match(
+    reference_row: pd.Series, observed: pd.DataFrame, matched_observed: set[int], tolerance_seconds: int
+) -> int | None:
     best_index: int | None = None
     best_delta: float | None = None
     for observed_index, observed_row in observed.iterrows():
@@ -506,7 +520,9 @@ def _increment(counts: dict[str, int], key: str) -> None:
 
 
 def _discover_latest_live_audit(candidate_id: str) -> Path | None:
-    common_audit_dir = Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Terminal" / "Common" / "Files" / "AgenticForex" / "Audit"
+    common_audit_dir = (
+        Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Terminal" / "Common" / "Files" / "AgenticForex" / "Audit"
+    )
     if not common_audit_dir.exists():
         return None
     matches = sorted(common_audit_dir.glob(f"{candidate_id}__*__audit.csv"), key=lambda path: path.stat().st_mtime)

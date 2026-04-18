@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from pathlib import Path
 from types import SimpleNamespace
 
 from agentic_forex.campaigns import run_next_step, run_program_loop
@@ -15,8 +14,8 @@ from agentic_forex.governance.models import (
     RuleFormalizationReport,
 )
 from agentic_forex.mt5.ea_generator import render_candidate_ea
-from agentic_forex.mt5.service import build_logic_manifest_payload
 from agentic_forex.mt5.models import MT5RunResult
+from agentic_forex.mt5.service import build_logic_manifest_payload
 from agentic_forex.nodes.toolkit import compile_strategy_spec_tool
 from agentic_forex.runtime import ReadPolicy
 from agentic_forex.utils.io import read_json, write_json
@@ -237,7 +236,7 @@ def test_build_smoke_report_classifies_zero_trade_html_as_no_trades_generated(se
     report_dir.mkdir(parents=True, exist_ok=True)
     tester_report = tmp_path / "tester_report.htm"
     tester_report.write_text(
-        "<html><td colspan=\"3\">Total Trades:</td><td nowrap><b>0</b></td></html>",
+        '<html><td colspan="3">Total Trades:</td><td nowrap><b>0</b></td></html>',
         encoding="utf-16",
     )
     launch_status_path = tmp_path / "launch_status.json"
@@ -301,14 +300,16 @@ def test_run_mt5_backtest_smoke_renders_run_specific_audit_path(settings, monkey
     )
     monkeypatch.setattr(
         "agentic_forex.campaigns.throughput.render_candidate_ea",
-        lambda spec, *, audit_relative_path, packet_run_id, broker_timezone="UTC": captured.update(
-            {
-                "audit_relative_path": audit_relative_path,
-                "packet_run_id": packet_run_id,
-                "broker_timezone": broker_timezone,
-            }
-        )
-        or "// source",
+        lambda spec, *, audit_relative_path, packet_run_id, broker_timezone="UTC": (
+            captured.update(
+                {
+                    "audit_relative_path": audit_relative_path,
+                    "packet_run_id": packet_run_id,
+                    "broker_timezone": broker_timezone,
+                }
+            )
+            or "// source"
+        ),
     )
     monkeypatch.setattr("agentic_forex.campaigns.throughput._resolve_terminal_path", lambda settings: terminal_path)
     monkeypatch.setattr(
@@ -324,7 +325,15 @@ def test_run_mt5_backtest_smoke_renders_run_specific_audit_path(settings, monkey
         lambda terminal_path: terminal_path.parent / "MetaEditor64.exe",
     )
 
-    def _fake_deploy_and_compile_ea(*, candidate_id, packet_source_path, compile_target_relative_path, terminal_data_path, metaeditor_path, packet_dir):
+    def _fake_deploy_and_compile_ea(
+        *,
+        candidate_id,
+        packet_source_path,
+        compile_target_relative_path,
+        terminal_data_path,
+        metaeditor_path,
+        packet_dir,
+    ):
         staged_source_path = terminal_data_path / compile_target_relative_path
         staged_source_path.parent.mkdir(parents=True, exist_ok=True)
         staged_source_path.write_text(packet_source_path.read_text(encoding="utf-8"), encoding="utf-8")
@@ -345,7 +354,9 @@ def test_run_mt5_backtest_smoke_renders_run_specific_audit_path(settings, monkey
     )
     monkeypatch.setattr(
         "agentic_forex.campaigns.throughput._resolve_audit_output_path",
-        lambda settings, terminal_data_path, audit_relative_path: terminal_data_path / audit_relative_path.replace("\\", "/"),
+        lambda settings, terminal_data_path, audit_relative_path: (
+            terminal_data_path / audit_relative_path.replace("\\", "/")
+        ),
     )
     monkeypatch.setattr(
         "agentic_forex.campaigns.throughput._launch_mt5_tester",

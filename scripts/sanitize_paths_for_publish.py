@@ -29,8 +29,17 @@ USER_HOME = Path.home()
 
 # Directories to skip entirely (includes gitignored dirs that don't need sanitization)
 SKIP_DIRS = {
-    ".git", "data", ".venv", ".codex", "__pycache__", ".pytest_cache",
-    "traces", "reports", "published", "dist", "build",
+    ".git",
+    "data",
+    ".venv",
+    ".codex",
+    "__pycache__",
+    ".pytest_cache",
+    "traces",
+    "reports",
+    "published",
+    "dist",
+    "build",
 }
 
 # Only process these file extensions
@@ -184,10 +193,7 @@ def main() -> None:
         current = Path(dirpath)
 
         # Prune skipped directories
-        dirnames[:] = [
-            d for d in dirnames
-            if not should_skip(current / d)
-        ]
+        dirnames[:] = [d for d in dirnames if not should_skip(current / d)]
 
         for filename in filenames:
             filepath = current / filename

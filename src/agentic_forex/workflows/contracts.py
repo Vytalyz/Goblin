@@ -6,7 +6,6 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
-
 _EVIDENCE_TAG_KEYWORDS: dict[str, tuple[str, ...]] = {
     "mean_reversion_stationarity": (
         "stationarity",
@@ -114,7 +113,7 @@ class MarketRationale(BaseModel):
     evidence_tags: list[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
-    def _populate_evidence_tags(self) -> "MarketRationale":
+    def _populate_evidence_tags(self) -> MarketRationale:
         inferred_tags = infer_market_evidence_tags(
             self.market_behavior,
             self.edge_mechanism,
@@ -174,22 +173,14 @@ class CandidateDraft(BaseModel):
     trailing_stop_pips: float | None = None
 
     @model_validator(mode="after")
-    def _populate_market_rationale(self) -> "CandidateDraft":
+    def _populate_market_rationale(self) -> CandidateDraft:
         if self.market_rationale.is_meaningful():
             return self
         session_focus = self.market_context.session_focus.replace("_", " ").strip()
         volatility = self.market_context.volatility_preference.replace("_", " ").strip()
         self.market_rationale = MarketRationale(
-            market_behavior=(
-                self.strategy_hypothesis.strip()
-                or self.setup_summary.strip()
-                or self.thesis.strip()
-            ),
-            edge_mechanism=(
-                self.entry_summary.strip()
-                or self.setup_summary.strip()
-                or self.exit_summary.strip()
-            ),
+            market_behavior=(self.strategy_hypothesis.strip() or self.setup_summary.strip() or self.thesis.strip()),
+            edge_mechanism=(self.entry_summary.strip() or self.setup_summary.strip() or self.exit_summary.strip()),
             persistence_reason=(
                 self.thesis.strip()
                 or self.risk_summary.strip()

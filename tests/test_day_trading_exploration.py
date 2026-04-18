@@ -1,11 +1,11 @@
 from __future__ import annotations
 
+from conftest import create_corpus_mirror, create_oanda_candles_json
+
 from agentic_forex.experiments import explore_day_trading_candidates, scan_day_trading_behaviors
 from agentic_forex.experiments.day_trading_lab import _behavior_scan_score, _front_door_comparison_gate
 from agentic_forex.market_data.ingest import ingest_oanda_json
 from agentic_forex.utils.io import read_json
-
-from conftest import create_corpus_mirror, create_oanda_candles_json
 
 
 def test_explore_day_trading_candidates_generates_reviewed_candidate_set(settings, tmp_path):
@@ -405,7 +405,9 @@ def test_explore_day_trading_candidates_can_target_compression_reversion_family(
     assert report.scan_report_path.exists()
     scan_payload = read_json(report.scan_report_path)
     assert scan_payload["screen_records"]
-    assert {record["family"] for record in scan_payload["screen_records"]} == {"europe_open_compression_reversion_research"}
+    assert {record["family"] for record in scan_payload["screen_records"]} == {
+        "europe_open_compression_reversion_research"
+    }
     if report.candidates:
         candidate = report.candidates[0]
         assert candidate.entry_style == "compression_reversion"
@@ -483,7 +485,9 @@ def test_explore_day_trading_candidates_can_target_pullback_continuation_family(
     assert report.scan_report_path is not None
     scan_payload = read_json(report.scan_report_path)
     assert scan_payload["screen_records"]
-    assert {record["family"] for record in scan_payload["screen_records"]} == {"europe_open_pullback_continuation_research"}
+    assert {record["family"] for record in scan_payload["screen_records"]} == {
+        "europe_open_pullback_continuation_research"
+    }
     if report.candidates:
         candidate = report.candidates[0]
         assert candidate.entry_style == "pullback_continuation"

@@ -6,23 +6,22 @@ import math
 from datetime import UTC, datetime, timedelta
 
 import pandas as pd
-import pytest
 
 from agentic_forex.backtesting.engine import _scan_trailing_exit
 from agentic_forex.features.service import build_features
 from agentic_forex.workflows.contracts import (
     CandidateDraft,
     MarketContextSummary,
-    StrategySpec,
+    RiskPolicy,
     SessionPolicy,
     SetupLogic,
-    RiskPolicy,
+    StrategySpec,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _make_frame(rows: int = 100, *, trend: float = 0.0) -> pd.DataFrame:
     """Build a minimal OHLC + spread DataFrame for feature/engine tests."""
@@ -102,6 +101,7 @@ def _minimal_spec(
 # ATR tests
 # ---------------------------------------------------------------------------
 
+
 class TestATRFeature:
     def test_atr_14_column_exists(self):
         frame = _make_frame(50)
@@ -140,6 +140,7 @@ class TestATRFeature:
 # RSI tests
 # ---------------------------------------------------------------------------
 
+
 class TestRSIFeature:
     def test_rsi_14_column_exists(self):
         frame = _make_frame(50)
@@ -171,6 +172,7 @@ class TestRSIFeature:
 # ---------------------------------------------------------------------------
 # Trailing stop scan tests
 # ---------------------------------------------------------------------------
+
 
 class TestTrailingStopScan:
     def test_trailing_stop_disabled_returns_none(self):
@@ -311,6 +313,7 @@ class TestTrailingStopScan:
 # Contract model tests
 # ---------------------------------------------------------------------------
 
+
 class TestTrailingStopContracts:
     def test_strategy_spec_trailing_fields_default(self):
         spec = _minimal_spec()
@@ -365,6 +368,7 @@ class TestTrailingStopContracts:
 # EA generator trailing stop output
 # ---------------------------------------------------------------------------
 
+
 class TestEATrailingStop:
     def test_ea_includes_trailing_inputs_when_enabled(self):
         from agentic_forex.mt5.ea_generator import render_candidate_ea
@@ -388,16 +392,29 @@ class TestEATrailingStop:
 # Existing features still present
 # ---------------------------------------------------------------------------
 
+
 class TestExistingFeaturesUnchanged:
     def test_all_original_features_present(self):
         frame = _make_frame(50)
         features = build_features(frame)
         expected = [
-            "ret_1", "ret_5", "rolling_mean_10", "rolling_std_10", "zscore_10",
-            "momentum_12", "volatility_5", "volatility_20", "volatility_ratio_5_to_20",
-            "intrabar_range_pips", "range_width_10_pips", "net_change_10_pips",
-            "range_efficiency_10", "range_position_10", "spread_to_range_10",
-            "spread_shock_20", "hour",
+            "ret_1",
+            "ret_5",
+            "rolling_mean_10",
+            "rolling_std_10",
+            "zscore_10",
+            "momentum_12",
+            "volatility_5",
+            "volatility_20",
+            "volatility_ratio_5_to_20",
+            "intrabar_range_pips",
+            "range_width_10_pips",
+            "net_change_10_pips",
+            "range_efficiency_10",
+            "range_position_10",
+            "spread_to_range_10",
+            "spread_shock_20",
+            "hour",
         ]
         for col in expected:
             assert col in features.columns, f"Missing feature: {col}"

@@ -24,7 +24,13 @@ from agentic_forex.runtime import ReadPolicy, WorkflowEngine
 from agentic_forex.utils.ids import next_candidate_id
 from agentic_forex.utils.io import read_json, write_json
 from agentic_forex.workflows import WorkflowRepository
-from agentic_forex.workflows.contracts import CandidateDraft, MarketContextSummary, MarketRationale, ReviewPacket, StrategySpec
+from agentic_forex.workflows.contracts import (
+    CandidateDraft,
+    MarketContextSummary,
+    MarketRationale,
+    ReviewPacket,
+    StrategySpec,
+)
 
 
 def scan_day_trading_behaviors(
@@ -60,9 +66,7 @@ def scan_day_trading_behaviors(
 
     candidate_templates.sort(key=lambda item: item[0], reverse=True)
     materialization_budget = (
-        len(candidate_templates)
-        if family_filter and max_materialized is None
-        else max(1, max_materialized or 4)
+        len(candidate_templates) if family_filter and max_materialized is None else max(1, max_materialized or 4)
     )
     selected_templates = [template for _, template, _ in candidate_templates[:materialization_budget]]
 
@@ -83,7 +87,9 @@ def scan_day_trading_behaviors(
                 settings,
                 index=len(records),
             )
-            artifact = _materialize_candidate(candidate, settings, review_engine=review_engine, review_workflow=review_workflow)
+            artifact = _materialize_candidate(
+                candidate, settings, review_engine=review_engine, review_workflow=review_workflow
+            )
         records.append(_scan_record_from_artifact(artifact))
 
     ordered = sorted(records, key=lambda item: item.scan_score, reverse=True)
@@ -129,9 +135,7 @@ def explore_day_trading_candidates(
     max_materialized: int | None = None,
 ) -> DayTradingExplorationReport:
     resolved_max_materialized = (
-        max_materialized
-        if max_materialized is not None
-        else (None if family_filter else max(max_candidates, 4))
+        max_materialized if max_materialized is not None else (None if family_filter else max(max_candidates, 4))
     )
     scan = scan_day_trading_behaviors(
         settings,
@@ -200,9 +204,7 @@ def _catalog_needs_refresh(settings: Settings) -> bool:
     catalog_payload = read_json(settings.catalog_path)
     catalog_entries = list(catalog_payload.get("entries") or [])
     existing_paths = {
-        str(Path(str(entry.get("path") or "")).resolve())
-        for entry in catalog_entries
-        if entry.get("path")
+        str(Path(str(entry.get("path") or "")).resolve()) for entry in catalog_entries if entry.get("path")
     }
     expected_paths = {
         str(Path(configured_path).resolve())
@@ -452,15 +454,9 @@ def _anchor_alignment_score(
 def _daytype_alignment_score(frame: pd.DataFrame) -> float:
     if frame.empty:
         return 0.0
-    spread_component = (
-        1.0 / frame["spread_shock_20"].clip(lower=1.0, upper=5.0)
-    ).clip(lower=0.0, upper=1.0).mean()
-    volatility_component = (
-        frame["volatility_ratio_5_to_20"].clip(lower=0.0, upper=1.5) / 1.5
-    ).mean()
-    efficiency_component = (
-        frame["range_efficiency_10"].clip(lower=0.0, upper=1.2) / 1.2
-    ).mean()
+    spread_component = (1.0 / frame["spread_shock_20"].clip(lower=1.0, upper=5.0)).clip(lower=0.0, upper=1.0).mean()
+    volatility_component = (frame["volatility_ratio_5_to_20"].clip(lower=0.0, upper=1.5) / 1.5).mean()
+    efficiency_component = (frame["range_efficiency_10"].clip(lower=0.0, upper=1.2) / 1.2).mean()
     return float((spread_component + volatility_component + efficiency_component) / 3.0)
 
 
@@ -514,8 +510,15 @@ def _template_pretest_mask(
         mask &= _context_series(frame) != blocked_context
     required_phase_bucket = str(custom_filters.get("required_phase_bucket", "")).strip()
     if required_phase_bucket:
-        mask &= frame["hour"].map(lambda hour: _phase_bucket_for_hour(int(hour), open_anchor_hour_utc=open_anchor_hour_utc)) == required_phase_bucket
-    if filter_enabled("require_ret_1_confirmation") or filter_enabled("require_reversal_ret_1") or filter_enabled("require_recovery_ret_1"):
+        mask &= (
+            frame["hour"].map(lambda hour: _phase_bucket_for_hour(int(hour), open_anchor_hour_utc=open_anchor_hour_utc))
+            == required_phase_bucket
+        )
+    if (
+        filter_enabled("require_ret_1_confirmation")
+        or filter_enabled("require_reversal_ret_1")
+        or filter_enabled("require_recovery_ret_1")
+    ):
         mask &= frame["ret_1"].abs() > 0.0
     return mask
 
@@ -565,7 +568,7 @@ def _load_cached_day_trading_artifacts(
     settings: Settings,
     *,
     family_filter: str | None = None,
-) -> dict[tuple[str, str, str], "_CandidateArtifact"]:
+) -> dict[tuple[str, str, str], _CandidateArtifact]:
     cache: dict[tuple[str, str, str], _CandidateArtifact] = {}
     report_dirs = sorted(
         (path for path in settings.paths().reports_dir.iterdir() if path.is_dir()),
@@ -717,10 +720,7 @@ def _front_door_comparison_gate(
     train_pf = float(train.get("profit_factor", 0.0))
     validation_pf = float(validation.get("profit_factor", 0.0))
     uniformly_negative = (
-        train_expectancy < 0.0
-        and validation_expectancy < 0.0
-        and train_pf < 1.0
-        and validation_pf < 1.0
+        train_expectancy < 0.0 and validation_expectancy < 0.0 and train_pf < 1.0 and validation_pf < 1.0
     )
     if uniformly_negative:
         return False, "uniformly_negative_train_validation"
@@ -1172,7 +1172,9 @@ def _day_trading_templates(*, family_filter: str | None = None) -> list[dict[str
         *_asia_europe_transition_daytype_reclaim_templates(),
     ]
     if family_filter:
-        templates = [template for template in templates if str(template.get("family") or "day_trading") == family_filter]
+        templates = [
+            template for template in templates if str(template.get("family") or "day_trading") == family_filter
+        ]
         if not templates:
             raise ValueError(f"No day-trading exploration templates match family={family_filter!r}.")
         return templates
@@ -2738,7 +2740,7 @@ def _draft_from_template(template: dict[str, object], digest, settings: Settings
         candidate_id=candidate_id,
         family=str(template.get("family") or "day_trading"),
         title=template["title"],
-        thesis=f'{template["thesis"]} Corpus anchor: {highlight}',
+        thesis=f"{template['thesis']} Corpus anchor: {highlight}",
         source_citations=citations or ["SRC-001"],
         strategy_hypothesis=highlight,
         market_context=MarketContextSummary(
@@ -2748,7 +2750,7 @@ def _draft_from_template(template: dict[str, object], digest, settings: Settings
             execution_notes=[
                 "Use canonical OANDA bid/ask data for research.",
                 "Keep downstream parity and forward artifacts out of research ranking and queue policy.",
-                f'Exploration archetype: {template["entry_style"]}.',
+                f"Exploration archetype: {template['entry_style']}.",
                 f"Open-anchor hour UTC: {book_prior['open_anchor_hour_utc']}.",
                 "No overnight carry is permitted for these open-anchor momentum families.",
             ],
@@ -2785,8 +2787,7 @@ def _draft_from_template(template: dict[str, object], digest, settings: Settings
             "ExecutionRealist: this family must still earn parity through research-stage robustness first.",
         ],
         custom_filters=[
-            {"name": name, "rule": rule}
-            for name, rule in dict(template.get("custom_filters") or {}).items()
+            {"name": name, "rule": rule} for name, rule in dict(template.get("custom_filters") or {}).items()
         ],
         enable_news_blackout=bool(template.get("enable_news_blackout")),
         book_alignment_score=book_prior["book_alignment_score"],

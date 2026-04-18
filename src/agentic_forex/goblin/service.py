@@ -14,7 +14,6 @@ from agentic_forex.goblin.models import (
 )
 from agentic_forex.utils.io import read_json, write_json
 
-
 PHASE_BLUEPRINTS: list[PhaseBlueprint] = [
     PhaseBlueprint(
         phase_id="GOBLIN-P00",
@@ -22,7 +21,10 @@ PHASE_BLUEPRINTS: list[PhaseBlueprint] = [
         objective="Create Goblin as the tracked umbrella program without destabilizing the current runtime kernel.",
         outputs=["Goblin master docs", "phase ledger", "naming ADR", "CLI alias plan"],
         expected_artifacts=["Goblin/PROGRAM.md", "Goblin/ROADMAP.md", "Goblin/state/program_status.json"],
-        exit_criteria=["Goblin exists as the canonical program layer.", "All later phases have dependency graphs and state files."],
+        exit_criteria=[
+            "Goblin exists as the canonical program layer.",
+            "All later phases have dependency graphs and state files.",
+        ],
     ),
     PhaseBlueprint(
         phase_id="GOBLIN-P01",
@@ -65,7 +67,13 @@ PHASE_BLUEPRINTS: list[PhaseBlueprint] = [
         title="Live Demo Observability And Broker Reconciliation",
         objective="Make live-demo evidence operationally trustworthy and externally reconcilable.",
         dependencies=["GOBLIN-P04"],
-        outputs=["runtime contract", "broker reconciliation pipeline", "execution cost contract", "statistical decision policy", "ops incident triggers"],
+        outputs=[
+            "runtime contract",
+            "broker reconciliation pipeline",
+            "execution cost contract",
+            "statistical decision policy",
+            "ops incident triggers",
+        ],
         expected_artifacts=[
             "Goblin/contracts/live-demo-contract.md",
             "Goblin/contracts/broker-reconciliation.md",
@@ -96,7 +104,13 @@ PHASE_BLUEPRINTS: list[PhaseBlueprint] = [
         title="Release, Approval, And Change Management",
         objective="Make every deployable artifact a governed release bundle with a declared deployment ladder state, so bundle approval and operational readiness are never conflated.",
         dependencies=["GOBLIN-P05"],
-        outputs=["deployment bundle schema", "deployment ladder contract", "environment reproducibility contract", "approval boundary policy", "retention runbooks"],
+        outputs=[
+            "deployment bundle schema",
+            "deployment ladder contract",
+            "environment reproducibility contract",
+            "approval boundary policy",
+            "retention runbooks",
+        ],
         expected_artifacts=[
             "Goblin/contracts/deployment-bundle.md",
             "Goblin/contracts/deployment-ladder.md",
@@ -122,7 +136,11 @@ PHASE_BLUEPRINTS: list[PhaseBlueprint] = [
         title="Strategy Methodology, Search-Bias, And Experiment Governance",
         objective="Improve strategy quality without repeating the same research-control mistakes, with experiment budgeting that enforces search discipline rather than documenting it.",
         dependencies=["GOBLIN-P08"],
-        outputs=["methodology rubric", "strategy rationale cards", "experiment accounting ledger with budget enforcement"],
+        outputs=[
+            "methodology rubric",
+            "strategy rationale cards",
+            "experiment accounting ledger with budget enforcement",
+        ],
         expected_artifacts=["Goblin/contracts/strategy-rationale-card.md", "Goblin/contracts/experiment-accounting.md"],
         exit_criteria=[
             "No live/demo candidate exists without a rationale card and experiment lineage.",
@@ -470,43 +488,109 @@ def initialize_goblin_program(settings: Settings, *, refresh_docs: bool = False)
     _write_if_missing_or_refresh(paths.goblin_dir / "PROGRAM.md", _program_markdown(), refresh_docs)
     _write_if_missing_or_refresh(paths.goblin_dir / "ROADMAP.md", _roadmap_markdown(), refresh_docs)
     _write_if_missing_or_refresh(paths.goblin_contracts_dir / "truth-stack.md", _truth_stack_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "comparison-matrix.md", _comparison_matrix_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "artifact-provenance.md", _artifact_provenance_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "research-data-contract.md", _research_contract_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "time-session-contract.md", _time_session_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "mt5-certification.md", _mt5_certification_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "live-demo-contract.md", _live_demo_contract_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "broker-reconciliation.md", _broker_reconciliation_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "execution-cost-contract.md", _execution_cost_contract_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "statistical-decision-policy.md", _statistical_decision_policy_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "incident-severity-matrix.md", _incident_severity_matrix_markdown(), refresh_docs)
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "comparison-matrix.md", _comparison_matrix_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "artifact-provenance.md", _artifact_provenance_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "research-data-contract.md", _research_contract_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "time-session-contract.md", _time_session_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "mt5-certification.md", _mt5_certification_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "live-demo-contract.md", _live_demo_contract_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "broker-reconciliation.md", _broker_reconciliation_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "execution-cost-contract.md", _execution_cost_contract_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "statistical-decision-policy.md",
+        _statistical_decision_policy_markdown(),
+        refresh_docs,
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "incident-severity-matrix.md", _incident_severity_matrix_markdown(), refresh_docs
+    )
     _write_if_missing_or_refresh(paths.goblin_contracts_dir / "incident-sla.md", _incident_sla_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "deployment-ladder.md", _deployment_ladder_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "environment-reproducibility.md", _environment_reproducibility_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "deployment-bundle.md", _deployment_bundle_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "investigation-trace.md", _investigation_trace_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "evaluation-suite.md", _evaluation_suite_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "strategy-rationale-card.md", _strategy_rationale_card_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "experiment-accounting.md", _experiment_accounting_markdown(), refresh_docs)
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "deployment-ladder.md", _deployment_ladder_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "environment-reproducibility.md",
+        _environment_reproducibility_markdown(),
+        refresh_docs,
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "deployment-bundle.md", _deployment_bundle_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "investigation-trace.md", _investigation_trace_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "evaluation-suite.md", _evaluation_suite_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "strategy-rationale-card.md", _strategy_rationale_card_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "experiment-accounting.md", _experiment_accounting_markdown(), refresh_docs
+    )
     _write_if_missing_or_refresh(
         paths.goblin_contracts_dir / "strategy-methodology-rubric.md",
         _strategy_methodology_rubric_markdown(),
         refresh_docs,
     )
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "candidate-scorecard.md", _candidate_scorecard_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "promotion-decision-packet.md", _promotion_decision_packet_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "model-registry.md", _model_registry_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "knowledge-lineage.md", _knowledge_lineage_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "retrieval-policy.md", _retrieval_policy_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_contracts_dir / "operator-orchestrator-split.md", _operator_orchestrator_split_markdown(), refresh_docs)
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "candidate-scorecard.md", _candidate_scorecard_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "promotion-decision-packet.md", _promotion_decision_packet_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "model-registry.md", _model_registry_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "knowledge-lineage.md", _knowledge_lineage_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "retrieval-policy.md", _retrieval_policy_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_contracts_dir / "operator-orchestrator-split.md",
+        _operator_orchestrator_split_markdown(),
+        refresh_docs,
+    )
     _write_if_missing_or_refresh(paths.goblin_templates_dir / "ADR_TEMPLATE.md", _adr_template_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_templates_dir / "PHASE_RECORD_TEMPLATE.md", _phase_template_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_templates_dir / "phase_record.example.json", _phase_record_example_json(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_templates_dir / "checkpoint_record.example.json", _checkpoint_record_example_json(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_runbooks_dir / "RESUME_PHASE.md", _resume_runbook_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_runbooks_dir / "INCIDENT_RESPONSE.md", _incident_runbook_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_runbooks_dir / "RELEASE_AND_ROLLBACK.md", _release_runbook_markdown(), refresh_docs)
-    _write_if_missing_or_refresh(paths.goblin_decisions_dir / "ADR-0001-goblin-umbrella-program.md", _adr_0001_markdown(), refresh_docs)
+    _write_if_missing_or_refresh(
+        paths.goblin_templates_dir / "PHASE_RECORD_TEMPLATE.md", _phase_template_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_templates_dir / "phase_record.example.json", _phase_record_example_json(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_templates_dir / "checkpoint_record.example.json", _checkpoint_record_example_json(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_runbooks_dir / "RESUME_PHASE.md", _resume_runbook_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_runbooks_dir / "INCIDENT_RESPONSE.md", _incident_runbook_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_runbooks_dir / "RELEASE_AND_ROLLBACK.md", _release_runbook_markdown(), refresh_docs
+    )
+    _write_if_missing_or_refresh(
+        paths.goblin_decisions_dir / "ADR-0001-goblin-umbrella-program.md", _adr_0001_markdown(), refresh_docs
+    )
 
     existing = _load_existing_phase_records(settings)
     completed_ids = {phase_id for phase_id, record in existing.items() if record.status == "completed"}
@@ -525,7 +609,9 @@ def initialize_goblin_program(settings: Settings, *, refresh_docs: bool = False)
             build_items=list(phase_details.get("build_items", current.build_items if current else [])),
             outputs=list(blueprint.outputs),
             expected_artifacts=list(blueprint.expected_artifacts),
-            checkpoint_targets=list(phase_details.get("checkpoint_targets", current.checkpoint_targets if current else [])),
+            checkpoint_targets=list(
+                phase_details.get("checkpoint_targets", current.checkpoint_targets if current else [])
+            ),
             authoritative_artifacts=list(
                 phase_details.get("authoritative_artifacts", current.authoritative_artifacts if current else [])
             ),
@@ -535,7 +621,9 @@ def initialize_goblin_program(settings: Settings, *, refresh_docs: bool = False)
             last_checkpoint=current.last_checkpoint if current else None,
             idempotency_key=current.idempotency_key if current else f"goblin:{blueprint.phase_id}",
             rerun_mode=current.rerun_mode if current else blueprint.rerun_mode,
-            resume_command=current.resume_command if current else f"goblin goblin-phase-update --phase-id {blueprint.phase_id} --status in_progress",
+            resume_command=current.resume_command
+            if current
+            else f"goblin goblin-phase-update --phase-id {blueprint.phase_id} --status in_progress",
             verify_command=current.verify_command if current else "goblin goblin-status",
             blockers=list(current.blockers) if current else [],
             owner=current.owner if current else blueprint.owner,
@@ -548,7 +636,9 @@ def initialize_goblin_program(settings: Settings, *, refresh_docs: bool = False)
             record_path=record_path,
         )
         write_json(record_path, phase_record.model_dump(mode="json"))
-        _write_if_missing_or_refresh(paths.goblin_phases_dir / f"{blueprint.phase_id}.md", _phase_markdown(blueprint), refresh_docs)
+        _write_if_missing_or_refresh(
+            paths.goblin_phases_dir / f"{blueprint.phase_id}.md", _phase_markdown(blueprint), refresh_docs
+        )
         phase_records.append(phase_record)
         if phase_record.status == "completed":
             completed_ids.add(phase_record.phase_id)
@@ -802,12 +892,12 @@ def _phase_markdown(blueprint: PhaseBlueprint) -> str:
     outputs = "\n".join(f"- {item}" for item in blueprint.outputs) or "- none"
     artifacts = "\n".join(f"- `{item}`" for item in blueprint.expected_artifacts) or "- none"
     checkpoint_targets = "\n".join(f"- {item}" for item in phase_details.get("checkpoint_targets", [])) or "- none"
-    authoritative_artifacts = "\n".join(
-        f"- `{item}`" for item in phase_details.get("authoritative_artifacts", [])
-    ) or "- none"
-    regenerable_artifacts = "\n".join(
-        f"- `{item}`" for item in phase_details.get("regenerable_artifacts", [])
-    ) or "- none"
+    authoritative_artifacts = (
+        "\n".join(f"- `{item}`" for item in phase_details.get("authoritative_artifacts", [])) or "- none"
+    )
+    regenerable_artifacts = (
+        "\n".join(f"- `{item}`" for item in phase_details.get("regenerable_artifacts", [])) or "- none"
+    )
     exit_criteria = "\n".join(f"- {item}" for item in blueprint.exit_criteria) or "- none"
     return (
         f"# {blueprint.phase_id}: {blueprint.title}\n\n"

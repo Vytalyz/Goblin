@@ -27,8 +27,8 @@ from agentic_forex.workflows.contracts import (
     CriticNote,
     ExecutionCostModel,
     NewsPolicy,
-    RiskEnvelope,
     ReviewContext,
+    RiskEnvelope,
     RouteDecision,
     SessionPolicy,
     SetupLogic,
@@ -47,7 +47,9 @@ def default_execution_cost_fields(
     is_scalping = family == "scalping"
     default_slippage_pips = 0.05 if is_scalping else 0.0
     default_fill_delay_ms = 250 if is_scalping else 0
-    default_broker_fee_model = "oanda_spread_only" if settings.data.canonical_source == "oanda" else "spread_plus_commission"
+    default_broker_fee_model = (
+        "oanda_spread_only" if settings.data.canonical_source == "oanda" else "spread_plus_commission"
+    )
     notes = [
         "Canonical research source is OANDA bid/ask data.",
         "Versioned execution model for research, parity, and forward-stage evaluation.",
@@ -103,7 +105,9 @@ def route_strategy_family(*, payload: dict, settings: Settings, config: dict, re
     if family not in {"scalping", "day_trading"}:
         family = "scalping" if "scalp" in str(payload).lower() else "day_trading"
     next_node = "scalping_analyst" if family == "scalping" else "day_trading_analyst"
-    return RouteDecision(next_node=next_node, payload=payload, rationale=f"Routed to {family} strategist.").model_dump(mode="json")
+    return RouteDecision(next_node=next_node, payload=payload, rationale=f"Routed to {family} strategist.").model_dump(
+        mode="json"
+    )
 
 
 def finalize_candidate(*, payload: dict, settings: Settings, config: dict, read_policy: ReadPolicy) -> dict:
@@ -132,7 +136,9 @@ def compile_strategy_spec_tool(*, payload: dict, settings: Settings, config: dic
         write_json(candidate_path, candidate.model_dump(mode="json"))
     is_scalping = candidate.family == "scalping"
     currencies = [part for part in settings.data.instrument.split("_") if part]
-    session_hours = candidate.market_context.allowed_hours_utc or ([7, 8, 9, 10, 11, 12] if is_scalping and candidate.entry_style == "session_breakout" else [])
+    session_hours = candidate.market_context.allowed_hours_utc or (
+        [7, 8, 9, 10, 11, 12] if is_scalping and candidate.entry_style == "session_breakout" else []
+    )
     scalping_volatility_floor = (
         "0.00012"
         if candidate.market_context.volatility_preference.strip().lower() in {"high", "high_only"}
@@ -182,7 +188,9 @@ def compile_strategy_spec_tool(*, payload: dict, settings: Settings, config: dic
         context_granularities=["M5", "M15"] if is_scalping else ["M5", "M15", "H1"],
         session_policy=SessionPolicy(
             name="candidate_defined_intraday",
-            allowed_sessions=["europe_open_breakout"] if is_scalping and candidate.entry_style == "session_breakout" else ["intraday_active_windows"],
+            allowed_sessions=["europe_open_breakout"]
+            if is_scalping and candidate.entry_style == "session_breakout"
+            else ["intraday_active_windows"],
             allowed_hours_utc=session_hours,
             notes=[candidate.market_context.session_focus] + candidate.market_context.execution_notes,
         ),
@@ -204,7 +212,12 @@ def compile_strategy_spec_tool(*, payload: dict, settings: Settings, config: dic
         exit_logic=[
             candidate.exit_summary,
             f"Time exit after {candidate.holding_bars} bars",
-        ] + ([f"Trailing stop {candidate.trailing_stop_pips} pips"] if candidate.trailing_stop_enabled and candidate.trailing_stop_pips else []),
+        ]
+        + (
+            [f"Trailing stop {candidate.trailing_stop_pips} pips"]
+            if candidate.trailing_stop_enabled and candidate.trailing_stop_pips
+            else []
+        ),
         risk_policy={
             "stop_loss_pips": candidate.stop_loss_pips,
             "take_profit_pips": candidate.take_profit_pips,

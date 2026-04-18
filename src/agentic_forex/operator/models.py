@@ -6,7 +6,6 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
-
 CapabilitySourceKind = Literal["official_doc", "local_dir", "local_file"]
 CapabilitySurfaceType = Literal[
     "docs",

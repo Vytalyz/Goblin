@@ -2,13 +2,14 @@ from __future__ import annotations
 
 import pandas as pd
 import pytest
+from conftest import create_economic_calendar_csv, create_oanda_candles_json
 
 from agentic_forex.approval.models import ApprovalRecord
 from agentic_forex.approval.service import publish_candidate, record_approval
 from agentic_forex.backtesting.engine import _passes_common_filters, run_backtest, run_stress_test
 from agentic_forex.features.service import build_features
-from agentic_forex.llm import MockLLMClient
 from agentic_forex.labels.service import build_labels
+from agentic_forex.llm import MockLLMClient
 from agentic_forex.market_data.ingest import ingest_oanda_json
 from agentic_forex.ml.train import train_models
 from agentic_forex.mt5.service import generate_mt5_packet, validate_mt5_practice
@@ -18,8 +19,6 @@ from agentic_forex.policy.calendar import ingest_economic_calendar
 from agentic_forex.runtime import ReadPolicy, WorkflowEngine
 from agentic_forex.workflows import WorkflowRepository
 from agentic_forex.workflows.contracts import CandidateDraft, MarketContextSummary, ReviewPacket, StrategySpec
-
-from conftest import create_economic_calendar_csv, create_oanda_candles_json
 
 
 def test_build_labels_uses_path_aware_exit_geometry(settings, tmp_path):
@@ -35,7 +34,9 @@ def test_build_labels_uses_path_aware_exit_geometry(settings, tmp_path):
         take_profit_pips=6.0,
     )
 
-    assert {"long_exit_reason", "short_exit_reason", "long_outcome_pips", "short_outcome_pips"}.issubset(labeled.columns)
+    assert {"long_exit_reason", "short_exit_reason", "long_outcome_pips", "short_outcome_pips"}.issubset(
+        labeled.columns
+    )
     assert labeled["label_up"].dropna().isin([0, 1]).all()
     assert labeled["label_down"].dropna().isin([0, 1]).all()
     assert set(labeled["long_exit_reason"].dropna().unique()).issubset({"take_profit", "stop_loss", "time_exit"})

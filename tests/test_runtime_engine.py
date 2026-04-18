@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from agentic_forex.llm import MockLLMClient
 from agentic_forex.runtime import ReadPolicy, WorkflowEngine
-from agentic_forex.runtime.models import EdgeSpec, NodeKind, NodeSpec, WorkflowDefinition
+from agentic_forex.runtime.models import NodeKind, NodeSpec, WorkflowDefinition
 
 
 def passthrough_tool(*, payload, settings, config, read_policy):
@@ -51,4 +51,3 @@ def test_node_schema_validation_writes_trace_error(settings):
     assert "candidate_id" in trace.node_traces[0].error
     assert (settings.paths().traces_dir / trace.trace_id / "trace.json").exists()
     assert (settings.paths().traces_dir / trace.trace_id / "trace.md").exists()
-

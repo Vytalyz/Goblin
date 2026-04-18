@@ -6,9 +6,8 @@ agentic_forex runtime kernel during migration.
 
 from __future__ import annotations
 
-from importlib import import_module
 import sys
-
+from importlib import import_module
 
 __all__ = ["__version__"]
 __version__ = "0.1.0"

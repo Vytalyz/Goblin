@@ -4,9 +4,8 @@ import hashlib
 import json
 import re
 import tomllib
-from collections import defaultdict
+from collections import Counter, defaultdict
 from csv import DictReader
-from collections import Counter
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -131,9 +130,7 @@ def build_queue_snapshot(
         )
     campaign_rows.sort(key=lambda item: item.updated_utc, reverse=True)
 
-    report_path = settings.paths().operator_reports_dir / (
-        report_name or f"queue_snapshot-{_timestamp_token()}.json"
-    )
+    report_path = settings.paths().operator_reports_dir / (report_name or f"queue_snapshot-{_timestamp_token()}.json")
     report = QueueSnapshotReport(
         family_filter=family,
         pending_lanes=pending_lanes,
@@ -159,7 +156,9 @@ def export_operator_state(
     )
     resolved_run_id = run_id or f"operator-state-{_timestamp_token()}"
     automation_specs = _load_automation_specs(settings)
-    capability_catalog_path = settings.paths().capability_catalog_path if settings.paths().capability_catalog_path.exists() else None
+    capability_catalog_path = (
+        settings.paths().capability_catalog_path if settings.paths().capability_catalog_path.exists() else None
+    )
 
     report = OperatorStateExport(
         run_id=resolved_run_id,
@@ -172,7 +171,9 @@ def export_operator_state(
         codex_assets={
             "codex_config_path": str(settings.paths().codex_dir / "config.toml"),
             "codex_agent_files": sorted(path.name for path in settings.paths().codex_agents_dir.glob("*.toml")),
-            "repo_skill_dirs": sorted(path.name for path in settings.paths().repo_agent_skills_dir.glob("*") if path.is_dir()),
+            "repo_skill_dirs": sorted(
+                path.name for path in settings.paths().repo_agent_skills_dir.glob("*") if path.is_dir()
+            ),
             "rules_file": str(Path(settings.codex_operator.repo_rules_file)),
         },
         automation_specs=automation_specs,
@@ -210,11 +211,15 @@ def audit_candidate_branches(
             trade_count=int(metrics.get("trade_count") or 0),
             oos_profit_factor=float(metrics.get("out_of_sample_profit_factor") or 0.0),
             expectancy_pips=float(metrics.get("expectancy_pips") or 0.0),
-            stressed_profit_factor=float(((metrics.get("stress_scenarios") or [{}])[-1].get("profit_factor") or 0.0)),
+            stressed_profit_factor=float((metrics.get("stress_scenarios") or [{}])[-1].get("profit_factor") or 0.0),
             stress_passed=bool(metrics.get("stress_passed")),
             walk_forward_ok=bool(robustness_payload.get("walk_forward_ok")),
-            auto_continue_allowed=bool(diagnostic_payload.get("auto_continue_allowed")) if diagnostic_payload else False,
-            supported_slice_count=len(((diagnostic_payload.get("candidate_reports") or [{}])[0].get("supported_slices") or []))
+            auto_continue_allowed=bool(diagnostic_payload.get("auto_continue_allowed"))
+            if diagnostic_payload
+            else False,
+            supported_slice_count=len(
+                (diagnostic_payload.get("candidate_reports") or [{}])[0].get("supported_slices") or []
+            )
             if diagnostic_payload
             else 0,
             trial_count_family=int(robustness_payload.get("trial_count_family") or 0),
@@ -234,7 +239,7 @@ def audit_candidate_branches(
             out_of_sample_profit_factor=float(metrics.get("out_of_sample_profit_factor") or 0.0),
             expectancy_pips=float(metrics.get("expectancy_pips") or 0.0),
             max_drawdown_pct=float(metrics.get("max_drawdown_pct") or 0.0),
-            stressed_profit_factor=float(((metrics.get("stress_scenarios") or [{}])[-1].get("profit_factor") or 0.0)),
+            stressed_profit_factor=float((metrics.get("stress_scenarios") or [{}])[-1].get("profit_factor") or 0.0),
             stress_passed=bool(metrics.get("stress_passed")),
             walk_forward_ok=bool(robustness_payload.get("walk_forward_ok")),
             readiness=str(review_payload.get("readiness") or "unreviewed"),
@@ -243,14 +248,20 @@ def audit_candidate_branches(
             trial_count_candidate=int(robustness_payload.get("trial_count_candidate") or 0),
             diagnostic_stop_reason=str(diagnostic_payload.get("stop_reason")) if diagnostic_payload else None,
             transition_status=str(diagnostic_payload.get("transition_status")) if diagnostic_payload else None,
-            auto_continue_allowed=bool(diagnostic_payload.get("auto_continue_allowed")) if diagnostic_payload else False,
-            supported_slice_count=len(((diagnostic_payload.get("candidate_reports") or [{}])[0].get("supported_slices") or []))
+            auto_continue_allowed=bool(diagnostic_payload.get("auto_continue_allowed"))
+            if diagnostic_payload
+            else False,
+            supported_slice_count=len(
+                (diagnostic_payload.get("candidate_reports") or [{}])[0].get("supported_slices") or []
+            )
             if diagnostic_payload
             else 0,
             recommended_mutation=((diagnostic_payload.get("candidate_reports") or [{}])[0].get("recommended_mutation"))
             if diagnostic_payload
             else None,
-            diagnostic_confidence=((diagnostic_payload.get("candidate_reports") or [{}])[0].get("diagnostic_confidence"))
+            diagnostic_confidence=(
+                (diagnostic_payload.get("candidate_reports") or [{}])[0].get("diagnostic_confidence")
+            )
             if diagnostic_payload
             else None,
             branch_score=round(branch_score, 6),
@@ -269,7 +280,9 @@ def audit_candidate_branches(
     recommended_candidate_id = (
         sorted(actionable, key=lambda item: item.branch_score, reverse=True)[0].candidate_id if actionable else None
     )
-    recommended_family = next((record.family for record in records if record.candidate_id == recommended_candidate_id), None)
+    recommended_family = next(
+        (record.family for record in records if record.candidate_id == recommended_candidate_id), None
+    )
     rationale = _branch_audit_rationale(records, next_family_hint=next_family_hint, decision=decision)
     report = CandidateBranchAuditReport(
         candidate_ids=list(candidate_ids),
@@ -610,18 +623,18 @@ def _rows_for_walk_forward_window(
     window_number: int,
 ) -> list[dict[str, str]]:
     window = next(
-        (item for item in list(backtest_payload.get("walk_forward_summary") or []) if int(item.get("window", 0)) == window_number),
+        (
+            item
+            for item in list(backtest_payload.get("walk_forward_summary") or [])
+            if int(item.get("window", 0)) == window_number
+        ),
         None,
     )
     if window is None:
         return []
     start = _parse_utc(window["start_utc"])
     end = _parse_utc(window["end_utc"])
-    return [
-        row
-        for row in ledger_rows
-        if start <= _parse_utc(row["timestamp_utc"]) < end
-    ]
+    return [row for row in ledger_rows if start <= _parse_utc(row["timestamp_utc"]) < end]
 
 
 def _parse_utc(value: str) -> datetime:
@@ -857,7 +870,9 @@ def run_governed_action(
                     "gate": "strategy_governance",
                     "family": family,
                     "ledger_path": str(ledger.report_path) if ledger.report_path else None,
-                    "methodology_audit_path": str(methodology_audit.report_path) if methodology_audit.report_path else None,
+                    "methodology_audit_path": str(methodology_audit.report_path)
+                    if methodology_audit.report_path
+                    else None,
                     "methodology_audit_score": methodology_audit.weighted_score,
                     "methodology_audit_passed": methodology_audit.passed,
                     "trial_count_family": ledger.trial_count_family,
@@ -928,7 +943,9 @@ def inspect_governed_action(
     )
 
 
-def _latest_next_step_report_for_candidate(settings: Settings, candidate_id: str) -> tuple[dict[str, Any] | None, Path | None]:
+def _latest_next_step_report_for_candidate(
+    settings: Settings, candidate_id: str
+) -> tuple[dict[str, Any] | None, Path | None]:
     matches: list[tuple[float, Path, dict[str, Any]]] = []
     for path in settings.paths().campaigns_dir.glob("*/next_step_report.json"):
         payload = read_json(path)
@@ -1115,17 +1132,7 @@ def _render_capability_index(entries: list[CapabilityCatalogEntry]) -> str:
     ]
     for entry in sorted(entries, key=lambda item: item.source_id):
         lines.append(
-            "| {name} | `{source}` | `{surface}` | `{stability}` | `{windows}` | `{critical}` | `{sandbox}` | `{approval}` | `{status}` |".format(
-                name=entry.capability_name,
-                source=entry.source_ref,
-                surface=entry.surface_type,
-                stability=entry.stability,
-                windows=entry.windows_support,
-                critical=entry.critical_path_eligibility,
-                sandbox=entry.sandbox_posture,
-                approval=entry.approval_posture,
-                status=entry.sync_status,
-            )
+            f"| {entry.capability_name} | `{entry.source_ref}` | `{entry.surface_type}` | `{entry.stability}` | `{entry.windows_support}` | `{entry.critical_path_eligibility}` | `{entry.sandbox_posture}` | `{entry.approval_posture}` | `{entry.sync_status}` |"
         )
     lines.extend(["", "## Notes", ""])
     for entry in sorted(entries, key=lambda item: item.source_id):
@@ -1405,12 +1412,10 @@ def _branch_audit_rationale(
     rationale: list[str] = []
     for record in sorted(records, key=lambda item: item.branch_score, reverse=True):
         rationale.append(
-            (
-                f"{record.candidate_id} ({record.family}) scored {record.branch_score:.2f}: "
-                f"OOS PF {record.out_of_sample_profit_factor:.3f}, expectancy {record.expectancy_pips:.3f}, "
-                f"stressed PF {record.stressed_profit_factor:.3f}, walk_forward_ok={record.walk_forward_ok}, "
-                f"supported_slices={record.supported_slice_count}."
-            )
+            f"{record.candidate_id} ({record.family}) scored {record.branch_score:.2f}: "
+            f"OOS PF {record.out_of_sample_profit_factor:.3f}, expectancy {record.expectancy_pips:.3f}, "
+            f"stressed PF {record.stressed_profit_factor:.3f}, walk_forward_ok={record.walk_forward_ok}, "
+            f"supported_slices={record.supported_slice_count}."
         )
     if decision == "open_new_family":
         rationale.append(
@@ -1419,7 +1424,9 @@ def _branch_audit_rationale(
         if next_family_hint:
             rationale.append(f"Recommended next family: {next_family_hint}.")
     else:
-        rationale.append("At least one audited branch still has a supported bounded continuation and should remain active.")
+        rationale.append(
+            "At least one audited branch still has a supported bounded continuation and should remain active."
+        )
     return rationale
 
 

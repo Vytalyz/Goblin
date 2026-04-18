@@ -19,13 +19,13 @@ from agentic_forex.goblin.models import (
     DeploymentLadderState,
     DeploymentProfile,
     EvaluationSuite,
+    ExperimentAccountingLedger,
+    ExperimentBudgetCaps,
     GoblinRunRecord,
     IncidentClosurePacket,
     IncidentRecord,
     IncidentSeverity,
     IncidentSlaClass,
-    ExperimentAccountingLedger,
-    ExperimentBudgetCaps,
     InvestigationPack,
     InvestigationScenario,
     InvestigationTrace,
@@ -44,13 +44,12 @@ from agentic_forex.goblin.models import (
     RiskOverlay,
     RuntimeHeartbeat,
     RuntimeSummary,
-    StrategyRationaleCard,
     StrategyMethodologyAudit,
+    StrategyRationaleCard,
     TrustedLabelPolicy,
 )
 from agentic_forex.governance.models import ProductionIncidentReport
 from agentic_forex.utils.io import read_json, write_json
-
 
 _P10_REQUIRED_STATISTICAL_POLICY_KEYS = {
     "validation.parity_timestamp_tolerance_seconds",
@@ -158,8 +157,14 @@ def validate_incident_closure(severity: IncidentSeverity, packet: IncidentClosur
     """
     missing: list[str] = []
     if severity == "S1":
-        for field in ("root_cause_classification", "root_cause_description", "corrective_action",
-                      "verification_evidence_path", "deployed_bundle_id", "approved_by"):
+        for field in (
+            "root_cause_classification",
+            "root_cause_description",
+            "corrective_action",
+            "verification_evidence_path",
+            "deployed_bundle_id",
+            "approved_by",
+        ):
             if not getattr(packet, field, None):
                 missing.append(field)
     elif severity == "S2":
@@ -334,7 +339,9 @@ def write_investigation_scenario(
 ) -> InvestigationScenario:
     if not scenario.candidate_id:
         raise ValueError("InvestigationScenario.candidate_id is required.")
-    report_dir = _investigation_pack_root(settings, candidate_id=scenario.candidate_id, incident_id=scenario.incident_id)
+    report_dir = _investigation_pack_root(
+        settings, candidate_id=scenario.candidate_id, incident_id=scenario.incident_id
+    )
     scenarios_dir = report_dir / "scenarios"
     scenarios_dir.mkdir(parents=True, exist_ok=True)
     resolved = scenario.model_copy(
@@ -354,7 +361,9 @@ def write_investigation_trace(
     report_dir = _investigation_pack_root(settings, candidate_id=trace.candidate_id, incident_id=trace.incident_id)
     traces_dir = report_dir / "traces"
     traces_dir.mkdir(parents=True, exist_ok=True)
-    resolved = trace.model_copy(update={"report_path": traces_dir / _stable_json_filename(trace.trace_id, prefix="trace")})
+    resolved = trace.model_copy(
+        update={"report_path": traces_dir / _stable_json_filename(trace.trace_id, prefix="trace")}
+    )
     write_json(resolved.report_path, resolved.model_dump(mode="json"))
     return resolved
 
@@ -369,7 +378,9 @@ def write_evaluation_suite(
     incident_id = suite.incident_id or suite.suite_id
     report_dir = settings.paths().goblin_evaluation_reports_dir / suite.candidate_id / incident_id
     report_dir.mkdir(parents=True, exist_ok=True)
-    resolved = suite.model_copy(update={"report_path": report_dir / _stable_json_filename(suite.suite_id, prefix="suite")})
+    resolved = suite.model_copy(
+        update={"report_path": report_dir / _stable_json_filename(suite.suite_id, prefix="suite")}
+    )
     write_json(resolved.report_path, resolved.model_dump(mode="json"))
     return resolved
 
@@ -382,7 +393,9 @@ def build_incident_investigation_pack(
 ) -> InvestigationPack:
     incident = ProductionIncidentReport.model_validate(read_json(incident_report_path))
     resolved_pack_id = pack_id or f"investigation-pack-{incident.incident_id}"
-    benchmark_history_path = _write_benchmark_history(settings, incident=incident, incident_report_path=incident_report_path)
+    benchmark_history_path = _write_benchmark_history(
+        settings, incident=incident, incident_report_path=incident_report_path
+    )
 
     scenario_paths: list[Path] = []
     scenarios = _build_investigation_scenarios(incident, incident_report_path=incident_report_path)
@@ -398,7 +411,9 @@ def build_incident_investigation_pack(
             scenario_id=scenarios[0].scenario_id,
             incident_id=incident.incident_id,
             candidate_id=incident.candidate_id,
-            evidence_refs=_investigation_evidence_refs(incident, incident_report_path=incident_report_path, benchmark_history_path=benchmark_history_path),
+            evidence_refs=_investigation_evidence_refs(
+                incident, incident_report_path=incident_report_path, benchmark_history_path=benchmark_history_path
+            ),
             tool_calls=_investigation_tool_calls(incident),
             intermediate_classifications=_intermediate_classifications(incident),
             findings=_investigation_findings(incident),
@@ -587,7 +602,11 @@ def write_strategy_methodology_audit(
 ) -> StrategyMethodologyAudit:
     resolved_ledger = ledger or write_experiment_accounting_ledger(settings, family=family)
     rationale_path = resolved_ledger.strategy_rationale_card_path
-    rationale_card = StrategyRationaleCard.model_validate(read_json(rationale_path)) if rationale_path and rationale_path.exists() else None
+    rationale_card = (
+        StrategyRationaleCard.model_validate(read_json(rationale_path))
+        if rationale_path and rationale_path.exists()
+        else None
+    )
 
     has_thesis = bool((rationale_card.thesis or "").strip()) if rationale_card else False
     thesis_length = len((rationale_card.thesis or "").strip()) if rationale_card else 0
@@ -743,16 +762,16 @@ def write_promotion_decision_packet(
         _P10_REQUIRED_STATISTICAL_POLICY_KEYS.difference(set(resolved_statistical_policy_keys))
     )
     if missing_policy_keys:
-        raise ValueError(
-            "promotion_packet_missing_statistical_policy_keys: "
-            + ", ".join(missing_policy_keys)
-        )
+        raise ValueError("promotion_packet_missing_statistical_policy_keys: " + ", ".join(missing_policy_keys))
     if resolved_ladder_state is None:
         raise ValueError(
             "promotion_packet_missing_ladder_state: deployment_ladder_state is required by deployment-ladder contract"
         )
     is_promotion_approval = decision_status.strip().lower() in _P10_PROMOTION_APPROVAL_STATUSES
-    if is_promotion_approval and _P10_LADDER_STATE_RANK[resolved_ladder_state] < _P10_LADDER_STATE_RANK["observed_demo"]:
+    if (
+        is_promotion_approval
+        and _P10_LADDER_STATE_RANK[resolved_ladder_state] < _P10_LADDER_STATE_RANK["observed_demo"]
+    ):
         raise ValueError(
             "promotion_blocked_below_observed_demo: candidate ladder state must be observed_demo or higher"
         )
@@ -795,9 +814,7 @@ def write_model_registry_entry(settings: Settings, *, entry: ModelRegistryEntry)
     updates: dict[str, Any] = {"report_path": report_dir / "model_registry_entry.json"}
     if entry.label_policy_path is None and entry.label_policy:
         updates["label_policy_path"] = (
-            settings.paths().goblin_label_policies_dir
-            / entry.label_policy
-            / "trusted_label_policy.json"
+            settings.paths().goblin_label_policies_dir / entry.label_policy / "trusted_label_policy.json"
         )
     if entry.training_cycle_path is None:
         cycle_root = settings.paths().goblin_training_cycles_dir / entry.model_id
@@ -847,9 +864,7 @@ def write_offline_training_cycle(
         raise ValueError("offline_training_requires_holdout_windows")
     if cycle.touches_live_execution and cycle.mt5_certification_path is None:
         raise ValueError("live_execution_model_requires_mt5_certification")
-    report_dir = (
-        settings.paths().goblin_training_cycles_dir / cycle.model_id / cycle.cycle_id
-    )
+    report_dir = settings.paths().goblin_training_cycles_dir / cycle.model_id / cycle.cycle_id
     report_dir.mkdir(parents=True, exist_ok=True)
     resolved = cycle.model_copy(update={"report_path": report_dir / "offline_training_cycle.json"})
     write_json(resolved.report_path, resolved.model_dump(mode="json"))
@@ -868,9 +883,7 @@ def enforce_ml_governance(
     - ``online_self_tuning_enabled`` is True (forbidden by P11 exit criterion).
     - ``touches_live_execution`` is True and the registry entry is not approved.
     """
-    entry_path = (
-        settings.paths().goblin_model_registry_dir / model_id / "model_registry_entry.json"
-    )
+    entry_path = settings.paths().goblin_model_registry_dir / model_id / "model_registry_entry.json"
     if not entry_path.exists():
         raise FileNotFoundError(f"model_registry_entry not found for model_id={model_id!r}")
     data = read_json(entry_path)
@@ -1056,10 +1069,7 @@ def write_runtime_heartbeat(
     heartbeat: RuntimeHeartbeat,
 ) -> RuntimeHeartbeat:
     heartbeats_dir = (
-        settings.paths().goblin_live_demo_reports_dir
-        / heartbeat.candidate_id
-        / heartbeat.run_id
-        / "heartbeats"
+        settings.paths().goblin_live_demo_reports_dir / heartbeat.candidate_id / heartbeat.run_id / "heartbeats"
     )
     heartbeats_dir.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S%fZ")
@@ -1086,9 +1096,7 @@ def validate_attach_against_bundle(
         # ea_build_hash is the EA binary; inputs_hash is the .set file.
         # Both are captured on the manifest at attach time and on the bundle at issue time.
         if bundle.inputs_hash and manifest.inputs_hash != bundle.inputs_hash:
-            violations.append(
-                f"inputs_hash mismatch: bundle={bundle.inputs_hash!r} manifest={manifest.inputs_hash!r}"
-            )
+            violations.append(f"inputs_hash mismatch: bundle={bundle.inputs_hash!r} manifest={manifest.inputs_hash!r}")
 
     # Check EA hash via bundle_id linkage (advisory: manifest may not carry ea hash directly)
     # The authoritative check is inputs_hash — if the bundle has no hashes, no violation.
@@ -1369,9 +1377,7 @@ def _bootstrap_family_rationale_card_from_candidate(
         entry_style = str(spec_payload.get("entry_style") or "unknown")
         setup_logic = spec_payload.get("setup_logic") or {}
         setup_summary = str(setup_logic.get("summary") or "")
-    thesis = (
-        f"Family {family} candidate {candidate_id} uses {entry_style} execution and requires explicit invalidation, regime-specific risk controls, and bounded search discipline before any live/demo progression."
-    )
+    thesis = f"Family {family} candidate {candidate_id} uses {entry_style} execution and requires explicit invalidation, regime-specific risk controls, and bounded search discipline before any live/demo progression."
     invalidation_conditions = [
         "out_of_sample_profit_factor falls below policy floor",
         "stress validation fails under declared execution-cost assumptions",
@@ -1816,7 +1822,9 @@ def _follow_up_actions(incident: ProductionIncidentReport) -> list[str]:
         actions.append("Rebuild the investigation pack after additional replay or reconciliation evidence is captured.")
         return actions
     if incident.attribution_bucket == "implementation_delta":
-        actions.append("Verify the implementation fix against the same frozen incident window before citing new live evidence.")
+        actions.append(
+            "Verify the implementation fix against the same frozen incident window before citing new live evidence."
+        )
     elif incident.attribution_bucket == "execution_delta":
         actions.append("Review execution-cost assumptions and broker reconciliation before changing strategy judgment.")
     elif incident.attribution_bucket == "market_or_regime":

@@ -1,17 +1,18 @@
 from __future__ import annotations
 
-from concurrent.futures import ThreadPoolExecutor
 import json
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import pandas as pd
 import pytest
+from conftest import create_economic_calendar_csv, create_oanda_candles_json
 
 from agentic_forex.approval.models import ApprovalRecord
 from agentic_forex.approval.service import record_approval
-from agentic_forex.backtesting.models import BacktestArtifact
 from agentic_forex.backtesting.engine import _generate_signal, run_backtest, run_stress_test
+from agentic_forex.backtesting.models import BacktestArtifact
 from agentic_forex.campaigns import run_bounded_campaign
 from agentic_forex.config.models import ProgramLanePolicy
 from agentic_forex.forward import run_shadow_forward
@@ -23,15 +24,15 @@ from agentic_forex.mt5 import service as mt5_service
 from agentic_forex.mt5.ea_generator import render_candidate_ea
 from agentic_forex.mt5.models import MT5Packet, MT5ParityReport, MT5RunResult, MT5RunSpec, MT5ValidationReport
 from agentic_forex.mt5.service import (
-    _is_packet_stale,
-    _manual_run_strategy_spec,
-    _parity_class_from_report,
-    _resolve_effective_parity_policy,
-    _resolve_executable_exit,
     _archive_tester_report_bundle,
     _clear_tester_cache,
     _discover_tester_report,
+    _is_packet_stale,
+    _manual_run_strategy_spec,
+    _parity_class_from_report,
     _prepare_automated_terminal_runtime,
+    _resolve_effective_parity_policy,
+    _resolve_executable_exit,
     _stage_existing_build_for_launch,
     _tester_ini,
     generate_mt5_packet,
@@ -42,9 +43,14 @@ from agentic_forex.policy.calendar import ingest_economic_calendar
 from agentic_forex.runtime import ReadPolicy
 from agentic_forex.utils.ids import next_candidate_id
 from agentic_forex.utils.io import read_json, write_json
-from agentic_forex.workflows.contracts import CandidateDraft, MarketContextSummary, RiskPolicy, SessionPolicy, SetupLogic, StrategySpec
-
-from conftest import create_economic_calendar_csv, create_oanda_candles_json
+from agentic_forex.workflows.contracts import (
+    CandidateDraft,
+    MarketContextSummary,
+    RiskPolicy,
+    SessionPolicy,
+    SetupLogic,
+    StrategySpec,
+)
 
 
 def test_forward_stage_and_trial_ledger_artifacts(settings, tmp_path):
@@ -1271,7 +1277,9 @@ def test_run_mt5_manual_test_reuses_packet_and_archives_outputs(settings, tmp_pa
     monkeypatch.setattr(mt5_service, "_is_packet_stale", lambda *args, **kwargs: False)
     monkeypatch.setattr(mt5_service, "_manual_run_spec_from_packet", lambda *args, **kwargs: run_spec)
     monkeypatch.setattr(mt5_service, "_load_spec", lambda *args, **kwargs: spec)
-    monkeypatch.setattr(mt5_service, "_load_expected_signal_frame", lambda *args, **kwargs: pd.DataFrame({"timestamp_utc": []}))
+    monkeypatch.setattr(
+        mt5_service, "_load_expected_signal_frame", lambda *args, **kwargs: pd.DataFrame({"timestamp_utc": []})
+    )
     monkeypatch.setattr(mt5_service, "_clear_previous_parity_outputs", lambda *args, **kwargs: None)
     monkeypatch.setattr(
         mt5_service,
@@ -1334,12 +1342,7 @@ def test_render_candidate_ea_supports_throughput_entry_styles(settings):
         ("AF-CAND-0149", "session_extreme_reversion"),
     ]
     for candidate_id, entry_style in candidate_ids:
-        spec_path = (
-            Path(r".")
-            / "reports"
-            / candidate_id
-            / "strategy_spec.json"
-        )
+        spec_path = Path(r".") / "reports" / candidate_id / "strategy_spec.json"
         spec = StrategySpec.model_validate(read_json(spec_path))
         source = render_candidate_ea(spec)
         assert f'if(InpEntryStyle == "{entry_style}")' in source
@@ -1367,7 +1370,9 @@ def test_render_candidate_ea_supports_market_structure_entry_styles(entry_style)
     spec = StrategySpec(
         candidate_id=f"AF-CAND-TEST-{entry_style}",
         family="market_structure_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[8, 9, 10, 11]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[8, 9, 10, 11]
+        ),
         setup_logic=SetupLogic(style=entry_style, summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=8.0, take_profit_pips=12.0),
         source_citations=["SRC-TEST"],
@@ -1386,7 +1391,9 @@ def test_render_candidate_ea_uses_mid_adjusted_rates_for_session_momentum_band()
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-SMB-RATES",
         family="session_momentum_band_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[14, 15, 16]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[14, 15, 16]
+        ),
         setup_logic=SetupLogic(style="session_momentum_band", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=7.0, take_profit_pips=14.5),
         source_citations=["SRC-TEST"],
@@ -1411,7 +1418,9 @@ def test_render_candidate_ea_converts_broker_time_to_utc_for_session_and_audit()
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-TZ",
         family="parity_alignment_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]
+        ),
         setup_logic=SetupLogic(style="overlap_event_retest_breakout", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=5.0, take_profit_pips=8.0),
         source_citations=["SRC-TEST"],
@@ -1435,7 +1444,9 @@ def test_render_candidate_ea_exports_broker_history():
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-HISTORY-EXPORT",
         family="parity_alignment_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]
+        ),
         setup_logic=SetupLogic(style="session_momentum_band", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=7.0, take_profit_pips=14.5),
         source_citations=["SRC-TEST"],
@@ -1460,7 +1471,9 @@ def test_render_candidate_ea_prefers_tick_aggregated_broker_history():
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-TICK-HISTORY",
         family="parity_alignment_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]
+        ),
         setup_logic=SetupLogic(style="session_momentum_band", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=7.0, take_profit_pips=14.5),
         source_citations=["SRC-TEST"],
@@ -1485,7 +1498,9 @@ def test_render_candidate_ea_supports_targeted_diagnostic_tick_windows():
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-DIAGNOSTIC-TICKS",
         family="parity_alignment_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]
+        ),
         setup_logic=SetupLogic(style="session_momentum_band", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=7.0, take_profit_pips=14.5),
         source_citations=["SRC-TEST"],
@@ -1512,7 +1527,9 @@ def test_render_candidate_ea_writes_exit_reason_and_collision_audit_fields():
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-EXIT-AUDIT",
         family="parity_alignment_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]
+        ),
         setup_logic=SetupLogic(style="session_momentum_band", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=7.0, take_profit_pips=14.5),
         source_citations=["SRC-TEST"],
@@ -1526,17 +1543,21 @@ def test_render_candidate_ea_writes_exit_reason_and_collision_audit_fields():
     source = render_candidate_ea(spec)
 
     assert "string MapExitReason(int deal_reason)" in source
-    assert "bool ExitBarCollision(string side, double stop_price, double take_profit_price, datetime exit_time)" in source
+    assert (
+        "bool ExitBarCollision(string side, double stop_price, double take_profit_price, datetime exit_time)" in source
+    )
     assert '"exit_reason",' in source
     assert '"same_bar_collision"' in source
-    assert "g_timeout_exit_pending && exit_reason == \"expert\"" in source
+    assert 'g_timeout_exit_pending && exit_reason == "expert"' in source
 
 
 def test_render_candidate_ea_anchors_timeout_and_audit_to_entry_bar_time():
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-ENTRY-BAR-TIME",
         family="parity_alignment_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]
+        ),
         setup_logic=SetupLogic(style="session_momentum_band", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=7.0, take_profit_pips=14.5),
         source_citations=["SRC-TEST"],
@@ -1553,7 +1574,10 @@ def test_render_candidate_ea_anchors_timeout_and_audit_to_entry_bar_time():
     assert "datetime g_pending_entry_bar_time = 0;" in source
     assert "g_pending_entry_bar_time = current_bar;" in source
     assert "g_entry_bar_time = current_bar;" in source
-    assert "g_entry_bar_time = g_pending_entry_bar_time > 0 ? g_pending_entry_bar_time : NormalizeBarOpen(g_entry_time);" in source
+    assert (
+        "g_entry_bar_time = g_pending_entry_bar_time > 0 ? g_pending_entry_bar_time : NormalizeBarOpen(g_entry_time);"
+        in source
+    )
     assert "datetime anchor_bar = g_entry_bar_time > 0 ? g_entry_bar_time : NormalizeBarOpen(g_entry_time);" in source
     assert "WriteAuditRow(\n      g_entry_bar_time," in source
     assert "datetime NormalizeBarOpen(datetime value)" in source
@@ -1563,7 +1587,9 @@ def test_render_candidate_ea_shadow_mode_guards_trade_execution():
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-SHADOW",
         family="shadow_test_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[8, 9, 10]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[8, 9, 10]
+        ),
         setup_logic=SetupLogic(style="volatility_breakout", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=7.0, take_profit_pips=24.0),
         source_citations=["SRC-TEST"],
@@ -1590,7 +1616,9 @@ def test_render_candidate_ea_shadow_mode_defaults_to_false():
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-SHADOW-OFF",
         family="shadow_test_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[8, 9, 10]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[8, 9, 10]
+        ),
         setup_logic=SetupLogic(style="volatility_breakout", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=7.0, take_profit_pips=24.0),
         source_citations=["SRC-TEST"],
@@ -1740,14 +1768,33 @@ def test_validate_mt5_practice_prefers_signal_trace_for_broker_history_entries(s
     broker_history_csv = tmp_path / "broker_history.csv"
     pd.DataFrame.from_records(
         [
-            {"timestamp_utc": "2024-01-01T00:00:00Z", "bid_o": 1.1000, "bid_h": 1.1001, "bid_l": 1.0999, "bid_c": 1.1000, "ask_o": 1.1002, "ask_h": 1.1003, "ask_l": 1.1001, "ask_c": 1.1002, "spread_pips": 2.0, "volume": 10},
+            {
+                "timestamp_utc": "2024-01-01T00:00:00Z",
+                "bid_o": 1.1000,
+                "bid_h": 1.1001,
+                "bid_l": 1.0999,
+                "bid_c": 1.1000,
+                "ask_o": 1.1002,
+                "ask_h": 1.1003,
+                "ask_l": 1.1001,
+                "ask_c": 1.1002,
+                "spread_pips": 2.0,
+                "volume": 10,
+            },
         ]
     ).to_csv(broker_history_csv, index=False)
 
     signal_trace_csv = tmp_path / "signal_trace.csv"
     pd.DataFrame.from_records(
         [
-            {"timestamp_utc": "2024-01-01T00:01:00Z", "candidate_id": spec.candidate_id, "run_id": "mt5run-test", "signal": 1, "spread_pips": 0.2, "bars_processed": 100}
+            {
+                "timestamp_utc": "2024-01-01T00:01:00Z",
+                "candidate_id": spec.candidate_id,
+                "run_id": "mt5run-test",
+                "signal": 1,
+                "spread_pips": 0.2,
+                "bars_processed": 100,
+            }
         ]
     ).to_csv(signal_trace_csv, index=False)
 
@@ -1903,7 +1950,9 @@ def test_resolve_executable_exit_prioritizes_timeout_at_expiry_bar_open():
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-TIMEOUT-PRIORITY",
         family="parity_alignment_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]
+        ),
         setup_logic=SetupLogic(style="session_momentum_band", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=5.0, take_profit_pips=10.0),
         source_citations=["SRC-TEST"],
@@ -1967,7 +2016,9 @@ def test_resolve_executable_exit_does_not_promote_one_point_near_miss_to_stop_lo
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-EXACT-BOUNDARY",
         family="parity_alignment_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16]
+        ),
         setup_logic=SetupLogic(style="session_momentum_band", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=7.0, take_profit_pips=24.0),
         source_citations=["SRC-TEST"],
@@ -2419,7 +2470,9 @@ def test_backtesting_engine_supports_throughput_entry_styles(entry_style, signal
     spec = StrategySpec(
         candidate_id=f"AF-CAND-TEST-{entry_style}",
         family="throughput_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=allowed_hours),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=allowed_hours
+        ),
         setup_logic=SetupLogic(style=entry_style, summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=8.0, take_profit_pips=12.0),
         source_citations=["SRC-TEST"],
@@ -2437,7 +2490,9 @@ def test_executable_exit_rounds_fx_prices_before_bar_hit_comparison():
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-PARITY-ROUNDING",
         family="overlap_resolution_bridge_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16, 17]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16, 17]
+        ),
         setup_logic=SetupLogic(style="overlap_persistence_retest", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=12.0, take_profit_pips=22.0),
         source_citations=["SRC-TEST"],
@@ -2507,7 +2562,9 @@ def test_executable_exit_treats_one_point_boundary_near_miss_as_timeout_for_fx_s
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-PARITY-BOUNDARY",
         family="overlap_resolution_bridge_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16, 17]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16, 17]
+        ),
         setup_logic=SetupLogic(style="overlap_persistence_retest", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=12.0, take_profit_pips=22.0),
         source_citations=["SRC-TEST"],
@@ -2578,7 +2635,9 @@ def test_executable_exit_prefers_exact_hit_timing_over_earlier_one_point_boundar
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-PARITY-EXACT-FIRST",
         family="overlap_resolution_bridge_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16, 17]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16, 17]
+        ),
         setup_logic=SetupLogic(style="overlap_persistence_retest", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=12.0, take_profit_pips=22.0),
         source_citations=["SRC-TEST"],
@@ -2660,7 +2719,9 @@ def test_executable_exit_keeps_timeout_when_no_exact_boundary_touch_occurs():
     spec = StrategySpec(
         candidate_id="AF-CAND-TEST-PARITY-EXACT-FALLBACK",
         family="overlap_resolution_bridge_research",
-        session_policy=SessionPolicy(name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16, 17]),
+        session_policy=SessionPolicy(
+            name="test", allowed_sessions=["intraday_active_windows"], allowed_hours_utc=[13, 14, 15, 16, 17]
+        ),
         setup_logic=SetupLogic(style="overlap_persistence_retest", summary="test"),
         risk_policy=RiskPolicy(stop_loss_pips=12.0, take_profit_pips=22.0),
         source_citations=["SRC-TEST"],

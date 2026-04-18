@@ -8,7 +8,11 @@ from typing import Any
 from agentic_forex.approval.models import ApprovalRecord, PublishManifest
 from agentic_forex.config import Settings
 from agentic_forex.goblin.controls import enforce_candidate_strategy_governance
-from agentic_forex.governance.control_plane import fingerprint_evidence_paths, latest_evaluation_revision, policy_snapshot_hash
+from agentic_forex.governance.control_plane import (
+    fingerprint_evidence_paths,
+    latest_evaluation_revision,
+    policy_snapshot_hash,
+)
 from agentic_forex.governance.incident import candidate_validation_suspended
 from agentic_forex.governance.trial_ledger import append_trial_entry
 from agentic_forex.utils.io import read_json, write_json

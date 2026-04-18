@@ -7,7 +7,6 @@ import pandas as pd
 from agentic_forex.config import Settings
 from agentic_forex.utils.io import write_json
 
-
 REQUIRED_COLUMNS = ["timestamp_utc", "currency", "impact", "title"]
 IMPACT_RANK = {"low": 1, "medium": 2, "high": 3}
 

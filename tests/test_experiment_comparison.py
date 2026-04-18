@@ -4,6 +4,7 @@ import csv
 import json
 
 import pytest
+from conftest import create_economic_calendar_csv, create_oanda_candles_json
 
 from agentic_forex.backtesting.benchmark import run_scalping_benchmark
 from agentic_forex.backtesting.models import BacktestArtifact, StressTestReport
@@ -13,8 +14,6 @@ from agentic_forex.nodes.toolkit import compile_strategy_spec_tool
 from agentic_forex.policy.calendar import ingest_economic_calendar
 from agentic_forex.runtime import ReadPolicy
 from agentic_forex.workflows.contracts import CandidateDraft, MarketContextSummary, StrategySpec
-
-from conftest import create_economic_calendar_csv, create_oanda_candles_json
 
 
 def test_compare_experiments_writes_ranked_registry_with_ftmo_fit(settings, tmp_path):
@@ -160,7 +159,10 @@ def test_compare_experiments_does_not_auto_recommend_non_viable_candidate(settin
     assert report.total_records == 2
     assert report.recommended_candidate_id == "AF-CAND-COMPARE-STRONG"
     record_by_candidate = {record.candidate_id: record for record in report.records}
-    assert record_by_candidate["AF-CAND-COMPARE-STRONG"].comparison_score > record_by_candidate["AF-CAND-COMPARE-WEAK"].comparison_score
+    assert (
+        record_by_candidate["AF-CAND-COMPARE-STRONG"].comparison_score
+        > record_by_candidate["AF-CAND-COMPARE-WEAK"].comparison_score
+    )
 
 
 def test_compare_experiments_rejects_invalid_requested_candidate(settings):
@@ -287,9 +289,27 @@ def _write_comparison_candidate(
             },
         },
         regime_breakdown={
-            "session_bucket": {"london_open": {"trade_count": max(trade_count // 2, 1), "mean_pnl_pips": expectancy_pips, "profit_factor": max(profit_factor, 0.01)}},
-            "volatility_bucket": {"normal": {"trade_count": max(trade_count // 2, 1), "mean_pnl_pips": expectancy_pips, "profit_factor": max(profit_factor, 0.01)}},
-            "context_bucket": {"trend": {"trade_count": max(trade_count // 2, 1), "mean_pnl_pips": expectancy_pips, "profit_factor": max(profit_factor, 0.01)}},
+            "session_bucket": {
+                "london_open": {
+                    "trade_count": max(trade_count // 2, 1),
+                    "mean_pnl_pips": expectancy_pips,
+                    "profit_factor": max(profit_factor, 0.01),
+                }
+            },
+            "volatility_bucket": {
+                "normal": {
+                    "trade_count": max(trade_count // 2, 1),
+                    "mean_pnl_pips": expectancy_pips,
+                    "profit_factor": max(profit_factor, 0.01),
+                }
+            },
+            "context_bucket": {
+                "trend": {
+                    "trade_count": max(trade_count // 2, 1),
+                    "mean_pnl_pips": expectancy_pips,
+                    "profit_factor": max(profit_factor, 0.01),
+                }
+            },
         },
         walk_forward_summary=[
             {

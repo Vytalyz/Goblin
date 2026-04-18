@@ -7,7 +7,11 @@ from pathlib import Path
 from agentic_forex.approval.service import approval_status, issue_machine_approval
 from agentic_forex.campaigns.program_loop import run_program_loop
 from agentic_forex.config import Settings
-from agentic_forex.goblin.controls import enforce_strategy_governance, finalize_goblin_run_record, start_goblin_run_record
+from agentic_forex.goblin.controls import (
+    enforce_strategy_governance,
+    finalize_goblin_run_record,
+    start_goblin_run_record,
+)
 from agentic_forex.goblin.models import GoblinRunRecord
 from agentic_forex.governance.control_plane import (
     acquire_lease,
@@ -465,13 +469,18 @@ def _candidate_is_parity_ready(candidate_id: str, settings: Settings) -> bool:
     if pbo is not None and float(pbo) > settings.validation.pbo_threshold:
         return False
     wrc_p = robustness.get("white_reality_check_p_value")
-    threshold = robustness.get("white_reality_check_pvalue_threshold") or settings.validation.white_reality_check_pvalue_threshold
+    threshold = (
+        robustness.get("white_reality_check_pvalue_threshold")
+        or settings.validation.white_reality_check_pvalue_threshold
+    )
     if wrc_p is not None and float(wrc_p) > float(threshold):
         return False
     return True
 
 
-def _maybe_build_ea_test_ready_handoff(settings: Settings, *, final_report, policy_hash: str) -> dict[str, object] | None:
+def _maybe_build_ea_test_ready_handoff(
+    settings: Settings, *, final_report, policy_hash: str
+) -> dict[str, object] | None:
     if final_report is None or final_report.recommended_follow_on_step != "human_review":
         return None
     candidate_id = _candidate_from_report(final_report)
@@ -495,7 +504,9 @@ def _maybe_build_ea_test_ready_handoff(settings: Settings, *, final_report, poli
     safety_path = handoff_dir / "operator_safety_envelope.json"
     write_json(safety_path, safety_envelope.model_dump(mode="json"))
 
-    packet = MT5Packet.model_validate(read_json(settings.paths().approvals_dir / "mt5_packets" / candidate_id / "packet.json"))
+    packet = MT5Packet.model_validate(
+        read_json(settings.paths().approvals_dir / "mt5_packets" / candidate_id / "packet.json")
+    )
     parity_report = load_latest_mt5_validation(candidate_id, settings)
     review_path = settings.paths().reports_dir / candidate_id / "review_packet.json"
     robustness_path = settings.paths().reports_dir / candidate_id / "robustness_report.json"
@@ -566,7 +577,10 @@ def _candidate_is_ea_test_ready(candidate_id: str, settings: Settings, *, policy
         return False
     if float(forward.get("expectancy_pips") or 0.0) <= settings.validation.forward_expectancy_floor:
         return False
-    if float(forward.get("expectancy_degradation_pct") or 100.0) > settings.validation.forward_expectancy_degradation_limit_pct:
+    if (
+        float(forward.get("expectancy_degradation_pct") or 100.0)
+        > settings.validation.forward_expectancy_degradation_limit_pct
+    ):
         return False
     if list(forward.get("risk_violations") or []):
         return False
@@ -706,7 +720,8 @@ def _finalize_manager_report(
     )
     if run_record is not None:
         finalize_goblin_run_record(
-            settings, run_record,
+            settings,
+            run_record,
             notes=[f"status={report.status}", f"stop_reason={report.stop_reason}"],
         )
     return report

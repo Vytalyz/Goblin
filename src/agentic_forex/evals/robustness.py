@@ -49,11 +49,19 @@ def build_robustness_report(
         desired_partition_count=settings.validation.cscv_partition_count,
         contract=contract,
     )
-    white_reality_check = _estimate_family_white_reality_check_from_ledgers(candidate_ledgers, settings=settings, contract=contract)
-    walk_forward_ok = all(window.get("profit_factor", 0.0) > 0.9 for window in backtest.walk_forward_summary) if backtest.walk_forward_summary else False
+    white_reality_check = _estimate_family_white_reality_check_from_ledgers(
+        candidate_ledgers, settings=settings, contract=contract
+    )
+    walk_forward_ok = (
+        all(window.get("profit_factor", 0.0) > 0.9 for window in backtest.walk_forward_summary)
+        if backtest.walk_forward_summary
+        else False
+    )
     warnings: list[str] = []
     if trial_count_family >= 10:
-        warnings.append(f"Family has already consumed {trial_count_family} recorded trials; search-adjusted caution is required.")
+        warnings.append(
+            f"Family has already consumed {trial_count_family} recorded trials; search-adjusted caution is required."
+        )
     if not walk_forward_ok:
         warnings.append("Walk-forward windows are not uniformly stable.")
     if not stress.passed:
@@ -70,7 +78,9 @@ def build_robustness_report(
                 f"{cscv_result['partition_count']} partitions."
             )
     else:
-        warnings.append("CSCV/PBO is not yet available for this family universe; this robustness assessment remains provisional.")
+        warnings.append(
+            "CSCV/PBO is not yet available for this family universe; this robustness assessment remains provisional."
+        )
     if white_reality_check["available"]:
         if white_reality_check["p_value"] <= settings.validation.white_reality_check_pvalue_threshold:
             warnings.append(
@@ -83,7 +93,9 @@ def build_robustness_report(
                 f"threshold {settings.validation.white_reality_check_pvalue_threshold:.3f})."
             )
     else:
-        warnings.append("White's Reality Check is not yet available for this family universe; search-adjusted robustness remains provisional.")
+        warnings.append(
+            "White's Reality Check is not yet available for this family universe; search-adjusted robustness remains provisional."
+        )
     status = (
         "robustness_passed"
         if cscv_result["available"]
@@ -97,7 +109,9 @@ def build_robustness_report(
     )
     report = RobustnessReport(
         candidate_id=spec.candidate_id,
-        mode="full_search_adjusted_robustness" if cscv_result["available"] or white_reality_check["available"] else "staged_proxy_only",
+        mode="full_search_adjusted_robustness"
+        if cscv_result["available"] or white_reality_check["available"]
+        else "staged_proxy_only",
         cscv_pbo_available=bool(cscv_result["available"]),
         cscv_partition_count=int(cscv_result["partition_count"]),
         cscv_candidate_count=int(cscv_result["candidate_count"]),
@@ -105,7 +119,9 @@ def build_robustness_report(
         white_reality_check_candidate_count=int(white_reality_check["candidate_count"]),
         white_reality_check_bootstrap_samples=int(white_reality_check["bootstrap_samples"]),
         white_reality_check_best_candidate_id=white_reality_check["best_candidate_id"],
-        white_reality_check_p_value=round(white_reality_check["p_value"], 6) if white_reality_check["p_value"] is not None else None,
+        white_reality_check_p_value=round(white_reality_check["p_value"], 6)
+        if white_reality_check["p_value"] is not None
+        else None,
         white_reality_check_pvalue_threshold=settings.validation.white_reality_check_pvalue_threshold,
         candidate_universe=list(cscv_result["candidate_ids"]),
         comparable_universe_contract=dict(cscv_result["contract"]),
@@ -207,7 +223,9 @@ def _estimate_family_cscv_pbo_from_ledgers(
         }
         best_candidate_id = max(train_metrics, key=train_metrics.get)
         ranked = sorted(test_metrics.items(), key=lambda item: item[1], reverse=True)
-        out_of_sample_rank = next(index + 1 for index, (candidate_id, _) in enumerate(ranked) if candidate_id == best_candidate_id)
+        out_of_sample_rank = next(
+            index + 1 for index, (candidate_id, _) in enumerate(ranked) if candidate_id == best_candidate_id
+        )
         overfit_events.append(out_of_sample_rank > (candidate_count / 2.0))
     return {
         "available": bool(overfit_events),
@@ -255,7 +273,11 @@ def _estimate_family_white_reality_check_from_ledgers(
     rng = random.Random(settings.validation.white_reality_check_random_seed)
     exceedances = 0
     centered_ledgers = [
-        (candidate_id, pd.to_numeric(ledger, errors="coerce").fillna(0.0).reset_index(drop=True) - float(pd.to_numeric(ledger, errors="coerce").fillna(0.0).mean()))
+        (
+            candidate_id,
+            pd.to_numeric(ledger, errors="coerce").fillna(0.0).reset_index(drop=True)
+            - float(pd.to_numeric(ledger, errors="coerce").fillna(0.0).mean()),
+        )
         for candidate_id, ledger in candidate_ledgers
     ]
     for _ in range(bootstrap_samples):
@@ -281,7 +303,9 @@ def _estimate_family_white_reality_check_from_ledgers(
     }
 
 
-def _family_candidate_ledgers(spec: StrategySpec, settings: Settings) -> tuple[list[tuple[str, pd.Series]], dict[str, object]]:
+def _family_candidate_ledgers(
+    spec: StrategySpec, settings: Settings
+) -> tuple[list[tuple[str, pd.Series]], dict[str, object]]:
     target_signature = _load_comparable_universe_signature(settings.paths().reports_dir / spec.candidate_id)
     contract = _signature_to_contract(spec, target_signature)
     ledgers: list[tuple[str, pd.Series]] = []

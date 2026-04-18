@@ -8,7 +8,6 @@ AF-CAND-0716 (swing, pullback_continuation): base PF 1.170, stressed 1.051
 
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
 
@@ -60,24 +59,28 @@ def _scalp_base() -> dict:
 def _scalp_variants() -> list[dict]:
     # R1: Wider TP 25 + hold 180 — more room for winners
     r1 = _scalp_base()
-    r1.update({
-        "candidate_id": "AF-CAND-0730",
-        "title": "0724-R1: TP 25 + Hold 180",
-        "thesis": "Push TP wider and give more hold time for large breakout follow-through.",
-        "exit_summary": "Fixed stop 8 pips, target 25 pips, 180-bar timeout.",
-        "take_profit_pips": 25.0,
-        "holding_bars": 180,
-    })
+    r1.update(
+        {
+            "candidate_id": "AF-CAND-0730",
+            "title": "0724-R1: TP 25 + Hold 180",
+            "thesis": "Push TP wider and give more hold time for large breakout follow-through.",
+            "exit_summary": "Fixed stop 8 pips, target 25 pips, 180-bar timeout.",
+            "take_profit_pips": 25.0,
+            "holding_bars": 180,
+        }
+    )
 
     # R2: Tighter spread 1.2 + TP 24 — eliminate most costly entries
     r2 = _scalp_base()
-    r2.update({
-        "candidate_id": "AF-CAND-0731",
-        "title": "0724-R2: Spread 1.2 + TP 24",
-        "thesis": "Ultra-tight spread filter ensures every entry has minimal cost drag.",
-        "exit_summary": "Fixed stop 8 pips, target 24 pips, 150-bar timeout.",
-        "take_profit_pips": 24.0,
-    })
+    r2.update(
+        {
+            "candidate_id": "AF-CAND-0731",
+            "title": "0724-R2: Spread 1.2 + TP 24",
+            "thesis": "Ultra-tight spread filter ensures every entry has minimal cost drag.",
+            "exit_summary": "Fixed stop 8 pips, target 24 pips, 150-bar timeout.",
+            "take_profit_pips": 24.0,
+        }
+    )
     r2["custom_filters"] = [
         {"name": "breakout_zscore_floor", "rule": "0.75"},
         {"name": "require_ret_5_alignment", "rule": "true"},
@@ -88,13 +91,15 @@ def _scalp_variants() -> list[dict]:
 
     # R3: Higher Z-score floor 0.85 + TP 24 — more selective signal
     r3 = _scalp_base()
-    r3.update({
-        "candidate_id": "AF-CAND-0732",
-        "title": "0724-R3: Zscore 0.85 + TP 24",
-        "thesis": "Higher Z-score floor selects only directionally committed breakouts.",
-        "exit_summary": "Fixed stop 8 pips, target 24 pips, 150-bar timeout.",
-        "take_profit_pips": 24.0,
-    })
+    r3.update(
+        {
+            "candidate_id": "AF-CAND-0732",
+            "title": "0724-R3: Zscore 0.85 + TP 24",
+            "thesis": "Higher Z-score floor selects only directionally committed breakouts.",
+            "exit_summary": "Fixed stop 8 pips, target 24 pips, 150-bar timeout.",
+            "take_profit_pips": 24.0,
+        }
+    )
     r3["custom_filters"] = [
         {"name": "breakout_zscore_floor", "rule": "0.85"},
         {"name": "require_ret_5_alignment", "rule": "true"},
@@ -105,25 +110,29 @@ def _scalp_variants() -> list[dict]:
 
     # R4: Tighter SL 7 + TP 24 — better R:R ratio
     r4 = _scalp_base()
-    r4.update({
-        "candidate_id": "AF-CAND-0733",
-        "title": "0724-R4: SL 7 + TP 24",
-        "thesis": "Tighter stop loss improves R:R (3.4:1) and reduces per-trade downside.",
-        "exit_summary": "Fixed stop 7 pips, target 24 pips, 150-bar timeout.",
-        "stop_loss_pips": 7.0,
-        "take_profit_pips": 24.0,
-    })
+    r4.update(
+        {
+            "candidate_id": "AF-CAND-0733",
+            "title": "0724-R4: SL 7 + TP 24",
+            "thesis": "Tighter stop loss improves R:R (3.4:1) and reduces per-trade downside.",
+            "exit_summary": "Fixed stop 7 pips, target 24 pips, 150-bar timeout.",
+            "stop_loss_pips": 7.0,
+            "take_profit_pips": 24.0,
+        }
+    )
 
     # R5: Higher vol floor 0.00007 + TP 24 + hold 180
     r5 = _scalp_base()
-    r5.update({
-        "candidate_id": "AF-CAND-0734",
-        "title": "0724-R5: Vol 0.00007 + TP 24 + Hold 180",
-        "thesis": "Higher volatility floor ensures adequate directional range for wider TP.",
-        "exit_summary": "Fixed stop 8 pips, target 24 pips, 180-bar timeout.",
-        "take_profit_pips": 24.0,
-        "holding_bars": 180,
-    })
+    r5.update(
+        {
+            "candidate_id": "AF-CAND-0734",
+            "title": "0724-R5: Vol 0.00007 + TP 24 + Hold 180",
+            "thesis": "Higher volatility floor ensures adequate directional range for wider TP.",
+            "exit_summary": "Fixed stop 8 pips, target 24 pips, 180-bar timeout.",
+            "take_profit_pips": 24.0,
+            "holding_bars": 180,
+        }
+    )
     r5["custom_filters"] = [
         {"name": "breakout_zscore_floor", "rule": "0.75"},
         {"name": "require_ret_5_alignment", "rule": "true"},
@@ -134,14 +143,16 @@ def _scalp_variants() -> list[dict]:
 
     # R6: Combined best — spread 1.2 + zscore 0.85 + TP 25 + hold 180
     r6 = _scalp_base()
-    r6.update({
-        "candidate_id": "AF-CAND-0735",
-        "title": "0724-R6: Spread 1.2 + Zsc 0.85 + TP 25 + H 180",
-        "thesis": "Stack the strongest individual tweaks into one ultra-selective variant.",
-        "exit_summary": "Fixed stop 8 pips, target 25 pips, 180-bar timeout.",
-        "take_profit_pips": 25.0,
-        "holding_bars": 180,
-    })
+    r6.update(
+        {
+            "candidate_id": "AF-CAND-0735",
+            "title": "0724-R6: Spread 1.2 + Zsc 0.85 + TP 25 + H 180",
+            "thesis": "Stack the strongest individual tweaks into one ultra-selective variant.",
+            "exit_summary": "Fixed stop 8 pips, target 25 pips, 180-bar timeout.",
+            "take_profit_pips": 25.0,
+            "holding_bars": 180,
+        }
+    )
     r6["custom_filters"] = [
         {"name": "breakout_zscore_floor", "rule": "0.85"},
         {"name": "require_ret_5_alignment", "rule": "true"},
@@ -189,38 +200,44 @@ def _swing_base() -> dict:
 def _swing_variants() -> list[dict]:
     # W1: Wider trail 18 + TP 55 — let winners run further
     w1 = _swing_base()
-    w1.update({
-        "candidate_id": "AF-CAND-0736",
-        "title": "0716-W1: Trail 18 + TP 55",
-        "thesis": "Wider trailing stop and TP lets genuine trends develop fully.",
-        "exit_summary": "Trailing stop 18 pips, fixed SL 20 pips, TP 55 pips, 8-hour timeout.",
-        "trailing_stop_pips": 18.0,
-        "stop_loss_pips": 20.0,
-        "take_profit_pips": 55.0,
-    })
+    w1.update(
+        {
+            "candidate_id": "AF-CAND-0736",
+            "title": "0716-W1: Trail 18 + TP 55",
+            "thesis": "Wider trailing stop and TP lets genuine trends develop fully.",
+            "exit_summary": "Trailing stop 18 pips, fixed SL 20 pips, TP 55 pips, 8-hour timeout.",
+            "trailing_stop_pips": 18.0,
+            "stop_loss_pips": 20.0,
+            "take_profit_pips": 55.0,
+        }
+    )
 
     # W2: Wider trail 20 + TP 60 + hold 600 — maximum room
     w2 = _swing_base()
-    w2.update({
-        "candidate_id": "AF-CAND-0737",
-        "title": "0716-W2: Trail 20 + TP 60 + Hold 600",
-        "thesis": "Maximum room for trend development — widest trail and hold.",
-        "exit_summary": "Trailing stop 20 pips, fixed SL 22 pips, TP 60 pips, 10-hour timeout.",
-        "trailing_stop_pips": 20.0,
-        "stop_loss_pips": 22.0,
-        "take_profit_pips": 60.0,
-        "holding_bars": 600,
-    })
+    w2.update(
+        {
+            "candidate_id": "AF-CAND-0737",
+            "title": "0716-W2: Trail 20 + TP 60 + Hold 600",
+            "thesis": "Maximum room for trend development — widest trail and hold.",
+            "exit_summary": "Trailing stop 20 pips, fixed SL 22 pips, TP 60 pips, 10-hour timeout.",
+            "trailing_stop_pips": 20.0,
+            "stop_loss_pips": 22.0,
+            "take_profit_pips": 60.0,
+            "holding_bars": 600,
+        }
+    )
 
     # W3: Tighter spread 2.5 + TP 50 — reduce cost impact
     w3 = _swing_base()
-    w3.update({
-        "candidate_id": "AF-CAND-0738",
-        "title": "0716-W3: Spread 2.5 + TP 50",
-        "thesis": "Tighter spread filter improves cost efficiency on swing entries.",
-        "exit_summary": "Trailing stop 15 pips, fixed SL 18 pips, TP 50 pips, 8-hour timeout.",
-        "take_profit_pips": 50.0,
-    })
+    w3.update(
+        {
+            "candidate_id": "AF-CAND-0738",
+            "title": "0716-W3: Spread 2.5 + TP 50",
+            "thesis": "Tighter spread filter improves cost efficiency on swing entries.",
+            "exit_summary": "Trailing stop 15 pips, fixed SL 18 pips, TP 50 pips, 8-hour timeout.",
+            "take_profit_pips": 50.0,
+        }
+    )
     w3["custom_filters"] = [
         {"name": "trend_ret_5_min", "rule": "0.00004"},
         {"name": "pullback_zscore_limit", "rule": "0.70"},
@@ -231,13 +248,15 @@ def _swing_variants() -> list[dict]:
 
     # W4: Lower threshold 0.6 + wider pullback 0.80 — more trades
     w4 = _swing_base()
-    w4.update({
-        "candidate_id": "AF-CAND-0739",
-        "title": "0716-W4: Threshold 0.6 + Pullback 0.80",
-        "thesis": "Relax entry criteria to increase trade count while keeping mean alignment and recovery filters.",
-        "exit_summary": "Trailing stop 15 pips, fixed SL 18 pips, TP 45 pips, 8-hour timeout.",
-        "signal_threshold": 0.6,
-    })
+    w4.update(
+        {
+            "candidate_id": "AF-CAND-0739",
+            "title": "0716-W4: Threshold 0.6 + Pullback 0.80",
+            "thesis": "Relax entry criteria to increase trade count while keeping mean alignment and recovery filters.",
+            "exit_summary": "Trailing stop 15 pips, fixed SL 18 pips, TP 45 pips, 8-hour timeout.",
+            "signal_threshold": 0.6,
+        }
+    )
     w4["custom_filters"] = [
         {"name": "trend_ret_5_min", "rule": "0.00003"},
         {"name": "pullback_zscore_limit", "rule": "0.80"},
@@ -248,15 +267,17 @@ def _swing_variants() -> list[dict]:
 
     # W5: Trail 18 + spread 2.5 + TP 50 — combined cost + room
     w5 = _swing_base()
-    w5.update({
-        "candidate_id": "AF-CAND-0740",
-        "title": "0716-W5: Trail 18 + Spread 2.5 + TP 50",
-        "thesis": "Combine tighter spread with wider trail and TP for best cost-adjusted performance.",
-        "exit_summary": "Trailing stop 18 pips, fixed SL 20 pips, TP 50 pips, 8-hour timeout.",
-        "trailing_stop_pips": 18.0,
-        "stop_loss_pips": 20.0,
-        "take_profit_pips": 50.0,
-    })
+    w5.update(
+        {
+            "candidate_id": "AF-CAND-0740",
+            "title": "0716-W5: Trail 18 + Spread 2.5 + TP 50",
+            "thesis": "Combine tighter spread with wider trail and TP for best cost-adjusted performance.",
+            "exit_summary": "Trailing stop 18 pips, fixed SL 20 pips, TP 50 pips, 8-hour timeout.",
+            "trailing_stop_pips": 18.0,
+            "stop_loss_pips": 20.0,
+            "take_profit_pips": 50.0,
+        }
+    )
     w5["custom_filters"] = [
         {"name": "trend_ret_5_min", "rule": "0.00004"},
         {"name": "pullback_zscore_limit", "rule": "0.70"},
@@ -267,17 +288,19 @@ def _swing_variants() -> list[dict]:
 
     # W6: Best-of stack — trail 18 + spread 2.5 + TP 55 + hold 600 + threshold 0.7
     w6 = _swing_base()
-    w6.update({
-        "candidate_id": "AF-CAND-0741",
-        "title": "0716-W6: Trail 18 + Spr 2.5 + TP 55 + H 600",
-        "thesis": "Stack strongest swing tweaks — wider room + cost reduction + relaxed threshold.",
-        "exit_summary": "Trailing stop 18 pips, fixed SL 20 pips, TP 55 pips, 10-hour timeout.",
-        "signal_threshold": 0.7,
-        "trailing_stop_pips": 18.0,
-        "stop_loss_pips": 20.0,
-        "take_profit_pips": 55.0,
-        "holding_bars": 600,
-    })
+    w6.update(
+        {
+            "candidate_id": "AF-CAND-0741",
+            "title": "0716-W6: Trail 18 + Spr 2.5 + TP 55 + H 600",
+            "thesis": "Stack strongest swing tweaks — wider room + cost reduction + relaxed threshold.",
+            "exit_summary": "Trailing stop 18 pips, fixed SL 20 pips, TP 55 pips, 10-hour timeout.",
+            "signal_threshold": 0.7,
+            "trailing_stop_pips": 18.0,
+            "stop_loss_pips": 20.0,
+            "take_profit_pips": 55.0,
+            "holding_bars": 600,
+        }
+    )
     w6["custom_filters"] = [
         {"name": "trend_ret_5_min", "rule": "0.00004"},
         {"name": "pullback_zscore_limit", "rule": "0.75"},
@@ -316,23 +339,33 @@ def main():
 
         # Base backtest
         artifact = run_backtest(spec, settings)
-        print(f"  Base: {artifact.trade_count} trades, PF {artifact.profit_factor:.3f}, WR {artifact.win_rate:.1%}, DD {artifact.max_drawdown_pct:.2f}%, OOS {artifact.out_of_sample_profit_factor:.3f}")
+        print(
+            f"  Base: {artifact.trade_count} trades, PF {artifact.profit_factor:.3f}, WR {artifact.win_rate:.1%}, DD {artifact.max_drawdown_pct:.2f}%, OOS {artifact.out_of_sample_profit_factor:.3f}"
+        )
 
         if artifact.trade_count < 50 or artifact.profit_factor < 1.0:
             print(f"  Skip stress — triage fail (trades={artifact.trade_count}, PF={artifact.profit_factor:.3f})")
-            results.append({
-                "candidate_id": cid, "type": vtype, "title": raw["title"],
-                "trades": artifact.trade_count, "base_pf": round(artifact.profit_factor, 3),
-                "stressed_pf": 0.0, "stress_passed": False,
-                "wf_passing": 0, "wf_total": 0, "wf_passed": False,
-                "oos_pf": round(artifact.out_of_sample_profit_factor, 3),
-                "max_dd_pct": round(artifact.max_drawdown_pct, 2),
-                "overall_pass": False,
-            })
+            results.append(
+                {
+                    "candidate_id": cid,
+                    "type": vtype,
+                    "title": raw["title"],
+                    "trades": artifact.trade_count,
+                    "base_pf": round(artifact.profit_factor, 3),
+                    "stressed_pf": 0.0,
+                    "stress_passed": False,
+                    "wf_passing": 0,
+                    "wf_total": 0,
+                    "wf_passed": False,
+                    "oos_pf": round(artifact.out_of_sample_profit_factor, 3),
+                    "max_dd_pct": round(artifact.max_drawdown_pct, 2),
+                    "overall_pass": False,
+                }
+            )
             continue
 
         # Stress test
-        print(f"  Stress testing...")
+        print("  Stress testing...")
         stress = run_stress_test(spec, settings)
         for sc in stress.scenarios:
             print(f"    {sc.name}: PF {sc.profit_factor:.3f}")
@@ -348,28 +381,38 @@ def main():
         print(f"  WF: {wf_passing}/{wf_total} pass")
 
         overall = stress.passed and wf_passed
-        results.append({
-            "candidate_id": cid, "type": vtype, "title": raw["title"],
-            "trades": artifact.trade_count,
-            "base_pf": round(stress.base_profit_factor, 3),
-            "stressed_pf": round(stress.stressed_profit_factor, 3),
-            "stress_passed": stress.passed,
-            "wf_passing": wf_passing, "wf_total": wf_total, "wf_passed": wf_passed,
-            "oos_pf": round(artifact.out_of_sample_profit_factor, 3),
-            "max_dd_pct": round(artifact.max_drawdown_pct, 2),
-            "overall_pass": overall,
-        })
+        results.append(
+            {
+                "candidate_id": cid,
+                "type": vtype,
+                "title": raw["title"],
+                "trades": artifact.trade_count,
+                "base_pf": round(stress.base_profit_factor, 3),
+                "stressed_pf": round(stress.stressed_profit_factor, 3),
+                "stress_passed": stress.passed,
+                "wf_passing": wf_passing,
+                "wf_total": wf_total,
+                "wf_passed": wf_passed,
+                "oos_pf": round(artifact.out_of_sample_profit_factor, 3),
+                "max_dd_pct": round(artifact.max_drawdown_pct, 2),
+                "overall_pass": overall,
+            }
+        )
         print(f"  >>> {cid}: [{'PASS' if overall else 'FAIL'}]")
 
     # Summary
     print("\n\n" + "=" * 130)
-    print(f"{'ID':<16} {'Type':<6} {'Title':<42} {'Trades':>6} {'Base':>6} {'Stress':>7} {'S?':>4} {'WF':>5} {'OOS':>6} {'DD%':>6} {'OK':>5}")
+    print(
+        f"{'ID':<16} {'Type':<6} {'Title':<42} {'Trades':>6} {'Base':>6} {'Stress':>7} {'S?':>4} {'WF':>5} {'OOS':>6} {'DD%':>6} {'OK':>5}"
+    )
     print("-" * 130)
     for r in results:
         s = "Y" if r["stress_passed"] else "N"
         w = f"{r['wf_passing']}/{r['wf_total']}"
         o = "PASS" if r["overall_pass"] else "FAIL"
-        print(f"{r['candidate_id']:<16} {r['type']:<6} {r['title']:<42} {r['trades']:>6} {r['base_pf']:>6.3f} {r['stressed_pf']:>7.3f} {s:>4} {w:>5} {r['oos_pf']:>6.3f} {r['max_dd_pct']:>5.2f}% {o:>5}")
+        print(
+            f"{r['candidate_id']:<16} {r['type']:<6} {r['title']:<42} {r['trades']:>6} {r['base_pf']:>6.3f} {r['stressed_pf']:>7.3f} {s:>4} {w:>5} {r['oos_pf']:>6.3f} {r['max_dd_pct']:>5.2f}% {o:>5}"
+        )
     print("=" * 130)
 
     passed = [r for r in results if r["overall_pass"]]
@@ -379,10 +422,12 @@ def main():
     if passed:
         print("\nRanked by stressed PF:")
         for rank, r in enumerate(sorted(passed, key=lambda x: x["stressed_pf"], reverse=True), 1):
-            print(f"  #{rank} {r['candidate_id']} — stressed {r['stressed_pf']:.3f}, OOS {r['oos_pf']:.3f}, DD {r['max_dd_pct']:.2f}%, {r['trades']} trades")
+            print(
+                f"  #{rank} {r['candidate_id']} — stressed {r['stressed_pf']:.3f}, OOS {r['oos_pf']:.3f}, DD {r['max_dd_pct']:.2f}%, {r['trades']} trades"
+            )
 
     write_json(PROJECT_ROOT / "reports" / "phase3c_deep_refinement_results.json", results)
-    print(f"\nSaved to: reports/phase3c_deep_refinement_results.json")
+    print("\nSaved to: reports/phase3c_deep_refinement_results.json")
 
 
 if __name__ == "__main__":

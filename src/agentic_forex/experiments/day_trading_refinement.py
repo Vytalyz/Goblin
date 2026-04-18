@@ -158,7 +158,7 @@ def _variant_candidate(
             "candidate_id": next_candidate_id(settings),
             "family": candidate_family,
             "title": template["title"],
-            "thesis": f'{template["thesis"]} Derived from {target.candidate_id} under the bounded day-trading refinement lane.',
+            "thesis": f"{template['thesis']} Derived from {target.candidate_id} under the bounded day-trading refinement lane.",
             "setup_summary": template["setup_summary"],
             "entry_summary": template["entry_summary"],
             "exit_summary": template["exit_summary"],
@@ -169,15 +169,12 @@ def _variant_candidate(
                     "volatility_preference": template["volatility_preference"],
                     "allowed_hours_utc": template["allowed_hours_utc"],
                     "execution_notes": list(target.market_context.execution_notes)
-                    + [f'Refinement variant: {template["variant_label"]}.'],
+                    + [f"Refinement variant: {template['variant_label']}."],
                 }
             ),
-            "notes": list(target.notes) + [f'Bounded refinement candidate derived from {target.candidate_id}.'],
+            "notes": list(target.notes) + [f"Bounded refinement candidate derived from {target.candidate_id}."],
             "quality_flags": new_quality_flags,
-            "custom_filters": [
-                {"name": name, "rule": rule}
-                for name, rule in template["custom_filters"].items()
-            ],
+            "custom_filters": [{"name": name, "rule": rule} for name, rule in template["custom_filters"].items()],
             "enable_news_blackout": bool(template["enable_news_blackout"]),
             "entry_style": target.entry_style,
             "holding_bars": int(template["holding_bars"]),
@@ -207,7 +204,9 @@ def _apply_day_trading_refinement(
     risk_envelope = spec.risk_envelope.model_copy(
         update={
             "session_boundaries_utc": template["allowed_hours_utc"],
-            "news_event_policy": "calendar_blackout" if template["enable_news_blackout"] else spec.risk_envelope.news_event_policy,
+            "news_event_policy": "calendar_blackout"
+            if template["enable_news_blackout"]
+            else spec.risk_envelope.news_event_policy,
         }
     )
     updated = spec.model_copy(
@@ -225,13 +224,13 @@ def _apply_day_trading_refinement(
             "take_profit_pips": float(template["take_profit_pips"]),
             "entry_logic": [
                 template["entry_summary"],
-                f'Signal threshold {template["signal_threshold"]}',
+                f"Signal threshold {template['signal_threshold']}",
             ],
             "exit_logic": [
                 template["exit_summary"],
-                f'Time exit after {template["holding_bars"]} bars',
+                f"Time exit after {template['holding_bars']} bars",
             ],
-            "notes": list(spec.notes) + [f'Refinement label: {template["variant_label"]}.'],
+            "notes": list(spec.notes) + [f"Refinement label: {template['variant_label']}."],
         }
     )
     return StrategySpec.model_validate(updated.model_dump(mode="json"))

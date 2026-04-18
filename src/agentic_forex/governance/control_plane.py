@@ -144,7 +144,9 @@ def acquire_lease(
     return lease
 
 
-def heartbeat_lease(settings: Settings, *, lease_key: str, owner_id: str, fencing_token: int, ttl_seconds: int) -> LeaseRecord:
+def heartbeat_lease(
+    settings: Settings, *, lease_key: str, owner_id: str, fencing_token: int, ttl_seconds: int
+) -> LeaseRecord:
     lease = load_lease(settings, lease_key)
     if lease is None or not lease.active:
         raise PermissionError(f"lease_missing:{lease_key}")
