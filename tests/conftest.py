@@ -1,3 +1,5 @@
+
+from __future__ import annotations
 import os
 
 # --- Ensure .codex directory exists for all test environments (local and CI) ---
@@ -9,7 +11,6 @@ def setup_codex_directory():
     if not os.path.exists(codex_path):
         os.makedirs(codex_path, exist_ok=True)
     yield
-from __future__ import annotations
 
 import json
 import math

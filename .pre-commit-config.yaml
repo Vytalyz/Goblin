@@ -1,0 +1,38 @@
+# Goblin Guardian: Guard the Coins!
+# This pre-commit config ensures no code sneaks past the goblin without a syntax, lint, or test check.
+# Playful, on-theme, but not distracting.
+
+repos:
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.4.4
+    hooks:
+      - id: ruff
+        name: "Goblin Guardian: Ruff Lint"
+        entry: ruff check .
+        language: python
+        types: [python]
+        pass_filenames: false
+        verbose: true
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-symlinks
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: local
+    hooks:
+      - id: goblin-guardian-syntax
+        name: "Goblin Guardian: Syntax Check"
+        entry: python -m compileall .
+        language: system
+        types: [python]
+        pass_filenames: false
+        verbose: true
+      - id: goblin-guardian-tests
+        name: "Goblin Guardian: Test Gate"
+        entry: pytest --tb=short -q
+        language: system
+        types: [python]
+        pass_filenames: false
+        verbose: true

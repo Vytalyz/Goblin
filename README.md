@@ -1,3 +1,22 @@
+# Goblin Guardian Agent: Guarding the Coins
+
+All code changes are protected by the Goblin Guardian agent:
+- Syntax checks (no sneaky syntax errors)
+- Ruff linting (modern, fast, and strict)
+- Test gate (all tests must pass)
+- Runs automatically on every commit and push (via pre-commit hooks)
+- Runs in CI for every PR and push
+
+**How it works:**
+- On every commit, the Guardian agent checks your code for syntax, style, and test failures.
+- If any check fails, the commit is blocked—no code escapes the goblin’s vault!
+- To activate locally: `pre-commit install`
+- To run manually: `pre-commit run --all-files`
+
+**Guardian is always watching—your coins (codebase) are safe!**
+
+---
+
 # Goblin
 
 **Goblin** is a governed, agentic algorithmic forex research platform. It automates the full lifecycle of trading strategy discovery, backtesting, robustness evaluation, and broker-parity validation — while keeping humans in the loop for every decision that matters.
