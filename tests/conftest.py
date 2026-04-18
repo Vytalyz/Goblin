@@ -46,9 +46,38 @@ def scaffold_project(root: Path) -> Path:
         "automations",
         "src",
     ):
-        shutil.copytree(TEMPLATE_ROOT / name, root / name, dirs_exist_ok=True)
+        template_dir = TEMPLATE_ROOT / name
+        if template_dir.is_dir():
+            shutil.copytree(template_dir, root / name, dirs_exist_ok=True)
+        else:
+            (root / name).mkdir(parents=True, exist_ok=True)
+    _ensure_codex_scaffolding(root)
     ProjectPaths.from_root(root).ensure_directories()
     return root
+
+
+def _ensure_codex_scaffolding(root: Path) -> None:
+    """Create minimal .codex structure when the template copy is empty (CI)."""
+    codex_dir = root / ".codex"
+    codex_dir.mkdir(parents=True, exist_ok=True)
+    config_path = codex_dir / "config.toml"
+    if not config_path.exists():
+        config_path.write_text(
+            'sandbox_mode = "workspace-write"\n\n[features]\ncodex_hooks = false\n',
+            encoding="utf-8",
+        )
+    rules_dir = codex_dir / "rules"
+    rules_dir.mkdir(parents=True, exist_ok=True)
+    rules_file = rules_dir / "default.rules"
+    if not rules_file.exists():
+        rules_file.write_text("# Goblin test rules stub\n", encoding="utf-8")
+    agents_dir = codex_dir / "agents"
+    agents_dir.mkdir(parents=True, exist_ok=True)
+    if not any(agents_dir.glob("*.toml")):
+        (agents_dir / "portfolio_orchestrator.toml").write_text(
+            '# Stub for test scaffolding\nname = "portfolio_orchestrator"\n',
+            encoding="utf-8",
+        )
 
 
 def create_corpus_mirror(base_dir: Path) -> Path:

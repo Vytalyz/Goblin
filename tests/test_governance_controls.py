@@ -428,6 +428,10 @@ def test_resolve_effective_parity_policy_ignores_self_parent_lineage_entries(set
 
 
 def test_generated_mt5_packet_is_not_immediately_stale(settings, tmp_path):
+    from agentic_forex.mt5.service import _resolve_terminal_path
+
+    if _resolve_terminal_path(settings) is None:
+        pytest.skip("MT5 terminal not available")
     oanda_json = create_oanda_candles_json(tmp_path, rows=5000)
     calendar_csv = create_economic_calendar_csv(tmp_path)
     ingest_oanda_json(oanda_json, settings)
@@ -1341,6 +1345,9 @@ def test_render_candidate_ea_supports_throughput_entry_styles(settings):
         ("AF-CAND-0148", "trend_pullback_retest"),
         ("AF-CAND-0149", "session_extreme_reversion"),
     ]
+    first_spec_path = Path(r".") / "reports" / candidate_ids[0][0] / "strategy_spec.json"
+    if not first_spec_path.exists():
+        pytest.skip("Local report fixtures not available (CI environment)")
     for candidate_id, entry_style in candidate_ids:
         spec_path = Path(r".") / "reports" / candidate_id / "strategy_spec.json"
         spec = StrategySpec.model_validate(read_json(spec_path))

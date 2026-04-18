@@ -45,4 +45,7 @@ for package_name in _ALIAS_PACKAGES:
     legacy_name = f"agentic_forex.{package_name}"
     goblin_name = f"goblin.{package_name}"
     if goblin_name not in sys.modules:
-        sys.modules[goblin_name] = import_module(legacy_name)
+        try:
+            sys.modules[goblin_name] = import_module(legacy_name)
+        except ModuleNotFoundError:
+            pass
