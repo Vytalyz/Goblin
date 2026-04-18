@@ -1,3 +1,14 @@
+import os
+
+# --- Ensure .codex directory exists for all test environments (local and CI) ---
+import pytest
+
+@pytest.fixture(scope="session", autouse=True)
+def setup_codex_directory():
+    codex_path = ".codex"
+    if not os.path.exists(codex_path):
+        os.makedirs(codex_path, exist_ok=True)
+    yield
 from __future__ import annotations
 
 import json
