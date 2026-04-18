@@ -34,6 +34,7 @@ SECRET_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"""sk-[a-zA-Z0-9]{20,}"""),
     re.compile(r"""Bearer\s+[a-zA-Z0-9\-_]{20,}"""),
     re.compile(r"""(api[_-]?key|api[_-]?token|secret|password)\s*[:=]\s*['"][^'"]{8,}""", re.IGNORECASE),
+    re.compile(r"""gh[opsr]_[A-Za-z0-9]{36,}"""),  # GitHub OAuth/PAT/server/refresh tokens
 ]
 
 PATH_PATTERNS: list[re.Pattern[str]] = [
