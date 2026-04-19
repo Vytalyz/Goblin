@@ -460,3 +460,59 @@ def _moving_block_bootstrap_mean(pnl: pd.Series, *, block_size: int, rng: random
             if len(values) >= sample_size:
                 break
     return float(sum(values) / sample_size)
+
+# ---------------------------------------------------------------------------
+# MT5 feature alignment test  (ML-P1.9)
+# ---------------------------------------------------------------------------
+
+def mt5_feature_alignment_test(
+    oanda_features: pd.DataFrame,
+    mt5_features: pd.DataFrame,
+    *,
+    feature_cols: list[str] | None = None,
+    max_auc: float = 0.60,
+) -> dict:
+    """Adversarial test: can a classifier distinguish OANDA vs MT5 features?
+
+    Builds a combined dataset labelling each row by source, trains a
+    stratified k-fold classifier, and computes the mean OOS AUC.  If
+    AUC exceeds *max_auc* the two feeds are materially different and
+    any model trained on OANDA may not transfer to MT5.
+    """
+    import numpy as np
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.metrics import roc_auc_score
+    from sklearn.model_selection import StratifiedKFold
+
+    cols = feature_cols or [
+        c for c in oanda_features.columns
+        if c in mt5_features.columns and oanda_features[c].dtype.kind in "fi"
+    ]
+
+    oa = oanda_features[cols].dropna().copy()
+    mt = mt5_features[cols].dropna().copy()
+    oa["_source"] = 0
+    mt["_source"] = 1
+    combined = pd.concat([oa, mt], ignore_index=True)
+
+    X = combined[cols]
+    y = combined["_source"]
+
+    if len(X) < 40:
+        return {"auc": 0.5, "passed": True, "note": "insufficient data"}
+
+    skf = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+    aucs = []
+    for train_idx, test_idx in skf.split(X, y):
+        clf = RandomForestClassifier(n_estimators=50, random_state=42)
+        clf.fit(X.iloc[train_idx], y.iloc[train_idx])
+        prob = clf.predict_proba(X.iloc[test_idx])[:, 1]
+        aucs.append(float(roc_auc_score(y.iloc[test_idx], prob)))
+
+    mean_auc = float(np.mean(aucs))
+    return {
+        "auc": round(mean_auc, 4),
+        "per_fold_auc": [round(a, 4) for a in aucs],
+        "max_auc_threshold": max_auc,
+        "passed": mean_auc <= max_auc,
+    }

@@ -8,7 +8,7 @@ import pandas as pd
 
 from agentic_forex.backtesting.models import BacktestArtifact, StressScenarioResult, StressTestReport
 from agentic_forex.config import Settings
-from agentic_forex.features.service import build_features
+from agentic_forex.features.service import build_features, pip_scale_for_instrument
 from agentic_forex.governance.provenance import build_data_provenance, build_environment_snapshot
 from agentic_forex.governance.trial_ledger import append_trial_entry
 from agentic_forex.policy.calendar import build_blackout_windows, is_in_blackout, load_relevant_calendar_events
@@ -110,7 +110,7 @@ def run_backtest(
         / f"{spec.instrument.lower()}_{spec.execution_granularity.lower()}.parquet"
     )
     frame = frame.copy() if frame is not None else pd.read_parquet(parquet_path)
-    features = build_features(frame).reset_index(drop=True)
+    features = build_features(frame, pip_scale=pip_scale_for_instrument(spec.instrument)).reset_index(drop=True)
     blackout_windows = _load_blackout_windows(spec, settings)
     trade_rows = []
     train_cutoff, validation_cutoff = _split_boundaries(len(features), spec.time_split)

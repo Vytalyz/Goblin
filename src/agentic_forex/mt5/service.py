@@ -2236,11 +2236,10 @@ def _executable_expected_signal_frame_from_market_frame(
     if not required_columns.issubset(set(raw.columns)):
         return pd.DataFrame(columns=EXPECTED_SIGNAL_COLUMNS)
     market_frame = _build_executable_market_frame(raw, spec)
-    features = build_features(market_frame).reset_index(drop=True)
+    pip_scale = _pip_scale(spec.instrument)
+    features = build_features(market_frame, pip_scale=pip_scale).reset_index(drop=True)
     if features.empty or len(features) <= spec.holding_bars + 21:
         return pd.DataFrame(columns=EXPECTED_SIGNAL_COLUMNS)
-
-    pip_scale = _pip_scale(spec.instrument)
     next_available_index = 21
     expected_rows: list[dict[str, Any]] = []
 
@@ -2637,7 +2636,8 @@ def _match_expected_to_actual(
     feature_index_by_timestamp: dict[pd.Timestamp, int] = {}
     pip_scale = 10000.0
     if spec is not None and broker_history_frame is not None and not broker_history_frame.empty:
-        executable_features = build_features(_ensure_market_mid_columns(broker_history_frame)).reset_index(drop=True)
+        pip_scale = _pip_scale(spec.instrument)
+        executable_features = build_features(_ensure_market_mid_columns(broker_history_frame), pip_scale=pip_scale).reset_index(drop=True)
         feature_index_by_timestamp = {
             pd.Timestamp(timestamp): int(index) for index, timestamp in executable_features["timestamp_utc"].items()
         }

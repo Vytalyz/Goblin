@@ -343,6 +343,38 @@ class MT5EnvironmentSettings(BaseModel):
     stale_packet_policy: str = "logic_manifest_hash_or_missing_ex5"
 
 
+class MLHardeningSettings(BaseModel):
+    label_randomization_accuracy_ceiling: float = 0.55
+    adversarial_auc_threshold: float = 0.55
+    purged_cv_embargo_minimum_bars: int = 10
+    feature_importance_top3_floor: float = 0.40
+    model_persistence_format: str = "joblib"
+
+
+class EvaOptimizerSettings(BaseModel):
+    default_population_size: int = 30
+    default_generations: int = 80
+    fitness_pbo_penalty_weight: float = 0.3
+    stop_loss_pips_bounds: list[float] = Field(default_factory=lambda: [5.0, 50.0])
+    take_profit_pips_bounds: list[float] = Field(default_factory=lambda: [5.0, 100.0])
+    signal_threshold_bounds: list[float] = Field(default_factory=lambda: [0.3, 0.9])
+    holding_bars_bounds: list[float] = Field(default_factory=lambda: [5, 120])
+
+
+class RegimeClassifierSettings(BaseModel):
+    n_components_range: list[int] = Field(default_factory=lambda: [3, 5])
+    regime_stability_min_window_agreement: float = 0.60
+
+
+class MT5AlignmentSettings(BaseModel):
+    feature_alignment_auc_threshold: float = 0.60
+
+
+class SignalFilterSettings(BaseModel):
+    model_type: str = "xgboost"
+    max_leaves: int = 500
+
+
 class WorkflowSettings(BaseModel):
     discovery_workflow_id: str = "strategy_discovery_router_v1"
     review_workflow_id: str = "candidate_review_v1"
@@ -376,6 +408,11 @@ class Settings(BaseModel):
     autonomy: AutonomyPolicySettings = Field(default_factory=AutonomyPolicySettings)
     codex_operator: CodexOperatorPolicySettings = Field(default_factory=CodexOperatorPolicySettings)
     mt5_env: MT5EnvironmentSettings = Field(default_factory=MT5EnvironmentSettings)
+    ml_hardening: MLHardeningSettings = Field(default_factory=MLHardeningSettings)
+    eva_optimizer: EvaOptimizerSettings = Field(default_factory=EvaOptimizerSettings)
+    regime_classifier: RegimeClassifierSettings = Field(default_factory=RegimeClassifierSettings)
+    mt5_alignment: MT5AlignmentSettings = Field(default_factory=MT5AlignmentSettings)
+    signal_filter: SignalFilterSettings = Field(default_factory=SignalFilterSettings)
     workflows: WorkflowSettings = Field(default_factory=WorkflowSettings)
     policy: PolicySettings = Field(default_factory=PolicySettings)
 

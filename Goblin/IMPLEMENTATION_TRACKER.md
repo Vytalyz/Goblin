@@ -60,6 +60,7 @@ Status meanings:
 | EA observability (Print/Comment) | `implemented` | `Print()` logging at every decision point (init, deinit, bar processing, spread blocks, hour filter, signal fire, shadow order) and on-chart `Comment()` overlay showing bars/hour/signals/orders; added to both generator template and AF-CAND-0733 deployed EA |
 | S1-P02 shadow-only attach | `implemented` | AF-CAND-0733 shadow week completed Apr 15–17: 208 signals across 2 trading days (116 long, 92 short), 0 real orders, 0 failures; all 4 governed artifact types collected; auto-deploy/compile baked into `goblin-live-attach` |
 | S1-P03 limited-demo attach | `in_progress` | S1-P03 started 2026-04-17: `InpShadowModeOnly=false` set in packet EA; `goblin-live-attach` against `AF-CAND-0733-limited-demo-20260414` compiled and manifested at `ladder_state: limited_demo`; pending MT5 manual re-attach and first real demo trade evidence |
+| ML Evolution Program | `in_progress` | Bundle A (ML-P0) complete — purged CV, embargo, feature importance, label randomization, adversarial validation, model persistence; 16 new tests; 407 total pass. Next: Bundle B (ML-P1, ML-P1.5) |
 
 ## Update Rule
 

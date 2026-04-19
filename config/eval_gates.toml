@@ -43,3 +43,30 @@ stop_on_review_eligible_provisional = true
 max_mt5_parity_retries_per_candidate = 2
 max_shadow_forward_retries_per_candidate = 1
 max_total_operational_runs_per_campaign = 4
+
+[ml_hardening]
+label_randomization_accuracy_ceiling = 0.55
+adversarial_auc_threshold = 0.55
+purged_cv_embargo_minimum_bars = 10
+feature_importance_top3_floor = 0.40
+model_persistence_format = "joblib"
+
+[eva_optimizer]
+default_population_size = 30
+default_generations = 80
+fitness_pbo_penalty_weight = 0.3
+stop_loss_pips_bounds = [5.0, 50.0]
+take_profit_pips_bounds = [5.0, 100.0]
+signal_threshold_bounds = [0.3, 0.9]
+holding_bars_bounds = [5, 120]
+
+[regime_classifier]
+n_components_range = [3, 5]
+regime_stability_min_window_agreement = 0.60
+
+[mt5_alignment]
+feature_alignment_auc_threshold = 0.60
+
+[signal_filter]
+model_type = "xgboost"
+max_leaves = 500

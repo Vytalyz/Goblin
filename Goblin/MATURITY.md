@@ -54,6 +54,7 @@ Reason:
 | Session-aware run logging | `M4` | GoblinRunRecord model with classify_session_window, JSONL persistence, campaign integration into all 3 entrypoints, 18 tests |
 | Clean-room pattern governance | `M4` | 7 auditable rules ratified, 5 baseline scenarios documented, pattern card template and framework gap matrix published |
 | Multi-timezone strategy program | `M1` | remaining phased execution is documented in `Goblin/S1_PLUS_PLAN.md`; operational execution has not started |
+| ML Evolution Program | `M1` | 8-phase plan (ML-P0 through ML-P3d) with governance tiers, rollback procedures, and HITL gates documented in `Goblin/ML_EVOLUTION_PLAN.md`; no implementation started |
 
 ## Advancement Rule
 

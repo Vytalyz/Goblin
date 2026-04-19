@@ -78,6 +78,7 @@ SUPPORTED_STEP_TYPES: set[NextStepType] = {
     "data_regime_audit",
     "data_feature_audit",
     "data_label_audit",
+    "optimize_parameters",
     "run_parity",
     "run_forward",
 }
@@ -322,6 +323,18 @@ def run_next_step(
                 report_path=report_path,
                 recommendations_path=recommendations_path,
             )
+        elif decision.step_type == "optimize_parameters":
+            report = _run_optimize_parameters(
+                settings,
+                child_spec=child_spec,
+                state=state,
+                candidate_ids=decision.candidate_scope,
+                step_reason=decision.rationale,
+                report_path=report_path,
+                recommendations_path=recommendations_path,
+            )
+            state.iterations_run += 1
+            state.trials_consumed += 1
         elif decision.step_type == "run_parity":
             report = _run_parity_step(
                 settings,
@@ -3564,6 +3577,99 @@ def _run_data_label_audit(
                 "next_step_report_path": str(report.report_path),
             },
         )
+    return report
+
+
+# ---------------------------------------------------------------------------
+# optimize_parameters step  (ML-P1.10 — EvA CMA-ES optimizer)
+# ---------------------------------------------------------------------------
+
+def _run_optimize_parameters(
+    settings: Settings,
+    *,
+    child_spec: CampaignSpec,
+    state: CampaignState,
+    candidate_ids: list[str],
+    step_reason: str,
+    report_path: Path,
+    recommendations_path: Path,
+) -> NextStepControllerReport:
+    """Run CMA-ES parameter optimisation on the first candidate in scope.
+
+    Produces an optimizer_result.json artifact and recommends a mutation
+    step with the optimized parameters.
+    """
+    from agentic_forex.ml.optimizer import OptimizerBounds, run_cma_optimizer
+
+    source_candidate_id = candidate_ids[0]
+    source_spec = _load_spec(settings, source_candidate_id)
+
+    bounds = OptimizerBounds(
+        stop_loss_pips=(
+            settings.eva_optimizer.stop_loss_range[0],
+            settings.eva_optimizer.stop_loss_range[1],
+        ),
+        take_profit_pips=(
+            settings.eva_optimizer.take_profit_range[0],
+            settings.eva_optimizer.take_profit_range[1],
+        ),
+        signal_threshold=(
+            settings.eva_optimizer.signal_threshold_range[0],
+            settings.eva_optimizer.signal_threshold_range[1],
+        ),
+        holding_bars=(
+            settings.eva_optimizer.holding_bars_range[0],
+            settings.eva_optimizer.holding_bars_range[1],
+        ),
+    )
+
+    result = run_cma_optimizer(
+        source_spec,
+        settings,
+        bounds=bounds,
+        max_generations=settings.eva_optimizer.max_generations,
+        population_size=settings.eva_optimizer.population_size,
+    )
+
+    result_path = settings.paths().reports_dir / source_candidate_id / "optimizer_result.json"
+    result_path.parent.mkdir(parents=True, exist_ok=True)
+    write_json(result_path, result.model_dump(mode="json") if hasattr(result, "model_dump") else result.__dict__)
+
+    next_recommendations = [
+        NextStepRecommendation(
+            step_type="mutate_one_candidate",
+            candidate_id=source_candidate_id,
+            rationale=(
+                f"CMA-ES optimization suggests parameters: "
+                f"stop_loss_pips={result.best_params.get('stop_loss_pips')}, "
+                f"take_profit_pips={result.best_params.get('take_profit_pips')}, "
+                f"signal_threshold={result.best_params.get('signal_threshold')}, "
+                f"holding_bars={result.best_params.get('holding_bars')}. "
+                f"Best fitness={result.best_fitness:.4f}."
+            ),
+            binding=False,
+            evidence_status="supported",
+            step_payload={
+                "mutation_type": "optimizer_suggested",
+                "optimized_params": result.best_params,
+                "fitness": result.best_fitness,
+            },
+        )
+    ]
+
+    report = NextStepControllerReport(
+        campaign_id=child_spec.campaign_id,
+        parent_campaign_id=child_spec.parent_campaign_id,
+        selected_step_type="optimize_parameters",
+        step_reason=step_reason,
+        status="completed",
+        stop_reason="optimizer_completed",
+        candidate_scope=candidate_ids,
+        next_recommendations=next_recommendations,
+        report_path=report_path,
+    )
+    write_json(report.report_path, report.model_dump(mode="json"))
+    write_json(recommendations_path, [item.model_dump(mode="json") for item in next_recommendations])
     return report
 
 
