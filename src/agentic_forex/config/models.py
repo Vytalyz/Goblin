@@ -375,6 +375,18 @@ class SignalFilterSettings(BaseModel):
     max_leaves: int = 500
 
 
+class GPRulesSettings(BaseModel):
+    population_size: int = 150
+    generations: int = 75
+    max_tree_depth: int = 7
+    parsimony_coefficient: float = 0.01
+    crossover_probability: float = 0.7
+    mutation_probability: float = 0.2
+    tournament_size: int = 5
+    min_signals_for_recommendation: int = 20
+    min_pf_for_recommendation: float = 1.0
+
+
 class WorkflowSettings(BaseModel):
     discovery_workflow_id: str = "strategy_discovery_router_v1"
     review_workflow_id: str = "candidate_review_v1"
@@ -413,6 +425,7 @@ class Settings(BaseModel):
     regime_classifier: RegimeClassifierSettings = Field(default_factory=RegimeClassifierSettings)
     mt5_alignment: MT5AlignmentSettings = Field(default_factory=MT5AlignmentSettings)
     signal_filter: SignalFilterSettings = Field(default_factory=SignalFilterSettings)
+    gp_rules: GPRulesSettings = Field(default_factory=GPRulesSettings)
     workflows: WorkflowSettings = Field(default_factory=WorkflowSettings)
     policy: PolicySettings = Field(default_factory=PolicySettings)
 

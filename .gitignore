@@ -53,3 +53,14 @@ Thumbs.db
 
 # --- Codex operator layer (local-only orchestration) ---
 .codex/
+
+# --- Temp test output files ---
+_pytest_run*.txt
+_test_output*.txt
+_test_results*.txt
+_err*.txt
+_out*.txt
+test_results.txt
+_err.txt
+_out.txt
+_test_full.txt

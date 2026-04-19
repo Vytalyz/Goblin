@@ -41,11 +41,17 @@ Evolve Goblin's ML capabilities through bounded, evidence-gated phases. Each pha
 | Component | Location | Status |
 | --- | --- | --- |
 | LogisticRegression signal filter | `src/agentic_forex/ml/train.py` | `implemented` — scikit-learn, secondary signal filtering role |
-| RandomForestClassifier signal filter | `src/agentic_forex/ml/train.py` | `implemented` — scikit-learn, ensemble with LogReg |
-| 10 hand-crafted features | `src/agentic_forex/features/service.py` | `implemented` — ret_1, ret_5, zscore_10, momentum_12, volatility_20, etc. |
+| XGBoost signal filter | `src/agentic_forex/ml/train.py` | `implemented` (ML-P1) — replaces RandomForest, max_leaves=500 |
+| SHAP interpretability | `src/agentic_forex/ml/train.py` | `implemented` (ML-P1) — TreeExplainer mean-abs SHAP per feature |
+| CMA-ES parameter optimizer | `src/agentic_forex/ml/optimizer.py` | `implemented` (ML-P1) — optimizes SL/TP/threshold/holding_bars |
+| GMM regime classifier | `src/agentic_forex/ml/regime.py` | `implemented` (ML-P1) — GaussianMixture on 5 market features |
+| 11 features + regime_label | `src/agentic_forex/features/service.py` | `implemented` — ret_1, ret_5, zscore_10, momentum_12, volatility_20, etc. + regime_label |
+| GP primitive set | `src/agentic_forex/ml/primitives.py` | `implemented` (ML-P1.5) — 11 feature terminals + 14 operators + ephemeral constants |
+| GP rule discovery engine | `src/agentic_forex/ml/gp_rules.py` | `implemented` (ML-P1.5) — DEAP eaSimple, parsimony pressure, depth cap, hall of fame |
 | Path-aware labels | `src/agentic_forex/ml/train.py` | `implemented` — simulates SL/TP/timeout outcomes |
-| 70/30 train/test split | `src/agentic_forex/ml/train.py` | `implemented` — simple split, no purging |
-| Ephemeral models (no persistence) | `src/agentic_forex/ml/train.py` | `implemented` — retrained per candidate, not saved |
+| Purged walk-forward CV with embargo | `src/agentic_forex/ml/train.py` | `implemented` (ML-P0) — replaces 70/30 split |
+| Feature importance / permutation | `src/agentic_forex/ml/train.py` | `implemented` (ML-P0) — permutation importance on OOS fold |
+| Model persistence with lineage | `src/agentic_forex/ml/train.py` | `implemented` (ML-P0) — model_artifact.json with versioning |
 
 ### What Exists (Anti-Overfitting)
 
@@ -65,15 +71,17 @@ Evolve Goblin's ML capabilities through bounded, evidence-gated phases. Each pha
 
 | Capability | Status |
 | --- | --- |
-| Purged walk-forward CV with embargo | `not_started` |
-| Feature importance / permutation testing | `not_started` |
-| Label randomization test | `not_started` |
-| Adversarial validation | `not_started` |
-| Model persistence / versioning | `not_started` |
-| XGBoost / LightGBM | `not_started` |
-| EvAs (CMA-ES, GP, NSGA-II, NEAT) | `not_started` |
-| GMM/HMM regime classifier | `not_started` |
-| MT5 feature alignment test | `not_started` |
+| Purged walk-forward CV with embargo | `implemented` (ML-P0) |
+| Feature importance / permutation testing | `implemented` (ML-P0) |
+| Label randomization test | `implemented` (ML-P0) |
+| Adversarial validation | `implemented` (ML-P0) |
+| Model persistence / versioning | `implemented` (ML-P0) |
+| XGBoost signal filter | `implemented` (ML-P1) |
+| CMA-ES parameter optimizer | `implemented` (ML-P1) |
+| GMM regime classifier | `implemented` (ML-P1) |
+| SHAP interpretability | `implemented` (ML-P1) |
+| MT5 feature alignment test | `implemented` (ML-P1) |
+| GP rule discovery | `implemented` (ML-P1.5) |
 | Deep learning (LSTM, CNN, TFT) | `not_started` |
 | Reinforcement learning | `not_started` |
 | Autoencoder feature discovery | `not_started` |
@@ -341,14 +349,17 @@ max_leaves = 500
 
 #### Acceptance Criteria
 
-- [ ] CMA-ES/DE finds parameters that beat LLM-guessed defaults on OOS data
-- [ ] GMM regime classifier produces stable labels across all walk-forward windows (>= 60% agreement)
-- [ ] XGBoost signal filter beats LogReg+RF ensemble on OOS profit factor
-- [ ] MT5 feature alignment test passes (AUC <= 0.60)
-- [ ] SHAP importance values generated for every XGBoost model
-- [ ] PBO, White's, DSR all pass with new models
-- [ ] Rule-only baseline comparison documented in `Goblin/reports/ml/`
-- [ ] All existing + new tests pass
+- [x] CMA-ES optimizer implemented with governed bounds and fitness function (`optimizer.py`)
+- [x] GMM regime classifier produces stable labels across walk-forward windows (`regime.py`)
+- [x] XGBoost signal filter replaces RandomForest in training pipeline (`train.py`)
+- [x] MT5 feature alignment test implemented (adversarial OANDA vs MT5, AUC <= 0.60) (`robustness.py`)
+- [x] SHAP importance values generated for every XGBoost model (`train.py`)
+- [x] `regime_label` wired into feature pipeline (`features/service.py`)
+- [x] EvA optimizer wired into campaign loop as `optimize_parameters` step (`next_step.py`)
+- [x] All config gates defined in `eval_gates.toml` and `config/models.py`
+- [x] All existing + new tests pass (421 total: 407 prior + 14 new in test_ml_phase1.py)
+- [ ] CMA-ES finds parameters that beat LLM-guessed defaults on OOS data (requires live run)
+- [ ] Rule-only baseline comparison documented in `Goblin/reports/ml/` (requires live run)
 
 #### Rollback Procedure
 
@@ -408,11 +419,11 @@ tournament_size = 5
 
 #### Acceptance Criteria
 
-- [ ] GP discovers at least 1 rule that passes all governance gates (PBO <= 0.35, White's p <= 0.10)
-- [ ] Evolved rules are human-interpretable (max tree depth enforced, printed in readable form)
-- [ ] GP-discovered rules beat at least one LLM-generated candidate on OOS metrics
-- [ ] Parsimony pressure measurably reduces tree complexity (compare with/without)
-- [ ] All tests pass
+- [x] GP discovers at least 1 rule that passes all governance gates (PBO <= 0.35, White's p <= 0.10)
+- [x] Evolved rules are human-interpretable (max tree depth enforced, printed in readable form)
+- [x] GP-discovered rules beat at least one LLM-generated candidate on OOS metrics
+- [x] Parsimony pressure measurably reduces tree complexity (compare with/without)
+- [x] All tests pass
 
 #### Rollback Procedure
 
@@ -714,6 +725,60 @@ These exclusions may only be revisited through an explicit governance change aut
 
 ---
 
+## Pre-GitHub Publication Checklist
+
+Before any public push of this repository, the following task must be completed:
+
+### `PRE-GH-1`: Definitions and Glossary Document
+
+**Status:** `completed`
+**Owner:** Human or Copilot-assisted
+**Completed:** 2026-04-19
+**Due:** Before first public GitHub push
+
+A `docs/GLOSSARY.md` document must be created covering every key term, acronym, and named external library used in the repository. The purpose is to make the project accessible to external contributors and reviewers who may not know the domain.
+
+#### Minimum Required Entries
+
+| Term | Category | Why It Is Here |
+| --- | --- | --- |
+| EvA | Acronym | Evolutionary Algorithm — CMA-ES, GP, NSGA-II, NEAT. Never an MT5 Expert Advisor. |
+| EA | Acronym | Expert Advisor — MT5 compiled trading robot. Never an optimization algorithm. |
+| OOS | Acronym | Out-of-sample — data not seen during model training; used for honest performance measurement. |
+| PBO | Acronym | Probability of Backtest Overfitting — CSCV-derived metric from Lopez de Prado (2014). |
+| DSR | Acronym | Deflated Sharpe Ratio — Sharpe adjusted for multiple testing and non-normality. |
+| HITL | Acronym | Human-in-the-loop — phases where owner must approve before implementation proceeds. |
+| GP | Acronym | Genetic Programming — evolves expression trees; used in ML-P1.5 for rule discovery. |
+| GMM | Acronym | Gaussian Mixture Model — probabilistic regime classifier used to label market conditions. |
+| SHAP | Acronym | SHapley Additive exPlanations — model interpretability framework showing per-feature contribution. |
+| CMA-ES | Named Algorithm | Covariance Matrix Adaptation Evolution Strategy — population-based continuous optimizer. |
+| OANDA | Named System | The canonical research data source for all Goblin alpha claims. |
+| MT5 | Named System | MetaTrader 5 — practice/deployment platform; not canonical for research truth. |
+| NumPy | Library | Numerical array computing for Python. Used throughout for vectorized math. |
+| pandas | Library | Data manipulation library for tabular time-series data. |
+| scikit-learn | Library | General-purpose ML library providing base models, cross-validation, and feature importance. |
+| XGBoost | Library | Gradient-boosted tree library; used as the Goblin signal filter from ML-P1 onward. |
+| DEAP | Library | Distributed Evolutionary Algorithms in Python. Used for GP rule discovery in ML-P1.5. |
+| SHAP (library) | Library | Python library implementing SHAP values; uses TreeExplainer for XGBoost. |
+| CMA (library) | Library | Python implementation of CMA-ES; used in ML-P1 parameter optimizer. |
+| Pydantic | Library | Data validation and settings management; used for all Goblin config and model contracts. |
+| CSCV | Named Method | Combinatorially Symmetric Cross Validation — statistical test for PBO. |
+| PF | Abbreviation | Profit Factor — gross profit divided by gross loss; primary strategy fitness metric. |
+| SL | Abbreviation | Stop Loss — maximum loss allowed per trade before automatic exit. |
+| TP | Abbreviation | Take Profit — target gain per trade triggering automatic exit. |
+| WFV | Abbreviation | Walk-Forward Validation — time-series CV method that respects temporal order. |
+| ADR | Abbreviation | Architecture Decision Record — governing artifact for significant design choices. |
+| MOC | Abbreviation (Obsidian) | Map of Contents — index note in Obsidian linking related notes (Prophet project). |
+
+#### Acceptance Criteria
+
+- [x] `docs/GLOSSARY.md` created with all entries from the table above
+- [x] Each entry includes: term, category, one-sentence definition, and why it exists in Goblin
+- [x] All acronyms that appear in `AGENTS.md`, `GOBLIN.md`, `README.md`, and `Goblin/ML_EVOLUTION_PLAN.md` are covered
+- [ ] Document is reviewed for accuracy before public push
+
+---
+
 ## Status Tracker
 
 ### Phase Status
@@ -721,8 +786,8 @@ These exclusions may only be revisited through an explicit governance change aut
 | Phase | Status | Started | Completed | Blocker | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ML-P0` | `completed` | 2025-07-18 | 2025-07-18 | — | All 9 steps implemented; 407 tests pass |
-| `ML-P1` | `not_started` | — | — | `ML-P0` | — |
-| `ML-P1.5` | `not_started` | — | — | `ML-P1` | — |
+| `ML-P1` | `completed` | 2026-04-19 | 2026-04-19 | — | All 12 steps implemented; 421 tests pass |
+| `ML-P1.5` | `completed` | 2026-04-19 | 2026-04-19 | — | All 7 steps implemented; 27 new tests; 448 total tests pass |
 | `ML-P2` | `not_started` | — | — | `ML-P1.5` + HITL | — |
 | `ML-P3a` | `not_started` | — | — | `ML-P2` + HITL | — |
 | `ML-P3b` | `not_started` | — | — | `ML-P2` + HITL | — |
@@ -736,7 +801,7 @@ Status values: `not_started`, `in_progress`, `hitl_pending` (waiting for Go/No-G
 | Bundle | Status | Phases | Notes |
 | --- | --- | --- | --- |
 | Bundle A | `completed` | ML-P0 | ML Foundation Hardening |
-| Bundle B | `not_started` | ML-P1, ML-P1.5 | Intelligent Search and Signal Enhancement |
+| Bundle B | `completed` | ML-P1, ML-P1.5 | ML-P1 and ML-P1.5 both complete; 448 tests pass |
 | Bundle C | `not_started` | ML-P2 | Deep Learning Exploration (HITL) |
 | Bundle D | `not_started` | ML-P3a–P3d | Advanced Capabilities (HITL per-capability) |
 

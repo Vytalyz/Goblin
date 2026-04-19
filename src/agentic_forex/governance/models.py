@@ -38,6 +38,8 @@ NextStepType = Literal[
     "run_parity",
     "run_forward",
     "human_review",
+    "optimize_parameters",
+    "discover_gp_rules",
 ]
 
 ContinuationStatus = Literal["continue", "stop"]

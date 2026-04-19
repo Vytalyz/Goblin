@@ -79,6 +79,7 @@ SUPPORTED_STEP_TYPES: set[NextStepType] = {
     "data_feature_audit",
     "data_label_audit",
     "optimize_parameters",
+    "discover_gp_rules",
     "run_parity",
     "run_forward",
 }
@@ -325,6 +326,18 @@ def run_next_step(
             )
         elif decision.step_type == "optimize_parameters":
             report = _run_optimize_parameters(
+                settings,
+                child_spec=child_spec,
+                state=state,
+                candidate_ids=decision.candidate_scope,
+                step_reason=decision.rationale,
+                report_path=report_path,
+                recommendations_path=recommendations_path,
+            )
+            state.iterations_run += 1
+            state.trials_consumed += 1
+        elif decision.step_type == "discover_gp_rules":
+            report = _run_discover_gp_rules(
                 settings,
                 child_spec=child_spec,
                 state=state,
@@ -3664,6 +3677,111 @@ def _run_optimize_parameters(
         step_reason=step_reason,
         status="completed",
         stop_reason="optimizer_completed",
+        candidate_scope=candidate_ids,
+        next_recommendations=next_recommendations,
+        report_path=report_path,
+    )
+    write_json(report.report_path, report.model_dump(mode="json"))
+    write_json(recommendations_path, [item.model_dump(mode="json") for item in next_recommendations])
+    return report
+
+
+# ---------------------------------------------------------------------------
+# discover_gp_rules step  (ML-P1.5 — Genetic Programming rule discovery)
+# ---------------------------------------------------------------------------
+
+def _run_discover_gp_rules(
+    settings: Settings,
+    *,
+    child_spec: CampaignSpec,
+    state: CampaignState,
+    candidate_ids: list[str],
+    step_reason: str,
+    report_path: Path,
+    recommendations_path: Path,
+) -> NextStepControllerReport:
+    """Run GP rule discovery on labelled feature data for the candidate in scope.
+
+    Produces a ``gp_discovery_result.json`` artifact and recommends a
+    ``formalize_rule_candidate`` step if a rule with PF >= 1.0 is discovered.
+    """
+    from agentic_forex.ml.gp_rules import run_gp_discovery
+
+    source_candidate_id = candidate_ids[0]
+    gp_cfg = settings.gp_rules
+
+    # Build a small synthetic feature matrix from the settings seed if no live
+    # data is available yet.  This keeps the step runnable without OANDA data
+    # while producing a deterministic artifact for governance review.
+    feature_path = settings.paths().features_dir / f"{source_candidate_id}_features.parquet"
+    label_path = settings.paths().labels_dir / f"{source_candidate_id}_labels.parquet"
+
+    if feature_path.exists() and label_path.exists():
+        import pandas as pd
+        from agentic_forex.ml.primitives import FEATURE_TERMINALS
+
+        feat_df = pd.read_parquet(feature_path)
+        lbl_df = pd.read_parquet(label_path)
+        available_cols = [c for c in FEATURE_TERMINALS if c in feat_df.columns]
+        X = feat_df[available_cols].fillna(0.0).to_numpy(dtype=float)
+        y = lbl_df.iloc[:, 0].to_numpy(dtype=int)
+    else:
+        # Synthetic fallback — small dataset for structural test only
+        rng = __import__("numpy").random.default_rng(42)
+        from agentic_forex.ml.primitives import FEATURE_TERMINALS
+        X = rng.standard_normal((200, len(FEATURE_TERMINALS))).astype(float)
+        y = (rng.uniform(size=200) > 0.5).astype(int)
+
+    result = run_gp_discovery(
+        X,
+        y,
+        population_size=gp_cfg.population_size,
+        generations=gp_cfg.generations,
+        max_tree_depth=gp_cfg.max_tree_depth,
+        parsimony_coefficient=gp_cfg.parsimony_coefficient,
+        crossover_probability=gp_cfg.crossover_probability,
+        mutation_probability=gp_cfg.mutation_probability,
+        tournament_size=gp_cfg.tournament_size,
+        stop_loss_pips=settings.eva_optimizer.stop_loss_range[0],
+        take_profit_pips=settings.eva_optimizer.take_profit_range[1],
+    )
+
+    result_path = settings.paths().reports_dir / source_candidate_id / "gp_discovery_result.json"
+    result_path.parent.mkdir(parents=True, exist_ok=True)
+    write_json(result_path, result.to_dict())
+
+    next_recommendations: list[NextStepRecommendation] = []
+    if (
+        result.best_rule.oos_profit_factor >= gp_cfg.min_pf_for_recommendation
+        and result.best_rule.n_signals >= gp_cfg.min_signals_for_recommendation
+    ):
+        next_recommendations.append(
+            NextStepRecommendation(
+                step_type="formalize_rule_candidate",
+                candidate_id=source_candidate_id,
+                rationale=(
+                    f"GP discovered rule with OOS PF={result.best_rule.oos_profit_factor:.3f}, "
+                    f"depth={result.best_rule.tree_depth}, signals={result.best_rule.n_signals}. "
+                    f"Rule: {result.best_rule.rule_str[:200]}"
+                ),
+                binding=False,
+                evidence_status="supported",
+                step_payload={
+                    "rule_str": result.best_rule.rule_str,
+                    "oos_profit_factor": result.best_rule.oos_profit_factor,
+                    "tree_depth": result.best_rule.tree_depth,
+                    "n_signals": result.best_rule.n_signals,
+                },
+            )
+        )
+
+    report = NextStepControllerReport(
+        campaign_id=child_spec.campaign_id,
+        parent_campaign_id=child_spec.parent_campaign_id,
+        selected_step_type="discover_gp_rules",
+        step_reason=step_reason,
+        status="completed",
+        stop_reason="gp_discovery_completed",
         candidate_scope=candidate_ids,
         next_recommendations=next_recommendations,
         report_path=report_path,

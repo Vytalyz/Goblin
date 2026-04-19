@@ -70,3 +70,14 @@ feature_alignment_auc_threshold = 0.60
 [signal_filter]
 model_type = "xgboost"
 max_leaves = 500
+
+[gp_rules]
+population_size = 150
+generations = 75
+max_tree_depth = 7
+parsimony_coefficient = 0.01
+crossover_probability = 0.7
+mutation_probability = 0.2
+tournament_size = 5
+min_signals_for_recommendation = 20
+min_pf_for_recommendation = 1.0
