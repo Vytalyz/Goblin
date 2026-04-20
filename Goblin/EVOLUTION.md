@@ -4,6 +4,16 @@ This document records major program milestones and the intended evolution path f
 
 ## Current Milestones
 
+### 2026-04-20: ML-P2 holdout ceremony complete — verdict NO_GO (commit `d093c35`)
+
+- **Result**: Aggregate primary PF lift **+0.0528** — just below CONDITIONAL floor (0.055). BCa 95% CI **[-0.027, +0.261]** crosses zero.
+- **Individual lifts**: 0734 +0.003 / 0322 +0.062 / 0323 +0.062 / 0007 +0.058 / 0002 +0.077 / 0290 +0.055
+- **Q1 fragile cohort**: all 5 fragile candidates positive — Q1_OK
+- **Prediction accuracy**: Midpoint prediction (NO_GO) was correct
+- **HARD_CAP**: 2/2 used — holdout sealed permanently
+- **Governance artifacts**: `predictions.jsonl` (2 entries committed), `p2_0_holdout_eval_report.json` + `p2_0_insample_eval.json` (local, gitignored)
+- **Next decision required**: ML-P3 architecture revision OR halt
+
 ### 2026-04-20: ML-P2 evaluation pipeline complete (commit `8f0d15a`)
 
 - **`tools/run_p2_eval.py`** (~350 LOC): Holdout evaluation pipeline. Trains XGBClassifier on in-sample rows (locked hparams), evaluates all 6 primary + 5 fragile candidates on holdout, runs BCa moving-block bootstrap (n=10000, seed=20260420, block_min=20), Bonferroni 4-regime Wilcoxon signed-rank tests (α=0.0025 per test), Q1 fragile-sentinel rule (NOGO at mean < −2σ_cross AND ≥3/5 negative, CONDITIONAL_RESTRICTED at mean < −1σ_cross), and renders GO/CONDITIONAL/CONDITIONAL_RESTRICTED/NO_GO verdict. Writes `Goblin/reports/ml/p2_0_holdout_eval_report.json`. Invoked via `tools/holdout_access_ceremony.py --eval-cmd`.
