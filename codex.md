@@ -16,7 +16,9 @@ Read these before doing Goblin work:
 - `Goblin/EVOLUTION.md`
 - `Goblin/PHASE_BRIEF.md`
 - `Goblin/TAKEOVER_PLAN.md`
-- `Goblin/decisions/ml_decisions.jsonl` (append-only ML decision log; validated by `tools/verify_decision_log_schema.py`)
+- `Goblin/decisions/ml_decisions.jsonl` (append-only ML decision log; 9 entries; validated by `tools/verify_decision_log_schema.py`)
+- `Goblin/decisions/predictions.jsonl` (R4-11 mid-process predictions log; currently empty; schema at `Goblin/decisions/PREDICTIONS_SCHEMA.md`)
+- `Goblin/reports/ml/p2_0_rehearsal_report.json` (EX-10 E2E rehearsal report; overall=PASS 6/6)
 
 ## Required Goblin Tracking Discipline
 

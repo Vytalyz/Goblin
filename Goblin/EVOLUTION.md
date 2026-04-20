@@ -4,6 +4,21 @@ This document records major program milestones and the intended evolution path f
 
 ## Current Milestones
 
+### 2026-04-20: ML-P2.0 pre-registration scaffolding (EX-1 through EX-10) completed
+
+- **EX-1 (`tools/derive_mde.py`)**: σ_cross=0.0211004853, MDE_upper=0.0503209020 locked into `[ml_p2]` eval_gates.toml. 24 tests.
+- **EX-2 (`tools/gate_sensitivity.py`)**: Risk-1 retrospective gate evaluation proved Q1/I1 thresholds were not tuned post-hoc to 1.6 data. SURVIVORS frozenset (0734/0322/0323/0007/0002/0290) and FRAGILES frozenset (0716/0738/0739/0009/0001) code-enforced. 10 tests.
+- **EX-3 (predictions log infrastructure)**: `Goblin/decisions/PREDICTIONS_SCHEMA.md` + empty `predictions.jsonl` (append-only CI) + `tools/verify_predictions_log_schema.py` (validator). 3 CI jobs added to `ml-phase-gates.yml`. `CODEOWNERS` established. 19 tests.
+- **EX-4 (`tools/holdout_access_ceremony.py`)**: HARD_CAP=2, abort-counts-toward-cap (G7), 3-pass shred, key-outside-repo guard, INITIATED→COMPLETED/ABORTED decision-log bracketing. `holdout-ceremony.yml` workflow + key rotation runbook. 21 tests.
+- **EX-5 (torch determinism)**: `[ml-p2]` optional extra pinned in `pyproject.toml`. `tests/test_torch_determinism.py` (1D-CNN bit-identical across runs). CI job `tests-with-torch-determinism`. 4 tests (skip without torch locally).
+- **EX-6 (regime threshold freeze)**: `[ml_regime]` block in `eval_gates.toml`: `abs_momentum_12_median=1.9`, `volatility_20_median=0.0000741639`, `n_in_sample_rows_used=155775`. `tests/test_regime_freeze.py`. 6 tests.
+- **EX-7 (grandfather frozenset hardening)**: Module-level `assert GRANDFATHERED_NO_BIAS_AUDIT == frozenset({"DEC-ML-1.6.0-CANDIDATES"})` in `verify_decision_log_schema.py`. 3 tests.
+- **EX-8 (synthetic 4-regime generator)**: `tools/generate_synthetic_holdout.py` — samples from in-sample, shuffles, permutes labels. 4-regime coverage check. Output `Goblin/holdout/ml_p2_synthetic_rehearsal.parquet`. 4 tests.
+- **EX-9 (HITL gate — approved 2026-04-20)**: Three pre-registration entries appended to `Goblin/decisions/ml_decisions.jsonl` (9 total, all schema-validated, commit `27d1bd6`): DEC-ML-2.0-CANDIDATES (n=6 primary, n=11 secondary), DEC-ML-2.0-TARGET (GO≥0.10 PF, CONDITIONAL≥0.055 PF, BCa bootstrap, Bonferroni 4-test, R4-11 predictions scaffold), DEC-ML-1.6b-A1-AUTHORIZATION (sequential CNN excluded from primary endpoint). Full 8-field bias self-audit on all three.
+- **EX-10 (HITL gate — approved 2026-04-20)**: `tools/run_p20_rehearsal.py` + `tests/test_p20_rehearsal.py` + `.github/workflows/e2e_p20_rehearsal.yml`. Rehearsal PASSED 6/6 steps on synthetic data (regime coverage, predictions log schema, ceremony happy-path INITIATED→COMPLETED + shred, ceremony abort-path INITIATED→ABORTED, cap enforcement refused at HARD_CAP=2, decision-log schema). Report: `Goblin/reports/ml/p2_0_rehearsal_report.json`. Real holdout HARD_CAP: 0/2 used. Commit `cca5cdd`.
+- Total test suite after EX-10: 628 passing (+ 4 subprocess-based rehearsal tests), 1 skipped (torch local), 0 failed.
+- **ML-P2 implementation is now UNBLOCKED.** Next action: log the R4-11 midpoint prediction in `Goblin/decisions/predictions.jsonl` when Phase 2 XGB-on-tabular first produces a non-error PF on non-holdout data, then proceed with P2 architecture.
+
 ### 2026-04-20: ML evidence-first phases ML-P1.6.0 → 1.6 → 1.6b → 1.7 completed
 
 - **ML-P1.6.0 (Variance Pilot)**: σ_PF=0.0083 measured (10 seeds × 3 candidates, locked XGB hparams). Effect-size floor and MDE locked at 0.0083 PF in `config/eval_gates.toml [ml_variance_pilot]`. Decision log initialized at `Goblin/decisions/ml_decisions.jsonl`.
