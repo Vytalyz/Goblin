@@ -19,6 +19,8 @@ Read these before doing Goblin work:
 - `Goblin/decisions/ml_decisions.jsonl` (append-only ML decision log; 9 entries; validated by `tools/verify_decision_log_schema.py`)
 - `Goblin/decisions/predictions.jsonl` (R4-11 mid-process predictions log; currently empty; schema at `Goblin/decisions/PREDICTIONS_SCHEMA.md`)
 - `Goblin/reports/ml/p2_0_rehearsal_report.json` (EX-10 E2E rehearsal report; overall=PASS 6/6)
+- `Goblin/reports/ml/p2_0_insample_eval.json` (written by `tools/run_p2_insample_eval.py` — NOT YET RUN; triggers R4-11 midpoint prediction obligation when first produced)
+- `Goblin/reports/ml/p2_0_holdout_eval_report.json` (written by `tools/run_p2_eval.py` via holdout ceremony — NOT YET RUN)
 
 ## Required Goblin Tracking Discipline
 
@@ -113,3 +115,34 @@ goblin goblin-live-session-end --candidate-id AF-CAND-0733 --run-id <RUN_ID> --m
 ```
 
 Artifacts land in `Goblin/reports/live_demo/<candidate_id>/<run_id>/`.
+
+## ML-P2.0 Evaluation Operator Commands
+
+The ML-P2 toolchain is now fully scaffolded. Run in this order:
+
+```sh
+# Step 1: In-sample walk-forward CV (triggers R4-11 midpoint prediction obligation)
+.venv\Scripts\python.exe tools/run_p2_insample_eval.py
+# → writes Goblin/reports/ml/p2_0_insample_eval.json
+
+# Step 2: Log R4-11 midpoint prediction
+.venv\Scripts\python.exe tools/log_p2_prediction.py \
+  --phase midpoint --verdict <VERDICT> \
+  --point-estimate <PF_LIFT> --ci-low <LOW> --ci-high <HIGH> \
+  --rationale "<50+ char rationale>" --attestation "<30+ char attestation>"
+# → appends to Goblin/decisions/predictions.jsonl
+
+# Step 3: Holdout ceremony (HARD_CAP=2, 0/2 used)
+.venv\Scripts\python.exe tools/holdout_access_ceremony.py \
+  --key-path ~/.goblin/holdout_keys/<key_file> \
+  --eval-cmd "tools/run_p2_eval.py" \
+  --note "ML-P2.0 primary evaluation"
+# → writes Goblin/reports/ml/p2_0_holdout_eval_report.json
+
+# Step 4: Log R4-11 trigger prediction
+.venv\Scripts\python.exe tools/log_p2_prediction.py \
+  --phase trigger --verdict <FINAL_VERDICT> \
+  --point-estimate <PF_LIFT> --ci-low <LOW> --ci-high <HIGH> \
+  --rationale "<50+ char rationale>" --attestation "<30+ char attestation>" \
+  --midpoint-sha <COMMIT_SHA_OF_MIDPOINT_PREDICTION>
+```

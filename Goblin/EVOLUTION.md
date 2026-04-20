@@ -4,6 +4,15 @@ This document records major program milestones and the intended evolution path f
 
 ## Current Milestones
 
+### 2026-04-20: ML-P2 evaluation pipeline complete (commit `8f0d15a`)
+
+- **`tools/run_p2_eval.py`** (~350 LOC): Holdout evaluation pipeline. Trains XGBClassifier on in-sample rows (locked hparams), evaluates all 6 primary + 5 fragile candidates on holdout, runs BCa moving-block bootstrap (n=10000, seed=20260420, block_min=20), Bonferroni 4-regime Wilcoxon signed-rank tests (α=0.0025 per test), Q1 fragile-sentinel rule (NOGO at mean < −2σ_cross AND ≥3/5 negative, CONDITIONAL_RESTRICTED at mean < −1σ_cross), and renders GO/CONDITIONAL/CONDITIONAL_RESTRICTED/NO_GO verdict. Writes `Goblin/reports/ml/p2_0_holdout_eval_report.json`. Invoked via `tools/holdout_access_ceremony.py --eval-cmd`.
+- **`tools/log_p2_prediction.py`** (~200 LOC): R4-11 pre-registration prediction logger. Validates phase (midpoint/trigger), verdict enum, CI ordering, commit-SHA format (40-char hex), rationale length (≥50 chars), attestation length (≥30 chars), trigger-phase midpoint-SHA cross-reference. Appends to `Goblin/decisions/predictions.jsonl`. Supports `--dry-run`.
+- **`tools/run_p2_insample_eval.py`** (~180 LOC): Purged walk-forward CV on in-sample rows 0:155775 for all 6 primary survivors. Produces `Goblin/reports/ml/p2_0_insample_eval.json`. Running this tool for the first time triggers the R4-11 midpoint prediction obligation.
+- **New tests**: 52 total (33 in `tests/test_p2_eval.py`: verdict/BCa/Q1/Bonferroni/outcome pip/aggregate; 19 in `tests/test_log_p2_prediction.py`: validation, round-trip, ID sequencing, CLI). All pass.
+- **Sealed holdout HARD_CAP**: 0/2 used.
+- **Next action**: Run `tools/run_p2_insample_eval.py` to get first non-error PF. Log R4-11 midpoint prediction via `tools/log_p2_prediction.py`. Then run holdout ceremony.
+
 ### 2026-04-20: ML-P2.0 pre-registration scaffolding (EX-1 through EX-10) completed
 
 - **EX-1 (`tools/derive_mde.py`)**: σ_cross=0.0211004853, MDE_upper=0.0503209020 locked into `[ml_p2]` eval_gates.toml. 24 tests.
