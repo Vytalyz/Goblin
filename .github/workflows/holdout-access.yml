@@ -1,0 +1,46 @@
+name: "ML Holdout Access Audit"
+
+# Standalone job: ensures no committed file ever contains the sealed-holdout
+# Fernet key, or attempts to read the ciphertext outside the gated workflows.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  holdout-key-leak-check:
+    name: "Holdout: key never in repo"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Scan for committed Fernet keys named HOLDOUT-*
+        run: |
+          set -euo pipefail
+          if git ls-files | grep -E '(^|/)HOLDOUT-[A-Z0-9-]+\.key$'; then
+            echo "FAIL: a HOLDOUT-*.key file is tracked by git"
+            exit 1
+          fi
+          echo "OK: no tracked HOLDOUT-*.key file"
+
+  holdout-decryption-call-check:
+    name: "Holdout: no kernel-side decryption calls"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Search src/ for Fernet decryption of the sealed holdout
+        run: |
+          set -euo pipefail
+          # We DO permit the seal_holdout.py script in scripts/ to use Fernet
+          # for sealing. We do NOT permit kernel code (src/) to decrypt it.
+          if grep -RIn --include='*.py' \
+              -e 'Fernet(.*HOLDOUT' \
+              -e 'ml_p2_holdout.parquet.enc' \
+              src/ 2>/dev/null; then
+            echo "FAIL: kernel code references the sealed holdout payload"
+            exit 1
+          fi
+          echo "OK: no kernel-side sealed-holdout references"

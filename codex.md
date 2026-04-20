@@ -8,6 +8,7 @@ Read these before doing Goblin work:
 
 - `Goblin/PROGRAM.md`
 - `Goblin/ROADMAP.md`
+- `Goblin/ML_EVOLUTION_PLAN.md`
 - `Goblin/S1_PLUS_PLAN.md`
 - `Goblin/STATUS.md`
 - `Goblin/IMPLEMENTATION_TRACKER.md`
@@ -15,6 +16,7 @@ Read these before doing Goblin work:
 - `Goblin/EVOLUTION.md`
 - `Goblin/PHASE_BRIEF.md`
 - `Goblin/TAKEOVER_PLAN.md`
+- `Goblin/decisions/ml_decisions.jsonl` (append-only ML decision log; validated by `tools/verify_decision_log_schema.py`)
 
 ## Required Goblin Tracking Discipline
 

@@ -1,0 +1,135 @@
+name: "ML Phase Gates"
+
+# Phase 1.7 plan-hardening CI lane: enforces the structural guarantees that
+# the ML-P1.6.0 -> ML-P1.6 -> ML-P1.6b evidence chain depends on.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  tests-without-torch:
+    name: "ML: pytest (without torch)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install (no torch)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+          pip uninstall -y torch torchvision torchaudio 2>/dev/null || true
+      - run: pytest -q --tb=short
+
+  tests-with-torch:
+    name: "ML: pytest (with torch, allowed-to-fail)"
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install (with torch)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+          pip install --index-url https://download.pytorch.org/whl/cpu torch || true
+      - run: pytest -q --tb=short
+
+  decision-log-append-only:
+    name: "ML: decision log append-only"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify ml_decisions.jsonl is append-only
+        run: |
+          set -euo pipefail
+          if git rev-parse origin/main >/dev/null 2>&1; then
+            base=origin/main
+          else
+            base=$(git rev-parse HEAD~1 || echo HEAD)
+          fi
+          file=Goblin/decisions/ml_decisions.jsonl
+          if ! git show "$base":"$file" >/dev/null 2>&1; then
+            echo "no prior version of $file; treating as initial commit"
+            exit 0
+          fi
+          git show "$base":"$file" > /tmp/old.jsonl
+          old_lines=$(wc -l < /tmp/old.jsonl)
+          new_lines=$(wc -l < "$file")
+          head -n "$old_lines" "$file" > /tmp/new_head.jsonl
+          if ! diff -q /tmp/old.jsonl /tmp/new_head.jsonl; then
+            echo "FAIL: ml_decisions.jsonl prefix has been mutated"
+            exit 1
+          fi
+          if [ "$new_lines" -lt "$old_lines" ]; then
+            echo "FAIL: ml_decisions.jsonl shrank from $old_lines to $new_lines"
+            exit 1
+          fi
+          echo "OK: append-only (was $old_lines lines, now $new_lines)"
+
+  decision-log-verify-commit:
+    name: "ML: decision log committed entries"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm decision log file exists and is non-empty
+        run: |
+          set -euo pipefail
+          file=Goblin/decisions/ml_decisions.jsonl
+          test -s "$file" || (echo "FAIL: $file is missing or empty" && exit 1)
+          echo "OK: $(wc -l < $file) entries"
+
+  decision-log-schema-check:
+    name: "ML: decision log schema"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python tools/verify_decision_log_schema.py
+
+  dataset-sha-pin-check:
+    name: "ML: dataset SHA pin"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Verify pinned dataset SHA (skip if missing)
+        run: |
+          set -euo pipefail
+          if [ -f data/normalized/research/eur_usd_m1.parquet ]; then
+            python tools/verify_dataset_sha.py
+          else
+            echo "Dataset not present in repo (LFS / external); skipping pin check"
+          fi
+
+  holdout-access-audit:
+    name: "ML: sealed holdout access audit"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm sealed holdout key is NOT in the repo
+        run: |
+          set -euo pipefail
+          if find . -name 'HOLDOUT-*.key' -not -path './.git/*' | grep -q .; then
+            echo "FAIL: a HOLDOUT key file is present in the working tree"
+            exit 1
+          fi
+          echo "OK: no HOLDOUT-*.key files in the repo"
+      - name: Confirm sealed ciphertext exists
+        run: |
+          set -euo pipefail
+          test -f Goblin/holdout/ml_p2_holdout.parquet.enc || \
+            (echo "FAIL: sealed holdout ciphertext missing" && exit 1)
+          echo "OK: sealed holdout ciphertext present"

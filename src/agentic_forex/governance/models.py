@@ -849,3 +849,149 @@ class CampaignState(BaseModel):
     last_report_path: Path | None = None
     next_recommendations_path: Path | None = None
     updated_utc: str = Field(default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z"))
+
+
+# ---------------------------------------------------------------------------
+# Phase 1.6.0 — Variance Pilot report
+# ---------------------------------------------------------------------------
+
+
+class VariancePilotCandidateResult(BaseModel):
+    """Per-candidate rollup inside a VariancePilotReport (Phase 1.6.0)."""
+
+    candidate_id: str
+    seeds: list[int]
+    profit_factors: list[float]
+    trade_counts: list[int]
+    sigma_pf_within_candidate: float = 0.0
+    mean_pf_within_candidate: float = 0.0
+
+
+class VariancePilotReport(BaseModel):
+    """Phase 1.6.0 output — σ_PF estimate used to calibrate the MDE
+    and effect-size floor for every downstream phase gate.
+
+    Append-only: re-running the pilot must produce a new file with a
+    new ``pilot_id`` rather than overwriting an existing report.
+    """
+
+    pilot_id: str
+    generated_at_utc: str = Field(
+        default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z")
+    )
+    dataset_path: str
+    dataset_sha256: str
+    candidate_ids: list[str]
+    seeds: list[int]
+    n_folds: int
+    embargo_bars: int
+    feature_columns: list[str]
+    locked_xgb_hparams: dict[str, Any] = Field(default_factory=dict)
+    candidate_results: list[VariancePilotCandidateResult] = Field(default_factory=list)
+    sigma_pf: float
+    mean_pf: float
+    mde_pf: float
+    effect_size_floor_pf: float
+    required_n_candidates: int
+    torch_imported_during_run: bool = False
+    notes: list[str] = Field(default_factory=list)
+
+
+# =====================================================================
+# Phase 1.6 — Baseline Evidence Foundation
+# =====================================================================
+
+
+class RegimeBreakdown(BaseModel):
+    """Per-regime XGB-vs-rule PF lift for a single candidate.
+
+    The plan requires non-negativity in every regime (D14): a candidate
+    that lifts in aggregate but degrades in even one regime is rejected.
+    """
+
+    regime_id: str
+    regime_description: str
+    n_trades: int
+    rule_pf: float
+    xgb_pf: float
+    pf_lift: float
+
+
+class CostSensitivityRow(BaseModel):
+    """XGB-vs-rule PF lift at one transaction-cost shock level (pips)."""
+
+    cost_pips: float
+    rule_pf: float
+    xgb_pf: float
+    pf_lift: float
+
+
+class CandidateBaselineResult(BaseModel):
+    """Full baseline evidence for a single candidate."""
+
+    candidate_id: str
+    n_trades_total: int
+    rule_pf_aggregate: float
+    xgb_pf_aggregate: float
+    pf_lift_aggregate: float
+    fold_xgb_pf: list[float] = Field(default_factory=list)
+    fold_rule_pf: list[float] = Field(default_factory=list)
+    fold_pf_lift: list[float] = Field(default_factory=list)
+    regime_breakdown: list[RegimeBreakdown] = Field(default_factory=list)
+    cost_sweep: list[CostSensitivityRow] = Field(default_factory=list)
+    regime_non_negative: bool
+    cost_persistent_at_1pip: bool
+
+
+class BaselineComparisonReport(BaseModel):
+    """Phase 1.6 output — XGB-vs-rule baseline across pre-registered
+    stratified candidates, with regime breakdown and cost-sensitivity
+    sweep. Append-only: each run produces a new ``run_id``.
+    """
+
+    run_id: str
+    generated_at_utc: str = Field(
+        default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z")
+    )
+    dataset_path: str
+    dataset_sha256: str
+    candidate_ids: list[str]
+    n_folds: int
+    embargo_bars: int
+    feature_columns: list[str]
+    locked_xgb_hparams: dict[str, Any] = Field(default_factory=dict)
+    cost_shock_pips: list[float]
+    regime_definitions: list[dict[str, Any]] = Field(default_factory=list)
+    candidate_results: list[CandidateBaselineResult] = Field(default_factory=list)
+    median_pf_lift: float
+    mean_pf_lift: float
+    fraction_above_effect_size_floor: float
+    effect_size_floor_pf: float
+    holdout_path: str
+    holdout_sha256: str
+    holdout_n_rows: int
+    notes: list[str] = Field(default_factory=list)
+
+
+class SealedHoldoutManifest(BaseModel):
+    """Manifest for an encrypted OOS holdout slice (Phase 1.6.4 / D12).
+
+    ``ciphertext_sha256`` is hash-pinned in the Decision Log; CI uses
+    it to detect tamper. The decryption key lives outside the repo.
+    """
+
+    holdout_id: str
+    created_at_utc: str = Field(
+        default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z")
+    )
+    source_dataset_path: str
+    source_dataset_sha256: str
+    holdout_n_rows: int
+    holdout_first_index: int
+    holdout_last_index: int
+    plaintext_sha256: str
+    ciphertext_path: str
+    ciphertext_sha256: str
+    key_storage_location: str
+    encryption_algorithm: str
+

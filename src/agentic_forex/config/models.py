@@ -387,6 +387,24 @@ class GPRulesSettings(BaseModel):
     min_pf_for_recommendation: float = 1.0
 
 
+class MLVariancePilotSettings(BaseModel):
+    """Phase 1.6.0 calibration outputs.
+
+    Populated by ``scripts/run_ml_variance_pilot.py`` after the pilot
+    report is committed. Every downstream ML phase gate must read
+    ``effect_size_floor_pf`` and ``mde_pf`` from here — do not hardcode.
+    """
+
+    sigma_pf: float = 0.0
+    mde_pf: float = 0.0
+    effect_size_floor_pf: float = 0.0
+    required_n_candidates: int = 0
+    n_seeds: int = 10
+    n_candidates: int = 3
+    pilot_report_path: str | None = None
+    pilot_id: str | None = None
+
+
 class WorkflowSettings(BaseModel):
     discovery_workflow_id: str = "strategy_discovery_router_v1"
     review_workflow_id: str = "candidate_review_v1"
@@ -428,6 +446,7 @@ class Settings(BaseModel):
     gp_rules: GPRulesSettings = Field(default_factory=GPRulesSettings)
     workflows: WorkflowSettings = Field(default_factory=WorkflowSettings)
     policy: PolicySettings = Field(default_factory=PolicySettings)
+    ml_variance_pilot: MLVariancePilotSettings = Field(default_factory=MLVariancePilotSettings)
 
     def paths(self) -> ProjectPaths:
         return ProjectPaths.from_root(self.project_root)

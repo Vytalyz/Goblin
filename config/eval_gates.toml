@@ -81,3 +81,24 @@ mutation_probability = 0.2
 tournament_size = 5
 min_signals_for_recommendation = 20
 min_pf_for_recommendation = 1.0
+
+# ---------------------------------------------------------------------------
+# Phase 1.6.0 — Variance Pilot calibration outputs.
+# Populated by scripts/run_ml_variance_pilot.py after the pilot runs.
+# Do NOT hand-edit these values; downstream phase gates read them and any
+# hand-tuning would defeat the "measure noise before locking thresholds"
+# discipline that motivates the pilot.
+# ---------------------------------------------------------------------------
+[ml_variance_pilot]
+# Locked from PILOT-1.6.0-20260420 (10 seeds × 3 candidates: AF-CAND-0007,
+# AF-CAND-0278, AF-CAND-0290) on data/normalized/research/eur_usd_m1.parquet.
+# σ_PF was measured at 0.0083 — well under the 0.08 hard-exit gate, so the
+# pilot proceeds without a data-collection sub-phase.
+sigma_pf = 0.0083
+mde_pf = 0.0083
+effect_size_floor_pf = 0.0083
+required_n_candidates = 11
+n_seeds = 10
+n_candidates = 3
+pilot_report_path = "Goblin/reports/ml/p1_6_0_variance_pilot.json"
+pilot_id = "PILOT-1.6.0-20260420"

@@ -1,0 +1,14 @@
+{
+  "holdout_id": "HOLDOUT-ML-P2-20260420",
+  "created_at_utc": "2026-04-20T00:59:31.759362Z",
+  "source_dataset_path": "data/normalized/research/eur_usd_m1.parquet",
+  "source_dataset_sha256": "7875ba5af620476aaba80cdec0c86680b343f70a02bf19eb40695517378ed8f1",
+  "holdout_n_rows": 38944,
+  "holdout_first_index": 155775,
+  "holdout_last_index": 194718,
+  "plaintext_sha256": "094802db71db3af5fcce700844d09a9f7b79c8cac460304d4154a14ab8a6da32",
+  "ciphertext_path": "Goblin/holdout/ml_p2_holdout.parquet.enc",
+  "ciphertext_sha256": "8b6fbd4741c9cb525d07e7f029c76b26a691ed5f18870b2751ed6c0b17d8d9fb",
+  "key_storage_location": "C:\\Users\\josep\\.goblin\\holdout_keys\\HOLDOUT-ML-P2-20260420.key",
+  "encryption_algorithm": "Fernet (AES-128-CBC + HMAC-SHA256)"
+}

@@ -4,6 +4,14 @@ This document records major program milestones and the intended evolution path f
 
 ## Current Milestones
 
+### 2026-04-20: ML evidence-first phases ML-P1.6.0 → 1.6 → 1.6b → 1.7 completed
+
+- **ML-P1.6.0 (Variance Pilot)**: σ_PF=0.0083 measured (10 seeds × 3 candidates, locked XGB hparams). Effect-size floor and MDE locked at 0.0083 PF in `config/eval_gates.toml [ml_variance_pilot]`. Decision log initialized at `Goblin/decisions/ml_decisions.jsonl`.
+- **ML-P1.6 (Baseline Comparison)**: 11 stratified candidates evaluated; median PF lift +0.0506 (~5.5× floor); 11/11 above floor; 11/11 cost-persistent at +1.0 pip. Regime gate: 6/11 surviving (0734, 0322, 0323, 0007, 0002, 0290), 5/11 fragile. Verdict: `conditional`. Sealed holdout created (key outside repo) gating ML-P2.0.
+- **ML-P1.6b (Sequential Probe)**: 6 sequential features tested (`momentum_acceleration`, `vol_of_vol_5`, `range_compression_ratio`, `rsi_slope_10`, `realized_skew_20`, `realized_kurt_20`). All stationary (ADF + KPSS). Mean Δ-PF lift = +0.0041 across 6 surviving candidates (4.1% of 0.10 PF P2 target, p=0.2387 one-sided, BH-FDR q=0.10 rejected 0/6 features). Verdict: `p2_proceed_unchanged` — sequential features will NOT be added to the ML-P2 architecture.
+- **ML-P1.7 (Plan Hardening)**: `tools/verify_decision_log_schema.py` (with explicit grandfather list), `tools/verify_dataset_sha.py` (pinned SHA `7875ba5a…`), `src/agentic_forex/governance/locked_benchmark.py` (case/whitespace/JSON-embedding guard for AF-CAND-0263). New CI lanes `.github/workflows/ml-phase-gates.yml` (7 jobs) and `.github/workflows/holdout-access.yml`. Glossary extended with BH-FDR / MDE / σ_PF / PSI / Decision Log / Effect-size floor / Sealed Holdout. Test suite grew from 463 → 541.
+- ML-P2.0 HITL re-gate intentionally NOT executed; sealed holdout untouched. Pipeline paused awaiting explicit owner approval.
+
 ### 2026-04-14: demo-account MT5 automation policy alignment completed
 
 - top-level repo governance now explicitly allows governed MT5 demo-account EA automation under the Goblin live-demo contract
