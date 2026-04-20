@@ -32,6 +32,13 @@ dev = [
   "ruff>=0.4,<1",
   "pre-commit>=3.7,<4",
 ]
+# ML Phase 2 optional: torch + cryptography for the sealed-holdout ceremony
+# and the deterministic 1D-CNN baseline. Pinned to CPU-only torch wheel.
+# CI installs this as: pip install -e ".[ml-p2]" --extra-index-url https://download.pytorch.org/whl/cpu
+ml-p2 = [
+  "cryptography>=43,<44",
+  "torch==2.5.1",
+]
 
 [project.scripts]
 goblin = "goblin.cli.app:main"

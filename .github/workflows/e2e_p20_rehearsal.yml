@@ -1,0 +1,94 @@
+name: E2E Phase 2.0 Rehearsal
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/run_p20_rehearsal.py'
+      - 'tools/holdout_access_ceremony.py'
+      - 'tools/verify_predictions_log_schema.py'
+      - 'tools/verify_decision_log_schema.py'
+      - 'tools/generate_synthetic_holdout.py'
+      - 'Goblin/decisions/PREDICTIONS_SCHEMA.md'
+      - 'Goblin/holdout/ml_p2_synthetic_rehearsal.parquet'
+      - 'tests/test_p20_rehearsal.py'
+
+jobs:
+  rehearsal:
+    name: Phase 2.0 E2E Rehearsal (synthetic data, no real holdout consumed)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies (ml-p2 extra for cryptography)
+        run: |
+          pip install -e ".[ml-p2]" --extra-index-url https://download.pytorch.org/whl/cpu
+
+      - name: Verify synthetic holdout exists
+        run: |
+          python -B tools/generate_synthetic_holdout.py \
+            --parquet data/normalized/research/eur_usd_m1.parquet \
+            --holdout-manifest Goblin/holdout/ml_p2_holdout_manifest.json \
+            --out Goblin/holdout/ml_p2_synthetic_rehearsal.parquet \
+            --check-coverage || true
+          # If parquet data isn't present in CI, the generator will exit non-zero;
+          # the rehearsal test will then skip with an informative message.
+          test -f Goblin/holdout/ml_p2_synthetic_rehearsal.parquet && \
+            echo "synthetic-holdout-present=true" >> "$GITHUB_ENV" || \
+            echo "synthetic-holdout-present=false" >> "$GITHUB_ENV"
+
+      - name: Run E2E rehearsal
+        if: env.synthetic-holdout-present == 'true'
+        run: |
+          python -B tools/run_p20_rehearsal.py
+
+      - name: Verify report
+        if: env.synthetic-holdout-present == 'true'
+        run: |
+          python -B -c "
+          import json, sys, pathlib
+          r = json.loads(pathlib.Path('Goblin/reports/ml/p2_0_rehearsal_report.json').read_text())
+          print('Rehearsal overall:', r['overall'])
+          print('Steps passed:', r['steps_passed'])
+          print('Steps failed:', r['steps_failed'])
+          if r['overall'] != 'PASS':
+              print('Failures:')
+              for f in r['failures']:
+                  print(' -', f)
+              sys.exit(1)
+          "
+
+      - name: Verify real holdout cap is unaffected
+        if: env.synthetic-holdout-present == 'true'
+        run: |
+          python -B -c "
+          import json, pathlib
+          log = pathlib.Path('Goblin/decisions/ml_decisions.jsonl')
+          entries = [json.loads(l) for l in log.read_text().splitlines() if l.strip()]
+          access_ids = [e['decision_id'] for e in entries
+                        if 'ACCESS' in e.get('decision_id','') or 'REHEARSAL' in e.get('decision_id','')]
+          assert access_ids == [], f'Unexpected entries in real log: {access_ids}'
+          print('OK — no ACCESS/REHEARSAL entries in real decisions log (HARD_CAP unaffected)')
+          "
+
+      - name: Upload rehearsal report as artifact
+        if: always() && env.synthetic-holdout-present == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: p2-rehearsal-report
+          path: Goblin/reports/ml/p2_0_rehearsal_report.json
+          retention-days: 30
+
+      - name: Run rehearsal pytest tests
+        if: env.synthetic-holdout-present == 'true'
+        run: |
+          python -B -m pytest tests/test_p20_rehearsal.py -v --timeout=300

@@ -41,6 +41,24 @@ jobs:
           pip install --index-url https://download.pytorch.org/whl/cpu torch || true
       - run: pytest -q --tb=short
 
+  tests-with-torch-determinism:
+    name: "ML: torch determinism (ml-p2 extra)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install ml-p2 extra (CPU torch wheel)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev,ml-p2]" --extra-index-url https://download.pytorch.org/whl/cpu
+      - name: Run torch determinism tests
+        env:
+          CUBLAS_WORKSPACE_CONFIG: ":4096:8"
+          PYTORCH_CUDA_ALLOC_CONF: "max_split_size_mb:128"
+        run: pytest -q tests/test_torch_determinism.py --tb=short
+
   decision-log-append-only:
     name: "ML: decision log append-only"
     runs-on: ubuntu-latest
@@ -113,6 +131,89 @@ jobs:
           else
             echo "Dataset not present in repo (LFS / external); skipping pin check"
           fi
+
+  predictions-log-append-only:
+    name: "ML: predictions log append-only"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify predictions.jsonl is append-only
+        run: |
+          set -euo pipefail
+          file=Goblin/decisions/predictions.jsonl
+          if [ ! -f "$file" ]; then
+            echo "predictions.jsonl not yet present; skipping"
+            exit 0
+          fi
+          if git rev-parse origin/main >/dev/null 2>&1; then
+            base=origin/main
+          else
+            base=$(git rev-parse HEAD~1 || echo HEAD)
+          fi
+          if ! git show "$base":"$file" >/dev/null 2>&1; then
+            echo "no prior version of $file; treating as initial commit"
+            exit 0
+          fi
+          git show "$base":"$file" > /tmp/old_pred.jsonl
+          old_lines=$(wc -l < /tmp/old_pred.jsonl)
+          new_lines=$(wc -l < "$file")
+          if [ "$old_lines" -gt 0 ]; then
+            head -n "$old_lines" "$file" > /tmp/new_pred_head.jsonl
+            if ! diff -q /tmp/old_pred.jsonl /tmp/new_pred_head.jsonl; then
+              echo "FAIL: predictions.jsonl prefix has been mutated"
+              exit 1
+            fi
+          fi
+          if [ "$new_lines" -lt "$old_lines" ]; then
+            echo "FAIL: predictions.jsonl shrank from $old_lines to $new_lines"
+            exit 1
+          fi
+          echo "OK: predictions log append-only (was $old_lines lines, now $new_lines)"
+
+  predictions-log-schema-check:
+    name: "ML: predictions log schema"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python tools/verify_predictions_log_schema.py
+
+  predictions-log-verify-commit:
+    name: "ML: predictions log signed commits"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify signatures on commits touching predictions.jsonl
+        run: |
+          set -euo pipefail
+          file=Goblin/decisions/predictions.jsonl
+          if [ ! -f "$file" ]; then
+            echo "predictions.jsonl not present; skipping"
+            exit 0
+          fi
+          # Only verify commits that actually modified the file.
+          commits=$(git log --pretty=format:%H -- "$file" || true)
+          if [ -z "$commits" ]; then
+            echo "no commits touch $file yet; nothing to verify"
+            exit 0
+          fi
+          fail=0
+          for c in $commits; do
+            if ! git verify-commit "$c" >/dev/null 2>&1; then
+              echo "WARN: commit $c touching $file is not signature-verifiable in CI"
+              # Note: 'git verify-commit' fails in CI when the signer's pubkey
+              # is not imported. We log the warning but do not hard-fail here
+              # because GitHub's branch-protection 'require signed commits'
+              # rule is the primary enforcement surface. CI documents intent.
+            fi
+          done
+          echo "OK: predictions log signature audit complete (warnings logged)"
 
   holdout-access-audit:
     name: "ML: sealed holdout access audit"

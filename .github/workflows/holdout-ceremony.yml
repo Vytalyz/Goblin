@@ -1,0 +1,101 @@
+name: "ML Holdout Decryption Ceremony"
+
+# Manual workflow for the gated decryption of the sealed P2 holdout.
+# Hard cap: 2 successful events for the entire P2 program.
+# See docs/operations/holdout_key_rotation.md.
+
+on:
+  workflow_dispatch:
+    inputs:
+      rationale_note:
+        description: "Rationale for this access (>=50 chars). Audit-trail field."
+        required: true
+        type: string
+      eval_command:
+        description: "Eval command to run on the plaintext holdout. Will receive the plaintext-parquet path as last argument."
+        required: true
+        type: string
+        default: "python scripts/eval_holdout.py"
+
+jobs:
+  ceremony:
+    name: "Holdout: gated decryption ceremony"
+    runs-on: ubuntu-latest
+    # Two-person-rule (solo-owner): GitHub Environment with required-reviewers.
+    # Configure 'holdout-ceremony' environment in repo settings with owner as
+    # required reviewer.
+    environment:
+      name: holdout-ceremony
+    concurrency:
+      group: holdout-ceremony
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.HOLDOUT_CEREMONY_PAT }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]" cryptography
+
+      - name: Materialize key from secret (outside repo tree)
+        env:
+          HOLDOUT_KEY_B64: ${{ secrets.HOLDOUT_FERNET_KEY_B64 }}
+        run: |
+          set -euo pipefail
+          if [ -z "${HOLDOUT_KEY_B64:-}" ]; then
+            echo "FAIL: HOLDOUT_FERNET_KEY_B64 secret not configured"
+            exit 1
+          fi
+          mkdir -p "$RUNNER_TEMP/holdout_keys"
+          chmod 700 "$RUNNER_TEMP/holdout_keys"
+          echo -n "$HOLDOUT_KEY_B64" | base64 -d > "$RUNNER_TEMP/holdout_keys/HOLDOUT-ML-P2-20260420.key"
+          chmod 600 "$RUNNER_TEMP/holdout_keys/HOLDOUT-ML-P2-20260420.key"
+          # Verify path is OUTSIDE the repo tree.
+          case "$RUNNER_TEMP" in
+            "$GITHUB_WORKSPACE"*) echo "FAIL: RUNNER_TEMP under workspace"; exit 1 ;;
+            *) echo "OK: key materialized outside repo at $RUNNER_TEMP/holdout_keys/" ;;
+          esac
+
+      - name: Run ceremony
+        env:
+          KEY_PATH: ${{ runner.temp }}/holdout_keys/HOLDOUT-ML-P2-20260420.key
+        run: |
+          set -euo pipefail
+          python tools/holdout_access_ceremony.py \
+            --key-path "$KEY_PATH" \
+            --note "${{ inputs.rationale_note }}" \
+            --actor "owner" \
+            --eval-cmd ${{ inputs.eval_command }}
+
+      - name: Shred materialized key
+        if: always()
+        env:
+          KEY_PATH: ${{ runner.temp }}/holdout_keys/HOLDOUT-ML-P2-20260420.key
+        run: |
+          if [ -f "$KEY_PATH" ]; then
+            dd if=/dev/urandom of="$KEY_PATH" bs=1 count=$(stat -c%s "$KEY_PATH") conv=notrunc 2>/dev/null || true
+            rm -f "$KEY_PATH"
+          fi
+          rmdir "$RUNNER_TEMP/holdout_keys" 2>/dev/null || true
+          echo "OK: key material shredded"
+
+      - name: Commit decision-log update
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name "holdout-ceremony-bot"
+          git config user.email "ceremony@goblin.local"
+          if git diff --quiet -- Goblin/decisions/ml_decisions.jsonl; then
+            echo "no decision log changes"
+            exit 0
+          fi
+          git add Goblin/decisions/ml_decisions.jsonl
+          git commit -m "chore(ml-2.0): holdout ceremony decision log update [skip ci]"
+          git push

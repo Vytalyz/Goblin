@@ -53,10 +53,22 @@ class DecisionLogSchemaError(ValueError):
 # format was standardized in DEC-ML-1.6.0-COMPLETE. The append-only invariant
 # forbids mutating these in place; they are accepted on the historical record
 # but no new entry may rely on this exemption.
+#
+# EX-7: hardened from `len(...) == 1` to identity comparison so silent
+# additions to the set surface in code review. Modifications require
+# CODEOWNERS review on tools/verify_decision_log_schema.py per
+# .github/CODEOWNERS, plus a new EX-7.x decision log entry.
 GRANDFATHERED_NO_BIAS_AUDIT: frozenset[str] = frozenset(
     {
         "DEC-ML-1.6.0-CANDIDATES",
     }
+)
+# Hard assertion: the grandfather set must be exactly this value.
+# If a maintainer adds an entry, this assertion forces them to update
+# both the literal AND this guard in the SAME commit (visibility).
+assert GRANDFATHERED_NO_BIAS_AUDIT == frozenset({"DEC-ML-1.6.0-CANDIDATES"}), (
+    "GRANDFATHERED_NO_BIAS_AUDIT mutated without updating the EX-7 guard. "
+    "See docs and CODEOWNERS before changing."
 )
 
 

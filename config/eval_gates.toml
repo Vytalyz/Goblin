@@ -102,3 +102,58 @@ n_seeds = 10
 n_candidates = 3
 pilot_report_path = "Goblin/reports/ml/p1_6_0_variance_pilot.json"
 pilot_id = "PILOT-1.6.0-20260420"
+
+# ---------------------------------------------------------------------------
+# Phase 1.6 — Baseline Evidence Foundation locked artifacts.
+# Locked at run time; tools/derive_mde.py refuses to run on a mismatched SHA
+# (R4-3 Constraint 4 — fail loudly on input drift, do not silently re-derive).
+# ---------------------------------------------------------------------------
+[ml_baseline_comparison]
+dataset_sha = "7875ba5af620476aaba80cdec0c86680b343f70a02bf19eb40695517378ed8f1"
+dataset_path = "data/normalized/research/eur_usd_m1.parquet"
+report_path = "Goblin/reports/ml/p1_6_baseline_comparison.json"
+report_sha = ""  # populated by EX-1 first run; subsequent runs assert match
+run_id = "BASELINE-1.6-20260420"
+n_candidates = 11
+n_folds = 3
+
+# ---------------------------------------------------------------------------
+# Phase 2.0 — Re-Gate calibration (R4-3 outputs; EX-1 phase).
+# Populated by tools/derive_mde.py from the locked 1.6 baseline report.
+# Do NOT hand-edit. Conservative-tier-on-upper-bound rule applies (I1):
+# if mde_pf_at_upper_ci_bound crosses an I1 tier boundary, pre-commit to
+# the more conservative tier in DEC-ML-2.0-TARGET.
+# ---------------------------------------------------------------------------
+[ml_p2]
+sigma_cross_point = 0.0211004853
+sigma_cross_ci_low = 0.0136548471
+sigma_cross_ci_high = 0.0248926354
+mde_pf_point = 0.0426550036
+mde_pf_at_upper_ci_bound = 0.0503209020
+n_survivors = 6
+alpha = 0.01
+power = 0.80
+bootstrap_n_resamples = 10000
+bootstrap_rng_seed = 20260420
+derivation_manifest_path = "Goblin/reports/ml/p2_0_mde_derivation_manifest.json"
+derivation_manifest_sha = "1823043a7940bc4fceec5b72badad1be4dbeafc61c22ca7d82043283775f6bf1"
+
+
+# ---------------------------------------------------------------------------
+# Phase 2.0 - Frozen regime split thresholds (EX-6).
+# Computed once from the in-sample (non-holdout, chronologically-earliest 80%)
+# portion of dataset_sha pinned above. Replaces the per-candidate-recomputed
+# medians in src/agentic_forex/ml/baseline_runner.py:assign_regimes for all
+# Phase 2 work. Frozen so cross-candidate regime-fragility comparisons are
+# apples-to-apples and not perturbed by per-candidate label-NaN drops.
+# Modifications require @joseph-romeo CODEOWNERS review AND a new EX-6.x
+# decision log entry. Test tests/test_regime_freeze.py asserts immutability.
+# ---------------------------------------------------------------------------
+[ml_regime]
+abs_momentum_12_median = 1.9000000000
+volatility_20_median = 0.0000741639
+n_in_sample_rows_used = 155775
+in_sample_holdout_first_index = 155775
+dataset_sha256_at_freeze = "7875ba5af620476aaba80cdec0c86680b343f70a02bf19eb40695517378ed8f1"
+frozen_at_utc = "2026-04-21T00:00:00Z"
+frozen_in_phase = "ML-P2-EX-6"

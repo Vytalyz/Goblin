@@ -1,0 +1,27 @@
+# Goblin CODEOWNERS — governance-critical paths require owner review.
+#
+# Last-match-wins: keep this file's most-specific rules at the bottom.
+
+# Default: repo owner reviews everything as a fallback.
+*  @joseph-romeo
+
+# ML decision log — append-only governance artifact.
+Goblin/decisions/ml_decisions.jsonl  @joseph-romeo
+
+# Phase 2.0 predictions log (R4-11 + L2 pre-commitment scaffold).
+Goblin/decisions/predictions.jsonl   @joseph-romeo
+Goblin/decisions/PREDICTIONS_SCHEMA.md  @joseph-romeo
+
+# Locked governance constants — any change must surface in review.
+config/eval_gates.toml               @joseph-romeo
+
+# Schema validators — modifications to the rule set itself must be reviewed.
+tools/verify_decision_log_schema.py     @joseph-romeo
+tools/verify_predictions_log_schema.py  @joseph-romeo
+
+# Sealed holdout artifacts and access workflow.
+Goblin/holdout/                      @joseph-romeo
+.github/workflows/holdout-access.yml @joseph-romeo
+
+# CI gating definitions.
+.github/workflows/ml-phase-gates.yml @joseph-romeo
