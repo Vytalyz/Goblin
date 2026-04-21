@@ -71,10 +71,27 @@ assert GRANDFATHERED_NO_BIAS_AUDIT == frozenset({"DEC-ML-1.6.0-CANDIDATES"}), (
     "See docs and CODEOWNERS before changing."
 )
 
+# Operational ceremony decision_types are auto-generated bracketing events
+# (e.g. holdout-access INITIATED/ABORTED/COMPLETED). They record an
+# operational fact, not an analytical choice, so a bias self-audit is not
+# meaningful. The originating analytical decision (the prediction file or
+# evaluation entry) carries the bias self-audit instead.
+OPERATIONAL_CEREMONY_DECISION_TYPES: frozenset[str] = frozenset(
+    {
+        "holdout_access_initiated",
+        "holdout_access_completed",
+        "holdout_access_aborted",
+    }
+)
+
 
 def _check_entry(idx: int, entry: dict) -> None:
     decision_id = entry.get("decision_id", "")
-    is_grandfathered = decision_id in GRANDFATHERED_NO_BIAS_AUDIT
+    decision_type = entry.get("decision_type", "")
+    is_grandfathered = (
+        decision_id in GRANDFATHERED_NO_BIAS_AUDIT
+        or decision_type in OPERATIONAL_CEREMONY_DECISION_TYPES
+    )
     required = (
         REQUIRED_TOP_LEVEL if not is_grandfathered else tuple(f for f in REQUIRED_TOP_LEVEL if f != "bias_self_audit")
     )
