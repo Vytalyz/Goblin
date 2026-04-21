@@ -4,6 +4,14 @@ This document records major program milestones and the intended evolution path f
 
 ## Current Milestones
 
+### 2026-04-21: Strategy Loop S1 scaffolder
+
+- **`tools/generate_strategy_spec.py`** is the S1 (Strategy Design) entry point of the loop. It runs a single transaction that produces three governed artifacts: the lean `strategy_spec.json` under `reports/AF-CAND-NNNN/`, the five-field rationale card under `Goblin/reports/strategy_rationale_cards/`, and an append-only `DEC-STRAT-AF-CAND-NNNN-S1-PASS` entry in `Goblin/decisions/strategy_decisions.jsonl`.
+- **Governance enforced at the scaffold step.** The chosen `--family` must appear in the slot's `allowed_families` from `config/portfolio_policy.toml`; the hypothesis must be ≥30 chars (matches the validator's `MIN_RATIONALE_CHARS`); slot_id and ID allocation are validated before any file is written. The decision-log entry it emits passes `tools/verify_strategy_decisions_schema.py` end-to-end (round-trip tested).
+- **CLI supports `--dry-run` and `--json`** for safe preview and tooling integration. Live dry-run on the real repo correctly allocated the next ID (`AF-CAND-0742`).
+- **Tests.** 12 new tests (happy path, schema round-trip, ID allocation, family/hypothesis/slot validation, dry-run isolation, CLI return codes). Targeted Stage 1 suite: 48/48 pass (12 scaffolder + 26 validator + 10 status).
+- **Next.** `tools/run_strategy_s2_eval.py` (12-gate S2 evaluator), `tools/run_strategy_s3_eval.py` (per-candidate ML eval), per-candidate sealed-holdout generator.
+
 ### 2026-04-21: Strategy Loop Stage 1 — foundational tooling
 
 - **Decision log surface.** New `Goblin/decisions/strategy_decisions.jsonl` (append-only, currently empty) + canonical schema doc at `Goblin/decisions/STRATEGY_DECISIONS_SCHEMA.md`. Required fields: `decision_id`, `candidate_id`, `stage` (S1–S7 or RETIREMENT), `outcome` (pass/fail/pending/retired/promoted), `decided_by` (owner/runner), `decided_at` (ISO-8601 UTC), `rationale` (≥30 chars), `gate_results`, `evidence_uris`, `next_action`. Optional: `slot_id`, `prior_decision_id`, `failure_mode`, `post_mortem_uri`, `commit_sha`, `tool_version`.
