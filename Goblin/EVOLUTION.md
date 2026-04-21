@@ -4,6 +4,15 @@ This document records major program milestones and the intended evolution path f
 
 ## Current Milestones
 
+### 2026-04-21: Strategy Loop Stage 1 — foundational tooling
+
+- **Decision log surface.** New `Goblin/decisions/strategy_decisions.jsonl` (append-only, currently empty) + canonical schema doc at `Goblin/decisions/STRATEGY_DECISIONS_SCHEMA.md`. Required fields: `decision_id`, `candidate_id`, `stage` (S1–S7 or RETIREMENT), `outcome` (pass/fail/pending/retired/promoted), `decided_by` (owner/runner), `decided_at` (ISO-8601 UTC), `rationale` (≥30 chars), `gate_results`, `evidence_uris`, `next_action`. Optional: `slot_id`, `prior_decision_id`, `failure_mode`, `post_mortem_uri`, `commit_sha`, `tool_version`.
+- **Validator.** `tools/verify_strategy_decisions_schema.py` enforces required-field set, `decision_id` regex, candidate-id regex, ISO-8601 UTC timestamp format, stage/outcome/decided_by enums, rationale minimum length, `gate_results` structure (with boolean `passed`), and `decision_id` uniqueness within the file. Returns exit code 0/1 like the ML decision validator.
+- **Status reader.** `tools/strategy_loop_status.py` is a read-only renderer of the loop state: portfolio slots from `config/portfolio_policy.toml`, total decisions, candidates tracked, latest decision per candidate, last_action per slot, optional `--candidate` history filter, and `--json` output for tooling integration. Live output now correctly shows `slot_a=AF-CAND-0733` and `slot_b=(none)`.
+- **Tests.** 36 new tests (26 validator + 10 status) all pass. Targeted run: 36/36.
+- **Pre-existing ML-P2 test failures fixed in same window.** Exempted operational `holdout_access_*` decision_types from `bias_self_audit` requirement (they are auto-generated bracketing events, not analytical decisions). Narrowed `test_rehearsal_report_hard_cap_unaffected` to flag only REHEARSAL-marked entries; legitimate HOLDOUT-ACCESS entries are expected once the cap is used. Committed the 4 real ceremony entries from the 2026-04-20 ML-P2 ceremony that were never persisted.
+- **Next.** `tools/generate_strategy_spec.py` (interactive scaffolder for new strategy specs), `tools/run_strategy_s2_eval.py` and `tools/run_strategy_s3_eval.py` (gate runners that write to the strategy decisions log), per-candidate sealed-holdout generator.
+
 ### 2026-04-21: Strategy Loop Stage 0 — governance reset complete
 
 - **Removed the AF-CAND-0263 lock.** The `locked_benchmark` slot mode no longer exists; `PortfolioSlotPolicy.mode` literal is now `["active_candidate", "blank_slate_research"]`. Real governance now lives in the deployment ladder, decision logs, and per-candidate sealed holdouts — not in slot-level mutation locks.
