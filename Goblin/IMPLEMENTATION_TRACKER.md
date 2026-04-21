@@ -38,7 +38,7 @@ Status meanings:
 
 | Surface | Current Status | Notes |
 | --- | --- | --- |
-| Strategy Loop Stage 1 (foundational tooling) | `partial` | Decision log + schema doc + validator (`tools/verify_strategy_decisions_schema.py`) + read-only status reader (`tools/strategy_loop_status.py`) + S1 scaffolder (`tools/generate_strategy_spec.py`) implemented and tested (48 tests). Still missing: `tools/run_strategy_s2_eval.py`, `tools/run_strategy_s3_eval.py`, per-candidate sealed-holdout generator |
+| Strategy Loop Stage 1–2 (foundational tooling) | `partial` | Decision log + schema doc + validator + status reader + S1 scaffolder + S2 gate evaluator (`tools/evaluate_strategy_s2_gates.py`) implemented and tested (71 tests). Still missing: S2 orchestrator (`tools/run_strategy_s2_eval.py`, hydrates lean spec → calls `run_backtest` + cost sweep + `build_robustness_report` → calls gate evaluator), `tools/run_strategy_s3_eval.py`, per-candidate sealed-holdout generator |
 | Strategy Loop Stage 0 (governance reset) | `implemented` | AF-CAND-0263 lock removed; `PortfolioSlotPolicy.mode` literal narrowed to `["active_candidate", "blank_slate_research"]`; `slot_a` = active candidate (currently `AF-CAND-0733` @ `limited_demo`), `slot_b` = blank-slate challenger requiring `strategy_inheritance == "none_from_prior_candidates"`; operator contract checks updated; `governance/locked_benchmark.py` and its test deleted; both slots route through `_run_research_slot`; full suite 651/0/1 (pass/fail/skip) |
 | Goblin program scaffolding | `implemented` | `/Goblin` exists with roadmap, status, state, phases, contracts, checkpoints, templates, runbooks |
 | Goblin CLI surfaces | `implemented` | init/status/phase/checkpoint plus evidence/control helper commands were added |

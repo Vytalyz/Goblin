@@ -4,6 +4,17 @@ This document records major program milestones and the intended evolution path f
 
 ## Current Milestones
 
+### 2026-04-21: Strategy Loop S2 gate evaluator (decision layer)
+
+- **`tools/evaluate_strategy_s2_gates.py`** is the decision layer of S2 — deliberately split from the orchestration layer so that gate logic is unit-testable without a parquet file or a live backtest.
+- **Inputs.** `backtest_summary.json` from `run_backtest` (provides `out_of_sample_profit_factor`, `expectancy_pips`, `trade_count`, `walk_forward_summary`, `regime_breakdown`, `max_drawdown_pct`, `in_sample_drawdown_pct`, `stress_profit_factor`); `robustness_report.json` from `build_robustness_report` (provides `pbo`, `white_reality_check_p_value`, `deflated_sharpe_ratio`, `cscv_pbo_available`, `white_reality_check_available`); optional cost-sweep JSON `{"plus_1pip_pf": <float>}`.
+- **Outputs.** Pure decision-log entry (returnable from `evaluate_s2()` and appendable via `append_decision()`) keyed `DEC-STRAT-AF-CAND-NNNN-S2-PASS|FAIL`, schema-validated by `tools/verify_strategy_decisions_schema.py` round-trip in tests. Also writes `failure_mode` field listing failing gates and a `next_action` pointing to S3 (on PASS) or RETIRE (on FAIL).
+- **Twelve gates evaluated.** OOS PF ≥1.05, expectancy >0, trade_count ≥100, walk-forward PF per window ≥0.90, walk-forward trades per window ≥10, DD degradation ≤15%, stress PF ≥1.0, regime non-negativity (PF≥1 in every regime bucket), cost persistence at +1pip (PF≥1), PBO ≤0.35, White's RC p-value ≤0.10, DSR ≥0.0. All thresholds load from `config/eval_gates.toml [validation]`.
+- **`--allow-provisional`** matches the robustness suite's `robustness_provisional` mode — PBO and White's RC are downgraded to passed-with-note when the family universe is too small for CSCV/WRC to produce a value. Without this flag, an unavailable PBO/WRC fails the gate (the strict default).
+- **CLI return codes.** 0=PASS, 1=FAIL, 2=missing artifact — makes the tool composable with shell pipelines and the future S2 orchestrator.
+- **Tests.** 23 new tests covering happy path, every per-gate failure mode, dict-vs-list `regime_breakdown`, missing/zero in-sample DD, provisional toggle in both directions, real-config threshold load, append-only log behaviour, and CLI return codes. Targeted Stage 1+2 suite: **71/71 pass**.
+- **Next.** `tools/run_strategy_s2_eval.py` (orchestration layer that hydrates the lean S1 spec into a full `StrategySpec`, runs `run_backtest` + cost sweep + `build_robustness_report`, then invokes the gate evaluator). Then `tools/run_strategy_s3_eval.py` and the per-candidate sealed-holdout generator.
+
 ### 2026-04-21: Strategy Loop S1 scaffolder
 
 - **`tools/generate_strategy_spec.py`** is the S1 (Strategy Design) entry point of the loop. It runs a single transaction that produces three governed artifacts: the lean `strategy_spec.json` under `reports/AF-CAND-NNNN/`, the five-field rationale card under `Goblin/reports/strategy_rationale_cards/`, and an append-only `DEC-STRAT-AF-CAND-NNNN-S1-PASS` entry in `Goblin/decisions/strategy_decisions.jsonl`.
