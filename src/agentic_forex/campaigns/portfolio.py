@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import re
 from datetime import UTC, datetime
-from pathlib import Path
 
 from agentic_forex.campaigns.autonomous_manager import run_autonomous_manager
 from agentic_forex.config import Settings
@@ -34,10 +32,7 @@ def run_portfolio_cycle(
     )
 
     for slot in selected_slots:
-        if slot.mode == "locked_benchmark":
-            report.slot_reports.append(_summarize_locked_benchmark(settings, slot))
-            continue
-        report.slot_reports.append(_run_blank_slate_research_slot(settings, slot))
+        report.slot_reports.append(_run_research_slot(settings, slot))
 
     write_json(report.report_path, report.model_dump(mode="json"))
     write_json(settings.paths().portfolio_reports_dir / "portfolio_cycle_latest.json", report.model_dump(mode="json"))
@@ -53,48 +48,7 @@ def _selected_slots(settings: Settings, *, slot_id: str | None, run_all_slots: b
     return []
 
 
-def _summarize_locked_benchmark(settings: Settings, slot: PortfolioSlotPolicy) -> PortfolioSlotReport:
-    candidate_id = slot.active_candidate_id
-    report_dir = settings.paths().reports_dir / str(candidate_id or "")
-    operational_status_path = report_dir / "operational_status.md"
-    review_packet_path = report_dir / "review_packet.json"
-    forward_stage_path = report_dir / "forward_stage_report.json"
-    notes: list[str] = []
-    if operational_status_path.exists():
-        notes.extend(_extract_status_lines(operational_status_path))
-    else:
-        notes.append("No operational_status.md found for the locked benchmark candidate.")
-
-    artifact_paths = {
-        "operational_status_path": str(operational_status_path),
-    }
-    if review_packet_path.exists():
-        artifact_paths["review_packet_path"] = str(review_packet_path)
-    if forward_stage_path.exists():
-        artifact_paths["forward_stage_report_path"] = str(forward_stage_path)
-
-    latest_manual_report = _latest_run_file(
-        settings.paths().mt5_runs_dir / str(candidate_id or ""), "mt5_manual_run_report.json"
-    )
-    if latest_manual_report is not None:
-        artifact_paths["latest_manual_run_report_path"] = str(latest_manual_report)
-
-    return PortfolioSlotReport(
-        slot_id=slot.slot_id,
-        mode=slot.mode,
-        purpose=slot.purpose,
-        active_candidate_id=candidate_id,
-        allowed_families=list(slot.allowed_families),
-        codex_execution_mode=slot.codex_execution_mode,
-        status="monitoring_summary_only",
-        last_action="synthesized_locked_benchmark_status",
-        mutation_occurred=False,
-        artifact_paths=artifact_paths,
-        notes=notes,
-    )
-
-
-def _run_blank_slate_research_slot(settings: Settings, slot: PortfolioSlotPolicy) -> PortfolioSlotReport:
+def _run_research_slot(settings: Settings, slot: PortfolioSlotPolicy) -> PortfolioSlotReport:
     if not slot.allowed_families:
         return PortfolioSlotReport(
             slot_id=slot.slot_id,
@@ -174,36 +128,16 @@ def _run_blank_slate_research_slot(settings: Settings, slot: PortfolioSlotPolicy
     mutation_occurred = _manager_mutation_occurred(selected_report)
     artifact_paths["autonomous_manager_report_path"] = str(selected_report.report_path)
 
-    benchmark_candidate_id = _resolve_locked_benchmark_candidate(settings)
     notes = [
         *attempted_notes,
         f"Selected family: {selected_family}",
         f"Terminal boundary: {selected_report.terminal_boundary}",
         f"Stop reason: {selected_report.stop_reason}",
     ]
-    if benchmark_candidate_id:
-        notes.append(f"Locked benchmark candidate: {benchmark_candidate_id}")
 
     challenger_candidate_id = selected_report.handoff_candidate_id
     if challenger_candidate_id:
         artifact_paths["challenger_candidate_id"] = challenger_candidate_id
-        if benchmark_candidate_id and challenger_candidate_id == benchmark_candidate_id:
-            return PortfolioSlotReport(
-                slot_id=slot.slot_id,
-                mode=slot.mode,
-                purpose=slot.purpose,
-                active_candidate_id=slot.active_candidate_id,
-                allowed_families=list(slot.allowed_families),
-                codex_execution_mode=slot.codex_execution_mode,
-                status="research_manager_blocked",
-                last_action=f"ran_autonomous_manager:{selected_family}",
-                mutation_occurred=False,
-                artifact_paths=artifact_paths,
-                notes=[
-                    *notes,
-                    "challenger_conflict_with_locked_benchmark: challenger cannot reuse benchmark candidate identity.",
-                ],
-            )
         promotion_packet = _load_promotion_packet(settings, candidate_id=challenger_candidate_id)
         if promotion_packet is None:
             return PortfolioSlotReport(
@@ -270,38 +204,9 @@ def _portfolio_manager_run_id(slot_id: str, family: str) -> str:
     return f"portfolio-{slot_id}-{family}-{timestamp}"
 
 
-def _resolve_locked_benchmark_candidate(settings: Settings) -> str | None:
-    for slot in settings.portfolio.slots:
-        if slot.mode == "locked_benchmark" and slot.active_candidate_id:
-            return slot.active_candidate_id
-    return None
-
-
 def _load_promotion_packet(settings: Settings, *, candidate_id: str) -> PromotionDecisionPacket | None:
     packet_path = settings.paths().goblin_deployment_bundles_dir / candidate_id / "promotion_decision_packet.json"
     if not packet_path.exists():
         return None
     packet = PromotionDecisionPacket.model_validate(read_json(packet_path))
     return packet.model_copy(update={"report_path": packet_path})
-
-
-def _latest_run_file(run_root: Path, file_name: str) -> Path | None:
-    if not run_root.exists():
-        return None
-    matches = sorted(run_root.glob(f"*/{file_name}"))
-    if not matches:
-        return None
-    return matches[-1]
-
-
-def _extract_status_lines(status_path: Path) -> list[str]:
-    lines: list[str] = []
-    for raw_line in status_path.read_text(encoding="utf-8").splitlines():
-        text = raw_line.strip()
-        if not text.startswith("-"):
-            continue
-        text = re.sub(r"^-\s*", "", text)
-        text = text.replace("`", "").strip()
-        if text:
-            lines.append(text)
-    return lines[:6]

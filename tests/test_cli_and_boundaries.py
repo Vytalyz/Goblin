@@ -135,13 +135,13 @@ def test_parser_supports_run_portfolio_cycle_command():
             "--project-root",
             "C:\\agentic-forex",
             "--slot",
-            "gap_blank_slate",
+            "slot_b",
         ]
     )
 
     assert args.command == "run-portfolio-cycle"
     assert args.project_root == "C:\\agentic-forex"
-    assert args.slot == "gap_blank_slate"
+    assert args.slot == "slot_b"
     assert args.all_slots is False
 
 

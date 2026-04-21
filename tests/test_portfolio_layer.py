@@ -10,48 +10,70 @@ from agentic_forex.governance.models import AutonomousManagerReport
 def test_settings_load_portfolio_slots_from_policy(settings):
     slot_ids = {slot.slot_id for slot in settings.portfolio.slots}
 
-    assert "overlap_benchmark" in slot_ids
-    assert "gap_blank_slate" in slot_ids
+    assert "slot_a" in slot_ids
+    assert "slot_b" in slot_ids
 
 
-def test_locked_benchmark_slot_rejects_mutating_codex_execution():
-    with pytest.raises(ValueError, match="locked_benchmark slots cannot allow mutation"):
+def test_active_candidate_slot_requires_mutation_allowed():
+    with pytest.raises(ValueError, match="active_candidate slots must allow mutation"):
         PortfolioSlotPolicy(
-            slot_id="overlap_benchmark",
-            mode="locked_benchmark",
-            purpose="demo_monitoring_reference",
-            active_candidate_id="AF-CAND-0263",
-            mutation_allowed=True,
+            slot_id="slot_a",
+            mode="active_candidate",
+            purpose="active_strategy_under_live_demo",
+            active_candidate_id="AF-CAND-0733",
+            mutation_allowed=False,
             codex_execution_mode="app_automation_worktree",
         )
 
 
 def test_blank_slate_slot_rejects_non_blank_inheritance():
-    with pytest.raises(ValueError, match="none_from_AF-CAND-0263_logic"):
+    with pytest.raises(ValueError, match="none_from_prior_candidates"):
         PortfolioSlotPolicy(
-            slot_id="gap_blank_slate",
+            slot_id="slot_b",
             mode="blank_slate_research",
-            purpose="next_non_overlap_deployable_strategy",
+            purpose="challenger_blank_slate_research",
             mutation_allowed=True,
             allowed_families=["europe_open_impulse_retest_research"],
             codex_execution_mode="app_automation_worktree",
-            strategy_inheritance="borrow_from_AF-CAND-0263",
+            strategy_inheritance="borrow_from_prior",
         )
 
 
-def test_run_portfolio_cycle_overlap_slot_is_monitoring_only(settings):
-    report = run_portfolio_cycle(settings, slot_id="overlap_benchmark")
+def test_run_portfolio_cycle_active_candidate_slot_routes_into_autonomous_manager(settings, monkeypatch):
+    captured = []
+
+    def _fake_run_autonomous_manager(*args, **kwargs):
+        captured.append(kwargs["family"])
+        return AutonomousManagerReport(
+            manager_run_id="manager-slot-a",
+            program_id="slot-a-program",
+            family=kwargs["family"],
+            executed_cycles=1,
+            max_cycles=4,
+            status="stopped",
+            stop_reason="program_loop_max_lanes_reached",
+            stop_class="budget_exhausted",
+            terminal_boundary="blocked_no_authorized_path",
+            policy_snapshot_hash="pytest-policy",
+            cycle_summaries=[],
+            notification_required=True,
+            notification_reason="blocked_no_authorized_path",
+            report_path=settings.paths().autonomous_manager_dir / "manager-slot-a.json",
+        )
+
+    monkeypatch.setattr("agentic_forex.campaigns.portfolio.run_autonomous_manager", _fake_run_autonomous_manager)
+
+    report = run_portfolio_cycle(settings, slot_id="slot_a")
 
     assert len(report.slot_reports) == 1
     slot_report = report.slot_reports[0]
-    assert slot_report.slot_id == "overlap_benchmark"
-    assert slot_report.status == "monitoring_summary_only"
+    assert slot_report.slot_id == "slot_a"
+    assert slot_report.status == "research_manager_blocked"
     assert slot_report.mutation_occurred is False
-    assert "operational_status_path" in slot_report.artifact_paths
     assert report.report_path.exists()
 
 
-def test_run_portfolio_cycle_gap_slot_routes_into_autonomous_manager(settings, monkeypatch):
+def test_run_portfolio_cycle_slot_b_routes_into_autonomous_manager(settings, monkeypatch):
     seen_families = []
 
     def _fake_run_autonomous_manager(*args, **kwargs):
@@ -75,19 +97,19 @@ def test_run_portfolio_cycle_gap_slot_routes_into_autonomous_manager(settings, m
 
     monkeypatch.setattr("agentic_forex.campaigns.portfolio.run_autonomous_manager", _fake_run_autonomous_manager)
 
-    report = run_portfolio_cycle(settings, slot_id="gap_blank_slate")
+    report = run_portfolio_cycle(settings, slot_id="slot_b")
 
     assert len(report.slot_reports) == 1
     slot_report = report.slot_reports[0]
-    assert slot_report.slot_id == "gap_blank_slate"
+    assert slot_report.slot_id == "slot_b"
     assert slot_report.status == "research_manager_blocked"
     assert slot_report.mutation_occurred is False
     assert slot_report.last_action == "ran_autonomous_manager:europe_open_impulse_retest_research"
     assert seen_families == ["europe_open_impulse_retest_research"]
 
 
-def test_run_portfolio_cycle_gap_slot_falls_through_empty_queue_family(settings, monkeypatch):
-    settings.portfolio.slot_by_id("gap_blank_slate").allowed_families = [
+def test_run_portfolio_cycle_slot_b_falls_through_empty_queue_family(settings, monkeypatch):
+    settings.portfolio.slot_by_id("slot_b").allowed_families = [
         "europe_open_impulse_retest_research",
         "europe_open_opening_range_retest_research",
     ]
@@ -141,7 +163,7 @@ def test_run_portfolio_cycle_gap_slot_falls_through_empty_queue_family(settings,
 
     monkeypatch.setattr("agentic_forex.campaigns.portfolio.run_autonomous_manager", _fake_run_autonomous_manager)
 
-    report = run_portfolio_cycle(settings, slot_id="gap_blank_slate")
+    report = run_portfolio_cycle(settings, slot_id="slot_b")
 
     slot_report = report.slot_reports[0]
     assert slot_report.status == "research_manager_executed"
@@ -154,8 +176,8 @@ def test_run_portfolio_cycle_gap_slot_falls_through_empty_queue_family(settings,
     ) in slot_report.notes
 
 
-def test_run_portfolio_cycle_gap_slot_falls_through_low_novelty_family(settings, monkeypatch):
-    settings.portfolio.slot_by_id("gap_blank_slate").allowed_families = [
+def test_run_portfolio_cycle_slot_b_falls_through_low_novelty_family(settings, monkeypatch):
+    settings.portfolio.slot_by_id("slot_b").allowed_families = [
         "europe_open_impulse_retest_research",
         "europe_open_early_follow_through_research",
     ]
@@ -209,7 +231,7 @@ def test_run_portfolio_cycle_gap_slot_falls_through_low_novelty_family(settings,
 
     monkeypatch.setattr("agentic_forex.campaigns.portfolio.run_autonomous_manager", _fake_run_autonomous_manager)
 
-    report = run_portfolio_cycle(settings, slot_id="gap_blank_slate")
+    report = run_portfolio_cycle(settings, slot_id="slot_b")
 
     slot_report = report.slot_reports[0]
     assert slot_report.status == "research_manager_executed"
@@ -244,7 +266,7 @@ def test_run_portfolio_cycle_all_slots_builds_combined_report(settings, monkeypa
     assert settings.paths().portfolio_reports_dir.joinpath("portfolio_cycle_latest.json").exists()
 
 
-def test_run_portfolio_cycle_gap_slot_reports_no_selected_family_when_all_fallbacks(settings, monkeypatch):
+def test_run_portfolio_cycle_slot_b_reports_no_selected_family_when_all_fallbacks(settings, monkeypatch):
     def _fake_run_autonomous_manager(*args, **kwargs):
         family = kwargs["family"]
         return AutonomousManagerReport(
@@ -266,7 +288,7 @@ def test_run_portfolio_cycle_gap_slot_reports_no_selected_family_when_all_fallba
 
     monkeypatch.setattr("agentic_forex.campaigns.portfolio.run_autonomous_manager", _fake_run_autonomous_manager)
 
-    report = run_portfolio_cycle(settings, slot_id="gap_blank_slate")
+    report = run_portfolio_cycle(settings, slot_id="slot_b")
 
     slot_report = report.slot_reports[0]
     assert slot_report.status == "research_manager_blocked"
@@ -299,7 +321,7 @@ def test_run_portfolio_cycle_blocks_challenger_without_promotion_packet(settings
 
     monkeypatch.setattr("agentic_forex.campaigns.portfolio.run_autonomous_manager", _fake_run_autonomous_manager)
 
-    report = run_portfolio_cycle(settings, slot_id="gap_blank_slate")
+    report = run_portfolio_cycle(settings, slot_id="slot_b")
     slot_report = report.slot_reports[0]
 
     assert slot_report.status == "research_manager_blocked"
@@ -354,7 +376,7 @@ def test_run_portfolio_cycle_accepts_challenger_with_promotion_packet(settings, 
 
     monkeypatch.setattr("agentic_forex.campaigns.portfolio.run_autonomous_manager", _fake_run_autonomous_manager)
 
-    report = run_portfolio_cycle(settings, slot_id="gap_blank_slate")
+    report = run_portfolio_cycle(settings, slot_id="slot_b")
     slot_report = report.slot_reports[0]
 
     assert slot_report.status == "research_manager_executed"

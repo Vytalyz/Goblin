@@ -4,6 +4,17 @@ This document records major program milestones and the intended evolution path f
 
 ## Current Milestones
 
+### 2026-04-21: Strategy Loop Stage 0 — governance reset complete
+
+- **Removed the AF-CAND-0263 lock.** The `locked_benchmark` slot mode no longer exists; `PortfolioSlotPolicy.mode` literal is now `["active_candidate", "blank_slate_research"]`. Real governance now lives in the deployment ladder, decision logs, and per-candidate sealed holdouts — not in slot-level mutation locks.
+- **Two-slot portfolio.**
+  - `slot_a` (`active_candidate`): currently holds **`AF-CAND-0733`** at `limited_demo` on the deployment ladder. Mutable.
+  - `slot_b` (`blank_slate_research`): blank-slate challenger track with `strategy_inheritance == "none_from_prior_candidates"`. Mutable.
+- **Code surface changes.** Deleted `src/agentic_forex/governance/locked_benchmark.py` and `tests/test_af_cand_0263_locked.py`. Renamed operator contract findings (`missing_overlap_slot`/`overlap_slot_mutable` → `missing_slot_a`/`slot_a_misconfigured`; `missing_gap_slot`/`gap_slot_inheritance_invalid` → `missing_slot_b`/`slot_b_inheritance_invalid`). Renamed `_run_blank_slate_research_slot` → `_run_research_slot` and routed both slot modes through it. Removed orphan `_extract_status_lines`/`_latest_run_file` helpers and unused `re` import from `campaigns/portfolio.py`. Removed `_guard_against_locked_benchmark` from `scripts/run_ml_baseline_comparison.py`.
+- **Governance docs updated.** `AGENTS.md`, `.codex/AGENTS.md`, `.github/copilot-instructions.md`, `.github/pull_request_template.md`, `CONTRIBUTING.md`, `config/portfolio_policy.toml`.
+- **Test status.** Targeted suite (portfolio + CLI + goblin_live): 35/35 pass. Full suite: 649 pass, 2 pre-existing failures unrelated to Stage 0 (`test_p20_rehearsal::test_rehearsal_report_hard_cap_unaffected`, `test_verify_decision_log_schema::test_real_decision_log_passes`) carried over from ML-P2 work.
+- **Next.** Stage 1+ tooling per `/memories/session/plan.md` §11: `Goblin/decisions/strategy_decisions.jsonl` + schema, `tools/generate_strategy_spec.py`, `tools/run_strategy_s2_eval.py`, `tools/run_strategy_s3_eval.py`, `tools/strategy_loop_status.py`, per-candidate sealed-holdout generator.
+
 ### 2026-04-20: ML-P2 holdout ceremony complete — verdict NO_GO (commit `d093c35`)
 
 - **Result**: Aggregate primary PF lift **+0.0528** — just below CONDITIONAL floor (0.055). BCa 95% CI **[-0.027, +0.261]** crosses zero.

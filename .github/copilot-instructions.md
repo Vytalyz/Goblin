@@ -11,7 +11,7 @@ This is the **Goblin** algorithmic forex research platform.
 - OANDA is the canonical research data source. MT5 is practice/parity only.
 - Governed MT5 demo-account EA automation is allowed for live-demo observability and broker reconciliation.
 - Real-money automated trading remains forbidden unless explicitly reauthorized by repo governance.
-- `AF-CAND-0263` is the locked overlap benchmark — never mutate it.
+- The portfolio has two mutable slots: `slot_a` (active candidate, currently `AF-CAND-0733`) and `slot_b` (blank-slate challenger). Strategies progress through the S1–S6 development loop documented in the strategy development plan.
 
 ## Project Structure
 

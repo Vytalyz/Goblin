@@ -486,13 +486,13 @@ def validate_operator_contract(settings: Settings) -> OperatorContractReport:
         )
 
     try:
-        overlap_slot = settings.portfolio.slot_by_id("overlap_benchmark")
-        if overlap_slot.active_candidate_id != "AF-CAND-0263" or overlap_slot.mutation_allowed:
+        slot_a = settings.portfolio.slot_by_id("slot_a")
+        if not slot_a.mutation_allowed or slot_a.mode != "active_candidate":
             findings.append(
                 OperatorContractFinding(
                     severity="error",
-                    code="overlap_slot_mutable",
-                    message="The overlap benchmark slot must stay pinned to AF-CAND-0263 and remain immutable.",
+                    code="slot_a_misconfigured",
+                    message="slot_a must be the mutable active_candidate slot.",
                     path=settings.paths().config_dir / "portfolio_policy.toml",
                 )
             )
@@ -500,20 +500,20 @@ def validate_operator_contract(settings: Settings) -> OperatorContractReport:
         findings.append(
             OperatorContractFinding(
                 severity="error",
-                code="missing_overlap_slot",
-                message="Portfolio policy is missing the overlap_benchmark slot.",
+                code="missing_slot_a",
+                message="Portfolio policy is missing the slot_a slot.",
                 path=settings.paths().config_dir / "portfolio_policy.toml",
             )
         )
 
     try:
-        gap_slot = settings.portfolio.slot_by_id("gap_blank_slate")
-        if gap_slot.strategy_inheritance != "none_from_AF-CAND-0263_logic":
+        slot_b = settings.portfolio.slot_by_id("slot_b")
+        if slot_b.strategy_inheritance != "none_from_prior_candidates":
             findings.append(
                 OperatorContractFinding(
                     severity="error",
-                    code="gap_slot_inheritance_invalid",
-                    message="The gap blank-slate slot must explicitly reject AF-CAND-0263 strategy inheritance.",
+                    code="slot_b_inheritance_invalid",
+                    message="slot_b must explicitly declare strategy_inheritance = 'none_from_prior_candidates'.",
                     path=settings.paths().config_dir / "portfolio_policy.toml",
                 )
             )
@@ -521,8 +521,8 @@ def validate_operator_contract(settings: Settings) -> OperatorContractReport:
         findings.append(
             OperatorContractFinding(
                 severity="error",
-                code="missing_gap_slot",
-                message="Portfolio policy is missing the gap_blank_slate slot.",
+                code="missing_slot_b",
+                message="Portfolio policy is missing the slot_b slot.",
                 path=settings.paths().config_dir / "portfolio_policy.toml",
             )
         )

@@ -38,6 +38,7 @@ Status meanings:
 
 | Surface | Current Status | Notes |
 | --- | --- | --- |
+| Strategy Loop Stage 0 (governance reset) | `implemented` | AF-CAND-0263 lock removed; `PortfolioSlotPolicy.mode` literal narrowed to `["active_candidate", "blank_slate_research"]`; `slot_a` = active candidate (currently `AF-CAND-0733` @ `limited_demo`), `slot_b` = blank-slate challenger requiring `strategy_inheritance == "none_from_prior_candidates"`; operator contract checks updated; `governance/locked_benchmark.py` and its test deleted; both slots route through `_run_research_slot`; targeted tests (portfolio + CLI + goblin_live): 35/35 pass |
 | Goblin program scaffolding | `implemented` | `/Goblin` exists with roadmap, status, state, phases, contracts, checkpoints, templates, runbooks |
 | Goblin CLI surfaces | `implemented` | init/status/phase/checkpoint plus evidence/control helper commands were added |
 | Four-channel truth stack | `implemented` | modeled and documented |

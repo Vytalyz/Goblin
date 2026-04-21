@@ -10,7 +10,7 @@ from agentic_forex.utils.paths import ProjectPaths
 from agentic_forex.utils.secrets import resolve_secret
 
 ParityClass = Literal["m1_official", "tick_required"]
-PortfolioSlotMode = Literal["locked_benchmark", "blank_slate_research"]
+PortfolioSlotMode = Literal["active_candidate", "blank_slate_research"]
 CodexExecutionMode = Literal[
     "disabled", "manual_or_readonly_summary", "app_automation_worktree", "app_automation_local"
 ]
@@ -217,23 +217,17 @@ class PortfolioSlotPolicy(BaseModel):
 
     @model_validator(mode="after")
     def _validate_policy(self) -> PortfolioSlotPolicy:
-        if self.mode == "locked_benchmark":
-            if self.mutation_allowed:
-                raise ValueError("locked_benchmark slots cannot allow mutation.")
-            if self.codex_execution_mode not in {"disabled", "manual_or_readonly_summary"}:
-                raise ValueError(
-                    "locked_benchmark slots may only use disabled or manual_or_readonly_summary Codex execution."
-                )
+        if self.mode == "active_candidate":
+            if not self.mutation_allowed:
+                raise ValueError("active_candidate slots must allow mutation.")
         if self.mode == "blank_slate_research":
             if not self.mutation_allowed:
                 raise ValueError("blank_slate_research slots must allow mutation.")
-            if self.strategy_inheritance != "none_from_AF-CAND-0263_logic":
+            if self.strategy_inheritance != "none_from_prior_candidates":
                 raise ValueError(
                     "blank_slate_research slots must explicitly declare strategy_inheritance = "
-                    "'none_from_AF-CAND-0263_logic'."
+                    "'none_from_prior_candidates'."
                 )
-            if self.active_candidate_id == "AF-CAND-0263":
-                raise ValueError("blank_slate_research slots cannot use AF-CAND-0263 as the active candidate.")
         return self
 
 

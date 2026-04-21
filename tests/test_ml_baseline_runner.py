@@ -149,23 +149,6 @@ class TestDatasetShaGuard:
 
 
 # ---------------------------------------------------------------------------
-# AF-CAND-0263 guard in the runner script
-# ---------------------------------------------------------------------------
-
-
-class TestRunnerGuardAgainstLockedBenchmark:
-    def test_runner_rejects_locked_benchmark(self):
-        script = REPO_ROOT / "scripts" / "run_ml_baseline_comparison.py"
-        # Spawn a fresh interpreter: the guard runs before any heavy imports.
-        proc = subprocess.run(
-            [sys.executable, "-B", str(script), "--candidates", "AF-CAND-0263", "AF-CAND-0007"],
-            capture_output=True, text=True,
-        )
-        assert proc.returncode != 0
-        assert "AF-CAND-0263" in (proc.stderr + proc.stdout)
-
-
-# ---------------------------------------------------------------------------
 # Holdout sealing integrity
 # ---------------------------------------------------------------------------
 

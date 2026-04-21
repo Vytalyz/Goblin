@@ -1,20 +1,28 @@
 [portfolio]
 
+# Active-candidate slot: holds the in-flight strategy currently progressing
+# through the deployment ladder (currently AF-CAND-0733 in limited_demo).
+# Mutable; new candidates may rotate in once they pass the strategy
+# development loop (S1-S6).
 [[portfolio.slots]]
-slot_id = "overlap_benchmark"
-mode = "locked_benchmark"
-purpose = "demo_monitoring_reference"
-active_candidate_id = "AF-CAND-0263"
-mutation_allowed = false
+slot_id = "slot_a"
+mode = "active_candidate"
+purpose = "active_strategy_under_live_demo"
+active_candidate_id = "AF-CAND-0733"
+mutation_allowed = true
 allowed_families = ["overlap_resolution_bridge_research"]
-codex_execution_mode = "manual_or_readonly_summary"
-worktree_name = "codex-overlap-benchmark"
-automation_name = "portfolio-brief"
+codex_execution_mode = "app_automation_worktree"
+worktree_name = "codex-slot-a-active"
+automation_name = "slot-a-active"
 
+# Challenger slot: blank-slate research producing the next candidate to
+# challenge slot_a. Strategy logic must NOT inherit thresholds, geometry,
+# or holding rules from any prior candidate (per strategy development
+# loop S1 discipline).
 [[portfolio.slots]]
-slot_id = "gap_blank_slate"
+slot_id = "slot_b"
 mode = "blank_slate_research"
-purpose = "next_non_overlap_deployable_strategy"
+purpose = "challenger_blank_slate_research"
 mutation_allowed = true
 allowed_families = [
   "europe_open_impulse_retest_research",
@@ -22,6 +30,6 @@ allowed_families = [
   "europe_open_early_follow_through_research",
 ]
 codex_execution_mode = "app_automation_worktree"
-worktree_name = "codex-gap-strategy-rd"
-automation_name = "gap-strategy-rd"
-strategy_inheritance = "none_from_AF-CAND-0263_logic"
+worktree_name = "codex-slot-b-challenger"
+automation_name = "slot-b-challenger"
+strategy_inheritance = "none_from_prior_candidates"

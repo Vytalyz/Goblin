@@ -115,9 +115,9 @@ git commit --no-verify -m "emergency fix"
 - Absolute user paths (`C:\Users\...`)
 - API keys, tokens, or passwords (inline or in config files)
 
-### Locked Benchmark
+### Portfolio Slots
 
-`AF-CAND-0263` is the locked overlap benchmark. Never modify its data, experiment files, or evaluation results. See [AGENTS.md](AGENTS.md) for full governance rules.
+The portfolio currently exposes two mutable slots, `slot_a` (active candidate) and `slot_b` (blank-slate challenger), defined in `config/portfolio_policy.toml`. Strategies progress through the S1–S6 development loop and may rotate between slots once they pass the gates. There is no candidate locked from mutation today; see [AGENTS.md](AGENTS.md) for the active governance rules.
 
 ## Troubleshooting Guardian Failures
 

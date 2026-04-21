@@ -7,9 +7,6 @@ Usage:
         --run-id BASELINE-1.6-20260420 \\
         --dataset-sha 7875ba5af620476a... \\
         --holdout-manifest Goblin/holdout/ml_p2_holdout_manifest.json
-
-Refuses to run if AF-CAND-0263 is in the candidate set (locked benchmark
-per AGENTS.md).
 """
 from __future__ import annotations
 
@@ -46,17 +43,6 @@ from agentic_forex.ml.baseline_runner import (  # noqa: E402
     summarise_runs,
 )
 from agentic_forex.ml.variance_pilot import LOCKED_XGB_HPARAMS  # noqa: E402
-
-LOCKED_BENCHMARK_ID = "AF-CAND-0263"
-
-
-def _guard_against_locked_benchmark(candidate_ids: list[str]) -> None:
-    norm = {c.strip().upper() for c in candidate_ids}
-    if LOCKED_BENCHMARK_ID in norm:
-        raise SystemExit(
-            f"[baseline] AF-CAND-0263 is the locked overlap benchmark per AGENTS.md "
-            f"and may not be included in baseline runs. Aborting."
-        )
 
 
 def _load_spec(candidate_id: str) -> dict:
@@ -97,8 +83,6 @@ def main() -> int:
     ap.add_argument("--exclude-holdout", action="store_true", default=True,
                     help="Exclude the sealed holdout rows from training+CV (always on).")
     args = ap.parse_args()
-
-    _guard_against_locked_benchmark(args.candidates)
 
     parquet = (REPO_ROOT / args.parquet).resolve()
     if not parquet.exists():

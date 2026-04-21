@@ -30,23 +30,23 @@ These instructions apply to the repository root unless a deeper `AGENTS.md` over
 
 ## Active Portfolio Slots
 
-- `overlap_benchmark`
-  - locked benchmark candidate: `AF-CAND-0263`
-  - purpose: demo monitoring reference
-  - mutation is forbidden
-- `gap_blank_slate`
-  - purpose: next non-overlap deployable strategy
+- `slot_a`
+  - active candidate: `AF-CAND-0733` (currently in `limited_demo` on the deployment ladder)
+  - purpose: live-demo strategy under observation; mutable
+  - candidates rotate in once they pass the strategy development loop (S1-S6)
+- `slot_b`
+  - purpose: blank-slate challenger producing the next candidate to challenge `slot_a`
   - strategy logic must start blank-slate
-  - do not borrow thresholds, geometry, or holding logic from `AF-CAND-0263`
+  - do not borrow thresholds, geometry, or holding logic from any prior candidate
 
 ## Portfolio Controls
 
-- Slot policy is authoritative for whether a lane is mutable, benchmark-only, or parity-eligible.
-- `AF-CAND-0263` must never be mutated through portfolio routing.
+- Slot policy is authoritative for whether a lane is mutable, parity-eligible, or research-only.
+- Both slots are mutable; there is no candidate-level lock today. Strategy progression is governed by the S1-S6 loop and the deployment ladder, not by per-candidate mutation locks.
 - New strategy families must remain governed by explicit parity-class assignment before official parity.
 - Diagnostic MT5 evidence may explain failures but cannot establish promotion truth.
 - Governed MT5 demo runs must produce the live-demo contract artifacts and remain subordinate to broker/account reconciliation and deployment-ladder state.
-- No candidate rescue is allowed through the new gap lane.
+- A failing strategy at any S-stage gate is retired; iteration on a failed candidate's parameters is forbidden (gate-shopping).
 
 ## Codex Execution Rules
 
