@@ -101,6 +101,9 @@ Any Goblin progress summary should state:
 
 ## Live-Demo Operator Commands
 
+Current governed operator candidate: `AF-CAND-0733`.
+Forward-stage passed on `2026-04-22` and the current approval/freshness check confirms `human_review`, `mt5_packet`, `mt5_parity_run`, and `mt5_validation` are all approved, fresh, and unsuperseded. The next operator action is the governed limited-demo MT5 attach for `AF-CAND-0733`.
+
 Shadow-only and live-demo attaches use the following CLI workflow:
 
 ```sh
@@ -110,11 +113,22 @@ goblin goblin-live-attach --candidate-id AF-CAND-0733 --run-id live-demo-<UTC> -
 # 2. During session: periodic heartbeats
 goblin goblin-live-heartbeat --candidate-id AF-CAND-0733 --run-id <RUN_ID> --status healthy --terminal-active true --algo-trading-enabled true
 
-# 3. After session: collect EA outputs into governed artifacts
+# 3. LIVE: On-demand view of active MT5 logs during demo session
+goblin goblin-live-journal --candidate-id AF-CAND-0733 --tail 20
+goblin goblin-live-experts --candidate-id AF-CAND-0733 --tail 20
+# → auto-discovers active MT5 terminal; displays most recent N lines of journal/experts log
+
+# 4. After session: collect EA outputs into governed artifacts
 goblin goblin-live-session-end --candidate-id AF-CAND-0733 --run-id <RUN_ID> --mt5-common-path "C:\...\Terminal\Common\Files"
+# → zero-input closeout: auto-discovers runtime summary, signal trace, EA audit, broker history,
+#   diagnostic windows, terminal journal, and experts logs; also writes candidate_quality_audit.json
+
+# Optional manual recovery inputs for a run that already happened:
+# - explicit overrides are still available for one-off recovery edge cases
+goblin goblin-live-session-end --candidate-id AF-CAND-0733 --run-id <RUN_ID> --mt5-common-path "C:\...\Terminal\Common\Files" --broker-csv-path "C:\...\history.csv" --journal-path "C:\...\terminal.log" --experts-log-path "C:\...\experts.log"
 ```
 
-Artifacts land in `Goblin/reports/live_demo/<candidate_id>/<run_id>/`.
+Artifacts land in `Goblin/reports/live_demo/<candidate_id>/<run_id>/`. Broker reconciliation artifacts land in `Goblin/reports/broker_account_history/<candidate_id>/<run_id>/`.
 
 ## ML-P2.0 Evaluation Operator Commands
 

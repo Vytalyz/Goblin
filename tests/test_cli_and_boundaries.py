@@ -89,6 +89,35 @@ def test_parser_supports_run_mt5_manual_test_command():
     assert args.auto_scale_lots is True
 
 
+def test_parser_supports_extended_live_session_end_args():
+    parser = build_parser()
+
+    args = parser.parse_args(
+        [
+            "goblin-live-session-end",
+            "--project-root",
+            "C:\\agentic-forex",
+            "--candidate-id",
+            "AF-CAND-0733",
+            "--run-id",
+            "live-demo-20260422T213955Z",
+            "--mt5-common-path",
+            "C:\\mt5\\Common\\Files",
+            "--broker-csv-path",
+            "C:\\exports\\history.csv",
+            "--journal-path",
+            "C:\\exports\\terminal.log",
+            "--experts-log-path",
+            "C:\\exports\\experts.log",
+        ]
+    )
+
+    assert args.command == "goblin-live-session-end"
+    assert args.broker_csv_path == "C:\\exports\\history.csv"
+    assert args.journal_path == "C:\\exports\\terminal.log"
+    assert args.experts_log_path == "C:\\exports\\experts.log"
+
+
 def test_parser_supports_incident_commands():
     parser = build_parser()
 

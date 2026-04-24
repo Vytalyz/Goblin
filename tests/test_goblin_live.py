@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
+from agentic_forex.cli import app
 from agentic_forex.goblin.controls import (
     detect_live_runtime_anomalies,
     run_broker_reconciliation,
@@ -338,3 +340,147 @@ def test_run_broker_reconciliation_pnl_delta(settings, tmp_path):
     assert report.reconciliation_status == "matched"
     assert report.matched_trade_count == 1
     assert abs(report.cash_pnl_delta - 0.05) < 1e-9
+
+
+def test_live_session_end_collects_broker_and_log_artifacts(project_root: Path, capsys):
+    candidate_id = "AF-CAND-0733"
+    run_id = "live-demo-20260422T213955Z"
+    common_base = project_root / "mt5_common"
+    live_demo_dir = common_base / "AgenticForex" / "LiveDemo" / candidate_id
+    live_demo_dir.mkdir(parents=True, exist_ok=True)
+    audit_dir = common_base / "AgenticForex" / "Audit"
+    audit_dir.mkdir(parents=True, exist_ok=True)
+
+    (live_demo_dir / "runtime_summary.json").write_text(
+        json.dumps(
+            {
+                "bars_processed": 12,
+                "allowed_hour_bars": 8,
+                "long_signals": 2,
+                "short_signals": 1,
+                "order_attempts": 3,
+                "order_successes": 2,
+                "order_failures": 1,
+                "spread_blocked_bars": 1,
+                "filter_blocked_bars": 2,
+                "audit_write_failures": 0,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (live_demo_dir / "signal_trace.csv").write_text("timestamp_utc,signal\n2026-04-22T21:40:00Z,long\n", encoding="utf-8")
+    (live_demo_dir / "ea_audit.json").write_text(
+        json.dumps(
+            {
+                "candidate_id": candidate_id,
+                "run_id": run_id,
+                "trades": [
+                    {
+                        "ticket": "11111",
+                        "symbol": "EURUSD",
+                        "trade_type": "buy",
+                        "volume": 0.01,
+                        "open_time": "2026-04-22T21:40:00Z",
+                        "close_time": "2026-04-22T21:55:00Z",
+                        "open_price": 1.1000,
+                        "close_price": 1.1010,
+                        "profit": 1.0,
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (audit_dir / f"{candidate_id}__broker_history.csv").write_text(
+        "Ticket,Symbol,Type,Volume,Open Time,Close Time,Open Price,Close Price,Profit\n"
+        "11111,EURUSD,buy,0.01,2026-04-22T21:40:00Z,2026-04-22T21:55:00Z,1.1000,1.1010,1.0\n",
+        encoding="utf-8",
+    )
+    (audit_dir / f"{candidate_id}__diagnostic_tick_windows.csv").write_text(
+        "window_start_utc,window_end_utc\n2026-04-22T21:40:00Z,2026-04-22T21:41:00Z\n",
+        encoding="utf-8",
+    )
+    terminal_hash_dir = common_base.parent / "EC6CB01DD6EC087A123DA4B636574C06"
+    terminal_logs_dir = terminal_hash_dir / "logs"
+    experts_logs_dir = terminal_hash_dir / "MQL5" / "Logs"
+    terminal_logs_dir.mkdir(parents=True, exist_ok=True)
+    experts_logs_dir.mkdir(parents=True, exist_ok=True)
+    (terminal_logs_dir / "20260422.log").write_text("accepted market buy order\n", encoding="utf-8")
+    (experts_logs_dir / "20260422.log").write_text("expert loaded\n", encoding="utf-8")
+
+    rc = app.main(
+        [
+            "--project-root",
+            str(project_root),
+            "goblin-live-session-end",
+            "--candidate-id",
+            candidate_id,
+            "--run-id",
+            run_id,
+            "--mt5-common-path",
+            str(common_base),
+            "--broker-account-id",
+            "12345678",
+        ]
+    )
+
+    assert rc == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["broker_reconciliation"]["reconciliation_status"] == "matched"
+    assert payload["quality_assessment"]["candidate_id"] == candidate_id
+    assert payload["quality_assessment"]["run_id"] == run_id
+    assert payload["quality_assessment"]["verdict"] in {"healthy", "risk", "insufficient_evidence"}
+
+    live_report_dir = project_root / "Goblin" / "reports" / "live_demo" / candidate_id / run_id
+    assert (live_report_dir / "signal_trace.csv").exists()
+    assert (live_report_dir / "ea_audit.json").exists()
+    assert (live_report_dir / "diagnostic_tick_windows.csv").exists()
+    assert (live_report_dir / "terminal_journal.log").exists()
+    assert (live_report_dir / "experts.log").exists()
+    assert (live_report_dir / "candidate_quality_audit.json").exists()
+
+    broker_report_dir = project_root / "Goblin" / "reports" / "broker_account_history" / candidate_id / run_id
+    assert (broker_report_dir / "broker_history.csv").exists()
+    assert (broker_report_dir / "broker_reconciliation_report.json").exists()
+
+
+def test_live_journal_tail_returns_error_when_no_mt5(project_root: Path, capsys):
+    """Test goblin-live-journal returns 1 when MT5 not running."""
+    rc = app.main(
+        [
+            "--project-root",
+            str(project_root),
+            "goblin-live-journal",
+            "--candidate-id",
+            "AF-CAND-0733",
+            "--tail",
+            "5",
+            "--mt5-common-path",
+            "/nonexistent/path",
+        ]
+    )
+    
+    assert rc == 1
+    stderr = capsys.readouterr().err
+    assert "ERROR" in stderr
+
+
+def test_live_experts_tail_returns_error_when_no_mt5(project_root: Path, capsys):
+    """Test goblin-live-experts returns 1 when MT5 not running."""
+    rc = app.main(
+        [
+            "--project-root",
+            str(project_root),
+            "goblin-live-experts",
+            "--candidate-id",
+            "AF-CAND-0733",
+            "--tail",
+            "5",
+            "--mt5-common-path",
+            "/nonexistent/path",
+        ]
+    )
+    
+    assert rc == 1
+    stderr = capsys.readouterr().err
+    assert "ERROR" in stderr

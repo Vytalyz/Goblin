@@ -4,6 +4,45 @@ This document records major program milestones and the intended evolution path f
 
 ## Current Milestones
 
+### 2026-04-24: Zero-input live-demo closeout now emits candidate quality audits
+
+- **Gap closed.** Session-end could already auto-capture runtime and broker artifacts, but journal/experts capture still depended on explicit path flags.
+- **What changed.** `goblin-live-session-end` now auto-discovers and archives terminal journal + experts logs from active MT5 terminal hash directories, while still allowing explicit overrides.
+- **Quality measurement added.** Closeout now writes `candidate_quality_audit.json` under the candidate/run live-demo report directory. The audit computes a deterministic quality score/verdict using strategy baseline (forward-stage evidence), runtime execution metrics (attempt/success/failure/audit-write), and broker reconciliation status.
+- **Operational consequence.** Live-demo auditing is now zero-input for the full evidence bundle at closeout, and each candidate run gets a durable, candidate-scoped quality artifact for review.
+
+### 2026-04-23: Live-viewing commands for on-demand MT5 journal and expert log access
+
+- **Gap identified.** Post-session-end archiving works, but during an active live-demo session there was no operator-facing way to tail the live MT5 journal or expert logs without manually navigating the MT5 terminal directories.
+- **What added.** Two new operator commands:
+  - `goblin-live-journal --candidate-id AF-CAND-0733 --tail 20`: displays the last 20 lines of the active MT5 terminal journal (auto-discovers active terminal hash)
+  - `goblin-live-experts --candidate-id AF-CAND-0733 --tail 20`: displays the last 20 lines of the active EA experts log (auto-discovers active experts.log file)
+- **Implementation.** Both commands auto-detect the MT5 common files path (or accept explicit `--mt5-common-path` override), scan for active terminal hash directories (32-char folder names), find the most recent journal/experts log, and tail N lines with metadata (file name, last update time).
+- **Operational consequence.** Operator can now poll live demo session observability in real-time without interrupting MT5 or manually hunting down log files. Falls back gracefully if MT5 is not running (returns error code 1 with clear message).
+- **Tests.** 2 new tests confirm error handling when MT5 is not running; full suite remains 13/13 passing.
+
+### 2026-04-23: Live-demo session-end now closes the observability gap
+
+- **Root issue.** The governed live-demo path already had contracts and helpers for EA audit, broker reconciliation, and runtime artifacts, but the operator-facing `goblin-live-session-end` command only harvested runtime summary and signal trace from MT5 common files. In practice that meant a real run could finish with attach evidence on disk but without the rest of the evidence set being pulled into Goblin.
+- **What changed.** `goblin-live-session-end` now auto-discovers and archives `runtime_summary.json`, `signal_trace.csv`, `ea_audit.json`, broker-history CSV, and diagnostic-windows CSV when those files exist in the standard MT5 common-file locations. It also accepts explicit `--journal-path` and `--experts-log-path` overrides so raw terminal logs can be captured for one-off manual recovery without creating a second ad hoc workflow.
+- **Operational consequence.** Manual recovery of a just-finished demo run now happens through the same governed session-end surface that future automation will use. Broker reconciliation is executed automatically at session close whenever broker history is available, so live-demo closeout is much less likely to stall at the attach-only state again.
+
+### 2026-04-22: AF-CAND-0730 prepared as governed fallback/comparator candidate
+
+- **Context.** To provide a second candidate for direct comparison with `AF-CAND-0733`, we first attempted governed slot-b generation paths (`portfolio_cycle`, `autonomous_manager` across all allowed slot_b families). Goblin policy boundaries blocked minting a net-new challenger at this time (`program_loop_no_pending_approved_lanes`, plus orthogonality constraints on the first slot_b family).
+- **Governed fallback path used.** Instead of bypassing policy, we advanced the existing approved challenger lineage candidate `AF-CAND-0730` by running `goblin shadow-forward --spec-json reports/AF-CAND-0730/strategy_spec.json`.
+- **Forward-stage result.** `passed=true`, `trading_days_observed=13`, `trade_count=25`, `profit_factor=2.686157517899841`, `expectancy_pips=5.6520000000003146`, `oos_expectancy_pips=4.730188679245478`, `expectancy_degradation_pct=0.0`, `risk_violations=[]`. Artifact: `reports/AF-CAND-0730/forward_stage_report.json`.
+- **Freshness + approval state.** Post-run deterministic approval probe confirms `human_review`, `mt5_packet`, `mt5_parity_run`, and `mt5_validation` are all approved/fresh/unsuperseded under the current policy snapshot. Latest MT5 validation for `AF-CAND-0730` remains `passed` with parity rate `0.990625`.
+- **Operational consequence.** `AF-CAND-0730` is now ready as the second governed comparator candidate to run alongside or against `AF-CAND-0733` decisioning, and to serve as immediate fallback if 0733 fails limited-demo progression.
+
+### 2026-04-22: AF-CAND-0733 forward-stage passed and closed the remaining MT5-readiness gap
+
+- **Forward-stage executed through the repo-native CLI.** Ran `goblin shadow-forward --spec-json reports/AF-CAND-0733/strategy_spec.json`, which wrote `reports/AF-CAND-0733/forward_stage_report.json` and appended a governed `forward_stage` entry to `experiments/trial_ledger.jsonl`.
+- **Result.** `passed=true`, `trading_days_observed=12`, `trade_count=26`, `profit_factor=2.57142857142866`, `expectancy_pips=4.019230769231061`, `oos_expectancy_pips=2.6295081967214338`, `expectancy_degradation_pct=0.0`, `risk_violations=[]`.
+- **Meaning in Goblin terms.** This was the missing evidence that prevented `AF-CAND-0733` from being legally MT5-ready under current governance. Human review had already been approved, and the MT5 packet, parity run, and MT5 validation approvals were already present.
+- **Freshness check.** A deterministic post-run probe confirmed `human_review`, `mt5_packet`, `mt5_parity_run`, and `mt5_validation` are all still `approved`, `fresh`, and not `superseded` under the current policy snapshot. The latest MT5 validation remains `passed` with parity rate `0.990617` and deployment-grade certification.
+- **Operational consequence.** `AF-CAND-0733` is now the current governed operator path for MT5 testing. The next manual/governed operator step is the limited-demo attach flow (`goblin-live-attach` → heartbeats → `goblin-live-session-end`) using the already-approved packet/bundle surface.
+
 ### 2026-04-21: Strategy Loop S2 gate evaluator (decision layer)
 
 - **`tools/evaluate_strategy_s2_gates.py`** is the decision layer of S2 — deliberately split from the orchestration layer so that gate logic is unit-testable without a parquet file or a live backtest.

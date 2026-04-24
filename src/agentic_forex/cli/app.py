@@ -3,6 +3,8 @@ from __future__ import annotations
 import argparse
 import getpass
 import json
+import shutil
+import sys
 import textwrap
 from datetime import UTC, datetime
 from pathlib import Path
@@ -40,6 +42,7 @@ from agentic_forex.goblin import (
     get_goblin_program_status,
     initialize_goblin_program,
     open_incident_record,
+    run_broker_reconciliation,
     update_goblin_phase,
     validate_attach_against_bundle,
     write_candidate_scorecard,
@@ -592,7 +595,25 @@ def build_parser() -> argparse.ArgumentParser:
     live_session_end.add_argument("--candidate-id", required=True)
     live_session_end.add_argument("--run-id", required=True)
     live_session_end.add_argument("--mt5-common-path", required=True)
+    live_session_end.add_argument("--runtime-summary-path")
+    live_session_end.add_argument("--signal-trace-path")
+    live_session_end.add_argument("--ea-audit-path")
+    live_session_end.add_argument("--broker-csv-path")
+    live_session_end.add_argument("--broker-account-id")
+    live_session_end.add_argument("--diagnostic-windows-path")
+    live_session_end.add_argument("--journal-path")
+    live_session_end.add_argument("--experts-log-path")
     live_session_end.add_argument("--note", action="append", dest="notes")
+
+    live_journal = subparsers.add_parser("goblin-live-journal", parents=[common])
+    live_journal.add_argument("--candidate-id", required=True)
+    live_journal.add_argument("--tail", type=int, default=20, help="Number of lines to tail (default 20)")
+    live_journal.add_argument("--mt5-common-path", help="Path to MT5 Common Files (auto-detected if omitted)")
+
+    live_experts = subparsers.add_parser("goblin-live-experts", parents=[common])
+    live_experts.add_argument("--candidate-id", required=True)
+    live_experts.add_argument("--tail", type=int, default=20, help="Number of lines to tail (default 20)")
+    live_experts.add_argument("--mt5-common-path", help="Path to MT5 Common Files (auto-detected if omitted)")
 
     mt5_cleanup = subparsers.add_parser("goblin-mt5-cleanup", parents=[common])
     mt5_cleanup.add_argument(
@@ -607,6 +628,161 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     return parser
+
+
+def _resolve_existing_path(primary: str | None, fallbacks: list[Path]) -> Path | None:
+    if primary:
+        resolved = Path(primary)
+        return resolved if resolved.exists() else None
+    for candidate in fallbacks:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _archive_file(source: Path | None, destination: Path, notes: list[str], *, found_note: str, missing_note: str) -> Path | None:
+    if source is None:
+        notes.append(missing_note)
+        return None
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, destination)
+    notes.append(f"{found_note}={source}")
+    return destination
+
+
+def _find_mt5_common_path() -> Path | None:
+    """Auto-detect MT5 common files path from standard Windows locations."""
+    candidates = [
+        Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Terminal" / "Common" / "Files",
+        Path("C:") / "Users" / Path.home().name / "AppData" / "Roaming" / "MetaQuotes" / "Terminal" / "Common" / "Files",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _latest_log_file(log_dir: Path) -> Path | None:
+    if not log_dir.exists():
+        return None
+    logs = sorted(log_dir.glob("*.log"), key=lambda p: p.stat().st_mtime, reverse=True)
+    return logs[0] if logs else None
+
+
+def _discover_mt5_terminal_logs(common_base: Path) -> tuple[Path | None, Path | None]:
+    """Return newest terminal journal and experts log across detected MT5 terminal hashes."""
+    terminals_root = common_base.parent
+    newest_journal: Path | None = None
+    newest_experts: Path | None = None
+
+    if not terminals_root.exists():
+        return None, None
+
+    for term_dir in terminals_root.iterdir():
+        if not (term_dir.is_dir() and len(term_dir.name) == 32):
+            continue
+        journal_candidate = _latest_log_file(term_dir / "logs")
+        experts_candidate = _latest_log_file(term_dir / "MQL5" / "Logs")
+
+        if journal_candidate is not None and (
+            newest_journal is None or journal_candidate.stat().st_mtime > newest_journal.stat().st_mtime
+        ):
+            newest_journal = journal_candidate
+        if experts_candidate is not None and (
+            newest_experts is None or experts_candidate.stat().st_mtime > newest_experts.stat().st_mtime
+        ):
+            newest_experts = experts_candidate
+
+    return newest_journal, newest_experts
+
+
+def _build_live_quality_assessment(
+    *,
+    settings,
+    candidate_id: str,
+    run_id: str,
+    summary: RuntimeSummary,
+    reconciliation_payload: dict[str, object] | None,
+) -> dict[str, object]:
+    """Create a deterministic candidate-scoped quality assessment for live-demo closeout."""
+    forward_report_path = settings.paths().reports_dir / candidate_id / "forward_stage_report.json"
+    forward_passed = None
+    forward_profit_factor = None
+    forward_expectancy_pips = None
+    if forward_report_path.exists():
+        forward_data = read_json(forward_report_path)
+        forward_passed = bool(forward_data.get("passed", False))
+        forward_profit_factor = forward_data.get("profit_factor")
+        forward_expectancy_pips = forward_data.get("expectancy_pips")
+
+    reconciliation_status = (
+        str(reconciliation_payload.get("reconciliation_status", "not_run")) if reconciliation_payload else "not_run"
+    )
+
+    order_success_ratio = 1.0 if summary.order_attempts == 0 else summary.order_successes / summary.order_attempts
+    quality_score = 100.0
+    reasons: list[str] = []
+
+    if summary.order_failures > 0:
+        quality_score -= min(40.0, summary.order_failures * 15.0)
+        reasons.append(f"order_failures={summary.order_failures}")
+    if summary.audit_write_failures > 0:
+        quality_score -= min(30.0, summary.audit_write_failures * 10.0)
+        reasons.append(f"audit_write_failures={summary.audit_write_failures}")
+    if reconciliation_status == "mismatch":
+        quality_score -= 35.0
+        reasons.append("broker_reconciliation_mismatch")
+    elif reconciliation_status == "not_run":
+        quality_score -= 10.0
+        reasons.append("broker_reconciliation_not_run")
+    if forward_passed is False:
+        quality_score -= 30.0
+        reasons.append("forward_stage_not_passed")
+    if summary.signals_generated == 0 and summary.order_attempts == 0:
+        quality_score -= 10.0
+        reasons.append("insufficient_live_activity")
+
+    quality_score = max(0.0, round(quality_score, 2))
+
+    if quality_score >= 80.0 and summary.audit_write_failures == 0 and reconciliation_status != "mismatch":
+        verdict = "healthy"
+    elif summary.signals_generated == 0 and summary.order_attempts == 0:
+        verdict = "insufficient_evidence"
+    else:
+        verdict = "risk"
+
+    assessment = {
+        "candidate_id": candidate_id,
+        "run_id": run_id,
+        "generated_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
+        "verdict": verdict,
+        "quality_score": quality_score,
+        "order_success_ratio": round(order_success_ratio, 4),
+        "strategy_baseline": {
+            "forward_stage_report_found": forward_report_path.exists(),
+            "forward_stage_passed": forward_passed,
+            "forward_profit_factor": forward_profit_factor,
+            "forward_expectancy_pips": forward_expectancy_pips,
+        },
+        "runtime_metrics": {
+            "bars_processed": summary.bars_processed,
+            "signals_generated": summary.signals_generated,
+            "order_attempts": summary.order_attempts,
+            "order_successes": summary.order_successes,
+            "order_failures": summary.order_failures,
+            "spread_blocks": summary.spread_blocks,
+            "filter_blocks": summary.filter_blocks,
+            "audit_write_failures": summary.audit_write_failures,
+        },
+        "broker_reconciliation_status": reconciliation_status,
+        "reasons": reasons,
+    }
+
+    quality_report_path = settings.paths().goblin_live_demo_reports_dir / candidate_id / run_id / "candidate_quality_audit.json"
+    quality_report_path.parent.mkdir(parents=True, exist_ok=True)
+    quality_report_path.write_text(json.dumps(assessment, indent=2), encoding="utf-8")
+    assessment["report_path"] = str(quality_report_path)
+    return assessment
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -1324,8 +1500,43 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "goblin-live-session-end":
         common_base = Path(args.mt5_common_path)
-        ea_runtime_path = common_base / "AgenticForex" / "LiveDemo" / args.candidate_id / "runtime_summary.json"
-        ea_signal_trace_path = common_base / "AgenticForex" / "LiveDemo" / args.candidate_id / "signal_trace.csv"
+        live_demo_base = common_base / "AgenticForex" / "LiveDemo" / args.candidate_id
+        audit_base = common_base / "AgenticForex" / "Audit"
+        report_dir = settings.paths().goblin_live_demo_reports_dir / args.candidate_id / args.run_id
+        broker_report_dir = settings.paths().goblin_broker_history_reports_dir / args.candidate_id / args.run_id
+        ea_runtime_path = _resolve_existing_path(
+            args.runtime_summary_path,
+            [live_demo_base / "runtime_summary.json"],
+        )
+        ea_signal_trace_path = _resolve_existing_path(
+            args.signal_trace_path,
+            [live_demo_base / "signal_trace.csv"],
+        )
+        ea_audit_path = _resolve_existing_path(
+            args.ea_audit_path,
+            [live_demo_base / "ea_audit.json"],
+        )
+        broker_csv_path = _resolve_existing_path(
+            args.broker_csv_path,
+            [
+                audit_base / f"{args.candidate_id}__{args.run_id}__broker_history.csv",
+                audit_base / f"{args.candidate_id}__broker_history.csv",
+            ],
+        )
+        diagnostic_windows_path = _resolve_existing_path(
+            args.diagnostic_windows_path,
+            [
+                audit_base / f"{args.candidate_id}__{args.run_id}__diagnostic_tick_windows.csv",
+                audit_base / f"{args.candidate_id}__diagnostic_tick_windows.csv",
+            ],
+        )
+        journal_path = _resolve_existing_path(args.journal_path, [])
+        experts_log_path = _resolve_existing_path(args.experts_log_path, [])
+        auto_journal_path, auto_experts_path = _discover_mt5_terminal_logs(common_base)
+        if journal_path is None:
+            journal_path = auto_journal_path
+        if experts_log_path is None:
+            experts_log_path = auto_experts_path
         notes = list(args.notes or [])
         bars_processed = 0
         allowed_hour_bars = 0
@@ -1336,7 +1547,7 @@ def main(argv: list[str] | None = None) -> int:
         spread_blocks = 0
         filter_blocks = 0
         audit_write_failures = 0
-        if ea_runtime_path.exists():
+        if ea_runtime_path is not None and ea_runtime_path.exists():
             ea_data = read_json(ea_runtime_path)
             bars_processed = int(ea_data.get("bars_processed", 0))
             allowed_hour_bars = int(ea_data.get("allowed_hour_bars", 0))
@@ -1349,16 +1560,68 @@ def main(argv: list[str] | None = None) -> int:
             audit_write_failures = int(ea_data.get("audit_write_failures", 0))
             notes.append(f"ea_runtime_summary_source={ea_runtime_path}")
         else:
-            notes.append(f"ea_runtime_summary_not_found={ea_runtime_path}")
-        if ea_signal_trace_path.exists():
-            dest_dir = settings.paths().goblin_live_demo_reports_dir / args.candidate_id / args.run_id
-            dest_dir.mkdir(parents=True, exist_ok=True)
-            import shutil
+            notes.append(f"ea_runtime_summary_not_found={live_demo_base / 'runtime_summary.json'}")
 
-            shutil.copy2(ea_signal_trace_path, dest_dir / "signal_trace.csv")
-            notes.append(f"signal_trace_copied={ea_signal_trace_path}")
+        report_dir.mkdir(parents=True, exist_ok=True)
+        archived_signal_trace = _archive_file(
+            ea_signal_trace_path,
+            report_dir / "signal_trace.csv",
+            notes,
+            found_note="signal_trace_copied",
+            missing_note=f"signal_trace_not_found={live_demo_base / 'signal_trace.csv'}",
+        )
+        archived_ea_audit = _archive_file(
+            ea_audit_path,
+            report_dir / "ea_audit.json",
+            notes,
+            found_note="ea_audit_copied",
+            missing_note=f"ea_audit_not_found={live_demo_base / 'ea_audit.json'}",
+        )
+        _archive_file(
+            diagnostic_windows_path,
+            report_dir / "diagnostic_tick_windows.csv",
+            notes,
+            found_note="diagnostic_windows_copied",
+            missing_note=f"diagnostic_windows_not_found={audit_base / (args.candidate_id + '__diagnostic_tick_windows.csv')}",
+        )
+        _archive_file(
+            journal_path,
+            report_dir / "terminal_journal.log",
+            notes,
+            found_note="terminal_journal_copied",
+            missing_note="terminal_journal_not_found",
+        )
+        _archive_file(
+            experts_log_path,
+            report_dir / "experts.log",
+            notes,
+            found_note="experts_log_copied",
+            missing_note="experts_log_not_found",
+        )
+
+        archived_broker_csv = _archive_file(
+            broker_csv_path,
+            broker_report_dir / "broker_history.csv",
+            notes,
+            found_note="broker_history_copied",
+            missing_note=f"broker_history_not_found={audit_base / (args.candidate_id + '__broker_history.csv')}",
+        )
+
+        reconciliation_payload = None
+        if archived_broker_csv is not None:
+            reconciliation = run_broker_reconciliation(
+                settings,
+                candidate_id=args.candidate_id,
+                run_id=args.run_id,
+                broker_csv_path=archived_broker_csv,
+                account_id=args.broker_account_id,
+                ea_audit_path=archived_ea_audit,
+            )
+            notes.append(f"broker_reconciliation_status={reconciliation.reconciliation_status}")
+            reconciliation_payload = reconciliation.model_dump(mode="json")
         else:
-            notes.append(f"signal_trace_not_found={ea_signal_trace_path}")
+            notes.append("broker_reconciliation_skipped=no_broker_history")
+
         summary = RuntimeSummary(
             candidate_id=args.candidate_id,
             run_id=args.run_id,
@@ -1374,7 +1637,85 @@ def main(argv: list[str] | None = None) -> int:
             notes=notes,
         )
         result = write_runtime_summary(settings, summary=summary)
-        print(json.dumps(result.model_dump(mode="json"), indent=2, default=str))
+        quality_assessment = _build_live_quality_assessment(
+            settings=settings,
+            candidate_id=args.candidate_id,
+            run_id=args.run_id,
+            summary=result,
+            reconciliation_payload=reconciliation_payload,
+        )
+        print(
+            json.dumps(
+                {
+                    "runtime_summary": result.model_dump(mode="json"),
+                    "archived_signal_trace": str(archived_signal_trace) if archived_signal_trace else None,
+                    "archived_ea_audit": str(archived_ea_audit) if archived_ea_audit else None,
+                    "archived_broker_history": str(archived_broker_csv) if archived_broker_csv else None,
+                    "broker_reconciliation": reconciliation_payload,
+                    "quality_assessment": quality_assessment,
+                },
+                indent=2,
+                default=str,
+            )
+        )
+        return 0
+
+    if args.command == "goblin-live-journal":
+        """Tail the active MT5 terminal journal for a candidate."""
+        common_base = Path(args.mt5_common_path) if args.mt5_common_path else _find_mt5_common_path()
+        if not common_base:
+            print("ERROR: MT5 common files path not found. Specify --mt5-common-path.", file=sys.stderr)
+            return 1
+
+        journal_path, _ = _discover_mt5_terminal_logs(common_base)
+        if journal_path is None:
+            print(
+                f"ERROR: No active MT5 terminal journal found. "
+                f"Ensure MT5 is running with {args.candidate_id} EA.",
+                file=sys.stderr,
+            )
+            return 1
+
+        try:
+            with open(journal_path, "r", encoding="utf-8", errors="ignore") as f:
+                lines = f.readlines()
+                tail_lines = lines[-args.tail:] if args.tail > 0 else lines
+                print(f"# Journal: {journal_path.name} (tail -{args.tail})")
+                print(f"# Updated: {datetime.fromtimestamp(journal_path.stat().st_mtime, tz=UTC).isoformat()}")
+                print()
+                print("".join(tail_lines), end="")
+        except Exception as e:
+            print(f"ERROR reading journal: {e}", file=sys.stderr)
+            return 1
+        return 0
+
+    if args.command == "goblin-live-experts":
+        """Tail the active MT5 experts log for a candidate."""
+        common_base = Path(args.mt5_common_path) if args.mt5_common_path else _find_mt5_common_path()
+        if not common_base:
+            print("ERROR: MT5 common files path not found. Specify --mt5-common-path.", file=sys.stderr)
+            return 1
+
+        _, experts_path = _discover_mt5_terminal_logs(common_base)
+        if experts_path is None:
+            print(
+                f"ERROR: No active MT5 experts log found. "
+                f"Ensure MT5 is running with {args.candidate_id} EA.",
+                file=sys.stderr,
+            )
+            return 1
+
+        try:
+            with open(experts_path, "r", encoding="utf-8", errors="ignore") as f:
+                lines = f.readlines()
+                tail_lines = lines[-args.tail:] if args.tail > 0 else lines
+                print(f"# Experts Log: {experts_path.name} (tail -{args.tail})")
+                print(f"# Updated: {datetime.fromtimestamp(experts_path.stat().st_mtime, tz=UTC).isoformat()}")
+                print()
+                print("".join(tail_lines), end="")
+        except Exception as e:
+            print(f"ERROR reading experts log: {e}", file=sys.stderr)
+            return 1
         return 0
 
     if args.command == "goblin-mt5-cleanup":
