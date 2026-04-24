@@ -19,7 +19,7 @@ def _set_deterministic() -> None:
     np.random.seed(20260420)
 
 
-def _make_cnn() -> "torch.nn.Module":
+def _make_cnn() -> torch.nn.Module:
     return torch.nn.Sequential(
         torch.nn.Conv1d(in_channels=1, out_channels=4, kernel_size=3, padding=1),
         torch.nn.ReLU(),
@@ -41,7 +41,7 @@ def test_use_deterministic_algorithms_enabled():
 def test_1d_cnn_forward_pass_bit_identical_across_runs():
     """Same input + same seed + deterministic mode → bit-identical output."""
 
-    def run_once() -> "torch.Tensor":
+    def run_once() -> torch.Tensor:
         _set_deterministic()
         torch.manual_seed(20260420)
         model = _make_cnn()

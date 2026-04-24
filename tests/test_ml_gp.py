@@ -5,7 +5,6 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -45,7 +44,7 @@ class TestPrimitiveSet:
 
     def test_pset_has_expected_arity(self):
         pytest.importorskip("deap")
-        from agentic_forex.ml.primitives import build_primitive_set, FEATURE_TERMINALS
+        from agentic_forex.ml.primitives import FEATURE_TERMINALS, build_primitive_set
         pset = build_primitive_set()
         # DEAP PrimitiveSet stores terminals in pset.arguments
         assert len(pset.arguments) == len(FEATURE_TERMINALS)
@@ -215,6 +214,7 @@ class TestGPStepType:
     def test_discover_gp_rules_in_next_step_type(self):
         """discover_gp_rules must be in NextStepType Literal."""
         import typing
+
         from agentic_forex.governance.models import NextStepType
         args = typing.get_args(NextStepType)
         assert "discover_gp_rules" in args

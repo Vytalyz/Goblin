@@ -136,7 +136,7 @@ class TestAppendDecision:
 class TestRunCeremonyEndToEnd:
     @pytest.fixture
     def fernet_setup(self, tmp_path):
-        cryptography = pytest.importorskip("cryptography")
+        pytest.importorskip("cryptography")
         from cryptography.fernet import Fernet
         key = Fernet.generate_key()
         key_path = tmp_path / "test.key"
@@ -160,7 +160,7 @@ class TestRunCeremonyEndToEnd:
             sealed_path=sealed,
         )
         assert rc == 0
-        entries = [json.loads(l) for l in log.read_text().strip().splitlines()]
+        entries = [json.loads(line) for line in log.read_text().strip().splitlines()]
         ids = [e["decision_id"] for e in entries]
         assert "DEC-ML-HOLDOUT-ACCESS-1-INITIATED" in ids
         assert "DEC-ML-HOLDOUT-ACCESS-1-COMPLETED" in ids
@@ -179,7 +179,7 @@ class TestRunCeremonyEndToEnd:
             sealed_path=sealed,
         )
         assert rc == 6
-        entries = [json.loads(l) for l in log.read_text().strip().splitlines()]
+        entries = [json.loads(line) for line in log.read_text().strip().splitlines()]
         ids = [e["decision_id"] for e in entries]
         assert "DEC-ML-HOLDOUT-ACCESS-1-INITIATED" in ids
         assert "DEC-ML-HOLDOUT-ACCESS-1-ABORTED" in ids

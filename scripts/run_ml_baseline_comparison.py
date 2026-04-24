@@ -11,10 +11,9 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pandas as pd
@@ -26,9 +25,7 @@ if str(SRC_ROOT) not in sys.path:
 
 from agentic_forex.features.service import build_features  # noqa: E402
 from agentic_forex.governance.errors import (  # noqa: E402
-    CostSensitivityError,
     DatasetSHAMismatchError,
-    RegimeNonNegativityError,
 )
 from agentic_forex.labels.service import build_labels  # noqa: E402
 from agentic_forex.ml.baseline_runner import (  # noqa: E402
@@ -36,7 +33,6 @@ from agentic_forex.ml.baseline_runner import (  # noqa: E402
     DEFAULT_COST_SHOCKS_PIPS,
     REGIMES,
     assert_dataset_sha,
-    assert_gates,
     assert_no_torch_import,
     evaluate_candidate,
     file_sha256,
@@ -146,7 +142,7 @@ def main() -> int:
 
     report = {
         "run_id": args.run_id,
-        "generated_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "dataset_path": args.parquet,
         "dataset_sha256": actual_sha,
         "candidate_ids": list(args.candidates),

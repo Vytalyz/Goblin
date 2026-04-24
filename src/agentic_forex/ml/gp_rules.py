@@ -234,7 +234,7 @@ def run_gp_discovery(
             "Install it with: pip install 'deap>=1.4,<2'"
         ) from exc
 
-    from agentic_forex.ml.primitives import build_primitive_set, FEATURE_TERMINALS
+    from agentic_forex.ml.primitives import FEATURE_TERMINALS, build_primitive_set
 
     if random_seed is not None:
         random.seed(random_seed)

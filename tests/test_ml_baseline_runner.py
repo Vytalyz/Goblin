@@ -1,9 +1,7 @@
 """Tests for Phase 1.6 baseline runner (D11/D14/D15 enforcement)."""
 from __future__ import annotations
 
-import json
 import sys
-import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -18,7 +16,6 @@ if str(SRC_ROOT) not in sys.path:
 from agentic_forex.governance.errors import (
     CostSensitivityError,
     DatasetSHAMismatchError,
-    GovernanceError,
     RegimeNonNegativityError,
 )
 from agentic_forex.ml import baseline_runner as br

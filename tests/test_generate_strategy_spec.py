@@ -16,7 +16,6 @@ sys.path.insert(0, str(TOOLS_DIR))
 import generate_strategy_spec as gss  # type: ignore  # noqa: E402
 import verify_strategy_decisions_schema as vsd  # type: ignore  # noqa: E402
 
-
 # --- Fixtures ---------------------------------------------------------------
 
 

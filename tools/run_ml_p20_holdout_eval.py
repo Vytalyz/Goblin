@@ -35,7 +35,7 @@ import math
 import subprocess
 import sys
 import traceback
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
@@ -116,7 +116,7 @@ FINAL_FIT_SEED: int = 42
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _head_sha() -> str:
@@ -628,7 +628,7 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
         report = {
             "evaluation_id": (
                 f"DEC-ML-2.0-RE-GATE-"
-                f"{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+                f"{datetime.now(UTC).strftime('%Y%m%dT%H%M%SZ')}"
             ),
             "generated_utc": _utc_now(),
             "commit_sha": head_sha,

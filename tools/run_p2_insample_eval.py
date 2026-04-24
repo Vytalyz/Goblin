@@ -23,7 +23,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
@@ -37,7 +37,6 @@ from agentic_forex.labels.service import build_labels  # noqa: E402
 from agentic_forex.ml.baseline_runner import (  # noqa: E402
     BASELINE_FEATURE_COLUMNS,
     DEFAULT_COST_SHOCKS_PIPS,
-    assert_dataset_sha,
     evaluate_candidate,
     file_sha256,
     summarise_runs,
@@ -66,7 +65,7 @@ DEFAULT_EMBARGO_BARS = 20
 
 
 def _utc_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _load_spec(candidate_id: str, repo_root: Path = REPO_ROOT) -> dict:
@@ -169,7 +168,7 @@ def main(argv: list[str] | None = None) -> int:
 
     summary = summarise_runs(candidate_results, effect_size_floor_pf=0.0083)
 
-    print(f"\n[p2-insample] --- Summary ---")
+    print("\n[p2-insample] --- Summary ---")
     print(f"[p2-insample] mean PF lift  : {summary['mean_pf_lift']:+.4f}")
     print(f"[p2-insample] median PF lift: {summary['median_pf_lift']:+.4f}")
     print(
@@ -187,7 +186,7 @@ def main(argv: list[str] | None = None) -> int:
     # Write report
     lifts = [c["pf_lift_aggregate"] for c in candidate_results]
     report = {
-        "report_id": f"P2-INSAMPLE-EVAL-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}",
+        "report_id": f"P2-INSAMPLE-EVAL-{datetime.now(UTC).strftime('%Y%m%dT%H%M%SZ')}",
         "generated_utc": _utc_iso(),
         "n_in_sample_rows": N_IN_SAMPLE,
         "dataset_sha256": DATASET_SHA,
@@ -201,7 +200,7 @@ def main(argv: list[str] | None = None) -> int:
             "min_pf_lift": float(np.min(lifts)),
             "max_pf_lift": float(np.max(lifts)),
             "fraction_above_0083_floor": float(
-                np.mean([l >= 0.0083 for l in lifts])
+                np.mean([lift_value >= 0.0083 for lift_value in lifts])
             ),
         },
         "governance_note": (

@@ -20,7 +20,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
@@ -99,7 +99,7 @@ DEFAULT_REPORT_OUT = "Goblin/reports/ml/p2_0_holdout_eval_report.json"
 # ---------------------------------------------------------------------------
 
 def _utc_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _load_spec(candidate_id: str, repo_root: Path = REPO_ROOT) -> dict:
@@ -571,19 +571,19 @@ def main(argv: list[str] | None = None) -> int:  # noqa: C901
     # --- Verdict ---
     verdict = render_verdict(aggregate_lift, bca["ci_low_95"], q1_result)
 
-    print(f"\n[p2-eval] =================================================")
+    print("\n[p2-eval] =================================================")
     print(f"[p2-eval] VERDICT        : {verdict}")
     print(f"[p2-eval] aggregate_lift : {aggregate_lift:+.6f}")
     print(f"[p2-eval] BCa CI low     : {bca['ci_low_95']:+.6f}")
-    print(f"[p2-eval] GO >= 0.10     CONDITIONAL >= 0.055")
-    print(f"[p2-eval] =================================================\n")
+    print("[p2-eval] GO >= 0.10     CONDITIONAL >= 0.055")
+    print("[p2-eval] =================================================\n")
 
     # --- Write report (strip numpy arrays) ---
     def _strip_arrays(r: dict) -> dict:
         return {k: v for k, v in r.items() if k not in ("xgb_outcomes", "rule_outcomes")}
 
     report = {
-        "report_id": f"P2-HOLDOUT-EVAL-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}",
+        "report_id": f"P2-HOLDOUT-EVAL-{datetime.now(UTC).strftime('%Y%m%dT%H%M%SZ')}",
         "generated_utc": _utc_iso(),
         "verdict": verdict,
         "aggregate_primary_pf_lift": aggregate_lift,

@@ -32,13 +32,11 @@ Exit codes:
 from __future__ import annotations
 
 import hashlib
-import importlib.util
 import json
 import subprocess
 import sys
 import tempfile
-import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -62,7 +60,7 @@ FAKE_COMMIT_SHA = "a" * 40  # 40-char hex placeholder for rehearsal predictions
 
 
 def _utc_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _load_toml_ml_regime() -> dict:
@@ -94,7 +92,6 @@ def _load_toml_ml_regime() -> dict:
 # ---------------------------------------------------------------------------
 
 def check_regime_coverage(results: list[dict]) -> None:
-    import numpy as np
     import pandas as pd
 
     if not SYNTHETIC_HOLDOUT.exists():
@@ -238,7 +235,7 @@ def check_ceremony_happy_path(tmpdir: Path, results: list[dict]) -> None:
             "import pandas as pd, sys\n"
             "df = pd.read_parquet(sys.argv[1])\n"
             "assert len(df) > 0, 'Empty parquet'\n"
-            f"print('rehearsal eval OK: rows=' + str(len(df)))\n"
+            "print('rehearsal eval OK: rows=' + str(len(df)))\n"
         ),
     ]
 

@@ -5,8 +5,6 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
-import pytest
-
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -42,8 +40,8 @@ class TestOptimizerBounds:
         hi = bounds.upper()
         assert len(lo) == 4
         assert len(hi) == 4
-        for l, h in zip(lo, hi):
-            assert l < h
+        for low, high in zip(lo, hi):
+            assert low < high
 
     def test_midpoint_within_bounds(self):
         from agentic_forex.ml.optimizer import OptimizerBounds
@@ -52,8 +50,8 @@ class TestOptimizerBounds:
         mid = bounds.midpoint()
         lo = bounds.lower()
         hi = bounds.upper()
-        for m, l, h in zip(mid, lo, hi):
-            assert l <= m <= h
+        for midpoint, low, high in zip(mid, lo, hi):
+            assert low <= midpoint <= high
 
     def test_decode_individual_clips(self):
         from agentic_forex.ml.optimizer import OptimizerBounds, _decode_individual
@@ -193,7 +191,6 @@ class TestMT5FeatureAlignment:
     def test_different_feeds_fail(self):
         from agentic_forex.evals.robustness import mt5_feature_alignment_test
 
-        rng = np.random.RandomState(42)
         oanda = _make_feature_df(200, seed=42)
         # Create systematically different MT5 data
         mt5 = oanda.copy()

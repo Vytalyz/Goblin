@@ -24,10 +24,9 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -74,7 +73,7 @@ EFFECT_SIZE_FLOOR_PF: float = 0.0083  # locked from PILOT-1.6.0-20260420
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _head_sha() -> str:
@@ -152,7 +151,7 @@ def main() -> int:
     head_sha = _head_sha()
 
     report = {
-        "run_id": f"P20-INSAMPLE-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}",
+        "run_id": f"P20-INSAMPLE-{datetime.now(UTC).strftime('%Y%m%dT%H%M%SZ')}",
         "stage": "midpoint_evidence",
         "evaluation_type": "in_sample_purged_cv",
         "generated_utc": _utc_now(),

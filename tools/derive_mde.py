@@ -40,7 +40,7 @@ import hashlib
 import json
 import math
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
@@ -315,7 +315,7 @@ def main(argv: list[str] | None = None) -> int:
     mde_point = derive_mde(sigma_point)
     mde_upper = derive_mde(ci_high)
 
-    runtime_utc = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    runtime_utc = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     payload = manifest_payload(
         dataset_sha=actual_sha,
         report_sha=report_sha,

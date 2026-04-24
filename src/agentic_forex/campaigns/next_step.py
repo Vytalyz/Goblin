@@ -3718,6 +3718,7 @@ def _run_discover_gp_rules(
 
     if feature_path.exists() and label_path.exists():
         import pandas as pd
+
         from agentic_forex.ml.primitives import FEATURE_TERMINALS
 
         feat_df = pd.read_parquet(feature_path)

@@ -130,9 +130,9 @@ def test_rehearsal_report_hard_cap_unaffected():
     entries would indicate the rehearsal scaffold polluted the real log.
     """
     entries = [
-        json.loads(l)
-        for l in REAL_DECISIONS_LOG.read_text(encoding="utf-8").splitlines()
-        if l.strip()
+        json.loads(line)
+        for line in REAL_DECISIONS_LOG.read_text(encoding="utf-8").splitlines()
+        if line.strip()
     ]
     rehearsal_ids = [
         e["decision_id"] for e in entries

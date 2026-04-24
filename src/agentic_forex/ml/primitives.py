@@ -12,9 +12,7 @@ from __future__ import annotations
 
 import math
 import operator as _op
-from typing import Callable
-
-import numpy as np
+from collections.abc import Callable
 
 # ---------------------------------------------------------------------------
 # Feature column names available as GP terminals

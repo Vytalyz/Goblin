@@ -459,7 +459,7 @@ def test_live_journal_tail_returns_error_when_no_mt5(project_root: Path, capsys)
             "/nonexistent/path",
         ]
     )
-    
+
     assert rc == 1
     stderr = capsys.readouterr().err
     assert "ERROR" in stderr
@@ -480,7 +480,7 @@ def test_live_experts_tail_returns_error_when_no_mt5(project_root: Path, capsys)
             "/nonexistent/path",
         ]
     )
-    
+
     assert rc == 1
     stderr = capsys.readouterr().err
     assert "ERROR" in stderr

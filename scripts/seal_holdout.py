@@ -20,12 +20,11 @@ import hashlib
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pandas as pd
 from cryptography.fernet import Fernet
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -103,7 +102,7 @@ def main() -> int:
 
     manifest = {
         "holdout_id": args.holdout_id,
-        "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "created_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "source_dataset_path": str(args.source),
         "source_dataset_sha256": src_sha,
         "holdout_n_rows": int(n_holdout),

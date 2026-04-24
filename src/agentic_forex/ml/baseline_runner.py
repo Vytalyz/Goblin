@@ -11,24 +11,21 @@ CI lane stays green through Phase 1.7).
 from __future__ import annotations
 
 import hashlib
-import json
 import math
 import sys
+from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Sequence
 
 import numpy as np
 import pandas as pd
 import xgboost as xgb
 
-from agentic_forex.features.service import build_features
 from agentic_forex.governance.errors import (
     CostSensitivityError,
     DatasetSHAMismatchError,
     RegimeNonNegativityError,
 )
-from agentic_forex.labels.service import build_labels
 from agentic_forex.ml.train import _purged_walk_forward_folds
 from agentic_forex.ml.variance_pilot import LOCKED_XGB_HPARAMS
 

@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
-import pytest
 
 from agentic_forex.ml.train import (
     FEATURE_COLUMNS,
@@ -16,7 +15,6 @@ from agentic_forex.ml.train import (
     _purged_walk_forward_folds,
     _top_k_importance_share,
 )
-
 
 # ---------------------------------------------------------------------------
 # P0.1 / P0.2 — Purged walk-forward CV with embargo

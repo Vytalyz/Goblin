@@ -38,7 +38,7 @@ import secrets
 import subprocess
 import sys
 import tempfile
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -49,7 +49,7 @@ ACCESS_ID_PATTERN = re.compile(r"^DEC-ML-HOLDOUT-ACCESS-(\d+)-(INITIATED|COMPLET
 
 
 def _utc_now_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _read_log(path: Path) -> list[dict]:

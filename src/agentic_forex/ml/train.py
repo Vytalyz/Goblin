@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 import hashlib
-import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -197,7 +196,7 @@ def _persist_model_artifact(
     """Write model lineage artifact alongside the training report."""
     artifact = {
         "candidate_id": candidate_id,
-        "training_timestamp": datetime.now(timezone.utc).isoformat(),
+        "training_timestamp": datetime.now(UTC).isoformat(),
         "feature_set_hash": _feature_set_hash(feature_columns),
         "feature_columns": feature_columns,
         "n_folds": n_folds,

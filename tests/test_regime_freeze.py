@@ -87,6 +87,7 @@ class TestRegimeFreezePropertyConsistency:
 
         sys.path.insert(0, str(REPO_ROOT / "src"))
         import pandas as pd  # noqa: PLC0415
+
         from agentic_forex.features.service import build_features  # noqa: PLC0415
 
         parquet = REPO_ROOT / "data" / "normalized" / "research" / "eur_usd_m1.parquet"

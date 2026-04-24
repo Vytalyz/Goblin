@@ -37,6 +37,7 @@ def generate(
     sys.path.insert(0, str(REPO_ROOT / "src"))
     import numpy as np
     import pandas as pd
+
     from agentic_forex.features.service import build_features  # noqa: PLC0415
     from agentic_forex.labels.service import build_labels  # noqa: PLC0415
 

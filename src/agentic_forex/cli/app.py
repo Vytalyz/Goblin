@@ -1677,7 +1677,7 @@ def main(argv: list[str] | None = None) -> int:
             return 1
 
         try:
-            with open(journal_path, "r", encoding="utf-8", errors="ignore") as f:
+            with open(journal_path, encoding="utf-8", errors="ignore") as f:
                 lines = f.readlines()
                 tail_lines = lines[-args.tail:] if args.tail > 0 else lines
                 print(f"# Journal: {journal_path.name} (tail -{args.tail})")
@@ -1706,7 +1706,7 @@ def main(argv: list[str] | None = None) -> int:
             return 1
 
         try:
-            with open(experts_path, "r", encoding="utf-8", errors="ignore") as f:
+            with open(experts_path, encoding="utf-8", errors="ignore") as f:
                 lines = f.readlines()
                 tail_lines = lines[-args.tail:] if args.tail > 0 else lines
                 print(f"# Experts Log: {experts_path.name} (tail -{args.tail})")

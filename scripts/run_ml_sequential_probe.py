@@ -15,7 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
@@ -28,17 +28,23 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from agentic_forex.features.sequential import (  # noqa: E402
-    SEQUENTIAL_FEATURE_NAMES, add_sequential_features,
+    SEQUENTIAL_FEATURE_NAMES,
+    add_sequential_features,
 )
 from agentic_forex.features.service import build_features  # noqa: E402
 from agentic_forex.labels.service import build_labels  # noqa: E402
 from agentic_forex.ml.baseline_runner import (  # noqa: E402
-    BASELINE_FEATURE_COLUMNS, DEFAULT_COST_SHOCKS_PIPS,
-    assert_dataset_sha, assert_no_torch_import,
-    evaluate_candidate, file_sha256, summarise_runs,
+    BASELINE_FEATURE_COLUMNS,
+    DEFAULT_COST_SHOCKS_PIPS,
+    assert_dataset_sha,
+    assert_no_torch_import,
+    evaluate_candidate,
+    file_sha256,
 )
 from agentic_forex.ml.stationarity import (  # noqa: E402
-    assess_features, benjamini_hochberg, normalize_non_stationary_inplace,
+    assess_features,
+    benjamini_hochberg,
+    normalize_non_stationary_inplace,
 )
 from agentic_forex.ml.variance_pilot import LOCKED_XGB_HPARAMS  # noqa: E402
 
@@ -47,7 +53,7 @@ LOCKED_BENCHMARK_ID = "AF-CAND-0263"
 
 def _guard(candidates: list[str]) -> None:
     if LOCKED_BENCHMARK_ID in {c.strip().upper() for c in candidates}:
-        raise SystemExit(f"[1.6b] AF-CAND-0263 may not be in candidate set.")
+        raise SystemExit("[1.6b] AF-CAND-0263 may not be in candidate set.")
 
 
 def _load_spec(cid: str) -> dict:
@@ -230,7 +236,7 @@ def main() -> int:
 
     report = {
         "run_id": args.run_id,
-        "generated_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "dataset_path": args.parquet,
         "dataset_sha256": actual_sha,
         "candidate_ids": list(args.candidates),

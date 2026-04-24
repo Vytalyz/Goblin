@@ -12,8 +12,8 @@ torch here would break the without-torch CI lane (Phase 1.7 / D7).
 from __future__ import annotations
 
 import math
+from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Sequence
 
 import numpy as np
 import pandas as pd

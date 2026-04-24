@@ -25,7 +25,7 @@ import argparse
 import hashlib
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -218,9 +218,9 @@ def render_report(
         "## Reproducibility",
         "",
         f"- Generated UTC: `{runtime_utc}`",
-        f"- Tool: `tools/gate_sensitivity.py`",
+        "- Tool: `tools/gate_sensitivity.py`",
         f"- Inputs: locked 1.6 baseline report (SHA `{report_sha[:16]}…`)",
-        f"- σ_cross + MDE source: `Goblin/reports/ml/p2_0_mde_derivation_manifest.json` (EX-1)",
+        "- σ_cross + MDE source: `Goblin/reports/ml/p2_0_mde_derivation_manifest.json` (EX-1)",
         "",
     ]
     return "\n".join(lines)
@@ -269,7 +269,7 @@ def main(argv: list[str] | None = None) -> int:
         effect_size_floor=pilot["effect_size_floor_pf"],
     )
 
-    runtime_utc = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    runtime_utc = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     md = render_report(
         run_id=report["run_id"],
         dataset_sha=bc["dataset_sha"],

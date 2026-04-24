@@ -19,7 +19,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 import tomllib
 from collections import OrderedDict
 from pathlib import Path
@@ -53,7 +52,7 @@ def _load_decisions() -> list[dict[str, Any]]:
     return entries
 
 
-def _latest_per_candidate(entries: list[dict[str, Any]]) -> "OrderedDict[str, dict[str, Any]]":
+def _latest_per_candidate(entries: list[dict[str, Any]]) -> OrderedDict[str, dict[str, Any]]:
     """Return the latest decision per candidate, preserving insertion order."""
     latest: OrderedDict[str, dict[str, Any]] = OrderedDict()
     for entry in entries:

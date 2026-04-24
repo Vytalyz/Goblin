@@ -12,7 +12,6 @@ normalization at the runner layer.
 """
 from __future__ import annotations
 
-import numpy as np
 import pandas as pd
 
 SEQUENTIAL_FEATURE_NAMES: list[str] = [

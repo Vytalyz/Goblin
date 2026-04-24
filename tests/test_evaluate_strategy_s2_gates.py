@@ -16,7 +16,6 @@ sys.path.insert(0, str(TOOLS_DIR))
 import evaluate_strategy_s2_gates as s2  # type: ignore  # noqa: E402
 import verify_strategy_decisions_schema as vsd  # type: ignore  # noqa: E402
 
-
 # --- Fixtures ---------------------------------------------------------------
 
 

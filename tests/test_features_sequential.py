@@ -6,7 +6,6 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SRC_ROOT = REPO_ROOT / "src"
@@ -14,11 +13,15 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from agentic_forex.features.sequential import (
-    SEQUENTIAL_FEATURE_NAMES, add_sequential_features,
+    SEQUENTIAL_FEATURE_NAMES,
+    add_sequential_features,
 )
 from agentic_forex.ml.stationarity import (
-    StationarityVerdict, adf_pvalue, assess, assess_features,
-    benjamini_hochberg, kpss_pvalue, normalize_non_stationary_inplace,
+    StationarityVerdict,
+    assess,
+    assess_features,
+    benjamini_hochberg,
+    normalize_non_stationary_inplace,
     rolling_zscore,
 )
 
