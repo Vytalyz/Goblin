@@ -9,6 +9,7 @@ Covered:
 - AF-CAND-0263 guard in the script driver
 - no-torch-import assertion
 """
+
 from __future__ import annotations
 
 import subprocess
@@ -28,6 +29,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 # Synthetic fixture
 # ---------------------------------------------------------------------------
 
+
 def _synthetic_dataset(n: int = 300, *, seed: int = 17) -> pd.DataFrame:
     rng = np.random.RandomState(seed)
     features = {
@@ -45,11 +47,13 @@ def _synthetic_dataset(n: int = 300, *, seed: int = 17) -> pd.DataFrame:
         rng.uniform(1.0, 5.0, n),
         -rng.uniform(1.0, 5.0, n),
     )
-    return pd.DataFrame({
-        **features,
-        "label_up": label_up,
-        "long_outcome_pips": long_outcome_pips,
-    })
+    return pd.DataFrame(
+        {
+            **features,
+            "label_up": label_up,
+            "long_outcome_pips": long_outcome_pips,
+        }
+    )
 
 
 FEATURE_COLS = ["f_a", "f_b", "f_c"]
@@ -58,6 +62,7 @@ FEATURE_COLS = ["f_a", "f_b", "f_c"]
 # ---------------------------------------------------------------------------
 # Profit-factor helper
 # ---------------------------------------------------------------------------
+
 
 class TestProfitFactor:
     def test_no_trades_returns_zero(self):
@@ -77,6 +82,7 @@ class TestProfitFactor:
 # ---------------------------------------------------------------------------
 # run_seed reproducibility + variability
 # ---------------------------------------------------------------------------
+
 
 class TestRunSeed:
     def test_same_seed_is_deterministic(self):
@@ -128,6 +134,7 @@ class TestRunSeed:
 # summarise() statistics
 # ---------------------------------------------------------------------------
 
+
 class TestSummarise:
     def _outcomes(self, pfs: list[float]) -> list[vp.SeedOutcome]:
         return [
@@ -151,9 +158,7 @@ class TestSummarise:
         # With MDE = k*sigma, required_n simplifies to ((z_a + z_b)/k)^2.
         pfs = [1.0, 1.1, 0.9, 1.2, 0.8]
         s = vp.summarise(self._outcomes(pfs), mde_multiplier=1.0)
-        expected = int(
-            np.ceil(((vp.Z_ALPHA_001 + vp.Z_BETA_080) / 1.0) ** 2)
-        )
+        expected = int(np.ceil(((vp.Z_ALPHA_001 + vp.Z_BETA_080) / 1.0) ** 2))
         assert s.required_n_candidates == expected
 
     def test_required_n_scales_inversely_with_mde(self):
@@ -175,6 +180,7 @@ class TestSummarise:
 # ---------------------------------------------------------------------------
 # No-torch-import guard
 # ---------------------------------------------------------------------------
+
 
 class TestNoTorchImport:
     def test_module_does_not_pull_torch(self):
@@ -213,6 +219,7 @@ class TestNoTorchImport:
 # Script driver — AF-CAND-0263 guard
 # ---------------------------------------------------------------------------
 
+
 class TestScriptGuard:
     def test_af_cand_0263_rejected(self, tmp_path):
         # Import the script module and call its main() — it should
@@ -225,9 +232,12 @@ class TestScriptGuard:
                 sys.executable,
                 "-B",
                 str(script_path),
-                "--candidates", "AF-CAND-0263",
-                "--seeds", "0",
-                "--output", str(tmp_path / "out.json"),
+                "--candidates",
+                "AF-CAND-0263",
+                "--seeds",
+                "0",
+                "--output",
+                str(tmp_path / "out.json"),
             ],
             cwd=REPO_ROOT,
             capture_output=True,

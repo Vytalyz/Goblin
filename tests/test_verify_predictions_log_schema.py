@@ -24,9 +24,7 @@ VALID_MIDPOINT = {
         "Midpoint prediction based on architecture-level evidence; sequential "
         "features absent per A1 amendment; expecting modest gain."
     ),
-    "predictor_attestation": (
-        "Reviewed model card commit only; no holdout access."
-    ),
+    "predictor_attestation": ("Reviewed model card commit only; no holdout access."),
 }
 VALID_TRIGGER = {
     "prediction_id": "PRED-ML-2.0-TRIGGER-1",
@@ -41,9 +39,7 @@ VALID_TRIGGER = {
         "Trigger prediction; final tuning complete; mild upward revision from "
         "midpoint reflects validation-fold consistency."
     ),
-    "predictor_attestation": (
-        "No peeks at holdout; eval pipeline ran only on validation folds."
-    ),
+    "predictor_attestation": ("No peeks at holdout; eval pipeline ran only on validation folds."),
     "commit_sha_of_midpoint_prediction": "a" * 40,
 }
 

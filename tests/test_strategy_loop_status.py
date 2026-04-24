@@ -63,12 +63,11 @@ def test_build_status_with_real_repo_runs(monkeypatch: pytest.MonkeyPatch) -> No
     assert isinstance(status["slots"], list)
 
 
-def test_build_status_with_isolated_log(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_build_status_with_isolated_log(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     log = tmp_path / "strategy_decisions.jsonl"
     log.write_text(
-        json.dumps(_entry()) + "\n"
+        json.dumps(_entry())
+        + "\n"
         + json.dumps(_entry(decision_id="DEC-STRAT-AF-CAND-1001-S3-PASS", stage="S3"))
         + "\n",
         encoding="utf-8",
@@ -82,18 +81,14 @@ def test_build_status_with_isolated_log(
     assert status["candidate_history_count"] == 2
 
 
-def test_build_status_with_missing_log_does_not_raise(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_build_status_with_missing_log_does_not_raise(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setattr(sls, "DECISIONS_LOG", tmp_path / "does_not_exist.jsonl")
     status = sls.build_status()
     assert status["decisions_total"] == 0
     assert status["candidates_tracked"] == 0
 
 
-def test_build_status_with_invalid_json_skips_line(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_build_status_with_invalid_json_skips_line(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     log = tmp_path / "strategy_decisions.jsonl"
     log.write_text(
         "{not valid json}\n" + json.dumps(_entry()) + "\n",
@@ -112,9 +107,7 @@ def test_format_text_is_non_empty() -> None:
     assert "Portfolio slots" in text
 
 
-def test_main_emits_json(
-    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
-) -> None:
+def test_main_emits_json(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
     rc = sls.main(["--json"])
     assert rc == 0
     captured = capsys.readouterr()

@@ -23,6 +23,7 @@ import run_p2_eval as ev  # noqa: E402
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _make_outcomes(n: int, seed: int = 0) -> tuple[np.ndarray, np.ndarray]:
     """Return (xgb_out, rule_out) arrays with positive mean lift."""
     rng = np.random.default_rng(seed)
@@ -40,6 +41,7 @@ def _make_flat_outcomes(n: int) -> tuple[np.ndarray, np.ndarray]:
 # ---------------------------------------------------------------------------
 # Verdict logic
 # ---------------------------------------------------------------------------
+
 
 class TestRenderVerdict:
     """19 paths tested across verdict bands + Q1 interactions."""
@@ -106,6 +108,7 @@ class TestRenderVerdict:
 # Q1 rule
 # ---------------------------------------------------------------------------
 
+
 class TestApplyQ1Rule:
     def test_q1_ok_when_all_positive(self):
         result = ev.apply_q1_rule([0.05, 0.03, 0.07, 0.02, 0.04])
@@ -153,6 +156,7 @@ class TestApplyQ1Rule:
 # BCa moving-block bootstrap
 # ---------------------------------------------------------------------------
 
+
 class TestBcaBootstrap:
     def test_returns_required_keys(self):
         xgb_out, rule_out = _make_outcomes(200)
@@ -188,6 +192,7 @@ class TestBcaBootstrap:
 # ---------------------------------------------------------------------------
 # Bonferroni regime tests
 # ---------------------------------------------------------------------------
+
 
 class TestBonferroniRegimeTests:
     def _make_regime_series(self, n: int) -> pd.Series:
@@ -229,6 +234,7 @@ class TestBonferroniRegimeTests:
 # Outcome pip convention
 # ---------------------------------------------------------------------------
 
+
 class TestOutcomePipConvention:
     def test_long_side_returns_positive_pips_for_up_move(self):
         df = pd.DataFrame({"long_outcome_pips": [5.0]})
@@ -246,6 +252,7 @@ class TestOutcomePipConvention:
 # ---------------------------------------------------------------------------
 # Aggregate lift
 # ---------------------------------------------------------------------------
+
 
 class TestAggregateComputation:
     def test_aggregate_lift_is_mean_of_candidate_lifts(self):

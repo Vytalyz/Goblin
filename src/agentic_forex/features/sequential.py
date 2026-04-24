@@ -10,6 +10,7 @@ checked with BH-FDR at q=0.10. ADF/KPSS stationarity tests run via
 ``ml/stationarity.py`` and any flagged feature gets rolling-z-score
 normalization at the runner layer.
 """
+
 from __future__ import annotations
 
 import pandas as pd
@@ -52,9 +53,9 @@ def add_sequential_features(data: pd.DataFrame) -> pd.DataFrame:
     # 3. range_compression_ratio: current intrabar range / 20-bar mean intrabar range.
     if "intrabar_range_pips" in out.columns:
         mean20 = out["intrabar_range_pips"].rolling(20).mean().bfill()
-        out["range_compression_ratio"] = _safe_div(
-            out["intrabar_range_pips"], mean20
-        ).clip(lower=0.0, upper=10.0).fillna(1.0)
+        out["range_compression_ratio"] = (
+            _safe_div(out["intrabar_range_pips"], mean20).clip(lower=0.0, upper=10.0).fillna(1.0)
+        )
     else:
         out["range_compression_ratio"] = 1.0
 
@@ -66,17 +67,13 @@ def add_sequential_features(data: pd.DataFrame) -> pd.DataFrame:
 
     # 5. realized_skew_20: rolling 20-bar skew of 1-bar returns.
     if "ret_1" in out.columns:
-        out["realized_skew_20"] = (
-            out["ret_1"].rolling(20).skew().fillna(0.0).clip(-10.0, 10.0)
-        )
+        out["realized_skew_20"] = out["ret_1"].rolling(20).skew().fillna(0.0).clip(-10.0, 10.0)
     else:
         out["realized_skew_20"] = 0.0
 
     # 6. realized_kurt_20: rolling 20-bar excess kurtosis of 1-bar returns.
     if "ret_1" in out.columns:
-        out["realized_kurt_20"] = (
-            out["ret_1"].rolling(20).kurt().fillna(0.0).clip(-10.0, 50.0)
-        )
+        out["realized_kurt_20"] = out["ret_1"].rolling(20).kurt().fillna(0.0).clip(-10.0, 50.0)
     else:
         out["realized_kurt_20"] = 0.0
 

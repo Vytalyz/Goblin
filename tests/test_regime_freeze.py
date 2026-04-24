@@ -34,17 +34,14 @@ def _load_eval_gates() -> dict:
 EXPECTED_ABS_MOMENTUM_12_MEDIAN = 1.9000000000
 EXPECTED_VOLATILITY_20_MEDIAN = 0.0000741639
 EXPECTED_N_ROWS = 155775
-EXPECTED_DATASET_SHA = (
-    "7875ba5af620476aaba80cdec0c86680b343f70a02bf19eb40695517378ed8f1"
-)
+EXPECTED_DATASET_SHA = "7875ba5af620476aaba80cdec0c86680b343f70a02bf19eb40695517378ed8f1"
 
 
 class TestRegimeFreezeImmutable:
     def test_block_present(self):
         cfg = _load_eval_gates()
         assert "ml_regime" in cfg, (
-            "[ml_regime] missing from config/eval_gates.toml. "
-            "EX-6 froze these values; do not delete the block."
+            "[ml_regime] missing from config/eval_gates.toml. EX-6 froze these values; do not delete the block."
         )
 
     def test_abs_momentum_median_unchanged(self):
@@ -71,10 +68,7 @@ class TestRegimeFreezeImmutable:
         cfg = _load_eval_gates()
         assert cfg["ml_regime"]["dataset_sha256_at_freeze"] == EXPECTED_DATASET_SHA
         # Cross-check: matches the [ml_baseline_comparison] pin
-        assert (
-            cfg["ml_regime"]["dataset_sha256_at_freeze"]
-            == cfg["ml_baseline_comparison"]["dataset_sha"]
-        )
+        assert cfg["ml_regime"]["dataset_sha256_at_freeze"] == cfg["ml_baseline_comparison"]["dataset_sha"]
 
 
 class TestRegimeFreezePropertyConsistency:

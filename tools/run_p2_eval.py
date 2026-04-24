@@ -70,8 +70,8 @@ FRAGILE_CANDIDATES: list[str] = [
 TARGET_PF_LIFT_GO: float = 0.10
 CONDITIONAL_FLOOR: float = 0.055
 SIGMA_CROSS: float = 0.0211004853
-Q1_CONDITIONAL_THRESHOLD: float = -1.0 * SIGMA_CROSS   # -0.0211…
-Q1_NOGO_THRESHOLD: float = -2.0 * SIGMA_CROSS          # -0.0422…
+Q1_CONDITIONAL_THRESHOLD: float = -1.0 * SIGMA_CROSS  # -0.0211…
+Q1_NOGO_THRESHOLD: float = -2.0 * SIGMA_CROSS  # -0.0422…
 Q1_BREADTH_N_FRAGILE_NEGATIVE: int = 3
 
 # BCa bootstrap parameters
@@ -97,6 +97,7 @@ DEFAULT_REPORT_OUT = "Goblin/reports/ml/p2_0_holdout_eval_report.json"
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _utc_iso() -> str:
     return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -142,6 +143,7 @@ def _outcome_pips(dataset: pd.DataFrame, side: np.ndarray) -> np.ndarray:
 # BCa moving-block bootstrap
 # ---------------------------------------------------------------------------
 
+
 def bca_moving_block_bootstrap(
     xgb_out: np.ndarray,
     rule_out: np.ndarray,
@@ -183,14 +185,11 @@ def bca_moving_block_bootstrap(
     jack_n = min(n, 500)
     step = max(1, n // jack_n)
     jack_idx = list(range(0, n, step))[:jack_n]
-    jack_means = np.array([
-        np.delete(lift, j).mean() if n > 1 else 0.0
-        for j in jack_idx
-    ])
+    jack_means = np.array([np.delete(lift, j).mean() if n > 1 else 0.0 for j in jack_idx])
     jack_bar = jack_means.mean()
     diff = jack_bar - jack_means
-    num = float((diff ** 3).sum())
-    den = float(6.0 * (diff ** 2).sum() ** 1.5)
+    num = float((diff**3).sum())
+    den = float(6.0 * (diff**2).sum() ** 1.5)
     a_hat = num / den if abs(den) > 1e-15 else 0.0
 
     z_low = float(norm.ppf(0.025))
@@ -224,6 +223,7 @@ def bca_moving_block_bootstrap(
 # Bonferroni regime sub-tests
 # ---------------------------------------------------------------------------
 
+
 def run_bonferroni_regime_tests(
     pooled_xgb: np.ndarray,
     pooled_rule: np.ndarray,
@@ -242,14 +242,16 @@ def run_bonferroni_regime_tests(
         mask = (regime_series == regime_id).to_numpy()
         n = int(mask.sum())
         if n < 10:
-            results.append({
-                "regime_id": regime_id,
-                "n_trades": n,
-                "mean_lift": 0.0,
-                "p_value": 1.0,
-                "significant_at_bonferroni": False,
-                "note": "insufficient_trades",
-            })
+            results.append(
+                {
+                    "regime_id": regime_id,
+                    "n_trades": n,
+                    "mean_lift": 0.0,
+                    "p_value": 1.0,
+                    "significant_at_bonferroni": False,
+                    "note": "insufficient_trades",
+                }
+            )
             continue
 
         region_lift = lift[mask]
@@ -263,13 +265,15 @@ def run_bonferroni_regime_tests(
             except ValueError:
                 p_value = 1.0
 
-        results.append({
-            "regime_id": regime_id,
-            "n_trades": n,
-            "mean_lift": mean_lift,
-            "p_value": float(p_value),
-            "significant_at_bonferroni": float(p_value) < BONFERRONI_PER_TEST_ALPHA,
-        })
+        results.append(
+            {
+                "regime_id": regime_id,
+                "n_trades": n,
+                "mean_lift": mean_lift,
+                "p_value": float(p_value),
+                "significant_at_bonferroni": float(p_value) < BONFERRONI_PER_TEST_ALPHA,
+            }
+        )
 
     return results
 
@@ -277,6 +281,7 @@ def run_bonferroni_regime_tests(
 # ---------------------------------------------------------------------------
 # Q1 secondary-cohort diagnostic
 # ---------------------------------------------------------------------------
+
 
 def apply_q1_rule(fragile_lifts: list[float]) -> dict:
     """Apply Q1 fragile-strongly-negative rule (from DEC-ML-2.0-TARGET).
@@ -315,6 +320,7 @@ def apply_q1_rule(fragile_lifts: list[float]) -> dict:
 # Verdict renderer
 # ---------------------------------------------------------------------------
 
+
 def render_verdict(
     aggregate_lift: float,
     bca_ci_low: float,
@@ -347,6 +353,7 @@ def render_verdict(
 # Per-candidate holdout evaluation
 # ---------------------------------------------------------------------------
 
+
 def evaluate_candidate_on_holdout(
     candidate_id: str,
     insample_df: pd.DataFrame,
@@ -357,9 +364,7 @@ def evaluate_candidate_on_holdout(
     """Train on insample, evaluate on holdout. Returns per-candidate result."""
     model = _train_xgb(insample_df, feature_cols, seed=seed)
 
-    eval_df = holdout_df.dropna(
-        subset=feature_cols + ["label_up", "long_outcome_pips"]
-    ).reset_index(drop=True)
+    eval_df = holdout_df.dropna(subset=feature_cols + ["label_up", "long_outcome_pips"]).reset_index(drop=True)
 
     if eval_df.empty:
         return {
@@ -390,17 +395,27 @@ def evaluate_candidate_on_holdout(
         mask = (regimes == regime_id).to_numpy()
         n = int(mask.sum())
         if n == 0:
-            regime_breakdown.append({
-                "regime_id": regime_id, "n_trades": 0,
-                "xgb_pf": 0.0, "rule_pf": 0.0, "pf_lift": 0.0,
-            })
+            regime_breakdown.append(
+                {
+                    "regime_id": regime_id,
+                    "n_trades": 0,
+                    "xgb_pf": 0.0,
+                    "rule_pf": 0.0,
+                    "pf_lift": 0.0,
+                }
+            )
             continue
         r_xgb = profit_factor(xgb_out[mask])
         r_rule = profit_factor(rule_out[mask])
-        regime_breakdown.append({
-            "regime_id": regime_id, "n_trades": n,
-            "xgb_pf": r_xgb, "rule_pf": r_rule, "pf_lift": r_xgb - r_rule,
-        })
+        regime_breakdown.append(
+            {
+                "regime_id": regime_id,
+                "n_trades": n,
+                "xgb_pf": r_xgb,
+                "rule_pf": r_rule,
+                "pf_lift": r_xgb - r_rule,
+            }
+        )
 
     return {
         "candidate_id": candidate_id,
@@ -418,10 +433,12 @@ def evaluate_candidate_on_holdout(
 # Main
 # ---------------------------------------------------------------------------
 
+
 def main(argv: list[str] | None = None) -> int:  # noqa: C901
     ap = argparse.ArgumentParser(description="ML-P2.0 holdout evaluation pipeline")
     ap.add_argument(
-        "holdout_parquet", type=Path,
+        "holdout_parquet",
+        type=Path,
         help="Decrypted holdout parquet path (positional, provided by ceremony)",
     )
     ap.add_argument(
@@ -430,11 +447,14 @@ def main(argv: list[str] | None = None) -> int:  # noqa: C901
         help="In-sample parquet path (relative to repo root)",
     )
     ap.add_argument(
-        "--output", default=DEFAULT_REPORT_OUT,
+        "--output",
+        default=DEFAULT_REPORT_OUT,
         help="Report output path (relative to repo root)",
     )
     ap.add_argument(
-        "--seed", type=int, default=42,
+        "--seed",
+        type=int,
+        default=42,
         help="XGBoost training seed",
     )
     args = ap.parse_args(argv)
@@ -497,17 +517,14 @@ def main(argv: list[str] | None = None) -> int:  # noqa: C901
             .reset_index(drop=True)
         )
 
-        result = evaluate_candidate_on_holdout(
-            cid, insample_ds, holdout_ds, BASELINE_FEATURE_COLUMNS, seed=args.seed
-        )
+        result = evaluate_candidate_on_holdout(cid, insample_ds, holdout_ds, BASELINE_FEATURE_COLUMNS, seed=args.seed)
         primary_results.append(result)
         all_xgb_out.append(result["xgb_outcomes"])
         all_rule_out.append(result["rule_outcomes"])
         all_regimes_list.append(assign_regimes(holdout_ds))
 
         print(
-            f"[p2-eval]   rule_PF={result['rule_pf']:.4f}  "
-            f"xgb_PF={result['xgb_pf']:.4f}  lift={result['pf_lift']:+.4f}"
+            f"[p2-eval]   rule_PF={result['rule_pf']:.4f}  xgb_PF={result['xgb_pf']:.4f}  lift={result['pf_lift']:+.4f}"
         )
 
     # Aggregate lift
@@ -521,15 +538,11 @@ def main(argv: list[str] | None = None) -> int:  # noqa: C901
 
     print(f"[p2-eval] BCa bootstrap (n={BOOTSTRAP_N}, seed={BOOTSTRAP_SEED})...")
     bca = bca_moving_block_bootstrap(pooled_xgb, pooled_rule)
-    print(
-        f"[p2-eval] BCa mean={bca['mean']:+.6f}  "
-        f"95% CI=[{bca['ci_low_95']:+.6f}, {bca['ci_high_95']:+.6f}]"
-    )
+    print(f"[p2-eval] BCa mean={bca['mean']:+.6f}  95% CI=[{bca['ci_low_95']:+.6f}, {bca['ci_high_95']:+.6f}]")
 
     # Bonferroni regime sub-tests
     combined_regimes = (
-        pd.concat(all_regimes_list, ignore_index=True)
-        if all_regimes_list else pd.Series([], dtype="object")
+        pd.concat(all_regimes_list, ignore_index=True) if all_regimes_list else pd.Series([], dtype="object")
     )
     regime_tests = run_bonferroni_regime_tests(pooled_xgb, pooled_rule, combined_regimes)
 
@@ -558,9 +571,7 @@ def main(argv: list[str] | None = None) -> int:  # noqa: C901
             .reset_index(drop=True)
         )
 
-        result = evaluate_candidate_on_holdout(
-            cid, insample_ds, holdout_ds, BASELINE_FEATURE_COLUMNS, seed=args.seed
-        )
+        result = evaluate_candidate_on_holdout(cid, insample_ds, holdout_ds, BASELINE_FEATURE_COLUMNS, seed=args.seed)
         secondary_results.append(result)
         fragile_lifts.append(result["pf_lift"])
         print(f"[p2-eval]   lift={result['pf_lift']:+.4f}")
@@ -604,8 +615,7 @@ def main(argv: list[str] | None = None) -> int:  # noqa: C901
             "amendment_a1": "DEC-ML-1.6b-A1-AUTHORIZATION",
             "sigma_cross": SIGMA_CROSS,
             "bootstrap_method": (
-                f"BCa moving-block n={BOOTSTRAP_N} "
-                f"seed={BOOTSTRAP_SEED} block_min={BOOTSTRAP_BLOCK_SIZE_MIN}"
+                f"BCa moving-block n={BOOTSTRAP_N} seed={BOOTSTRAP_SEED} block_min={BOOTSTRAP_BLOCK_SIZE_MIN}"
             ),
             "bonferroni_family": BONFERRONI_FAMILY,
             "bonferroni_per_test_alpha": BONFERRONI_PER_TEST_ALPHA,

@@ -23,13 +23,11 @@ class TestCounters:
         assert hc.count_completed_accesses([]) == 0
 
     def test_count_completed_one(self):
-        e = [_entry("DEC-ML-HOLDOUT-ACCESS-1-INITIATED"),
-             _entry("DEC-ML-HOLDOUT-ACCESS-1-COMPLETED")]
+        e = [_entry("DEC-ML-HOLDOUT-ACCESS-1-INITIATED"), _entry("DEC-ML-HOLDOUT-ACCESS-1-COMPLETED")]
         assert hc.count_completed_accesses(e) == 1
 
     def test_count_aborted_one(self):
-        e = [_entry("DEC-ML-HOLDOUT-ACCESS-1-INITIATED"),
-             _entry("DEC-ML-HOLDOUT-ACCESS-1-ABORTED")]
+        e = [_entry("DEC-ML-HOLDOUT-ACCESS-1-INITIATED"), _entry("DEC-ML-HOLDOUT-ACCESS-1-ABORTED")]
         assert hc.count_aborted_accesses(e) == 1
 
     def test_unrelated_decisions_ignored(self):
@@ -80,13 +78,11 @@ class TestNextAccessN:
         assert hc.next_access_n([]) == 1
 
     def test_after_one_returns_two(self):
-        e = [_entry("DEC-ML-HOLDOUT-ACCESS-1-INITIATED"),
-             _entry("DEC-ML-HOLDOUT-ACCESS-1-COMPLETED")]
+        e = [_entry("DEC-ML-HOLDOUT-ACCESS-1-INITIATED"), _entry("DEC-ML-HOLDOUT-ACCESS-1-COMPLETED")]
         assert hc.next_access_n(e) == 2
 
     def test_aborted_consumes_index(self):
-        e = [_entry("DEC-ML-HOLDOUT-ACCESS-1-INITIATED"),
-             _entry("DEC-ML-HOLDOUT-ACCESS-1-ABORTED")]
+        e = [_entry("DEC-ML-HOLDOUT-ACCESS-1-INITIATED"), _entry("DEC-ML-HOLDOUT-ACCESS-1-ABORTED")]
         assert hc.next_access_n(e) == 2
 
 
@@ -138,6 +134,7 @@ class TestRunCeremonyEndToEnd:
     def fernet_setup(self, tmp_path):
         pytest.importorskip("cryptography")
         from cryptography.fernet import Fernet
+
         key = Fernet.generate_key()
         key_path = tmp_path / "test.key"
         key_path.write_bytes(key)
@@ -191,12 +188,15 @@ class TestRunCeremonyEndToEnd:
         log = tmp_path / "ml_decisions.jsonl"
         # Pre-seed two completed accesses.
         log.write_text(
-            "\n".join([
-                json.dumps({"decision_id": "DEC-ML-HOLDOUT-ACCESS-1-INITIATED"}),
-                json.dumps({"decision_id": "DEC-ML-HOLDOUT-ACCESS-1-COMPLETED"}),
-                json.dumps({"decision_id": "DEC-ML-HOLDOUT-ACCESS-2-INITIATED"}),
-                json.dumps({"decision_id": "DEC-ML-HOLDOUT-ACCESS-2-COMPLETED"}),
-            ]) + "\n"
+            "\n".join(
+                [
+                    json.dumps({"decision_id": "DEC-ML-HOLDOUT-ACCESS-1-INITIATED"}),
+                    json.dumps({"decision_id": "DEC-ML-HOLDOUT-ACCESS-1-COMPLETED"}),
+                    json.dumps({"decision_id": "DEC-ML-HOLDOUT-ACCESS-2-INITIATED"}),
+                    json.dumps({"decision_id": "DEC-ML-HOLDOUT-ACCESS-2-COMPLETED"}),
+                ]
+            )
+            + "\n"
         )
         script = tmp_path / "noop_eval.py"
         script.write_text("import sys; sys.exit(0)\n")

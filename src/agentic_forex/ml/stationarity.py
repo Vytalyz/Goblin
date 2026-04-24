@@ -8,6 +8,7 @@ Combined verdict per plan section 6:
 A feature flagged as non-stationary gets rolling-z-score normalization
 before model training.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -81,6 +82,7 @@ def assess(series: pd.Series, name: str) -> StationarityVerdict:
 
 def assess_features(data: pd.DataFrame, features: list[str]) -> list[StationarityVerdict]:
     import warnings
+
     verdicts: list[StationarityVerdict] = []
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
@@ -103,7 +105,9 @@ def rolling_zscore(series: pd.Series, window: int = 200) -> pd.Series:
 
 
 def normalize_non_stationary_inplace(
-    data: pd.DataFrame, verdicts: list[StationarityVerdict], window: int = 200,
+    data: pd.DataFrame,
+    verdicts: list[StationarityVerdict],
+    window: int = 200,
 ) -> list[str]:
     """Rolling-z-score-normalize any non-stationary feature in place.
     Returns the list of feature names that were normalized.

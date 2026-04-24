@@ -404,11 +404,16 @@ def test_cli_main_passes_with_inline_paths(
 
     rc = s2.main(
         [
-            "--candidate-id", "AF-CAND-9001",
-            "--slot-id", "slot_b",
-            "--backtest-summary", str(bs_path),
-            "--robustness-report", str(rr_path),
-            "--cost-sweep", str(cs_path),
+            "--candidate-id",
+            "AF-CAND-9001",
+            "--slot-id",
+            "slot_b",
+            "--backtest-summary",
+            str(bs_path),
+            "--robustness-report",
+            str(rr_path),
+            "--cost-sweep",
+            str(cs_path),
             "--json",
         ]
     )
@@ -434,9 +439,12 @@ def test_cli_main_fail_returns_1(
 
     rc = s2.main(
         [
-            "--candidate-id", "AF-CAND-9001",
-            "--backtest-summary", str(bs_path),
-            "--robustness-report", str(rr_path),
+            "--candidate-id",
+            "AF-CAND-9001",
+            "--backtest-summary",
+            str(bs_path),
+            "--robustness-report",
+            str(rr_path),
         ]
     )
     assert rc == 1
@@ -445,14 +453,15 @@ def test_cli_main_fail_returns_1(
     assert line["decision_id"].endswith("S2-FAIL")
 
 
-def test_cli_main_missing_artifact_returns_2(
-    tmp_path: Path, capsys: pytest.CaptureFixture
-) -> None:
+def test_cli_main_missing_artifact_returns_2(tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
     rc = s2.main(
         [
-            "--candidate-id", "AF-CAND-9001",
-            "--backtest-summary", str(tmp_path / "missing.json"),
-            "--robustness-report", str(tmp_path / "missing2.json"),
+            "--candidate-id",
+            "AF-CAND-9001",
+            "--backtest-summary",
+            str(tmp_path / "missing.json"),
+            "--robustness-report",
+            str(tmp_path / "missing2.json"),
             "--no-append",
         ]
     )

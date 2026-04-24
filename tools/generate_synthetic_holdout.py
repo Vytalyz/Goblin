@@ -57,9 +57,7 @@ def generate(
     rng = np.random.default_rng(seed)
     n_avail = len(labelled)
     if n_rows > n_avail:
-        raise SystemExit(
-            f"FAIL: requested {n_rows} rows but only {n_avail} available in-sample"
-        )
+        raise SystemExit(f"FAIL: requested {n_rows} rows but only {n_avail} available in-sample")
     # Sample (without replacement) and shuffle.
     chosen_idx = rng.choice(n_avail, size=n_rows, replace=False)
     shuffled = labelled.iloc[chosen_idx].reset_index(drop=True)
@@ -67,8 +65,7 @@ def generate(
     # Permute label columns (any column starting with 'label_' or 'outcome_')
     # to destroy signal while preserving regime composition.
     permuted = shuffled.copy()
-    label_cols = [c for c in permuted.columns
-                  if c.startswith("label_") or c.startswith("outcome_")]
+    label_cols = [c for c in permuted.columns if c.startswith("label_") or c.startswith("outcome_")]
     perm = rng.permutation(len(permuted))
     for col in label_cols:
         permuted[col] = permuted[col].to_numpy()[perm]
@@ -110,10 +107,7 @@ def assert_4_regime_coverage(parquet_path: Path, *, ml_regime_cfg: dict) -> dict
     floor = max(1, total // 100)  # at least 1% per regime
     missing = [r for r, n in regimes.items() if n < floor]
     if missing:
-        raise AssertionError(
-            f"4-regime coverage failed: {missing} have < 1% of rows. "
-            f"Counts: {regimes}, total={total}"
-        )
+        raise AssertionError(f"4-regime coverage failed: {missing} have < 1% of rows. Counts: {regimes}, total={total}")
     return regimes
 
 

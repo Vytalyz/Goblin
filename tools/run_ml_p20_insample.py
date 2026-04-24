@@ -123,12 +123,16 @@ def main() -> int:
     candidate_results: list[dict] = []
     for cid in SURVIVORS:
         spec = _load_spec(cid)
-        labelled = build_labels(
-            full_features.copy(),
-            spec["holding_bars"],
-            stop_loss_pips=spec["stop_loss_pips"],
-            take_profit_pips=spec["take_profit_pips"],
-        ).dropna().reset_index(drop=True)
+        labelled = (
+            build_labels(
+                full_features.copy(),
+                spec["holding_bars"],
+                stop_loss_pips=spec["stop_loss_pips"],
+                take_profit_pips=spec["take_profit_pips"],
+            )
+            .dropna()
+            .reset_index(drop=True)
+        )
 
         result = evaluate_candidate(
             labelled,

@@ -38,14 +38,14 @@ logger = logging.getLogger(__name__)
 class GPRuleResult:
     """A single evolved rule and its evaluation metrics."""
 
-    rule_str: str          # Human-readable expression string
-    tree_depth: int        # Depth of the expression tree
-    n_nodes: int           # Total node count
+    rule_str: str  # Human-readable expression string
+    tree_depth: int  # Depth of the expression tree
+    n_nodes: int  # Total node count
     oos_profit_factor: float
     win_rate: float
-    n_signals: int         # Number of True signals on OOS data
-    fitness: float         # Final fitness value (PF - parsimony_penalty)
-    generation: int        # Generation in which this individual was found
+    n_signals: int  # Number of True signals on OOS data
+    fitness: float  # Final fitness value (PF - parsimony_penalty)
+    generation: int  # Generation in which this individual was found
 
 
 @dataclass
@@ -230,8 +230,7 @@ def run_gp_discovery(
         from deap import algorithms, base, creator, gp, tools
     except ImportError as exc:
         raise ImportError(
-            "DEAP is required for GP rule discovery (ML-P1.5). "
-            "Install it with: pip install 'deap>=1.4,<2'"
+            "DEAP is required for GP rule discovery (ML-P1.5). Install it with: pip install 'deap>=1.4,<2'"
         ) from exc
 
     from agentic_forex.ml.primitives import FEATURE_TERMINALS, build_primitive_set
@@ -332,10 +331,19 @@ def run_gp_discovery(
             )
         )
 
-    best = top_results[0] if top_results else GPRuleResult(
-        rule_str="", tree_depth=0, n_nodes=0,
-        oos_profit_factor=0.0, win_rate=0.0, n_signals=0,
-        fitness=-10.0, generation=0,
+    best = (
+        top_results[0]
+        if top_results
+        else GPRuleResult(
+            rule_str="",
+            tree_depth=0,
+            n_nodes=0,
+            oos_profit_factor=0.0,
+            win_rate=0.0,
+            n_signals=0,
+            fitness=-10.0,
+            generation=0,
+        )
     )
 
     # Check convergence: last few generations showed < 1% fitness improvement
@@ -360,6 +368,7 @@ def run_gp_discovery(
 # ---------------------------------------------------------------------------
 # Helper used by DEAP decorators
 # ---------------------------------------------------------------------------
+
 
 def _op_height(ind: Any) -> int:
     """Return the height of a GP individual (required by staticLimit decorator)."""

@@ -8,6 +8,7 @@ Usage:
         --dataset-sha 7875ba5af620476a... \\
         --holdout-manifest Goblin/holdout/ml_p2_holdout_manifest.json
 """
+
 from __future__ import annotations
 
 import argparse
@@ -64,20 +65,22 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Phase 1.6 baseline comparison runner.")
     ap.add_argument("--candidates", nargs="+", required=True)
     ap.add_argument("--parquet", default="data/normalized/research/eur_usd_m1.parquet")
-    ap.add_argument("--dataset-sha", default=None,
-                    help="Expected dataset SHA-256; runner aborts on mismatch (D15).")
+    ap.add_argument("--dataset-sha", default=None, help="Expected dataset SHA-256; runner aborts on mismatch (D15).")
     ap.add_argument("--run-id", default="BASELINE-1.6-20260420")
     ap.add_argument("--n-folds", type=int, default=3)
-    ap.add_argument("--embargo-bars", type=int, default=20,
-                    help=">= longest feature lookback (D11).")
-    ap.add_argument("--effect-size-floor-pf", type=float, default=0.0083,
-                    help="Locked from PILOT-1.6.0-20260420 (1x sigma_PF).")
-    ap.add_argument("--cost-shocks", nargs="+", type=float,
-                    default=list(DEFAULT_COST_SHOCKS_PIPS))
+    ap.add_argument("--embargo-bars", type=int, default=20, help=">= longest feature lookback (D11).")
+    ap.add_argument(
+        "--effect-size-floor-pf", type=float, default=0.0083, help="Locked from PILOT-1.6.0-20260420 (1x sigma_PF)."
+    )
+    ap.add_argument("--cost-shocks", nargs="+", type=float, default=list(DEFAULT_COST_SHOCKS_PIPS))
     ap.add_argument("--output", default="Goblin/reports/ml/p1_6_baseline_comparison.json")
     ap.add_argument("--holdout-manifest", default="Goblin/holdout/ml_p2_holdout_manifest.json")
-    ap.add_argument("--exclude-holdout", action="store_true", default=True,
-                    help="Exclude the sealed holdout rows from training+CV (always on).")
+    ap.add_argument(
+        "--exclude-holdout",
+        action="store_true",
+        default=True,
+        help="Exclude the sealed holdout rows from training+CV (always on).",
+    )
     args = ap.parse_args()
 
     parquet = (REPO_ROOT / args.parquet).resolve()
@@ -105,11 +108,11 @@ def main() -> int:
             "sha256": manifest["ciphertext_sha256"],
             "n_rows": int(manifest["holdout_n_rows"]),
         }
-        print(f"[baseline] excluding rows >= index {holdout_first_idx} (sealed holdout, "
-              f"n={manifest['holdout_n_rows']})")
+        print(
+            f"[baseline] excluding rows >= index {holdout_first_idx} (sealed holdout, n={manifest['holdout_n_rows']})"
+        )
     else:
-        print(f"[baseline] WARNING: no holdout manifest at {manifest_path}; "
-              f"running on full dataset.", file=sys.stderr)
+        print(f"[baseline] WARNING: no holdout manifest at {manifest_path}; running on full dataset.", file=sys.stderr)
 
     candidate_results: list[dict] = []
     for cid in args.candidates:
@@ -130,14 +133,17 @@ def main() -> int:
             cost_shocks_pips=args.cost_shocks,
         )
         candidate_results.append(result)
-        print(f"[baseline] {cid:>14}  rule_PF={result['rule_pf_aggregate']:.4f}  "
-              f"xgb_PF={result['xgb_pf_aggregate']:.4f}  "
-              f"lift={result['pf_lift_aggregate']:+.4f}  "
-              f"regime_ok={result['regime_non_negative']}  "
-              f"cost_ok@1pip={result['cost_persistent_at_1pip']}")
+        print(
+            f"[baseline] {cid:>14}  rule_PF={result['rule_pf_aggregate']:.4f}  "
+            f"xgb_PF={result['xgb_pf_aggregate']:.4f}  "
+            f"lift={result['pf_lift_aggregate']:+.4f}  "
+            f"regime_ok={result['regime_non_negative']}  "
+            f"cost_ok@1pip={result['cost_persistent_at_1pip']}"
+        )
 
     summary = summarise_runs(
-        candidate_results, effect_size_floor_pf=args.effect_size_floor_pf,
+        candidate_results,
+        effect_size_floor_pf=args.effect_size_floor_pf,
     )
 
     report = {
@@ -151,9 +157,7 @@ def main() -> int:
         "feature_columns": BASELINE_FEATURE_COLUMNS,
         "locked_xgb_hparams": LOCKED_XGB_HPARAMS,
         "cost_shock_pips": list(args.cost_shocks),
-        "regime_definitions": [
-            {"regime_id": r.regime_id, "description": r.description} for r in REGIMES
-        ],
+        "regime_definitions": [{"regime_id": r.regime_id, "description": r.description} for r in REGIMES],
         "candidate_results": candidate_results,
         "median_pf_lift": summary["median_pf_lift"],
         "mean_pf_lift": summary["mean_pf_lift"],
@@ -169,10 +173,12 @@ def main() -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(f"[baseline] wrote {output}")
-    print(f"[baseline] median_lift={summary['median_pf_lift']:+.4f}  "
-          f"mean_lift={summary['mean_pf_lift']:+.4f}  "
-          f"frac_above_floor={summary['fraction_above_effect_size_floor']:.2%}  "
-          f"floor={args.effect_size_floor_pf:.4f}")
+    print(
+        f"[baseline] median_lift={summary['median_pf_lift']:+.4f}  "
+        f"mean_lift={summary['mean_pf_lift']:+.4f}  "
+        f"frac_above_floor={summary['fraction_above_effect_size_floor']:.2%}  "
+        f"floor={args.effect_size_floor_pf:.4f}"
+    )
 
     # Hard gate enforcement (D14). Print verdict but DO NOT raise on regime/cost
     # for the report itself — gate logic is checked here separately and prints

@@ -39,6 +39,7 @@ FEATURE_COLUMNS: list[str] = [
 # Purged walk-forward CV  (P0.1 / P0.2)
 # ---------------------------------------------------------------------------
 
+
 def _purged_walk_forward_folds(
     n_samples: int,
     *,
@@ -75,6 +76,7 @@ def _purged_walk_forward_folds(
 # Permutation feature importance  (P0.3)
 # ---------------------------------------------------------------------------
 
+
 def _compute_feature_importance(
     model: Any,
     X: pd.DataFrame,
@@ -84,7 +86,12 @@ def _compute_feature_importance(
     random_state: int = 42,
 ) -> dict[str, float]:
     result = permutation_importance(
-        model, X, y, n_repeats=n_repeats, random_state=random_state, scoring="accuracy",
+        model,
+        X,
+        y,
+        n_repeats=n_repeats,
+        random_state=random_state,
+        scoring="accuracy",
     )
     importance: dict[str, float] = {}
     for col_idx, col_name in enumerate(X.columns):
@@ -105,6 +112,7 @@ def _top_k_importance_share(importance: dict[str, float], k: int = 3) -> float:
 # SHAP interpretability  (P1.8)
 # ---------------------------------------------------------------------------
 
+
 def _compute_shap_values(
     model: Any,
     X: pd.DataFrame,
@@ -124,6 +132,7 @@ def _compute_shap_values(
 # ---------------------------------------------------------------------------
 # Label randomization test  (P0.4)
 # ---------------------------------------------------------------------------
+
 
 def _label_randomization_test(
     X_train: pd.DataFrame,
@@ -146,6 +155,7 @@ def _label_randomization_test(
 # ---------------------------------------------------------------------------
 # Adversarial validation  (P0.5)
 # ---------------------------------------------------------------------------
+
 
 def _adversarial_validation(
     X_train: pd.DataFrame,
@@ -176,6 +186,7 @@ def _adversarial_validation(
 # ---------------------------------------------------------------------------
 # Model persistence helpers  (P0.6)
 # ---------------------------------------------------------------------------
+
 
 def _feature_set_hash(feature_columns: list[str]) -> str:
     return hashlib.sha256(",".join(sorted(feature_columns)).encode()).hexdigest()[:16]
@@ -216,6 +227,7 @@ def _persist_model_artifact(
 # Main entry point
 # ---------------------------------------------------------------------------
 
+
 def train_models(spec: StrategySpec, settings: Settings) -> Path:
     parquet_path = (
         settings.paths().normalized_research_dir
@@ -240,7 +252,9 @@ def train_models(spec: StrategySpec, settings: Settings) -> Path:
     embargo_bars = max(spec.holding_bars, 10)
     n_folds = getattr(settings.validation, "walk_forward_windows", 3)
     folds = _purged_walk_forward_folds(
-        len(dataset), n_folds=n_folds, embargo_bars=embargo_bars,
+        len(dataset),
+        n_folds=n_folds,
+        embargo_bars=embargo_bars,
     )
 
     # Aggregate OOS predictions across folds
@@ -274,13 +288,15 @@ def train_models(spec: StrategySpec, settings: Settings) -> Path:
         all_logit_prob.append(logit_prob)
         all_forest_prob.append(xgb_prob)
 
-        fold_metrics.append({
-            "fold": fold_idx,
-            "train_size": len(train_idx),
-            "test_size": len(test_idx),
-            "logit_accuracy": float(accuracy_score(y_test, (logit_prob >= 0.5).astype(int))),
-            "xgb_accuracy": float(accuracy_score(y_test, (xgb_prob >= 0.5).astype(int))),
-        })
+        fold_metrics.append(
+            {
+                "fold": fold_idx,
+                "train_size": len(train_idx),
+                "test_size": len(test_idx),
+                "logit_accuracy": float(accuracy_score(y_test, (logit_prob >= 0.5).astype(int))),
+                "xgb_accuracy": float(accuracy_score(y_test, (xgb_prob >= 0.5).astype(int))),
+            }
+        )
 
     # Concatenate OOS predictions from all folds
     y_oos = pd.concat(all_y_test, ignore_index=True)
@@ -296,13 +312,16 @@ def train_models(spec: StrategySpec, settings: Settings) -> Path:
     first_train = dataset.iloc[folds[0][0]]
     first_test = dataset.iloc[folds[0][1]]
     label_rand = _label_randomization_test(
-        first_train[feature_cols], first_train["label_up"],
-        first_test[feature_cols], first_test["label_up"],
+        first_train[feature_cols],
+        first_train["label_up"],
+        first_test[feature_cols],
+        first_test["label_up"],
     )
 
     # Adversarial validation using first fold split
     adv_val = _adversarial_validation(
-        first_train[feature_cols], first_test[feature_cols],
+        first_train[feature_cols],
+        first_test[feature_cols],
     )
 
     rule_backtest = run_backtest(spec, settings, output_prefix="shadow_rule_baseline")

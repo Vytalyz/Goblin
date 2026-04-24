@@ -67,8 +67,7 @@ GRANDFATHERED_NO_BIAS_AUDIT: frozenset[str] = frozenset(
 # If a maintainer adds an entry, this assertion forces them to update
 # both the literal AND this guard in the SAME commit (visibility).
 assert GRANDFATHERED_NO_BIAS_AUDIT == frozenset({"DEC-ML-1.6.0-CANDIDATES"}), (
-    "GRANDFATHERED_NO_BIAS_AUDIT mutated without updating the EX-7 guard. "
-    "See docs and CODEOWNERS before changing."
+    "GRANDFATHERED_NO_BIAS_AUDIT mutated without updating the EX-7 guard. See docs and CODEOWNERS before changing."
 )
 
 # Operational ceremony decision_types are auto-generated bracketing events
@@ -89,8 +88,7 @@ def _check_entry(idx: int, entry: dict) -> None:
     decision_id = entry.get("decision_id", "")
     decision_type = entry.get("decision_type", "")
     is_grandfathered = (
-        decision_id in GRANDFATHERED_NO_BIAS_AUDIT
-        or decision_type in OPERATIONAL_CEREMONY_DECISION_TYPES
+        decision_id in GRANDFATHERED_NO_BIAS_AUDIT or decision_type in OPERATIONAL_CEREMONY_DECISION_TYPES
     )
     required = (
         REQUIRED_TOP_LEVEL if not is_grandfathered else tuple(f for f in REQUIRED_TOP_LEVEL if f != "bias_self_audit")

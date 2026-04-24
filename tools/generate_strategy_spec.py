@@ -101,7 +101,7 @@ def _next_candidate_id(reports_dir: Path) -> str:
         name = path.name
         if not name.startswith("AF-CAND-"):
             continue
-        suffix = name[len("AF-CAND-"):]
+        suffix = name[len("AF-CAND-") :]
         if len(suffix) == 4 and suffix.isdigit():
             highest = max(highest, int(suffix))
     return f"AF-CAND-{highest + 1:04d}"
@@ -202,9 +202,7 @@ def build_s1_decision_entry(
         except ValueError:
             return str(p).replace("\\", "/")
 
-    rationale = (
-        f"S1 scaffold complete for {candidate_id}. Hypothesis: {hypothesis}"
-    )
+    rationale = f"S1 scaffold complete for {candidate_id}. Hypothesis: {hypothesis}"
     return {
         "decision_id": f"DEC-STRAT-{candidate_id}-S1-PASS",
         "candidate_id": candidate_id,
@@ -269,8 +267,7 @@ def scaffold(
 
     if len(hypothesis.strip()) < MIN_HYPOTHESIS_CHARS:
         raise StrategyScaffoldError(
-            f"--hypothesis must be at least {MIN_HYPOTHESIS_CHARS} characters "
-            f"(got {len(hypothesis.strip())})"
+            f"--hypothesis must be at least {MIN_HYPOTHESIS_CHARS} characters (got {len(hypothesis.strip())})"
         )
 
     # Slot validation lives off the canonical PORTFOLIO_POLICY constant so
@@ -278,10 +275,7 @@ def scaffold(
     slot = _load_slot(slot_id)
     allowed_families = slot.get("allowed_families", [])
     if family not in allowed_families:
-        raise StrategyScaffoldError(
-            f"family '{family}' is not in allowed_families for {slot_id}: "
-            f"{allowed_families}"
-        )
+        raise StrategyScaffoldError(f"family '{family}' is not in allowed_families for {slot_id}: {allowed_families}")
 
     candidate_id = _next_candidate_id(reports_dir)
     candidate_dir = reports_dir / candidate_id
@@ -415,7 +409,9 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(result, indent=2))
     else:
         prefix = "[dry-run] " if args.dry_run else ""
-        print(f"{prefix}Allocated candidate: {result['candidate_id']} (slot={result['slot_id']}, family={result['family']})")
+        print(
+            f"{prefix}Allocated candidate: {result['candidate_id']} (slot={result['slot_id']}, family={result['family']})"
+        )
         print(f"  spec:           {result['spec_path']}")
         print(f"  rationale card: {result['rationale_card_path']}")
         if not args.dry_run:

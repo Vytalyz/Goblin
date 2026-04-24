@@ -3597,6 +3597,7 @@ def _run_data_label_audit(
 # optimize_parameters step  (ML-P1.10 — EvA CMA-ES optimizer)
 # ---------------------------------------------------------------------------
 
+
 def _run_optimize_parameters(
     settings: Settings,
     *,
@@ -3690,6 +3691,7 @@ def _run_optimize_parameters(
 # discover_gp_rules step  (ML-P1.5 — Genetic Programming rule discovery)
 # ---------------------------------------------------------------------------
 
+
 def _run_discover_gp_rules(
     settings: Settings,
     *,
@@ -3730,6 +3732,7 @@ def _run_discover_gp_rules(
         # Synthetic fallback — small dataset for structural test only
         rng = __import__("numpy").random.default_rng(42)
         from agentic_forex.ml.primitives import FEATURE_TERMINALS
+
         X = rng.standard_normal((200, len(FEATURE_TERMINALS))).astype(float)
         y = (rng.uniform(size=200) > 0.5).astype(int)
 

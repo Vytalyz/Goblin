@@ -16,6 +16,7 @@ Usage::
 
 See ``memories/session/plan.md`` §4 for the acceptance criteria.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -100,11 +101,15 @@ def main(argv: list[str] | None = None) -> int:
         help="Override pilot_id (default: derived from UTC timestamp).",
     )
     parser.add_argument(
-        "--n-folds", type=int, default=3,
+        "--n-folds",
+        type=int,
+        default=3,
         help="Walk-forward fold count (inherits train.py default).",
     )
     parser.add_argument(
-        "--embargo-bars", type=int, default=10,
+        "--embargo-bars",
+        type=int,
+        default=10,
         help="Embargo bar count (inherits train.py default).",
     )
     args = parser.parse_args(argv)
@@ -112,8 +117,7 @@ def main(argv: list[str] | None = None) -> int:
     # Hard guard: refuse to run against the locked benchmark.
     if "AF-CAND-0263" in args.candidates:
         raise SystemExit(
-            "AF-CAND-0263 is the locked overlap benchmark and cannot be "
-            "used in the variance pilot (AGENTS.md)."
+            "AF-CAND-0263 is the locked overlap benchmark and cannot be used in the variance pilot (AGENTS.md)."
         )
 
     # Import after CLI parse so --help works without installing deps.
@@ -147,9 +151,7 @@ def main(argv: list[str] | None = None) -> int:
         # signed realized PnL per bar for a long entry at that bar.
         outcome_col = "long_outcome_pips"
         if outcome_col not in dataset.columns:
-            raise RuntimeError(
-                f"{candidate_id}: dataset missing '{outcome_col}' — label builder must supply it."
-            )
+            raise RuntimeError(f"{candidate_id}: dataset missing '{outcome_col}' — label builder must supply it.")
         feature_cols_used = feature_cols
 
         for seed in args.seeds:

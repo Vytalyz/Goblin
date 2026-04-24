@@ -264,10 +264,7 @@ def bca_block_bootstrap_pf_lift(
     # Acceleration via capped observation-wise jackknife
     max_jk = min(n, 500)
     step = max(n // max_jk, 1)
-    jk_lifts = [
-        profit_factor(np.delete(xgb_out, i)) - profit_factor(np.delete(rule_out, i))
-        for i in range(0, n, step)
-    ]
+    jk_lifts = [profit_factor(np.delete(xgb_out, i)) - profit_factor(np.delete(rule_out, i)) for i in range(0, n, step)]
     jk_arr = np.asarray(jk_lifts, dtype=float)
     jk_mean = float(np.mean(jk_arr))
     diff = jk_mean - jk_arr
@@ -313,11 +310,7 @@ def determine_verdict(
     if q1_nogo:
         return "NO_GO"
 
-    if (
-        aggregate_lift >= GO_THRESHOLD
-        and not math.isnan(bca_ci_lower)
-        and bca_ci_lower > 0.0
-    ):
+    if aggregate_lift >= GO_THRESHOLD and not math.isnan(bca_ci_lower) and bca_ci_lower > 0.0:
         verdict = "GO"
     elif aggregate_lift >= CONDITIONAL_THRESHOLD:
         verdict = "CONDITIONAL"
@@ -494,8 +487,7 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
             rng_seed=BOOTSTRAP_RNG_SEED,
         )
         print(
-            f"[p20-holdout] aggregate_lift={aggregate_lift:+.4f}  "
-            f"BCa 95% CI=[{bca_lo:+.4f}, {bca_hi:+.4f}]",
+            f"[p20-holdout] aggregate_lift={aggregate_lift:+.4f}  BCa 95% CI=[{bca_lo:+.4f}, {bca_hi:+.4f}]",
             flush=True,
         )
 
@@ -504,9 +496,7 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
         # ------------------------------------------------------------------
         print("[p20-holdout] regime sub-tests ...", flush=True)
         holdout_features = full_features[full_features.index >= N_IN_SAMPLE].copy()
-        holdout_frozen_regime = _assign_regimes_frozen(
-            holdout_features, mom_thresh, vol_thresh
-        )
+        holdout_frozen_regime = _assign_regimes_frozen(holdout_features, mom_thresh, vol_thresh)
 
         regime_results: list[dict] = []
         for regime_id in REGIME_IDS:
@@ -520,12 +510,8 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
                 r_xgb_parts.append(sr["_xgb_out"][mask])
                 r_rule_parts.append(sr["_rule_out"][mask])
 
-            r_xgb_pool = (
-                np.concatenate(r_xgb_parts) if r_xgb_parts else np.array([], dtype=float)
-            )
-            r_rule_pool = (
-                np.concatenate(r_rule_parts) if r_rule_parts else np.array([], dtype=float)
-            )
+            r_xgb_pool = np.concatenate(r_xgb_parts) if r_xgb_parts else np.array([], dtype=float)
+            r_rule_pool = np.concatenate(r_rule_parts) if r_rule_parts else np.array([], dtype=float)
             r_xgb_pf = profit_factor(r_xgb_pool)
             r_rule_pf = profit_factor(r_rule_pool)
             r_lift = r_xgb_pf - r_rule_pf
@@ -565,9 +551,7 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
                 }
             )
             print(
-                f"[p20-holdout]   {regime_id:>20}  "
-                f"n={len(r_xgb_pool):>5}  lift={r_lift:+.4f}  "
-                f"fragile={r_fragile}",
+                f"[p20-holdout]   {regime_id:>20}  n={len(r_xgb_pool):>5}  lift={r_lift:+.4f}  fragile={r_fragile}",
                 flush=True,
             )
 
@@ -581,8 +565,7 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
                 r = _evaluate_candidate_holdout(full_features, cid)
                 fragile_results.append(r)
                 print(
-                    f"[p20-holdout]   {cid:>14}  "
-                    f"xgb_pf={r['xgb_pf']:.4f}  lift={r['pf_lift']:+.4f}",
+                    f"[p20-holdout]   {cid:>14}  xgb_pf={r['xgb_pf']:.4f}  lift={r['pf_lift']:+.4f}",
                     flush=True,
                 )
             except Exception as exc:
@@ -590,9 +573,7 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
                     f"[p20-holdout]   {cid:>14}  FAILED: {exc}",
                     file=sys.stderr,
                 )
-                fragile_results.append(
-                    {"candidate_id": cid, "pf_lift": float("nan"), "_failed": True}
-                )
+                fragile_results.append({"candidate_id": cid, "pf_lift": float("nan"), "_failed": True})
 
         fragile_valid_lifts = [
             r["pf_lift"] for r in fragile_results if not r.get("_failed") and not math.isnan(r["pf_lift"])
@@ -600,14 +581,9 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
         mean_fragile_lift = float(np.mean(fragile_valid_lifts)) if fragile_valid_lifts else float("nan")
         n_fragile_negative = sum(1 for v in fragile_valid_lifts if v < 0.0)
 
-        q1_conditional_restricted = (
-            not math.isnan(mean_fragile_lift)
-            and mean_fragile_lift < -1.0 * SIGMA_CROSS
-        )
+        q1_conditional_restricted = not math.isnan(mean_fragile_lift) and mean_fragile_lift < -1.0 * SIGMA_CROSS
         q1_nogo = (
-            not math.isnan(mean_fragile_lift)
-            and mean_fragile_lift < -2.0 * SIGMA_CROSS
-            and n_fragile_negative >= 3
+            not math.isnan(mean_fragile_lift) and mean_fragile_lift < -2.0 * SIGMA_CROSS and n_fragile_negative >= 3
         )
 
         # ------------------------------------------------------------------
@@ -626,10 +602,7 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
         # Build report
         # ------------------------------------------------------------------
         report = {
-            "evaluation_id": (
-                f"DEC-ML-2.0-RE-GATE-"
-                f"{datetime.now(UTC).strftime('%Y%m%dT%H%M%SZ')}"
-            ),
+            "evaluation_id": (f"DEC-ML-2.0-RE-GATE-{datetime.now(UTC).strftime('%Y%m%dT%H%M%SZ')}"),
             "generated_utc": _utc_now(),
             "commit_sha": head_sha,
             "dataset_sha256": actual_sha,
@@ -648,10 +621,7 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
             "bca_rng_seed": BOOTSTRAP_RNG_SEED,
             "go_threshold": GO_THRESHOLD,
             "conditional_threshold": CONDITIONAL_THRESHOLD,
-            "primary_cohort_results": [
-                {k: v for k, v in r.items() if not k.startswith("_")}
-                for r in survivor_results
-            ],
+            "primary_cohort_results": [{k: v for k, v in r.items() if not k.startswith("_")} for r in survivor_results],
             "regime_sub_tests": regime_results,
             "secondary_cohort_q1": {
                 "mean_fragile_lift": float(mean_fragile_lift),
@@ -661,10 +631,7 @@ def main(holdout_parquet_path: str) -> int:  # noqa: C901 (complexity acceptable
                 "sigma_cross": SIGMA_CROSS,
                 "conditional_restricted_threshold": -1.0 * SIGMA_CROSS,
                 "nogo_threshold": -2.0 * SIGMA_CROSS,
-                "fragile_results": [
-                    {k: v for k, v in r.items() if not k.startswith("_")}
-                    for r in fragile_results
-                ],
+                "fragile_results": [{k: v for k, v in r.items() if not k.startswith("_")} for r in fragile_results],
             },
             "midpoint_prediction": midpoint_preds[-1] if midpoint_preds else None,
             "trigger_prediction": trigger_preds[-1] if trigger_preds else None,

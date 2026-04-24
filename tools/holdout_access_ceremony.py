@@ -134,10 +134,7 @@ def ceremony_should_refuse(entries: list[dict]) -> str | None:
         )
     dangling = has_dangling_initiated(entries)
     if dangling is not None:
-        return (
-            f"REFUSED: dangling INITIATED entry without terminal: {dangling}. "
-            "Resolve manually before re-running."
-        )
+        return f"REFUSED: dangling INITIATED entry without terminal: {dangling}. Resolve manually before re-running."
     return None
 
 
@@ -181,8 +178,7 @@ def _validate_key_outside_repo(key_path: Path) -> None:
     except ValueError:
         return  # OK: not under REPO_ROOT
     raise RuntimeError(
-        f"FATAL: key path {resolved} is inside the repository tree. "
-        "Holdout keys must live outside the repo."
+        f"FATAL: key path {resolved} is inside the repository tree. Holdout keys must live outside the repo."
     )
 
 
@@ -190,9 +186,7 @@ def _decrypt(key_bytes: bytes, ciphertext: bytes) -> bytes:
     try:
         from cryptography.fernet import Fernet
     except ImportError as e:
-        raise RuntimeError(
-            "cryptography package required for decryption: pip install cryptography"
-        ) from e
+        raise RuntimeError("cryptography package required for decryption: pip install cryptography") from e
     return Fernet(key_bytes).decrypt(ciphertext)
 
 

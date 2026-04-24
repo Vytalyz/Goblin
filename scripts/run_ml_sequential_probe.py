@@ -10,6 +10,7 @@ hand-crafted sequential features (17 total). Reports:
 
 Stays on the without-torch lane.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -69,7 +70,8 @@ def _build_dataset(parquet: Path, spec: dict, *, with_sequential: bool) -> pd.Da
     if with_sequential:
         feats = add_sequential_features(feats)
     labelled = build_labels(
-        feats, spec["holding_bars"],
+        feats,
+        spec["holding_bars"],
         stop_loss_pips=spec["stop_loss_pips"],
         take_profit_pips=spec["take_profit_pips"],
     )
@@ -78,18 +80,17 @@ def _build_dataset(parquet: Path, spec: dict, *, with_sequential: bool) -> pd.Da
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Phase 1.6b sequential-features probe.")
-    ap.add_argument("--candidates", nargs="+", required=True,
-                    help="Pre-registered surviving candidate set from 1.6.")
+    ap.add_argument("--candidates", nargs="+", required=True, help="Pre-registered surviving candidate set from 1.6.")
     ap.add_argument("--parquet", default="data/normalized/research/eur_usd_m1.parquet")
     ap.add_argument("--dataset-sha", default=None)
     ap.add_argument("--run-id", default="PROBE-1.6b-20260420")
     ap.add_argument("--n-folds", type=int, default=3)
     ap.add_argument("--embargo-bars", type=int, default=20)
     ap.add_argument("--effect-size-floor-pf", type=float, default=0.0083)
-    ap.add_argument("--p2-target-lift", type=float, required=True,
-                    help="Pre-registered P2 target PF lift (DEC-ML-1.6b-TARGET).")
-    ap.add_argument("--cost-shocks", nargs="+", type=float,
-                    default=list(DEFAULT_COST_SHOCKS_PIPS))
+    ap.add_argument(
+        "--p2-target-lift", type=float, required=True, help="Pre-registered P2 target PF lift (DEC-ML-1.6b-TARGET)."
+    )
+    ap.add_argument("--cost-shocks", nargs="+", type=float, default=list(DEFAULT_COST_SHOCKS_PIPS))
     ap.add_argument("--bh-fdr-q", type=float, default=0.10)
     ap.add_argument("--output", default="Goblin/reports/ml/p1_6b_sequential_probe.json")
     ap.add_argument("--holdout-manifest", default="Goblin/holdout/ml_p2_holdout_manifest.json")
@@ -118,7 +119,7 @@ def main() -> int:
     first_spec = _load_spec(args.candidates[0])
     full_with_seq = _build_dataset(parquet, first_spec, with_sequential=True)
     if holdout_first_idx is not None:
-        full_with_seq = full_with_seq.iloc[:min(len(full_with_seq), holdout_first_idx)]
+        full_with_seq = full_with_seq.iloc[: min(len(full_with_seq), holdout_first_idx)]
     verdicts = assess_features(full_with_seq, SEQUENTIAL_FEATURE_NAMES)
     verdict_dicts = [v.to_dict() for v in verdicts]
     print("[1.6b] stationarity verdicts (ADF p, KPSS p, stationary?):")
@@ -137,44 +138,52 @@ def main() -> int:
         # Baseline (11 features)
         ds_b = _build_dataset(parquet, spec, with_sequential=False)
         if holdout_first_idx is not None:
-            ds_b = ds_b.iloc[:min(len(ds_b), holdout_first_idx)].reset_index(drop=True)
+            ds_b = ds_b.iloc[: min(len(ds_b), holdout_first_idx)].reset_index(drop=True)
         res_b = evaluate_candidate(
-            ds_b, feature_cols=BASELINE_FEATURE_COLUMNS,
-            candidate_id=cid, n_folds=args.n_folds, embargo_bars=args.embargo_bars,
+            ds_b,
+            feature_cols=BASELINE_FEATURE_COLUMNS,
+            candidate_id=cid,
+            n_folds=args.n_folds,
+            embargo_bars=args.embargo_bars,
             cost_shocks_pips=args.cost_shocks,
         )
 
         # Sequential (17 features). Apply rolling-z normalization to flagged.
         ds_s = _build_dataset(parquet, spec, with_sequential=True)
         if holdout_first_idx is not None:
-            ds_s = ds_s.iloc[:min(len(ds_s), holdout_first_idx)].reset_index(drop=True)
+            ds_s = ds_s.iloc[: min(len(ds_s), holdout_first_idx)].reset_index(drop=True)
         normalized = normalize_non_stationary_inplace(ds_s, verdicts)
         res_s = evaluate_candidate(
-            ds_s, feature_cols=feature_cols_17,
-            candidate_id=cid, n_folds=args.n_folds, embargo_bars=args.embargo_bars,
+            ds_s,
+            feature_cols=feature_cols_17,
+            candidate_id=cid,
+            n_folds=args.n_folds,
+            embargo_bars=args.embargo_bars,
             cost_shocks_pips=args.cost_shocks,
         )
 
         # Paired delta on fold lifts
-        delta_per_fold = [
-            float(s - b) for s, b in zip(res_s["fold_xgb_pf"], res_b["fold_xgb_pf"])
-        ]
+        delta_per_fold = [float(s - b) for s, b in zip(res_s["fold_xgb_pf"], res_b["fold_xgb_pf"])]
         delta_lift_aggregate = res_s["xgb_pf_aggregate"] - res_b["xgb_pf_aggregate"]
 
-        paired_results.append({
-            "candidate_id": cid,
-            "baseline_xgb_pf": res_b["xgb_pf_aggregate"],
-            "sequential_xgb_pf": res_s["xgb_pf_aggregate"],
-            "delta_xgb_pf_aggregate": delta_lift_aggregate,
-            "delta_per_fold": delta_per_fold,
-            "normalized_features": normalized,
-            "regime_non_negative_with_sequential": res_s["regime_non_negative"],
-            "cost_persistent_at_1pip_with_sequential": res_s["cost_persistent_at_1pip"],
-        })
-        print(f"[1.6b] {cid:>14}  baseline_PF={res_b['xgb_pf_aggregate']:.4f}  "
-              f"seq_PF={res_s['xgb_pf_aggregate']:.4f}  "
-              f"delta={delta_lift_aggregate:+.4f}  "
-              f"regime_ok={res_s['regime_non_negative']}  cost_ok@1pip={res_s['cost_persistent_at_1pip']}")
+        paired_results.append(
+            {
+                "candidate_id": cid,
+                "baseline_xgb_pf": res_b["xgb_pf_aggregate"],
+                "sequential_xgb_pf": res_s["xgb_pf_aggregate"],
+                "delta_xgb_pf_aggregate": delta_lift_aggregate,
+                "delta_per_fold": delta_per_fold,
+                "normalized_features": normalized,
+                "regime_non_negative_with_sequential": res_s["regime_non_negative"],
+                "cost_persistent_at_1pip_with_sequential": res_s["cost_persistent_at_1pip"],
+            }
+        )
+        print(
+            f"[1.6b] {cid:>14}  baseline_PF={res_b['xgb_pf_aggregate']:.4f}  "
+            f"seq_PF={res_s['xgb_pf_aggregate']:.4f}  "
+            f"delta={delta_lift_aggregate:+.4f}  "
+            f"regime_ok={res_s['regime_non_negative']}  cost_ok@1pip={res_s['cost_persistent_at_1pip']}"
+        )
 
     # ---------------------------------------------------------------------
     # PRIMARY endpoint: cross-candidate mean delta-lift, paired one-sided test
@@ -270,8 +279,10 @@ def main() -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(f"[1.6b] wrote {output}")
-    print(f"[1.6b] mean_delta={primary_mean_lift:+.4f}  target={args.p2_target_lift:.4f}  "
-          f"fraction={fraction_of_target:.2%}  p={primary_pvalue:.4f}  verdict={verdict}")
+    print(
+        f"[1.6b] mean_delta={primary_mean_lift:+.4f}  target={args.p2_target_lift:.4f}  "
+        f"fraction={fraction_of_target:.2%}  p={primary_pvalue:.4f}  verdict={verdict}"
+    )
 
     assert_no_torch_import()
     return 0

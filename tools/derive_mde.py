@@ -288,9 +288,7 @@ def main(argv: list[str] | None = None) -> int:
 
     actual_sha = compute_file_sha256(dataset_path)
     if locked_sha and actual_sha != locked_sha:
-        raise DatasetSHAMismatchError(
-            DATASET_SHA_MISMATCH_ERROR.format(expected=locked_sha, actual=actual_sha)
-        )
+        raise DatasetSHAMismatchError(DATASET_SHA_MISMATCH_ERROR.format(expected=locked_sha, actual=actual_sha))
     if not locked_sha and not args.allow_empty_locked_sha:
         print(
             "ERROR: locked dataset_sha is empty; refusing to run. "

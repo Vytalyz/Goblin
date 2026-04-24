@@ -2637,7 +2637,9 @@ def _match_expected_to_actual(
     pip_scale = 10000.0
     if spec is not None and broker_history_frame is not None and not broker_history_frame.empty:
         pip_scale = _pip_scale(spec.instrument)
-        executable_features = build_features(_ensure_market_mid_columns(broker_history_frame), pip_scale=pip_scale).reset_index(drop=True)
+        executable_features = build_features(
+            _ensure_market_mid_columns(broker_history_frame), pip_scale=pip_scale
+        ).reset_index(drop=True)
         feature_index_by_timestamp = {
             pd.Timestamp(timestamp): int(index) for index, timestamp in executable_features["timestamp_utc"].items()
         }

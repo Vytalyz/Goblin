@@ -70,28 +70,14 @@ def evaluate_gates(
     effect_size_floor: float,
 ) -> dict:
     """Evaluate each gate and return structured results."""
-    n_above_floor = sum(
-        1 for c in candidate_results if c["pf_lift_aggregate"] >= effect_size_floor
-    )
+    n_above_floor = sum(1 for c in candidate_results if c["pf_lift_aggregate"] >= effect_size_floor)
     n_regime_pass = sum(1 for c in candidate_results if c.get("regime_non_negative"))
     n_cost_pass = sum(1 for c in candidate_results if c.get("cost_persistent_at_1pip"))
 
-    survivor_lifts = [
-        c["pf_lift_aggregate"]
-        for c in candidate_results
-        if c["candidate_id"] in SURVIVORS
-    ]
-    fragile_lifts = [
-        c["pf_lift_aggregate"]
-        for c in candidate_results
-        if c["candidate_id"] in FRAGILES
-    ]
-    survivor_mean = (
-        sum(survivor_lifts) / len(survivor_lifts) if survivor_lifts else 0.0
-    )
-    fragile_mean = (
-        sum(fragile_lifts) / len(fragile_lifts) if fragile_lifts else 0.0
-    )
+    survivor_lifts = [c["pf_lift_aggregate"] for c in candidate_results if c["candidate_id"] in SURVIVORS]
+    fragile_lifts = [c["pf_lift_aggregate"] for c in candidate_results if c["candidate_id"] in FRAGILES]
+    survivor_mean = sum(survivor_lifts) / len(survivor_lifts) if survivor_lifts else 0.0
+    fragile_mean = sum(fragile_lifts) / len(fragile_lifts) if fragile_lifts else 0.0
     n_fragile_negative = sum(1 for x in fragile_lifts if x < 0)
 
     # Q1 rule on 1.6 evidence (using 1.6 candidates as the lens):
@@ -177,10 +163,7 @@ def render_report(
             f"{gates['n_cost_persistent_at_1pip']}/{gates['n_candidates']} pass | "
             f"{'PASS' if gates['n_cost_persistent_at_1pip'] == gates['n_candidates'] else 'PARTIAL'} |"
         ),
-        (
-            f"| I1 MDE tier | TIER_1 if MDE_upper ≤ 0.10 | "
-            f"MDE_upper = {mde_upper:.4f} | {gates['i1_locked_tier']} |"
-        ),
+        (f"| I1 MDE tier | TIER_1 if MDE_upper ≤ 0.10 | MDE_upper = {mde_upper:.4f} | {gates['i1_locked_tier']} |"),
         (
             f"| Q1 fragile rule (CONDITIONAL_RESTRICTED) | "
             f"fragile mean < {gates['q1_conditional_threshold_neg1_sigma']:.4f} (-1σ_cross) | "
@@ -255,8 +238,7 @@ def main(argv: list[str] | None = None) -> int:
     actual_report_sha = hashlib.sha256(report_path.read_bytes()).hexdigest()
     if bc.get("report_sha") and actual_report_sha != bc["report_sha"]:
         print(
-            f"ERROR: baseline report SHA mismatch: expected {bc['report_sha']}, "
-            f"got {actual_report_sha}",
+            f"ERROR: baseline report SHA mismatch: expected {bc['report_sha']}, got {actual_report_sha}",
             file=sys.stderr,
         )
         return 5

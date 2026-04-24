@@ -9,6 +9,7 @@ rather than a guess.
 This module is deliberately numpy/scipy/xgboost only. Importing
 torch here would break the without-torch CI lane (Phase 1.7 / D7).
 """
+
 from __future__ import annotations
 
 import math
@@ -90,9 +91,7 @@ def _purged_folds(
         folds.append((np.arange(train_end), np.arange(test_start, test_end)))
     if not folds:
         split = max(int(n_samples * 0.7), 1)
-        folds.append(
-            (np.arange(split), np.arange(min(split + embargo_bars, n_samples), n_samples))
-        )
+        folds.append((np.arange(split), np.arange(min(split + embargo_bars, n_samples), n_samples)))
     return folds
 
 
@@ -135,9 +134,7 @@ def run_seed(
     seed:
         Random seed — the only stochastic input the pilot varies.
     """
-    folds = _purged_folds(
-        len(dataset), n_folds=n_folds, embargo_bars=embargo_bars
-    )
+    folds = _purged_folds(len(dataset), n_folds=n_folds, embargo_bars=embargo_bars)
     fold_pfs: list[float] = []
     all_outcomes: list[np.ndarray] = []
 
@@ -156,9 +153,7 @@ def run_seed(
         fold_pfs.append(_profit_factor(outcomes))
         all_outcomes.append(outcomes)
 
-    aggregate = _profit_factor(
-        np.concatenate(all_outcomes) if all_outcomes else np.empty(0)
-    )
+    aggregate = _profit_factor(np.concatenate(all_outcomes) if all_outcomes else np.empty(0))
     trade_count = int(sum(a.size for a in all_outcomes))
     return SeedOutcome(
         candidate_id=candidate_id,
@@ -233,6 +228,5 @@ def assert_no_torch_import() -> None:
 
     if "torch" in sys.modules:
         raise RuntimeError(
-            "torch was imported during the variance pilot; "
-            "Phase 1.6.0 must remain on the without-torch CI lane."
+            "torch was imported during the variance pilot; Phase 1.6.0 must remain on the without-torch CI lane."
         )

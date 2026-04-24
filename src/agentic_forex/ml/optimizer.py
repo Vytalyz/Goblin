@@ -179,12 +179,14 @@ def run_cma_optimizer(
 
         best_idx = int(np.argmin(fitnesses))
         best_gen_params = _decode_individual(solutions[best_idx], bounds)
-        history.append({
-            "generation": gen,
-            "best_fitness": float(fitnesses[best_idx]),
-            "best_params": best_gen_params,
-            "mean_fitness": float(np.mean(fitnesses)),
-        })
+        history.append(
+            {
+                "generation": gen,
+                "best_fitness": float(fitnesses[best_idx]),
+                "best_params": best_gen_params,
+                "mean_fitness": float(np.mean(fitnesses)),
+            }
+        )
         logger.info("EvA gen %d: best=%.4f mean=%.4f", gen, fitnesses[best_idx], np.mean(fitnesses))
 
     best_x = es.result.xbest

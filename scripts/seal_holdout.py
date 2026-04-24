@@ -13,6 +13,7 @@ D12 reminder: the holdout may be opened exactly twice: once at Phase
 2.0 re-gate, once at Phase 2.10 final. Decryption SHOULD be done via
 ``.github/workflows/holdout-access.yml`` once Phase 1.7 lands it.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -44,14 +45,24 @@ def bytes_sha256(data: bytes) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser(description="Seal an OOS holdout slice (Phase 1.6.4 / D12).")
     ap.add_argument("--source", default="data/normalized/research/eur_usd_m1.parquet")
-    ap.add_argument("--holdout-fraction", type=float, default=0.20,
-                    help="Chronologically-latest fraction to seal (0.15-0.20 per plan).")
-    ap.add_argument("--ciphertext-out", default="Goblin/holdout/ml_p2_holdout.parquet.enc",
-                    help="Where to write the encrypted holdout (relative to repo root).")
+    ap.add_argument(
+        "--holdout-fraction",
+        type=float,
+        default=0.20,
+        help="Chronologically-latest fraction to seal (0.15-0.20 per plan).",
+    )
+    ap.add_argument(
+        "--ciphertext-out",
+        default="Goblin/holdout/ml_p2_holdout.parquet.enc",
+        help="Where to write the encrypted holdout (relative to repo root).",
+    )
     ap.add_argument("--manifest-out", default="Goblin/holdout/ml_p2_holdout_manifest.json")
     ap.add_argument("--holdout-id", default="HOLDOUT-ML-P2-20260420")
-    ap.add_argument("--key-dir", default=str(Path.home() / ".goblin" / "holdout_keys"),
-                    help="Directory OUTSIDE the repo where the key is stored.")
+    ap.add_argument(
+        "--key-dir",
+        default=str(Path.home() / ".goblin" / "holdout_keys"),
+        help="Directory OUTSIDE the repo where the key is stored.",
+    )
     args = ap.parse_args()
 
     src = (REPO_ROOT / args.source).resolve()
@@ -59,8 +70,7 @@ def main() -> int:
         print(f"[seal] source not found: {src}", file=sys.stderr)
         return 2
     if not (0.05 <= args.holdout_fraction <= 0.30):
-        print(f"[seal] holdout-fraction must be in [0.05, 0.30], got {args.holdout_fraction}",
-              file=sys.stderr)
+        print(f"[seal] holdout-fraction must be in [0.05, 0.30], got {args.holdout_fraction}", file=sys.stderr)
         return 2
 
     src_sha = file_sha256(src)
@@ -73,6 +83,7 @@ def main() -> int:
 
     # Serialize holdout to a temp parquet bytes blob (in-memory), then encrypt.
     import io
+
     buf = io.BytesIO()
     holdout.to_parquet(buf, index=False)
     plaintext = buf.getvalue()
@@ -83,9 +94,11 @@ def main() -> int:
     key_dir.mkdir(parents=True, exist_ok=True)
     key_path = key_dir / f"{args.holdout_id}.key"
     if key_path.exists():
-        print(f"[seal] key already exists at {key_path} — refusing to overwrite "
-              f"(would orphan the existing ciphertext). Move it aside first.",
-              file=sys.stderr)
+        print(
+            f"[seal] key already exists at {key_path} — refusing to overwrite "
+            f"(would orphan the existing ciphertext). Move it aside first.",
+            file=sys.stderr,
+        )
         return 3
     key = Fernet.generate_key()
     key_path.write_bytes(key)
@@ -121,8 +134,10 @@ def main() -> int:
     print(f"[seal] wrote ciphertext  {cipher_out}  ({len(cipher)} bytes)")
     print(f"[seal] wrote manifest    {manifest_out}")
     print(f"[seal] key (OUT-of-repo) {key_path}")
-    print(f"[seal] holdout rows={n_holdout}  source_sha={src_sha[:16]}...  "
-          f"plaintext_sha={plaintext_sha[:16]}...  cipher_sha={cipher_sha[:16]}...")
+    print(
+        f"[seal] holdout rows={n_holdout}  source_sha={src_sha[:16]}...  "
+        f"plaintext_sha={plaintext_sha[:16]}...  cipher_sha={cipher_sha[:16]}..."
+    )
     return 0
 
 

@@ -456,9 +456,7 @@ def evaluate_s2(
     g9 = evaluate_cost_persistence(cost_sweep)
 
     # --- Gates 10-12: robustness ---
-    g10, g11, g12 = evaluate_robustness_gates(
-        robustness_report, th, allow_provisional=allow_provisional
-    )
+    g10, g11, g12 = evaluate_robustness_gates(robustness_report, th, allow_provisional=allow_provisional)
 
     gate_results: dict[str, dict[str, Any]] = {
         GATE_OOS_PF: g1,
@@ -479,8 +477,7 @@ def evaluate_s2(
     outcome = "pass" if not failing else "fail"
     decision_suffix = "PASS" if outcome == "pass" else "FAIL"
     rationale = (
-        f"S2 gate evaluation for {candidate_id}: "
-        f"{len(gate_results) - len(failing)}/{len(gate_results)} gates passed."
+        f"S2 gate evaluation for {candidate_id}: {len(gate_results) - len(failing)}/{len(gate_results)} gates passed."
     )
     if failing:
         rationale += f" Failing gates: {', '.join(failing)}."
@@ -559,7 +556,7 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
         "--cost-sweep",
         type=Path,
         default=None,
-        help="Optional path to a cost-sweep JSON like {\"plus_1pip_pf\": 1.07}.",
+        help='Optional path to a cost-sweep JSON like {"plus_1pip_pf": 1.07}.',
     )
     parser.add_argument(
         "--allow-provisional",

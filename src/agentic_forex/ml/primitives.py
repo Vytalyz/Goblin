@@ -42,6 +42,7 @@ CONSTANT_RANGE: tuple[float, float] = (-3.0, 3.0)
 # Protected arithmetic operators
 # ---------------------------------------------------------------------------
 
+
 def protected_div(a: float, b: float) -> float:
     """Division protected against zero denominator."""
     if abs(b) < 1e-9:
@@ -81,6 +82,7 @@ def neg(a: float) -> float:
 # Comparison operators — return float 1.0/0.0 so trees stay numeric
 # ---------------------------------------------------------------------------
 
+
 def gt(a: float, b: float) -> float:
     return 1.0 if a > b else 0.0
 
@@ -100,6 +102,7 @@ def le(a: float, b: float) -> float:
 # ---------------------------------------------------------------------------
 # Logical operators on float (0.0 = False, non-zero = True)
 # ---------------------------------------------------------------------------
+
 
 def and_(a: float, b: float) -> float:
     return 1.0 if (a != 0.0 and b != 0.0) else 0.0

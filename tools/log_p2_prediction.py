@@ -71,8 +71,7 @@ def _next_prediction_id(entries: list[dict], phase: str) -> str:
     existing = [
         e.get("prediction_id", "")
         for e in entries
-        if isinstance(e.get("prediction_id"), str)
-        and f"PRED-ML-2.0-{label}-" in e["prediction_id"]
+        if isinstance(e.get("prediction_id"), str) and f"PRED-ML-2.0-{label}-" in e["prediction_id"]
     ]
     n = len(existing) + 1
     return f"PRED-ML-2.0-{label}-{n}"
@@ -94,16 +93,17 @@ def validate_prediction_entry(entry: dict) -> list[str]:
     ci_low = entry.get("predicted_ci_low")
     ci_high = entry.get("predicted_ci_high")
 
-    for name, val in [("predicted_point_estimate_pf", point), ("predicted_ci_low", ci_low), ("predicted_ci_high", ci_high)]:
+    for name, val in [
+        ("predicted_point_estimate_pf", point),
+        ("predicted_ci_low", ci_low),
+        ("predicted_ci_high", ci_high),
+    ]:
         if not isinstance(val, (int, float)):
             errors.append(f"{name} must be a number, got {val!r}")
 
     if isinstance(ci_low, (int, float)) and isinstance(point, (int, float)) and isinstance(ci_high, (int, float)):
         if not (ci_low <= point <= ci_high):
-            errors.append(
-                f"ci_low <= point_estimate <= ci_high violated: "
-                f"{ci_low} <= {point} <= {ci_high}"
-            )
+            errors.append(f"ci_low <= point_estimate <= ci_high violated: {ci_low} <= {point} <= {ci_high}")
 
     sha = entry.get("commit_sha_at_prediction", "")
     if not COMMIT_SHA_RE.match(str(sha)):
@@ -111,25 +111,16 @@ def validate_prediction_entry(entry: dict) -> list[str]:
 
     rationale = entry.get("rationale_note", "")
     if len(str(rationale)) < RATIONALE_MIN_LEN:
-        errors.append(
-            f"rationale_note must be >= {RATIONALE_MIN_LEN} chars "
-            f"(got {len(str(rationale))})"
-        )
+        errors.append(f"rationale_note must be >= {RATIONALE_MIN_LEN} chars (got {len(str(rationale))})")
 
     attestation = entry.get("predictor_attestation", "")
     if len(str(attestation)) < ATTESTATION_MIN_LEN:
-        errors.append(
-            f"predictor_attestation must be >= {ATTESTATION_MIN_LEN} chars "
-            f"(got {len(str(attestation))})"
-        )
+        errors.append(f"predictor_attestation must be >= {ATTESTATION_MIN_LEN} chars (got {len(str(attestation))})")
 
     if phase == "trigger":
         mp_sha = entry.get("commit_sha_of_midpoint_prediction", "")
         if not COMMIT_SHA_RE.match(str(mp_sha)):
-            errors.append(
-                "trigger phase requires commit_sha_of_midpoint_prediction "
-                f"(40-char hex), got {mp_sha!r}"
-            )
+            errors.append(f"trigger phase requires commit_sha_of_midpoint_prediction (40-char hex), got {mp_sha!r}")
 
     return errors
 
@@ -145,6 +136,7 @@ def _get_current_commit_sha() -> str:
     """Return the current HEAD SHA (40 chars), or 40 zeros on failure."""
     try:
         import subprocess
+
         result = subprocess.run(
             ["git", "rev-parse", "HEAD"],
             cwd=str(REPO_ROOT),
@@ -164,23 +156,38 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="ML-P2.0 prediction logger (R4-11)")
     ap.add_argument("--phase", required=True, choices=sorted(VALID_PHASES))
     ap.add_argument("--verdict", required=True, choices=sorted(VALID_VERDICTS))
-    ap.add_argument("--point-estimate", type=float, required=True,
-                    dest="point_estimate",
-                    help="Predicted aggregate PF lift on 6 survivors")
+    ap.add_argument(
+        "--point-estimate",
+        type=float,
+        required=True,
+        dest="point_estimate",
+        help="Predicted aggregate PF lift on 6 survivors",
+    )
     ap.add_argument("--ci-low", type=float, required=True, dest="ci_low")
     ap.add_argument("--ci-high", type=float, required=True, dest="ci_high")
-    ap.add_argument("--rationale", type=str, required=True,
-                    help=f">= {RATIONALE_MIN_LEN} characters")
-    ap.add_argument("--attestation", type=str, required=True,
-                    help=f">= {ATTESTATION_MIN_LEN} chars; non-peek attestation for solo owner")
-    ap.add_argument("--midpoint-sha", type=str, default=None, dest="midpoint_sha",
-                    help="Required for trigger phase: commit SHA of midpoint prediction")
-    ap.add_argument("--commit-sha", type=str, default=None, dest="commit_sha",
-                    help="Override HEAD commit SHA (default: auto-detect)")
-    ap.add_argument("--log", type=Path, default=PREDICTIONS_LOG,
-                    help="Predictions log path")
-    ap.add_argument("--dry-run", action="store_true",
-                    help="Validate and print the entry without writing")
+    ap.add_argument("--rationale", type=str, required=True, help=f">= {RATIONALE_MIN_LEN} characters")
+    ap.add_argument(
+        "--attestation",
+        type=str,
+        required=True,
+        help=f">= {ATTESTATION_MIN_LEN} chars; non-peek attestation for solo owner",
+    )
+    ap.add_argument(
+        "--midpoint-sha",
+        type=str,
+        default=None,
+        dest="midpoint_sha",
+        help="Required for trigger phase: commit SHA of midpoint prediction",
+    )
+    ap.add_argument(
+        "--commit-sha",
+        type=str,
+        default=None,
+        dest="commit_sha",
+        help="Override HEAD commit SHA (default: auto-detect)",
+    )
+    ap.add_argument("--log", type=Path, default=PREDICTIONS_LOG, help="Predictions log path")
+    ap.add_argument("--dry-run", action="store_true", help="Validate and print the entry without writing")
     args = ap.parse_args(argv)
 
     commit_sha = args.commit_sha or _get_current_commit_sha()
@@ -208,9 +215,9 @@ def main(argv: list[str] | None = None) -> int:
         entry["commit_sha_of_midpoint_prediction"] = args.midpoint_sha
         # Verify midpoint entry exists
         midpoint_entries = [
-            e for e in entries
-            if e.get("phase") == "midpoint"
-            and e.get("commit_sha_at_prediction") == args.midpoint_sha
+            e
+            for e in entries
+            if e.get("phase") == "midpoint" and e.get("commit_sha_at_prediction") == args.midpoint_sha
         ]
         if not midpoint_entries:
             print(
@@ -223,9 +230,7 @@ def main(argv: list[str] | None = None) -> int:
         # Compute delta from midpoint
         if midpoint_entries:
             mp_point = float(midpoint_entries[-1].get("predicted_point_estimate_pf", 0.0))
-            entry["predicted_delta_from_midpoint_pf"] = round(
-                args.point_estimate - mp_point, 6
-            )
+            entry["predicted_delta_from_midpoint_pf"] = round(args.point_estimate - mp_point, 6)
 
     errors = validate_prediction_entry(entry)
     if errors:

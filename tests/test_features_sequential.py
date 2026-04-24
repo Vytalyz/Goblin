@@ -1,4 +1,5 @@
 """Tests for Phase 1.6b sequential features + stationarity helpers."""
+
 from __future__ import annotations
 
 import sys
@@ -28,13 +29,15 @@ from agentic_forex.ml.stationarity import (
 
 def _seed_frame(n: int = 600, seed: int = 0) -> pd.DataFrame:
     rng = np.random.default_rng(seed)
-    df = pd.DataFrame({
-        "ret_1": rng.normal(0, 1e-4, n),
-        "momentum_12": rng.normal(0, 1e-3, n),
-        "volatility_20": np.abs(rng.normal(1e-4, 5e-5, n)),
-        "intrabar_range_pips": np.abs(rng.normal(2.0, 0.5, n)),
-        "rsi_14": rng.uniform(20, 80, n),
-    })
+    df = pd.DataFrame(
+        {
+            "ret_1": rng.normal(0, 1e-4, n),
+            "momentum_12": rng.normal(0, 1e-3, n),
+            "volatility_20": np.abs(rng.normal(1e-4, 5e-5, n)),
+            "intrabar_range_pips": np.abs(rng.normal(2.0, 0.5, n)),
+            "rsi_14": rng.uniform(20, 80, n),
+        }
+    )
     return df
 
 

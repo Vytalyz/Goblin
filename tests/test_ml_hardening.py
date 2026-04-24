@@ -101,8 +101,10 @@ class TestLabelRandomization:
         X, y = _make_synthetic_data(300)
         split = 200
         result = _label_randomization_test(
-            X.iloc[:split], y.iloc[:split],
-            X.iloc[split:], y.iloc[split:],
+            X.iloc[:split],
+            y.iloc[:split],
+            X.iloc[split:],
+            y.iloc[split:],
         )
         assert "shuffled_accuracy" in result
         # With shuffled labels, accuracy should be near 0.5 (not great)
@@ -112,8 +114,10 @@ class TestLabelRandomization:
         X, y = _make_synthetic_data()
         split = 140
         result = _label_randomization_test(
-            X.iloc[:split], y.iloc[:split],
-            X.iloc[split:], y.iloc[split:],
+            X.iloc[:split],
+            y.iloc[:split],
+            X.iloc[split:],
+            y.iloc[split:],
         )
         assert "shuffled_accuracy" in result
 

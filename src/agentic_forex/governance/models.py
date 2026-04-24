@@ -876,9 +876,7 @@ class VariancePilotReport(BaseModel):
     """
 
     pilot_id: str
-    generated_at_utc: str = Field(
-        default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z")
-    )
+    generated_at_utc: str = Field(default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z"))
     dataset_path: str
     dataset_sha256: str
     candidate_ids: list[str]
@@ -950,9 +948,7 @@ class BaselineComparisonReport(BaseModel):
     """
 
     run_id: str
-    generated_at_utc: str = Field(
-        default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z")
-    )
+    generated_at_utc: str = Field(default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z"))
     dataset_path: str
     dataset_sha256: str
     candidate_ids: list[str]
@@ -981,9 +977,7 @@ class SealedHoldoutManifest(BaseModel):
     """
 
     holdout_id: str
-    created_at_utc: str = Field(
-        default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z")
-    )
+    created_at_utc: str = Field(default_factory=lambda: datetime.now(UTC).isoformat().replace("+00:00", "Z"))
     source_dataset_path: str
     source_dataset_sha256: str
     holdout_n_rows: int
@@ -994,4 +988,3 @@ class SealedHoldoutManifest(BaseModel):
     ciphertext_sha256: str
     key_storage_location: str
     encryption_algorithm: str
-

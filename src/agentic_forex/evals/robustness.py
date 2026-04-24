@@ -461,9 +461,11 @@ def _moving_block_bootstrap_mean(pnl: pd.Series, *, block_size: int, rng: random
                 break
     return float(sum(values) / sample_size)
 
+
 # ---------------------------------------------------------------------------
 # MT5 feature alignment test  (ML-P1.9)
 # ---------------------------------------------------------------------------
+
 
 def mt5_feature_alignment_test(
     oanda_features: pd.DataFrame,
@@ -485,8 +487,7 @@ def mt5_feature_alignment_test(
     from sklearn.model_selection import StratifiedKFold
 
     cols = feature_cols or [
-        c for c in oanda_features.columns
-        if c in mt5_features.columns and oanda_features[c].dtype.kind in "fi"
+        c for c in oanda_features.columns if c in mt5_features.columns and oanda_features[c].dtype.kind in "fi"
     ]
 
     oa = oanda_features[cols].dropna().copy()

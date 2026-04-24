@@ -63,10 +63,7 @@ def validate_entry(entry: dict, midpoint_shas: set[str]) -> list[str]:
         pt = entry["predicted_point_estimate_pf"]
         hi = entry["predicted_ci_high"]
         if not (lo <= pt <= hi):
-            errors.append(
-                f"predicted_ci_low ({lo}) <= point_estimate ({pt}) "
-                f"<= predicted_ci_high ({hi}) violated"
-            )
+            errors.append(f"predicted_ci_low ({lo}) <= point_estimate ({pt}) <= predicted_ci_high ({hi}) violated")
 
     sha = entry["commit_sha_at_prediction"]
     if not isinstance(sha, str) or not SHA_PATTERN.match(sha):
@@ -82,21 +79,15 @@ def validate_entry(entry: dict, midpoint_shas: set[str]) -> list[str]:
 
     att = entry["predictor_attestation"]
     if not isinstance(att, str) or len(att) < ATTESTATION_MIN_CHARS:
-        errors.append(
-            f"predictor_attestation must be a string >= {ATTESTATION_MIN_CHARS} chars"
-        )
+        errors.append(f"predictor_attestation must be a string >= {ATTESTATION_MIN_CHARS} chars")
 
     if entry.get("phase") == "trigger":
         ref = entry.get("commit_sha_of_midpoint_prediction")
         if not isinstance(ref, str) or not SHA_PATTERN.match(ref):
-            errors.append(
-                "trigger entry requires commit_sha_of_midpoint_prediction "
-                "(40-char hex)"
-            )
+            errors.append("trigger entry requires commit_sha_of_midpoint_prediction (40-char hex)")
         elif ref not in midpoint_shas:
             errors.append(
-                f"trigger references midpoint SHA {ref} that does not appear in any "
-                "prior phase=midpoint entry"
+                f"trigger references midpoint SHA {ref} that does not appear in any prior phase=midpoint entry"
             )
 
     return errors

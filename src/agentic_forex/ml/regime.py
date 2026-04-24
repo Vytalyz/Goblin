@@ -93,7 +93,9 @@ def regime_stability_score(
         end = start + chunk_size if w < n_windows - 1 else n
         window_data = clean.iloc[start:end]
         gmm = fit_regime_classifier(
-            window_data, n_components=n_components, random_state=random_state + w,
+            window_data,
+            n_components=n_components,
+            random_state=random_state + w,
         )
         # Predict on the full dataset from each window's model.
         full_labels = gmm.predict(clean[REGIME_FEATURES])

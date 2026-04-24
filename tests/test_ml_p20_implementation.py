@@ -62,9 +62,7 @@ class TestInSampleConstants:
         assert self.mod.N_IN_SAMPLE == 155_775
 
     def test_dataset_sha(self):
-        assert self.mod.DATASET_SHA == (
-            "7875ba5af620476aaba80cdec0c86680b343f70a02bf19eb40695517378ed8f1"
-        )
+        assert self.mod.DATASET_SHA == ("7875ba5af620476aaba80cdec0c86680b343f70a02bf19eb40695517378ed8f1")
 
     def test_effect_size_floor(self):
         assert abs(self.mod.EFFECT_SIZE_FLOOR_PF - 0.0083) < 1e-9
@@ -117,9 +115,7 @@ class TestBcaBootstrap:
         rng = np.random.default_rng(7)
         n = 300
         outcomes = np.where(rng.random(n) < 0.5, 1.0, -1.0)
-        _, ci_lo, ci_hi, _ = self.fn(
-            outcomes, outcomes, block_size=20, n_resamples=200, rng_seed=3
-        )
+        _, ci_lo, ci_hi, _ = self.fn(outcomes, outcomes, block_size=20, n_resamples=200, rng_seed=3)
         # Identical arrays → lift = 0; CI should straddle 0
         assert ci_lo <= 0.0 <= ci_hi
 
@@ -282,9 +278,7 @@ class TestCeremonyPreConditions:
 
     def test_exits_1_missing_trigger(self, tmp_path, monkeypatch):
         pred_log = tmp_path / "predictions.jsonl"
-        pred_log.write_text(
-            json.dumps({"phase": "midpoint", "prediction_id": "PRED-X"}) + "\n"
-        )
+        pred_log.write_text(json.dumps({"phase": "midpoint", "prediction_id": "PRED-X"}) + "\n")
         monkeypatch.setattr(self.mod, "PREDICTIONS_LOG", pred_log)
         result = self.mod.main(["--key-path", str(tmp_path / "fake.key")])
         assert result == 1

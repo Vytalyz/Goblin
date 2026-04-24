@@ -171,9 +171,7 @@ def main(argv: list[str] | None = None) -> int:
     print("\n[p2-insample] --- Summary ---")
     print(f"[p2-insample] mean PF lift  : {summary['mean_pf_lift']:+.4f}")
     print(f"[p2-insample] median PF lift: {summary['median_pf_lift']:+.4f}")
-    print(
-        f"[p2-insample] frac above floor: {summary['fraction_above_effect_size_floor']:.2f}"
-    )
+    print(f"[p2-insample] frac above floor: {summary['fraction_above_effect_size_floor']:.2f}")
     print(
         f"\n[p2-insample] NEXT STEP: file midpoint prediction:\n"
         f"  python tools/log_p2_prediction.py "
@@ -199,14 +197,9 @@ def main(argv: list[str] | None = None) -> int:
             "median_pf_lift": float(np.median(lifts)),
             "min_pf_lift": float(np.min(lifts)),
             "max_pf_lift": float(np.max(lifts)),
-            "fraction_above_0083_floor": float(
-                np.mean([lift_value >= 0.0083 for lift_value in lifts])
-            ),
+            "fraction_above_0083_floor": float(np.mean([lift_value >= 0.0083 for lift_value in lifts])),
         },
-        "governance_note": (
-            "In-sample CV result only. Holdout NOT loaded. "
-            "File midpoint prediction before ceremony."
-        ),
+        "governance_note": ("In-sample CV result only. Holdout NOT loaded. File midpoint prediction before ceremony."),
     }
 
     output_path.parent.mkdir(parents=True, exist_ok=True)

@@ -640,7 +640,9 @@ def _resolve_existing_path(primary: str | None, fallbacks: list[Path]) -> Path |
     return None
 
 
-def _archive_file(source: Path | None, destination: Path, notes: list[str], *, found_note: str, missing_note: str) -> Path | None:
+def _archive_file(
+    source: Path | None, destination: Path, notes: list[str], *, found_note: str, missing_note: str
+) -> Path | None:
     if source is None:
         notes.append(missing_note)
         return None
@@ -654,7 +656,15 @@ def _find_mt5_common_path() -> Path | None:
     """Auto-detect MT5 common files path from standard Windows locations."""
     candidates = [
         Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Terminal" / "Common" / "Files",
-        Path("C:") / "Users" / Path.home().name / "AppData" / "Roaming" / "MetaQuotes" / "Terminal" / "Common" / "Files",
+        Path("C:")
+        / "Users"
+        / Path.home().name
+        / "AppData"
+        / "Roaming"
+        / "MetaQuotes"
+        / "Terminal"
+        / "Common"
+        / "Files",
     ]
     for candidate in candidates:
         if candidate.exists():
@@ -778,7 +788,9 @@ def _build_live_quality_assessment(
         "reasons": reasons,
     }
 
-    quality_report_path = settings.paths().goblin_live_demo_reports_dir / candidate_id / run_id / "candidate_quality_audit.json"
+    quality_report_path = (
+        settings.paths().goblin_live_demo_reports_dir / candidate_id / run_id / "candidate_quality_audit.json"
+    )
     quality_report_path.parent.mkdir(parents=True, exist_ok=True)
     quality_report_path.write_text(json.dumps(assessment, indent=2), encoding="utf-8")
     assessment["report_path"] = str(quality_report_path)
@@ -1670,8 +1682,7 @@ def main(argv: list[str] | None = None) -> int:
         journal_path, _ = _discover_mt5_terminal_logs(common_base)
         if journal_path is None:
             print(
-                f"ERROR: No active MT5 terminal journal found. "
-                f"Ensure MT5 is running with {args.candidate_id} EA.",
+                f"ERROR: No active MT5 terminal journal found. Ensure MT5 is running with {args.candidate_id} EA.",
                 file=sys.stderr,
             )
             return 1
@@ -1679,7 +1690,7 @@ def main(argv: list[str] | None = None) -> int:
         try:
             with open(journal_path, encoding="utf-8", errors="ignore") as f:
                 lines = f.readlines()
-                tail_lines = lines[-args.tail:] if args.tail > 0 else lines
+                tail_lines = lines[-args.tail :] if args.tail > 0 else lines
                 print(f"# Journal: {journal_path.name} (tail -{args.tail})")
                 print(f"# Updated: {datetime.fromtimestamp(journal_path.stat().st_mtime, tz=UTC).isoformat()}")
                 print()
@@ -1699,8 +1710,7 @@ def main(argv: list[str] | None = None) -> int:
         _, experts_path = _discover_mt5_terminal_logs(common_base)
         if experts_path is None:
             print(
-                f"ERROR: No active MT5 experts log found. "
-                f"Ensure MT5 is running with {args.candidate_id} EA.",
+                f"ERROR: No active MT5 experts log found. Ensure MT5 is running with {args.candidate_id} EA.",
                 file=sys.stderr,
             )
             return 1
@@ -1708,7 +1718,7 @@ def main(argv: list[str] | None = None) -> int:
         try:
             with open(experts_path, encoding="utf-8", errors="ignore") as f:
                 lines = f.readlines()
-                tail_lines = lines[-args.tail:] if args.tail > 0 else lines
+                tail_lines = lines[-args.tail :] if args.tail > 0 else lines
                 print(f"# Experts Log: {experts_path.name} (tail -{args.tail})")
                 print(f"# Updated: {datetime.fromtimestamp(experts_path.stat().st_mtime, tz=UTC).isoformat()}")
                 print()

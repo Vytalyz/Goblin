@@ -20,7 +20,7 @@ import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 REHEARSAL_SCRIPT = REPO_ROOT / "tools" / "run_p20_rehearsal.py"
-REHEARSAL_REPORT  = REPO_ROOT / "Goblin" / "reports" / "ml" / "p2_0_rehearsal_report.json"
+REHEARSAL_REPORT = REPO_ROOT / "Goblin" / "reports" / "ml" / "p2_0_rehearsal_report.json"
 REAL_DECISIONS_LOG = REPO_ROOT / "Goblin" / "decisions" / "ml_decisions.jsonl"
 REAL_PREDICTIONS_LOG = REPO_ROOT / "Goblin" / "decisions" / "predictions.jsonl"
 SYNTHETIC_HOLDOUT = REPO_ROOT / "Goblin" / "holdout" / "ml_p2_synthetic_rehearsal.parquet"
@@ -28,6 +28,7 @@ SYNTHETIC_HOLDOUT = REPO_ROOT / "Goblin" / "holdout" / "ml_p2_synthetic_rehearsa
 # ---------------------------------------------------------------------------
 # helpers
 # ---------------------------------------------------------------------------
+
 
 def _decisions_log_sha() -> str:
     return hashlib.sha256(REAL_DECISIONS_LOG.read_bytes()).hexdigest()
@@ -41,12 +42,12 @@ def _predictions_log_size() -> int:
 # tests
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.timeout(300)
 def test_rehearsal_exits_zero():
     """Full rehearsal must complete with exit code 0."""
     assert SYNTHETIC_HOLDOUT.exists(), (
-        f"Synthetic holdout not found: {SYNTHETIC_HOLDOUT}\n"
-        "Run: python tools/generate_synthetic_holdout.py"
+        f"Synthetic holdout not found: {SYNTHETIC_HOLDOUT}\nRun: python tools/generate_synthetic_holdout.py"
     )
 
     before_decisions_sha = _decisions_log_sha()
@@ -54,13 +55,11 @@ def test_rehearsal_exits_zero():
 
     result = subprocess.run(
         [sys.executable, "-B", str(REHEARSAL_SCRIPT)],
-        capture_output=False,   # let output stream to terminal for visibility
+        capture_output=False,  # let output stream to terminal for visibility
         cwd=str(REPO_ROOT),
     )
 
-    assert result.returncode == 0, (
-        "Rehearsal script exited non-zero — check step output above for failures"
-    )
+    assert result.returncode == 0, "Rehearsal script exited non-zero — check step output above for failures"
 
     # Real artifacts must be untouched
     assert _decisions_log_sha() == before_decisions_sha, (
@@ -101,8 +100,7 @@ def test_rehearsal_report_schema():
         assert k in report, f"Report missing key: {k}"
 
     assert report["overall"] == "PASS", (
-        f"Rehearsal report overall={report['overall']!r}; "
-        f"failures: {report['failures']}"
+        f"Rehearsal report overall={report['overall']!r}; failures: {report['failures']}"
     )
     assert report["steps_failed"] == 0, f"Failures: {report['failures']}"
 
@@ -115,9 +113,7 @@ def test_rehearsal_report_schema():
         "E_cap_enforcement",
         "F_decisions_schema",
     }
-    assert expected_steps <= step_names, (
-        f"Missing steps in report: {expected_steps - step_names}"
-    )
+    assert expected_steps <= step_names, f"Missing steps in report: {expected_steps - step_names}"
 
 
 @pytest.mark.timeout(30)
@@ -129,15 +125,6 @@ def test_rehearsal_report_hard_cap_unaffected():
     present once the hard cap has been used. Only REHEARSAL-marked
     entries would indicate the rehearsal scaffold polluted the real log.
     """
-    entries = [
-        json.loads(line)
-        for line in REAL_DECISIONS_LOG.read_text(encoding="utf-8").splitlines()
-        if line.strip()
-    ]
-    rehearsal_ids = [
-        e["decision_id"] for e in entries
-        if "REHEARSAL" in e.get("decision_id", "")
-    ]
-    assert rehearsal_ids == [], (
-        f"Real decisions log contains unexpected REHEARSAL entries: {rehearsal_ids}"
-    )
+    entries = [json.loads(line) for line in REAL_DECISIONS_LOG.read_text(encoding="utf-8").splitlines() if line.strip()]
+    rehearsal_ids = [e["decision_id"] for e in entries if "REHEARSAL" in e.get("decision_id", "")]
+    assert rehearsal_ids == [], f"Real decisions log contains unexpected REHEARSAL entries: {rehearsal_ids}"

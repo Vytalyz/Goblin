@@ -7,6 +7,7 @@ into non-zero exit codes plus Decision-Log entries.
 Phase 1.7 (D14) requires the baseline runner to raise these explicitly
 so the gate is enforced in code, not just in narrative documentation.
 """
+
 from __future__ import annotations
 
 

@@ -25,8 +25,11 @@ def test_generate_writes_requested_rows(tmp_path):
     _skip_if_data_missing()
     out = tmp_path / "synth.parquet"
     meta = gsh.generate(
-        parquet_path=PARQUET, holdout_manifest=MANIFEST,
-        out_path=out, n_rows=2000, seed=20260420,
+        parquet_path=PARQUET,
+        holdout_manifest=MANIFEST,
+        out_path=out,
+        n_rows=2000,
+        seed=20260420,
     )
     assert out.exists()
     assert meta["n_rows_written"] == 2000
@@ -39,6 +42,7 @@ def test_generate_is_deterministic_under_same_seed(tmp_path):
     gsh.generate(parquet_path=PARQUET, holdout_manifest=MANIFEST, out_path=out1, n_rows=1000, seed=99)
     gsh.generate(parquet_path=PARQUET, holdout_manifest=MANIFEST, out_path=out2, n_rows=1000, seed=99)
     import pandas as pd
+
     a = pd.read_parquet(out1)
     b = pd.read_parquet(out2)
     pd.testing.assert_frame_equal(a, b)
@@ -51,6 +55,7 @@ def test_generate_different_seeds_differ(tmp_path):
     gsh.generate(parquet_path=PARQUET, holdout_manifest=MANIFEST, out_path=out1, n_rows=500, seed=1)
     gsh.generate(parquet_path=PARQUET, holdout_manifest=MANIFEST, out_path=out2, n_rows=500, seed=2)
     import pandas as pd
+
     a = pd.read_parquet(out1)
     b = pd.read_parquet(out2)
     # Different seeds → different row selection / permutation; high probability they differ

@@ -8,6 +8,7 @@ shocks. Uses the purged walk-forward CV with embargo from
 This module is numpy/pandas/xgboost only — no torch import (without-torch
 CI lane stays green through Phase 1.7).
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -63,9 +64,9 @@ class RegimeDefinition:
 
 REGIMES: tuple[RegimeDefinition, ...] = (
     RegimeDefinition("trend_high_vol", "|momentum_12| above median AND volatility_20 above median"),
-    RegimeDefinition("trend_low_vol",  "|momentum_12| above median AND volatility_20 below median"),
+    RegimeDefinition("trend_low_vol", "|momentum_12| above median AND volatility_20 below median"),
     RegimeDefinition("range_high_vol", "|momentum_12| below median AND volatility_20 above median"),
-    RegimeDefinition("range_low_vol",  "|momentum_12| below median AND volatility_20 below median"),
+    RegimeDefinition("range_low_vol", "|momentum_12| below median AND volatility_20 below median"),
 )
 
 
@@ -87,8 +88,7 @@ def assert_dataset_sha(parquet_path: Path, expected_sha: str) -> None:
     actual = file_sha256(parquet_path)
     if actual != expected_sha:
         raise DatasetSHAMismatchError(
-            f"Dataset SHA mismatch for {parquet_path}: "
-            f"expected {expected_sha!r}, got {actual!r}"
+            f"Dataset SHA mismatch for {parquet_path}: expected {expected_sha!r}, got {actual!r}"
         )
 
 
@@ -174,7 +174,9 @@ def evaluate_candidate(
     dataset. Returns a dict matching ``CandidateBaselineResult``.
     """
     folds = _purged_walk_forward_folds(
-        len(dataset), n_folds=n_folds, embargo_bars=embargo_bars,
+        len(dataset),
+        n_folds=n_folds,
+        embargo_bars=embargo_bars,
     )
 
     fold_xgb_pf: list[float] = []
@@ -218,9 +220,11 @@ def evaluate_candidate(
     pf_lift_agg = xgb_pf_agg - rule_pf_agg
 
     # Regime breakdown
-    full_test = pd.concat(
-        [dataset.iloc[idx] for idx in all_test_idx], ignore_index=False
-    ) if all_test_idx else dataset.iloc[0:0]
+    full_test = (
+        pd.concat([dataset.iloc[idx] for idx in all_test_idx], ignore_index=False)
+        if all_test_idx
+        else dataset.iloc[0:0]
+    )
     regimes_for_test = assign_regimes(full_test)
 
     regime_rows: list[dict] = []
@@ -229,28 +233,32 @@ def evaluate_candidate(
         mask = (regimes_for_test == rdef.regime_id).to_numpy()
         n = int(mask.sum())
         if n == 0:
-            regime_rows.append({
-                "regime_id": rdef.regime_id,
-                "regime_description": rdef.description,
-                "n_trades": 0,
-                "rule_pf": 0.0,
-                "xgb_pf": 0.0,
-                "pf_lift": 0.0,
-            })
+            regime_rows.append(
+                {
+                    "regime_id": rdef.regime_id,
+                    "regime_description": rdef.description,
+                    "n_trades": 0,
+                    "rule_pf": 0.0,
+                    "xgb_pf": 0.0,
+                    "pf_lift": 0.0,
+                }
+            )
             continue
         r_xgb = profit_factor(full_xgb_out[mask])
         r_rule = profit_factor(full_rule_out[mask])
         lift = r_xgb - r_rule
         if lift < 0:
             regime_non_negative = False
-        regime_rows.append({
-            "regime_id": rdef.regime_id,
-            "regime_description": rdef.description,
-            "n_trades": n,
-            "rule_pf": r_rule,
-            "xgb_pf": r_xgb,
-            "pf_lift": lift,
-        })
+        regime_rows.append(
+            {
+                "regime_id": rdef.regime_id,
+                "regime_description": rdef.description,
+                "n_trades": n,
+                "rule_pf": r_rule,
+                "xgb_pf": r_xgb,
+                "pf_lift": lift,
+            }
+        )
 
     # Cost-sensitivity sweep
     cost_rows: list[dict] = []
@@ -263,12 +271,14 @@ def evaluate_candidate(
         r_xgb = profit_factor(xgb_after)
         r_rule = profit_factor(rule_after)
         lift = r_xgb - r_rule
-        cost_rows.append({
-            "cost_pips": float(cost),
-            "rule_pf": r_rule,
-            "xgb_pf": r_xgb,
-            "pf_lift": lift,
-        })
+        cost_rows.append(
+            {
+                "cost_pips": float(cost),
+                "rule_pf": r_rule,
+                "xgb_pf": r_xgb,
+                "pf_lift": lift,
+            }
+        )
         if math.isclose(cost, 1.0, abs_tol=1e-9) and lift <= 0:
             cost_persistent_at_1pip = False
 
@@ -292,8 +302,7 @@ def assert_no_torch_import() -> None:
     """Fail loudly if torch was imported during a baseline run."""
     if "torch" in sys.modules:
         raise RuntimeError(
-            "torch was imported during the baseline run. The without-torch CI "
-            "lane forbids torch in Phase 1.6/1.6b/1.7."
+            "torch was imported during the baseline run. The without-torch CI lane forbids torch in Phase 1.6/1.6b/1.7."
         )
 
 
@@ -317,13 +326,9 @@ def assert_gates(candidate_results: list[dict]) -> None:
     for c in candidate_results:
         if not c["regime_non_negative"]:
             offenders = [r["regime_id"] for r in c["regime_breakdown"] if r["pf_lift"] < 0]
-            raise RegimeNonNegativityError(
-                f"{c['candidate_id']}: PF lift negative in regimes {offenders}"
-            )
+            raise RegimeNonNegativityError(f"{c['candidate_id']}: PF lift negative in regimes {offenders}")
         if not c["cost_persistent_at_1pip"]:
-            raise CostSensitivityError(
-                f"{c['candidate_id']}: PF lift does not persist at +1.0 pip cost"
-            )
+            raise CostSensitivityError(f"{c['candidate_id']}: PF lift does not persist at +1.0 pip cost")
 
 
 __all__ = [

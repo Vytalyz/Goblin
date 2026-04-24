@@ -10,26 +10,30 @@ import pandas as pd
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _make_feature_df(n: int = 400, *, seed: int = 42) -> pd.DataFrame:
     """Return a synthetic DataFrame with all regime + training features."""
     rng = np.random.RandomState(seed)
-    return pd.DataFrame({
-        "ret_1": rng.randn(n) * 0.01,
-        "ret_5": rng.randn(n) * 0.02,
-        "zscore_10": rng.randn(n),
-        "momentum_12": rng.randn(n) * 0.5,
-        "volatility_20": np.abs(rng.randn(n)) * 0.01 + 0.005,
-        "intrabar_range_pips": rng.uniform(1, 10, n),
-        "range_position_10": rng.uniform(0, 1, n),
-        "spread_to_range_10": rng.uniform(0.01, 0.5, n),
-        "spread_pips": rng.uniform(0.5, 3.0, n),
-        "hour": rng.randint(0, 24, n).astype(float),
-    })
+    return pd.DataFrame(
+        {
+            "ret_1": rng.randn(n) * 0.01,
+            "ret_5": rng.randn(n) * 0.02,
+            "zscore_10": rng.randn(n),
+            "momentum_12": rng.randn(n) * 0.5,
+            "volatility_20": np.abs(rng.randn(n)) * 0.01 + 0.005,
+            "intrabar_range_pips": rng.uniform(1, 10, n),
+            "range_position_10": rng.uniform(0, 1, n),
+            "spread_to_range_10": rng.uniform(0.01, 0.5, n),
+            "spread_pips": rng.uniform(0.5, 3.0, n),
+            "hour": rng.randint(0, 24, n).astype(float),
+        }
+    )
 
 
 # ---------------------------------------------------------------------------
 # P1.3 — CMA-ES optimizer data classes
 # ---------------------------------------------------------------------------
+
 
 class TestOptimizerBounds:
     def test_bounds_lower_upper(self):
@@ -83,6 +87,7 @@ class TestOptimizerBounds:
 # ---------------------------------------------------------------------------
 # P1.5 — GMM regime classifier
 # ---------------------------------------------------------------------------
+
 
 class TestGMMRegime:
     def test_fit_and_predict(self):
@@ -145,6 +150,7 @@ class TestGMMRegime:
 # P1.7 / P1.8 — XGBoost + SHAP
 # ---------------------------------------------------------------------------
 
+
 class TestXGBoostSHAP:
     def test_shap_values_structure(self):
         import xgboost as xgb
@@ -152,11 +158,13 @@ class TestXGBoostSHAP:
         from agentic_forex.ml.train import _compute_shap_values
 
         rng = np.random.RandomState(42)
-        X = pd.DataFrame({
-            "feat_a": rng.randn(100),
-            "feat_b": rng.randn(100),
-            "feat_c": rng.randn(100),
-        })
+        X = pd.DataFrame(
+            {
+                "feat_a": rng.randn(100),
+                "feat_b": rng.randn(100),
+                "feat_c": rng.randn(100),
+            }
+        )
         y = (rng.rand(100) > 0.5).astype(int)
         clf = xgb.XGBClassifier(n_estimators=10, random_state=42, verbosity=0)
         clf.fit(X, y)
@@ -177,6 +185,7 @@ class TestXGBoostSHAP:
 # ---------------------------------------------------------------------------
 # P1.9 — MT5 feature alignment
 # ---------------------------------------------------------------------------
+
 
 class TestMT5FeatureAlignment:
     def test_identical_feeds_pass(self):

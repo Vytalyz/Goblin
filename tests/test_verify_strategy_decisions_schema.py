@@ -46,10 +46,21 @@ def test_empty_log_validates() -> None:
     assert validate_lines(["", "  ", "\n"]) == 0
 
 
-@pytest.mark.parametrize("missing", [
-    "decision_id", "candidate_id", "stage", "outcome", "decided_by",
-    "decided_at", "rationale", "gate_results", "evidence_uris", "next_action",
-])
+@pytest.mark.parametrize(
+    "missing",
+    [
+        "decision_id",
+        "candidate_id",
+        "stage",
+        "outcome",
+        "decided_by",
+        "decided_at",
+        "rationale",
+        "gate_results",
+        "evidence_uris",
+        "next_action",
+    ],
+)
 def test_missing_required_field_rejected(missing: str) -> None:
     entry = _well_formed_entry()
     del entry[missing]
@@ -103,17 +114,13 @@ def test_short_rationale_rejected() -> None:
 
 
 def test_gate_results_missing_passed_rejected() -> None:
-    entry = _well_formed_entry(
-        gate_results={"profit_factor": {"value": 1.34, "threshold": 1.10}}
-    )
+    entry = _well_formed_entry(gate_results={"profit_factor": {"value": 1.34, "threshold": 1.10}})
     with pytest.raises(StrategyDecisionLogError, match="missing 'passed'"):
         validate_lines([json.dumps(entry)])
 
 
 def test_gate_results_passed_must_be_bool() -> None:
-    entry = _well_formed_entry(
-        gate_results={"profit_factor": {"value": 1.34, "threshold": 1.10, "passed": "yes"}}
-    )
+    entry = _well_formed_entry(gate_results={"profit_factor": {"value": 1.34, "threshold": 1.10, "passed": "yes"}})
     with pytest.raises(StrategyDecisionLogError, match="must be a boolean"):
         validate_lines([json.dumps(entry)])
 
@@ -137,9 +144,7 @@ def test_validate_file_missing_path() -> None:
 def test_validate_file_roundtrip(tmp_path: Path) -> None:
     log = tmp_path / "strategy_decisions.jsonl"
     e1 = _well_formed_entry(decision_id="DEC-STRAT-AF-CAND-1001-S2-PASS")
-    e2 = _well_formed_entry(
-        decision_id="DEC-STRAT-AF-CAND-1001-S3-PASS", stage="S3"
-    )
+    e2 = _well_formed_entry(decision_id="DEC-STRAT-AF-CAND-1001-S3-PASS", stage="S3")
     log.write_text(json.dumps(e1) + "\n" + json.dumps(e2) + "\n", encoding="utf-8")
     assert validate_file(log) == 2
 

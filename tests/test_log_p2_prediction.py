@@ -20,6 +20,7 @@ import log_p2_prediction as logger  # noqa: E402
 
 VALID_COMMIT_SHA = "a" * 40
 
+
 def _midpoint_entry(**overrides) -> dict:
     base = {
         "prediction_id": "PRED-ML-2.0-MIDPOINT-1",
@@ -59,6 +60,7 @@ def _trigger_entry(**overrides) -> dict:
 # validate_prediction_entry
 # ---------------------------------------------------------------------------
 
+
 class TestValidatePredictionEntry:
     def test_valid_midpoint_has_no_errors(self):
         assert logger.validate_prediction_entry(_midpoint_entry()) == []
@@ -96,15 +98,14 @@ class TestValidatePredictionEntry:
         assert any("midpoint" in e.lower() or "trigger" in e.lower() for e in errors)
 
     def test_invalid_commit_sha_rejected(self):
-        errors = logger.validate_prediction_entry(
-            _midpoint_entry(commit_sha_at_prediction="not-a-sha")
-        )
+        errors = logger.validate_prediction_entry(_midpoint_entry(commit_sha_at_prediction="not-a-sha"))
         assert any("commit_sha" in e for e in errors)
 
 
 # ---------------------------------------------------------------------------
 # append_prediction / _read_log round-trip
 # ---------------------------------------------------------------------------
+
 
 class TestAppendAndRead:
     def test_midpoint_written_and_readable(self, tmp_path):
@@ -134,6 +135,7 @@ class TestAppendAndRead:
 # _next_prediction_id
 # ---------------------------------------------------------------------------
 
+
 class TestNextPredictionId:
     def test_first_midpoint_id_is_1(self):
         assert logger._next_prediction_id([], "midpoint") == "PRED-ML-2.0-MIDPOINT-1"
@@ -157,16 +159,25 @@ class TestNextPredictionId:
 # CLI main (dry-run and write)
 # ---------------------------------------------------------------------------
 
+
 class TestCLIMain:
     _BASE_ARGS = [
-        "--phase", "midpoint",
-        "--verdict", "CONDITIONAL",
-        "--point-estimate", "0.067",
-        "--ci-low", "0.020",
-        "--ci-high", "0.120",
-        "--rationale", "X" * 55,
-        "--attestation", "A" * 35,
-        "--commit-sha", VALID_COMMIT_SHA,
+        "--phase",
+        "midpoint",
+        "--verdict",
+        "CONDITIONAL",
+        "--point-estimate",
+        "0.067",
+        "--ci-low",
+        "0.020",
+        "--ci-high",
+        "0.120",
+        "--rationale",
+        "X" * 55,
+        "--attestation",
+        "A" * 35,
+        "--commit-sha",
+        VALID_COMMIT_SHA,
     ]
 
     def test_dry_run_exits_zero(self, tmp_path):
@@ -186,15 +197,24 @@ class TestCLIMain:
     def test_invalid_ci_order_exits_nonzero(self, tmp_path):
         log = tmp_path / "predictions.jsonl"
         args = [
-            "--phase", "midpoint",
-            "--verdict", "CONDITIONAL",
-            "--point-estimate", "0.01",   # below ci_low
-            "--ci-low", "0.05",
-            "--ci-high", "0.10",
-            "--rationale", "X" * 55,
-            "--attestation", "A" * 35,
-            "--commit-sha", VALID_COMMIT_SHA,
-            "--log", str(log),
+            "--phase",
+            "midpoint",
+            "--verdict",
+            "CONDITIONAL",
+            "--point-estimate",
+            "0.01",  # below ci_low
+            "--ci-low",
+            "0.05",
+            "--ci-high",
+            "0.10",
+            "--rationale",
+            "X" * 55,
+            "--attestation",
+            "A" * 35,
+            "--commit-sha",
+            VALID_COMMIT_SHA,
+            "--log",
+            str(log),
         ]
         rc = logger.main(args)
         assert rc != 0

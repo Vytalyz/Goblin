@@ -368,7 +368,9 @@ def test_live_session_end_collects_broker_and_log_artifacts(project_root: Path, 
         ),
         encoding="utf-8",
     )
-    (live_demo_dir / "signal_trace.csv").write_text("timestamp_utc,signal\n2026-04-22T21:40:00Z,long\n", encoding="utf-8")
+    (live_demo_dir / "signal_trace.csv").write_text(
+        "timestamp_utc,signal\n2026-04-22T21:40:00Z,long\n", encoding="utf-8"
+    )
     (live_demo_dir / "ea_audit.json").write_text(
         json.dumps(
             {

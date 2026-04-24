@@ -149,9 +149,7 @@ class TestBootstrapReproducibility:
     def test_bootstrap_ci_brackets_point_estimate(self):
         means = np.array([0.0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12])
         point = derive_mde.sigma_cross(means)
-        ci_low, ci_high = derive_mde.bootstrap_sigma_cross_ci(
-            means, n_resamples=2000, rng_seed=20260420
-        )
+        ci_low, ci_high = derive_mde.bootstrap_sigma_cross_ci(means, n_resamples=2000, rng_seed=20260420)
         assert ci_low <= point <= ci_high
 
 

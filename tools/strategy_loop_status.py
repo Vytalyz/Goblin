@@ -110,10 +110,7 @@ def _format_text(status: dict[str, Any]) -> str:
     lines.append("Goblin Strategy Loop — Status")
     lines.append("=" * 72)
     lines.append(f"Decisions log: {status['decisions_log_path']}")
-    lines.append(
-        f"Total decisions: {status['decisions_total']}  |  "
-        f"Candidates tracked: {status['candidates_tracked']}"
-    )
+    lines.append(f"Total decisions: {status['decisions_total']}  |  Candidates tracked: {status['candidates_tracked']}")
     lines.append("")
     lines.append("Portfolio slots")
     lines.append("-" * 72)
@@ -121,14 +118,11 @@ def _format_text(status: dict[str, Any]) -> str:
         lines.append("  (no slots loaded — check config/portfolio_policy.toml)")
     for slot in status["slots"]:
         lines.append(
-            f"  [{slot['slot_id']}] mode={slot['mode']}  "
-            f"active_candidate={slot['active_candidate_id'] or '(none)'}"
+            f"  [{slot['slot_id']}] mode={slot['mode']}  active_candidate={slot['active_candidate_id'] or '(none)'}"
         )
         lines.append(f"      purpose: {slot['purpose']}")
         if slot["allowed_families"]:
-            lines.append(
-                f"      allowed_families: {', '.join(slot['allowed_families'])}"
-            )
+            lines.append(f"      allowed_families: {', '.join(slot['allowed_families'])}")
         last = slot["last_decision"]
         if last:
             lines.append(
@@ -142,10 +136,7 @@ def _format_text(status: dict[str, Any]) -> str:
         lines.append("")
 
     if "candidate_filter" in status:
-        lines.append(
-            f"History for {status['candidate_filter']} "
-            f"({status['candidate_history_count']} entries)"
-        )
+        lines.append(f"History for {status['candidate_filter']} ({status['candidate_history_count']} entries)")
         lines.append("-" * 72)
         if not status["candidate_history"]:
             lines.append("  (no decisions recorded for this candidate)")

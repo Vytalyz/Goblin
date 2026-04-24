@@ -45,9 +45,7 @@ class TestEvaluateGates:
         assert out["fragile_mean_lift"] == pytest.approx(0.02)
 
     def test_q1_conditional_restricted_trigger(self):
-        cands = [
-            _candidate(f"AF-CAND-073{i}", 0.05) for i in range(4, 7)
-        ] + [
+        cands = [_candidate(f"AF-CAND-073{i}", 0.05) for i in range(4, 7)] + [
             _candidate("AF-CAND-0322", 0.05),
             _candidate("AF-CAND-0002", 0.05),
             _candidate("AF-CAND-0290", 0.05),
@@ -63,9 +61,8 @@ class TestEvaluateGates:
 
     def test_q1_nogo_trigger(self):
         cands = [
-            _candidate(c, 0.05) for c in
-            ["AF-CAND-0734", "AF-CAND-0322", "AF-CAND-0323",
-             "AF-CAND-0007", "AF-CAND-0002", "AF-CAND-0290"]
+            _candidate(c, 0.05)
+            for c in ["AF-CAND-0734", "AF-CAND-0322", "AF-CAND-0323", "AF-CAND-0007", "AF-CAND-0002", "AF-CAND-0290"]
         ] + [
             # mean = -0.06 = -3*sigma_cross with all 5 negative
             _candidate("AF-CAND-0716", -0.06),
@@ -80,9 +77,8 @@ class TestEvaluateGates:
     def test_q1_breadth_required_for_nogo(self):
         # Mean is < -2*sigma_cross but only 2/5 negative (1 huge negative dragging mean)
         cands = [
-            _candidate(c, 0.05) for c in
-            ["AF-CAND-0734", "AF-CAND-0322", "AF-CAND-0323",
-             "AF-CAND-0007", "AF-CAND-0002", "AF-CAND-0290"]
+            _candidate(c, 0.05)
+            for c in ["AF-CAND-0734", "AF-CAND-0322", "AF-CAND-0323", "AF-CAND-0007", "AF-CAND-0002", "AF-CAND-0290"]
         ] + [
             _candidate("AF-CAND-0716", -0.30),
             _candidate("AF-CAND-0738", -0.05),
@@ -96,13 +92,16 @@ class TestEvaluateGates:
 
 
 class TestI1TierBoundaries:
-    @pytest.mark.parametrize("upper,expected", [
-        (0.05, "TIER_1_PROCEED"),
-        (0.10, "TIER_1_PROCEED"),
-        (0.12, "TIER_2_BORDERLINE"),
-        (0.15, "TIER_2_BORDERLINE"),
-        (0.16, "TIER_3_DO_NOT_RUN"),
-    ])
+    @pytest.mark.parametrize(
+        "upper,expected",
+        [
+            (0.05, "TIER_1_PROCEED"),
+            (0.10, "TIER_1_PROCEED"),
+            (0.12, "TIER_2_BORDERLINE"),
+            (0.15, "TIER_2_BORDERLINE"),
+            (0.16, "TIER_3_DO_NOT_RUN"),
+        ],
+    )
     def test_i1_tier_via_evaluate(self, upper, expected):
         cands = [_candidate("AF-CAND-0734", 0.05)]
         out = gs.evaluate_gates(cands, sigma_cross=0.02, mde_point=0.04, mde_upper=upper, effect_size_floor=0.01)
@@ -111,14 +110,20 @@ class TestI1TierBoundaries:
 
 class TestRenderDeterminism:
     def test_render_excluding_timestamp_is_stable(self):
-        cands = [_candidate(c, 0.05) for c in
-                 ["AF-CAND-0734", "AF-CAND-0322", "AF-CAND-0323",
-                  "AF-CAND-0007", "AF-CAND-0002", "AF-CAND-0290"]]
+        cands = [
+            _candidate(c, 0.05)
+            for c in ["AF-CAND-0734", "AF-CAND-0322", "AF-CAND-0323", "AF-CAND-0007", "AF-CAND-0002", "AF-CAND-0290"]
+        ]
         gates = gs.evaluate_gates(cands, sigma_cross=0.02, mde_point=0.04, mde_upper=0.05, effect_size_floor=0.01)
         kwargs = dict(
-            run_id="TEST", dataset_sha="a"*64, report_sha="b"*64,
-            sigma_cross=0.02, mde_point=0.04, mde_upper=0.05,
-            effect_size_floor=0.01, gates=gates,
+            run_id="TEST",
+            dataset_sha="a" * 64,
+            report_sha="b" * 64,
+            sigma_cross=0.02,
+            mde_point=0.04,
+            mde_upper=0.05,
+            effect_size_floor=0.01,
+            gates=gates,
         )
         md1 = gs.render_report(runtime_utc="2026-04-20T00:00:00Z", **kwargs)
         md2 = gs.render_report(runtime_utc="2099-12-31T23:59:59Z", **kwargs)
