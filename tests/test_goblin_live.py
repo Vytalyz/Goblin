@@ -446,6 +446,85 @@ def test_live_session_end_collects_broker_and_log_artifacts(project_root: Path, 
     assert (broker_report_dir / "broker_reconciliation_report.json").exists()
 
 
+def test_live_session_end_discovers_common_files_layout_and_csv_audit(project_root: Path, capsys):
+    candidate_id = "AF-CAND-0733"
+    run_id = "live-demo-20260425"
+    common_root = project_root / "mt5_terminal" / "Common"
+    common_files = common_root / "Files"
+    live_demo_dir = common_files / "AgenticForex" / "LiveDemo" / candidate_id
+    live_demo_dir.mkdir(parents=True, exist_ok=True)
+    audit_dir = common_files / "AgenticForex" / "Audit"
+    audit_dir.mkdir(parents=True, exist_ok=True)
+
+    (live_demo_dir / "runtime_summary.json").write_text(
+        json.dumps(
+            {
+                "bars_processed": 18,
+                "allowed_hour_bars": 12,
+                "long_signals": 2,
+                "short_signals": 0,
+                "order_attempts": 2,
+                "order_successes": 2,
+                "order_failures": 0,
+                "spread_blocked_bars": 1,
+                "filter_blocked_bars": 1,
+                "audit_write_failures": 0,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (live_demo_dir / "signal_trace.csv").write_text(
+        "timestamp_utc,signal\n2026-04-25T20:30:00Z,long\n", encoding="utf-8"
+    )
+    (audit_dir / f"{candidate_id}__{run_id}__audit.csv").write_text(
+        "Ticket,Symbol,Trade Type,Volume,Open Time,Close Time,Open Price,Close Price,Profit\n"
+        "44444,EURUSD,buy,0.01,2026-04-25T20:30:00Z,2026-04-25T20:45:00Z,1.1000,1.1010,1.0\n",
+        encoding="utf-8",
+    )
+    (audit_dir / f"{candidate_id}__broker_history.csv").write_text(
+        "Ticket,Symbol,Type,Volume,Open Time,Close Time,Open Price,Close Price,Profit\n"
+        "44444,EURUSD,buy,0.01,2026-04-25T20:30:00Z,2026-04-25T20:45:00Z,1.1000,1.1010,1.0\n",
+        encoding="utf-8",
+    )
+    (audit_dir / f"{candidate_id}__diagnostic_tick_windows.csv").write_text(
+        "window_start_utc,window_end_utc\n2026-04-25T20:30:00Z,2026-04-25T20:31:00Z\n",
+        encoding="utf-8",
+    )
+    terminal_hash_dir = common_root.parent / "EC6CB01DD6EC087A123DA4B636574C06"
+    terminal_logs_dir = terminal_hash_dir / "logs"
+    experts_logs_dir = terminal_hash_dir / "MQL5" / "Logs"
+    terminal_logs_dir.mkdir(parents=True, exist_ok=True)
+    experts_logs_dir.mkdir(parents=True, exist_ok=True)
+    (terminal_logs_dir / "20260425.log").write_text("weekend closeout journal\n", encoding="utf-8")
+    (experts_logs_dir / "20260425.log").write_text("weekend closeout experts\n", encoding="utf-8")
+
+    rc = app.main(
+        [
+            "--project-root",
+            str(project_root),
+            "goblin-live-session-end",
+            "--candidate-id",
+            candidate_id,
+            "--run-id",
+            run_id,
+            "--mt5-common-path",
+            str(common_root),
+            "--broker-account-id",
+            "12345678",
+        ]
+    )
+
+    assert rc == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["broker_reconciliation"]["reconciliation_status"] == "matched"
+    assert payload["archived_ea_audit"].endswith("ea_audit.csv")
+
+    live_report_dir = project_root / "Goblin" / "reports" / "live_demo" / candidate_id / run_id
+    assert (live_report_dir / "ea_audit.csv").exists()
+    assert (live_report_dir / "terminal_journal.log").exists()
+    assert (live_report_dir / "experts.log").exists()
+
+
 def test_live_journal_tail_returns_error_when_no_mt5(project_root: Path, capsys):
     """Test goblin-live-journal returns 1 when MT5 not running."""
     rc = app.main(

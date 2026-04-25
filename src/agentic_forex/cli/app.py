@@ -640,6 +640,10 @@ def _resolve_existing_path(primary: str | None, fallbacks: list[Path]) -> Path |
     return None
 
 
+def _format_missing_note(prefix: str, candidates: list[Path]) -> str:
+    return f"{prefix}={'|'.join(str(candidate) for candidate in candidates)}"
+
+
 def _archive_file(
     source: Path | None, destination: Path, notes: list[str], *, found_note: str, missing_note: str
 ) -> Path | None:
@@ -672,6 +676,21 @@ def _find_mt5_common_path() -> Path | None:
     return None
 
 
+def _normalize_mt5_common_root(common_base: Path) -> Path:
+    if common_base.name.lower() == "files" and common_base.parent.name.lower() == "common":
+        return common_base.parent
+    return common_base
+
+
+def _mt5_agentic_forex_roots(common_base: Path) -> list[Path]:
+    common_root = _normalize_mt5_common_root(common_base)
+    roots: list[Path] = []
+    for root in (common_root / "Files" / "AgenticForex", common_root / "AgenticForex"):
+        if root not in roots:
+            roots.append(root)
+    return roots
+
+
 def _latest_log_file(log_dir: Path) -> Path | None:
     if not log_dir.exists():
         return None
@@ -681,7 +700,7 @@ def _latest_log_file(log_dir: Path) -> Path | None:
 
 def _discover_mt5_terminal_logs(common_base: Path) -> tuple[Path | None, Path | None]:
     """Return newest terminal journal and experts log across detected MT5 terminal hashes."""
-    terminals_root = common_base.parent
+    terminals_root = _normalize_mt5_common_root(common_base).parent
     newest_journal: Path | None = None
     newest_experts: Path | None = None
 
@@ -1511,36 +1530,61 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "goblin-live-session-end":
-        common_base = Path(args.mt5_common_path)
-        live_demo_base = common_base / "AgenticForex" / "LiveDemo" / args.candidate_id
-        audit_base = common_base / "AgenticForex" / "Audit"
+        common_base = Path(args.mt5_common_path) if args.mt5_common_path else _find_mt5_common_path()
+        if common_base is None:
+            print("ERROR: MT5 common files path not found. Specify --mt5-common-path.", file=sys.stderr)
+            return 1
+        agentic_forex_roots = _mt5_agentic_forex_roots(common_base)
+        live_demo_bases = [root / "LiveDemo" / args.candidate_id for root in agentic_forex_roots]
+        audit_bases = [root / "Audit" for root in agentic_forex_roots]
         report_dir = settings.paths().goblin_live_demo_reports_dir / args.candidate_id / args.run_id
         broker_report_dir = settings.paths().goblin_broker_history_reports_dir / args.candidate_id / args.run_id
+        runtime_summary_candidates = [base / "runtime_summary.json" for base in live_demo_bases]
         ea_runtime_path = _resolve_existing_path(
             args.runtime_summary_path,
-            [live_demo_base / "runtime_summary.json"],
+            runtime_summary_candidates,
         )
+        signal_trace_candidates = [base / "signal_trace.csv" for base in live_demo_bases]
         ea_signal_trace_path = _resolve_existing_path(
             args.signal_trace_path,
-            [live_demo_base / "signal_trace.csv"],
+            signal_trace_candidates,
         )
+        ea_audit_candidates = [base / "ea_audit.json" for base in live_demo_bases]
+        ea_audit_candidates.extend(base / "ea_audit.csv" for base in live_demo_bases)
+        for audit_base in audit_bases:
+            ea_audit_candidates.extend(
+                [
+                    audit_base / f"{args.candidate_id}__{args.run_id}__audit.csv",
+                    audit_base / f"{args.candidate_id}__audit.csv",
+                ]
+            )
         ea_audit_path = _resolve_existing_path(
             args.ea_audit_path,
-            [live_demo_base / "ea_audit.json"],
+            ea_audit_candidates,
         )
+        broker_csv_candidates: list[Path] = []
+        for audit_base in audit_bases:
+            broker_csv_candidates.extend(
+                [
+                    audit_base / f"{args.candidate_id}__{args.run_id}__broker_history.csv",
+                    audit_base / f"{args.candidate_id}__broker_history.csv",
+                ]
+            )
         broker_csv_path = _resolve_existing_path(
             args.broker_csv_path,
-            [
-                audit_base / f"{args.candidate_id}__{args.run_id}__broker_history.csv",
-                audit_base / f"{args.candidate_id}__broker_history.csv",
-            ],
+            broker_csv_candidates,
         )
+        diagnostic_window_candidates: list[Path] = []
+        for audit_base in audit_bases:
+            diagnostic_window_candidates.extend(
+                [
+                    audit_base / f"{args.candidate_id}__{args.run_id}__diagnostic_tick_windows.csv",
+                    audit_base / f"{args.candidate_id}__diagnostic_tick_windows.csv",
+                ]
+            )
         diagnostic_windows_path = _resolve_existing_path(
             args.diagnostic_windows_path,
-            [
-                audit_base / f"{args.candidate_id}__{args.run_id}__diagnostic_tick_windows.csv",
-                audit_base / f"{args.candidate_id}__diagnostic_tick_windows.csv",
-            ],
+            diagnostic_window_candidates,
         )
         journal_path = _resolve_existing_path(args.journal_path, [])
         experts_log_path = _resolve_existing_path(args.experts_log_path, [])
@@ -1572,7 +1616,7 @@ def main(argv: list[str] | None = None) -> int:
             audit_write_failures = int(ea_data.get("audit_write_failures", 0))
             notes.append(f"ea_runtime_summary_source={ea_runtime_path}")
         else:
-            notes.append(f"ea_runtime_summary_not_found={live_demo_base / 'runtime_summary.json'}")
+            notes.append(_format_missing_note("ea_runtime_summary_not_found", runtime_summary_candidates))
 
         report_dir.mkdir(parents=True, exist_ok=True)
         archived_signal_trace = _archive_file(
@@ -1580,21 +1624,24 @@ def main(argv: list[str] | None = None) -> int:
             report_dir / "signal_trace.csv",
             notes,
             found_note="signal_trace_copied",
-            missing_note=f"signal_trace_not_found={live_demo_base / 'signal_trace.csv'}",
+            missing_note=_format_missing_note("signal_trace_not_found", signal_trace_candidates),
+        )
+        ea_audit_destination = report_dir / (
+            f"ea_audit{ea_audit_path.suffix.lower()}" if ea_audit_path is not None and ea_audit_path.suffix else "ea_audit.json"
         )
         archived_ea_audit = _archive_file(
             ea_audit_path,
-            report_dir / "ea_audit.json",
+            ea_audit_destination,
             notes,
             found_note="ea_audit_copied",
-            missing_note=f"ea_audit_not_found={live_demo_base / 'ea_audit.json'}",
+            missing_note=_format_missing_note("ea_audit_not_found", ea_audit_candidates),
         )
         _archive_file(
             diagnostic_windows_path,
             report_dir / "diagnostic_tick_windows.csv",
             notes,
             found_note="diagnostic_windows_copied",
-            missing_note=f"diagnostic_windows_not_found={audit_base / (args.candidate_id + '__diagnostic_tick_windows.csv')}",
+            missing_note=_format_missing_note("diagnostic_windows_not_found", diagnostic_window_candidates),
         )
         _archive_file(
             journal_path,
@@ -1616,7 +1663,7 @@ def main(argv: list[str] | None = None) -> int:
             broker_report_dir / "broker_history.csv",
             notes,
             found_note="broker_history_copied",
-            missing_note=f"broker_history_not_found={audit_base / (args.candidate_id + '__broker_history.csv')}",
+            missing_note=_format_missing_note("broker_history_not_found", broker_csv_candidates),
         )
 
         reconciliation_payload = None

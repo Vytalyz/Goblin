@@ -1198,6 +1198,13 @@ def _parse_broker_csv(broker_csv_path: Path) -> list[dict[str, Any]]:
 def _load_ea_audit_trades(ea_audit_path: Path) -> list[dict[str, Any]] | None:
     if not ea_audit_path.exists():
         return None
+    if ea_audit_path.suffix.lower() == ".csv":
+        rows: list[dict[str, Any]] = []
+        with ea_audit_path.open("r", encoding="utf-8-sig") as handle:
+            reader = csv.DictReader(handle)
+            for row in reader:
+                rows.append({k.strip().lower().replace(" ", "_"): v.strip() for k, v in row.items()})
+        return rows
     data = read_json(ea_audit_path)
     return list(data.get("trades", []))
 
